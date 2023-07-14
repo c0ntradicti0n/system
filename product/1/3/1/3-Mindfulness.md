@@ -1,0 +1,1 @@
+The synthesis of Self-Awareness and Unconsciousness gives rise to Mindfulness. Mindfulness encapsulates conscious focus and the ability to perceive one's emotions and thoughts non-judgmentally while acknowledging the influences of the unconscious mind.

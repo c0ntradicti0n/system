@@ -1,0 +1,12 @@
+coloredlogs==15.0.1
+Flask==2.3.2
+flask_restx==1.1.0
+#guidance==0.0.61
+simple_cache==0.35
+#torch==2.0.1
+#transformers
+python-dotenv
+#sentencepiece
+protobuf
+#einops
+ruamel.yaml

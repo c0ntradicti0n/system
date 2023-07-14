@@ -1,0 +1,1 @@
+Knowledge involves the accumulation of facts, information, and skills acquired through experience or education. It represents the understanding of a subject with the ability to use it for a specific purpose.

@@ -1,0 +1,1 @@
+The process through which Something encounters an Other and recognizes a difference. This is a dynamic process that underscores the mutability of identity and the inherent conflict within Something. Alteration gives identity to Something by highlighting the transformative aspect of its interaction with the Other.

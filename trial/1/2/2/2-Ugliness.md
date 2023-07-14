@@ -1,0 +1,1 @@
+Ugliness is typically understood as the opposite of beauty, often associated with unpleasant, repelling, or harmful qualities. However, it's not merely the absence of beauty but holds its own unique perspective, challenging conventional notions of aesthetic value.

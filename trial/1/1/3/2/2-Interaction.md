@@ -1,0 +1,1 @@
+The antithesis to Division is Interaction. Once the whole is divided into parts, the parts don't exist in isolation. They interact with each other. Interaction underlines the relationship among the parts of a Whole, emphasizing their interdependence and connectedness.

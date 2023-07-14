@@ -1,0 +1,1 @@
+Amorality represents the absence or indifference towards moral beliefs, principles, or values. Amorality doesn't necessarily mean immorality (which implies acting against moral norms), but rather, it signifies the lack of concern or awareness regarding moral judgments. It acts as a counterpoint to Morality.

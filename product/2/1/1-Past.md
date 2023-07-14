@@ -1,0 +1,1 @@
+The Past represents all events that have happened before a given point in time. It's inherently unch

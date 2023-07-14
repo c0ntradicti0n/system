@@ -1,0 +1,99 @@
+version: "3"
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: unless-stopped
+    build: nginx
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+    env_file:
+      - .env
+    environment:
+        HOST: $HOST
+        EMAIL: $EMAIL
+    depends_on:
+      - server
+      - web
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sites-enabled/:/etc/nginx/sites-enabled/
+ #     - ./certs:/etc/letsencrypt
+
+  server:
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+
+    build: server
+    container_name: server
+    env_file:
+      - .env
+    tty: true
+    user: 1000:1000
+    ports:
+      - "5001:5000"
+    environment:
+      LC_ALL: en_US.UTF-8
+      LANG: en_US.UTF-8
+      LANGUAGE: en_US.UTF-8
+      DEBUG: "true"
+      HOST: $HOST
+      SYSTEM: /system
+    extra_hosts:
+        - "host.docker.internal:host-gateway"
+    volumes:
+      - "$SYSTEM:/system"
+
+
+  philospher:
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+    build: philosopher
+    container_name: philosopher
+    env_file:
+      - .env
+    tty: true
+    user: 1000:1000
+    environment:
+      LC_ALL: en_US.UTF-8
+      LANG: en_US.UTF-8
+      LANGUAGE: en_US.UTF-8
+      DEBUG: "true"
+      HOST: $HOST
+      SYSTEM: /system
+    extra_hosts:
+        - "host.docker.internal:host-gateway"
+    volumes:
+      - "$SYSTEM:/system"
+
+
+  web:
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+    build:
+      context: web
+      target:  $TARGET
+    container_name: web
+    volumes:
+      - ./web/src:/app/src
+    tty: true
+    env_file:
+      - .env
+
+
+

@@ -1,0 +1,56 @@
+error_log /dev/stdout info;
+rewrite_log on;
+
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name polarity.science www.polarity.science;
+    access_log /dev/stdout;
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+
+server {
+  access_log /dev/stdout;
+
+    listen 443 ssl;
+    server_name polarity.science www.polarity.science;
+    access_log /dev/stdout;
+
+    ssl_certificate     /etc/letsencrypt/live/polarity.science/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/polarity.science/privkey.pem;
+
+
+
+location ^~ /api/ {
+  if ($request_method = 'OPTIONS') {
+    add_header 'Access-Control-Allow-Origin' '*';
+    add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+    add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
+    add_header 'Access-Control-Max-Age' 1728000;
+    add_header 'Content-Type' 'text/plain; charset=utf-8';
+    add_header 'Content-Length' 0;
+    return 204;
+  }
+  if ($request_method = 'GET') {
+    add_header 'Access-Control-Allow-Origin' '*';
+    add_header 'Access-Control-Allow-Methods' 'GET, OPTIONS';
+    add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
+    add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
+  }
+  proxy_pass http://server:5000;
+}
+
+  location / {
+    proxy_pass http://web:80;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+  }
+
+  proxy_read_timeout 300;
+  proxy_connect_timeout 300;
+  proxy_send_timeout 300;
+}

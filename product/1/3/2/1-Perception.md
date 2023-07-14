@@ -1,0 +1,1 @@
+Perception involves the organization, identification, and interpretation of sensory information to represent and understand the environment.

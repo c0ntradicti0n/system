@@ -1,0 +1,1 @@
+Determinate Being, unlike the pure being, contains a defining quality that differentiates it from nothingness and other beings. It's characterized by both its inherent identity and the exclusion of other identities. Determinate Being is the manifestation of a particular essence.

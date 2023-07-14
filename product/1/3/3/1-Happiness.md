@@ -1,0 +1,1 @@
+Happiness can be described as a mental or emotional state of well-being characterized by positive or

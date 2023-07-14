@@ -1,0 +1,1 @@
+The synthesis of Determinate Being and its Negation gives rise to 'Something'. 'Something' retains its own Determinate Being while also holding its negation within. It represents the resolution of the contradiction, the union of the Determinate Being and its Negation.

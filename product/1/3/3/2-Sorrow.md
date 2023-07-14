@@ -1,0 +1,1 @@
+Sorrow is an emotion, feeling, or sentiment of distress caused by the suffering or misfortune of on

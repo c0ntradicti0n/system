@@ -1,0 +1,1 @@
+Unconsciousness represents the part of our mind that influences our feelings, thoughts, and behaviors unknowingly. It's the state where our actions and decisions are driven not by our conscious understanding but by underlying factors we're not aware of.

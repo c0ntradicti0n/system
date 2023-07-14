@@ -1,0 +1,1 @@
+'Joyful-Sorrow' captures the paradox that elements of joy can exist within sorrow and vice versa, al

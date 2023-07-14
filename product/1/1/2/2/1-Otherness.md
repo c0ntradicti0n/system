@@ -1,0 +1,1 @@
+The inherent nature of Something is that it contains an identity and its negation, this introduces the concept of 'Otherness'. Something becomes an 'Other' in relation to a new Something. The 'Other' is a distinct entity yet shares a common ground with the original Something, existing in a state of differentiation.

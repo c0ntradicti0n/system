@@ -1,0 +1,1 @@
+The synthesis of Past and Future is the Present. The Present can be viewed as the most real and imme

@@ -1,0 +1,1 @@
+'Convergence-of-Disparity' encapsulates the paradox that even as diverse, disparate parts converge, they give rise to new forms of disparity at a higher, more complex level. It indicates that the process of complexification involves both integration and differentiation, setting the stage for the next cycle of the dialectic process.

@@ -1,0 +1,1 @@
+Compassion is the synthesis of Happiness and Sorrow. It's an emotion that fosters an empathetic conn
