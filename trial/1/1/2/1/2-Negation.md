@@ -1,1 +1,0 @@
-The inherent nature of Determinate Being necessitates the existence of its negation. The Negation represents the contradiction and limitations within a Determinate Being. Negation gives definition to Determinate Being by highlighting what it is not.

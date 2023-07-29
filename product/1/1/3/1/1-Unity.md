@@ -1,1 +1,0 @@
-Unity is the initial concept, representing the basic, indivisible unit of measure. It is the simplest form of quantity, defined by its singularity. As the basis of all quantity, unity is free from all determinations of quantity, it's both a beginning and an end in itself.

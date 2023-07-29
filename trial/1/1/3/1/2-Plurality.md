@@ -1,1 +1,0 @@
-The antithesis to Unity is Plurality. It signifies the existence of multiple units. Plurality is the differentiation of unity, it introduces diversity and multitude. It contradicts the singularity of Unity, and its existence necessarily defines and is defined by Unity.

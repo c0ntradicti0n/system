@@ -1,1 +1,0 @@
-    The synthesis of Disparity and Convergence is Emergence. Emergence depicts the rise of novel properties, behaviors, or patterns as a result of interactions among parts. These emergent properties are not found in individual parts, but come into being when the parts work together as a system.

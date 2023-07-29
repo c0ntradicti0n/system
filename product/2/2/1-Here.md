@@ -1,1 +1,0 @@
-'Here' refers to the specific location or position where one currently exists. It is precise and def

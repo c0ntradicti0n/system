@@ -1,1 +1,0 @@
-The synthesis of Perception and Misinterpretation results in Insight. Insight is the capacity to gain an accurate and deep understanding of a complex situation or problem.

@@ -1,1 +1,0 @@
-'There' refers to a location other than one's current position. It's an unspecified place, often at

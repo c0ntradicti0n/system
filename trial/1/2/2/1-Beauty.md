@@ -1,1 +1,0 @@
-Beauty represents that which gives pleasure to the senses or exalts the mind or spirit. It is usually associated with qualities such as harmony, balance, and unity. Beauty is often thought to be intrinsic to the object itself.

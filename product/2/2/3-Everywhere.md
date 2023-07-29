@@ -1,1 +1,0 @@
-The synthesis of 'Here' and 'There' is 'Everywhere'. 'Everywhere' signifies the totality of all plac

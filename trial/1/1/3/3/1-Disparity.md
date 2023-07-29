@@ -1,1 +1,0 @@
-    Disparity signifies the differences and divergences within the individual parts of a complex system. It emphasizes the inherent diversity, highlighting the ways in which each part is distinct. Disparity is the tension that emerges from the state of 'Isolation-in-Interaction' - each part isolated by its unique characteristics, yet in constant interaction with others.

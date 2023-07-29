@@ -40,7 +40,7 @@ jobs:
           SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
           SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
 
-      - name: Deploy
+      - name: deploy
         env:
           SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
         run: |
@@ -52,7 +52,8 @@ jobs:
 
           "
 
-      - name: rest
+
+      - name: start
         run: |
           ssh staging '   
               cd system

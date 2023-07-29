@@ -81,10 +81,16 @@ def update_nested_dict(
         if "_" in value:
             current_dict["_"] = value["_"]
         if "1" in value:
+            if not isinstance(current_dict.get(1), dict):
+                current_dict[1] = {}
             current_dict[1]["."] = value["1"]
         if "2" in value:
+            if not isinstance(current_dict.get(2), dict):
+                current_dict[2] = {}
             current_dict[2]["."] = value["2"]
         if "3" in value:
+            if not isinstance(current_dict.get(3), dict):
+                current_dict[3] = {}
             current_dict[3]["."] = value["3"]
     else:
         current_dict[keys[-1]] = value
@@ -324,6 +330,9 @@ def nested_dict_to_filesystem(path, tree, prefix_items=False, creations=None):
                 if new_file[-1].isdigit():
                     new_file = new_file + "/."
 
+                if value is None:
+                    logging.error(f"Value is None for {str(tree)}")
+                    continue
                 new_file = new_file + value
 
                 if not new_file.endswith(".md"):
@@ -334,7 +343,6 @@ def nested_dict_to_filesystem(path, tree, prefix_items=False, creations=None):
                 if not os.path.exists(new_file):
                     prefix = get_prefix(key)
 
-                    raise Exception("TODO", new_file) from e
                     os.system(f"rm -rf {path}/{prefix}*.md")
                     os.system(f"rm -rf {path}/{prefix}*")
                     os.makedirs(os.path.dirname(new_file), exist_ok=True)
@@ -347,6 +355,8 @@ def nested_dict_to_filesystem(path, tree, prefix_items=False, creations=None):
 
 
 def get_prefix(last_key):
+    if isinstance(last_key, int):
+        last_key = str(last_key)
     if last_key.startswith("_"):
         return "_"
     elif last_key.startswith("."):

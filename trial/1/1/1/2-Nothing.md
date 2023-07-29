@@ -1,1 +1,0 @@
-Nothing, pure, simple equality with itself, Emptiness, Indifference. Nothing is (exists) Nothing in contemplation or Thinking as empty contemplation and Thinking = Being

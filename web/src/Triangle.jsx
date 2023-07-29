@@ -91,7 +91,7 @@ function Triangle({
 
   if (hoverObjects[hoverObjects.length - 1] === fullId) {
     setTooltipData(data)
-      setHoverId(fullId)
+    setHoverId(fullId)
   }
 
   const title = data?.['.']

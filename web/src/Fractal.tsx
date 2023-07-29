@@ -75,11 +75,13 @@ const Fractal = ({ setContent }) => {
   useEffect(() => {
     if (scale === null || detailId === null) return
     if (scale > maxZoomThreshold) {
-const [newHiddenId, newRestId] = shiftIn(detailId, hoverId, {left:true})
+      const [newHiddenId, newRestId] = shiftIn(detailId, hoverId, {
+        left: true,
+      })
       const newData = lookupDeep(newHiddenId, collectedData)
       console.log('reset zoom out', {
         hoverId,
-        shiftIn:[newHiddenId, newRestId],
+        shiftIn: [newHiddenId, newRestId],
         newData,
         detailId,
         collectedData,
@@ -91,14 +93,15 @@ const [newHiddenId, newRestId] = shiftIn(detailId, hoverId, {left:true})
       setVisualData(newData)
     }
     if (scale < minZoomThreshold) {
-
       console.log(detailId, hoverId)
 
-      const [newHiddenId, newRestId] = shiftIn(detailId, hoverId, {left:false})
+      const [newHiddenId, newRestId] = shiftIn(detailId, hoverId, {
+        left: false,
+      })
       const newData = lookupDeep(newHiddenId, collectedData)
       console.log('reset zoom out', {
         hoverId,
-        shiftIn:[newHiddenId, newRestId],
+        shiftIn: [newHiddenId, newRestId],
         newData,
         detailId,
         collectedData,
@@ -173,7 +176,15 @@ const [newHiddenId, newRestId] = shiftIn(detailId, hoverId, {left:true})
                   top={0}
                   level={2}
                   setCurrentId={setDetailId}
-                  {...{ hoverId, setHoverId, setContent, detailId, transformState, scale, setTooltipData }}
+                  {...{
+                    hoverId,
+                    setHoverId,
+                    setContent,
+                    detailId,
+                    transformState,
+                    scale,
+                    setTooltipData,
+                  }}
                 />
               </div>
             </TransformComponent>

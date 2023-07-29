@@ -1,1 +1,0 @@
-The synthesis of Otherness and Alteration gives rise to the 'Limit'. The Limit represents the border between the Something and the Other, defining each entity by highlighting their differences. The Limit maintains the identity of Something while also defining its relation to the Other.

@@ -1,1 +1,0 @@
-The concept of 'Nowhere-in-Everywhere' encapsulates the paradox that a location can be simultaneously

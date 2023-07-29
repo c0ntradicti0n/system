@@ -1,1 +1,0 @@
-To be, pure, identical to self, not different from Others, no difference within or to the outside, Indefiniteness, Emptiness, empty contemplation itself, Thinking = Nothing

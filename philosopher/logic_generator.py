@@ -373,8 +373,10 @@ The place to think about is: {location_xpath} and the topic should be {theme}
             v = m["value"].replace("/", "-")
             if "{" in v and "}" in v:
                 vv = m["value"]
-                vv = regex.sub(r"(\d:)", '"\\1":', vv)
+                vv = regex.sub(r"(\d):", '"\\1":', vv)
                 v = json.loads(vv)
+                if not keys[-1] == ".":
+                    keys.append(".")
 
             update_nested_dict(
                 t,

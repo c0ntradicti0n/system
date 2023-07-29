@@ -1,1 +1,0 @@
-Morality pertains to personal and societal norms, rules, and laws that help differentiate between right and wrong behavior. These guidelines might be derived from cultural, religious, philosophical, or societal contexts. Morality can be thought of as a compass that directs our choices towards virtuous actions.

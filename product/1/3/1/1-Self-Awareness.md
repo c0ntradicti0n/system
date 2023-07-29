@@ -1,1 +1,0 @@
-Self-awareness pertains to an individual's understanding and acknowledgment of their own thoughts, emotions, behaviors, and perception. It represents the inner consciousness, our innermost identity, and the ability to introspect and analyze our own self.
