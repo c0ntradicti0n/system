@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 -11 50 56">
+    <polygon points="25,5 5,45 45,45" style="fill:lime;stroke:purple;stroke-width:1" />
+    <polygon points="25,15 15,35 35,35" style="fill:purple;stroke:lime;stroke-width:1" />
+    <polygon points="25,25 20,30 30,30" style="fill:lime;stroke:purple;stroke-width:1" />
+    <circle cx="25" cy="5" r="15" stroke="purple" stroke-width="2" fill="transparent" />
+    <circle cx="25" cy="5" r="10" stroke="lime" stroke-width="2" fill="transparent" />
+    <circle cx="25" cy="5" r="5" stroke="purple" stroke-width="2" fill="transparent" />
+</svg>

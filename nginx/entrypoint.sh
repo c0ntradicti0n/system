@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Check if /etc/letsencrypt directory does not exist
-if [ ! -d "/etc/letsencrypt" ]; then
+if [ ! -d "/etc/letsencrypt/live/polarity.science" ]; then
   # Create or renew certificate
   certbot certonly --standalone --non-interactive --agree-tos --email $EMAIL --domains $HOST
 
