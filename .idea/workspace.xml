@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="manual">
-      <change beforePath="$PROJECT_DIR$/key_base64.txt" beforeDir="false" />
+    <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="initial commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/entrypoint.sh" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/entrypoint.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/Fractal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/Fractal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/Tooltips.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/Tooltips.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/Triangle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/Triangle.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -245,6 +252,7 @@
       <workItem from="1690379239355" duration="10087000" />
       <workItem from="1690444680436" duration="158000" />
       <workItem from="1690451343008" duration="1230000" />
+      <workItem from="1690481111226" duration="3625000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -435,7 +443,21 @@
       <option name="project" value="LOCAL" />
       <updated>1690452525994</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="initial commit">
+      <created>1690453545660</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1690453545660</updated>
+    </task>
+    <task id="LOCAL-00029" summary="initial commit">
+      <created>1690453656831</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1690453656831</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -474,10 +496,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="x" />
-    <MESSAGE value="initial commit" />
     <MESSAGE value="add certbot" />
     <MESSAGE value="manual" />
-    <option name="LAST_COMMIT_MESSAGE" value="manual" />
+    <MESSAGE value="initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

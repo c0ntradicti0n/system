@@ -1,15 +1,18 @@
-import { getLeftPosition, getTopPosition, postProcessTitle } from './position'
+import { postProcessTitle } from './position'
+import React, { useState, useEffect } from 'react'
 
-export const Tooltips = ({ data,  id}) => {
-  console.log("RENDERING TOOLTIPS", id)
+export const Tooltips = ({ data, id, isWindowWide }) => {
   return (
     <div
       style={{
-        position: 'static',
+        position: isWindowWide ? 'absolute' : 'static',
         pointerEvents: 'none',
-        top: 0,
-        left: 0,
-        zIndex: 999999 ,
+        top: isWindowWide ? 'auto' : 0,
+        left: isWindowWide ? 0 : 'auto',
+        height: isWindowWide ? '100%' : '100%',
+        width: isWindowWide ? '30%' : '100%',
+        zIndex: 99999999,
+        backgroundColor: '#000',
       }}
     >
       <div
@@ -32,6 +35,8 @@ export const Tooltips = ({ data,  id}) => {
             flex: '2 0 auto',
           }}
         >
+          {isWindowWide ? 'wide' : 'tall'}
+
           <div
             style={{
               pointerEvents: 'none',

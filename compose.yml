@@ -24,7 +24,7 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/sites-enabled/:/etc/nginx/sites-enabled/
- #     - ./certs:/etc/letsencrypt
+      - ./certs:$CERTS
 
   server:
     logging:

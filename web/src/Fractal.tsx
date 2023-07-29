@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useQuery } from 'react-query'
 import Triangle from './Triangle'
-import { mergeDeep, lookupDeep, splitKey } from './nesting'
+import { mergeDeep, lookupDeep, splitKey, shiftIn } from './nesting'
 import {
   TransformWrapper,
   TransformComponent,
@@ -18,7 +18,7 @@ const Controls = ({ zoomIn, zoomOut, resetTransform }) => (
 )
 
 const maxZoomThreshold = 2
-const minZoomThreshold = 0.81
+const minZoomThreshold = 0.6
 const Fractal = ({ setContent }) => {
   const [detailId, setDetailId] = useState(null)
   const [transformState, setTransformState] = useState(null)
@@ -30,10 +30,25 @@ const Fractal = ({ setContent }) => {
     window.innerHeight < window.innerWidth
       ? window.innerHeight
       : window.innerWidth
-  const left = (window.innerWidth - size) / 2
-  const top = (window.innerHeight - size) / 2
+  const left = (window.innerWidth - size) * 0.84
+  const top = (window.innerHeight - size) * 0.84
   const transformComponentRef = useRef<ReactZoomPanPinchRef | null>(null)
   const [tooltipData, setTooltipData] = useState(null)
+  const [isWindowWide, setIsWindowWide] = useState(
+    window.innerWidth > window.innerHeight,
+  )
+  const [hoverId, setHoverId] = useState(null)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsWindowWide(window.innerWidth > window.innerHeight)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   const fetchFiles = async () => {
     const res = await fetch(
@@ -60,31 +75,37 @@ const Fractal = ({ setContent }) => {
   useEffect(() => {
     if (scale === null || detailId === null) return
     if (scale > maxZoomThreshold) {
-      const newHiddenId = splitKey(detailId)
+const [newHiddenId, newRestId] = shiftIn(detailId, hoverId, {left:true})
       const newData = lookupDeep(newHiddenId, collectedData)
-      console.log('reset', {
-        newHiddenId,
+      console.log('reset zoom out', {
+        hoverId,
+        shiftIn:[newHiddenId, newRestId],
         newData,
         detailId,
         collectedData,
         transformComponentRef: transformComponentRef.current,
       })
-      setHiddenId(newHiddenId.join('/') || '')
+
+      setHiddenId(newHiddenId || '')
       transformComponentRef.current.setTransform(0, 0, 1, 0, 0) // <-- reset the zoom
       setVisualData(newData)
     }
     if (scale < minZoomThreshold) {
-      console.log(scale, minZoomThreshold)
-      const newHiddenId = splitKey(detailId).slice(0, -1)
+
+      console.log(detailId, hoverId)
+
+      const [newHiddenId, newRestId] = shiftIn(detailId, hoverId, {left:false})
       const newData = lookupDeep(newHiddenId, collectedData)
-      console.log('reset', {
-        newHiddenId,
+      console.log('reset zoom out', {
+        hoverId,
+        shiftIn:[newHiddenId, newRestId],
         newData,
         detailId,
         collectedData,
         transformComponentRef: transformComponentRef.current,
       })
-      setHiddenId(newHiddenId.join('/') || '')
+
+      setHiddenId(newHiddenId || '')
       transformComponentRef.current.setTransform(0, 0, 1, 0, 0) // <-- reset the zoom
       setVisualData(newData)
     }
@@ -98,7 +119,9 @@ const Fractal = ({ setContent }) => {
     return <span>Error: {error.message}</span>
   }
 
-  console.log(scale, detailId, collectedData)
+  //console.log(scale, detailId, collectedData)
+
+  console.log('render', { hoverId })
 
   return (
     <div
@@ -111,7 +134,13 @@ const Fractal = ({ setContent }) => {
         overflow: 'hidden',
       }}
     >
-      {tooltipData && <Tooltips data={tooltipData} />}
+      {tooltipData && (
+        <Tooltips
+          data={tooltipData}
+          id={detailId}
+          isWindowWide={isWindowWide}
+        />
+      )}
       <TransformWrapper
         limitToBounds={false}
         maxScale={1000}
@@ -143,12 +172,8 @@ const Fractal = ({ setContent }) => {
                   left={0}
                   top={0}
                   level={2}
-                  scale={scale}
-                  transformState={transformState}
-                  detailId={detailId}
                   setCurrentId={setDetailId}
-                  setContent={setContent}
-                  setTooltipData={setTooltipData}
+                  {...{ hoverId, setHoverId, setContent, detailId, transformState, scale, setTooltipData }}
                 />
               </div>
             </TransformComponent>

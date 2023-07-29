@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
-import App from './App'
-import { mergeDeep } from './Fractal'
+import App from '../App'
+import { mergeDeep } from '../nesting'
 
 test('merge obj', () => {
   const x = mergeDeep({ a: 1, b: 2 }, { a: 3, c: 4 })

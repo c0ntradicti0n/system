@@ -27,11 +27,12 @@ function Triangle({
 
   transformState,
   setContent,
-    setTooltipData
+  setTooltipData,
+  setHoverId,
 }) {
   const [isHovering, setIsHovering] = useState(false)
 
-  const fontSize = size/30
+  const fontSize = size / 30 + Math.sqrt(level)
   const ref = React.useRef(null)
   const fetchData = async () => {
     console.log('fetchData', fullId)
@@ -47,7 +48,7 @@ function Triangle({
     if (isWithinViewport) {
       fetchData()
     }
-  }, [transformState, scale])
+  }, [transformState, scale, fetchData])
 
   if (typeof data === 'string' || !data) {
     const title = data
@@ -88,17 +89,13 @@ function Triangle({
     )
   }
 
-  if (      hoverObjects[hoverObjects.length - 1] === fullId)
-      setTooltipData(data)
+  if (hoverObjects[hoverObjects.length - 1] === fullId) {
+    setTooltipData(data)
+      setHoverId(fullId)
+  }
+
   const title = data?.['.']
   const anto = data?.['_']
-if (hoverObjects[hoverObjects.length - 1] === fullId) {
-  console.log(
-    hoverObjects,
-    fullId,
-    hoverObjects[hoverObjects.length - 1] === fullId,
-      data,
-  )}
 
   return (
     <div
@@ -115,7 +112,7 @@ if (hoverObjects[hoverObjects.length - 1] === fullId) {
         console.log(scale)
         e.preventDefault()
       }}
-      onMouseEnter={(e) => {
+      onMouseEnter={() => {
         addHoverObject(fullId)
         setIsHovering(true)
       }}
@@ -125,6 +122,7 @@ if (hoverObjects[hoverObjects.length - 1] === fullId) {
       }}
     >
       <div
+        key={fullId}
         className="triangle"
         style={{
           verticalAlign: 'middle',
@@ -135,32 +133,60 @@ if (hoverObjects[hoverObjects.length - 1] === fullId) {
         }}
       >
         {[1, 2, 3].map((subTriangleDir, index) => (
-          <>
+          <div key={fullId + '-' + index}>
             <Triangle
-              detailId={detailId}
               fullId={`${fullId}/${subTriangleDir}`}
               id={subTriangleDir}
-              key={index}
+              key={fullId + '-' + index}
               data={data[subTriangleDir]}
-              index={index}
               size={size / 2}
               left={getLeftPosition(index, size)}
               top={getTopPosition(index, size)}
-              level={level - 1}
-              scale={scale}
-              setCurrentId={setCurrentId}
-              setContent={setContent}
-              setTooltipData={setTooltipData}
+              level={level + 1}
+              {...{
+                scale,
+                setCurrentId,
+                setContent,
+                setTooltipData,
+                setHoverId,
+                index,
+                detailId,
+              }}
             />
-          </>
+          </div>
         ))}
 
-        <div style={{ position: 'relative', top: size / 2, fontSize }}>
-          <br /> {fullId.slice(1, 1000).replace(/[/]/g, '.')}.{' '}
+        <div
+          style={{
+            position: 'absolute',
+            top: '70%',
+            transform: 'translateY(-50%)',
+            fontSize,
+            width: '100%',
+            whiteSpace: 'pre-wrap',
+            wordWrap: 'break-word',
+          }}
+        >
+          {fullId.slice(-1).replace(/\//g, '.')}.{' '}
           {title && (
-            <div className="triangle-title">
-              {postProcessTitle(title)} <br /> {postProcessTitle(anto)}
-            </div>
+            <>
+              <div className="triangle-title">{postProcessTitle(title)}</div>
+
+              {postProcessTitle(anto)
+                ?.split(/[\s-]+/)
+                .map((word, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      fontFamily: 'serif',
+                      whiteSpace: 'pre-wrap',
+                      overflowWrap: 'break-word',
+                    }}
+                  >
+                    {word}
+                  </div>
+                ))}
+            </>
           )}
         </div>
       </div>
