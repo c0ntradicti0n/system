@@ -1,7 +1,9 @@
 from collections import Counter, defaultdict
 
+from helper import get_from_nested_dict
 
-def analyse(tree, exclude):
+
+def analyse_toc(tree, exclude):
     stack = [((), tree)]
     len_counter = defaultdict(list)
     while stack:
@@ -24,6 +26,56 @@ def analyse(tree, exclude):
         "max_depth_paths": len_counter[max(len_counter)],
         "len_counter": len_counter,
     }
+
+
+def make_key_before(keys):
+    if len(keys) == 0:
+        return None
+    last_key = keys[-1]
+    if last_key == "1":
+        if len(keys) == 1:
+            return None
+        return make_key_before(keys[:-1]) + ["3"]
+    elif last_key == "2":
+        return keys[:-1] + ["1"]
+    elif last_key == "3":
+        return keys[:-1] + ["2"]
+
+
+def without_text(t, base_path, exclude):
+    stack = [((), t)]
+
+    while stack:
+        path, current = stack.pop()
+        if any("/".join(path).startswith(e) for e in exclude):
+            continue
+
+        for x in [1, 2, 3, "_"]:
+            if x != "_":
+                fname = current[x]["."]
+            else:
+                fname = current[x]
+            with open(base_path + "/".join(path) + f"/{x}/.{fname}", "r") as f:
+                content = f.read()
+            if content.strip() == "" or content.strip == fname:
+                path_before = make_key_before(path)
+
+                if path_before is not None:
+                    title_before = get_from_nested_dict(t, path_before + (x,))["."]
+
+                    with open(
+                        base_path + "/".join(path_before) + f"/{x}/.{title_before}", "r"
+                    ) as f:
+                        content_before = f.read()
+                else:
+                    content_before = None
+
+                current_paths = [[*path, y] for y in [1, 2, 3, "_"]]
+                return current_paths, (path_before, content_before)
+
+        for k, v in current.items():
+            if isinstance(v, dict):
+                stack.append((path + (k,), v))
 
 
 if __name__ == "__main__":

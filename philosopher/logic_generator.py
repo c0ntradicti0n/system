@@ -1,3 +1,4 @@
+import glob
 import json
 import os
 import pprint
@@ -13,8 +14,9 @@ from helper import (OutputLevel, extract, get_prefix,
                     sanitize_nested_dict, tree, update_nested_dict)
 from regex import regex
 
-from philosopher.analyser import analyse
-from philosopher.LLMFeature import create_path, features
+from philosopher.analyser import analyse_toc
+from philosopher.llm_update_text import custom_parser, llm_update_text
+from philosopher.llm_update_toc import llm_update_toc
 from philosopher.yaml import (object_to_yaml_str, rec_sort,
                               single_key_completion)
 from server.os_tools import git_auto_commit
@@ -72,56 +74,9 @@ def dialectic_triangle(
     index = post_process_tree(single_key_completion(object_to_yaml_str(rec_sort(t))))
 
     if task == "index":
-        shortest_path = [
-            create_path(p) for p in analyse(t, exclude=["111"])["min_depth_paths"]
-        ]
-
-        instruction = (
-            """
-You are extending a dialectical system, emulating Hegel's methodology, where concepts unfold within a fractal structure of triples. Each triple consists of:
-
- - Thesis (1)
- - Antithesis (2)
- - Synthesis (3)
- 
-Each triple is a dialectical unit, which can be further extended by adding new triples to the synthesis.
-Their content has to be addressed by a topic given as '.'
- 
-Additionally we mention about each triple the Inversive Dialectical Antonym (this is a pivot concept that amplifies the evolution of the argumentation by identifying the conflict within the dialectic triple, thereby triggering the formation of the next triple. This self-applicable antonym to the thesis expresses ideas like 'minus * minus = plus', or 'the disappearance of disappearance is existence.') (_)
-
-You'll work with a representation reflecting your current progress. Each unit is addressed via a key as "13221." for the thesis in "1322".
-Your goal is to enhance and enrich the thematic structure of the fractal triples and also diving deeper by creating new triples.
-
-Detect paths where it lacks cohesion or displays incorrect structure. Propose improvements by modifying or introducing new elements. Use exactly the following syntax:
-
-Every nesting level should have a '.'-entry for telling the theme and also a '_'-entry to mark dialectical conceptual movement. 
-
-Examples:
-
-"""
-            + "\n\n".join([i for f in features if (i := f(**kwargs).instruction())])
-            + """
-   
-Stick exactly to this syntax, don't exchange: '.', '_' with more meaningful information, put the meaning only into the strings.
-Respond only with the keys (123.) and succinct suggestions. Avoid any other explanatory phrase. Your proposals should be limited to 1-4 word titles, no sentences.
-Thus your output should be a list with a syntax like this:
-
-"""
-            + "\n".join([e for f in features if (e := f(**kwargs).example())])
-            + """
-
-Don't be audacious and dont just change the series of words in one title, keep it as simple as possible, avoid repetitions in titles, the simplest words are the best and less words is more content. Be enormously precise with your answers and the keys, every wrong path causes chaos and will kill the whole project.
-Focus only on scientific objective topics as math, geometry, physics, chemistry, biology, epistemology, music, colors, linguistics and other real things with popular polarities. Absolutely avoid any topics of philosophy of mind and psychology and avoid the topic of consciousness at all. Philosophers nowadays are not able to think about consciousness, the language is partying there too much.
-Focus on a top-down approach to get to some more systematic dialectical structure; first all upper levels, then the lower levels.
-Focus on completeness of the fractal, please fill up all incomplete triples, rather add new triples than improving existing ones.
-
-And please dive deeper into """
-            + " and ".join(shortest_path)
-        )
-
-        prompt = f"""
-        {index}
-        """
+        instruction, prompt = llm_update_toc(index, kwargs, t)
+    elif task == "text":
+        instruction, prompt = llm_update_text(index, kwargs, t, base_path)
     else:
         raise NotImplementedError(f"{task} not implemented")
 
@@ -129,14 +84,18 @@ And please dive deeper into """
     print(location)
     print(f"{len(prompt)=} {len(index)=} {len(location)=}")
 
-    lllm_output = ".cache/lllm.output.txt"
-    lllm_input = ".cache/lllm.input.txt"
+    task_cache = f".cache_{task}/"
+    if not os.path.exists(task_cache):
+        os.makedirs(task_cache, exist_ok=True)
+    lllm_output = task_cache + "response.txt"
+    lllm_input = task_cache + "prompt.txt"
 
     if not os.path.exists(lllm_output):
-        api_result = llm(instruction=instruction.strip(), text=prompt)
-        output = api_result["choices"][0]["message"]["content"]
         with open(lllm_input, "w") as f:
             f.write(instruction.strip() + "\n" + prompt + "\n")
+
+        api_result = llm(instruction=instruction.strip(), text=prompt)
+        output = api_result["choices"][0]["message"]["content"]
 
         with open(lllm_output, "w") as f:
             f.write(output + "\n")
@@ -233,19 +192,57 @@ And please dive deeper into """
 
         created = nested_dict_to_filesystem(f"{base_path}".strip(), t)
         print(f"Created {created} files.")
+    elif task == "text":
+        # The findall function of the re module is used to get all matching patterns.
+        split_strings = custom_parser(output, "# (\d|_) .*$")
+        for header, content in split_strings:
+            path = re.match("# (\d*(\d|_) .+)$", header).group(2)
+
+            if path[-1].isdigit():
+                file_pattern = base_path + "/" + "/".join(path) + "/.*.md"
+            else:
+                file_pattern = base_path + "/" + "/".join(path) + "*.md"
+            files = glob.glob(file_pattern)
+            assert files[0]
+            with open(files[0], "w") as f:
+                f.write(content)
+
+        print(split_strings)
 
 
 if __name__ == "__main__":
     with git_auto_commit(
-        config.system_path, commit_message_prefix="Automated Commit"
+        config.system_path, commit_message_prefix="Automated TEXT Commit"
     ) as ctx:
         print(
             dialectic_triangle(
                 base_path=config.system_path,
                 location="",
-                improve=True,
+                task="text",
                 info_radius=100000,
                 preset_output_level=OutputLevel.FILENAMES,
+                # llm features
+                block=True,
+                shift=True,
+                topic=True,
+                antithesis=True,
+                thesis=True,
+                synthesis=True,
+                inversion_antonym=True,
+            )
+        )
+
+    with git_auto_commit(
+        config.system_path, commit_message_prefix="Automated TOC Commit"
+    ) as ctx:
+        print(
+            dialectic_triangle(
+                base_path=config.system_path,
+                location="",
+                task="index",
+                info_radius=100000,
+                preset_output_level=OutputLevel.FILENAMES,
+                # llm features
                 block=True,
                 shift=True,
                 topic=True,

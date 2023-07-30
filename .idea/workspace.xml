@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="initial commit">
+    <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="wash up">
+      <change afterPath="$PROJECT_DIR$/philosopher/.cache_text/response.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philosopher/llm_update_text.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philosopher/llm_update_toc.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philosopher/analyser.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/analyser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/philosopher/logic_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/logic_generator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/helper.py" afterDir="false" />
     </list>
@@ -23,8 +27,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript JSX File" />
-        <option value="Python Script" />
         <option value="JavaScript File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -259,7 +263,7 @@
       <workItem from="1690451343008" duration="1230000" />
       <workItem from="1690481111226" duration="8467000" />
       <workItem from="1690635136373" duration="10068000" />
-      <workItem from="1690707109952" duration="889000" />
+      <workItem from="1690707109952" duration="12864000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -492,7 +496,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690644944395</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="wash up">
+      <created>1690708193067</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1690708193067</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -534,65 +545,86 @@
     <MESSAGE value="add certbot" />
     <MESSAGE value="manual" />
     <MESSAGE value="initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+    <MESSAGE value="wash up" />
+    <option name="LAST_COMMIT_MESSAGE" value="wash up" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/logic_generator.py</url>
-          <line>244</line>
+          <line>193</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/server/helper.py</url>
-          <line>353</line>
+          <line>349</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/analyser.py</url>
-          <line>307</line>
+          <line>357</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/philosopher/logic_generator.py</url>
-          <line>147</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/server/helper.py</url>
-          <line>203</line>
+          <line>216</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/logic_generator.py</url>
-          <line>243</line>
+          <line>192</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/server/helper.py</url>
-          <line>345</line>
+          <line>341</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/server/helper.py</url>
-          <line>334</line>
+          <line>330</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/logic_generator.py</url>
-          <line>225</line>
+          <line>174</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/logic_generator.py</url>
-          <line>210</line>
+          <line>159</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/logic_generator.py</url>
-          <line>32</line>
-          <option name="timeStamp" value="31" />
+          <line>235</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/philosopher/logic_generator.py</url>
+          <line>96</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/philosopher/logic_generator.py</url>
+          <line>210</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/philosopher/logic_generator.py</url>
+          <line>207</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/philosopher/logic_generator.py</url>
+          <line>198</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/philosopher/logic_generator.py</url>
+          <line>203</line>
+          <option name="timeStamp" value="50" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -600,6 +632,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/wdl$analyser.coverage" NAME="analyser Coverage Results" MODIFIED="1690108599658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
     <SUITE FILE_PATH="coverage/wdl$rest.coverage" NAME="rest Coverage Results" MODIFIED="1690380994662" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
-    <SUITE FILE_PATH="coverage/wdl$logic_generator.coverage" NAME="logic_generator Coverage Results" MODIFIED="1690707459892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
+    <SUITE FILE_PATH="coverage/wdl$logic_generator.coverage" NAME="logic_generator Coverage Results" MODIFIED="1690758166136" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
   </component>
 </project>

@@ -1,5 +1,6 @@
 import logging
 import os
+import pathlib
 import re
 import shlex
 import subprocess
@@ -97,7 +98,11 @@ def update_nested_dict(
 
 
 def digitize(keys):
-    return [k if not k.isdigit() else int(k) for k in keys if k]
+    return [
+        k if isinstance(k, int) else (k if not k.isdigit() else int(k))
+        for k in keys
+        if k
+    ]
 
 
 def add_to_nested_dict(nested_dict, keys, value):
@@ -113,6 +118,19 @@ def exists_in_nested_dict(nested_dict, keys):
     for key in keys[:-1]:
         nested_dict = nested_dict.setdefault(key, {})
     return keys[-1] in nested_dict
+
+
+def get_from_nested_dict(nested_dict, keys):
+    keys = digitize(keys)
+    old_dict = nested_dict
+
+    for key in keys[:-1]:
+        if key == "..":
+            nested_dict = old_dict
+
+        old_dict = nested_dict
+        nested_dict = nested_dict.setdefault(key, {})
+    return nested_dict[keys[-1]]
 
 
 def round_school(x):
@@ -238,23 +256,8 @@ def tree(
                     content = content[:100]
             except:
                 raise Exception("error reading file", os.path.join(path, name))
-        if format == "string":
-            list_symbol = "-"
-            if m := re.match("^(\d)+-", name):
-                list_symbol = m.group(1) + "."
-                name = name[len(m.group(0)) :]
 
-            if output_level <= OutputLevel.FILENAMES:
-                output.append(("{}" + list_symbol + " {}").format("   " * indent, name))
-
-            content_indentation = "   " * (indent + 1)
-
-            if output_level <= OutputLevel.FILE:
-                for line in content.split("\n"):
-                    if line.strip() == "":
-                        continue
-                    output.append(content_indentation + line)
-        elif format == "json":
+        if format == "json":
             k = name
 
             if output_level <= OutputLevel.FILE:
@@ -283,9 +286,7 @@ def tree(
             if add:
                 add_to_nested_dict(output, keys + [k], v)
 
-    if format == "string":
-        return "\n".join(output)
-    elif format == "json":
+    if format == "json":
         return output
 
 
@@ -460,6 +461,7 @@ def post_process_tree(tree):
         .replace(r"/", "")
     )
     tree = regex.sub("- (\d+)-?", r"\1. ", tree)
+    tree = regex.sub(r".+ null(\n|$)", r"", tree)
     return tree
 
 

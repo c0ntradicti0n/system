@@ -1,0 +1,532 @@
+You are extending a dialectical system, emulating Hegel's methodology, where concepts unfold within a fractal structure of triples. Each triple consists of:
+
+ - Thesis (1)
+ - Antithesis (2)
+ - Synthesis (3)
+
+Each triple is a dialectical unit, which can be further extended by adding new triples to any of them.
+
+Additionally we mention about each triple the Inversive Dialectical Antonym (this is a pivot concept that amplifies the evolution of the argumentation by identifying the conflict within the dialectic triple, thereby triggering the formation of the next triple. This self-applicable antonym to the thesis expresses ideas like 'minus * minus = plus', or 'the disappearance of disappearance is existence.') (_)
+
+You'll provided a table of contents and a key, as well es text before and after, if there is, and you'll create text content for it for one chapter.
+
+Each chapter is addressed via a key as "13221", meaning the "thesis" in "1322".
+And will answer with a list of keys and suggestions for the content of the chapters. Use exactly the following syntax:
+
+```
+# 1321 
+your text for the thesis
+
+# 1322 
+your text for the antithesis
+
+# 1323 
+your text for the synthesis
+
+# 132_ 
+your text for the Inversive Dialectical Antonym
+```
+
+Avoid any other explanatory phrase. Your texts can have markdown-syntax or mermaid-graphs for anything, but this should not be needed much.
+Keep mind to explain to the point their dialectical relationship, what the concept means under the hood and how it relates to the other near concepts in the toc.
+
+A very neat example is the first chapter, take this as a inspiration for your work:
+
+```
+# 1321 Pure Being
+Being is absolute indeterminateness and emptiness, without any content to be distinguished within or from anything else, existing only in the purity of its self-equality. However, this pure being, in its indeterminate immediacy, equates to nothing, for it contains no distinguishing content, rendering it equal to pure nothingness in its undifferentiated absence of determination.
+
+
+# 1322 Pure Nothing
+Nothing, though it signifies absence, has a semantic existence in our cognition as the counterpart to being, hence nothing and being, while appearing antithetical, are in essence the same. Nonetheless, they are distinct in their immediacy, with each state immediately vanishing into its opposite, giving rise to the concept of becoming, a constant fluid transition between being and nothing.
+
+# 1323 Becoming
+Becoming, the unseparated unity of being and nothing, encapsulates these states as vanishing moments, constantly in flux, expressing itself through two key movements: coming-to-be, where nothing transitions to being, and ceasing-to-be, where being transitions to nothing. This continuous interplay leads to a self-sublation within each state, causing the "vanishing of the vanishing itself", settling into a stable unity that encapsulates the vanished becoming, which is determinate being, a unity of being and nothing in the form of being.
+
+# 132_ 
+Vanishing of the vanishing itself
+``
+
+And write the text for the following paths and topics:
+1 Metaphysics
+ 2 Anthropology
+ 3 World
+ ['_'] System-Structure
+
+        . System
+_ System-Structure 
+1. Metaphysics
+11. A Priori
+111. Ontology
+111_ Disappeareance-of-Disappearing
+1111. Being
+1112. Nothing
+1113. Becoming
+112. Quality
+1121. Existential Dialectics
+1121_ Negation-of-Negation
+11211. Determinate Being (Dasein)
+11212. Negation
+11213. Something
+1122. Affirmation and Negation
+1122_ Transcendence-of-Limit
+11221. Otherness
+11222. Alteration
+11223. Limit
+1123. Boundaries
+1123_ Finite-Infinite
+11231. Limit
+11232. Infinite
+11233. Boundary
+113. Quantity
+113_ Mathematics
+1131. Wholeness
+1131_ Part-of-Whole
+11311. Unity
+11312. Plurality
+11313. Totality
+1132. Algebra
+11321. Calculus
+113211. Equation
+1132111. Linearity
+1132112. Functionality
+1132113. Nonlinearity
+113212_ Minus-times-Minus is Plus
+113213. Exponential and Root
+113213_ 0 to power 1 and 1 to power 0
+1132131. Power
+1132132. Root
+1132133. Logarithm
+11321331. Base
+11322. Calculate
+1132211. Line Calculation
+11322111. Addition
+11322112. Substraction
+11322113. a+b=a--b
+11322113_ Loss of Loss is status quo
+1132212. Dot Calculation
+11322121. Multiplication
+11322122. Division
+11322123. Neutral Element 1
+11322123_ Minus times Minus is Plus
+1132213. Exponentiation
+11322131. Exponentiation
+11322132. Root Extraction
+11322133. Logarithm
+11322133_ 0^1 and 1^0
+1132221. Integration
+1132222. Differentiation
+1132223. Neutral element e
+11322231. integration of e^x = e^x
+11322232. d:dx ln(x)=1:x
+11322233. e for exponents, roots and logarithms
+11323. Analysis
+113231. Linear Algebra
+1132311. Operations
+1132312. Variables
+1132313. Functions
+1133. Combinatorics
+1133_ Quantitative-qualitative
+12. A Posteri
+121. Time
+121_ Now is not now
+1211. Past
+1211_ Old-New
+12111. Yesterday
+12112. Age
+12113. History
+1212. Future
+1212_ Change-Stagnation
+12121. Tomorrow
+12122. Growth
+12123. Prediction
+1213. Present
+1213_ Instant-Eternity
+12131. Today
+12132. Moment
+12133. Occurrence
+122. Geometry
+122_ Symmetry-Asymmetry
+1221. Order
+12211. Here
+12212. There
+12213. Everywhere
+1222. Geometry
+1222_ Finite-Infinite
+12221. Point
+12222. Line
+12223. Surface
+1223. Form
+1223_ Linear-Nonlinear
+12231. Dimensions
+12232. Transformations
+12233. Topology
+123. Nature
+123_ Whole-Parts
+1231. Physics
+1231111. Physics & Dynamics
+12311111. Matter
+12311112. Motion
+12311113. Gravity
+1231112. Motion
+12311121. Element
+12311122. Molecule
+12311123. Compound
+1231113. Energy
+12311131. Single cell
+12311132. Multi-cellular organism
+12311133. Biospheric harmonics
+1231121. Quantum field theory
+1231121_ Force-Field
+12311211. Fundamental forces
+12311212. Fundamental particles
+12311213. Fields
+1231211. Thermodynamics
+1231211_ Conservation-Entropy
+12312111. Heat
+12312113. Temperature
+1231212_ Consonance-Dissonance
+12312121. Melodic interval
+12312122. Harmonic interval
+12312123. Compound interval
+1231213. Physics of sound
+1231213_ Absence-Presence
+12312131. Sound
+12312132. Silence
+12312133. Melody
+1231221. Physics of light
+12312211. Light
+12312212. Darkness
+12312213. Colors
+12313. Cosmology
+123131. Solar system
+123132. Galaxy
+123133. Universe
+1232. Chemistry
+1232_ Homogenous-Heterogenous
+12321. Element
+12322. Compound
+1232223. Molecular Orbitals
+12323. Mixture
+1233. Biology
+1233_ Individual-Community
+123311. Cellular Biology
+123312. Organismic Biology
+123313. Ecological Biology
+12332_ Static-Evolution
+123321. Life
+123322. Death
+123323. Evolution
+13. Logic
+13_ How to Know
+1321. Scientific Method
+1321_ Doubt-Certainty
+13211. Hypothesis
+13212. Test
+13213. Theory
+1322. Methodology
+1322_ Infallibility-Fallibility
+13221. Trial
+13222. Error
+13223. Correction
+1323. Logic
+1323_ Complexity-Simplicity
+13231. Speculation
+13232. Evaluation
+13233. Confirmation
+1331. Types of logic
+1331_ Deduction-Induction
+13311. Mathematical logic
+13312. Formal logic
+13313. Inductive logic
+2. Anthropology
+21. Natrual Necessity
+22. Moral Judgment
+22_ Good-Bad
+221. Legal Ethics
+221_ Just-Unjust
+2211. Right
+2211_ Virtue-Sin
+22111. Legal
+22111_ Permission-Prohibition
+221111. Rule
+221112. Transgression
+221113. Consequence
+22112. Illegal
+221121. Laws
+221122. Breaches
+221123. Punishment
+22113. Legal System
+22113_ Law-Anarchy
+221131. Legislation
+221132. Jurisdiction
+221133. Enforcement
+2212. Wrong
+22121. Immoral
+22121_ Harm-Benefit
+221211. Evil
+221212. Guilt
+221213. Punishment
+22122. Moral
+22122_ Benefit-Harm
+221221. Good
+221222. Merit
+221223. Reward
+22123. Morality
+22123_ Obligation-Freedom
+221231. Right
+221232. Duty
+221233. Responsibility
+2213. Justice
+2213_ Unenlightenment of Enlightenment
+22131. Unfair
+22131_ Prejudice-Fairness
+221311. Inequality
+221312. Bias
+221313. Discrimination
+22132. Fair
+22132_ Fairness-Prejudice
+221321. Equity
+221322. Impartiality
+221323. Neutrality
+22133. Equity
+22133_ Fairness-Inequality
+221331. Benevolence
+221332. Justice
+221333. Equality
+222. Sublime
+222_ Fear-Desire
+2221. Beauty
+2221_ Ugly-Beautiful
+22211. Distaste
+22211_ Repulsive-Attractive
+222111. Disgust
+222112. Aversion
+222113. Repugnant
+22212. Taste
+22212_ Attractive-Repulsive
+222121. Pleasure
+222122. Attraction
+222123. Delight
+22213. Aesthetic
+22213_ Classic-Modern
+222131. Art
+222132. Style
+222133. Trends
+2222. Ugliness
+2222_ Hate-Love
+22221. Offense
+22221_ Harsh-Soft
+222211. Offensive
+222212. Provocation
+222213. Desecration
+22222. Defense
+22222111. "'Visible light'"
+22222112. "'Invisible light'"
+22222113. "'Colour spectrum'"
+22222311. "'Chemical Elements'"
+22222312. "'Chemical Compounds'"
+22222313. "'Chemical Reactions'"
+22223. Equilibrium
+22223_ Stability-Imbalance
+222231. Calming
+222232. Balance
+222233. Peace
+2223. Sublime
+2223_ Fear-Desire
+22231. Repulsion
+22231_ Rejection-Attraction
+222311. Repellant
+222312. Repulsing
+222313. Distancing
+22232. Attraction
+22232_ Attraction-Rejection
+222321. Temptation
+222322. Longing
+222323. Desire
+22233. Balance
+22233_ Balance-Imbalance
+222331. Stability
+222332. Adaptation
+222333. Homeostasis
+223. Dialectics of Nature
+223_ Wisdom of Ignorance
+2231. Knowledge
+223121111. Ignorance
+223121112. Inquiry
+223121113. Knowledge
+22313. Astrophysics
+22313_ Macro-Micro
+223131. Stars
+223132. Planets
+223133. Galaxies
+2232. Ignorance
+22321. Learning Process
+22321_ Unknowing-Knowing
+22321111. Absence of Knowledge
+22321112. Curiosity
+22321113. Gain of Knowledge
+2233. Forms of wisdom
+2233_ Thought-Action
+22331. Scientific wisdom
+22331_ Theory-Practice
+223311. Physics
+223312. Chemistry
+223313. Biology
+22332. Philosophical wisdom
+22332_ Belief-Knowledge
+223321. Ideology
+223322. Metaphysics
+223323. Epistemology
+22333. Practical wisdom
+22333_ Theory-Practice
+223331. Craft
+223332. Skills
+223333. Proficiency
+3. World
+31. Applied Science
+32. Artistery
+321. Art
+322. Musical theory
+322_ Silence-Noise
+3221. Sound
+32211. Dialectics of Illumination
+32211_ Subject-object-switch
+322111. Subjectivity
+322111_ Individual-Collective
+3221111. Self
+3221112. Consciousness
+3221113. Identity
+322112. Objectivity
+322112_ False-True
+3221121. Logic
+3221122. Reason
+3221123. Truth
+322113. Inter-subjectivity
+322113_ Individual-Collective
+3221131. Group
+3221132. Community
+3221133. Society
+32212. Elements of Sound
+32212_ Harmony-Disharmony
+322121. Pitch
+322121_ Mono-Poly
+3221211. Frequency
+3221212. Resonance
+3221213. Tone
+322122. Distance
+3221221. Major Interval
+3221222. Minor Interval
+3221223. Octaves
+32212231. Chromatic Scale
+32212232. Diatonic Scale
+32212233. Whole-tone Scale
+3221224. Pitch Harmony
+322123. Sound Space
+322123_ Here-There
+3221231. Location
+3221232. Direction
+3221233. Space
+32213. Timing in Music
+32213_ Meter-Pulse
+322131. Beats
+322131_ Slow-Fast
+3221311. Pulse
+3221312. Rhythm
+3221313. Tempo
+322132. Rests
+322132_ Sounding-Silent
+3221321. Pause
+3221322. Break
+3221323. Interrupt
+322133. Mensuration
+3221331. Duple Meter
+3221332. Triple Meter 
+3221333. Quadruple Meter
+32213331. Downbeat
+32213332. Upbeat
+32213333. Offbeat
+3222. Note
+3222_ Signifier-Signified
+32222. Methodology
+32222_ Fact-Theory
+322221. Empiricism
+322221_ Objective-Subjective
+3222211. Observation
+3222212. Experiment
+3222213. Data
+322222. Rationalism
+322222_ Objective-Subjective
+3222221. Logic
+3222222. Hypothesis
+3222223. Theory
+322223. Critical theory
+322223_ Compare-Contrast
+3222231. Critique
+3222232. Correction
+3222233. Improvement
+322232. Language
+3222321. Meaning
+3222323. Sign
+322233. Information theory
+322233_ Binary-Superposition
+3222331. Analogue
+3222332. Digital
+3222333. Quantum computing
+3223. Musical theory
+3223_ Silence-Noise
+32231. Sounds
+32231_ Beat-Pattern
+322311. Rhythm
+322311_ Repeat-Vary
+3223111. Pattern
+3223112. Sequence
+3223113. Cycle
+322312. Melody
+322312_ Tone-Untone
+3223121. Note
+3223122. Harmony
+3223123. Melody
+322313. Harmony
+322313_ Harmony-Disharmony
+3223131. Chord
+3223132. Consonance
+3223133. Dissonance
+32232. Notes
+32232_ High-Low
+322321. Pitch
+322321_ Frequency-Wavelength
+3223211. High
+3223212. Low
+3223213. Octave
+322322. Tone
+322322_ Macro-Micro
+3223221. Tone
+3223222. Overtones
+3223223. Polyphony
+322323. Timbre
+322323_ Soft-Hard
+3223231. Texture
+3223232. Resonance
+3223233. Brightness
+32233. Music
+32233_ Tone-Semi-tone
+322331. Scale
+322331_ Transposition-Modulation
+3223311. Scale
+3223312. Key
+3223313. Tuning
+322332. Key
+322332_ Home-Away
+3223321. Key
+3223322. Accidentals
+3223323. Scale
+322333. Mode
+322333_ Tonic-Dominant
+3223331. Mode
+3223332. Tonality
+3223333. Atonality
+323. Combined Arts
+33. Politics
+  
+        
