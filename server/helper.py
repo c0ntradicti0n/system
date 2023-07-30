@@ -1,14 +1,14 @@
 import logging
+import os
 import re
-import subprocess
 import shlex
+import subprocess
 from enum import Enum
 from functools import total_ordering
-import os
 
+from jsonpath_ng import parse
 from Levenshtein import distance
 from regex import regex
-from jsonpath_ng import parse
 
 
 def o(cmd, user=None, cwd="./", err_out=True):
@@ -392,6 +392,75 @@ def nested_str_dict(d):
         del d[k]
 
     return d
+
+
+def sanitize_nested_dict(
+    d,
+    sanitize_key=lambda x: x,
+    sanitize_value=lambda x: x,
+    healthy_last_key=lambda x: True,
+    healthy_normal_key=lambda x: True,
+    last_key_to_normal_key=lambda x: x,
+):
+    if isinstance(d, dict):
+        r = {}
+        for k, v in d.items():
+            new_key = sanitize_key(k)
+            if isinstance(d[k], dict) and healthy_last_key(k):
+                new_key = last_key_to_normal_key(new_key)
+            if (
+                not v
+                or isinstance(d[k], str)
+                and healthy_last_key(k)
+                or healthy_normal_key(k)
+                or isinstance(d[k], dict)
+                and healthy_last_key(k)
+            ):
+                r[new_key] = sanitize_nested_dict(
+                    d[k],
+                    sanitize_key=sanitize_key,
+                    sanitize_value=sanitize_value,
+                    healthy_last_key=healthy_last_key,
+                    healthy_normal_key=healthy_normal_key,
+                    last_key_to_normal_key=last_key_to_normal_key,
+                )
+            else:
+                print("dropped key " + k)
+                continue
+        return r
+    elif isinstance(d, list):
+        return [
+            sanitize_nested_dict(
+                e, sanitize_key=sanitize_key, sanitize_value=sanitize_value
+            )
+            for e in d
+        ]
+    elif isinstance(d, str):
+        return sanitize_value(d)
+
+
+def touch(path, is_dir=False):
+    if is_dir:
+        os.makedirs(path, exist_ok=True)
+    else:
+        pathlib.Path(path).touch()
+
+
+def dump(path, content):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w") as f:
+        f.write(content)
+
+
+def post_process_tree(tree):
+    tree = (
+        tree.replace(".md", "")
+        .replace("- _", "- self-antonym: ")
+        .replace("- .", "- topic: ")
+        .replace(r"/", "")
+    )
+    tree = regex.sub("- (\d+)-?", r"\1. ", tree)
+    return tree
 
 
 if __name__ == "__main__":

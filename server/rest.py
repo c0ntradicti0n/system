@@ -1,11 +1,12 @@
-import os
-from flask import Flask, jsonify
-from flask_restx import Resource, Api
-import coloredlogs
 import logging
-from flask_cors import CORS
-from helper import tree, OutputLevel, nested_str_dict
+import os
+
+import coloredlogs
 import config
+from flask import Flask, jsonify
+from flask_cors import CORS
+from flask_restx import Api, Resource
+from helper import OutputLevel, nested_str_dict, tree
 
 logging.basicConfig(level=logging.DEBUG)
 coloredlogs.install(level="DEBUG")

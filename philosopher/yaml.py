@@ -1,7 +1,8 @@
 # https://stackoverflow.com/questions/47614862/best-way-to-use-ruamel-yaml-to-dump-yaml-to-string-not-to-stream
-import ruamel.yaml
 from io import StringIO
 from pathlib import Path
+
+import ruamel.yaml
 
 # setup loader (basically options)
 yaml = ruamel.yaml.YAML()

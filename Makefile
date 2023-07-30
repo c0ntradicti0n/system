@@ -2,6 +2,7 @@
 
 format:
 	black **/*.py
+	isort .
 	cd web && npm run format
 
 
