@@ -5,14 +5,23 @@ from philosopher.analyser import without_text
 
 
 def llm_update_text(index, kwargs, t, base_path):
-    where, (path_before, text_before) = without_text(t, base_path, exclude=[])
+    for where, (path_before, text_before) in  without_text(t, base_path, exclude=[]):
 
-    themes = [(x, get_from_nested_dict(t, x)) for x in where]
-    themes = [
-        ("".join(str(pp) for pp in p), x["."]) if isinstance(x, dict) else (p, x)
-        for (p, x) in themes
-    ]
-    themes = [(x, y.replace(".md", "")) for (x, y) in themes]
+        try:
+            themes = [(x, get_from_nested_dict(t, x)) for x in where]
+        except:
+            add_to_missing_in_toc()
+        themes = [
+            (p, x["."]) if isinstance(x, dict) else (p, x)
+            for p, x in themes
+        ]
+        themes = [
+            ("".join(str(pp) for pp in p), x) for p, x in themes
+        ]
+        themes = [(x, y.replace(".md", "")) for (x, y) in themes]
+
+        if themes:
+            break
 
     instruction = """
 You are extending a dialectical system, emulating Hegel's methodology, where concepts unfold within a fractal structure of triples. Each triple consists of:
@@ -23,7 +32,7 @@ You are extending a dialectical system, emulating Hegel's methodology, where con
 
 Each triple is a dialectical unit, which can be further extended by adding new triples to any of them.
 
-Additionally we mention about each triple the Inversive Dialectical Antonym (this is a pivot concept that amplifies the evolution of the argumentation by identifying the conflict within the dialectic triple, thereby triggering the formation of the next triple. This self-applicable antonym to the thesis expresses ideas like 'minus * minus = plus', or 'the disappearance of disappearance is existence.') (_)
+Additionally we mention about each triple the Inversive Dialectical Antonym (this is a pivot concept that amplifies the evolution of the argumentation by identifying the conflict between the thesis and the antithesis, as the "vanishing of the vanishing itself" in the example below. But don't repeat that or use it as a reference.
 
 You'll provided a table of contents and a key, as well es text before and after, if there is, and you'll create text content for it for one chapter.
 
@@ -65,7 +74,7 @@ Vanishing of the vanishing itself
 ``
 
 And write the text for the following paths and topics:
-""" + "\n ".join(
+ * """ + "\n * ".join(
         f"{p} {t}" for p, t in themes
     )
     prompt = f"""

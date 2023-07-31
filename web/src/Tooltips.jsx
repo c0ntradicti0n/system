@@ -1,7 +1,26 @@
 import { postProcessTitle } from './position'
 import React, { useState, useEffect } from 'react'
+import { useQuery } from 'react-query'
 
 export const Tooltips = ({ data, id, isWindowWide }) => {
+  const fetchTexts = async () => {
+    const res = await fetch(
+      `${process.env['REACT_APP_HOST']}/api/text/${id ?? ''}`,
+    )
+    if (!res.ok) {
+      throw new Error('Network response was not ok')
+    }
+    const newData = await res.json()
+    console.log('got', { newData })
+    return newData
+  }
+
+  const { data: texts, error } = useQuery(['triangle', id], fetchTexts, {
+    keepPreviousData: true,
+  })
+
+  console.log('texts', texts, error)
+
   return (
     <div
       style={{
@@ -9,73 +28,39 @@ export const Tooltips = ({ data, id, isWindowWide }) => {
         pointerEvents: 'none',
         top: isWindowWide ? 'auto' : 0,
         left: isWindowWide ? 0 : 'auto',
-        height: isWindowWide ? '100%' : '100%',
-        width: isWindowWide ? '30%' : '100%',
+        height: isWindowWide ? '100vh' : '30vh',
+        width: isWindowWide ? '40vw' : 'vw',
         zIndex: 99999999,
         backgroundColor: '#000',
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap', // New addition for wrapping elements
       }}
     >
-      <div
-        style={{
-          pointerEvents: 'none',
-          display: 'flex',
-          flexDirection: 'column',
-          zIndex: 99999999,
-        }}
-      >
-        <div style={{ flex: '1 0 auto', backgroundColor: '#000' }}>
-          {postProcessTitle(data['.'])}
-        </div>
-
-        <div
-          style={{
-            pointerEvents: 'none',
-            display: 'flex',
-            flexDirection: 'row',
-            flex: '2 0 auto',
-          }}
-        >
-          {isWindowWide ? 'wide' : 'tall'}
-
+      {['1', '2', '3', '_'].map((key) => {
+        const header_value = key === '_' ? data[key] : data[key]
+        const value = (texts ?? data)[key]
+        const header =
+          typeof header_value === 'object' ? header_value?.['.'] : header_value
+        const content = typeof value === 'object' ? value?.['.'] : value
+        return (
           <div
+            key={key}
             style={{
-              pointerEvents: 'none',
-              display: 'flex',
-              flexDirection: 'column',
-              flex: '3 0 auto',
-              backgroundColor: '#000',
+              wordWrap: 'break-word',
+              textAlign: 'left',
+              width: '49%',
+              fontSize: '14px',
             }}
           >
-            {['1', '2', '3'].map((key) => {
-              const value = data[key]
-              const content = typeof value === 'object' ? value?.['.'] : value
-              return (
-                <div
-                  key={key}
-                  style={{
-                    pointerEvents: 'none',
-                    flex: '1 0 auto',
-                    padding: '10px',
-                  }}
-                >
-                  {key}.{postProcessTitle(content)}{' '}
-                </div>
-              )
-            })}
+            <h4>
+              {['1', '2', '3'].includes(key) ? key + '.' : '∇'}{' '}
+              {postProcessTitle(header)}
+            </h4>
+            {content}
           </div>
-
-          <div
-            style={{
-              pointerEvents: 'none',
-              flex: '3 3 auto',
-              backgroundColor: '#000',
-              padding: '10px',
-            }}
-          >
-            {postProcessTitle(data['_'])}
-          </div>
-        </div>
-      </div>
+        )
+      })}
     </div>
   )
 }

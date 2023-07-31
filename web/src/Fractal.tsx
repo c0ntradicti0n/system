@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useQuery } from 'react-query'
 import Triangle from './Triangle'
-import { mergeDeep, lookupDeep, splitKey, shiftIn } from './nesting'
+import { mergeDeep, lookupDeep, shiftIn } from './nesting'
 import {
   TransformWrapper,
   TransformComponent,
@@ -50,7 +50,7 @@ const Fractal = ({ setContent }) => {
     }
   }, [])
 
-  const fetchFiles = async () => {
+  const fetchTree = async () => {
     const res = await fetch(
       `${process.env['REACT_APP_HOST']}/api/${detailId ?? ''}`,
     )
@@ -68,12 +68,13 @@ const Fractal = ({ setContent }) => {
     return mergedData
   }
 
-  const { status, error } = useQuery(['triangle', detailId], fetchFiles, {
+  const { status, error } = useQuery(['triangle', detailId], fetchTree, {
     keepPreviousData: true,
   })
 
   useEffect(() => {
     if (scale === null || detailId === null) return
+    let direction = null
     if (scale > maxZoomThreshold) {
       const [newHiddenId, newRestId] = shiftIn(detailId, hoverId, {
         left: true,
@@ -119,7 +120,7 @@ const Fractal = ({ setContent }) => {
   }
 
   if (status === 'error') {
-    return <span>Error: {error.message}</span>
+    return <span>{JSON.stringify(error)}</span>
   }
 
   //console.log(scale, detailId, collectedData)
@@ -138,11 +139,7 @@ const Fractal = ({ setContent }) => {
       }}
     >
       {tooltipData && (
-        <Tooltips
-          data={tooltipData}
-          id={detailId}
-          isWindowWide={isWindowWide}
-        />
+        <Tooltips data={tooltipData} id={hoverId} isWindowWide={isWindowWide} />
       )}
       <TransformWrapper
         limitToBounds={false}

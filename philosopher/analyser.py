@@ -46,18 +46,21 @@ def without_text(t, base_path, exclude):
     stack = [((), t)]
 
     while stack:
-        path, current = stack.pop()
+        path, current = stack.pop(0)
         if any("/".join(path).startswith(e) for e in exclude):
             continue
 
         for x in [1, 2, 3, "_"]:
             if x != "_":
                 fname = current[x]["."]
+                file_path = base_path + "/".join(str(p) for p in path) + f"/{x}/.{fname}"
             else:
                 fname = current[x]
-            with open(base_path + "/".join(path) + f"/{x}/.{fname}", "r") as f:
+                file_path = base_path + "/".join(str(p) for p in path) + f"/_{fname}"
+
+            with open(file_path, "r") as f:
                 content = f.read()
-            if content.strip() == "" or content.strip == fname:
+            if content.strip() == "" or content.strip == fname or len(content) < 30:
                 path_before = make_key_before(path)
 
                 if path_before is not None:
@@ -71,7 +74,7 @@ def without_text(t, base_path, exclude):
                     content_before = None
 
                 current_paths = [[*path, y] for y in [1, 2, 3, "_"]]
-                return current_paths, (path_before, content_before)
+                yield current_paths, (path_before, content_before)
 
         for k, v in current.items():
             if isinstance(v, dict):

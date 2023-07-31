@@ -67,5 +67,5 @@ export function isElementInViewportAndBigAndNoChildren(el, data) {
 }
 
 export function postProcessTitle(title) {
-  return title?.replace('.md', '')
+  return title?.replace('.md', '').replace('_.', '')
 }

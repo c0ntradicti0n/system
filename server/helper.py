@@ -7,6 +7,7 @@ import subprocess
 from enum import Enum
 from functools import total_ordering
 
+from cache import file_based_cache
 from jsonpath_ng import parse
 from Levenshtein import distance
 from regex import regex
@@ -121,16 +122,19 @@ def exists_in_nested_dict(nested_dict, keys):
 
 
 def get_from_nested_dict(nested_dict, keys):
-    keys = digitize(keys)
-    old_dict = nested_dict
-
-    for key in keys[:-1]:
-        if key == "..":
-            nested_dict = old_dict
-
+    try:
+        keys = digitize(keys)
         old_dict = nested_dict
-        nested_dict = nested_dict.setdefault(key, {})
-    return nested_dict[keys[-1]]
+
+        for key in keys[:-1]:
+            if key == "..":
+                nested_dict = old_dict
+
+            old_dict = nested_dict
+            nested_dict = nested_dict.setdefault(key, {})
+        return nested_dict[keys[-1]]
+    except Exception as e:
+        raise
 
 
 def round_school(x):
@@ -153,6 +157,7 @@ class OutputLevel(Enum):
         return self.value == other.value
 
 
+@file_based_cache
 def tree(
     startpath,
     basepath,
@@ -166,6 +171,7 @@ def tree(
     pre_set_output_level=OutputLevel.TOPIC,
     exclude=[],
     prefix_items=False,
+    depth=None,
 ):
     if not pre_set_output_level:
         d = distance(startpath, location, weights=(1000, 1000, 100000))
@@ -225,25 +231,27 @@ def tree(
             if output_level <= OutputLevel.DIRECTORY:
                 output.append(result)
         elif format == "json":
-            tree(
-                startpath=os.path.join(startpath, name),
-                indent=indent,
-                format="json",
-                keys=keys + [name],
-                output=output,
-                sparse=sparse,
-                location=location,
-                info_radius=info_radius,
-                basepath=basepath,
-                pre_set_output_level=pre_set_output_level,
-                exclude=exclude,
-                prefix_items=prefix_items,
-            )
-            if not exists_in_nested_dict(output, keys + [name]):
-                if output_level <= OutputLevel.DIRECTORY:
-                    add_to_nested_dict(output, keys + [name], None)
-                elif output_level <= OutputLevel.TOPIC and name.startswith("."):
-                    add_to_nested_dict(output, keys + [name], None)
+            if depth == None or depth >= 0:
+                tree(
+                    startpath=os.path.join(startpath, name),
+                    indent=indent,
+                    format="json",
+                    keys=keys + [name],
+                    output=output,
+                    sparse=sparse,
+                    location=location,
+                    info_radius=info_radius,
+                    basepath=basepath,
+                    pre_set_output_level=pre_set_output_level,
+                    exclude=exclude,
+                    prefix_items=prefix_items,
+                    depth=depth - 1 if depth is not None else None,
+                )
+                if not exists_in_nested_dict(output, keys + [name]):
+                    if output_level <= OutputLevel.DIRECTORY:
+                        add_to_nested_dict(output, keys + [name], None)
+                    elif output_level <= OutputLevel.TOPIC and name.startswith("."):
+                        add_to_nested_dict(output, keys + [name], None)
 
     for name in sorted(files, key=sort_key):
         if name in exclude:

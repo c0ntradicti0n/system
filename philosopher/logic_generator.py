@@ -69,6 +69,8 @@ def dialectic_triangle(
         pre_set_output_level=preset_output_level,
         exclude=[".git", ".git.md", ".idea"],
         prefix_items=True,
+
+        depth= 3 if task=="text" else None
     )
     pprint.pprint(t)
     index = post_process_tree(single_key_completion(object_to_yaml_str(rec_sort(t))))
@@ -194,9 +196,9 @@ def dialectic_triangle(
         print(f"Created {created} files.")
     elif task == "text":
         # The findall function of the re module is used to get all matching patterns.
-        split_strings = custom_parser(output, "# (\d|_) .*$")
+        split_strings = custom_parser(output, "# (\d|_)+ .*$")
         for header, content in split_strings:
-            path = re.match("# (\d*(\d|_) .+)$", header).group(2)
+            path = re.match("# (\d*(\d|_)) .+$", header).group(1)
 
             if path[-1].isdigit():
                 file_pattern = base_path + "/" + "/".join(path) + "/.*.md"
