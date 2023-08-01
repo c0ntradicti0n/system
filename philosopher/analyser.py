@@ -1,6 +1,7 @@
 from collections import Counter, defaultdict
 
 from helper import get_from_nested_dict
+from philosopher.missing import add_to_missing_in_toc
 
 
 def analyse_toc(tree, exclude):
@@ -51,15 +52,23 @@ def without_text(t, base_path, exclude):
             continue
 
         for x in [1, 2, 3, "_"]:
-            if x != "_":
-                fname = current[x]["."]
-                file_path = base_path + "/".join(str(p) for p in path) + f"/{x}/.{fname}"
-            else:
-                fname = current[x]
-                file_path = base_path + "/".join(str(p) for p in path) + f"/_{fname}"
 
-            with open(file_path, "r") as f:
-                content = f.read()
+            try:
+                if x != "_":
+                    path_keys = [*path, x]
+                    fname = current[x]["."]
+                    file_path = base_path + "/".join(str(p) for p in path_keys) + f"/.{fname}"
+                else:
+                    path_keys = path
+
+                    fname = current[x]
+                    file_path = base_path + "/".join(str(p) for p in path) + f"/_{fname}"
+
+                with open(file_path, "r") as f:
+                    content = f.read()
+            except:
+                add_to_missing_in_toc(t, [path_keys])
+
             if content.strip() == "" or content.strip == fname or len(content) < 30:
                 path_before = make_key_before(path)
 

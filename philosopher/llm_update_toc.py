@@ -1,11 +1,18 @@
+import os.path
+import pathlib
+
 from philosopher.analyser import analyse_toc
 from philosopher.LLMFeature import create_path, features
 
 
 def llm_update_toc(index, kwargs, t):
-    shortest_path = [
-        create_path(p) for p in analyse_toc(t, exclude=["111"])["min_depth_paths"]
-    ]
+    if os.path.exists(os.environ.get("MISSING_CHAPTERS", "missing.txt")):
+        paths_to_fill = pathlib.Path(os.environ.get("MISSING_CHAPTERS", "missing.txt")).read_text()
+        paths_to_fill = [p for p in paths_to_fill.split("\n") if p]
+    else:
+        paths_to_fill = [
+            create_path(p) for p in analyse_toc(t, exclude=["111"])["min_depth_paths"]
+        ]
     instruction = (
         """
 You are extending a dialectical system, emulating Hegel's methodology, where concepts unfold within a 
@@ -55,7 +62,7 @@ Focus on a top-down approach to get to some more systematic dialectical structur
 Focus on completeness of the fractal, please fill up all incomplete triples, rather add new triples than improving existing ones.
 
 And please dive deeper into """
-        + " and ".join(shortest_path)
+        + " and ".join(paths_to_fill)
     )
     prompt = f"""
         {index}

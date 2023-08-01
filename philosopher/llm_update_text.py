@@ -1,7 +1,10 @@
+import os
+
 import regex as re
 from helper import get_from_nested_dict
 
 from philosopher.analyser import without_text
+from philosopher.missing import add_to_missing_in_toc
 
 
 def llm_update_text(index, kwargs, t, base_path):
@@ -9,12 +12,15 @@ def llm_update_text(index, kwargs, t, base_path):
 
         try:
             themes = [(x, get_from_nested_dict(t, x)) for x in where]
+            themes = [
+                (p, x["."]) if isinstance(x, dict) else (p, x)
+                for p, x in themes
+            ]
         except:
-            add_to_missing_in_toc()
-        themes = [
-            (p, x["."]) if isinstance(x, dict) else (p, x)
-            for p, x in themes
-        ]
+            add_to_missing_in_toc(t, where)
+            continue
+
+
         themes = [
             ("".join(str(pp) for pp in p), x) for p, x in themes
         ]
@@ -59,17 +65,16 @@ Keep mind to explain to the point their dialectical relationship, what the conce
 A very neat example is the first chapter, take this as a inspiration for your work:
 
 ```
-# 1321 Pure Being
+# 1111 Pure Being
 Being is absolute indeterminateness and emptiness, without any content to be distinguished within or from anything else, existing only in the purity of its self-equality. However, this pure being, in its indeterminate immediacy, equates to nothing, for it contains no distinguishing content, rendering it equal to pure nothingness in its undifferentiated absence of determination.
 
-
-# 1322 Pure Nothing
+# 1112 Pure Nothing
 Nothing, though it signifies absence, has a semantic existence in our cognition as the counterpart to being, hence nothing and being, while appearing antithetical, are in essence the same. Nonetheless, they are distinct in their immediacy, with each state immediately vanishing into its opposite, giving rise to the concept of becoming, a constant fluid transition between being and nothing.
 
-# 1323 Becoming
+# 1113 Becoming
 Becoming, the unseparated unity of being and nothing, encapsulates these states as vanishing moments, constantly in flux, expressing itself through two key movements: coming-to-be, where nothing transitions to being, and ceasing-to-be, where being transitions to nothing. This continuous interplay leads to a self-sublation within each state, causing the "vanishing of the vanishing itself", settling into a stable unity that encapsulates the vanished becoming, which is determinate being, a unity of being and nothing in the form of being.
 
-# 132_ 
+# 111_ 
 Vanishing of the vanishing itself
 ``
 
