@@ -52,7 +52,7 @@ const Fractal = ({ setContent }) => {
 
   const fetchTree = async () => {
     const res = await fetch(
-      `${process.env['REACT_APP_HOST']}/api/${detailId ?? ''}`,
+      `${process.env['REACT_APP_HOST']}/api/toc/${detailId ?? ''}`,
     )
     if (!res.ok) {
       throw new Error('Network response was not ok')

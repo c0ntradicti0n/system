@@ -1,3 +1,4 @@
+import logging
 import os
 
 import regex as re
@@ -20,11 +21,15 @@ def llm_update_text(index, kwargs, t, base_path):
             add_to_missing_in_toc(t, where)
             continue
 
-
-        themes = [
-            ("".join(str(pp) for pp in p), x) for p, x in themes
-        ]
-        themes = [(x, y.replace(".md", "")) for (x, y) in themes]
+        try:
+            themes = [
+                ("".join(str(pp) for pp in p), x) for p, x in themes
+            ]
+            themes = [(x, y.replace(".md", "")) for (x, y) in themes]
+        except:
+            print (themes, where)
+            logging.error("Error updating hegelian text.", exc_info=True)
+            continue
 
         if themes:
             break

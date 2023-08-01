@@ -70,7 +70,7 @@ def dialectic_triangle(
         exclude=[".git", ".git.md", ".idea"],
         prefix_items=True,
 
-        depth= 3 if task=="text" else None
+        depth= 3 if task=="text" else 7
     )
     pprint.pprint(t)
     index = post_process_tree(single_key_completion(object_to_yaml_str(rec_sort(t))))

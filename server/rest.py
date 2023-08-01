@@ -1,11 +1,12 @@
 import logging
 import os
+from pprint import pprint
 
 import coloredlogs
 import config
 from flask import Flask, jsonify
 from flask_cors import CORS
-from flask_restx import Api, Resource
+from flask_restx import Api, Resource, Namespace
 from helper import OutputLevel, get_from_nested_dict, nested_str_dict, tree
 
 logging.basicConfig(level=logging.DEBUG)
@@ -14,12 +15,15 @@ coloredlogs.install(level="DEBUG")
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
-toc = api.namespace("api", description="Logic fractal toc")
-text = api.namespace("api/text", description="Logic fractal text")
 
+toc = Namespace('toc', description='Logic Fractal TOC operations')
+text = Namespace('text', description='Logic Fractal text operations')
 
-@toc.route("/", defaults={"path": ""})
-@toc.route("/text/<path:path>")
+api.add_namespace(toc, path='/api/toc')
+api.add_namespace(text, path='/api/text')
+
+@toc.route('/', defaults={'path': ''})
+@toc.route("/<path:path>")
 class LogicFractal(Resource):
     @toc.doc("Load Table of contents")
     def get(self, path):
@@ -39,8 +43,7 @@ class LogicFractal(Resource):
             logging.error(f"File not found: {path}", exc_info=True)
             return {"error": "File not found"}, 404
 
-
-@text.route("/", defaults={"path": ""})
+@text.route('/', defaults={'path': ''})
 @text.route("/<path:path>")
 class LogicFractalText(Resource):
     @text.doc("Get text for things")
@@ -61,10 +64,14 @@ class LogicFractalText(Resource):
             if path.__len__():
                 file_dict = get_from_nested_dict(file_dict, path.split("/"))
 
-            file_dict = {
-                k: v.strip() if not isinstance(v, dict) else list(v.values())[0]
+            try:
+                file_dict = {
+                k[0]: (v.strip() if v else "") if not isinstance(v, dict) else list(v.values())[0]
                 for k, v in file_dict.items()
-            }
+                }
+            except Exception as e:
+                raise e
+            pprint(f"{file_dict=}")
             return jsonify(nested_str_dict(file_dict))
         except FileNotFoundError:
             logging.error(f"File not found: {path}", exc_info=True)
@@ -74,6 +81,8 @@ class LogicFractalText(Resource):
 if __name__ == "__main__":
     with app.app_context():
         result = LogicFractalText().get("")
+        print(result)
+        result = LogicFractalText().get("1")
         print(result)
     with app.app_context():
         print(LogicFractal().get(""))

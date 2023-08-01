@@ -157,7 +157,7 @@ class OutputLevel(Enum):
         return self.value == other.value
 
 
-@file_based_cache
+#@file_based_cache
 def tree(
     startpath,
     basepath,
@@ -256,14 +256,12 @@ def tree(
     for name in sorted(files, key=sort_key):
         if name in exclude:
             continue
-
-        with open(os.path.join(path, name), "r") as f:
-            try:
-                content = f.read()
-                if sparse:
+        try:
+            content = pathlib.Path(os.path.join(path, name)).read_text("utf-8")
+            if sparse:
                     content = content[:100]
-            except:
-                raise Exception("error reading file", os.path.join(path, name))
+        except Exception as e:
+            raise Exception("error reading file", os.path.join(path, name)) from e
 
         if format == "json":
             k = name
@@ -376,7 +374,7 @@ def get_prefix(last_key):
 
 def extract(x):
     try:
-        m = regex.match(r"(?P<key>^[\d\.]+) (?P<value>.+)\"?$", x).groupdict()
+        m = regex.match(r"(?P<key>^[\d\._]+) (?P<value>.+)\"?$", x).groupdict()
         return m
     except:
         print(f"not matched: {x}")
