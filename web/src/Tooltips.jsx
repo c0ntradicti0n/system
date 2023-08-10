@@ -20,7 +20,11 @@ export const Tooltips = ({ data, id, isWindowWide }) => {
   })
 
   console.log('texts', texts, error)
-
+  if (
+    !['1', '2', '3', '_'].some((key) => (texts ?? {})[key]) ||
+    ['1', '2', '3', '_'].every((key) => texts?.[key]?.length < 40)
+  )
+    return null
   return (
     <div
       style={{

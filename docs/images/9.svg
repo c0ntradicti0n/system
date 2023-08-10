@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <style>
+    @keyframes colorShift {
+      0% { fill: red; }
+      25% { fill: yellow; }
+      50% { fill: lime; }
+      75% { fill: cyan; }
+      100% { fill: magenta; }
+    }
+
+    @keyframes rotateTriangles {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(720deg); }
+    }
+
+    @keyframes portalPulse {
+      0% { r: 0; }
+      50% { r: 300; }
+      100% { r: 0; }
+    }
+  </style>
+
+  <polygon id="being" points="50,300 150,300 100,200" />
+  <polygon id="nothing" points="250,300 350,300 300,200" />
+  <polygon id="becoming" points="150,200 250,200 200,100" />
+
+  <circle id="portal" cx="200" cy="200" r="0" />
+
+  <style>
+    #being, #nothing, #becoming {
+      animation: colorShift 0.5s linear infinite, rotateTriangles 1s linear infinite;
+      transform-origin: 200px 200px;
+    }
+
+    #portal {
+      animation: colorShift 0.5s linear infinite, portalPulse 0.5s ease-in-out infinite;
+    }
+  </style>
+</svg>

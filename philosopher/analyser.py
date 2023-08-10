@@ -1,6 +1,7 @@
 from collections import Counter, defaultdict
 
 from helper import get_from_nested_dict
+
 from philosopher.missing import add_to_missing_in_toc
 
 
@@ -9,11 +10,16 @@ def analyse_toc(tree, exclude):
     len_counter = defaultdict(list)
     while stack:
         path, current = stack.pop()
+        keys = "".join([str(p) for p in path])
+
+        for x in [1, 2, 3, "_"]:
+            if x not in current:
+                len_counter[len(keys + str(x))].append(keys + str(x))
+
         for k, v in current.items():
             if isinstance(v, dict):
                 stack.append((path + (k,), v))
             else:
-                keys = "".join([str(p) for p in path])
                 if any(keys.startswith(e) for e in exclude):
                     continue
                 if any(isinstance(vv, dict) for vv in current.values()):
@@ -52,17 +58,20 @@ def without_text(t, base_path, exclude):
             continue
 
         for x in [1, 2, 3, "_"]:
-
             try:
                 if x != "_":
                     path_keys = [*path, x]
                     fname = current[x]["."]
-                    file_path = base_path + "/".join(str(p) for p in path_keys) + f"/.{fname}"
+                    file_path = (
+                        base_path + "/".join(str(p) for p in path_keys) + f"/.{fname}"
+                    )
                 else:
                     path_keys = path
 
                     fname = current[x]
-                    file_path = base_path + "/".join(str(p) for p in path) + f"/_{fname}"
+                    file_path = (
+                        base_path + "/".join(str(p) for p in path) + f"/_{fname}"
+                    )
 
                 with open(file_path, "r") as f:
                     content = f.read()

@@ -157,7 +157,7 @@ class OutputLevel(Enum):
         return self.value == other.value
 
 
-#@file_based_cache
+# @file_based_cache
 def tree(
     startpath,
     basepath,
@@ -259,7 +259,7 @@ def tree(
         try:
             content = pathlib.Path(os.path.join(path, name)).read_text("utf-8")
             if sparse:
-                    content = content[:100]
+                content = content[:100]
         except Exception as e:
             raise Exception("error reading file", os.path.join(path, name)) from e
 
@@ -468,6 +468,7 @@ def post_process_tree(tree):
     )
     tree = regex.sub("- (\d+)-?", r"\1. ", tree)
     tree = regex.sub(r".+ null(\n|$)", r"", tree)
+    tree = regex.sub(r"((\d*)\.)", r"\2", tree)
     return tree
 
 

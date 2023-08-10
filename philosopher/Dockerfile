@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y cron
 RUN touch /var/log/cron.log
 
 # copy the script into the container
-COPY logic_generator.py .
+COPY main.py .
 
 
 

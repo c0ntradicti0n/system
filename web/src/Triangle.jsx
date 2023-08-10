@@ -30,7 +30,7 @@ function Triangle({
   setTooltipData,
   setHoverId,
 }) {
-  const [isHovering, setIsHovering] = useState(false)
+  const [hovered, setIsHovering] = useState(false)
 
   const fontSize = size / 30 + Math.sqrt(level)
   const ref = React.useRef(null)
@@ -130,6 +130,7 @@ function Triangle({
           border: '10px solid black !important',
           backgroundColor: stringToColour(fullId.replace('/', ''), 1),
           zIndex: 1000 - level,
+          filter: hovered ? 'invert(1)' : 'invert(0)',
         }}
       >
         {[1, 2, 3].map((subTriangleDir, index) => (

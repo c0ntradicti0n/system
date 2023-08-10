@@ -6,7 +6,7 @@ import coloredlogs
 import config
 from flask import Flask, jsonify
 from flask_cors import CORS
-from flask_restx import Api, Resource, Namespace
+from flask_restx import Api, Namespace, Resource
 from helper import OutputLevel, get_from_nested_dict, nested_str_dict, tree
 
 logging.basicConfig(level=logging.DEBUG)
@@ -16,13 +16,14 @@ app = Flask(__name__)
 CORS(app)
 api = Api(app)
 
-toc = Namespace('toc', description='Logic Fractal TOC operations')
-text = Namespace('text', description='Logic Fractal text operations')
+toc = Namespace("toc", description="Logic Fractal TOC operations")
+text = Namespace("text", description="Logic Fractal text operations")
 
-api.add_namespace(toc, path='/api/toc')
-api.add_namespace(text, path='/api/text')
+api.add_namespace(toc, path="/api/toc")
+api.add_namespace(text, path="/api/text")
 
-@toc.route('/', defaults={'path': ''})
+
+@toc.route("/", defaults={"path": ""})
 @toc.route("/<path:path>")
 class LogicFractal(Resource):
     @toc.doc("Load Table of contents")
@@ -37,13 +38,15 @@ class LogicFractal(Resource):
                 exclude=[".git", ".git.md", ".gitignore", ".DS_Store", ".idea"],
                 pre_set_output_level=OutputLevel.FILENAMES,
                 prefix_items=True,
+                depth=os.environ.get("DEPTH", 4)
             )
             return jsonify(nested_str_dict(file_dict))
         except FileNotFoundError:
             logging.error(f"File not found: {path}", exc_info=True)
             return {"error": "File not found"}, 404
 
-@text.route('/', defaults={'path': ''})
+
+@text.route("/", defaults={"path": ""})
 @text.route("/<path:path>")
 class LogicFractalText(Resource):
     @text.doc("Get text for things")
@@ -63,11 +66,13 @@ class LogicFractalText(Resource):
 
             if path.__len__():
                 file_dict = get_from_nested_dict(file_dict, path.split("/"))
-
+            print(f"{file_dict=}")
             try:
                 file_dict = {
-                k[0]: (v.strip() if v else "") if not isinstance(v, dict) else list(v.values())[0]
-                for k, v in file_dict.items()
+                    str(k)[0]: (v.strip() if v else "")
+                    if not isinstance(v, dict)
+                    else list(v.values())[0]
+                    for k, v in file_dict.items()
                 }
             except Exception as e:
                 raise e

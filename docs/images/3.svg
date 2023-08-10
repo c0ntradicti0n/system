@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <style>
+    @keyframes fill {
+      0% { fill: white; }
+      50% { fill: black; }
+      100% { fill: white; }
+    }
+    @keyframes fillReverse {
+      0% { fill: black; }
+      50% { fill: white; }
+      100% { fill: black; }
+    }
+    @keyframes color {
+      0% { fill: black; }
+      50% { fill: white; }
+      100% { fill: black; }
+    }
+    @keyframes colorReverse {
+      0% { fill: white; }
+      50% { fill: black; }
+      100% { fill: white; }
+    }
+    @keyframes gradient {
+      0% { stop-color: black; }
+      50% { stop-color: white; }
+      100% { stop-color: black; }
+    }
+    @keyframes gradientReverse {
+      0% { stop-color: white; }
+      50% { stop-color: black; }
+      100% { stop-color: white; }
+    }
+  </style>
+
+  <polygon points="100,200 50,300 150,300" class="triangle1" />
+  <text x="100" y="280" text-anchor="middle" font-size="20" font-family="Arial" class="text1">Being</text>
+  <text x="100" y="300" text-anchor="middle" font-size="15" font-family="Arial" class="text1">Thesis</text>
+
+  <polygon points="300,200 250,300 350,300" class="triangle2" />
+  <text x="300" y="280" text-anchor="middle" font-size="20" font-family="Arial" class="text2">Nothing</text>
+  <text x="300" y="300" text-anchor="middle" font-size="15" font-family="Arial" class="text2">Antithesis</text>
+
+  <polygon points="200,100 150,200 250,200" class="triangle3" />
+  <text x="200" y="180" text-anchor="middle" font-size="20" font-family="Arial" class="text3">Becoming</text>
+  <text x="200" y="200" text-anchor="middle" font-size="15" font-family="Arial" class="text3">Synthesis</text>
+
+  <style>
+    .triangle1 {
+      animation: fill 10s infinite;
+    }
+    .text1 {
+      animation: color 10s infinite;
+    }
+    .triangle2 {
+      animation: fillReverse 10s infinite;
+    }
+    .text2 {
+      animation: colorReverse 10s infinite;
+    }
+    .triangle3 {
+      animation: fillReverse 10s infinite;
+    }
+    .text3 {
+      animation: colorReverse 10s infinite;
+    }
+    .stop1 {
+      animation: gradientReverse 10s infinite;
+    }
+    .stop2 {
+      animation: gradient 10s infinite;
+    }
+  </style>
+
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:white;stop-opacity:1" class="stop1" />
+      <stop offset="100%" style="stop-color:black;stop-opacity:1" class="stop2" />
+    </linearGradient>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="triangle2"/>
+    </marker>
+    <marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="10 0, 0 3.5, 10 7" class="triangle1"/>
+    </marker>
+  </defs>
+
+  <path d="M150,200 A50,150 0 1,1 250,200" stroke="url(#grad1)" fill="transparent" stroke-width="2" marker-end="url(#arrowhead)" style="stroke-linecap: round;"/>
+  <path d="M250,200 A50,150 0 1,0 150,200" stroke="url(#grad1)" fill="transparent" stroke-width="2" marker-end="url(#arrowhead2)" style="stroke-linecap: round;"/>
+</svg>

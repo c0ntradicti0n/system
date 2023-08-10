@@ -1,18 +1,23 @@
 import os.path
 import pathlib
 
+import regex
+
 from philosopher.analyser import analyse_toc
 from philosopher.LLMFeature import create_path, features
 
 
-def llm_update_toc(index, kwargs, t):
+def llm_update_toc(toc, kwargs, t):
     if os.path.exists(os.environ.get("MISSING_CHAPTERS", "missing.txt")):
-        paths_to_fill = pathlib.Path(os.environ.get("MISSING_CHAPTERS", "missing.txt")).read_text()
-        paths_to_fill = [p for p in paths_to_fill.split("\n") if p]
+        paths_to_fill = pathlib.Path(
+            os.environ.get("MISSING_CHAPTERS", "missing.txt")
+        ).read_text()
+        paths_to_fill = [(p, "") for p in paths_to_fill.split("\n") if p][:5]
     else:
         paths_to_fill = [
             create_path(p) for p in analyse_toc(t, exclude=["111"])["min_depth_paths"]
         ]
+    topics = " and ".join([f"{pf[0]}, {pf[1]}" for pf in paths_to_fill])
     instruction = (
         """
 You are extending a dialectical system, emulating Hegel's methodology, where concepts unfold within a 
@@ -24,8 +29,9 @@ fractal structure of triples. Each triple consists of:
 
 Each triple is a dialectical unit, which can be further extended by adding a new triple to any of them.
 
-Additionally we mention about each triple the Inversive Dialectical Antonym. 
-This is a pivot concept that amplifies the evolution of the argumentation by identifying the conflict within the 
+Additionally we explain about each triple a antinomic mutual relation. Remember the Kantian antinomies, and 
+other famous intricacies. 
+This should point to  the evolution of the argumentation by identifying the conflict within the 
 dialectic triple, thereby triggering the formation of the next triple. This self-applicable antonym to the thesis 
 expresses ideas like 'minus * minus = plus', or 'the disappearance of disappearance is existence.') (_)
 
@@ -48,7 +54,7 @@ Examples:
 
 Stick exactly to this syntax, don't exchange: '.', '_' with more meaningful information, put the meaning only into 
 the strings.
-Respond only with the keys (123.) and succinct suggestions. Avoid any other explanatory phrase. Your proposals should 
+Respond only with the keys like 31332 and succinct suggestions. Avoid any other explanatory phrase. Your proposals should 
 be limited to 1-4 word titles, no sentences.
 Thus your output should be a list with a syntax like this:
 
@@ -61,10 +67,23 @@ Focus only on scientific objective topics as math, geometry, physics, chemistry,
 Focus on a top-down approach to get to some more systematic dialectical structure; first all upper levels, then the lower levels.
 Focus on completeness of the fractal, please fill up all incomplete triples, rather add new triples than improving existing ones.
 
-And please dive deeper into """
-        + " and ".join(paths_to_fill)
+So, please dump all your knowledge accurately about """
+        + topics
     )
+
+    toc_lines = []
+    for l in toc.split("\n"):
+        lp = regex.match(r"^\d*", l).group(0)
+        for pf in paths_to_fill:
+            if pf.startswith(lp) or len(lp) < 4:
+                toc_lines.append(l)
+                break
+
+    toc = "\n".join(toc_lines)
     prompt = f"""
-        {index}
-        """
+Here is a truncated version of the current dialectical system to the path, where you should operate on:
+
+{toc}
+
+So, please dump all you wisdom accurately about """ + topics
     return instruction, prompt

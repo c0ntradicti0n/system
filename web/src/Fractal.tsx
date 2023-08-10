@@ -8,6 +8,7 @@ import {
   ReactZoomPanPinchRef,
 } from 'react-zoom-pan-pinch'
 import { Tooltips } from './Tooltips'
+import Triangle2 from './Triangle2'
 
 const Controls = ({ zoomIn, zoomOut, resetTransform }) => (
   <>
@@ -55,7 +56,8 @@ const Fractal = ({ setContent }) => {
       `${process.env['REACT_APP_HOST']}/api/toc/${detailId ?? ''}`,
     )
     if (!res.ok) {
-      throw new Error('Network response was not ok')
+      console.error('Network response was not ok', res)
+      return
     }
     const newData = await res.json()
     console.log('fetchFiles', { detailId, res, newData })

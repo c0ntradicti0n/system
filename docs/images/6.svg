@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <style>
+    @keyframes pulseBeing {
+      0% { fill: black; opacity: 1; }
+      50% { fill: white; opacity: 0.5; }
+      100% { fill: black; opacity: 1; }
+    }
+
+    @keyframes pulseNothing {
+      0% { fill: white; opacity: 1; }
+      50% { fill: black; opacity: 0.5; }
+      100% { fill: white; opacity: 1; }
+    }
+
+    @keyframes transformBeing {
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(180deg) translateX(200px); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes transformNothing {
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(-180deg) translateX(-200px); }
+      100% { transform: rotate(-360deg); }
+    }
+
+    @keyframes pulseBecoming {
+      0% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes portal {
+      0% { r: 0; fill: transparent; }
+      50% { r: 50; fill: url(#grad); }
+      100% { r: 0; fill: transparent; }
+    }
+
+    @keyframes rotatePortal {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+
+  <defs>
+    <radialGradient id="grad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color: #000; stop-opacity: 1"/>
+      <stop offset="100%" style="stop-color: #fff; stop-opacity: 1"/>
+    </radialGradient>
+  </defs>
+
+  <polygon id="being" points="50,300 150,300 100,200" class="triangle1" />
+  <polygon id="nothing" points="250,300 350,300 300,200" class="triangle2" />
+  <polygon id="becoming" points="150,200 250,200 200,100" class="triangle3" />
+
+  <circle id="portal" cx="200" cy="200" />
+
+  <style>
+    #being {
+      animation: pulseBeing 4s infinite, transformBeing 8s infinite;
+      transform-origin: 100px 250px;
+    }
+
+    #nothing {
+      animation: pulseNothing 4s infinite, transformNothing 8s infinite;
+      transform-origin: 300px 250px;
+    }
+
+    #becoming {
+      animation: pulseBecoming 4s infinite;
+    }
+
+    #portal {
+      animation: portal 4s infinite, rotatePortal 6s infinite;
+    }
+  </style>
+</svg>

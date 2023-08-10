@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <polygon points="100,10 10,190 190,190" fill="white" />
+  <text x="100" y="170" text-anchor="middle" font-size="12" fill="black" font-family="Arial">Being</text>
+  <text x="100" y="185" text-anchor="middle" font-size="10" fill="black" font-family="Arial">Thesis</text>
+</svg>

@@ -52,6 +52,7 @@ services:
         - "host.docker.internal:host-gateway"
     volumes:
       - "$SYSTEM:/system"
+      - "./server:/flask_app"
 
 
   philospher:

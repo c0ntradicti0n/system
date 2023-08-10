@@ -31,9 +31,9 @@ if os.environ.get("OPENAI_API_KEY"):
     openai.api_key = os.getenv("OPENAI_API_KEY")
 
     @simple_cache.cache_it(filename=os.getcwd() + "/dialectic_triangle.cache", ttl=120)
-    def llm(instruction, text):
+    def llm(instruction, text, model=os.environ.get("OPENAI_MODEL")):
         return openai.ChatCompletion.create(
-            model=os.environ.get("OPENAI_MODEL"),
+            model=model,
             messages=[
                 {"role": "system", "content": instruction},
                 {"role": "user", "content": text},
@@ -69,8 +69,7 @@ def dialectic_triangle(
         pre_set_output_level=preset_output_level,
         exclude=[".git", ".git.md", ".idea"],
         prefix_items=True,
-
-        depth= 3 if task=="text" else 7
+        depth=3 if task == "text" else 7,
     )
     pprint.pprint(t)
     index = post_process_tree(single_key_completion(object_to_yaml_str(rec_sort(t))))
@@ -96,7 +95,9 @@ def dialectic_triangle(
         with open(lllm_input, "w") as f:
             f.write(instruction.strip() + "\n" + prompt + "\n")
 
-        api_result = llm(instruction=instruction.strip(), text=prompt)
+        api_result = llm(
+            instruction=instruction.strip(), text=prompt, model=kwargs["model"]
+        )
         output = api_result["choices"][0]["message"]["content"]
 
         with open(lllm_output, "w") as f:
@@ -105,12 +106,14 @@ def dialectic_triangle(
         with open(lllm_output) as f:
             output = f.read()
 
-    xpaths = output.split("\n")
-    xpaths = [x for x in xpaths if x]
-    xpaths = [regex.sub(r"^\d\.", "", x) for x in xpaths]
-    print(xpaths)
+
 
     if task == "index":
+        xpaths = output.split("\n")
+        xpaths = [x for x in xpaths if x]
+        xpaths = [regex.sub(r"^\d\.", "", x) for x in xpaths]
+        print(xpaths)
+
         paths = []
         while not paths:
             for path in xpaths:
@@ -133,26 +136,12 @@ def dialectic_triangle(
         for m in paths:
             keys = (
                 m["key"]
-                .replace("['", "")
-                .replace("']", "|")
-                .replace("$.", "")
-                .replace("topic", ".")
-                .replace("antonym", "_")
-                .replace("thesis", "1")
-                .replace("antithesis", "2")
-                .replace("synthesis", "3")
-                .replace("/", "-")
             )
             keys = [k for k in keys]
             last_key = keys[-1]
             prefix = get_prefix(last_key)
 
-            if (
-                m["key"].startswith("$.['1']['1']")
-                or m["key"].startswith("$.['1']['2']")
-                or m["key"].startswith("$.['2']['1']")
-                or m["key"].startswith("$.['2']['2']")
-            ):
+            if m["key"].startswith("111"):
                 continue
 
             v = m["value"].replace("/", "-")
@@ -193,13 +182,17 @@ def dialectic_triangle(
         )
 
         created = nested_dict_to_filesystem(f"{base_path}".strip(), t)
-        print(f"Created {created} files.")
+        print(f"TOC created {created} files.")
+
     elif task == "text":
         # The findall function of the re module is used to get all matching patterns.
         split_strings = custom_parser(output, "# (\d|_)+ .*$")
         for header, content in split_strings:
-            path = re.match("# (\d*(\d|_)) .+$", header).group(1)
-
+            try:
+                path = re.match("# (\d*(\d|_)) .+$", header).group(1)
+            except AttributeError:
+                print(f"Could not parse {header}")
+                continue
             if path[-1].isdigit():
                 file_pattern = base_path + "/" + "/".join(path) + "/.*.md"
             else:
@@ -213,26 +206,30 @@ def dialectic_triangle(
 
 
 if __name__ == "__main__":
-    with git_auto_commit(
-        config.system_path, commit_message_prefix="Automated TEXT Commit"
-    ) as ctx:
-        print(
-            dialectic_triangle(
-                base_path=config.system_path,
-                location="",
-                task="text",
-                info_radius=100000,
-                preset_output_level=OutputLevel.FILENAMES,
-                # llm features
-                block=True,
-                shift=True,
-                topic=True,
-                antithesis=True,
-                thesis=True,
-                synthesis=True,
-                inversion_antonym=True,
+    for i in range(3):
+        with git_auto_commit(
+            config.system_path, commit_message_prefix="Automated TEXT Commit"
+        ) as ctx:
+            print(
+                dialectic_triangle(
+                    base_path=config.system_path,
+                    location="",
+                    task="text",
+                    info_radius=100000,
+                    preset_output_level=OutputLevel.FILENAMES,
+                    # llm features
+                    block=True,
+                    shift=True,
+                    topic=True,
+                    antithesis=True,
+                    thesis=True,
+                    synthesis=True,
+                    inversion_antonym=True,
+                    # llm model
+                    model="gpt-3.5-turbo",
+                )
             )
-        )
+        os.system("rm -rf .cache_text/")
 
     with git_auto_commit(
         config.system_path, commit_message_prefix="Automated TOC Commit"
@@ -252,5 +249,7 @@ if __name__ == "__main__":
                 thesis=True,
                 synthesis=True,
                 inversion_antonym=True,
+                # llm model
+                model="gpt-4",
             )
         )
