@@ -121,7 +121,7 @@ def exists_in_nested_dict(nested_dict, keys):
     return keys[-1] in nested_dict
 
 
-def get_from_nested_dict(nested_dict, keys):
+def get_from_nested_dict(nested_dict, keys, return_on_fail=None):
     try:
         keys = digitize(keys)
         old_dict = nested_dict
@@ -133,8 +133,12 @@ def get_from_nested_dict(nested_dict, keys):
             old_dict = nested_dict
             nested_dict = nested_dict.setdefault(key, {})
         return nested_dict[keys[-1]]
-    except Exception as e:
-        raise
+    except KeyError:
+
+        if return_on_fail is not None:
+            return return_on_fail
+        else:
+            raise
 
 
 def round_school(x):

@@ -1,8 +1,10 @@
 import os.path
 import pathlib
 
+import editdistance as editdistance
 import regex
 
+from helper import get_from_nested_dict
 from philosopher.analyser import analyse_toc
 from philosopher.LLMFeature import create_path, features
 
@@ -16,8 +18,11 @@ def llm_update_toc(toc, kwargs, t):
     else:
         paths_to_fill = [
             create_path(p) for p in analyse_toc(t, exclude=["111"])["min_depth_paths"]
-        ]
-    topics = " and ".join([f"{pf[0]}, {pf[1]}" for pf in paths_to_fill])
+        ][:3]
+    themes = [(x, get_from_nested_dict(t, list(x), return_on_fail="<please invent>")) for x in paths_to_fill]
+    themes = [(k, v if isinstance(v, str) else ", ".join(v.values()).replace(".md", "")) for k, v in themes]
+    topics = " and ".join([f"{k}, {v}," for k, v in themes])
+    paths_to_fill = [p for p in paths_to_fill if  not p.startswith("11")]
     instruction = (
         """
 You are extending a dialectical system, emulating Hegel's methodology, where concepts unfold within a 
@@ -75,11 +80,14 @@ So, please dump all your knowledge accurately about """
     for l in toc.split("\n"):
         lp = regex.match(r"^\d*", l).group(0)
         for pf in paths_to_fill:
-            if pf.startswith(lp) or len(lp) < 4:
+
+
+            if editdistance.eval(pf, lp) < 2 or len(lp) < 2:
                 toc_lines.append(l)
                 break
 
     toc = "\n".join(toc_lines)
+
     prompt = f"""
 Here is a truncated version of the current dialectical system to the path, where you should operate on:
 

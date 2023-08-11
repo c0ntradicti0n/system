@@ -4,102 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="add some textx and restore some files, that vanished">
-      <change afterPath="$PROJECT_DIR$/docs/images/1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/images/2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/images/3.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/images/4.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/images/5.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/images/6.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/images/7.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/images/8.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/images/9.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/b/3/.Mathematics.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/b/3/1/.Geometry.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/b/3/1/1/.Line.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/b/3/1/2/.Surface.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/b/3/1/3/.Volume.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/b/3/1/_Shape-Alignment.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/b/3/2/.Calculus.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/b/3/2/1/.Discrete.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/b/3/2/2/.Continuous.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/b/3/2/3/.Measurement.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/b/3/2/_Finite-Infinite.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/b/3/3/.Algebra.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/b/3/3/1/.Number.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/b/3/3/2/.Equation.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/b/3/3/3/.Proof.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/b/3/3/_Value-Variable.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trash/b/3/_Order-Chaos.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/.Metaphysics.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/Objectitivty.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/1/.A Priori.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/1/.A Priori.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/1/_Quantitative-qualitative.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/1/.Things and Properties.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/.A Posteri.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/Framework of Placement.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/.Time.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/.Time.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/1/.Past.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/1/.Past.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/1/1/.Yesterday.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/1/1/.Yesterday.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/1/1/3/.Historicity.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/1/1/3/.Historicity.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/1/2/.Age.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/1/2/.Age.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/1/2/2/.Expansion.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/1/2/2/.Expansion.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/1/2/3/.Immediacy.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/1/2/3/.Immediacy.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/1/3/.History.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/1/3/.History.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/1/_Old-New.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/1/_Old-New.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/2/.Future.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/2/.Future.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/2/1/.Tomorrow.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/2/1/.Tomorrow.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/2/2/.Growth.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/2/2/.Growth.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/2/3/.Prediction.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/2/3/.Prediction.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/2/_Change-Stagnation.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/2/_Change-Stagnation.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/3/.Present.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/3/.Present.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/3/1/.Today.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/3/1/.Today.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/3/2/.Moment.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/3/2/.Moment.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/3/3/.Occurrence.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/3/3/.Occurrence.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/3/_Instant-Eternity.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/3/_Instant-Eternity.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/1/_Now is not now.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/2/_Now is not now.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/.Space.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/.Space.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/1/.Order.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/1/.Order.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/1/1/.Here.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/1/1/.Here.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/1/1/3/.Manifold.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/1/1/3/.Manifold.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/1/2/.There.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/1/2/.There.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/1/2/1/.Localization.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/1/2/1/.Localization.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/1/2/3/.Ubiquity.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/1/2/3/.Ubiquity.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/1/3/.Everywhere.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/1/3/.Everywhere.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/2/.Geometry.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/2/.Geometry.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/2/1/1/.Filled Space.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/2/1/1/.Filled Space.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/2/1/2/.Empty Space.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/2/1/2/.Empty Space.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/2/1/3/3/1/.Point.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/2/1/3/3/1/.Point.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/2/1/3/3/2/.Line.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/2/1/3/3/2/.Line.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/2/1/3/3/3/1/.Line Segment.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/2/1/3/3/3/1/.Line Segment.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/2/1/3/3/3/2/.Area.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/2/1/3/3/3/2/.Area.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/2/1/3/3/3/3/.Volume.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/2/1/3/3/3/3/.Volume.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/2/1/3/3/3/_Body Limit.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/2/1/3/3/3/_Body Limit.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/2/_Finite-Infinite.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/2/_Finite-Infinite.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/3/1/.Dimensions.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/3/1/.Dimensions.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/3/2/.Transformations.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/3/2/.Transformations.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/3/3/.Topology.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/3/3/.Topology.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/1/2/2/_Here is not here.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/1/2/1/_Here is not here.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/2/.Life Necessities.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/2/.Subjectivity.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/2/1/.Natrual Necessity.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/2/1/.Natrual Necessity.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/.Communication.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/.Communication.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/_System-Chaos.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/_System-Chaos.md" afterDir="false" />
+    <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="y">
+      <change afterPath="$PROJECT_DIR$/philosopher/.cache_index/response.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philosopher/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/philosopher/analyser.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/analyser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philosopher/dialectic_triangle.cache" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/dialectic_triangle.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philosopher/dialectic_triangle.cache" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/philosopher/llm_update_text.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/llm_update_text.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/philosopher/llm_update_toc.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/llm_update_toc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philosopher/logic_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philosopher/missing.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/missing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app.ini" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philosopher/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/rest.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/rest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/public/favico.svg" beforeDir="false" afterPath="$PROJECT_DIR$/web/public/favico.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/web/public/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/Fractal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/Fractal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/Tooltips.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/Tooltips.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/Triangle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/Triangle.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +66,6 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -196,11 +108,11 @@
       <recent name="$PROJECT_DIR$/web/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../dialectics/1/2" />
+      <recent name="$PROJECT_DIR$/../dialectics/1/2/x" />
       <recent name="$PROJECT_DIR$/../dialectics/1/3/1/2/3" />
       <recent name="$PROJECT_DIR$/../dialectics/1/3/1/2/2" />
       <recent name="$PROJECT_DIR$/../dialectics/3/1/2/3/1/1" />
-      <recent name="$PROJECT_DIR$/../dialectics/3/1/2/2/1" />
-      <recent name="$PROJECT_DIR$/../dialectics/3/1/2/2" />
     </key>
   </component>
   <component name="RunManager" selected="Python.philosopher main">
@@ -367,7 +279,8 @@
       <workItem from="1691394360755" duration="676000" />
       <workItem from="1691396901966" duration="9422000" />
       <workItem from="1691566886843" duration="65000" />
-      <workItem from="1691625938657" duration="4305000" />
+      <workItem from="1691625938657" duration="8808000" />
+      <workItem from="1691706364930" duration="6017000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -642,7 +555,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690875782050</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="y">
+      <created>1691630548853</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1691630548853</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -688,7 +608,8 @@
     <MESSAGE value="generated first texts" />
     <MESSAGE value="generated second texts" />
     <MESSAGE value="add some textx and restore some files, that vanished" />
-    <option name="LAST_COMMIT_MESSAGE" value="add some textx and restore some files, that vanished" />
+    <MESSAGE value="y" />
+    <option name="LAST_COMMIT_MESSAGE" value="y" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -700,12 +621,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/server/helper.py</url>
-          <line>360</line>
+          <line>364</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/analyser.py</url>
-          <line>380</line>
+          <line>382</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -715,7 +636,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/server/helper.py</url>
-          <line>352</line>
+          <line>356</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -745,7 +666,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/llm_update_toc.py</url>
-          <line>8</line>
+          <line>10</line>
           <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -765,17 +686,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/llm_update_toc.py</url>
-          <line>14</line>
+          <line>16</line>
           <option name="timeStamp" value="66" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/philosopher/llm_update_toc.py</url>
-          <line>16</line>
-          <option name="timeStamp" value="67" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/main.py</url>
-          <line>231</line>
+          <line>255</line>
           <option name="timeStamp" value="68" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -790,8 +706,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/analyser.py</url>
-          <line>94</line>
+          <line>96</line>
           <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/philosopher/main.py</url>
+          <line>97</line>
+          <option name="timeStamp" value="87" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/server/helper.py</url>
+          <line>140</line>
+          <option name="timeStamp" value="91" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -806,7 +732,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/wdl$analyser.coverage" NAME="analyser Coverage Results" MODIFIED="1690108599658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
     <SUITE FILE_PATH="coverage/wdl$rest.coverage" NAME="rest Coverage Results" MODIFIED="1690875061170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
-    <SUITE FILE_PATH="coverage/wdl$philosopher_main.coverage" NAME="philosopher main Coverage Results" MODIFIED="1691630329678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
+    <SUITE FILE_PATH="coverage/wdl$philosopher_main.coverage" NAME="philosopher main Coverage Results" MODIFIED="1691712341884" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
     <SUITE FILE_PATH="coverage/wdl$logic_generator.coverage" NAME="philosopher main Coverage Results" MODIFIED="1691407193115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
   </component>
 </project>

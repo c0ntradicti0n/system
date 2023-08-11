@@ -14,7 +14,9 @@ def analyse_toc(tree, exclude):
 
         for x in [1, 2, 3, "_"]:
             if x not in current:
-                len_counter[len(keys + str(x))].append(keys + str(x))
+                if any(keys.startswith(e) for e in exclude):
+                    continue
+                len_counter[len((keys + str(x)).replace("_", ""))].append(keys + str(x))
 
         for k, v in current.items():
             if isinstance(v, dict):

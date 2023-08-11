@@ -27,7 +27,7 @@ def llm_update_text(toc, kwargs, t, base_path):
 
         if themes:
             break
-    topics =  " * " + "\n * ".join(
+    topics =  "# " + "\n# ".join(
         f"{p} {t}" for p, t in themes
     )
     instruction = """
@@ -84,7 +84,7 @@ Vanishing of the vanishing itself
 
 Don't wrwite for subtopics, only for the main topics. The subtopics will be filled automatically by the system. So it shoud contain four chapters, four times '#'
 
-Provide the text for ONE level of the text for the following paths and topics:
+Provide the text for ONE level of the text for the following paths and topics headed with:
 """+ topics
     prompt = f"""
         {toc}  

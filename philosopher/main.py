@@ -206,6 +206,30 @@ def dialectic_triangle(
 
 
 if __name__ == "__main__":
+
+    with git_auto_commit(
+        config.system_path, commit_message_prefix="Automated TOC Commit"
+    ) as ctx:
+        print(
+            dialectic_triangle(
+                base_path=config.system_path,
+                location="",
+                task="index",
+                info_radius=100000,
+                preset_output_level=OutputLevel.FILENAMES,
+                # llm features
+                block=True,
+                shift=True,
+                topic=True,
+                antithesis=True,
+                thesis=True,
+                synthesis=True,
+                inversion_antonym=True,
+                # llm model
+                model="gpt-4",
+            )
+        )
+
     for i in range(3):
         with git_auto_commit(
             config.system_path, commit_message_prefix="Automated TEXT Commit"
@@ -230,26 +254,3 @@ if __name__ == "__main__":
                 )
             )
         os.system("rm -rf .cache_text/")
-
-    with git_auto_commit(
-        config.system_path, commit_message_prefix="Automated TOC Commit"
-    ) as ctx:
-        print(
-            dialectic_triangle(
-                base_path=config.system_path,
-                location="",
-                task="index",
-                info_radius=100000,
-                preset_output_level=OutputLevel.FILENAMES,
-                # llm features
-                block=True,
-                shift=True,
-                topic=True,
-                antithesis=True,
-                thesis=True,
-                synthesis=True,
-                inversion_antonym=True,
-                # llm model
-                model="gpt-4",
-            )
-        )
