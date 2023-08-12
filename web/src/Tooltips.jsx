@@ -17,6 +17,7 @@ export const Tooltips = ({ data, id, isWindowWide }) => {
 
   const { data: texts, error } = useQuery(['triangle', id], fetchTexts, {
     keepPreviousData: true,
+      onError: console.error
   })
 
   console.log('texts', texts, error)

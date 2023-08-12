@@ -5,14 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="y">
-      <change afterPath="$PROJECT_DIR$/philosopher/.cache_index/response.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philosopher/.cache_text/response.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philosopher/analyser.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/analyser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philosopher/dialectic_triangle.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philosopher/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/philosopher/llm_update_text.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/llm_update_text.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philosopher/llm_update_toc.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/llm_update_toc.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/philosopher/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/server/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/Tooltips.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/Tooltips.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/Triangle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/Triangle.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -280,7 +281,11 @@
       <workItem from="1691396901966" duration="9422000" />
       <workItem from="1691566886843" duration="65000" />
       <workItem from="1691625938657" duration="8808000" />
-      <workItem from="1691706364930" duration="6017000" />
+      <workItem from="1691706364930" duration="7444000" />
+      <workItem from="1691746963540" duration="1960000" />
+      <workItem from="1691767370111" duration="971000" />
+      <workItem from="1691795344246" duration="43000" />
+      <workItem from="1691853975663" duration="520000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -562,7 +567,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691630548853</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="y">
+      <created>1691712405961</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1691712405961</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -691,27 +703,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/main.py</url>
-          <line>255</line>
-          <option name="timeStamp" value="68" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/philosopher/main.py</url>
-          <line>193</line>
+          <line>198</line>
           <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/philosopher/llm_update_text.py</url>
-          <line>28</line>
-          <option name="timeStamp" value="75" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/philosopher/analyser.py</url>
-          <line>96</line>
-          <option name="timeStamp" value="76" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/main.py</url>
-          <line>97</line>
+          <line>102</line>
           <option name="timeStamp" value="87" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -732,7 +729,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/wdl$analyser.coverage" NAME="analyser Coverage Results" MODIFIED="1690108599658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
     <SUITE FILE_PATH="coverage/wdl$rest.coverage" NAME="rest Coverage Results" MODIFIED="1690875061170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
-    <SUITE FILE_PATH="coverage/wdl$philosopher_main.coverage" NAME="philosopher main Coverage Results" MODIFIED="1691712341884" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
+    <SUITE FILE_PATH="coverage/wdl$philosopher_main.coverage" NAME="philosopher main Coverage Results" MODIFIED="1691748704396" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
     <SUITE FILE_PATH="coverage/wdl$logic_generator.coverage" NAME="philosopher main Coverage Results" MODIFIED="1691407193115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
   </component>
 </project>

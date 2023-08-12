@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y  gcc && rm -rf /var/lib/apt/lists/*
 # to the terminal without buffering it first
 ENV PYTHONUNBUFFERED 1
 
+
 # create root directory for our project in the container
 RUN mkdir /flask_app
 
@@ -26,6 +27,8 @@ RUN apt-get purge -y --auto-remove gcc
 ADD . /flask_app/
 
 RUN ls -la /flask_app
+
+ENV PYTHONIOENCODING=utf-8
 
 # Run the command to start uWSGI
 CMD ["uwsgi", "app.ini"]

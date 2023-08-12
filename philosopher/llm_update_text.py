@@ -31,7 +31,7 @@ def llm_update_text(toc, kwargs, t, base_path):
         f"{p} {t}" for p, t in themes
     )
     instruction = """
-You are prociding the tex for ONE level of a a dialectical system, emulating Hegel's methodology, where concepts unfold within a fractal structure of triples. Each triple consists of:
+You are providing the tex for ONE level of a a dialectical system, emulating Hegel's methodology, where concepts unfold within a fractal structure of triples. Each triple consists of:
 
  - Thesis (1)
  - Antithesis (2)
@@ -82,7 +82,8 @@ Vanishing of the vanishing itself
 ``
 
 
-Don't wrwite for subtopics, only for the main topics. The subtopics will be filled automatically by the system. So it shoud contain four chapters, four times '#'
+Don't write for subtopics, only for the main topics. The subtopics will be filled automatically by the system. So it 
+should contain four chapters and maximum 4 headings overall.
 
 Provide the text for ONE level of the text for the following paths and topics headed with:
 """+ topics

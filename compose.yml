@@ -48,6 +48,7 @@ services:
       DEBUG: "true"
       HOST: $HOST
       SYSTEM: /system
+      PYTHONIOENCODING: utf-8
     extra_hosts:
         - "host.docker.internal:host-gateway"
     volumes:

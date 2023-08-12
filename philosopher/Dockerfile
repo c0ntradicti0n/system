@@ -17,7 +17,7 @@ RUN touch /var/log/cron.log
 # copy the script into the container
 COPY main.py .
 
-
+ENV PYTHONIOENCODING=utf-8
 
 # copy the start script
 COPY start.sh .
