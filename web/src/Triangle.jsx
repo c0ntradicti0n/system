@@ -33,8 +33,11 @@ function Triangle({
   const [hovered, setIsHovered] = useState(false)
   const [inViewport, setInViewport] = useState(false)
 
-  const fontSize = size / 30 + Math.sqrt(level)
-  const ref = React.useRef(null)
+const devicePixelRatio = window.devicePixelRatio || 1;
+const isMobile = window.innerWidth <= 768;  // Example breakpoint for mobile
+const fontSize =! isMobile? (size / 30) / Math.log1p(devicePixelRatio)  :  (size / 20) / Math.log1p(devicePixelRatio)
+
+    const ref = React.useRef(null)
   const fetchData = async () => {
     console.log('fetchData', fullId)
     setCurrentId(fullId)
@@ -173,6 +176,7 @@ function Triangle({
             width: '100%',
             whiteSpace: 'pre-wrap',
             wordWrap: 'break-word',
+              zIndex: 10000
           }}
         >
           {fullId.slice(-1).replace(/\//g, '.')}.{' '}
@@ -189,6 +193,7 @@ function Triangle({
                       fontFamily: 'serif',
                       whiteSpace: 'pre-wrap',
                       overflowWrap: 'break-word',
+
                     }}
                   >
                     {word}
