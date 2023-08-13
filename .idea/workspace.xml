@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="y">
-      <change afterPath="$PROJECT_DIR$/philosopher/.cache_text/response.txt" afterDir="false" />
+    <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="improve usability">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philosopher/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philosopher/llm_update_text.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/llm_update_text.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philosopher/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/server/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/Tooltips.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/Tooltips.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/Triangle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/Triangle.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/Fractal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/Fractal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/nesting.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/nesting.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -285,7 +279,8 @@
       <workItem from="1691746963540" duration="1960000" />
       <workItem from="1691767370111" duration="971000" />
       <workItem from="1691795344246" duration="43000" />
-      <workItem from="1691853975663" duration="520000" />
+      <workItem from="1691853975663" duration="924000" />
+      <workItem from="1691888926544" duration="1435000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -574,7 +569,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691712405961</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="improve usability">
+      <created>1691854670726</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1691854670726</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -621,7 +623,8 @@
     <MESSAGE value="generated second texts" />
     <MESSAGE value="add some textx and restore some files, that vanished" />
     <MESSAGE value="y" />
-    <option name="LAST_COMMIT_MESSAGE" value="y" />
+    <MESSAGE value="improve usability" />
+    <option name="LAST_COMMIT_MESSAGE" value="improve usability" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

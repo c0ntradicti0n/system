@@ -31,6 +31,7 @@ export function splitKey(key) {
   return key.split('/').filter((x) => x)
 }
 export function shiftIn(firstPath, secondPath, options) {
+
   // Remove leading slashes from paths
   if (firstPath.startsWith('/')) {
     firstPath = firstPath.slice(1)

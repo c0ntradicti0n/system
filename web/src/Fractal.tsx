@@ -8,7 +8,6 @@ import {
   ReactZoomPanPinchRef,
 } from 'react-zoom-pan-pinch'
 import { Tooltips } from './Tooltips'
-import Triangle2 from './Triangle2'
 
 const Controls = ({ zoomIn, zoomOut, resetTransform }) => (
   <>
@@ -77,12 +76,18 @@ const Fractal = ({ setContent }) => {
   useEffect(() => {
     if (scale === null || detailId === null) return
     let direction = null
+
+    if (!hoverId) {
+      console.error("hoverId is null", detailId)
+      //return
+    }
+
     if (scale > maxZoomThreshold) {
-      const [newHiddenId, newRestId] = shiftIn(detailId, hoverId, {
+      const [newHiddenId, newRestId] = shiftIn(detailId, hoverId ?? detailId, {
         left: true,
       })
       const newData = lookupDeep(newHiddenId, collectedData)
-      console.log('reset zoom out', {
+      console.log('reset zoom in', {
         hoverId,
         shiftIn: [newHiddenId, newRestId],
         newData,
@@ -98,7 +103,7 @@ const Fractal = ({ setContent }) => {
     if (scale < minZoomThreshold) {
       console.log(detailId, hoverId)
 
-      const [newHiddenId, newRestId] = shiftIn(detailId, hoverId, {
+      const [newHiddenId, newRestId] = shiftIn(detailId, hoverId ??detailId, {
         left: false,
       })
       const newData = lookupDeep(newHiddenId, collectedData)
@@ -127,7 +132,7 @@ const Fractal = ({ setContent }) => {
 
   //console.log(scale, detailId, collectedData)
 
-  console.log('render', { hoverId })
+  console.log('render', { hoverId, fullId: hiddenId, detailId, collectedData })
 
   return (
     <div
