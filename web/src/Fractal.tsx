@@ -130,10 +130,6 @@ const Fractal = ({ setContent }) => {
     return <span>{JSON.stringify(error)}</span>
   }
 
-  //console.log(scale, detailId, collectedData)
-
-  console.log('render', { hoverId, fullId: hiddenId, detailId, collectedData })
-
   return (
     <div
       className="App"
