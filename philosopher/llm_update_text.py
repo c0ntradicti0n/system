@@ -27,10 +27,9 @@ def llm_update_text(toc, kwargs, t, base_path):
 
         if themes:
             break
-    topics =  "# " + "\n# ".join(
-        f"{p} {t}" for p, t in themes
-    )
-    instruction = """
+    topics = "# " + "\n# ".join(f"{p} {t}" for p, t in themes)
+    instruction = (
+        """
 You are providing the tex for ONE level of a a dialectical system, emulating Hegel's methodology, where concepts unfold within a fractal structure of triples. Each triple consists of:
 
  - Thesis (1)
@@ -86,7 +85,9 @@ Don't write for subtopics, only for the main topics. The subtopics will be fille
 should contain four chapters and maximum 4 headings overall.
 
 Provide the text for ONE level of the text for the following paths and topics headed with:
-"""+ topics
+"""
+        + topics
+    )
     prompt = f"""
         {toc}  
         """

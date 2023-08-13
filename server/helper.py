@@ -134,7 +134,6 @@ def get_from_nested_dict(nested_dict, keys, return_on_fail=None):
             nested_dict = nested_dict.setdefault(key, {})
         return nested_dict[keys[-1]]
     except KeyError:
-
         if return_on_fail is not None:
             return return_on_fail
         else:

@@ -33,11 +33,13 @@ function Triangle({
   const [hovered, setIsHovered] = useState(false)
   const [inViewport, setInViewport] = useState(false)
 
-const devicePixelRatio = window.devicePixelRatio || 1;
-const isMobile = window.innerWidth <= 768;  // Example breakpoint for mobile
-const fontSize =! isMobile? (size / 30) / Math.log1p(devicePixelRatio)  :  (size / 20) / Math.log1p(devicePixelRatio)
+  const devicePixelRatio = window.devicePixelRatio || 1
+  const isMobile = window.innerWidth <= 768 // Example breakpoint for mobile
+  const fontSize = !isMobile
+    ? size / 30 / Math.log1p(devicePixelRatio)
+    : size / 20 / Math.log1p(devicePixelRatio)
 
-    const ref = React.useRef(null)
+  const ref = React.useRef(null)
   const fetchData = async () => {
     console.log('fetchData', fullId)
     setCurrentId(fullId)
@@ -49,11 +51,11 @@ const fontSize =! isMobile? (size / 30) / Math.log1p(devicePixelRatio)  :  (size
       ref?.current,
     )
 
-      if (isWithinViewport){
-          addHoverObject(fullId)
-      } else {
-            removeHoverObject(fullId)
-      }
+    if (isWithinViewport) {
+      addHoverObject(fullId)
+    } else {
+      removeHoverObject(fullId)
+    }
 
     if (isWithinViewport) {
       fetchData()
@@ -140,6 +142,9 @@ const fontSize =! isMobile? (size / 30) / Math.log1p(devicePixelRatio)  :  (size
           backgroundColor: stringToColour(fullId.replace('/', ''), 1),
           zIndex: 1000 - level,
           filter: hover ? 'invert(1)' : 'invert(0)',
+          display: 'flex',
+          justifyContent: 'center' /* For horizontal alignment */,
+          alignItems: 'center' /* For vertical alignment */,
         }}
       >
         {[1, 2, 3].map((subTriangleDir, index) => (
@@ -167,23 +172,24 @@ const fontSize =! isMobile? (size / 30) / Math.log1p(devicePixelRatio)  :  (size
         ))}
 
         <div
-            onClick={() =>     setTooltipData([fullId, data])
-}
+          onClick={() => setTooltipData([fullId, data])}
           style={{
             position: 'absolute',
             top: '70%',
             transform: 'translateY(-50%)',
             fontSize,
-            width: '100%',
             whiteSpace: 'pre-wrap',
             wordWrap: 'break-word',
-              zIndex: 10000
+            zIndex: 10000,
+            width: `${size / 3}px`,
           }}
         >
-          {fullId.slice(-1).replace(/\//g, '.')}.{' '}
           {title && (
-            <>
-              <div className="triangle-title">{postProcessTitle(title)}</div>
+            <div>
+              <div className="triangle-title">
+                {fullId.slice(-1).replace(/\//g, '.')}.{' '}
+                {postProcessTitle(title)}
+              </div>
 
               {postProcessTitle(anto)
                 ?.split(/[\s-]+/)
@@ -194,13 +200,12 @@ const fontSize =! isMobile? (size / 30) / Math.log1p(devicePixelRatio)  :  (size
                       fontFamily: 'serif',
                       whiteSpace: 'pre-wrap',
                       overflowWrap: 'break-word',
-
                     }}
                   >
                     {word}
                   </div>
                 ))}
-            </>
+            </div>
           )}
         </div>
       </div>

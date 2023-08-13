@@ -111,8 +111,6 @@ def dialectic_triangle(
         with open(lllm_output) as f:
             output = f.read()
 
-
-
     if task == "index":
         xpaths = output.split("\n")
         xpaths = [x for x in xpaths if x]
@@ -139,9 +137,7 @@ def dialectic_triangle(
         assert paths, "No paths found. Try web interface and paste."
 
         for m in paths:
-            keys = (
-                m["key"]
-            )
+            keys = m["key"]
             keys = [k for k in keys]
             last_key = keys[-1]
             prefix = get_prefix(last_key)
@@ -236,8 +232,6 @@ if __name__ == "__main__":
             )
         os.system("rm -rf .cache_text/")
 
-
-
     with git_auto_commit(
         config.system_path, commit_message_prefix="Automated TOC Commit"
     ) as ctx:
@@ -260,5 +254,3 @@ if __name__ == "__main__":
                 model="gpt-4",
             )
         )
-
-
