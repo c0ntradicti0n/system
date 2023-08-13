@@ -2,7 +2,9 @@ import { postProcessTitle } from './position'
 import React, { useState, useEffect } from 'react'
 import { useQuery } from 'react-query'
 
-export const Tooltips = ({ data, id, isWindowWide }) => {
+export const Tooltips = ({ input, isWindowWide }) => {
+    console.log('Tooltips', input)
+    const [id, data ] = input ?? [null, {}]
   const fetchTexts = async () => {
     const res = await fetch(
       `${process.env['REACT_APP_HOST']}/api/text/${id ?? ''}`,
@@ -16,9 +18,11 @@ export const Tooltips = ({ data, id, isWindowWide }) => {
   }
 
   const { data: texts, error } = useQuery(['triangle', id], fetchTexts, {
-    keepPreviousData: true,
+    //keepPreviousData: true,
       onError: console.error
   })
+
+    if (!id) return null
 
   console.log('texts', texts, error)
   if (
@@ -39,11 +43,12 @@ export const Tooltips = ({ data, id, isWindowWide }) => {
         backgroundColor: '#000',
         display: 'flex',
         flexDirection: 'row',
-        flexWrap: 'wrap', // New addition for wrapping elements
+        flexWrap: 'wrap',
+          overflowY: 'scroll',
       }}
     >
       {['1', '2', '3', '_'].map((key) => {
-        const header_value = key === '_' ? data[key] : data[key]
+        const header_value =  data[key]
         const value = (texts ?? data)[key]
         const header =
           typeof header_value === 'object' ? header_value?.['.'] : header_value
@@ -55,7 +60,7 @@ export const Tooltips = ({ data, id, isWindowWide }) => {
               wordWrap: 'break-word',
               textAlign: 'left',
               width: '49%',
-              fontSize: '14px',
+              fontSize: '7px',
             }}
           >
             <h4>

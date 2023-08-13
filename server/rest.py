@@ -66,7 +66,7 @@ class LogicFractalText(Resource):
 
             if path.__len__():
                 file_dict = get_from_nested_dict(file_dict, path.split("/"))
-            print(f"{file_dict=}")
+            #print(f"{file_dict=}")
             try:
                 file_dict = {
                     str(k)[0]: (v.strip() if v else "")
@@ -76,7 +76,7 @@ class LogicFractalText(Resource):
                 }
             except Exception as e:
                 raise e
-            pprint(f"{file_dict=}")
+            #pprint(f"{file_dict=}")
             return jsonify(nested_str_dict(file_dict))
         except FileNotFoundError:
             logging.error(f"File not found: {path}", exc_info=True)

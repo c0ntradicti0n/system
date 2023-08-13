@@ -100,7 +100,6 @@ const fontSize =! isMobile? (size / 30) / Math.log1p(devicePixelRatio)  :  (size
   }
   const hover = hoverObjects[hoverObjects.length - 1] === fullId
   if (hover) {
-    setTooltipData(data)
     setHoverId(fullId)
   }
 
@@ -168,6 +167,8 @@ const fontSize =! isMobile? (size / 30) / Math.log1p(devicePixelRatio)  :  (size
         ))}
 
         <div
+            onClick={() =>     setTooltipData([fullId, data])
+}
           style={{
             position: 'absolute',
             top: '70%',

@@ -57,11 +57,11 @@ export function isElementInViewportAndBigAndNoChildren(el, data) {
     rect.left >= 0 &&
     rect.bottom <=
       (window.innerHeight ||
-        document.documentElement.clientHeight) /* or $(window).height() */ &&
+        document.documentElement.clientHeight) &&
     rect.right <=
       (window.innerWidth ||
-        document.documentElement.clientWidth) /* or $(window).width() */ &&
-    rect.height > window.innerHeight * 0.5 &&
+        document.documentElement.clientWidth) &&
+    rect.height > window.innerHeight * 0.4 &&
     typeof data !== 'object'
   )
 }

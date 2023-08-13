@@ -78,7 +78,7 @@ const Fractal = ({ setContent }) => {
     let direction = null
 
     if (!hoverId) {
-      console.error("hoverId is null", detailId)
+      console.error("hoverId is null", hoverId, detailId)
       //return
     }
 
@@ -146,7 +146,7 @@ const Fractal = ({ setContent }) => {
       }}
     >
       {tooltipData && (
-        <Tooltips data={tooltipData} id={hoverId} isWindowWide={isWindowWide} />
+        <Tooltips input={tooltipData} id={hoverId} isWindowWide={isWindowWide} />
       )}
       <TransformWrapper
         limitToBounds={false}
