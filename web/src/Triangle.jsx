@@ -31,6 +31,7 @@ function Triangle({
   setHoverId,
 }) {
   const [hovered, setIsHovered] = useState(false)
+  const [inViewport, setInViewport] = useState(false)
 
   const fontSize = size / 30 + Math.sqrt(level)
   const ref = React.useRef(null)
@@ -44,6 +45,12 @@ function Triangle({
     const isWithinViewport = isElementInViewportAndBigAndNoChildren(
       ref?.current,
     )
+
+      if (isWithinViewport){
+          addHoverObject(fullId)
+      } else {
+            removeHoverObject(fullId)
+      }
 
     if (isWithinViewport) {
       fetchData()

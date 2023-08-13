@@ -1,10 +1,13 @@
-export const hoverObjects = []
+export const hoverObjects = new Set();
+
 export const addHoverObject = (id) => {
-  hoverObjects.push(id)
+  if (!hoverObjects.has(id)) {
+    hoverObjects.add(id);
+  }
 }
+
 export const removeHoverObject = (id) => {
-  const index = hoverObjects.indexOf(id)
-  if (index > -1) {
-    hoverObjects.splice(index, 1)
+  if (hoverObjects.has(id)) {
+    hoverObjects.delete(id);
   }
 }
