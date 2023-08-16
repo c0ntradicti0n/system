@@ -13,7 +13,7 @@ def analyse_toc(tree, exclude):
         keys = "".join([str(p) for p in path])
 
         for x in [1, 2, 3, "_"]:
-            if x not in current:
+            if x not in current or not current[x]:
                 if any(keys.startswith(e) for e in exclude):
                     continue
                 len_counter[len((keys + str(x)).replace("_", ""))].append(keys + str(x))
@@ -79,6 +79,7 @@ def without_text(t, base_path, exclude):
                     content = f.read()
             except:
                 add_to_missing_in_toc(t, [path_keys])
+                content = ""
 
             if content.strip() == "" or content.strip == fname or len(content) < 30:
                 path_before = make_key_before(path)

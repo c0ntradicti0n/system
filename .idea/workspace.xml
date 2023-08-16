@@ -5,8 +5,148 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="fix mobile zoom">
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/.Using.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/.Physical Tool.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/.Tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/.Tools.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/.Basic Tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/.Basic Tools.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/.Knife.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/.Knife.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/.Butter Knife.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/1/.Butter Knife.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/.Steak Knife.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/2/.Steak Knife.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/.Swiss Army Knife.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/3/.Swiss Army Knife.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/.Hammer.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/.Hammer.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/.Claw Hammer.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/1/.Claw Hammer.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/.Ball-peen Hammer.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/2/.Ball-peen Hammer.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/.Sledgehammer.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/3/.Sledgehammer.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/.Axe.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/.Axe.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/1/.Hatchet.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/1/.Hatchet.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/2/.Splitting Axe.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/2/.Splitting Axe.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/3/.Double Bit Axe.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/3/.Double Bit Axe.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/_Cutting-Hitting-Slicing.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/_Cutting-Hitting-Slicing.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/.Advanced Tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/.Advanced Tools.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/.Drill.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/.Drill.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/1/.Hand Drill.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/1/.Hand Drill.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/2/.Electric Drill.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/2/.Electric Drill.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/3/.Drill Press.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/3/.Drill Press.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/.Welder.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/.Welder.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/1/.Arc Welder.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/.Arc Welder.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/2/.MIG Welder.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/.MIG Welder.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/3/.TIG Welder.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/.TIG Welder.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/.Lathe.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/.Lathe.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/1/.Wood Lathe.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/1/.Wood Lathe.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/2/.Metal Lathe.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/2/.Metal Lathe.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/3/.CNC Lathe.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/.CNC Lathe.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/_Constructing-Mending-Shaping.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/_Constructing-Mending-Shaping.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/.Specialized Tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/.Specialized Tools.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/.Blender.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/1/.Blender.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/1/.Immersion Blender.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/1/1/.Immersion Blender.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/2/.Countertop Blender.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/1/2/.Countertop Blender.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/3/.Personal Blender.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/1/3/.Personal Blender.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/.Pulley.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/2/.Pulley.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/1/.Fixed Pulley.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/2/1/.Fixed Pulley.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/2/.Moveable Pulley.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/2/2/.Moveable Pulley.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/3/.Compound Pulley.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/2/3/.Compound Pulley.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/3/.Plow.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/3/.Plow.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/3/1/.Chisel Plow.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/3/1/.Chisel Plow.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/3/2/.Moldboard Plow.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/3/2/.Moldboard Plow.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/3/3/.Rotary Plow.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/3/3/.Rotary Plow.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/_Kitchen-Building-Agriculture.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/_Kitchen-Building-Agriculture.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/_Basic-Specialized.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/_Basic-Specialized.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/.Vehicles &amp; Engines.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/.Vehicles &amp; Engines.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/.Land Tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/.Land Tools.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/.Wheelbarrow.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/1/.Wheelbarrow.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/1/.Single Wheel.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/1/1/.Single Wheel.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/2/.Dual Wheel.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/1/2/.Dual Wheel.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/3/.Heavy-Duty Wheelbarrow.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/1/3/.Heavy-Duty Wheelbarrow.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/_Form-Function.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/1/_Form-Function.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/.Car.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/2/.Car.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/1/.Sedan.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/2/1/.Sedan.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/2/.SUV.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/2/2/.SUV.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/3/.Convertible.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/2/3/.Convertible.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/_Tension-Release.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/2/_Tension-Release.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/.Train.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/3/.Train.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/1/.Steam Engine.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/3/1/.Steam Engine.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/2/.Bullet Train.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/3/2/.Bullet Train.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/3/.Freight Train.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/3/3/.Freight Train.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/_Conflict-Resolution.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/3/_Conflict-Resolution.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/_Manual-Motorized.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/_Manual-Motorized.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/.Air Tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/.Air Tools.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/.Hang Glider.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/1/.Hang Glider.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/1/.Flex Wing.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/1/1/.Flex Wing.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/2/.Rigid Wing.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/1/2/.Rigid Wing.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/3/.Tandem Wing.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/1/3/.Tandem Wing.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/_Frequency-Modulation.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/1/_Frequency-Modulation.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/.Propeller Airplane.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/2/.Propeller Airplane.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/1/.Single-engine.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/2/1/.Single-engine.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/2/.Twin-engine.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/2/2/.Twin-engine.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/3/.Turboprop.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/2/3/.Turboprop.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/_Image-Sound.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/2/_Image-Sound.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/.Jet Airplane.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/3/.Jet Airplane.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/1/.Fighter Jet.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/3/1/.Fighter Jet.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/2/.Commercial Jet.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/3/2/.Commercial Jet.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/3/.Private Jet.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/3/3/.Private Jet.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/_Analog-Digital.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/3/_Analog-Digital.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/_Glide-Powered.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/_Glide-Powered.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/.Sea Tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/.Sea Tools.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/.Sailboat.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/1/.Sailboat.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/1/.Dinghy.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/1/1/.Dinghy.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/2/.Cutter.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/1/2/.Cutter.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/3/.Ketch.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/1/3/.Ketch.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/.Submarine.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/2/.Submarine.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/1/.Nuclear Submarine.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/2/1/.Nuclear Submarine.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/2/.Research Submarine.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/2/2/.Research Submarine.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/3/.Ballistic Missile Submarine.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/2/3/.Ballistic Missile Submarine.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/.Cargo Ship.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/3/.Cargo Ship.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/1/.Container Ship.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/3/1/.Container Ship.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/2/.Bulk Carrier.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/3/2/.Bulk Carrier.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/3/.Tanker Ship.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/3/3/.Tanker Ship.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/_Sail-Motor.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/_Sail-Motor.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/_Land-Air-Sea.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/_Land-Air-Sea.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/.Craft &amp; Production.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/.Craft &amp; Production.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/.Forming Tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/.Forming Tools.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/1/.Chisel.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/1/.Chisel.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/1/1/.Wood Chisel.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/1/1/.Wood Chisel.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/1/2/.Masonry Chisel.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/1/2/.Masonry Chisel.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/1/3/.Carving Chisel.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/1/3/.Carving Chisel.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/2/.Saw.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/2/.Saw.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/2/1/.Hand Saw.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/2/1/.Hand Saw.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/2/2/.Circular Saw.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/2/2/.Circular Saw.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/2/3/.Chainsaw.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/2/3/.Chainsaw.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/3/.Mold.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/3/.Mold.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/3/1/.Plastic Mold.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/3/1/.Plastic Mold.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/3/2/.Silicone Mold.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/3/2/.Silicone Mold.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/3/3/.Ceramic Mold.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/3/3/.Ceramic Mold.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/_Carve-Cut-Mold.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/_Carve-Cut-Mold.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/.Functional Tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/.Functional Tools.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/1/.Nails &amp; Screws.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/1/.Nails &amp; Screws.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/1/1/.Finish Nail.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/1/1/.Finish Nail.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/1/2/.Drywall Screw.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/1/2/.Drywall Screw.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/1/3/.Lag Screw.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/1/3/.Lag Screw.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/2/.Bolt &amp; Nut.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/2/.Bolt &amp; Nut.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/2/1/.Hex Bolt.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/2/1/.Hex Bolt.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/2/2/.Carriage Bolt.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/2/2/.Carriage Bolt.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/2/3/.U-bolt.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/2/3/.U-bolt.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/3/.Clamp.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/3/.Clamp.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/3/1/.Spring Clamp.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/3/1/.Spring Clamp.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/3/2/.C-clamp.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/3/2/.C-clamp.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/3/3/.Bar Clamp.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/3/3/.Bar Clamp.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/_Connect-Fasten-Secure.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/_Connect-Fasten-Secure.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/.Finishing Tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/3/.Finishing Tools.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/1/.Sandpaper.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/3/1/.Sandpaper.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/2/.Torch.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/3/2/.Torch.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/3/.Cooling Fan.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/3/3/.Cooling Fan.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/_Polish-Heat-Cool.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/3/_Polish-Heat-Cool.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/_Form-Function-Finish.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/_Form-Function-Finish.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/_Tool-User.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/_Tool-Purpose.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/wdl.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/wdl.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/Triangle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/Triangle.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philosopher/.cache_index/response.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/philosopher/analyser.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/analyser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philosopher/llm_update_toc.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/llm_update_toc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philosopher/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philosopher/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cache.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/cache.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +204,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2SYe7RxLjamNx7v5w6jv3AmG81c" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -76,13 +219,14 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/stefan/Programming/dialectics/3/1/2/2/1/2/3/2&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/qwerty/system&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/home/stefan/.local/share/JetBrains/Toolbox/apps/PyCharm-P/ch-0/231.9011.38/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -102,11 +246,11 @@
       <recent name="$PROJECT_DIR$/web/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/../dialectics/1/2" />
-      <recent name="$PROJECT_DIR$/../dialectics/1/2/x" />
-      <recent name="$PROJECT_DIR$/../dialectics/1/3/1/2/3" />
-      <recent name="$PROJECT_DIR$/../dialectics/1/3/1/2/2" />
-      <recent name="$PROJECT_DIR$/../dialectics/3/1/2/3/1/1" />
+      <recent name="$PROJECT_DIR$/../dialectics/3/1/1/x" />
+      <recent name="$PROJECT_DIR$/../dialectics/3/1/1/2" />
+      <recent name="$PROJECT_DIR$/../dialectics/3/1" />
+      <recent name="$PROJECT_DIR$/../dialectics/3/1/2" />
+      <recent name="$PROJECT_DIR$/../dialectics/3/2" />
     </key>
   </component>
   <component name="RunManager" selected="Python.philosopher main">
@@ -280,6 +424,11 @@
       <workItem from="1691795344246" duration="43000" />
       <workItem from="1691853975663" duration="924000" />
       <workItem from="1691888926544" duration="7522000" />
+      <workItem from="1692006263171" duration="25000" />
+      <workItem from="1692035184149" duration="658000" />
+      <workItem from="1692035851270" duration="38000" />
+      <workItem from="1692035895803" duration="2365000" />
+      <workItem from="1692094250119" duration="14048000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -671,12 +820,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/server/helper.py</url>
-          <line>364</line>
+          <line>392</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/analyser.py</url>
-          <line>382</line>
+          <line>383</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -686,7 +835,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/server/helper.py</url>
-          <line>356</line>
+          <line>384</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -741,18 +890,24 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/main.py</url>
-          <line>198</line>
+          <line>197</line>
           <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/main.py</url>
-          <line>102</line>
+          <line>101</line>
           <option name="timeStamp" value="87" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/server/helper.py</url>
-          <line>140</line>
+          <line>153</line>
           <option name="timeStamp" value="91" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <condition expression="&quot;331&quot; in &quot;&quot;.join(str(p) for p in path)" language="Python" />
+          <url>file://$PROJECT_DIR$/philosopher/analyser.py</url>
+          <line>21</line>
+          <option name="timeStamp" value="108" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -765,9 +920,10 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/wdl$analyser.coverage" NAME="analyser Coverage Results" MODIFIED="1690108599658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
-    <SUITE FILE_PATH="coverage/wdl$rest.coverage" NAME="rest Coverage Results" MODIFIED="1690875061170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
     <SUITE FILE_PATH="coverage/wdl$philosopher_main.coverage" NAME="philosopher main Coverage Results" MODIFIED="1691748704396" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
+    <SUITE FILE_PATH="coverage/wdl$rest.coverage" NAME="rest Coverage Results" MODIFIED="1690875061170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
+    <SUITE FILE_PATH="coverage/wdl$analyser.coverage" NAME="analyser Coverage Results" MODIFIED="1690108599658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
+    <SUITE FILE_PATH="coverage/system$philosopher_main.coverage" NAME="philosopher main Coverage Results" MODIFIED="1692228670119" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
     <SUITE FILE_PATH="coverage/wdl$logic_generator.coverage" NAME="philosopher main Coverage Results" MODIFIED="1691407193115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
   </component>
 </project>

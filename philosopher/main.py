@@ -5,7 +5,6 @@ import pprint
 import re
 
 import config
-import guidance
 import openai
 import simple_cache as simple_cache
 from dotenv import load_dotenv

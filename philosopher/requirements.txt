@@ -10,3 +10,8 @@ python-dotenv
 protobuf
 #einops
 ruamel.yaml
+openai
+jsonpath_ng
+Levenshtein
+regex
+editdistance

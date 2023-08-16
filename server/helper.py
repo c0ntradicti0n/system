@@ -13,6 +13,16 @@ from Levenshtein import distance
 from regex import regex
 
 
+class E:
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        return isinstance(exc_val, (KeyError, TypeError))
+
+e = E()
+
+
 def o(cmd, user=None, cwd="./", err_out=True):
     try:
         logging.info(f"calling {user=}: " + cmd)
@@ -135,9 +145,27 @@ def get_from_nested_dict(nested_dict, keys, return_on_fail=None):
         return nested_dict[keys[-1]]
     except KeyError:
         if return_on_fail is not None:
+            if keys[-1] == "_" and "." in nested_dict:
+                topic_path = "".join(str(k) for k in keys[:-1])
+                return nested_dict["."].replace(".md", "") + f" (from {topic_path})"
             return return_on_fail
         else:
             raise
+
+
+def get_analogue_from_nested_dict(nested_dict, pivot_keys):
+    indices = [i for i, x in enumerate(pivot_keys) if x == "2"]
+
+    for i in indices:
+            keys = pivot_keys[:i] + ['1']
+            r = get_from_nested_dict(nested_dict, keys)
+
+            if r:
+                with e: yield keys + ["_"], r["_"]
+                with e: yield keys + ["."], r["."]
+                with e: yield keys + ["1"], r[1]["."]
+                with e: yield keys + ["2"], r[2]["."]
+                with e: yield keys + ["3"], r[3]["."]
 
 
 def round_school(x):
@@ -475,6 +503,16 @@ def post_process_tree(tree):
     return tree
 
 
+def unique_by_func(lst, func):
+    seen = set()
+    result = []
+    for item in lst:
+        key = func(item)
+        if key not in seen:
+            seen.add(key)
+            result.append(item)
+    return result
+
 if __name__ == "__main__":
     t = tree(
         basepath="../product/", startpath="", format="json", sparse=True, location="1/1"
@@ -482,3 +520,4 @@ if __name__ == "__main__":
     update_with_jsonpath(t, "$.1.1.3.topic", "Multiple Existence")
 
     print(tree("../product/", format="json", sparse=True, location="1/1"))
+

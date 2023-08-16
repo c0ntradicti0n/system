@@ -4,7 +4,7 @@ import pickle
 import time
 from functools import wraps
 
-import cachetools
+# import cachetools
 
 # The maximum number of items the cache can store
 CACHE_MAX_SIZE = 1000000
@@ -24,7 +24,7 @@ try:
 except FileNotFoundError:
     # If the cache file doesn't exist, create a new cache
 """
-cache = cachetools.TTLCache(CACHE_MAX_SIZE, TTL)
+# cache = cachetools.TTLCache(CACHE_MAX_SIZE, TTL)
 
 
 def file_based_cache(func):
