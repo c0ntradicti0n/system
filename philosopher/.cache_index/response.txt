@@ -1,0 +1,62 @@
+3111 "Tools"
+3111_ "Basic-Complex"
+
+31111 "Basic Hand Tools"
+31111_ "Cutting-Gripping"
+311111 "Knife"
+311112 "Hammer"
+311113 "Screwdriver"
+
+31112 "Advanced Hand Tools"
+31112_ "Modify-Construct"
+311121 "Drill"
+311122 "Wrench"
+311123 "Chisel"
+
+31113 "Functional and Protection Tools"
+31113_ "Access-Defend"
+311131 "Key"
+311132 "Rope"
+311133 "Flashlight"
+
+3112 "Specialized Tools"
+3112_ "Task-Specificity"
+
+31121 "Building and Construction"
+31121_ "Elevate-Compact"
+311211 "Crane"
+311212 "Bulldozer"
+311213 "Jackhammer"
+
+31122 "Agriculture and Gardening"
+31122_ "Sow-Reap"
+311221 "Plough"
+311222 "Hoe"
+311223 "Scythe"
+
+31123 "Defense and Hunting"
+31123_ "Protect-Hunt"
+311231 "Bow & Arrow"
+311232 "Gun"
+311233 "Shield"
+
+3113 "Utility, Craft & Mobility"
+3113_ "Locate-Transport"
+
+31131 "Artistic Creation"
+31131_ "Design-Express"
+311311 "Pencil"
+311312 "Paintbrush"
+311313 "Sculpting tools"
+
+31132 "Mobility Tools"
+31132_ "Land-Air"
+311321 "Car"
+311322 "Airplane"
+311323 "Skateboard"
+
+31133 "Kitchen and Domestic Tools"
+31133_ "Cook-Store"
+311331 "Pot & Pan"
+311332 "Oven"
+311333 "Refrigerator"
