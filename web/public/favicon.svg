@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="62" height="62" viewBox="0 0 50 50">
+    <style>
+        svg { background-color: lime; }
+    </style>
+    <rect width="100%" height="100%" fill="lime"/>
+    <!-- Moved the triangle 10 units down -->
+    <polygon points="10,47 25,21 40,47" style="fill:black;stroke:purple;stroke-width:1" />
+    <!-- Moved the circles 10 units down -->
+    <circle cx="25" cy="12" r="8" stroke="red" stroke-width="2" fill="transparent" />
+    <circle cx="25" cy="13" r="5" stroke="black" stroke-width="2" fill="transparent" />
+</svg>

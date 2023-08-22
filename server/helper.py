@@ -20,6 +20,7 @@ class E:
     def __exit__(self, exc_type, exc_val, exc_tb):
         return isinstance(exc_val, (KeyError, TypeError))
 
+
 e = E()
 
 
@@ -157,15 +158,20 @@ def get_analogue_from_nested_dict(nested_dict, pivot_keys):
     indices = [i for i, x in enumerate(pivot_keys) if x == "2"]
 
     for i in indices:
-            keys = pivot_keys[:i] + ['1']
-            r = get_from_nested_dict(nested_dict, keys)
+        keys = pivot_keys[:i] + ["1"]
+        r = get_from_nested_dict(nested_dict, keys)
 
-            if r:
-                with e: yield keys + ["_"], r["_"]
-                with e: yield keys + ["."], r["."]
-                with e: yield keys + ["1"], r[1]["."]
-                with e: yield keys + ["2"], r[2]["."]
-                with e: yield keys + ["3"], r[3]["."]
+        if r:
+            with e:
+                yield keys + ["_"], r["_"]
+            with e:
+                yield keys + ["."], r["."]
+            with e:
+                yield keys + ["1"], r[1]["."]
+            with e:
+                yield keys + ["2"], r[2]["."]
+            with e:
+                yield keys + ["3"], r[3]["."]
 
 
 def round_school(x):
@@ -513,6 +519,7 @@ def unique_by_func(lst, func):
             result.append(item)
     return result
 
+
 if __name__ == "__main__":
     t = tree(
         basepath="../product/", startpath="", format="json", sparse=True, location="1/1"
@@ -520,4 +527,3 @@ if __name__ == "__main__":
     update_with_jsonpath(t, "$.1.1.3.topic", "Multiple Existence")
 
     print(tree("../product/", format="json", sparse=True, location="1/1"))
-

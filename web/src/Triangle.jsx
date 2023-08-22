@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import {
   getLeftPosition,
   getTopPosition,
@@ -30,9 +30,6 @@ function Triangle({
   setTooltipData,
   setHoverId,
 }) {
-  const [hovered, setIsHovered] = useState(false)
-  const [inViewport, setInViewport] = useState(false)
-
   const devicePixelRatio = window.devicePixelRatio || 1
   const isMobile = window.innerWidth <= 768 // Example breakpoint for mobile
   const fontSize = !isMobile
@@ -40,10 +37,10 @@ function Triangle({
     : size / 20 / Math.log1p(devicePixelRatio)
 
   const ref = React.useRef(null)
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     console.log('fetchData', fullId)
     setCurrentId(fullId)
-  }
+  }, [fullId, setCurrentId])
 
   useEffect(() => {
     if (!ref?.current) return
@@ -60,7 +57,7 @@ function Triangle({
     if (isWithinViewport) {
       fetchData()
     }
-  }, [transformState, scale, fetchData])
+  }, [transformState, scale, fetchData, fullId])
 
   if (typeof data === 'string' || !data) {
     const title = data
@@ -125,11 +122,9 @@ function Triangle({
       }}
       onMouseEnter={() => {
         addHoverObject(fullId)
-        setIsHovered(true)
       }}
       onMouseLeave={() => {
         removeHoverObject(fullId)
-        setIsHovered(false)
       }}
     >
       <div

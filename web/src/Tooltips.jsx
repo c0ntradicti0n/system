@@ -1,14 +1,12 @@
 import { postProcessTitle } from './position'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useQuery } from 'react-query'
 
 export const Tooltips = ({ input, isWindowWide }) => {
-    console.log('Tooltips', input)
-    const [id, data ] = input ?? [null, {}]
+  console.log('Tooltips', input)
+  const [id, data] = input ?? [null, {}]
   const fetchTexts = async () => {
-    const res = await fetch(
-      `${process.env['REACT_APP_HOST']}/api/text/${id ?? ''}`,
-    )
+    const res = await fetch(`/api/text/${id ?? ''}`)
     if (!res.ok) {
       throw new Error('Network response was not ok')
     }
@@ -19,10 +17,10 @@ export const Tooltips = ({ input, isWindowWide }) => {
 
   const { data: texts, error } = useQuery(['triangle', id], fetchTexts, {
     //keepPreviousData: true,
-      onError: console.error
+    onError: console.error,
   })
 
-    if (!id) return null
+  if (!id) return null
 
   console.log('texts', texts, error)
   if (
@@ -44,11 +42,11 @@ export const Tooltips = ({ input, isWindowWide }) => {
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
-          overflowY: 'scroll',
+        overflowY: 'scroll',
       }}
     >
       {['1', '2', '3', '_'].map((key) => {
-        const header_value =  data[key]
+        const header_value = data[key]
         const value = (texts ?? data)[key]
         const header =
           typeof header_value === 'object' ? header_value?.['.'] : header_value

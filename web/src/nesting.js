@@ -31,7 +31,6 @@ export function splitKey(key) {
   return key.split('/').filter((x) => x)
 }
 export function shiftIn(firstPath, secondPath, options) {
-
   // Remove leading slashes from paths
   if (firstPath.startsWith('/')) {
     firstPath = firstPath.slice(1)
@@ -69,4 +68,79 @@ export function shiftIn(firstPath, secondPath, options) {
       secondParts.slice(shiftIndex).join('/'),
     ]
   }
+}
+
+export function shiftHorizontal(inputPath, direction) {
+  let currentPath = inputPath.replace(/\//g, '')
+  if (direction === 'right') {
+    if (currentPath === '') return '1'
+
+    let index = currentPath.length - 1
+    while (index >= 0 && currentPath[index] === '3') {
+      index--
+    }
+
+    if (index < 0) {
+      currentPath = currentPath + '1'
+    } else {
+      const char = currentPath[index]
+      const incrementedChar = (parseInt(char, 10) + 1).toString()
+      currentPath =
+        currentPath.substring(0, index) +
+        incrementedChar +
+        currentPath.substring(index + 1)
+    }
+  } else if (direction === 'left') {
+    if (currentPath === '') return ''
+
+    const lastChar = currentPath[currentPath.length - 1]
+    if (lastChar === '1') {
+      currentPath = currentPath.substring(0, currentPath.length - 1)
+    } else if (lastChar === '2') {
+      currentPath = currentPath.substring(0, currentPath.length - 1) + '1'
+    } else if (lastChar === '3') {
+      currentPath = currentPath.substring(0, currentPath.length - 1) + '2'
+    }
+  } else if (direction === 'zoom-in') {
+    currentPath += '1'
+  }
+
+  return currentPath
+}
+
+export function shiftVertical(inputPath, direction) {
+  if (direction === 'lower') {
+    return inputPath + '1'
+  } else if (direction === 'higher' && inputPath !== '') {
+    return inputPath.slice(0, -1)
+  }
+
+  return inputPath
+}
+
+function slashIt(currentPath) {
+  let str = currentPath.replace(/^\/+|\/+$/g, '')
+
+  // Replace consecutive slashes with a single slash
+  str = str.replace(/\/+/g, '/')
+  return str.split('').join('/')
+}
+
+export function shiftSideways(currentPath, direction) {
+  const res = shiftHorizontal(currentPath, direction)
+  console.log(res, currentPath, slashIt(currentPath))
+  return res
+}
+
+export function _shift(currentPath, direction) {
+  if (['left', 'right'].includes(direction)) {
+    return shiftSideways(currentPath, direction)
+  }
+  if (['lower', 'higher'].includes(direction)) {
+    return shiftVertical(currentPath, direction)
+  }
+}
+
+export function shift(currentPath, direction) {
+  return slashIt(_shift(currentPath, direction))
 }

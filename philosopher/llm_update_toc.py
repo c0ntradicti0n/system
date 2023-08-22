@@ -3,7 +3,8 @@ import pathlib
 
 import editdistance as editdistance
 import regex
-from helper import get_from_nested_dict, get_analogue_from_nested_dict, unique_by_func
+from helper import (get_analogue_from_nested_dict, get_from_nested_dict,
+                    unique_by_func)
 
 from philosopher.analyser import analyse_toc
 from philosopher.LLMFeature import create_path, features
@@ -26,19 +27,29 @@ def llm_update_toc(toc, kwargs, t):
         for x in paths_to_fill
     ]
     themes = [
-        (k, (v if isinstance(v, str) else
-        (", ".join(v.values()).replace(".md", "")) if v is not None else ""))
+        (
+            k,
+            (
+                v
+                if isinstance(v, str)
+                else (", ".join(v.values()).replace(".md", ""))
+                if v is not None
+                else ""
+            ),
+        )
         for k, v in themes
     ]
     topics = [f"{k}, {v}," for k, v in themes]
     analogies = "\n".join(
-        ''.join(l) + f" {a}" for k, v in themes for l, a in get_analogue_from_nested_dict(t, list(k)) if a
+        "".join(l) + f" {a}"
+        for k, v in themes
+        for l, a in get_analogue_from_nested_dict(t, list(k))
+        if a
     ).replace(".md", "")
     paths_to_fill = [p for p in paths_to_fill if not p.startswith("11")]
 
     instruction = (
-        (
-            """
+        """
 You are extending a dialectical system, emulating Hegel's methodology, where concepts unfold within a 
 fractal structure of triples. Each triple consists of:
 
@@ -70,8 +81,8 @@ movement, every path should match this regex: [1-3]_?
 Examples:
 
 """
-            + "\n\n".join([i for f in features if (i := f(**kwargs).instruction())])
-            + """
+        + "\n\n".join([i for f in features if (i := f(**kwargs).instruction())])
+        + """
 
 Stick exactly to this syntax, don't exchange: '.', '_' with more meaningful information, put the meaning only into 
 the strings.
@@ -80,8 +91,8 @@ be limited to 1-4 word titles, no sentences.
 Thus your output should be a list with a syntax like this:
 
 """
-            + "\n".join([e for f in features if (e := f(**kwargs).example())])
-            + """
+        + "\n".join([e for f in features if (e := f(**kwargs).example())])
+        + """
 
 Don't be audacious and dont just change the series of words in one title, keep it as simple as possible, avoid repetitions in titles, the simplest words are the best and less words is more content. Be enormously precise with your answers and the keys, every wrong path causes chaos and will kill the whole project.
 Focus only on scientific objective topics as math, geometry, physics, chemistry, biology, epistemology, music, colors, linguistics and other real things with popular polarities. Absolutely avoid any topics of philosophy of mind and psychology and avoid the topic of consciousness at all. Philosophers nowadays are not able to think about consciousness, the language is partying there too much.
@@ -89,8 +100,7 @@ Focus on a top-down approach to get to some more systematic dialectical structur
 Focus on completeness of the fractal, please fill up all incomplete triples, rather add new triples than improving existing ones.
 
 So, please dump all your knowledge accurately about """
-            + " and ".join(topics)
-        )
+        + " and ".join(topics)
     )
 
     toc_lines = []
@@ -98,10 +108,14 @@ So, please dump all your knowledge accurately about """
         lp = regex.match(r"^\d*", l).group(0)
         for pf in paths_to_fill:
             c = max(len(pf), len(lp))
-            depth_score = sum([
-                (lp[i] == pf [i])*(c -i) for i in range(c) if i < len(lp) and i < len(pf)
-            ])
-            min_score = len(pf) *1.5
+            depth_score = sum(
+                [
+                    (lp[i] == pf[i]) * (c - i)
+                    for i in range(c)
+                    if i < len(lp) and i < len(pf)
+                ]
+            )
+            min_score = len(pf) * 1.5
 
             if (depth_score > min_score or len(lp) < 2) and len(lp) < len(pf) + 2:
                 toc_lines.append(l)
@@ -117,16 +131,19 @@ Here is a truncated version of the current dialectical system to the path, where
 
 So, please dump all you wisdom accurately about \n"""
         + "\n".join(topics)
-        + ((
-               """
+        + (
+            (
+                """
 
 
-Respect that it should work on analogies resembling the following topics""")
-           + f"""
+Respect that it should work on analogies resembling the following topics"""
+            )
+            + f"""
 
 {analogies}
     """
-           if analogies else ""
-           )
+            if analogies
+            else ""
+        )
     )
     return instruction, prompt
