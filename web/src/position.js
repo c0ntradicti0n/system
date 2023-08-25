@@ -64,5 +64,6 @@ export function isElementInViewportAndBigAndNoChildren(el, data) {
 }
 
 export function postProcessTitle(title) {
-  return title?.replace('.md', '').replace('_.', '')
+  if (!title || typeof title == 'object') return null
+  return title?.replace('.md', '')?.replace('_.', '')
 }

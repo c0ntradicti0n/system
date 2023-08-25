@@ -167,7 +167,7 @@ function Triangle({
         ))}
 
         <div
-          onClick={() => setTooltipData([fullId, data])}
+          onClick={() => setTooltipData(fullId)}
           style={{
             position: 'absolute',
             top: '70%',

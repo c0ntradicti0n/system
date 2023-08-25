@@ -1,7 +1,6 @@
 import os.path
 import pathlib
 
-import editdistance as editdistance
 import regex
 from helper import (get_analogue_from_nested_dict, get_from_nested_dict,
                     unique_by_func)
@@ -40,12 +39,16 @@ def llm_update_toc(toc, kwargs, t):
         for k, v in themes
     ]
     topics = [f"{k}, {v}," for k, v in themes]
-    analogies = "\n".join(
-        "".join(l) + f" {a}"
-        for k, v in themes
-        for l, a in get_analogue_from_nested_dict(t, list(k))
-        if a
-    ).replace(".md", "")
+    analogs = unique_by_func(
+        [
+            (l, a)
+            for k, v in themes
+            for l, a in get_analogue_from_nested_dict(t, list(k))
+            if a
+        ],
+        lambda x: str(x[0]),
+    )
+    analogies = "\n".join("".join(l) + f" {a}" for l, a in analogs).replace(".md", "")
     paths_to_fill = [p for p in paths_to_fill if not p.startswith("11")]
 
     instruction = (

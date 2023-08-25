@@ -69,7 +69,7 @@ class LogicFractalText(Resource):
             # print(f"{file_dict=}")
             try:
                 file_dict = {
-                    str(k)[0]: (v.strip() if v else "")
+                    str(k)[0]: (v.strip().strip("\n") if v else "")
                     if not isinstance(v, dict)
                     else list(v.values())[0]
                     for k, v in file_dict.items()

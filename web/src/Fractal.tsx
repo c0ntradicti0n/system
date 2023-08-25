@@ -79,8 +79,8 @@ const Fractal = ({ setContent }) => {
     window.innerHeight < window.innerWidth
       ? window.innerHeight
       : window.innerWidth
-  const left = (window.innerWidth - size) * 0.84
-  const top = (window.innerHeight - size) * 0.84
+  const left = (window.innerWidth - size) * 0
+  const top = (window.innerHeight - size) * 0.6
   const transformComponentRef = useRef<ReactZoomPanPinchRef | null>(null)
   const [tooltipData, setTooltipData] = useState(null)
   const [isWindowWide, setIsWindowWide] = useState(
@@ -281,8 +281,8 @@ const Fractal = ({ setContent }) => {
       </TransformWrapper>
       {tooltipData && (
         <Tooltips
-          input={tooltipData}
-          id={hoverId}
+          tree={collectedData}
+          path={tooltipData}
           isWindowWide={isWindowWide}
         />
       )}

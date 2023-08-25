@@ -13,7 +13,6 @@ from helper import (OutputLevel, extract, get_prefix,
                     sanitize_nested_dict, tree, update_nested_dict)
 from regex import regex
 
-from philosopher.analyser import analyse_toc
 from philosopher.llm_update_text import custom_parser, llm_update_text
 from philosopher.llm_update_toc import llm_update_toc
 from philosopher.yaml import (object_to_yaml_str, rec_sort,
