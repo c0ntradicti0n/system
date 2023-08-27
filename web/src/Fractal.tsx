@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react'
 import { useQuery } from 'react-query'
 import Triangle from './Triangle'
-import { mergeDeep, lookupDeep, shiftIn, shift } from './nesting'
+import { mergeDeep, lookupDeep, shiftIn, shift, slashIt } from './nesting'
 import {
   TransformWrapper,
   TransformComponent,
   ReactZoomPanPinchRef,
 } from 'react-zoom-pan-pinch'
+import {go, beamDataTo} from "./navigate"
+
 import { Tooltips } from './Tooltips'
 import { MAX_LEVEL } from './const'
 import { MobileControls } from './MobileControls'
@@ -14,59 +16,6 @@ import { MobileControls } from './MobileControls'
 const maxZoomThreshold = 2
 const minZoomThreshold = 0.6
 
-function beamDataTo(
-  newHiddenId,
-  collectedData: {},
-  hoverId,
-  newRestId,
-  detailId,
-  transformComponentRef,
-  setHiddenId,
-  setVisualData,
-) {
-  const newData = lookupDeep(newHiddenId, collectedData)
-  console.log('reset zoom in', {
-    ids: {
-      shiftOnNestedHoverSomething: [newHiddenId, newRestId],
-      newHiddenId,
-      detailId,
-      hoverId,
-    },
-    newData,
-    collectedData,
-    transformComponentRef: transformComponentRef.current,
-  })
-
-  setHiddenId(newHiddenId || '')
-  transformComponentRef.current.setTransform(0, 0, 1, 0, 0) // <-- reset the zoom
-  setVisualData(newData)
-}
-
-const go = ({
-  direction,
-  hiddenId,
-  setDetailId,
-  collectedData,
-  hoverId,
-  detailId,
-  transformComponentRef,
-  setHiddenId,
-  setVisualData,
-}) => {
-  const newHiddenId = shift(hiddenId, direction)
-  console.log(hiddenId, hiddenId)
-  setDetailId(newHiddenId || '')
-  return beamDataTo(
-    newHiddenId,
-    collectedData,
-    hoverId,
-    '',
-    detailId,
-    transformComponentRef,
-    setHiddenId,
-    setVisualData,
-  )
-}
 
 const Fractal = ({ setContent }) => {
   const [detailId, setDetailId] = useState(null)
@@ -100,6 +49,21 @@ const Fractal = ({ setContent }) => {
     }),
     [hiddenId, setDetailId, collectedData, detailId, hoverId],
   )
+  const [initialPageLoad, setInitialPageLoad] = useState(true) // New state to track initial page load
+
+  useEffect(() => {
+    if (initialPageLoad) {
+      const hash = window.location.hash.substring(1) // Remove the '#' from the start
+      const parsedId = slashIt(hash.split('/').join('')) // Convert "/1/3/2" to "132", adapt as needed
+      setHiddenId(parsedId) // Update the hiddenId state
+      setDetailId("")
+      setTooltipData(parsedId) // Update the tooltipData state
+      setInitialPageLoad(false) // Mark that the initial page load logic is done
+          console.log("initial load", {hash, parsedId})
+
+    }
+  }, [initialPageLoad]) // Depend on initialPageLoad so that this useEffect runs only once
+
   useEffect(() => {
     const handleResize = () => {
       setIsWindowWide(window.innerWidth > window.innerHeight)
@@ -112,59 +76,34 @@ const Fractal = ({ setContent }) => {
   }, [])
 
   const fetchTree = async () => {
-    const res = await fetch(`/api/toc/${detailId ?? ''}`)
+    const id = (hiddenId ?? '') + (detailId ?? '')
+    const res = await fetch(`/api/toc/${id}`)
     if (!res.ok) {
       console.error('Network response was not ok', res)
       return
     }
     const newData = await res.json()
-    console.log('fetchFiles', { detailId, res, newData })
+    console.log('fetch TOC', { detailId, res, newData })
 
     const mergedData = mergeDeep(
       collectedData,
       newData[''] ? newData[''] : newData,
     )
     setCollectedData(mergedData)
+    if (hiddenId) {
+            const initialVisualData = lookupDeep(id, collectedData);
+      setVisualData(initialVisualData);
+    }
     return mergedData
   }
 
-  const { status, error } = useQuery(['triangle', detailId], fetchTree, {
-    keepPreviousData: true,
+  const { status, error } = useQuery(['triangle',hiddenId + "/"+ detailId ], fetchTree, {
+   // keepPreviousData: true,
+  staleTime: 0, // Data will be considered stale immediately after it's fetched, forcing a refetch
+
+    enabled: detailId !== null // Only execute the query if detailId is not null
+
   })
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      switch (e.key) {
-        case 'ArrowLeft':
-          go({ ...params, direction: 'left' })
-          break
-        case 'ArrowRight':
-          go({ ...params, direction: 'right' })
-          break
-        case 'ArrowUp':
-          go({ ...params, direction: 'lower' })
-          break
-        case 'ArrowDown':
-          go({ ...params, direction: 'higher' })
-          break
-        default:
-          return
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [
-    params,
-    detailId,
-    hoverId,
-    transformComponentRef,
-    collectedData,
-    hiddenId,
-  ])
 
   useEffect(() => {
     if (scale === null || detailId === null) return
@@ -188,6 +127,10 @@ const Fractal = ({ setContent }) => {
         setHiddenId,
         setVisualData,
       )
+            console.log("WHY DIS", newHiddenId)
+
+        setDetailId(newHiddenId);  // Or set it to another appropriate value.
+
     }
     if (scale < minZoomThreshold) {
       console.log(detailId, hoverId)
@@ -205,6 +148,9 @@ const Fractal = ({ setContent }) => {
         setHiddenId,
         setVisualData,
       )
+      console.log("WHY DIS", newHiddenId)
+      setDetailId(newHiddenId);  // Or set it to another appropriate value.
+
     }
   }, [scale, collectedData, detailId, hoverId])
 
@@ -215,6 +161,14 @@ const Fractal = ({ setContent }) => {
   if (status === 'error') {
     return <span>{JSON.stringify(error)}</span>
   }
+  const linkId =  tooltipData !== "" ? tooltipData : hiddenId
+
+  console.log({ids:{
+    hiddenId,
+      detailId,
+      tooltipData,
+      linkId
+    }})
 
   return (
     <div
@@ -239,12 +193,6 @@ const Fractal = ({ setContent }) => {
       >
         {(utils) => (
           <React.Fragment>
-            <MobileControls
-              onLeft={() => go({ ...params, direction: 'left' })}
-              onZoomIn={() => go({ ...params, direction: 'lower' })}
-              onRight={() => go({ ...params, direction: 'right' })}
-              onZoomOut={() => go({ ...params, direction: 'higher' })}
-            />{' '}
             <TransformComponent>
               <div
                 style={{
@@ -263,7 +211,10 @@ const Fractal = ({ setContent }) => {
                   left={0}
                   top={0}
                   level={MAX_LEVEL}
-                  setCurrentId={setDetailId}
+                  setCurrentId={(id) => {
+                    console.log("TRIANGLE SETTING DETAILID", id)
+                        setDetailId(id)
+                  }}
                   {...{
                     hoverId,
                     setHoverId,
@@ -282,10 +233,17 @@ const Fractal = ({ setContent }) => {
       {tooltipData && (
         <Tooltips
           tree={collectedData}
-          path={tooltipData}
+          path={tooltipData !== "" ? tooltipData : hiddenId}
           isWindowWide={isWindowWide}
         />
       )}
+      <MobileControls
+        onLeft={() => go({ ...params, direction: 'left' })}
+        onZoomIn={() => go({ ...params, direction: 'lower' })}
+        onRight={() => go({ ...params, direction: 'right' })}
+        onZoomOut={() => go({ ...params, direction: 'higher' })}
+        linkId={linkId}
+      />{' '}
     </div>
   )
 }

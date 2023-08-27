@@ -131,3 +131,77 @@
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   position: absolute;
 }
+
+.mobile-controls {
+  position: fixed;
+  top: 50%;
+  width: 10%;
+  left: 50%; /* Assuming you want it to cover the whole viewport height */
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  z-index: 10;
+}
+
+.button {
+  background: #333; /* Or any desired color */
+  color: #fff; /* Text color */
+  border: none;
+  width: 30px; /* Adjust width */
+  height: 30px; /* Adjust height */
+  border-radius: 20%; /* Making buttons round */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.3s background;
+}
+
+.button:hover {
+  background: #555; /* Or any desired hover color */
+}
+
+.left-controls,
+.right-controls,
+.top-controls,
+.bottom-controls {
+  position: absolute; /* Absolute positioning to set exact position of each button */
+}
+
+.left-controls {
+  left: calc(
+    50% - 60px
+  ); /* Centered horizontally minus half of the space for two buttons and their space */
+}
+
+.right-controls {
+  right: calc(50% - 60px);
+}
+
+.top-controls {
+  top: calc(50% - 60px);
+}
+
+.bottom-controls {
+  bottom: calc(50% - 60px);
+}
+
+@keyframes copiedAnimation {
+  0% {
+    background-color: #fff;
+  }
+  50% {
+    background-color: #19ab19;
+  }
+  100% {
+    background-color: #fff;
+  }
+}
+
+.copied-animation {
+  animation: copiedAnimation 1s ease-out;
+}
+
+.ant-modal-centered {
+  z-index: 100000000 !important;
+}

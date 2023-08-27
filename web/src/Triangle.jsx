@@ -8,8 +8,6 @@ import {
 } from './position'
 import { addHoverObject, hoverObjects, removeHoverObject } from './hover'
 
-const MAX_LEVEL = 1
-
 function Triangle({
   id,
   detailId,
@@ -39,7 +37,7 @@ function Triangle({
   const ref = React.useRef(null)
   const fetchData = useCallback(async () => {
     console.log('fetchData', fullId)
-    setCurrentId(fullId)
+    //setCurrentId(fullId)
   }, [fullId, setCurrentId])
 
   useEffect(() => {
