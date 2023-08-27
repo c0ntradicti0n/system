@@ -1,3 +1,3 @@
 import os
 
-system_path = os.environ.get("SYSTEM", "../../dialectics")
+system_path = os.environ.get("SYSTEM", "../dialectics")

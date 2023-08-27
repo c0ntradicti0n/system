@@ -65,14 +65,17 @@ def without_text(t, base_path, exclude):
                     path_keys = [*path, x]
                     fname = current[x]["."]
                     file_path = (
-                        base_path + "/".join(str(p) for p in path_keys) + f"/.{fname}"
+                        base_path
+                        + "/"
+                        + "/".join(str(p) for p in path_keys)
+                        + f"/.{fname}"
                     )
                 else:
                     path_keys = path
 
                     fname = current[x]
                     file_path = (
-                        base_path + "/".join(str(p) for p in path) + f"/_{fname}"
+                        base_path + "/" + "/".join(str(p) for p in path) + f"/_{fname}"
                     )
 
                 with open(file_path, "r") as f:

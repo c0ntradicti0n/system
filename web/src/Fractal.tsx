@@ -7,7 +7,7 @@ import {
   TransformComponent,
   ReactZoomPanPinchRef,
 } from 'react-zoom-pan-pinch'
-import {go, beamDataTo} from "./navigate"
+import { go, beamDataTo } from './navigate'
 
 import { Tooltips } from './Tooltips'
 import { MAX_LEVEL } from './const'
@@ -15,7 +15,6 @@ import { MobileControls } from './MobileControls'
 
 const maxZoomThreshold = 2
 const minZoomThreshold = 0.6
-
 
 const Fractal = ({ setContent }) => {
   const [detailId, setDetailId] = useState(null)
@@ -56,11 +55,10 @@ const Fractal = ({ setContent }) => {
       const hash = window.location.hash.substring(1) // Remove the '#' from the start
       const parsedId = slashIt(hash.split('/').join('')) // Convert "/1/3/2" to "132", adapt as needed
       setHiddenId(parsedId) // Update the hiddenId state
-      setDetailId("")
+      setDetailId('')
       setTooltipData(parsedId) // Update the tooltipData state
       setInitialPageLoad(false) // Mark that the initial page load logic is done
-          console.log("initial load", {hash, parsedId})
-
+      console.log('initial load', { hash, parsedId })
     }
   }, [initialPageLoad]) // Depend on initialPageLoad so that this useEffect runs only once
 
@@ -91,19 +89,22 @@ const Fractal = ({ setContent }) => {
     )
     setCollectedData(mergedData)
     if (hiddenId) {
-            const initialVisualData = lookupDeep(id, collectedData);
-      setVisualData(initialVisualData);
+      const initialVisualData = lookupDeep(id, collectedData)
+      setVisualData(initialVisualData)
     }
     return mergedData
   }
 
-  const { status, error } = useQuery(['triangle',hiddenId + "/"+ detailId ], fetchTree, {
-   // keepPreviousData: true,
-  staleTime: 0, // Data will be considered stale immediately after it's fetched, forcing a refetch
+  const { status, error } = useQuery(
+    ['triangle', hiddenId + '/' + detailId],
+    fetchTree,
+    {
+      // keepPreviousData: true,
+      staleTime: 0, // Data will be considered stale immediately after it's fetched, forcing a refetch
 
-    enabled: detailId !== null // Only execute the query if detailId is not null
-
-  })
+      enabled: detailId !== null, // Only execute the query if detailId is not null
+    },
+  )
 
   useEffect(() => {
     if (scale === null || detailId === null) return
@@ -127,10 +128,9 @@ const Fractal = ({ setContent }) => {
         setHiddenId,
         setVisualData,
       )
-            console.log("WHY DIS", newHiddenId)
+      console.log('WHY DIS', newHiddenId)
 
-        setDetailId(newHiddenId);  // Or set it to another appropriate value.
-
+      setDetailId(newHiddenId) // Or set it to another appropriate value.
     }
     if (scale < minZoomThreshold) {
       console.log(detailId, hoverId)
@@ -148,9 +148,8 @@ const Fractal = ({ setContent }) => {
         setHiddenId,
         setVisualData,
       )
-      console.log("WHY DIS", newHiddenId)
-      setDetailId(newHiddenId);  // Or set it to another appropriate value.
-
+      console.log('WHY DIS', newHiddenId)
+      setDetailId(newHiddenId) // Or set it to another appropriate value.
     }
   }, [scale, collectedData, detailId, hoverId])
 
@@ -161,14 +160,16 @@ const Fractal = ({ setContent }) => {
   if (status === 'error') {
     return <span>{JSON.stringify(error)}</span>
   }
-  const linkId =  tooltipData !== "" ? tooltipData : hiddenId
+  const linkId = tooltipData !== '' ? tooltipData : hiddenId
 
-  console.log({ids:{
-    hiddenId,
+  console.log({
+    ids: {
+      hiddenId,
       detailId,
       tooltipData,
-      linkId
-    }})
+      linkId,
+    },
+  })
 
   return (
     <div
@@ -212,8 +213,8 @@ const Fractal = ({ setContent }) => {
                   top={0}
                   level={MAX_LEVEL}
                   setCurrentId={(id) => {
-                    console.log("TRIANGLE SETTING DETAILID", id)
-                        setDetailId(id)
+                    console.log('TRIANGLE SETTING DETAILID', id)
+                    setDetailId(id)
                   }}
                   {...{
                     hoverId,
@@ -233,7 +234,7 @@ const Fractal = ({ setContent }) => {
       {tooltipData && (
         <Tooltips
           tree={collectedData}
-          path={tooltipData !== "" ? tooltipData : hiddenId}
+          path={tooltipData !== '' ? tooltipData : hiddenId}
           isWindowWide={isWindowWide}
         />
       )}

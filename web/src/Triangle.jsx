@@ -7,6 +7,7 @@ import {
   stringToColour,
 } from './position'
 import { addHoverObject, hoverObjects, removeHoverObject } from './hover'
+import {MAX_LEVEL} from "./const";
 
 function Triangle({
   id,

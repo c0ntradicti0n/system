@@ -99,7 +99,7 @@ Provide the text for ONE level of the text for the following paths and topics he
     prompt += f"""
 Now really dive into writing texts about and only about:
 {topics}
-And respect our structural requirements, please.
+And respect our structural requirements, please. Constrain yourself writing text to the mentioned 4 headings!
 """
     return instruction, prompt
 

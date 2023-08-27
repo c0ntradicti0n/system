@@ -17,7 +17,6 @@ export function beamDataTo(
   setVisualData(newData)
 }
 
-
 export function go(params) {
   const newHiddenId = shift(params.hiddenId, params.direction)
   params.setDetailId(newHiddenId || '')

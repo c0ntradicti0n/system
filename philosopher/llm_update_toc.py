@@ -17,7 +17,8 @@ def llm_update_toc(toc, kwargs, t):
         paths_to_fill = [(p, "") for p in paths_to_fill.split("\n") if p][:5]
     else:
         paths_to_fill = [
-            create_path(p) for p in analyse_toc(t, exclude=["111"])["min_depth_paths"]
+            create_path(p)
+            for p in analyse_toc(t, exclude=["111", "112"])["min_depth_paths"]
         ][:3]
     paths_to_fill = unique_by_func(paths_to_fill, func=lambda p: p.replace("_", ""))
 

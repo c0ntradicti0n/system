@@ -90,9 +90,6 @@ def dialectic_triangle(
     lllm_input = task_cache + "prompt.txt"
 
     os.makedirs(".cache_text/", exist_ok=True)
-    with open(".cache_text/response.txt", "w") as f:
-        f.write("")
-    pass
 
     if not os.path.exists(lllm_output):
         with open(lllm_input, "w") as f:
@@ -225,7 +222,7 @@ if __name__ == "__main__":
                     synthesis=True,
                     inversion_antonym=True,
                     # llm model
-                    model="gpt-3.5-turbo",
+                    model="gpt-4",
                 )
             )
         os.system("rm -rf .cache_text/")
