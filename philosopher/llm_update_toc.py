@@ -69,15 +69,15 @@ This should point to  the evolution of the argumentation by identifying the conf
 dialectic triple, thereby triggering the formation of the next triple. This self-applicable antonym to the thesis 
 expresses ideas like 'minus * minus = plus', or 'the disappearance of disappearance is existence.') (_)
 
-There is also this constraint: The fractal lives from semantic analogies, every subtopic from [1-3]*1 should mirror the topics in [1-3]*2 by ANALOGY (as far as possible) Please respect this, therefore you are given example other entries, that differ in editdistance 2. 
+There is also this constraint: 
+The fractal lives from semantic analogies, every subtopic from [1-3]*1 should mirror the topics in [1-3]*2 by ANALOGY (as far as possible) Please respect this, therefore you are given example other entries, that differ in editdistance 2. 
+
+Respect, that it moves from the most abstract to the most concrete concepts when moving deeper into the nesting and horizontally it moves by the defining other concepts by first treating the ingredients and then the complexities of those.
 
 You'll work with a representation reflecting your current progress. Each unit is addressed via a key as "13221." 
 for the thesis in "1322".
 Your goal is to enhance and enrich the thematic structure of the fractal triples and also diving deeper by creating 
 new triples.
-
-Detect paths where it lacks cohesion or displays incorrect structure. Propose improvements by modifying or introducing 
-new elements. Use exactly the following syntax:
 
 Every nesting level should have a bare path for telling the theme and also a '_'-entry to mark dialectical conceptual 
 movement, every path should match this regex: [1-3]_?

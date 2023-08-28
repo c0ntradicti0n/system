@@ -24,31 +24,6 @@ export function getTopPosition(index, parentSize) {
   }
 }
 
-export const stringToColour = (str, alpha = 1) => {
-  let hash = 0
-  for (let i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 7) - hash)
-  }
-
-  let color = ''
-  for (let i = 0; i < 3; i++) {
-    const value = (hash >> (i * 8)) & 0xff
-    color += ('00' + value.toString(18)).substr(-2)
-  }
-
-  return (
-    'rgba(' +
-    parseInt(color.substr(0, 2), 16) +
-    ',' +
-    parseInt(color.substr(2, 2), 16) +
-    ',' +
-    parseInt(color.substr(4, 2), 16) +
-    ',' +
-    alpha +
-    ')'
-  )
-}
-
 export function isElementInViewportAndBigAndNoChildren(el, data) {
   var rect = el.getBoundingClientRect()
 

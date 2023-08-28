@@ -1,13 +1,13 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useEffect, useCallback, useState } from 'react'
 import {
   getLeftPosition,
   getTopPosition,
   isElementInViewportAndBigAndNoChildren,
   postProcessTitle,
-  stringToColour,
 } from './position'
 import { addHoverObject, hoverObjects, removeHoverObject } from './hover'
-import {MAX_LEVEL} from "./const";
+import { MAX_LEVEL } from './const'
+import { stringToColour } from './color'
 
 function Triangle({
   id,
@@ -29,6 +29,7 @@ function Triangle({
   setTooltipData,
   setHoverId,
 }) {
+  const [_hover, _setHover] = useState(false)
   const devicePixelRatio = window.devicePixelRatio || 1
   const isMobile = window.innerWidth <= 768 // Example breakpoint for mobile
   const fontSize = !isMobile
@@ -96,10 +97,11 @@ function Triangle({
       </div>
     )
   }
-  const hover = hoverObjects[hoverObjects.length - 1] === fullId
+  const hover = hoverObjects.has(fullId)
   if (hover) {
     setHoverId(fullId)
   }
+  console.log('HOVER', hover, hoverObjects, fullId)
 
   const title = data?.['.']
   const anto = data?.['_']
@@ -114,6 +116,8 @@ function Triangle({
         height: size,
         left: left,
         top: top,
+        filter: _hover ? 'invert(1)' : 'invert(0)',
+        transform: _hover ? 'scale(1.05)' : 'scale(1)', // this line scales the triangle up a bit on hover
       }}
       onClick={(e) => {
         console.log(scale)
@@ -139,6 +143,7 @@ function Triangle({
           display: 'flex',
           justifyContent: 'center' /* For horizontal alignment */,
           alignItems: 'center' /* For vertical alignment */,
+          color: '#000',
         }}
       >
         {[1, 2, 3].map((subTriangleDir, index) => (
@@ -177,11 +182,13 @@ function Triangle({
             zIndex: 10000,
             width: `${size / 3}px`,
           }}
+          onMouseEnter={() => _setHover(true)}
+          onMouseLeave={() => _setHover(false)}
         >
           {title && (
             <div>
               <div className="triangle-title">
-                {fullId.slice(-1).replace(/\//g, '.')}.{' '}
+                {fullId.replace(/\//g, '.')}.{' '}
                 {postProcessTitle(title)}
               </div>
 
