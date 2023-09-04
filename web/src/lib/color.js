@@ -6,7 +6,6 @@ function filterString(str) {
 }
 
 export const stringToColour = (str, alpha = 1) => {
-  console.log('color', str)
   if (!str) return '#fff'
   str = filterString(str)
   const colors = {

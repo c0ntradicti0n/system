@@ -1,16 +1,23 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import ShareModal from './ShareModal'
+import { Button, Input } from 'antd'
+import { SearchOutlined } from '@ant-design/icons'
 
 export const MobileControls = ({
+  triggerSearch,
   onLeft,
   onZoomIn,
   onRight,
   onZoomOut,
   linkId,
 }) => {
-  console.log('LINKID', linkId)
+  const [searchText, setSearchText] = useState('')
   useEffect(() => {
     const handleKeyDown = (e) => {
+      if (e.target.id === 'search') {
+        return // If it is, exit early and don't process the key event
+      }
+
       switch (e.key) {
         case 'ArrowLeft':
           onLeft()
@@ -38,6 +45,23 @@ export const MobileControls = ({
 
   return (
     <div className="mobile-controls">
+      <div className="top-search">
+        <Input.TextArea
+          id="search"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          placeholder="How not to get murdered in the woods"
+          autoSize
+        />
+        <Button
+          type="primary"
+          icon={<SearchOutlined />}
+          onClick={() => triggerSearch(searchText)}
+        >
+          Search
+        </Button>
+      </div>
+
       <button
         onClick={onZoomIn}
         className="button top-controls"

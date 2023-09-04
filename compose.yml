@@ -54,6 +54,36 @@ services:
     volumes:
       - "$SYSTEM:/system"
       - "./server:/flask_app"
+  service:
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+    build:
+       context: service
+       args:
+         SYSTEM: /system
+
+    container_name: service
+    env_file:
+      - .env
+    tty: true
+    user: 1000:1000
+    ports:
+      - "5000:5000"
+    environment:
+      LC_ALL: en_US.UTF-8
+      LANG: en_US.UTF-8
+      LANGUAGE: en_US.UTF-8
+      DEBUG: "true"
+      HOST: $HOST
+      SYSTEM: /system
+      PYTHONIOENCODING: utf-8
+      HAYSTACK_TELEMETRY_ENABLED: False
+    volumes:
+      - "$SYSTEM:/system"
+      - "./service:/flask_app"
 
 
   philospher:
@@ -79,6 +109,7 @@ services:
         - "host.docker.internal:host-gateway"
     volumes:
       - "$SYSTEM:/system"
+
 
 
   web:

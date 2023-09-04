@@ -4,10 +4,10 @@ import {
   getTopPosition,
   isElementInViewportAndBigAndNoChildren,
   postProcessTitle,
-} from './position'
-import { addHoverObject, hoverObjects, removeHoverObject } from './hover'
-import { MAX_LEVEL } from './const'
-import { stringToColour } from './color'
+} from '../lib/position'
+import { addHoverObject, hoverObjects, removeHoverObject } from '../lib/hover'
+import { MAX_LEVEL } from '../config/const'
+import { stringToColour } from '../lib/color'
 
 function Triangle({
   id,
@@ -38,7 +38,6 @@ function Triangle({
 
   const ref = React.useRef(null)
   const fetchData = useCallback(async () => {
-    console.log('fetchData', fullId)
     //setCurrentId(fullId)
   }, [fullId, setCurrentId])
 
@@ -88,7 +87,11 @@ function Triangle({
         >
           <div style={{ position: 'relative', top: size / 1.5 }}>
             {id && (
-              <div style={{ fontSize }} className="triangle-title">
+              <div
+                id={'triangle-' + fullId.replace(/\//g, '')}
+                style={{ fontSize }}
+                className="triangle-title"
+              >
                 {postProcessTitle(title)}
               </div>
             )}
@@ -101,7 +104,6 @@ function Triangle({
   if (hover) {
     setHoverId(fullId)
   }
-  console.log('HOVER', hover, hoverObjects, fullId)
 
   const title = data?.['.']
   const anto = data?.['_']
@@ -187,9 +189,11 @@ function Triangle({
         >
           {title && (
             <div>
-              <div className="triangle-title">
-                {fullId.replace(/\//g, '.')}.{' '}
-                {postProcessTitle(title)}
+              <div
+                id={'triangle-' + fullId.replace(/\//g, '')}
+                className="triangle-title"
+              >
+                {fullId.replace(/\//g, '.')}. {postProcessTitle(title)}
               </div>
 
               {postProcessTitle(anto)
@@ -198,7 +202,6 @@ function Triangle({
                   <div
                     key={index}
                     style={{
-                      fontFamily: 'serif',
                       whiteSpace: 'pre-wrap',
                       overflowWrap: 'break-word',
                     }}

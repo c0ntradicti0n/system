@@ -15,8 +15,8 @@ from regex import regex
 
 from philosopher.llm_update_text import custom_parser, llm_update_text
 from philosopher.llm_update_toc import llm_update_toc
-from philosopher.yaml import (object_to_yaml_str, rec_sort,
-                              single_key_completion)
+from philosopher.yaml_tools import (object_to_yaml_str, rec_sort,
+                                    single_key_completion)
 from server.os_tools import git_auto_commit
 
 load_dotenv()
@@ -67,7 +67,7 @@ def dialectic_triangle(
         pre_set_output_level=preset_output_level,
         exclude=[".git", ".git.md", ".idea"],
         prefix_items=True,
-        depth=3 if task == "text" else 7,
+        depth=100 if task == "text" else 7,
     )
     pprint.pprint(t)
     index = post_process_tree(single_key_completion(object_to_yaml_str(rec_sort(t))))
@@ -202,7 +202,7 @@ def dialectic_triangle(
 
 
 if __name__ == "__main__":
-    for i in range(3):
+    for i in range(10):
         with git_auto_commit(
             config.system_path, commit_message_prefix="Automated TEXT Commit"
         ) as ctx:

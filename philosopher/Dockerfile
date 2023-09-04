@@ -23,7 +23,7 @@ ENV PYTHONIOENCODING=utf-8
 COPY start.sh .
 
 # make the start script executable
-RUN chmod +x start.sh
+RUN chmod +1 start.sh
 
 # run the script immediately and then start cron
 CMD "echo commented out"

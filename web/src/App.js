@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import './App.css'
-import Fractal from './Fractal.tsx'
+import Fractal from './ui/Fractal.tsx'
 const queryClient = new QueryClient()
 function App() {
   const [content, setContent] = useState('')

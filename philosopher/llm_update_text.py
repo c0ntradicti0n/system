@@ -3,16 +3,22 @@ import os
 
 import regex as re
 from helper import get_from_nested_dict
+from llm_update_toc import filter_similar_paths
 
 from philosopher.analyser import without_text
 from philosopher.missing import add_to_missing_in_toc
 
 
 def llm_update_text(toc, kwargs, t, base_path):
-    for where, (path_before, text_before) in without_text(t, base_path, exclude=[]):
+    new_themes = set()
+    for where, (path_before, text_before) in without_text(
+        t, base_path, exclude=["111"]
+    ):
         try:
             themes = [(x, get_from_nested_dict(t, x)) for x in where]
-            themes = [(p, x["."]) if isinstance(x, dict) else (p, x) for p, x in themes]
+            themes = [
+                ((p, x["."]) if isinstance(x, dict) else (p, x)) for p, x in themes
+            ]
         except:
             add_to_missing_in_toc(t, where)
             continue
@@ -26,8 +32,11 @@ def llm_update_text(toc, kwargs, t, base_path):
             continue
 
         if themes:
+            new_themes.update(themes)
+        if len(new_themes) >= 9:
             break
-    topics = "# " + "\n# ".join(f"{p} {t}" for p, t in themes)
+
+    topics = "\n" + "\n".join(("".join(p) + f" {t}") for p, t in sorted(new_themes))
     instruction = (
         """
 You are providing the tex for ONE level of a a dialectical system, emulating Hegel's methodology, where concepts unfold within a fractal structure of triples. Each triple consists of:
@@ -88,8 +97,10 @@ Provide the text for ONE level of the text for the following paths and topics he
 """
         + topics
     )
+    toc = "\n".join(filter_similar_paths([path for path, theme in themes], toc))
+
     prompt = f"""
-        {toc}  
+{toc.strip()}  
         """
     if text_before:
         prompt += f"""
@@ -99,7 +110,7 @@ Provide the text for ONE level of the text for the following paths and topics he
     prompt += f"""
 Now really dive into writing texts about and only about:
 {topics}
-And respect our structural requirements, please. Constrain yourself writing text to the mentioned 4 headings!
+And respect our structural requirements, please. Constrain yourself writing text to the mentioned headings!
 """
     return instruction, prompt
 

@@ -1,15 +1,11 @@
 import logging
 import os
 import pathlib
-import re
 import shlex
 import subprocess
 from enum import Enum
 from functools import total_ordering
 
-from cache import file_based_cache
-from jsonpath_ng import parse
-from Levenshtein import distance
 from regex import regex
 
 
@@ -159,10 +155,7 @@ def get_analogue_from_nested_dict(nested_dict, pivot_keys):
 
     for i in indices:
         keys = pivot_keys[:i] + ["1"]
-        try:
-            r = get_from_nested_dict(nested_dict, keys)
-        except:
-            r = get_from_nested_dict(nested_dict, pivot_keys[:i] + ["."])
+        r = get_from_nested_dict(nested_dict, keys)
 
         if r:
             with e:
@@ -216,21 +209,20 @@ def tree(
     if not pre_set_output_level:
         d = distance(startpath, location, weights=(1000, 1000, 100000))
         visibility = round_school(max(d + info_radius, 0) / 2000)
-        match visibility:
-            case x if x in {
-                0,
-                1,
-                2,
-            }:
-                output_level = OutputLevel.FILE
-            case x if x in {3, 4, 5}:
-                output_level = OutputLevel.FILENAMES
-            case x if x in {6, 7}:
-                output_level = OutputLevel.DIRECTORY
-            case x if x in {8, 9}:
-                output_level = OutputLevel.TOPIC
-            case _:
-                output_level = OutputLevel.TOPIC
+        if visibility in {
+            0,
+            1,
+            2,
+        }:
+            output_level = OutputLevel.FILE
+        elif visibility in {3, 4, 5}:
+            output_level = OutputLevel.FILENAMES
+        elif visibility in {6, 7}:
+            output_level = OutputLevel.DIRECTORY
+        elif visibility in {8, 9}:
+            output_level = OutputLevel.TOPIC
+        else:
+            output_level = OutputLevel.TOPIC
     else:
         output_level = pre_set_output_level
 
@@ -521,6 +513,32 @@ def unique_by_func(lst, func):
             seen.add(key)
             result.append(item)
     return result
+
+
+import json
+
+from haystack import Answer, Span
+
+
+class CustomEncoder(json.JSONEncoder):
+    def default(self, obj):
+        # Handle Answer objects
+        if isinstance(obj, Answer):
+            return {
+                "answer": obj.answer,
+                "type": obj.type,
+                "score": obj.score,
+                "context": obj.context,
+                "offsets_in_document": obj.offsets_in_document,
+                "offsets_in_context": obj.offsets_in_context,
+                "document_ids": obj.document_ids,
+                "meta": obj.meta,
+            }
+        # Handle Span objects
+        elif isinstance(obj, Span):
+            return {"start": obj.start, "end": obj.end}
+        # Let the base class handle any types we don't explicitly handle
+        return super(CustomEncoder, self).default(obj)
 
 
 if __name__ == "__main__":

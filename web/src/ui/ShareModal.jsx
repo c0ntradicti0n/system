@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Modal, Button, Input } from 'antd'
 import { ShareAltOutlined, CopyOutlined } from '@ant-design/icons'
-import { removeMultipleSlashes } from './nesting'
+import { removeMultipleSlashes } from '../lib/nesting'
 
 const ShareModal = ({ linkId }) => {
   const [isVisible, setIsVisible] = useState(false)
@@ -20,6 +20,9 @@ const ShareModal = ({ linkId }) => {
   }
 
   const handleHotkey = (e) => {
+    if (e.target.id === 'search') {
+      return // If it is, exit early and don't process the key event
+    }
     if (e.key === 's') {
       setIsVisible(true)
     }

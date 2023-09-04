@@ -1,0 +1,19 @@
+.grid {
+  position: relative;
+}
+
+.item {
+  display: block;
+  width: 100px;  /* or whatever width you prefer */
+  height: 100px; /* or whatever height you prefer */
+  margin: 5px;
+  z-index: 10000;
+}
+
+.item.muuri-item-dragging {
+  z-index: 30000;
+}
+
+.item.muuri-item-releasing {
+  z-index: 20000;
+}

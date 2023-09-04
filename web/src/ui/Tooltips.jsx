@@ -1,8 +1,8 @@
-import { postProcessTitle } from './position'
+import { postProcessTitle } from '../lib/position'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useQuery } from 'react-query'
 import { Tree } from 'antd'
-import { mergeDeep } from './nesting'
+import { mergeDeep } from '../lib/nesting'
 
 const generateExpandedKeys = (path) => {
   const segments = path.split('-')
@@ -88,8 +88,6 @@ const nestTexts = (path, texts) => {
   if (!texts) return {}
   if (!path) return texts
 
-  console.log(texts)
-
   const keys = path.split('/').filter(Boolean) // Split by '/' and filter out empty strings
   let currentObject = {}
 
@@ -107,14 +105,12 @@ const nestTexts = (path, texts) => {
     }
     return obj[key] // Return the nested object for the next iteration
   }, currentObject)
-  console.log('OBJ', { currentObject })
 
   return currentObject
 }
 
 export const Tooltips = ({ tree: _tree, path, isWindowWide }) => {
   const tree = structuredClone(_tree)
-  console.log(tree)
 
   const [expandedKeys, setExpandedKeys] = useState([])
 
@@ -124,7 +120,6 @@ export const Tooltips = ({ tree: _tree, path, isWindowWide }) => {
       throw new Error('Network response was not ok')
     }
     const newData = await res.json()
-    console.log('got', { newData })
     return newData
   }
 
@@ -135,7 +130,6 @@ export const Tooltips = ({ tree: _tree, path, isWindowWide }) => {
 
   const data = useMemo(() => {
     const nestedTextObject = nestTexts(path, texts)
-    console.log({ nestedTextObject })
 
     return mergeDeep(tree, nestedTextObject)
   }, [path, texts, tree])
@@ -150,7 +144,6 @@ export const Tooltips = ({ tree: _tree, path, isWindowWide }) => {
       path.replace(/^\/+|\/+$/g, '').replace(/\//g, '-') +
       (key ? '-' + key : ''),
   )
-  console.log('ex', paths)
   useEffect(() => {
     const baseKey = path.replace(/^\/+|\/+$/g, '').replace(/\//g, '-')
     const keys = ['', '1', '2', '3'].map(
@@ -164,7 +157,7 @@ export const Tooltips = ({ tree: _tree, path, isWindowWide }) => {
   return (
     <div
       style={{
-        position: 'fixed',
+        position: 'relative',
         top: 0,
         right: isWindowWide ? 0 : 'auto',
         height: isWindowWide ? '100vh' : '30vh',

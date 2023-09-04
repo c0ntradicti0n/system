@@ -131,7 +131,6 @@ export function removeMultipleSlashes(str) {
 
 export function shiftSideways(currentPath, direction) {
   const res = shiftHorizontal(currentPath, direction)
-  console.log(res, currentPath, slashIt(currentPath))
   return res
 }
 

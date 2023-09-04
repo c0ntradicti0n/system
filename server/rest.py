@@ -1,10 +1,12 @@
+import json
 import logging
 import os
 from pprint import pprint
 
 import coloredlogs
 import config
-from flask import Flask, jsonify
+import requests
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_restx import Api, Namespace, Resource
 from helper import OutputLevel, get_from_nested_dict, nested_str_dict, tree
@@ -18,9 +20,13 @@ api = Api(app)
 
 toc = Namespace("toc", description="Logic Fractal TOC operations")
 text = Namespace("text", description="Logic Fractal text operations")
+search = Namespace("search", description="Search operations")
 
 api.add_namespace(toc, path="/api/toc")
 api.add_namespace(text, path="/api/text")
+api.add_namespace(search, path="/api/search")
+
+SECONDARY_BACKEND_URL = "http://service:5000/api/search"
 
 
 @toc.route("/", defaults={"path": ""})
@@ -51,6 +57,8 @@ class LogicFractal(Resource):
 class LogicFractalText(Resource):
     @text.doc("Get text for things")
     def get(self, path):
+        if all(c in "123" for c in path):
+            path = "/".join(path)
         try:
             file_dict = tree(
                 basepath=config.system_path,
@@ -81,6 +89,34 @@ class LogicFractalText(Resource):
         except FileNotFoundError:
             logging.error(f"File not found: {path}", exc_info=True)
             return {"error": "File not found"}, 404
+
+
+@search.route("/")
+class SearchProxy(Resource):
+    @search.doc("Proxy search to a secondary backend service using POST")
+    def post(self):
+        try:
+            # Extract data from incoming POST request
+            data = request.json
+            string_to_search = data.get("string", "")
+
+            print("SEARCH for ", string_to_search)
+
+            # Forward the request to the secondary backend service
+            response = requests.post(f"{SECONDARY_BACKEND_URL}", json=data)
+
+            # Check if the request was successful
+            response.raise_for_status()
+
+            data = json.loads(response.json())
+
+            pprint(data)
+
+            return data, 200
+
+        except requests.RequestException as e:
+            logging.error(f"Request to secondary backend failed: {e}", exc_info=True)
+            return {"error": "Request to secondary backend failed"}, 500
 
 
 if __name__ == "__main__":

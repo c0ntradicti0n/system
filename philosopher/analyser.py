@@ -1,3 +1,4 @@
+import logging
 from collections import Counter, defaultdict
 
 from helper import get_from_nested_dict
@@ -56,13 +57,12 @@ def without_text(t, base_path, exclude):
 
     while stack:
         path, current = stack.pop(0)
-        if any("/".join(path).startswith(e) for e in exclude):
-            continue
 
         for x in [1, 2, 3, "_"]:
             try:
                 if x != "_":
                     path_keys = [*path, x]
+
                     fname = current[x]["."]
                     file_path = (
                         base_path
@@ -71,8 +71,6 @@ def without_text(t, base_path, exclude):
                         + f"/.{fname}"
                     )
                 else:
-                    path_keys = path
-
                     fname = current[x]
                     file_path = (
                         base_path + "/" + "/".join(str(p) for p in path) + f"/_{fname}"
@@ -80,7 +78,12 @@ def without_text(t, base_path, exclude):
 
                 with open(file_path, "r") as f:
                     content = f.read()
-            except:
+            except Exception as e:
+                if any(
+                    "".join(str(p) for p in path_keys).startswith(e) for e in exclude
+                ):
+                    continue
+                logging.error(f"Error reading {file_path}", exc_info=True)
                 add_to_missing_in_toc(t, [path_keys])
                 content = ""
 
@@ -186,8 +189,8 @@ if __name__ == "__main__":
                                 "1": {".": "Integration.md"},
                                 "2": {".": "Differentiation.md"},
                                 "3": {
-                                    "1": {".": "integration of e^x = e^x.md"},
-                                    "2": {".": "d:dx ln(x)=1:x.md"},
+                                    "1": {".": "integration of e^1 = e^1.md"},
+                                    "2": {".": "d:dx ln(1)=1:1.md"},
                                     "3": {
                                         ".": "e for exponents, roots and logarithms.md .md"
                                     },

@@ -1,17 +1,19 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react'
+import React, {useEffect, useRef, useState, useMemo, useCallback} from 'react'
 import { useQuery } from 'react-query'
 import Triangle from './Triangle'
-import { mergeDeep, lookupDeep, shiftIn, shift, slashIt } from './nesting'
+import { mergeDeep, lookupDeep, shiftIn, slashIt } from '../lib/nesting'
 import {
   TransformWrapper,
   TransformComponent,
   ReactZoomPanPinchRef,
 } from 'react-zoom-pan-pinch'
-import { go, beamDataTo } from './navigate'
+import { go, beamDataTo } from '../lib/navigate'
 
+import { PinManager } from './PinManager'
 import { Tooltips } from './Tooltips'
-import { MAX_LEVEL } from './const'
+import { MAX_LEVEL } from '../config/const'
 import { MobileControls } from './MobileControls'
+import { MuuriComponent } from './MuuriComponent'
 
 const maxZoomThreshold = 2
 const minZoomThreshold = 0.6
@@ -22,6 +24,8 @@ const Fractal = ({ setContent }) => {
   const [collectedData, setCollectedData] = useState({})
   const [visualData, setVisualData] = useState(null)
   const [hiddenId, setHiddenId] = useState('')
+  const [searchText, setSearchText] = useState(null)
+
   const [scale, setScale] = useState(null)
   const size =
     window.innerHeight < window.innerWidth
@@ -30,11 +34,22 @@ const Fractal = ({ setContent }) => {
   const left = (window.innerWidth - size) * 0
   const top = (window.innerHeight - size) * 0.6
   const transformComponentRef = useRef<ReactZoomPanPinchRef | null>(null)
+  const transformWrapperRef = useRef(null)
+  const [labels, setLabels] = useState({})
+    const addLabel = useCallback((label) => {
+        labels[label.path] = label
+    }, [labels])
+    const removeLabel = useCallback((label) => {
+        delete labels[label.path]
+    }, [labels])
+
   const [tooltipData, setTooltipData] = useState(null)
   const [isWindowWide, setIsWindowWide] = useState(
     window.innerWidth > window.innerHeight,
   )
   const [hoverId, setHoverId] = useState(null)
+  const [animationClass, setAnimationClass] = useState('')
+
   const params = useMemo(
     () => ({
       hiddenId,
@@ -58,7 +73,6 @@ const Fractal = ({ setContent }) => {
       setDetailId('')
       setTooltipData(parsedId) // Update the tooltipData state
       setInitialPageLoad(false) // Mark that the initial page load logic is done
-      console.log('initial load', { hash, parsedId })
     }
   }, [initialPageLoad]) // Depend on initialPageLoad so that this useEffect runs only once
 
@@ -73,6 +87,35 @@ const Fractal = ({ setContent }) => {
     }
   }, [])
 
+  const searchCall = async () => {
+    try {
+      const response = await fetch('/api/search/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          string: searchText,
+        }),
+      })
+
+      if (!response.ok) {
+        console.error('Network response was not ok', response)
+        return
+      }
+
+      return await response.json()
+    } catch (error) {
+      console.error('Error in making searchCall:', error)
+    }
+  }
+
+  const {
+    data: searchResults,
+    status: statusSearch,
+    error: errorSearch,
+  } = useQuery(['search', searchText], searchCall)
+
   const fetchTree = async () => {
     const id = (hiddenId ?? '') + (detailId ?? '')
     const res = await fetch(`/api/toc/${id}`)
@@ -81,7 +124,6 @@ const Fractal = ({ setContent }) => {
       return
     }
     const newData = await res.json()
-    console.log('fetch TOC', { detailId, res, newData })
 
     const mergedData = mergeDeep(
       collectedData,
@@ -128,13 +170,10 @@ const Fractal = ({ setContent }) => {
         setHiddenId,
         setVisualData,
       )
-      console.log('WHY DIS', newHiddenId)
 
       setDetailId(newHiddenId) // Or set it to another appropriate value.
     }
     if (scale < minZoomThreshold) {
-      console.log(detailId, hoverId)
-
       const [newHiddenId, newRestId] = shiftIn(detailId, hoverId ?? detailId, {
         left: false,
       })
@@ -148,7 +187,6 @@ const Fractal = ({ setContent }) => {
         setHiddenId,
         setVisualData,
       )
-      console.log('WHY DIS', newHiddenId)
       setDetailId(newHiddenId) // Or set it to another appropriate value.
     }
   }, [scale, collectedData, detailId, hoverId])
@@ -162,46 +200,46 @@ const Fractal = ({ setContent }) => {
   }
   const linkId = tooltipData !== '' ? tooltipData : hiddenId
 
-  console.log({
-    ids: {
-      hiddenId,
-      detailId,
-      tooltipData,
-      linkId,
-    },
-  })
+  const triggerAnimation = (searchText) => {
+    setAnimationClass('fallAnimation')
+    const elements = document.querySelectorAll('.react-transform-wrapper')
+    elements.forEach((element) => {
+      element.style.overflow = 'visible'
+    })
+    setSearchText(searchText)
+    setLabels({})
+  }
 
   return (
-    <div
-      className="App"
-      style={{
-        top: '0',
-        width: '100%',
-        height: '100%',
-        overflow: 'hidden',
-      }}
-    >
+    <div className="App" style={{}}>
+      <MuuriComponent labels={labels} />
+      <PinManager pins={searchResults} transformState={transformState}  addLabel={addLabel} removeLabel={removeLabel}/>
+
       <TransformWrapper
+        ref={transformComponentRef}
         style={{ zIndex: 0 }}
         limitToBounds={false}
         maxScale={1000}
+        overFlow="visible"
         minScale={0.01}
-        ref={transformComponentRef}
         onTransformed={(ref) => {
           setTransformState(ref?.instance?.transformState)
           setScale(ref?.instance?.transformState?.scale)
         }}
       >
         {(utils) => (
-          <React.Fragment>
+          <div
+            className={animationClass}
+            style={{ perspectiveOrigin: '0% 0%', top: 0 }}
+          >
             <TransformComponent>
               <div
                 style={{
                   position: 'relative',
                   left,
-                  top,
+                  top: 0,
                   width: isWindowWide && tooltipData ? '70vw' : '100vw',
-                  height: window.innerHeight,
+                  height: '100vh',
                 }}
               >
                 <Triangle
@@ -213,7 +251,6 @@ const Fractal = ({ setContent }) => {
                   top={0}
                   level={MAX_LEVEL}
                   setCurrentId={(id) => {
-                    console.log('TRIANGLE SETTING DETAILID', id)
                     setDetailId(id)
                   }}
                   {...{
@@ -228,9 +265,18 @@ const Fractal = ({ setContent }) => {
                 />
               </div>
             </TransformComponent>
-          </React.Fragment>
+          </div>
         )}
       </TransformWrapper>
+      <div className="right-container">
+<MobileControls
+        triggerSearch={triggerAnimation}
+        onLeft={() => go({ ...params, direction: 'left' })}
+        onZoomIn={() => go({ ...params, direction: 'lower' })}
+        onRight={() => go({ ...params, direction: 'right' })}
+        onZoomOut={() => go({ ...params, direction: 'higher' })}
+        linkId={linkId}
+      />
       {tooltipData && (
         <Tooltips
           tree={collectedData}
@@ -238,13 +284,7 @@ const Fractal = ({ setContent }) => {
           isWindowWide={isWindowWide}
         />
       )}
-      <MobileControls
-        onLeft={() => go({ ...params, direction: 'left' })}
-        onZoomIn={() => go({ ...params, direction: 'lower' })}
-        onRight={() => go({ ...params, direction: 'right' })}
-        onZoomOut={() => go({ ...params, direction: 'higher' })}
-        linkId={linkId}
-      />{' '}
+      </div>
     </div>
   )
 }

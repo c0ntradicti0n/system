@@ -1,69 +1,3 @@
-/*
- * The Typekit service used to deliver this font or fonts for use on websites
- * is provided by Adobe and is subject to these Terms of Use
- * http://www.adobe.com/products/eulas/tou_typekit. For font license
- * information, see the list below.
- *
- * adobe-caslon-pro:
- *   - http://typekit.com/eulas/000000000000000000012d66
- *   - http://typekit.com/eulas/000000000000000000012d69
- *   - http://typekit.com/eulas/000000000000000000012d6a
- *
- * © 2009-2023 Adobe Systems Incorporated. All Rights Reserved.
- */
-/*{"last_published":"2023-07-27 18:35:54 UTC"}*/
-
-@import url('https://p.typekit.net/p.css?s=1&k=ueg1vil&ht=tk&f=8485.8486.8487&a=160953541&app=typekit&e=css');
-
-@font-face {
-  font-family: 'adobe-caslon-pro';
-  src:
-    url('https://use.typekit.net/af/d7062a/000000000000000000012d66/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3')
-      format('woff2'),
-    url('https://use.typekit.net/af/d7062a/000000000000000000012d66/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3')
-      format('woff'),
-    url('https://use.typekit.net/af/d7062a/000000000000000000012d66/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3')
-      format('opentype');
-  font-display: auto;
-  font-style: italic;
-  font-weight: 700;
-  font-stretch: normal;
-}
-
-@font-face {
-  font-family: 'adobe-caslon-pro';
-  src:
-    url('https://use.typekit.net/af/68efc1/000000000000000000012d69/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3')
-      format('woff2'),
-    url('https://use.typekit.net/af/68efc1/000000000000000000012d69/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3')
-      format('woff'),
-    url('https://use.typekit.net/af/68efc1/000000000000000000012d69/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3')
-      format('opentype');
-  font-display: auto;
-  font-style: normal;
-  font-weight: 600;
-  font-stretch: normal;
-}
-
-@font-face {
-  font-family: 'adobe-caslon-pro';
-  src:
-    url('https://use.typekit.net/af/8c23a7/000000000000000000012d6a/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i6&v=3')
-      format('woff2'),
-    url('https://use.typekit.net/af/8c23a7/000000000000000000012d6a/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i6&v=3')
-      format('woff'),
-    url('https://use.typekit.net/af/8c23a7/000000000000000000012d6a/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i6&v=3')
-      format('opentype');
-  font-display: auto;
-  font-style: italic;
-  font-weight: 600;
-  font-stretch: normal;
-}
-
-.tk-adobe-caslon-pro {
-  font-family: 'adobe-caslon-pro', serif;
-}
-
 .App {
   text-align: center;
 
@@ -75,7 +9,6 @@
   width: 100vw;
   color: white;
   font-weight: bold;
-  font-family: adobe-caslon-pro;
 }
 
 .App > * {
@@ -120,6 +53,25 @@
   height: 100%;
 }
 
+@keyframes fallToGround {
+  from {
+    transform: perspective(1000px) rotateX(0deg);
+  }
+  to {
+    transform: perspective(1000px) rotateX(45deg) skewY(0deg);
+  }
+}
+
+.fallAnimation {
+  transform-origin: 50% 90%; /* 50% horizontally (center), 100% vertically (bottom) */
+
+  animation: fallToGround 1s forwards; /* 1 second duration, animation only plays once and stops at the final state */
+}
+
+.react-transform-wrapper .react-transform-component {
+  overflow: visible !important;
+}
+
 .triangle {
   white-space: pre-wrap;
   white-space: -moz-pre-wrap;
@@ -135,11 +87,69 @@
     transform 0.3s ease;
 }
 
-.mobile-controls {
+.pin {
+  width: 0;
+  height: 0;
+  position: absolute;
+  z-index: 999999;
+}
+
+.pin-content {
+  bottom: 0;
+  position: absolute;
+}
+
+.pin-line {
+  left: 0;
+  top: 0;
+  background-color: lawngreen;
+  width: 3px;
+  height: auto; /* Will adjust based on content */
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pin-bulb {
+  width: 5px;
+  height: 5px;
+  background-color: black;
+  border-radius: 50%;
+  margin-top: 5px; /* Separation between bulb and text */
+}
+.pin-labels {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.pin-text {
+  background-color: white;
+  border: 2px solid #333;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  color: #1b1b1b;
+  text-align: center;
+  width: 100px;
+}
+
+
+.right-container {
+  display: flex;
+    justify-content: space-between; /* Spacing out the controls */
+  align-items: center; /* Vertically centering items */
   position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  z-index: 99999998;
+}
+.mobile-controls {
   top: 50%;
-  width: 10%;
-  left: 50%; /* Assuming you want it to cover the whole viewport height */
+  width: 20vw;
   display: flex;
   justify-content: center; /* Center items horizontally */
   align-items: center; /* Center items vertically */
@@ -164,29 +174,46 @@
   background: #555; /* Or any desired hover color */
 }
 
+.top-search,
 .left-controls,
 .right-controls,
 .top-controls,
 .bottom-controls {
   position: absolute; /* Absolute positioning to set exact position of each button */
+    z-index: 999999999; /* Adjust this value as needed so it's less than .top-search but more than the Tooltips */
+
+}
+
+.top-search {
+  top: 5%;
+  width: 13vw;
+  z-index: 999999999999;
+}
+
+#search {
+  background-color: rgba(0, 0, 0, 0);
+  font:
+    bolder 12px Helvetica,
+    Verdana,
+    sans-serif;
+  color: antiquewhite;
 }
 
 .left-controls {
-  left: calc(
-    50% - 60px
-  ); /* Centered horizontally minus half of the space for two buttons and their space */
+  transform: translateX(40px);
 }
 
 .right-controls {
-  right: calc(50% - 60px);
+  transform: translateX(-40px);
 }
 
 .top-controls {
-  top: calc(50% - 60px);
+transform: translateY(-40px);
 }
 
 .bottom-controls {
-  bottom: calc(50% - 60px);
+transform: translateY(40px);
+
 }
 
 @keyframes copiedAnimation {

@@ -14,7 +14,7 @@ def llm_update_toc(toc, kwargs, t):
         paths_to_fill = pathlib.Path(
             os.environ.get("MISSING_CHAPTERS", "missing.txt")
         ).read_text()
-        paths_to_fill = [(p, "") for p in paths_to_fill.split("\n") if p][:5]
+        paths_to_fill = [p for p in paths_to_fill.split("\n") if p][:5]
     else:
         paths_to_fill = [
             create_path(p)
@@ -50,7 +50,7 @@ def llm_update_toc(toc, kwargs, t):
         lambda x: str(x[0]),
     )
     analogies = "\n".join("".join(l) + f" {a}" for l, a in analogs).replace(".md", "")
-    paths_to_fill = [p for p in paths_to_fill if not p.startswith("11")]
+    # paths_to_fill = [p for p in paths_to_fill if not p.startswith("11")]
 
     instruction = (
         """
@@ -107,25 +107,11 @@ So, please dump all your knowledge accurately about """
         + " and ".join(topics)
     )
 
-    toc_lines = []
-    for l in toc.split("\n"):
-        lp = regex.match(r"^\d*", l).group(0)
-        for pf in paths_to_fill:
-            c = max(len(pf), len(lp))
-            depth_score = sum(
-                [
-                    (lp[i] == pf[i]) * (c - i)
-                    for i in range(c)
-                    if i < len(lp) and i < len(pf)
-                ]
-            )
-            min_score = len(pf) * 1.5
-
-            if (depth_score > min_score or len(lp) < 2) and len(lp) < len(pf) + 2:
-                toc_lines.append(l)
-                break
+    toc_lines = filter_similar_paths(paths_to_fill, toc)
 
     toc = "\n".join(toc_lines)
+    if not toc:
+        raise Exception("No toc lines found")
 
     prompt = (
         f"""
@@ -151,3 +137,24 @@ Respect that it should work on analogies resembling the following topics"""
         )
     )
     return instruction, prompt
+
+
+def filter_similar_paths(paths_to_fill, toc):
+    toc_lines = []
+    for l in toc.split("\n"):
+        lp = regex.match(r"^\d*", l).group(0)
+        for pf in paths_to_fill:
+            c = max(len(pf), len(lp))
+            depth_score = sum(
+                [
+                    (lp[i] == pf[i]) * (c - i)
+                    for i in range(c)
+                    if i < len(lp) and i < len(pf)
+                ]
+            )
+            min_score = len(pf) * 3
+
+            if (depth_score > min_score or len(lp) < 2) and len(lp) < len(pf) + 2:
+                toc_lines.append(l)
+                break
+    return toc_lines
