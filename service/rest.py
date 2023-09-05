@@ -33,7 +33,8 @@ class SearchProxy(Resource):
             # Extract data from incoming POST request
             data = request.json
             string_to_search = data.get("string", "")
-
+            if not string_to_search:
+                return json.dumps([]), 200
             print("SEARCH for ", string_to_search)
 
             # Forward the request to the secondary backend service

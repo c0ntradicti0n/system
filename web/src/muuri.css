@@ -1,19 +1,35 @@
 .grid {
   position: relative;
+  /* Control the height manually */
+  /* In this case we limit it to two rows */
+  height: 420px !important;
+  width: 100vw !important;
 }
-
 .item {
-  display: block;
-  width: 100px;  /* or whatever width you prefer */
-  height: 100px; /* or whatever height you prefer */
+  width: 200px;
+  height: 100px;
   margin: 5px;
-  z-index: 10000;
+  z-index: 1;
 }
-
-.item.muuri-item-dragging {
-  z-index: 30000;
+.item.muuri-item-hidden {
+  z-index: 0;
 }
-
 .item.muuri-item-releasing {
-  z-index: 20000;
+  z-index: 2;
+}
+.item.muuri-item-dragging {
+  z-index: 3;
+}
+.item-content {
+  width: 100%;
+  height: 100%;
+  background: dodgerblue;
+  color: white;
+  cursor: pointer;
+}
+.item.muuri-item-dragging .item-content {
+  background: blue;
+}
+.item.muuri-item-releasing .item-content {
+  background: blueViolet;
 }

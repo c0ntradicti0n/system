@@ -100,6 +100,9 @@ class SearchProxy(Resource):
             data = request.json
             string_to_search = data.get("string", "")
 
+            if not string_to_search:
+                return [], 200
+
             print("SEARCH for ", string_to_search)
 
             # Forward the request to the secondary backend service

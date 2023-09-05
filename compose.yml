@@ -80,7 +80,9 @@ services:
       HOST: $HOST
       SYSTEM: /system
       PYTHONIOENCODING: utf-8
-      HAYSTACK_TELEMETRY_ENABLED: False
+      HAYSTACK_TELEMETRY_ENABLED: "False"
+      HF_HUB_DISABLE_TELEMETRY: True
+      DISABLE_TELEMETRY: True
     volumes:
       - "$SYSTEM:/system"
       - "./service:/flask_app"

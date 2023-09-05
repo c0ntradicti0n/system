@@ -1,5 +1,4 @@
-const path = require('path');
-
+const path = require('path')
 
 module.exports = {
   jest: {
@@ -12,18 +11,22 @@ module.exports = {
       ],
     },
   },
-   webpack: {
-        configure: (webpackConfig) => {
-            // Add the custom loader rule to the existing Webpack config.
-            webpackConfig.module.rules.push({
-                test: path.resolve(__dirname, 'node_modules/leader-line/'),
-                use: [{
-                    loader: 'skeleton-loader',
-                    options: { procedure: content => `${content}export default LeaderLine` }
-                }]
-            });
+  webpack: {
+    configure: (webpackConfig) => {
+      // Add the custom loader rule to the existing Webpack config.
+      webpackConfig.module.rules.push({
+        test: path.resolve(__dirname, 'node_modules/leader-line/'),
+        use: [
+          {
+            loader: 'skeleton-loader',
+            options: {
+              procedure: (content) => `${content}export default LeaderLine`,
+            },
+          },
+        ],
+      })
 
-            return webpackConfig;
-        }
-    }
+      return webpackConfig
+    },
+  },
 }

@@ -27,6 +27,7 @@ export function getTopPosition(index, parentSize) {
 export function isElementInViewportAndBigAndNoChildren(el, data) {
   var rect = el.getBoundingClientRect()
 
+  if (!rect) return false
   return (
     rect.top >= 0 &&
     rect.left >= 0 &&

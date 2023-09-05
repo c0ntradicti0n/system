@@ -1,50 +1,125 @@
-import React, { useEffect, useRef } from 'react';
-import Muuri from 'muuri';
-import '../muuri.css';
+import React, { useEffect, useRef } from 'react'
+import Muuri from 'muuri'
+import '../muuri.css'
+import LeaderLine from 'leader-line'
 
-const MuuriComponent = ({ labels }) => {
-  const gridRef = useRef(null);
+function try_to_find_start_end(triangleId, labelId) {
+  let currentId = triangleId
+  let end
+
+  while (currentId.length > 0) {
+    end = document.getElementById(currentId)
+    if (end) {
+      break // We've found an element that matches the ID
+    }
+    currentId = currentId.slice(0, -1) // Strip the last character
+  }
+  const start = document.getElementById(labelId)
+  console.log({ start, end }, { labelId, triangleId, currentId })
+  return { end, start }
+}
+
+function createLine(triangleId, labelId) {
+  let { end, start } = try_to_find_start_end(triangleId, labelId)
+  if (!start || !end) return
+  const line = new LeaderLine(start, end, {
+    color: 'lawngreen',
+    size: 4,
+    endPlugSize: 1.5,
+    dash: { animation: true },
+    startSocket: 'right',
+    endSocket: 'top',
+  })
+
+  return line
+}
+
+const MuuriComponent = ({ labels, setHiddenId, onScroll }) => {
+  const [lines, setLines] = React.useState([])
+  const gridRef = useRef(null)
 
   useEffect(() => {
+    if (!gridRef.current) return
     const grid = new Muuri(gridRef.current, {
   dragEnabled: true,
-  layout: {
-    fillGaps: true,
-  },
-  dragSortInterval: 50,
-  dragStartPredicate: {
-    distance: 8,
-    delay: 0,
-    handle: '.item'
-  }
-});
+  layout: { horizontal: true, alignRight: true }
+    })
 
     // Clean up Muuri instance when component unmounts
     return () => {
-      grid.destroy();
-    };
-  }, []);
+      grid.destroy()
+    }
+  }, [gridRef])
+
+  useEffect(() => {
+    if (!labels) return
+    setTimeout(() => {
+      setLines(
+        labels.map((value) => {
+          const labelId =
+            'pin-label-' + value.path.replace(/\//g, '').replace('.', '')
+          const triangleId =
+            'triangle-' + value.path.replace(/\//g, '').replace('.', '')
+          return [triangleId, labelId, createLine(triangleId, labelId)]
+        }),
+      )
+    }, '1 second')
+  }, [labels])
+
+  useEffect(() => {
+    const definedLseni = lines.filter(([triangleId, labelId, line]) => line)
+    if (definedLseni && definedLseni.length !== lines.length)
+      setLines(definedLseni)
+
+    return () => lines.forEach(([triangleId, labelId, line]) =>
+    {try {
+            line?.remove()
+        } catch (e) {
+
+    }})
+  }, [lines])
+
+  console.log(lines)
+
+  lines.forEach(([triangleId, labelId, line]) => {
+    const { start, end } = try_to_find_start_end(triangleId, labelId)
+    if (!start || !end) {
+      try {
+        line.remove()
+      } catch (e) {}
+    }
+
+    try {
+      line?.position()
+    } catch (e) {}
+  })
+  if (!labels) return null
 
   return (
     <div ref={gridRef} className="grid">
-      {Object.entries(labels)
-          .sort( (a, b) => a[0].localeCompare(b[0])).reverse()
-          .map(([key, value]) => {
+      {labels.map((value) => {
+        const labelId =
+          'pin-label-' + value.path.replace(/\//g, '').replace('.', '')
         return (
           <div
-            key={key}
-            id={"pin-label-" + key.replace(/\//g, "").replace(".", "")}
-            className="item pin-text"
-            onClick={value.createLine()}
-          > {
-            value.path
-          }<br />
-            {value.answer.answer}
+            key={labelId}
+            id={labelId}
+            className="item "
+            onClick={() => {
+              setHiddenId(value.path)
+            }}
+          >
+            <div className="item-content">
+            {' '}
+            {value.path.replace(/\//g, '')}
+            <br />
+            {value.answer ?? value.content}
+              </div>
           </div>
-        );
+        )
       })}
     </div>
-  );
-};
+  )
+}
 
-export{ MuuriComponent}
+export { MuuriComponent }

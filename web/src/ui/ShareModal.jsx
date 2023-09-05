@@ -6,7 +6,7 @@ import { removeMultipleSlashes } from '../lib/nesting'
 const ShareModal = ({ linkId }) => {
   const [isVisible, setIsVisible] = useState(false)
   const [isCopied, setIsCopied] = useState(false)
-  console.log(linkId)
+
   const fullUrl =
     `${window.location.protocol}//` +
     removeMultipleSlashes(`${window.location.host}#${linkId}`)
@@ -44,7 +44,7 @@ const ShareModal = ({ linkId }) => {
       />
       <Modal
         title="Share this URL"
-        visible={isVisible}
+        open={isVisible}
         onCancel={() => setIsVisible(false)}
         footer={null}
         centered

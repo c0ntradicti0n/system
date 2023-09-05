@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState, useMemo, useCallback} from 'react'
+import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react'
 import { useQuery } from 'react-query'
 import Triangle from './Triangle'
 import { mergeDeep, lookupDeep, shiftIn, slashIt } from '../lib/nesting'
@@ -9,7 +9,6 @@ import {
 } from 'react-zoom-pan-pinch'
 import { go, beamDataTo } from '../lib/navigate'
 
-import { PinManager } from './PinManager'
 import { Tooltips } from './Tooltips'
 import { MAX_LEVEL } from '../config/const'
 import { MobileControls } from './MobileControls'
@@ -17,6 +16,13 @@ import { MuuriComponent } from './MuuriComponent'
 
 const maxZoomThreshold = 2
 const minZoomThreshold = 0.6
+
+function makeNoHorizon() {
+  const elements = document.querySelectorAll('.react-transform-wrapper')
+  elements.forEach((element) => {
+    element.style.overflow = 'visible'
+  })
+}
 
 const Fractal = ({ setContent }) => {
   const [detailId, setDetailId] = useState(null)
@@ -34,14 +40,6 @@ const Fractal = ({ setContent }) => {
   const left = (window.innerWidth - size) * 0
   const top = (window.innerHeight - size) * 0.6
   const transformComponentRef = useRef<ReactZoomPanPinchRef | null>(null)
-  const transformWrapperRef = useRef(null)
-  const [labels, setLabels] = useState({})
-    const addLabel = useCallback((label) => {
-        labels[label.path] = label
-    }, [labels])
-    const removeLabel = useCallback((label) => {
-        delete labels[label.path]
-    }, [labels])
 
   const [tooltipData, setTooltipData] = useState(null)
   const [isWindowWide, setIsWindowWide] = useState(
@@ -189,6 +187,8 @@ const Fractal = ({ setContent }) => {
       )
       setDetailId(newHiddenId) // Or set it to another appropriate value.
     }
+
+    makeNoHorizon()
   }, [scale, collectedData, detailId, hoverId])
 
   if (status === 'loading') {
@@ -202,19 +202,15 @@ const Fractal = ({ setContent }) => {
 
   const triggerAnimation = (searchText) => {
     setAnimationClass('fallAnimation')
-    const elements = document.querySelectorAll('.react-transform-wrapper')
-    elements.forEach((element) => {
-      element.style.overflow = 'visible'
-    })
+    makeNoHorizon()
     setSearchText(searchText)
-    setLabels({})
   }
 
   return (
     <div className="App" style={{}}>
-      <MuuriComponent labels={labels} />
-      <PinManager pins={searchResults} transformState={transformState}  addLabel={addLabel} removeLabel={removeLabel}/>
-
+      <div style={{position: "absolute", width:0, height:0, top: 0}}>
+        <MuuriComponent labels={searchResults} setHiddenId={setHiddenId} />
+      </div>
       <TransformWrapper
         ref={transformComponentRef}
         style={{ zIndex: 0 }}
@@ -269,21 +265,21 @@ const Fractal = ({ setContent }) => {
         )}
       </TransformWrapper>
       <div className="right-container">
-<MobileControls
-        triggerSearch={triggerAnimation}
-        onLeft={() => go({ ...params, direction: 'left' })}
-        onZoomIn={() => go({ ...params, direction: 'lower' })}
-        onRight={() => go({ ...params, direction: 'right' })}
-        onZoomOut={() => go({ ...params, direction: 'higher' })}
-        linkId={linkId}
-      />
-      {tooltipData && (
-        <Tooltips
-          tree={collectedData}
-          path={tooltipData !== '' ? tooltipData : hiddenId}
-          isWindowWide={isWindowWide}
+        <MobileControls
+          triggerSearch={triggerAnimation}
+          onLeft={() => go({ ...params, direction: 'left' })}
+          onZoomIn={() => go({ ...params, direction: 'lower' })}
+          onRight={() => go({ ...params, direction: 'right' })}
+          onZoomOut={() => go({ ...params, direction: 'higher' })}
+          linkId={linkId}
         />
-      )}
+        {tooltipData && (
+          <Tooltips
+            tree={collectedData}
+            path={tooltipData !== '' ? tooltipData : hiddenId}
+            isWindowWide={isWindowWide}
+          />
+        )}
       </div>
     </div>
   )

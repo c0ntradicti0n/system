@@ -36,5 +36,7 @@ RUN ls -la /flask_app
 ENV PYTHONIOENCODING=utf-8
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
+ENV HAYSTACK_TELEMETRY_ENABLED="False"
+
 
 CMD ["python", "rest.py"]

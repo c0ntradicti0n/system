@@ -1,0 +1,12 @@
+coloredlogs
+Flask
+flask_restx
+transformers
+python-dotenv
+sentencepiece
+protobuf
+einops
+cython
+pyyaml
+farm-haystack[inference]
+ruamel.yaml
