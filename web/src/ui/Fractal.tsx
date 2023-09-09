@@ -138,6 +138,7 @@ const Fractal = ({ setContent }) => {
     data: searchResults,
     status: statusSearch,
     error: errorSearch,
+
   } = useQuery(['search', searchText], searchCall)
 
   const fetchTree = async () => {
@@ -235,7 +236,7 @@ const Fractal = ({ setContent }) => {
   return (
     <div className="App" style={{}}>
       <div style={{position: "absolute", width:0, height:0, top: 0}}>
-        <MuuriComponent labels={searchResults} setHiddenId={setHiddenId} />
+          {searchResults ? <MuuriComponent labels={searchResults} setHiddenId={setHiddenId} /> : null}
       </div>
       <TransformWrapper
         ref={transformComponentRef}
@@ -298,6 +299,7 @@ const Fractal = ({ setContent }) => {
           onRight={() => go({ ...params, direction: 'right' })}
           onZoomOut={() => go({ ...params, direction: 'higher' })}
           linkId={linkId}
+          isWindowWide={isWindowWide}
         />
         {tooltipData && (
           <Tooltips

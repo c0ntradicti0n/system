@@ -10,6 +10,7 @@ export const MobileControls = ({
   onRight,
   onZoomOut,
   linkId,
+    isWindowWide
 }) => {
   const [searchText, setSearchText] = useState('')
   useEffect(() => {
@@ -43,9 +44,10 @@ export const MobileControls = ({
     }
   }, [onLeft, onRight, onZoomIn, onZoomOut])
 
+    const mobileStyles = {left: 50, top: 50, position: "fixed"}
   return (
-    <div className="mobile-controls">
-      <div className="top-search">
+    <div className="mobile-controls" style={{}}>
+      <div className="top-search" style={{right: isWindowWide ? undefined: "20px"}}>
         <Input.TextArea
           id="search"
           value={searchText}
@@ -57,11 +59,9 @@ export const MobileControls = ({
           type="primary"
           icon={<SearchOutlined />}
           onClick={() => triggerSearch(searchText)}
-        >
-          Search
-        </Button>
+        />
       </div>
-
+        <div className="navigation-controls" style={mobileStyles}>
       <button
         onClick={onZoomIn}
         className="button top-controls"
@@ -78,7 +78,6 @@ export const MobileControls = ({
       >
         ←
       </button>
-      <ShareModal linkId={linkId} />
 
       <button
         onClick={onRight}
@@ -96,6 +95,9 @@ export const MobileControls = ({
       >
         ↓
       </button>
+                  <ShareModal linkId={linkId} />
+
+        </div>
     </div>
   )
 }

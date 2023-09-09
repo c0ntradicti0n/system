@@ -45,7 +45,7 @@ function createLine(start, end) {
       color: 'lawngreen',
       size: 2,
       endPlugSize: 1.5,
-      startSocket: 'right',
+      startSocket: 'bottom',
       endSocket: 'top',
   })
 }

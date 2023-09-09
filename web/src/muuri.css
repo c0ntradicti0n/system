@@ -2,12 +2,14 @@
   position: relative;
   /* Control the height manually */
   /* In this case we limit it to two rows */
-  height: 420px !important;
-  width: 100vw !important;
+  height: 160px !important;
+  width: 70vw !important;
+  left: 150px
 }
 .item {
-  width: 200px;
-  height: 100px;
+  position: absolute;
+  width: 90px;
+  height: 140px;
   margin: 5px;
   z-index: 1;
 }
@@ -15,12 +17,13 @@
   z-index: 0;
 }
 .item.muuri-item-releasing {
-  z-index: 2;
+  z-index: 20;
 }
 .item.muuri-item-dragging {
-  z-index: 3;
+  z-index: 30;
 }
 .item-content {
+  font: 10px serif;
   width: 100%;
   height: 100%;
   background: dodgerblue;

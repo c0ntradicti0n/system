@@ -70,10 +70,10 @@ pipe = p_ensemble
 def main(string):
     prediction = pipe.run(
         query=string,
-        params={"BM25Retriever": {"top_k": 5}},
+        params={"BM25Retriever": {"top_k": 3}},
     )
     print(f"{string=},{prediction=}")
-    return [
+    return list(sorted( [
         {
             "content": d.content[:100],
             "answer": d.anwswer if hasattr(d, "answer") else None,
@@ -87,4 +87,4 @@ def main(string):
             .strip("/"),
         }
         for d in prediction["documents"]
-    ]
+    ], key=lambda x: x["path"]))

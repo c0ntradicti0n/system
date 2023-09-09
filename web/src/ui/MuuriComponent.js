@@ -4,18 +4,21 @@ import '../muuri.css'
 import {Pin} from "./Pin";
 
 
-const MuuriComponent = ({ labels, setHiddenId, onScroll }) => {
+const MuuriComponent = ({ labels, setHiddenId }) => {
+  console.log(labels)
   const gridRef = useRef(null);
 
   useEffect(() => {
     if (!gridRef.current) return;
     const grid = new Muuri(gridRef.current, {
       dragEnabled: true,
-      layout: { horizontal: true, alignRight: true },
+      layout: { horizontal: true },
+      rounding: true,
+      width: 1000,
     });
 
     return () => grid.destroy();
-  }, [gridRef]);
+  }, [gridRef, labels]);
 
   if (!labels) return null;
 
