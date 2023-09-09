@@ -60,3 +60,9 @@ jobs:
               make start
           '
 
+      - name: fetch-system
+        run: |
+          ssh staging '   
+              cd dialectics
+              git pull
+          '

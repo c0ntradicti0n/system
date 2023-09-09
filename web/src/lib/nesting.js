@@ -119,10 +119,7 @@ export function shiftVertical(inputPath, direction) {
 }
 
 export function slashIt(currentPath) {
-  let str = currentPath.replace(/^\/+|\/+$/g, '')
-
-  // Replace consecutive slashes with a single slash
-  str = str.replace(/\/+/g, '/')
+  const str = currentPath.replace(/\/+/g, '')
   return str.split('').join('/')
 }
 export function removeMultipleSlashes(str) {

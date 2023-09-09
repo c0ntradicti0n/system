@@ -13,7 +13,7 @@ export function beamDataTo(
 ) {
   const newData = lookupDeep(newHiddenId, collectedData)
   setHiddenId(newHiddenId || '')
-  transformComponentRef.current.setTransform(0, 0, 1, 0, 0)
+  transformComponentRef.current?.setTransform(0, 0, 1, 0, 0)
   setVisualData(newData)
 }
 

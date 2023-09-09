@@ -2,6 +2,8 @@ import os.path
 import pathlib
 
 import regex
+
+from compare import weighted_fuzzy_compare
 from helper import (get_analogue_from_nested_dict, get_from_nested_dict,
                     unique_by_func)
 
@@ -70,9 +72,33 @@ dialectic triple, thereby triggering the formation of the next triple. This self
 expresses ideas like 'minus * minus = plus', or 'the disappearance of disappearance is existence.') (_)
 
 There is also this constraint: 
-The fractal lives from semantic analogies, every subtopic from [1-3]*1 should mirror the topics in [1-3]*2 by ANALOGY (as far as possible) Please respect this, therefore you are given example other entries, that differ in editdistance 2. 
+The fractal lives from semantic analogies, every subtopic from [1-3]*1 should mirror the topics in [1-3]*2 by 
+ANALOGY (as far as possible). Please respect this, therefore you are given example other entries, that might correspond.
 
-Respect, that it moves from the most abstract to the most concrete concepts when moving deeper into the nesting and horizontally it moves by the defining other concepts by first treating the ingredients and then the complexities of those.
+Respect, that it moves from the most abstract to the most concrete concepts when moving deeper into the nesting 
+and horizontally it moves by the defining other concepts by first treating the ingredients and then the complexities 
+of those. Another Note on categorization: The fractal has to conquer the realm of overlapping categories. Feelings might be
+ "happy" and "sad" as bigger categories and "joyful" and "depressed" might appear as sub-categories or 
+ rather side-categories, this is out preferred approach.
+ This means instead of 
+ 
+11 happy
+111 joyful
+12 sad
+121 depressed
+
+we would like to organize it like this:
+
+111 happy
+112 sad
+121 joyful
+122 depressed
+
+So the most basic category opens the field and gets mirrored by the other categories and dividing up all opposites 
+inside a nesting.
+
+Also respect, that we handle the concepts as "ideals" and daily politics and doubts are not the topic here, if something
+needs to be changed, it should be changed, there must not be a hint, that something might not be right.
 
 You'll work with a representation reflecting your current progress. Each unit is addressed via a key as "13221." 
 for the thesis in "1322".
@@ -98,8 +124,13 @@ Thus your output should be a list with a syntax like this:
         + "\n".join([e for f in features if (e := f(**kwargs).example())])
         + """
 
-Don't be audacious and dont just change the series of words in one title, keep it as simple as possible, avoid repetitions in titles, the simplest words are the best and less words is more content. Be enormously precise with your answers and the keys, every wrong path causes chaos and will kill the whole project.
-Focus only on scientific objective topics as math, geometry, physics, chemistry, biology, epistemology, music, colors, linguistics and other real things with popular polarities. Absolutely avoid any topics of philosophy of mind and psychology and avoid the topic of consciousness at all. Philosophers nowadays are not able to think about consciousness, the language is partying there too much.
+Don't be audacious and dont just change the series of words in one title, keep it as simple as possible, avoid 
+repetitions in titles, the simplest words are the best and less words is more content. Be enormously precise 
+with your answers and the keys, every wrong path causes chaos and will kill the whole project.
+Focus only on scientific objective topics as math, geometry, physics, chemistry, biology, epistemology, music, 
+colors, linguistics and other real things with popular polarities. Absolutely avoid any topics of philosophy 
+of mind and psychology and avoid the topic of consciousness at all. Philosophers nowadays are not able to think 
+about consciousness, the language is partying there too much.
 Focus on a top-down approach to get to some more systematic dialectical structure; first all upper levels, then the lower levels.
 Focus on completeness of the fractal, please fill up all incomplete triples, rather add new triples than improving existing ones.
 
@@ -139,22 +170,38 @@ Respect that it should work on analogies resembling the following topics"""
     return instruction, prompt
 
 
-def filter_similar_paths(paths_to_fill, toc):
-    toc_lines = []
-    for l in toc.split("\n"):
-        lp = regex.match(r"^\d*", l).group(0)
-        for pf in paths_to_fill:
-            c = max(len(pf), len(lp))
-            depth_score = sum(
-                [
-                    (lp[i] == pf[i]) * (c - i)
-                    for i in range(c)
-                    if i < len(lp) and i < len(pf)
-                ]
-            )
-            min_score = len(pf) * 3
+def filter_similar_paths(paths_to_fill, toc, target_count=100, precision=0.05):
+    lower_bound = 0.0
+    upper_bound = 1.0
+    threshold = 0.6  # starting threshold
 
-            if (depth_score > min_score or len(lp) < 2) and len(lp) < len(pf) + 2:
+    while True:
+        toc_lines = []
+
+        for l in toc.split("\n"):
+            lp = regex.match(r"^\d*", l).group(0)
+            if len(lp) < 3:
                 toc_lines.append(l)
-                break
-    return toc_lines
+            for pf in paths_to_fill:
+                if weighted_fuzzy_compare(lp, pf, threshold)[0]:
+                    toc_lines.append(l)
+                    break
+
+        count = len(toc_lines)
+
+        if abs(count - target_count) <= precision * target_count:  # Stop if close enough
+            return toc_lines
+
+        if count > target_count:
+            # Too many lines. Increase threshold.
+            new_threshold = threshold + (upper_bound - threshold) / 3
+            lower_bound = threshold
+        else:
+            # Too few lines. Decrease threshold.
+            new_threshold = threshold - (threshold - lower_bound) / 3
+            upper_bound = threshold
+
+        if abs(new_threshold - threshold) < 0.0000001:  # Prevent infinite loop by having a minimum difference
+            return toc_lines
+
+        threshold = new_threshold

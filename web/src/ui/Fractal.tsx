@@ -25,11 +25,29 @@ function makeNoHorizon() {
 }
 
 const Fractal = ({ setContent }) => {
-  const [detailId, setDetailId] = useState(null)
+  const [detailId, _setDetailId] = useState(null)
   const [transformState, setTransformState] = useState(null)
   const [collectedData, setCollectedData] = useState({})
   const [visualData, setVisualData] = useState(null)
-  const [hiddenId, setHiddenId] = useState('')
+  const [hiddenId, _setHiddenId] = useState('')
+  const setHiddenId = useCallback(
+    (id) => {
+      // replace multiple slashes with a single slash
+        id = slashIt(id)
+      _setHiddenId(id)
+    },
+    [_setHiddenId],
+  )
+    const setDetailId = useCallback(
+        (id) => {
+            // replace multiple slashes with a single slash
+            id = slashIt(id)
+            _setDetailId(id)
+        },
+        [_setDetailId],
+    )
+
+
   const [searchText, setSearchText] = useState(null)
 
   const [scale, setScale] = useState(null)
@@ -45,7 +63,15 @@ const Fractal = ({ setContent }) => {
   const [isWindowWide, setIsWindowWide] = useState(
     window.innerWidth > window.innerHeight,
   )
-  const [hoverId, setHoverId] = useState(null)
+  const [hoverId, _setHoverId] = useState(null)
+  const setHoverId = useCallback(
+    (id) => {
+      // replace multiple slashes with a single slash
+      id = slashIt(id)
+      _setHoverId(id)
+    },
+    [_setHoverId],
+  )
   const [animationClass, setAnimationClass] = useState('')
 
   const params = useMemo(
@@ -278,6 +304,7 @@ const Fractal = ({ setContent }) => {
             tree={collectedData}
             path={tooltipData !== '' ? tooltipData : hiddenId}
             isWindowWide={isWindowWide}
+            setTooltipData={setTooltipData}
           />
         )}
       </div>

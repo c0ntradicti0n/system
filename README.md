@@ -1,4 +1,5 @@
 # `System` - ChatGPT`s understanding of Hegels dialectic
+## "FractalVerse" - a fractalized verse of the universe
 
 I instructed ChatGPT to continuously update a data-structure to imitate [G.W.F. Hegel](https://en.wikipedia.org/wiki/Georg_Wilhelm_Friedrich_Hegel)
 

@@ -10,7 +10,7 @@ def analyse_toc(tree, exclude):
     stack = [((), tree)]
     len_counter = defaultdict(list)
     while stack:
-        path, current = stack.pop()
+        path, current = stack.pop(0)
         keys = "".join([str(p) for p in path])
 
         for x in [1, 2, 3, "_"]:

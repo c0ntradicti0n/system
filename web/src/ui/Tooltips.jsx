@@ -109,7 +109,7 @@ const nestTexts = (path, texts) => {
   return currentObject
 }
 
-export const Tooltips = ({ tree: _tree, path, isWindowWide }) => {
+export const Tooltips = ({ tree: _tree, path, isWindowWide, setTooltipData }) => {
   const tree = structuredClone(_tree)
 
   const [expandedKeys, setExpandedKeys] = useState([])
@@ -167,6 +167,9 @@ export const Tooltips = ({ tree: _tree, path, isWindowWide }) => {
         resize: 'both',
       }}
     >
+      <div style={{ position: 'absolute', top: 0, right: 15, color: "#000", zIndex: 9999999999, cursor: "pointer" }}
+      onClick={() => setTooltipData(null) }
+      >&#x2716;</div>
       <Tree
         showIcon
         showLine

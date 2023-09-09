@@ -6,7 +6,6 @@ import re
 
 import config
 import openai
-import simple_cache as simple_cache
 from dotenv import load_dotenv
 from helper import (OutputLevel, extract, get_prefix,
                     nested_dict_to_filesystem, post_process_tree,
@@ -28,7 +27,6 @@ if os.environ.get("OPENAI_API_KEY"):
     # Load your API key from an environment variable or secret management service
     openai.api_key = os.getenv("OPENAI_API_KEY")
 
-    @simple_cache.cache_it(filename=os.getcwd() + "/dialectic_triangle.cache", ttl=120)
     def llm(instruction, text, model=os.environ.get("OPENAI_MODEL")):
         return openai.ChatCompletion.create(
             model=model,
@@ -202,7 +200,7 @@ def dialectic_triangle(
 
 
 if __name__ == "__main__":
-    for i in range(10):
+    for i in range(0):
         with git_auto_commit(
             config.system_path, commit_message_prefix="Automated TEXT Commit"
         ) as ctx:
