@@ -1,26 +1,25 @@
 import React, { useEffect, useRef } from 'react'
 import Muuri from 'muuri'
 import '../muuri.css'
-import {Pin} from "./Pin";
-
+import { Pin } from './Pin'
 
 const MuuriComponent = ({ labels, setHiddenId }) => {
   console.log(labels)
-  const gridRef = useRef(null);
+  const gridRef = useRef(null)
 
   useEffect(() => {
-    if (!gridRef.current) return;
+    if (!gridRef.current) return
     const grid = new Muuri(gridRef.current, {
       dragEnabled: true,
       layout: { horizontal: true },
       rounding: true,
       width: 1000,
-    });
+    })
 
-    return () => grid.destroy();
-  }, [gridRef, labels]);
+    return () => grid.destroy()
+  }, [gridRef, labels])
 
-  if (!labels) return null;
+  if (!labels) return null
 
   return (
     <div ref={gridRef} className="grid">
@@ -28,7 +27,7 @@ const MuuriComponent = ({ labels, setHiddenId }) => {
         <Pin value={value} setHiddenId={setHiddenId} key={value.path} />
       ))}
     </div>
-  );
+  )
 }
 
-export { MuuriComponent };
+export { MuuriComponent }

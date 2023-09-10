@@ -2,7 +2,6 @@ import os.path
 import pathlib
 
 import regex
-
 from compare import weighted_fuzzy_compare
 from helper import (get_analogue_from_nested_dict, get_from_nested_dict,
                     unique_by_func)
@@ -189,7 +188,9 @@ def filter_similar_paths(paths_to_fill, toc, target_count=100, precision=0.05):
 
         count = len(toc_lines)
 
-        if abs(count - target_count) <= precision * target_count:  # Stop if close enough
+        if (
+            abs(count - target_count) <= precision * target_count
+        ):  # Stop if close enough
             return toc_lines
 
         if count > target_count:
@@ -201,7 +202,9 @@ def filter_similar_paths(paths_to_fill, toc, target_count=100, precision=0.05):
             new_threshold = threshold - (threshold - lower_bound) / 3
             upper_bound = threshold
 
-        if abs(new_threshold - threshold) < 0.0000001:  # Prevent infinite loop by having a minimum difference
+        if (
+            abs(new_threshold - threshold) < 0.0000001
+        ):  # Prevent infinite loop by having a minimum difference
             return toc_lines
 
         threshold = new_threshold

@@ -1,10 +1,8 @@
 .grid {
   position: relative;
-  /* Control the height manually */
-  /* In this case we limit it to two rows */
   height: 160px !important;
   width: 70vw !important;
-  left: 150px
+  left: 150px;
 }
 .item {
   position: absolute;
@@ -12,6 +10,12 @@
   height: 140px;
   margin: 5px;
   z-index: 1;
+}
+
+@media screen and (max-width: 600px) {
+  .item {
+    width: 68px;
+  }
 }
 .item.muuri-item-hidden {
   z-index: 0;

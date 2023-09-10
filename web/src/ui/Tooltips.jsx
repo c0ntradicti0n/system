@@ -109,7 +109,12 @@ const nestTexts = (path, texts) => {
   return currentObject
 }
 
-export const Tooltips = ({ tree: _tree, path, isWindowWide, setTooltipData }) => {
+export const Tooltips = ({
+  tree: _tree,
+  path,
+  isWindowWide,
+  setTooltipData,
+}) => {
   const tree = structuredClone(_tree)
 
   const [expandedKeys, setExpandedKeys] = useState([])
@@ -155,21 +160,20 @@ export const Tooltips = ({ tree: _tree, path, isWindowWide, setTooltipData }) =>
     setExpandedKeys([...new Set(allExpandedKeys)])
   }, [path])
   return (
-    <div
-      style={{
-        position: 'relative',
-        top: 0,
-        right: isWindowWide ? 0 : 'auto',
-        height: isWindowWide ? '100vh' : '30vh',
-        width: isWindowWide ? '40vw' : 'vw',
-        zIndex: 99999999,
-        overflow: 'auto',
-        resize: 'both',
-      }}
-    >
-      <div style={{ position: 'absolute', top: 0, right: 15, color: "#000", zIndex: 9999999999, cursor: "pointer" }}
-      onClick={() => setTooltipData(null) }
-      >&#x2716;</div>
+    <div className="tooltips">
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 15,
+          color: '#000',
+          zIndex: 9999999999,
+          cursor: 'pointer',
+        }}
+        onClick={() => setTooltipData(null)}
+      >
+        &#x2716;
+      </div>
       <Tree
         showIcon
         showLine
@@ -179,6 +183,7 @@ export const Tooltips = ({ tree: _tree, path, isWindowWide, setTooltipData }) =>
         onExpand={setExpandedKeys}
         onSelect={onSelect}
         treeData={treeData}
+        titleHeight={'10px'}
       />
     </div>
   )

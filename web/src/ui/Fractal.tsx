@@ -33,20 +33,19 @@ const Fractal = ({ setContent }) => {
   const setHiddenId = useCallback(
     (id) => {
       // replace multiple slashes with a single slash
-        id = slashIt(id)
+      id = slashIt(id)
       _setHiddenId(id)
     },
     [_setHiddenId],
   )
-    const setDetailId = useCallback(
-        (id) => {
-            // replace multiple slashes with a single slash
-            id = slashIt(id)
-            _setDetailId(id)
-        },
-        [_setDetailId],
-    )
-
+  const setDetailId = useCallback(
+    (id) => {
+      // replace multiple slashes with a single slash
+      id = slashIt(id)
+      _setDetailId(id)
+    },
+    [_setDetailId],
+  )
 
   const [searchText, setSearchText] = useState(null)
 
@@ -138,7 +137,6 @@ const Fractal = ({ setContent }) => {
     data: searchResults,
     status: statusSearch,
     error: errorSearch,
-
   } = useQuery(['search', searchText], searchCall)
 
   const fetchTree = async () => {
@@ -235,8 +233,10 @@ const Fractal = ({ setContent }) => {
 
   return (
     <div className="App" style={{}}>
-      <div style={{position: "absolute", width:0, height:0, top: 0}}>
-          {searchResults ? <MuuriComponent labels={searchResults} setHiddenId={setHiddenId} /> : null}
+      <div style={{ position: 'absolute', width: 0, height: 0, top: 0 }}>
+        {searchResults ? (
+          <MuuriComponent labels={searchResults} setHiddenId={setHiddenId} />
+        ) : null}
       </div>
       <TransformWrapper
         ref={transformComponentRef}
@@ -300,6 +300,7 @@ const Fractal = ({ setContent }) => {
           onZoomOut={() => go({ ...params, direction: 'higher' })}
           linkId={linkId}
           isWindowWide={isWindowWide}
+          labels={searchResults}
         />
         {tooltipData && (
           <Tooltips

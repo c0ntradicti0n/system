@@ -31,10 +31,7 @@ function Triangle({
 }) {
   const [_hover, _setHover] = useState(false)
   const devicePixelRatio = window.devicePixelRatio || 1
-  const isMobile = window.innerWidth <= 768 // Example breakpoint for mobile
-  const fontSize = !isMobile
-    ? size / 30 / Math.log1p(devicePixelRatio)
-    : size / 20 / Math.log1p(devicePixelRatio)
+  const fontSize = size / 30 / Math.log1p(devicePixelRatio)
 
   const ref = React.useRef(null)
   const fetchData = useCallback(async () => {

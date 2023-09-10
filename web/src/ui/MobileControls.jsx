@@ -10,7 +10,8 @@ export const MobileControls = ({
   onRight,
   onZoomOut,
   linkId,
-    isWindowWide
+  isWindowWide,
+  labels,
 }) => {
   const [searchText, setSearchText] = useState('')
   useEffect(() => {
@@ -44,10 +45,17 @@ export const MobileControls = ({
     }
   }, [onLeft, onRight, onZoomIn, onZoomOut])
 
-    const mobileStyles = {left: 50, top: 50, position: "fixed"}
+  const mobileStyles = { left: 50, top: 50, position: 'fixed' }
   return (
     <div className="mobile-controls" style={{}}>
-      <div className="top-search" style={{right: isWindowWide ? undefined: "20px"}}>
+      <div
+        className="top-search"
+        style={{
+          position: 'fixed',
+          left: labels?.length ? '5vw' : '66vw',
+          top: labels?.length ? '40vw' : '5vw',
+        }}
+      >
         <Input.TextArea
           id="search"
           value={searchText}
@@ -61,43 +69,42 @@ export const MobileControls = ({
           onClick={() => triggerSearch(searchText)}
         />
       </div>
-        <div className="navigation-controls" style={mobileStyles}>
-      <button
-        onClick={onZoomIn}
-        className="button top-controls"
-        aria-label="Up"
-        title="Hotkey: ArrowUp"
-      >
-        ↑
-      </button>
-      <button
-        onClick={onLeft}
-        className="button left-controls"
-        aria-label="Left"
-        title="Hotkey: ArrowLeft"
-      >
-        ←
-      </button>
+      <div className="navigation-controls" style={mobileStyles}>
+        <button
+          onClick={onZoomIn}
+          className="button top-controls"
+          aria-label="Up"
+          title="Hotkey: ArrowUp"
+        >
+          ↑
+        </button>
+        <button
+          onClick={onLeft}
+          className="button left-controls"
+          aria-label="Left"
+          title="Hotkey: ArrowLeft"
+        >
+          ←
+        </button>
 
-      <button
-        onClick={onRight}
-        className="button right-controls"
-        aria-label="Right"
-        title="Hotkey: ArrowRight"
-      >
-        →
-      </button>
-      <button
-        onClick={onZoomOut}
-        className="button bottom-controls"
-        aria-label="Down"
-        title="Hotkey: ArrowDown"
-      >
-        ↓
-      </button>
-                  <ShareModal linkId={linkId} />
-
-        </div>
+        <button
+          onClick={onRight}
+          className="button right-controls"
+          aria-label="Right"
+          title="Hotkey: ArrowRight"
+        >
+          →
+        </button>
+        <button
+          onClick={onZoomOut}
+          className="button bottom-controls"
+          aria-label="Down"
+          title="Hotkey: ArrowDown"
+        >
+          ↓
+        </button>
+        <ShareModal linkId={linkId} />
+      </div>
     </div>
   )
 }

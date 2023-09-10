@@ -73,18 +73,23 @@ def main(string):
         params={"BM25Retriever": {"top_k": 3}},
     )
     print(f"{string=},{prediction=}")
-    return list(sorted( [
-        {
-            "content": d.content[:100],
-            "answer": d.anwswer if hasattr(d, "answer") else None,
-            "path": next(
-                regex.finditer(
-                    "(\/[1-3\._])+", d.meta["file_path"].replace(doc_dir, "")
-                ),
-                "",
-            )
-            .group()
-            .strip("/"),
-        }
-        for d in prediction["documents"]
-    ], key=lambda x: x["path"]))
+    return list(
+        sorted(
+            [
+                {
+                    "content": d.content[:100],
+                    "answer": d.anwswer if hasattr(d, "answer") else None,
+                    "path": next(
+                        regex.finditer(
+                            "(\/[1-3\._])+", d.meta["file_path"].replace(doc_dir, "")
+                        ),
+                        "",
+                    )
+                    .group()
+                    .strip("/"),
+                }
+                for d in prediction["documents"]
+            ],
+            key=lambda x: x["path"],
+        )
+    )

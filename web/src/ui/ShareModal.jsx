@@ -40,6 +40,7 @@ const ShareModal = ({ linkId }) => {
       <Button
         onClick={() => setIsVisible(true)}
         icon={<ShareAltOutlined />}
+        className={'share-button'}
         aria-label="Share (Hotkey: s)"
       />
       <Modal

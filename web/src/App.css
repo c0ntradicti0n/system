@@ -5,10 +5,10 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 100vh;
-  width: 100vw;
+  height: 100vh !important;
+  width: 100vw !important;
+  position: fixed;
   color: white;
-  font-weight: bold;
 }
 
 .App > * {
@@ -126,8 +126,7 @@
   height: 100%;
 }
 .pin-text {
-    position: relative;
-
+  position: relative;
 }
 
 .right-container {
@@ -150,12 +149,12 @@
 }
 
 .button {
-  background: #333; /* Or any desired color */
-  color: #fff; /* Text color */
+  background: #333;
+  color: #fff;
   border: none;
-  width: 30px; /* Adjust width */
-  height: 30px; /* Adjust height */
-  border-radius: 20%; /* Making buttons round */
+  width: 30px;
+  height: 30px;
+  border-radius: 20%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -164,20 +163,35 @@
 }
 
 .button:hover {
-  background: #555; /* Or any desired hover color */
+  background: #555;
+}
+
+@media screen and (max-width: 600px) {
+  .left-controls,
+  .right-controls,
+  .top-controls,
+  .bottom-controls,
+  .share-button {
+    width: 7vw !important;
+    height: 7vw !important;
+  }
+
+  .top-search {
+    width: 20vw !important;
+  }
 }
 
 .top-search,
 .left-controls,
 .right-controls,
 .top-controls,
-.bottom-controls {
-  position: absolute; /* Absolute positioning to set exact position of each button */
-  z-index: 999999999; /* Adjust this value as needed so it's less than .top-search but more than the Tooltips */
+.bottom-controls,
+.share-button {
+  position: absolute;
+  z-index: 999999999;
 }
 
 .top-search {
-  top: 5%;
   width: 13vw;
   z-index: 999999999999;
 }
@@ -207,6 +221,31 @@
   transform: translateY(40px);
 }
 
+@media screen and (max-width: 600px) {
+  .top-search,
+  .left-controls,
+  .right-controls,
+  .top-controls,
+  .bottom-controls,
+  .share-button {
+    .right-controls {
+      transform: translateX(25px);
+    }
+
+    .left-controls {
+      transform: translateX(-25px);
+    }
+
+    .top-controls {
+      transform: translateY(-25px);
+    }
+
+    .bottom-controls {
+      transform: translateY(25px);
+    }
+  }
+}
+
 @keyframes copiedAnimation {
   0% {
     background-color: #fff;
@@ -225,4 +264,48 @@
 
 .ant-modal-centered {
   z-index: 100000000 !important;
+}
+
+.tooltips {
+  position: relative;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 40vw;
+  zindex: 99999999;
+  overflow: auto;
+  resize: both;
+}
+
+.ant-tree,
+.ant-tree-treenode {
+  font-size: small !important;
+}
+
+ant-tree-icon__customize,
+.ant-tree-switcher-noop,
+.ant-tree-node-content-wrapper {
+  line-height: 17px !important;
+}
+.ant-tree-switcher {
+  width: 12px !important;
+}
+
+.ant-tree-indent-unit {
+  width: 10px !important;
+}
+@media screen and (max-width: 600px) {
+  .tooltips {
+    position: absolute;
+    height: 33vh;
+    width: 100vw;
+    bottom: 0;
+    top: 67vh;
+    font-size: xx-small !important;
+    left: -80.1vw;
+  }
+  .ant-tree,
+  .ant-tree-treenode {
+    font-size: xx-small !important;
+  }
 }
