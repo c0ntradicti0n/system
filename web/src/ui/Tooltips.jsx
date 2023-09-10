@@ -118,29 +118,37 @@ export const Tooltips = ({
   const tree = structuredClone(_tree)
 
   const [expandedKeys, setExpandedKeys] = useState([])
-
+  const [openedKeys, setOpenedKeys] = useState(null)
+  const onExpand = (expandedKeysValue) => {
+    console.log('onExpand', expandedKeysValue)
+    setExpandedKeys(expandedKeysValue)
+  }
   const fetchTexts = async () => {
-    const res = await fetch(`/api/text/${path ?? ''}`)
+    const p = openedKeys ?? path ?? ''
+    const res = await fetch(`/api/text/${p}`)
+
     if (!res.ok) {
       throw new Error('Network response was not ok')
     }
     const newData = await res.json()
+    console.log("fetched, ", p, newData)
     return newData
   }
 
-  const { data: texts } = useQuery(['triangle', path], fetchTexts, {
+  const { data: texts } = useQuery(['triangle', path, openedKeys], fetchTexts, {
     onError: console.error,
     keepPreviousData: true,
   })
 
   const data = useMemo(() => {
-    const nestedTextObject = nestTexts(path, texts)
+    const nestedTextObject = nestTexts(openedKeys ?? path, texts)
 
     return mergeDeep(tree, nestedTextObject)
-  }, [path, texts, tree])
+  }, [openedKeys, path, texts, tree])
 
   const onSelect = (selectedKeys, info) => {
     console.log('selected', selectedKeys, info)
+
   }
 
   const treeData = convertToAntdTreeData(data)
@@ -180,10 +188,15 @@ export const Tooltips = ({
         checkStrictly={true}
         defaultExpandedKeys={paths}
         expandedKeys={expandedKeys}
-        onExpand={setExpandedKeys}
+        onExpand={onExpand}
         onSelect={onSelect}
         treeData={treeData}
         titleHeight={'10px'}
+        loadData = {async (node) => {
+          console.log(node)
+          setOpenedKeys(node.key.replace(/-/g, '/').slice(0,-2))
+        }
+        }
       />
     </div>
   )
