@@ -1,209 +1,53 @@
-3111121 Natural Materials
-
-3111121_ Organic-Inorganic
-
-31111211 Metals
-
-31111211_ Pure-Mixed
-
-311112111 Ore
-
-3111121111 Iron Ore
-3111121112 Copper Ore
-3111121113 Bauxite (Aluminum Ore)
-
-311112112 Alloy
-
-3111121121 Steel
-3111121122 Brass
-3111121123 Bronze
-
-311112113 Precious
-
-3111121131 Gold
-3111121132 Silver
-3111121133 Platinum
-
-31111212 Minerals
-
-31111212_ Crystalline-Noncrystalline
-
-311112121 Crystals
-
-3111121211 Quartz
-3111121212 Salt
-3111121213 Diamond
-
-311112122 Stones
-
-3111121221 Granite
-3111121222 Limestone
-3111121223 Sandstone
-
-311112123 Gems
-
-3111121231 Ruby
-3111121232 Sapphire
-3111121233 Emerald
-
-31111213 Organics
-
-31111213_ Hard-Soft
-
-311112131 Wood
-
-3111121311 Hardwood
-3111121312 Softwood
-3111121313 Bamboo
-
-311112132 Leather
-
-3111121321 Cowhide
-3111121322 Sheepskin
-3111121323 Exotic (like snake or alligator)
-
-311112133 Fibers
-
-3111121331 Cotton
-3111121332 Wool
-3111121333 Silk
-
-3111122 Synthetic Materials
-
-3111122_ Man-made-Natural Based
-
-31111221 Plastics
-
-31111221_ Rigid-Flexible
-
-311112211 Thermosetting
-
-3111122111 Bakelite
-3111122112 Urea-formaldehyde
-3111122113 Melamine-formaldehyde
-
-311112212 Thermoplastic
-
-3111122121 Polyethylene
-3111122122 Polypropylene
-3111122123 Polyvinyl Chloride (PVC)
-
-311112213 Biodegradable
-
-3111122131 Polylactic Acid (PLA)
-3111122132 Polyhydroxyalkanoates (PHA)
-3111122133 Starch-based
-
-31111222 Ceramics
-
-31111222_ Porous-Dense
-
-311112221 Porcelain
-
-3111122211 Fine Bone China
-3111122212 Hard-paste
-3111122213 Soft-paste
-
-311112222 Stoneware
-
-3111122221 Fine Stoneware
-3111122222 Traditional Stoneware
-3111122223 Earthenware
-
-311112223 Terracotta
-
-3111122231 Fired
-3111122232 Unfired
-3111122233 Glazed
-
-31111223 Composites
-
-31111223_ Homogeneous-Heterogeneous
-
-311112231 Fiber-reinforced
-
-3111122311 Carbon Fiber
-3111122312 Glass Fiber (Fiberglass)
-3111122313 Aramid (e.g., Kevlar)
-
-311112232 Layered
-
-3111122321 Laminates
-3111122322 Plywood
-3111122323 Sandwich Panels
-
-311112233 Matrix
-
-3111122331 Ceramic Matrix
-3111122332 Polymer Matrix
-3111122333 Metal Matrix
-
-3111123 Derived Materials
-
-3111123_ Waste-Repurposed
-
-31111231 Recyclables
-
-31111231_ Used-Newly Formed
-
-311112311 Metal Scraps
-
-3111123111 Aluminum Scraps
-3111123112 Copper Scraps
-3111123113 Steel Scraps
-
-311112312 Glass
-
-3111123121 Clear
-3111123122 Colored
-3111123123 Specialty
-
-311112313 Paper
-
-3111123131 White Paper
-3111123132 Cardboard
-3111123133 Newspaper
-
-31111232 Bio-derived
-
-31111232_ Extracted-Formulated
-
-311112321 Bioplastics
-
-3111123211 Derived from Sugarcane
-3111123212 Derived from Corn
-3111123213 Derived from Potatoes
-
-311112322 Natural Rubber
-
-3111123221 Latex
-3111123222 Crepe Rubber
-3111123223 Foam Rubber
-
-311112323 Biocomposites
-
-3111123231 Wood-plastic Composite
-3111123232 Kenaf Fiber Composite
-3111123233 Hemp Fiber Composite
-
-31111233 Upcycled
-
-31111233_ Renewed-Reused
-
-311112331 Artifacts
-
-3111123311 Reimagined Decor
-3111123312 Functional Art
-3111123313 Reassembled Structures
-
-311112332 Crafts
-
-3111123321 Textile Crafts
-3111123322 Metal Crafts
-3111123323 Wooden Crafts
-
-311112333 Refined Products
-
-3111123331 Upcycled Clothing
-3111123332 Upcycled Furniture
-3111123333 Repurposed Electronics
+311331 "Energy Management"
+311331_ "Storage-Conversion"
+3113311 "Battery Technology"
+3113311_ "Capacity-Durability"
+31133111 "Lithium-Ion"
+31133112 "Solid-State"
+31133113 "Graphene-Based"
+3113312 "Solar Integration"
+3113312_ "Efficiency-Reliability"
+31133121 "Monocrystalline Panels"
+31133122 "Polycrystalline Panels"
+31133123 "Thin-Film Solar Cells"
+3113313 "Kinetic Harvesting"
+3113313_ "Motion-Energy Conversion"
+31133131 "Piezoelectric Devices"
+31133132 "Electromagnetic Induction"
+31133133 "Triboelectric Generators"
+
+311332 "Self-repair Systems"
+311332_ "Deterioration-Regeneration"
+3113321 "Diagnostic Algorithms"
+3113321_ "Detection-Prediction"
+31133211 "Sensory Feedback Loops"
+31133212 "Machine Learning Models"
+31133213 "Predictive Maintenance"
+3113322 "Nano-repair Bots"
+3113322_ "Precision-Efficiency"
+31133221 "Micro-manipulators"
+31133222 "Resilient Nanomaterials"
+31133223 "Onboard Deployment Systems"
+3113323 "Material Recycling"
+3113323_ "Reuse-Remodel"
+31133231 "Onboard Processing Units"
+31133232 "Material Regeneration Modules"
+31133233 "Waste Management Protocols"
+
+311333 "Self-learning Capabilities"
+311333_ "Pre-set-Adaptive"
+3113331 "Skill Acquisition"
+3113331_ "Experience-Integration"
+31133311 "Task Repetition Learning"
+31133312 "Algorithm Optimization"
+31133313 "Knowledge Transfer Techniques"
+3113332 "Environment Adaptability"
+3113332_ "Fixed-Variable"
+31133321 "Terrain Analysis"
+31133322 "Climate Response Mechanisms"
+31133323 "Obstacle Navigation Algorithms"
+3113333 "Real-time Problem Solving"
+3113333_ "Challenge-Resolution"
+31133331 "Dynamic Decision Trees"
+31133332 "Solution Database Integration"
+31133333 "Real-time Feedback Mechanisms"
