@@ -55,8 +55,10 @@ jobs:
       - name: fetch-system
         run: |
           ssh staging '   
+          
               cd dialectics
               git pull
+          
           '
 
       - name: start
