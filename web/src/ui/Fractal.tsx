@@ -140,7 +140,7 @@ const Fractal = ({ setContent }) => {
   } = useQuery(['search', searchText], searchCall)
 
   const fetchTree = async () => {
-    const id = (hiddenId ?? '') + (detailId ?? '')
+    const id = (hiddenId ?? '')
     const res = await fetch(`/api/toc/${id}`)
     if (!res.ok) {
       console.error('Network response was not ok', res)
@@ -153,6 +153,7 @@ const Fractal = ({ setContent }) => {
       newData[''] ? newData[''] : newData,
     )
     setCollectedData(mergedData)
+    console.log('mergedData', mergedData)
     if (hiddenId) {
       const initialVisualData = lookupDeep(id, collectedData)
       setVisualData(initialVisualData)
