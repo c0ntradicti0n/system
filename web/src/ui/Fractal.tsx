@@ -153,7 +153,7 @@ const Fractal = ({ setContent }) => {
       newData[''] ? newData[''] : newData,
     )
     setCollectedData(mergedData)
-    console.log('mergedData', mergedData)
+
     if (hiddenId) {
       const initialVisualData = lookupDeep(id, collectedData)
       setVisualData(initialVisualData)
