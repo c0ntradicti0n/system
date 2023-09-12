@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import LeaderLine from 'leader-line'
+import useLinkedElementsStore from '../lib/PinnedElements'
 
 function findElementById(id) {
   let currentId = id
@@ -8,11 +9,20 @@ function findElementById(id) {
   while (!element && currentId.length > 0) {
     element = document.getElementById(currentId)
     if (!element) {
-      currentId = currentId.slice(0, -1) // remove the last character
+      currentId = currentId.slice(0, -1)
     }
+    console.log('findElementById', { id, currentId, element })
   }
 
   return element
+}
+
+function tryIt(callback) {
+  try {
+    callback()
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 function useElementById(baseId, shorterIdFinder = false, pollInterval = 200) {
@@ -48,14 +58,29 @@ function createLine(start, end) {
 
 export const Pin = ({ value, setHiddenId }) => {
   const cleanPath = value.path.replace(/\//g, '').replace('.', '')
-  const labelIdRef = useElementById('pin-label-' + cleanPath)
-  const triangleIdRef = useElementById('triangle-' + cleanPath, true)
+  const pinId = 'pin-label-' + cleanPath
+  const triangleId = 'triangle-' + cleanPath
+  const labelIdRef = useElementById(pinId)
+  const triangleIdRef = useElementById(triangleId, true)
   const [line, setLine] = useState(null)
   console.log('pin', { labelIdRef, triangleIdRef, line })
 
+  const { addElement, removeElement } = useLinkedElementsStore()
+
+  useEffect(() => {
+    if (triangleIdRef) {
+      addElement({ id: triangleId, data: labelIdRef })
+    }
+    return () => {
+      if (triangleIdRef) {
+        removeElement(triangleId)
+      }
+    }
+  }, [triangleIdRef, triangleId, addElement, labelIdRef, removeElement])
+
   useEffect(() => {
     if (!labelIdRef || !triangleIdRef)
-      if (line) line.remove()
+      if (line) tryIt(() => line.remove())
       else return
     if (line) return
     const newLine = createLine(labelIdRef, triangleIdRef)
@@ -63,7 +88,7 @@ export const Pin = ({ value, setHiddenId }) => {
   }, [line, labelIdRef, triangleIdRef])
 
   useEffect(() => {
-    return () => line?.remove()
+    return () => tryIt(() => line?.remove())
   }, [line])
 
   const triangleBounds = triangleIdRef?.getBoundingClientRect()

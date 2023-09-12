@@ -42,9 +42,6 @@ services:
     ports:
       - "5001:5000"
     environment:
-      LC_ALL: en_US.UTF-8
-      LANG: en_US.UTF-8
-      LANGUAGE: en_US.UTF-8
       DEBUG: "true"
       HOST: $HOST
       SYSTEM: /system
@@ -73,9 +70,6 @@ services:
     ports:
       - "5000:5000"
     environment:
-      LC_ALL: en_US.UTF-8
-      LANG: en_US.UTF-8
-      LANGUAGE: en_US.UTF-8
       DEBUG: "true"
       HOST: $HOST
       SYSTEM: /system
@@ -86,6 +80,9 @@ services:
     volumes:
       - "$SYSTEM:/system"
       - "./service:/flask_app"
+      - "./.chroma:/flask_app/.chroma:rw"
+      - "./.cache-hf:/flask_app/.cache:rw"
+
 
 
   philospher:
@@ -101,9 +98,6 @@ services:
     tty: true
     user: 1000:1000
     environment:
-      LC_ALL: en_US.UTF-8
-      LANG: en_US.UTF-8
-      LANGUAGE: en_US.UTF-8
       DEBUG: "true"
       HOST: $HOST
       SYSTEM: /system
@@ -111,8 +105,6 @@ services:
         - "host.docker.internal:host-gateway"
     volumes:
       - "$SYSTEM:/system"
-
-
 
   web:
     logging:

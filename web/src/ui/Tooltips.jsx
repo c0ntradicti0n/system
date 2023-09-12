@@ -131,7 +131,7 @@ export const Tooltips = ({
       throw new Error('Network response was not ok')
     }
     const newData = await res.json()
-    console.log("fetched, ", p, newData)
+    console.log('fetched, ', p, newData)
     return newData
   }
 
@@ -148,7 +148,6 @@ export const Tooltips = ({
 
   const onSelect = (selectedKeys, info) => {
     console.log('selected', selectedKeys, info)
-
   }
 
   const treeData = convertToAntdTreeData(data)
@@ -192,11 +191,10 @@ export const Tooltips = ({
         onSelect={onSelect}
         treeData={treeData}
         titleHeight={'10px'}
-        loadData = {async (node) => {
+        loadData={async (node) => {
           console.log(node)
-          setOpenedKeys(node.key.replace(/-/g, '/').slice(0,-2))
-        }
-        }
+          setOpenedKeys(node.key.replace(/-/g, '/').slice(0, -2))
+        }}
       />
     </div>
   )

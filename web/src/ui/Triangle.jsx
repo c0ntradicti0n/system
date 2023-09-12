@@ -8,6 +8,7 @@ import {
 import { addHoverObject, hoverObjects, removeHoverObject } from '../lib/hover'
 import { MAX_LEVEL } from '../config/const'
 import { stringToColour } from '../lib/color'
+import useLinkedElementsStore from '../lib/PinnedElements'
 
 function Triangle({
   id,
@@ -34,9 +35,7 @@ function Triangle({
   const fontSize = size / 30 / Math.log1p(devicePixelRatio)
 
   const ref = React.useRef(null)
-  const fetchData = useCallback(async () => {
-    //setCurrentId(fullId)
-  }, [fullId, setCurrentId])
+  const triangleId = 'triangle-' + fullId.replace(/\//g, '')
 
   useEffect(() => {
     if (!ref?.current) return
@@ -49,11 +48,11 @@ function Triangle({
     } else {
       removeHoverObject(fullId)
     }
+  }, [transformState, scale, fullId])
 
-    if (isWithinViewport) {
-      fetchData()
-    }
-  }, [transformState, scale, fetchData, fullId])
+  const { linkedElements, linkedElementsEmpty, linkedElementsHas } = useLinkedElementsStore()
+
+    console.log('linkedElements', linkedElements)
 
   if (typeof data === 'string' || !data) {
     const title = data
@@ -117,6 +116,11 @@ function Triangle({
         top: top,
         filter: _hover ? 'invert(1)' : 'invert(0)',
         transform: _hover ? 'scale(1.05)' : 'scale(1)', // this line scales the triangle up a bit on hover
+        visibility: true
+          ? 'visible'
+          : linkedElementsHas(fullId)
+          ? 'hidden'
+          : 'visible',
       }}
       onClick={(e) => {
         console.log(scale)
@@ -186,10 +190,7 @@ function Triangle({
         >
           {title && (
             <div>
-              <div
-                id={'triangle-' + fullId.replace(/\//g, '')}
-                className="triangle-title"
-              >
+              <div id={triangleId} className="triangle-title">
                 {fullId.replace(/\//g, '.')}. {postProcessTitle(title)}
               </div>
 

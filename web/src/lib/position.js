@@ -34,8 +34,8 @@ export function isElementInViewportAndBigAndNoChildren(el, data) {
     rect.bottom <=
       (window.innerHeight || document.documentElement.clientHeight) &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth) &&
-    rect.height > window.innerHeight * 0.4 &&
-    typeof data !== 'object'
+    rect.height > window.innerHeight * 0.4
+    //typeof data !== 'object'
   )
 }
 

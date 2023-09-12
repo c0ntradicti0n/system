@@ -21,7 +21,7 @@ COPY requirements.prod /flask_app/
 # Install system dependencies
 RUN pip install --upgrade pip
 RUN pip install uwsgi
-RUN pip install --no-cache-dir -r requirements.prod
+RUN --mount=type=cache,target=/root/.cache/pip  pip install --no-cache-dir -r requirements.prod
 RUN apt-get purge -y --auto-remove gcc
 # Copy the current directory contents into the container at /flask_app
 ADD . /flask_app/
@@ -31,6 +31,8 @@ RUN ls -la /flask_app
 ENV PYTHONIOENCODING=utf-8
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
+
+
 
 # Run the command to start uWSGI
 CMD ["uwsgi", "app.ini"]

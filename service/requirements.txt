@@ -10,3 +10,5 @@ cython
 pyyaml
 farm-haystack[inference]
 ruamel.yaml
+langchain
+chromadb

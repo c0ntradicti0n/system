@@ -516,27 +516,18 @@ def unique_by_func(lst, func):
 
 
 import json
-
-from haystack import Answer, Span
-
+from  langchain.schema.document import Document
 
 class CustomEncoder(json.JSONEncoder):
     def default(self, obj):
         # Handle Answer objects
-        if isinstance(obj, Answer):
+        if isinstance(obj, Document):
             return {
-                "answer": obj.answer,
-                "type": obj.type,
-                "score": obj.score,
-                "context": obj.context,
-                "offsets_in_document": obj.offsets_in_document,
-                "offsets_in_context": obj.offsets_in_context,
-                "document_ids": obj.document_ids,
-                "meta": obj.meta,
+                **obj.dict(),
+                "meta": obj.metadata,
+                "path": obj.metadata["path"].strip("/"),
+                "content": obj.page_content
             }
-        # Handle Span objects
-        elif isinstance(obj, Span):
-            return {"start": obj.start, "end": obj.end}
         # Let the base class handle any types we don't explicitly handle
         return super(CustomEncoder, self).default(obj)
 

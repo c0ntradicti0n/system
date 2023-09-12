@@ -1,95 +1,98 @@
 import os
+from pprint import pprint
+from time import perf_counter
 
 import regex
-from haystack.document_stores import InMemoryDocumentStore
-from haystack.nodes import (BM25Retriever, DensePassageRetriever,
-                            EmbeddingRetriever, FARMReader)
-from haystack.pipelines import (DocumentSearchPipeline, ExtractiveQAPipeline,
-                                Pipeline)
+from langchain.embeddings import SentenceTransformerEmbeddings
+from langchain.text_splitter import CharacterTextSplitter
+from langchain.vectorstores import Chroma
 
 
-def get_filename_without_extension(path):
-    return os.path.splitext(os.path.basename(path))[0]
+class catchtime:
+    def __init__(self, task):
+        self.task = task
+
+    def __enter__(self):
+        self.start = perf_counter()
+        return self
+
+    def __exit__(self, type, value, traceback):
+        self.time = perf_counter() - self.start
+        self.readout = f"Time {self.task}: {self.time:.3f} seconds"
+        print(self.readout)
 
 
-document_store = InMemoryDocumentStore(use_bm25=True, bm25_algorithm="BM25Plus")
-
-doc_dir = os.environ["SYSTEM"]
-
-# 2. Index the documents and store the file paths as metadata:
-all_files = []
-for root, _, files in os.walk(doc_dir):
-    for file in files:
-        all_files.append(os.path.join(root, file))
-
-all_files = [x for x in all_files if ".git" not in x]
-
-documents = []
-for file_path in all_files:
-    if not file_path.endswith(".md"):
-        continue
-    with open(file_path, "r", encoding="utf-8") as file:
-        text = file.read()
-        topic = get_filename_without_extension(file_path)
-        documents.append(
-            {
-                "content": (topic + "\n\n" + text)
-                .replace(".md", "")
-                .replace("_", "")
-                .lower(),
-                "meta": {"file_path": file_path},  # Storing file path as metadata
-            }
-        )
-document_store.write_documents(documents)
-
-from haystack.nodes import JoinDocuments
-
-# Initialize Sparse Retriever
-bm25_retriever = BM25Retriever(document_store=document_store)
-
-# Initialize Reader
-reader = FARMReader(model_name_or_path="deepset/roberta-base-squad2")
-
-# Create ensembled pipeline
-p_ensemble = Pipeline()
-p_ensemble.add_node(component=bm25_retriever, name="BM25Retriever", inputs=["Query"])
-p_ensemble.add_node(
-    component=JoinDocuments(join_mode="concatenate"),
-    name="JoinResults",
-    inputs=["BM25Retriever"],
-)
-p_ensemble.add_node(component=reader, name="Reader", inputs=["JoinResults"])
-
-# Uncomment the following to generate the pipeline image
-# p_ensemble.draw("pipeline_ensemble.png")
-
-# Run pipeline
-pipe = p_ensemble
+with catchtime("init"):
+    def get_filename_without_extension(path):
+        return os.path.splitext(os.path.basename(path))[0]
 
 
-def main(string):
-    prediction = pipe.run(
-        query=string,
-        params={"BM25Retriever": {"top_k": 3}},
+    def get_documents(document_dir):
+        text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+
+        all_files = []
+        for root, _, files in os.walk(document_dir):
+            for file in files:
+                all_files.append(os.path.join(root, file))
+
+        all_files = [x for x in all_files if ".git" not in x]
+
+        documents = []
+        for file_path in all_files:
+            if not file_path.endswith(".md"):
+                continue
+            with open(file_path, "r", encoding="utf-8") as file:
+                text = file.read()
+            topic = get_filename_without_extension(file_path)
+            content = topic + "\n\n" + text
+            docs = text_splitter.create_documents(
+                [content], metadatas=[
+                    {
+                        "file_path": file_path.replace(document_dir, ""),
+                     "path": regex.match(r"[\/1-3_]+", file_path.replace(document_dir, "")).group(0)}
+                ])
+            documents.extend(docs)
+        return documents
+
+
+    persist_directory = ".chroma"
+    embedding = SentenceTransformerEmbeddings(
+        model_name="sentence-transformers/all-mpnet-base-v2",
     )
-    print(f"{string=},{prediction=}")
-    return list(
-        sorted(
-            [
-                {
-                    "content": d.content[:100],
-                    "answer": d.anwswer if hasattr(d, "answer") else None,
-                    "path": next(
-                        regex.finditer(
-                            "(\/[1-3\._])+", d.meta["file_path"].replace(doc_dir, "")
-                        ),
-                        "",
-                    )
-                    .group()
-                    .strip("/"),
-                }
-                for d in prediction["documents"]
-            ],
-            key=lambda x: x["path"],
+    collection_name = "system"
+
+    if not os.path.exists(persist_directory) or not os.listdir(persist_directory):
+        doc_dir = os.environ["SYSTEM"]
+        documents = get_documents(doc_dir)
+
+        vector_store = Chroma.from_documents(
+            embedding=embedding,
+            documents=documents,
+            collection_name=collection_name,
+            persist_directory=persist_directory,
         )
-    )
+        vector_store.persist()
+    else:
+        vector_store = Chroma(
+            collection_name=collection_name,
+            persist_directory=persist_directory,
+            embedding_function=embedding,
+        )
+
+
+def search(query, top_k=10):
+    results = vector_store.search(query, top_k=top_k, search_type="mmr")
+    return results
+
+
+if __name__ == "__main__":
+    with catchtime("run"):
+        pprint(search("sex", top_k=4))
+    with catchtime("run"):
+        pprint(search("heart", top_k=4))
+    with catchtime("run"):
+        pprint(search("mass", top_k=4))
+    with catchtime("run"):
+        pprint(search("how does the system start?", top_k=4))
+    with catchtime("run"):
+        pprint(search("best food?", top_k=4))

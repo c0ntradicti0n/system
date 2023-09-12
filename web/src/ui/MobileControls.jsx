@@ -50,13 +50,17 @@ export const MobileControls = ({
     <div className="mobile-controls" style={{}}>
       <div
         className="top-search"
-        style={ !isWindowWide ?{
-          position: 'fixed',
-          left: labels?.length ? '5vw' : '76vw',
-          top: labels?.length ? '40vh' : '1vh',
-        } : {
-          top: '5vh'
-        } }
+        style={
+          !isWindowWide
+            ? {
+                position: 'fixed',
+                left: labels?.length ? '5vw' : '76vw',
+                top: labels?.length ? '40vh' : '1vh',
+              }
+            : {
+                top: '5vh',
+              }
+        }
       >
         <Input.TextArea
           id="search"

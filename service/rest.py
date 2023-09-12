@@ -11,7 +11,7 @@ from flask_cors import CORS
 from flask_restx import Api, Namespace, Resource
 from helper import (CustomEncoder, OutputLevel, get_from_nested_dict,
                     nested_str_dict, tree)
-from main import main
+from main import search as semantic_search
 
 logging.basicConfig(level=logging.DEBUG)
 coloredlogs.install(level="DEBUG")
@@ -37,8 +37,7 @@ class SearchProxy(Resource):
                 return json.dumps([]), 200
             print("SEARCH for ", string_to_search)
 
-            # Forward the request to the secondary backend service
-            response = main(string_to_search)
+            response = semantic_search(string_to_search, top_k=4)
 
             return json.dumps(response, cls=CustomEncoder), 200
 
