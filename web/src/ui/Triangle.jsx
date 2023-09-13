@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   getLeftPosition,
   getTopPosition,
@@ -50,7 +50,7 @@ function Triangle({
     }
   }, [transformState, scale, fullId])
 
-  const { linkedElements, linkedElementsEmpty, linkedElementsHas } = useLinkedElementsStore()
+  const { linkedElements, linkedElementsHas } = useLinkedElementsStore()
 
     console.log('linkedElements', linkedElements)
 

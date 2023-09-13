@@ -8,7 +8,7 @@ import config
 import requests
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from flask_restx import Api, Namespace, Resource
+from flask_restx import Api, Namespace, Resource, reqparse
 from helper import OutputLevel, get_from_nested_dict, nested_str_dict, tree
 
 logging.basicConfig(level=logging.DEBUG)
@@ -28,6 +28,9 @@ api.add_namespace(search, path="/api/search")
 
 SECONDARY_BACKEND_URL = "http://service:5000/api/search"
 
+parser = reqparse.RequestParser()
+parser.add_argument('string', type=str, required=True, help='String to search', location='json')
+parser.add_argument('filter_path', type=str, required=False, help='Filter path for the search', location='json')
 
 @toc.route("/", defaults={"path": ""})
 @toc.route("/<path:path>")
@@ -93,25 +96,31 @@ class LogicFractalText(Resource):
 
 @search.route("/")
 class SearchProxy(Resource):
+    @search.expect(parser)
     @search.doc("Proxy search to a secondary backend service using POST")
     def post(self):
         try:
             # Extract data from incoming POST request
             data = request.json
             string_to_search = data.get("string", "")
+            args = parser.parse_args()
+            string_to_search = args['string']
+            filter_path = args['filter_path']
 
             if not string_to_search:
                 return [], 200
 
-            print("SEARCH for ", string_to_search)
+            print(f"SEARCH STRING {string_to_search=}")
+            print (f"FILTER PATH {filter_path=}")
+
 
             # Forward the request to the secondary backend service
-            response = requests.post(f"{SECONDARY_BACKEND_URL}", json=data)
+            response = requests.post(f"{SECONDARY_BACKEND_URL}?filter_path={filter_path}", json=data)
 
             # Check if the request was successful
             response.raise_for_status()
 
-            data = json.loads(response.json())
+            data = response.json()
 
             pprint(data)
 

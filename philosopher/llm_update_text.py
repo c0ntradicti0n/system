@@ -87,8 +87,9 @@ Becoming, the unseparated unity of being and nothing, encapsulates these states 
 
 # 111_ 
 Vanishing of the vanishing itself
-``
+```
 
+Please provide a famous quote in any chapter about the topic.
 
 Don't write for subtopics, only for the main topics. The subtopics will be filled automatically by the system. So it 
 should contain four chapters and maximum 4 headings overall.
@@ -110,7 +111,7 @@ Provide the text for ONE level of the text for the following paths and topics he
     prompt += f"""
 Now really dive into writing texts about and only about:
 {topics}
-And respect our structural requirements, please. Constrain yourself writing text to the mentioned headings!
+And respect our structural requirements, please. Constrain yourself writing text to the mentioned headings! And don't forget the quote.
 """
     return instruction, prompt
 

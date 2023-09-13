@@ -67,23 +67,6 @@ const convertToAntdTreeData = (node, prefix = '') => {
   return result
 }
 
-const updateTreeData = (list, key, children) =>
-  list.map((node) => {
-    if (node.key === key) {
-      return {
-        ...node,
-        children,
-      }
-    }
-    if (node.children) {
-      return {
-        ...node,
-        children: updateTreeData(node.children, key, children),
-      }
-    }
-    return node
-  })
-
 const nestTexts = (path, texts) => {
   if (!texts) return {}
   if (!path) return texts
@@ -119,6 +102,8 @@ export const Tooltips = ({
 
   const [expandedKeys, setExpandedKeys] = useState([])
   const [openedKeys, setOpenedKeys] = useState(null)
+
+  console.log()
   const onExpand = (expandedKeysValue) => {
     console.log('onExpand', expandedKeysValue)
     setExpandedKeys(expandedKeysValue)

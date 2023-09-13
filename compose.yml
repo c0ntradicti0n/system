@@ -33,6 +33,8 @@ services:
         max-file: "5"
         max-size: "10m"
 
+    restart: unless-stopped
+
     build: server
     container_name: server
     env_file:
@@ -62,6 +64,8 @@ services:
        args:
          SYSTEM: /system
 
+    restart: unless-stopped
+
     container_name: service
     env_file:
       - .env
@@ -81,7 +85,7 @@ services:
       - "$SYSTEM:/system"
       - "./service:/flask_app"
       - "./.chroma:/flask_app/.chroma:rw"
-      - "./.cache-hf:/flask_app/.cache:rw"
+      - "./.cache-hf:/.cache:rw"
 
 
 

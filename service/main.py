@@ -45,11 +45,20 @@ with catchtime("init"):
                 text = file.read()
             topic = get_filename_without_extension(file_path)
             content = topic + "\n\n" + text
+            try:
+                path = regex.match(r"^[\/1-3_]*", file_path.replace(document_dir, "")).group(0)
+            except:
+                raise ValueError(f"Error parsing path for {file_path}")
+            clean_path = path.replace("/", "")
             docs = text_splitter.create_documents(
                 [content], metadatas=[
                     {
-                        "file_path": file_path.replace(document_dir, ""),
-                     "path": regex.match(r"[\/1-3_]+", file_path.replace(document_dir, "")).group(0)}
+                     "file_path": file_path.replace(document_dir, ""),
+                     "path": path,
+                     ** {
+                         clean_path[:i]: clean_path[:i]
+                         for i in range(clean_path.__len__()) }
+                         }
                 ])
             documents.extend(docs)
         return documents
@@ -80,19 +89,27 @@ with catchtime("init"):
         )
 
 
-def search(query, top_k=10):
-    results = vector_store.search(query, top_k=top_k, search_type="mmr")
+def search(query, top_k=10, filter_path=""):
+    if filter_path:
+        filter =  {filter_path:{'$eq': filter_path}}
+    else:
+        filter = None
+
+    results = vector_store.search(query, top_k=top_k, search_type="mmr", filter=filter)
     return results
 
 
 if __name__ == "__main__":
-    with catchtime("run"):
+    with catchtime("search"):
         pprint(search("sex", top_k=4))
-    with catchtime("run"):
+    with catchtime("search"):
         pprint(search("heart", top_k=4))
-    with catchtime("run"):
+    with catchtime("search"):
         pprint(search("mass", top_k=4))
-    with catchtime("run"):
+    with catchtime("search"):
         pprint(search("how does the system start?", top_k=4))
-    with catchtime("run"):
+    with catchtime("search"):
         pprint(search("best food?", top_k=4))
+
+    with catchtime("filter"):
+        pprint(search("best food?", top_k=4, filter_path="2"))

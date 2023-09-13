@@ -9,7 +9,7 @@ export const MobileControls = ({
   onZoomIn,
   onRight,
   onZoomOut,
-  linkId,
+  linkInfo,
   isWindowWide,
   labels,
 }) => {
@@ -109,7 +109,7 @@ export const MobileControls = ({
         >
           ↓
         </button>
-        <ShareModal linkId={linkId} />
+        <ShareModal linkInfo={linkInfo} />
       </div>
     </div>
   )

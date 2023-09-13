@@ -24,6 +24,18 @@ function makeNoHorizon() {
   })
 }
 
+function parseHash(hash) {
+    const params = {};
+    const pairs = (hash[0] === '#' ? hash.substr(1) : hash).split('&');
+
+    for (let i = 0; i < pairs.length; i++) {
+        const pair = pairs[i].split('=');
+        params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+    }
+
+    return params;
+}
+
 const Fractal = ({ setContent }) => {
   const [detailId, _setDetailId] = useState(null)
   const [transformState, setTransformState] = useState(null)
@@ -55,10 +67,11 @@ const Fractal = ({ setContent }) => {
       ? window.innerHeight
       : window.innerWidth
   const left = (window.innerWidth - size) * 0
-  const top = (window.innerHeight - size) * 0.6
   const transformComponentRef = useRef<ReactZoomPanPinchRef | null>(null)
 
   const [tooltipData, setTooltipData] = useState(null)
+
+    console.log('tooltipData', tooltipData)
   const [isWindowWide, setIsWindowWide] = useState(
     window.innerWidth > window.innerHeight,
   )
@@ -84,20 +97,27 @@ const Fractal = ({ setContent }) => {
       setHiddenId,
       setVisualData,
     }),
-    [hiddenId, setDetailId, collectedData, detailId, hoverId],
+    [hiddenId, setDetailId, collectedData, hoverId, detailId, setHiddenId],
   )
   const [initialPageLoad, setInitialPageLoad] = useState(true) // New state to track initial page load
 
   useEffect(() => {
     if (initialPageLoad) {
-      const hash = window.location.hash.substring(1) // Remove the '#' from the start
-      const parsedId = slashIt(hash.split('/').join('')) // Convert "/1/3/2" to "132", adapt as needed
-      setHiddenId(parsedId) // Update the hiddenId state
-      setDetailId('')
-      setTooltipData(parsedId) // Update the tooltipData state
-      setInitialPageLoad(false) // Mark that the initial page load logic is done
+    const params = parseHash(window.location.hash);
+
+    if (params.hiddenId !== undefined) {
+        setHiddenId(params.hiddenId);
     }
-  }, [initialPageLoad]) // Depend on initialPageLoad so that this useEffect runs only once
+    if (params.searchText !== undefined) {
+        setSearchText(params.searchText);
+    }
+    if (params.tooltipData !== undefined) {
+        setTooltipData(params.tooltipData);
+    }
+
+    setInitialPageLoad(false);  // Mark that the initial page load logic is done
+}
+  }, [initialPageLoad, setDetailId, setHiddenId]) // Depend on initialPageLoad so that this useEffect runs only once
 
   useEffect(() => {
     const handleResize = () => {
@@ -112,7 +132,9 @@ const Fractal = ({ setContent }) => {
 
   const searchCall = async () => {
     try {
-      const response = await fetch('/api/search/', {
+      const response = await fetch(`/api/search?filter_path=${hiddenId.replace(
+        /\//g,""
+      ) ??''}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -135,9 +157,7 @@ const Fractal = ({ setContent }) => {
 
   const {
     data: searchResults,
-    status: statusSearch,
-    error: errorSearch,
-  } = useQuery(['search', searchText], searchCall)
+  } = useQuery(['search', searchText, hiddenId], searchCall)
 
   const fetchTree = async () => {
     const id = (hiddenId ?? '')
@@ -165,10 +185,8 @@ const Fractal = ({ setContent }) => {
     ['triangle', hiddenId + '/' + detailId],
     fetchTree,
     {
-      // keepPreviousData: true,
-      staleTime: 0, // Data will be considered stale immediately after it's fetched, forcing a refetch
-
-      enabled: detailId !== null, // Only execute the query if detailId is not null
+      staleTime: 0,
+      enabled: detailId !== null,
     },
   )
 
@@ -177,7 +195,6 @@ const Fractal = ({ setContent }) => {
 
     if (!hoverId) {
       console.error('hoverId is null', hoverId, detailId)
-      //return
     }
 
     if (scale > maxZoomThreshold) {
@@ -215,7 +232,7 @@ const Fractal = ({ setContent }) => {
     }
 
     makeNoHorizon()
-  }, [scale, collectedData, detailId, hoverId])
+  }, [scale, collectedData, detailId, hoverId, setHiddenId, setDetailId])
 
   if (status === 'loading') {
     return <span>Loading...</span>
@@ -224,7 +241,8 @@ const Fractal = ({ setContent }) => {
   if (status === 'error') {
     return <span>{JSON.stringify(error)}</span>
   }
-  const linkId = tooltipData !== '' ? tooltipData : hiddenId
+  const linkInfo = {hiddenId, searchText, tooltipData: tooltipData?.replace(/\//g,"")}
+
 
   const triggerAnimation = (searchText) => {
     setAnimationClass('fallAnimation')
@@ -299,7 +317,7 @@ const Fractal = ({ setContent }) => {
           onZoomIn={() => go({ ...params, direction: 'lower' })}
           onRight={() => go({ ...params, direction: 'right' })}
           onZoomOut={() => go({ ...params, direction: 'higher' })}
-          linkId={linkId}
+          linkInfo={linkInfo}
           isWindowWide={isWindowWide}
           labels={searchResults}
         />

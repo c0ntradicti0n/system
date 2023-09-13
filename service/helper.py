@@ -515,10 +515,11 @@ def unique_by_func(lst, func):
     return result
 
 
-import json
 from  langchain.schema.document import Document
 
-class CustomEncoder(json.JSONEncoder):
+from json import JSONEncoder
+
+class CustomEncoder(JSONEncoder):
     def default(self, obj):
         # Handle Answer objects
         if isinstance(obj, Document):

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import LeaderLine from 'leader-line'
 import useLinkedElementsStore from '../lib/PinnedElements'
 
@@ -39,7 +39,7 @@ function useElementById(baseId, shorterIdFinder = false, pollInterval = 200) {
     }, pollInterval)
 
     return () => clearInterval(interval) // Cleanup on unmount or id change
-  }, [baseId, element, pollInterval])
+  }, [baseId, element, pollInterval, shorterIdFinder])
 
   return element
 }
@@ -113,7 +113,7 @@ export const Pin = ({ value, setHiddenId }) => {
       } catch (e) {
         console.log(e)
       }
-  }, [line, triangleLeft, triangleTop, labelIdRef?.left, labelTop])
+  }, [line, triangleLeft, triangleTop, labelIdRef?.left, labelTop, labelLeft])
 
   return (
     <div
