@@ -38,13 +38,13 @@ function Triangle({
   const [_hover, _setHover] = useState(false)
   const devicePixelRatio = window.devicePixelRatio || 1
   const fontSize = size / 30 / Math.log1p(devicePixelRatio)
-  const [animationClass, setAnimationClass] = useState(
-    ""
-  )
-   useEffect( () => {
-    setAnimationClass(getRandomElement(['fold-foreground', 'fold-right-top', 'fold-left-top']))
+  const [animationClass, setAnimationClass] = useState('')
+  useEffect(() => {
+    setAnimationClass(
+      getRandomElement(['fold-foreground', 'fold-right-top', 'fold-left-top']),
+    )
   }, [])
-  const [animationTime] = useState(Math.random()/4)
+  const [animationTime] = useState(Math.random() / 4)
   const ref = React.useRef(null)
   const triangleId = 'triangle-' + fullId.replace(/\//g, '')
 
@@ -103,41 +103,41 @@ function Triangle({
     >
       <div
         key={fullId}
-        className={'triangle ' + (animate ? (animationClass??""): "")}
+        className={'triangle ' + (animate ? animationClass ?? '' : '')}
         onAnimationEnd={(div) => setAnimationClass(null)}
         style={{
           backgroundColor: stringToColour(fullId.replace('/', ''), 1),
           zIndex: 1000 - level,
           filter: hover ? 'invert(1)' : 'invert(0)',
-            animationDuration:`${animationTime}s`
+          animationDuration: `${animationTime}s`,
         }}
       >
-        {[1, 2, 3].map((subTriangleDir, index) => (
-            data[subTriangleDir] ?
-                (<div key={fullId + '-' + index}>
-
-            <Triangle
-              fullId={`${fullId}/${subTriangleDir}`}
-              id={subTriangleDir}
-              key={fullId + '-' + index}
-              data={data[subTriangleDir]}
-              size={size / 2}
-              left={getLeftPosition(index, size)}
-              top={getTopPosition(index, size)}
-              level={level + 1}
-              animate={animationClass === null}
-              {...{
-                scale,
-                setCurrentId,
-                setContent,
-                setTooltipData,
-                setHoverId,
-                index,
-                detailId,
-              }}
-            />
-          </div>
-        ): null))}
+        {[1, 2, 3].map((subTriangleDir, index) =>
+          data[subTriangleDir] ? (
+            <div key={fullId + '-' + index}>
+              <Triangle
+                fullId={`${fullId}/${subTriangleDir}`}
+                id={subTriangleDir}
+                key={fullId + '-' + index}
+                data={data[subTriangleDir]}
+                size={size / 2}
+                left={getLeftPosition(index, size)}
+                top={getTopPosition(index, size)}
+                level={level + 1}
+                animate={animationClass === null}
+                {...{
+                  scale,
+                  setCurrentId,
+                  setContent,
+                  setTooltipData,
+                  setHoverId,
+                  index,
+                  detailId,
+                }}
+              />
+            </div>
+          ) : null,
+        )}
 
         <div
           className="triangle-content"
@@ -152,7 +152,7 @@ function Triangle({
         >
           {title && (
             <div>
-              <div>{(animate ? (animationClass??""): "")}</div>
+              <div>{animate ? animationClass ?? '' : ''}</div>
               <div id={triangleId} className="triangle-title">
                 {fullId.replace(/\//g, '.')}. {postProcessTitle(title)}
               </div>

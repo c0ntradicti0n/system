@@ -5,7 +5,7 @@ import { SearchOutlined } from '@ant-design/icons'
 
 export const MobileControls = ({
   triggerSearch,
-    searchText : _searchText,
+  searchText: _searchText,
   onLeft,
   onZoomIn,
   onRight,
@@ -14,13 +14,12 @@ export const MobileControls = ({
   isWindowWide,
   labels,
 }) => {
-  console.log("SSEEEARRRCHHH", _searchText)
+  console.log('SSEEEARRRCHHH', _searchText)
 
-
-  const [searchText, setSearchText] = useState(_searchText??'')
-    useEffect(() => {
+  const [searchText, setSearchText] = useState(_searchText ?? '')
+  useEffect(() => {
     setSearchText(_searchText)
-  }, [_searchText]);
+  }, [_searchText])
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.target.id === 'search') {

@@ -100,7 +100,6 @@ const Fractal = ({ setContent }) => {
   )
   const [initialPageLoad, setInitialPageLoad] = useState(true) // New state to track initial page load
 
-
   useEffect(() => {
     const handleResize = () => {
       setIsWindowWide(window.innerWidth > window.innerHeight)
@@ -218,7 +217,6 @@ const Fractal = ({ setContent }) => {
     makeNoHorizon()
   }, [scale, collectedData, detailId, hoverId, setHiddenId, setDetailId])
 
-
   const linkInfo = {
     hiddenId,
     searchText,
@@ -231,7 +229,7 @@ const Fractal = ({ setContent }) => {
     setSearchText(searchText)
   }
 
-    useEffect(() => {
+  useEffect(() => {
     if (initialPageLoad) {
       const params = parseHash(window.location.hash)
 
@@ -239,7 +237,7 @@ const Fractal = ({ setContent }) => {
         setHiddenId(slashIt(params.hiddenId))
       }
       if (params.searchText !== undefined) {
-        console.log("searchTEXT", params)
+        console.log('searchTEXT', params)
         triggerAnimation(params.searchText)
       }
       if (params.tooltipData !== undefined) {
@@ -280,7 +278,7 @@ const Fractal = ({ setContent }) => {
                   position: 'relative',
                   left,
                   top: 0,
-                  width: isWindowWide && tooltipData ? '70vw' : '100vw',
+                  width: '100vw',
                   height: '100vh',
                   perspective: '1000px',
                 }}
@@ -314,7 +312,7 @@ const Fractal = ({ setContent }) => {
       </TransformWrapper>
       <div className="right-container">
         <MobileControls
-            searchText={searchText}
+          searchText={searchText}
           triggerSearch={triggerAnimation}
           onLeft={() => go({ ...params, direction: 'left' })}
           onZoomIn={() => go({ ...params, direction: 'lower' })}

@@ -108,7 +108,7 @@
     transform: rotateX(90deg) rotateZ(90deg);
   }
   100% {
-    transform:  rotateX(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateZ(0deg);
   }
 }
 

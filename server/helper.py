@@ -234,7 +234,10 @@ def tree(
     else:
         output_level = pre_set_output_level
 
-    path = os.path.join(basepath, startpath)
+    try:
+        path = os.path.join(basepath, startpath)
+    except:
+        raise
 
     if output is None:
         if format == "string":
@@ -325,7 +328,15 @@ def tree(
                 try:
                     k = regex.match(r"(\d+-|\.|_)", name).group(0)
                 except Exception as e:
-                    raise Exception("error matching prefix", name) from e
+                    logging.error(
+                        f"error matching prefix {path=}/{name=}"
+                    )
+                    should_we_fix = input("Should we fix this by adding a `.` to the beginning of the filename? (y/n)")
+                    if should_we_fix == "y":
+                        os.rename(os.path.join(path, name), os.path.join(path, "." + name))
+                        k = "."
+                    else:
+                        raise Exception("error matching prefix", name) from e
                 v = name[len(k) :]
                 k = k[:1]
 

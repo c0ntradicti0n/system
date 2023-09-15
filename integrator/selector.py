@@ -1,48 +1,92 @@
-import itertools
 import os
 import random
 
 import torch
-from helper import tree
+from helper import OutputLevel, e, tree
+from integrator import config
 
 from integrator.embedding import get_embedding
 
 
-def tree_walker(basepath, yield_mode="valid"):
-    """
-    Generator function based on the tree function to yield either:
-    - a full subfolder from the root directory (yield_mode="valid")
-    - a random file from anywhere in the tree (yield_mode="random")
-    """
+def list_all_subdirs(dir_path, exclude):
+    """Recursively lists all subdirectories."""
+    subdirs = []
 
-    # Get JSON representation of the directory structure
-    directory_structure = tree(startpath="", basepath=basepath, format="json")
+    # Walk through the directory
+    for dirpath, dirnames, filenames in os.walk(dir_path):
+        for dirname in dirnames:
+            if not any(e in dirname or e in dirpath for e in exclude):
+                subdirs.append(os.path.join(dirpath, dirname))
 
-    if yield_mode == "valid":
-        # Yield each subfolder at the root
-        for subfolder, contents in directory_structure.items():
-            if isinstance(contents, dict):
-                yield subfolder, contents
 
-    elif yield_mode == "random":
-        all_files = []
 
-        def extract_files(d, current_path=[]):
-            """
-            Helper function to extract all files in the directory tree
-            """
-            for key, value in d.items():
-                new_path = current_path + [key]
-                if isinstance(value, dict):
-                    extract_files(value, new_path)
-                else:
-                    all_files.append("/".join(new_path))
+    return subdirs
 
-        extract_files(directory_structure)
 
-        while True:
-            # Randomly select a file from the list and yield
-            yield random.choice(all_files)
+gold_samples = list_all_subdirs(
+    os.environ["SYSTEM"],
+    exclude=[".git", ".git.md", ".gitignore", ".DS_Store", ".idea"],
+)
+
+
+def random_subdir(dir_path):
+    """Selects a random subdirectory."""
+
+    if not gold_samples:
+        raise ValueError("No subdirectories found!")
+
+    return random.choice(gold_samples)
+
+
+
+
+def tree_walker(yield_mode="valid", n_samples=10):
+    samples = []
+    while len(samples) < n_samples:
+        random_dir = random.choice(gold_samples)
+        d = tree(
+            basepath="",
+            startpath= random_dir,
+            depth=1,
+            format="json",
+            info_radius=10,
+            exclude=[".git", ".git.md", ".gitignore", ".DS_Store", ".idea"],
+            pre_set_output_level=OutputLevel.FILENAMES,
+            prefix_items=True,
+        )
+
+        if yield_mode == "valid":
+            a, b, c = None, None, None
+            with e:
+                a = d[1]["."]
+            with e:
+                b = d[2]["."]
+            with e:
+                c = d[3]["."]
+
+            if (
+                all([a, b, c])
+                and a not in samples
+                and b not in samples
+                and c not in samples
+            ):
+                samples.extend([(a, 1), (b, 2), (c, 3)])
+                yield_mode = "random"
+        elif yield_mode == "random":
+            r = random.choice([1, 2, 3])
+            c = None
+            with e:
+                c = d[r]["."]
+            if not c:
+                with e:
+                    c = d["."]
+
+            if c and not isinstance(c, str):
+                raise ValueError(f"{c=}")
+            if c:
+                samples.append((c, 0))
+    random.shuffle(samples)
+    return samples
 
 
 class DataGenerator:
@@ -53,10 +97,15 @@ class DataGenerator:
         # Adjust data distribution based on fscore
         pass
 
-    def generate_data(self, n_samples=10):
-        samples, labels = itertools.islice(
-            tree_walker(os.environ["SYSTEM"], random.choice("valid", "random")),
-            n_samples,
-        )
-        embeddings = get_embedding(samples)
-        return torch.stack(embeddings), torch.tensor(labels)
+    def generate_data(self, n_samples=config.n_samples):
+        texts = []
+        labels = []
+        embeddings = []
+        for _ in range(config.batch_size):
+            sample, label = list(zip(*tree_walker(random.choice(["valid", "random"]), n_samples)))
+            texts.append(sample)
+            labels.append(label)
+
+            embeddings.append(get_embedding(sample))
+
+        return torch.tensor(embeddings), torch.tensor(labels, dtype=torch.long)
