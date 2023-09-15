@@ -62,7 +62,7 @@ function Triangle({
   }, [transformState, scale, fullId])
   if (!data) return null
 
-  const { linkedElements, linkedElementsHas } = useLinkedElementsStore()
+  //const { linkedElements, linkedElementsHas } = useLinkedElementsStore()
 
   const hover = hoverObjects.has(fullId)
   if (hover) {
