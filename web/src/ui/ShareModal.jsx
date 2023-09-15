@@ -6,10 +6,16 @@ import { removeMultipleSlashes } from '../lib/nesting'
 const ShareModal = ({ linkInfo }) => {
   const [isVisible, setIsVisible] = useState(false)
   const [isCopied, setIsCopied] = useState(false)
-  const linkInfoNoNull = Object.fromEntries(Object.entries(linkInfo).filter(([_, v]) => v !== null))
+  const linkInfoNoNull = Object.fromEntries(
+    Object.entries(linkInfo).filter(([_, v]) => v !== null).map(([k, v]) => [k, v?.toString().replace(/\//g, '')]),
+  )
   const fullUrl =
     `${window.location.protocol}//` +
-    removeMultipleSlashes(`${window.location.host}#${new URLSearchParams(linkInfoNoNull).toString()}`)
+    removeMultipleSlashes(
+      `${window.location.host}#${new URLSearchParams(
+        linkInfoNoNull,
+      ).toString()}`,
+    )
 
   const handleCopy = () => {
     navigator.clipboard.writeText(fullUrl)

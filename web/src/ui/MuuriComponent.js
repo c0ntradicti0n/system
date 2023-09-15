@@ -4,7 +4,6 @@ import '../muuri.css'
 import { Pin } from './Pin'
 
 const MuuriComponent = ({ labels, setHiddenId }) => {
-  console.log(labels)
   const gridRef = useRef(null)
 
   useEffect(() => {

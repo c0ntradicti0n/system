@@ -29,8 +29,17 @@ api.add_namespace(search, path="/api/search")
 SECONDARY_BACKEND_URL = "http://service:5000/api/search"
 
 parser = reqparse.RequestParser()
-parser.add_argument('string', type=str, required=True, help='String to search', location='json')
-parser.add_argument('filter_path', type=str, required=False, help='Filter path for the search', location='json')
+parser.add_argument(
+    "string", type=str, required=True, help="String to search", location="json"
+)
+parser.add_argument(
+    "filter_path",
+    type=str,
+    required=False,
+    help="Filter path for the search",
+    location="json",
+)
+
 
 @toc.route("/", defaults={"path": ""})
 @toc.route("/<path:path>")
@@ -104,18 +113,19 @@ class SearchProxy(Resource):
             data = request.json
             string_to_search = data.get("string", "")
             args = parser.parse_args()
-            string_to_search = args['string']
-            filter_path = args['filter_path']
+            string_to_search = args["string"]
+            filter_path = args["filter_path"]
 
             if not string_to_search:
                 return [], 200
 
             print(f"SEARCH STRING {string_to_search=}")
-            print (f"FILTER PATH {filter_path=}")
-
+            print(f"FILTER PATH {filter_path=}")
 
             # Forward the request to the secondary backend service
-            response = requests.post(f"{SECONDARY_BACKEND_URL}?filter_path={filter_path}", json=data)
+            response = requests.post(
+                f"{SECONDARY_BACKEND_URL}?filter_path={filter_path}", json=data
+            )
 
             # Check if the request was successful
             response.raise_for_status()

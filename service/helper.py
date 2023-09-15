@@ -515,9 +515,10 @@ def unique_by_func(lst, func):
     return result
 
 
-from  langchain.schema.document import Document
-
 from json import JSONEncoder
+
+from langchain.schema.document import Document
+
 
 class CustomEncoder(JSONEncoder):
     def default(self, obj):
@@ -527,7 +528,7 @@ class CustomEncoder(JSONEncoder):
                 **obj.dict(),
                 "meta": obj.metadata,
                 "path": obj.metadata["path"].strip("/"),
-                "content": obj.page_content
+                "content": obj.page_content,
             }
         # Let the base class handle any types we don't explicitly handle
         return super(CustomEncoder, self).default(obj)

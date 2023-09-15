@@ -11,7 +11,9 @@ function findElementById(id) {
     if (!element) {
       currentId = currentId.slice(0, -1)
     }
-    console.log('findElementById', { id, currentId, element })
+  }
+  if (!element) {
+    console.log('Could not find element with id', id)
   }
 
   return element

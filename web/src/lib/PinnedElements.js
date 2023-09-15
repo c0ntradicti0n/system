@@ -11,7 +11,7 @@ const useLinkedElementsStore = create((set) => ({
   clearElements: () => set((state) => ({ linkedElements: [] })),
   linkedElementsHas: (elementId) =>
     set((state) => state.linkedElements.some((el) => el.id === elementId)),
-  linkedElementsEmpty: () => set((state) => state.linkedElements.length=== 0),
+  linkedElementsEmpty: () => set((state) => state.linkedElements.length === 0),
 }))
 
 export default useLinkedElementsStore

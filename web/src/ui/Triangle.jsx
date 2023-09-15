@@ -10,6 +10,10 @@ import { MAX_LEVEL } from '../config/const'
 import { stringToColour } from '../lib/color'
 import useLinkedElementsStore from '../lib/PinnedElements'
 
+function getRandomElement(arr) {
+  const randomIndex = Math.floor(Math.random() * arr.length)
+  return arr[randomIndex]
+}
 function Triangle({
   id,
   detailId,
@@ -29,11 +33,18 @@ function Triangle({
   setContent,
   setTooltipData,
   setHoverId,
+  animate,
 }) {
   const [_hover, _setHover] = useState(false)
   const devicePixelRatio = window.devicePixelRatio || 1
   const fontSize = size / 30 / Math.log1p(devicePixelRatio)
-
+  const [animationClass, setAnimationClass] = useState(
+    ""
+  )
+   useEffect( () => {
+    setAnimationClass(getRandomElement(['fold-foreground', 'fold-right-top', 'fold-left-top']))
+  }, [])
+  const [animationTime] = useState(Math.random()/4)
   const ref = React.useRef(null)
   const triangleId = 'triangle-' + fullId.replace(/\//g, '')
 
@@ -49,53 +60,10 @@ function Triangle({
       removeHoverObject(fullId)
     }
   }, [transformState, scale, fullId])
+  if (!data) return null
 
   const { linkedElements, linkedElementsHas } = useLinkedElementsStore()
 
-    console.log('linkedElements', linkedElements)
-
-  if (typeof data === 'string' || !data) {
-    const title = data
-    return (
-      <div
-        ref={ref}
-        id={fullId}
-        style={{
-          position: 'absolute',
-          width: size,
-          height: size,
-          left: left,
-          top: top,
-        }}
-      >
-        <div
-          className="triangle"
-          style={{
-            verticalAlign: 'middle',
-            textAlign: 'center',
-            border: '10px solid black !important',
-            zIndex: 1000 - level,
-          }}
-          onClick={() => {
-            console.log('click on ', data)
-            setContent(data)
-          }}
-        >
-          <div style={{ position: 'relative', top: size / 1.5 }}>
-            {id && (
-              <div
-                id={'triangle-' + fullId.replace(/\//g, '')}
-                style={{ fontSize }}
-                className="triangle-title"
-              >
-                {postProcessTitle(title)}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    )
-  }
   const hover = hoverObjects.has(fullId)
   if (hover) {
     setHoverId(fullId)
@@ -114,13 +82,13 @@ function Triangle({
         height: size,
         left: left,
         top: top,
-        filter: _hover ? 'invert(1)' : 'invert(0)',
-        transform: _hover ? 'scale(1.05)' : 'scale(1)', // this line scales the triangle up a bit on hover
+        //filter: _hover ? 'invert(1)' : 'invert(0)',
+        /*//transform: _hover ? 'scale(1.05)' : 'scale(1)', // this line scales the triangle up a bit on hover
         visibility: true
           ? 'visible'
           : linkedElementsHas(fullId)
           ? 'hidden'
-          : 'visible',
+          : 'visible',*/
       }}
       onClick={(e) => {
         console.log(scale)
@@ -135,22 +103,19 @@ function Triangle({
     >
       <div
         key={fullId}
-        className="triangle"
+        className={'triangle ' + (animate ? (animationClass??""): "")}
+        onAnimationEnd={(div) => setAnimationClass(null)}
         style={{
-          verticalAlign: 'middle',
-          textAlign: 'center',
-          border: '10px solid black !important',
           backgroundColor: stringToColour(fullId.replace('/', ''), 1),
           zIndex: 1000 - level,
           filter: hover ? 'invert(1)' : 'invert(0)',
-          display: 'flex',
-          justifyContent: 'center' /* For horizontal alignment */,
-          alignItems: 'center' /* For vertical alignment */,
-          color: '#000',
+            animationDuration:`${animationTime}s`
         }}
       >
         {[1, 2, 3].map((subTriangleDir, index) => (
-          <div key={fullId + '-' + index}>
+            data[subTriangleDir] ?
+                (<div key={fullId + '-' + index}>
+
             <Triangle
               fullId={`${fullId}/${subTriangleDir}`}
               id={subTriangleDir}
@@ -160,6 +125,7 @@ function Triangle({
               left={getLeftPosition(index, size)}
               top={getTopPosition(index, size)}
               level={level + 1}
+              animate={animationClass === null}
               {...{
                 scale,
                 setCurrentId,
@@ -171,18 +137,14 @@ function Triangle({
               }}
             />
           </div>
-        ))}
+        ): null))}
 
         <div
+          className="triangle-content"
           onClick={() => setTooltipData(fullId)}
           style={{
-            position: 'absolute',
-            top: '70%',
-            transform: 'translateY(-50%)',
             fontSize,
-            whiteSpace: 'pre-wrap',
-            wordWrap: 'break-word',
-            zIndex: 10000,
+
             width: `${size / 3}px`,
           }}
           onMouseEnter={() => _setHover(true)}
@@ -190,6 +152,7 @@ function Triangle({
         >
           {title && (
             <div>
+              <div>{(animate ? (animationClass??""): "")}</div>
               <div id={triangleId} className="triangle-title">
                 {fullId.replace(/\//g, '.')}. {postProcessTitle(title)}
               </div>

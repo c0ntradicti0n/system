@@ -85,6 +85,62 @@
   transition:
     filter 0.3s ease,
     transform 0.3s ease;
+  vertical-align: middle;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  perspective: 1000px;
+}
+
+.triangle-content {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  z-index: 10000;
+  position: absolute;
+  top: 70%;
+  transform: translateY(-50%);
+}
+
+@keyframes foldFromForeground {
+  0% {
+    transform: rotateX(90deg) rotateZ(90deg);
+  }
+  100% {
+    transform:  rotateX(0deg) rotateZ(0deg);
+  }
+}
+
+.fold-foreground {
+  animation: foldFromForeground 2s ease forwards;
+  animation-fill-mode: forwards;
+}
+@keyframes foldFromRightTop {
+  0% {
+    transform: rotateY(-90deg) rotateX(90deg);
+  }
+  100% {
+    transform: rotateY(0deg) rotateX(0deg);
+  }
+}
+
+.fold-right-top {
+  animation: foldFromRightTop 2s ease forwards;
+  animation-fill-mode: forwards;
+}
+@keyframes foldFromLeftTop {
+  0% {
+    transform: rotateZ(90deg) rotateY(-90deg);
+  }
+  100% {
+    transform: rotateZ(0deg) rotateY(0deg);
+  }
+}
+
+.fold-left-top {
+  animation: foldFromLeftTop 2s ease forwards;
+  animation-fill-mode: forwards;
 }
 
 .pin {

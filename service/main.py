@@ -23,9 +23,9 @@ class catchtime:
 
 
 with catchtime("init"):
+
     def get_filename_without_extension(path):
         return os.path.splitext(os.path.basename(path))[0]
-
 
     def get_documents(document_dir):
         text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
@@ -46,23 +46,27 @@ with catchtime("init"):
             topic = get_filename_without_extension(file_path)
             content = topic + "\n\n" + text
             try:
-                path = regex.match(r"^[\/1-3_]*", file_path.replace(document_dir, "")).group(0)
+                path = regex.match(
+                    r"^[\/1-3_]*", file_path.replace(document_dir, "")
+                ).group(0)
             except:
                 raise ValueError(f"Error parsing path for {file_path}")
             clean_path = path.replace("/", "")
             docs = text_splitter.create_documents(
-                [content], metadatas=[
+                [content],
+                metadatas=[
                     {
-                     "file_path": file_path.replace(document_dir, ""),
-                     "path": path,
-                     ** {
-                         clean_path[:i]: clean_path[:i]
-                         for i in range(clean_path.__len__()) }
-                         }
-                ])
+                        "file_path": file_path.replace(document_dir, ""),
+                        "path": path,
+                        **{
+                            clean_path[:i]: clean_path[:i]
+                            for i in range(clean_path.__len__())
+                        },
+                    }
+                ],
+            )
             documents.extend(docs)
         return documents
-
 
     persist_directory = ".chroma"
     embedding = SentenceTransformerEmbeddings(
@@ -91,7 +95,7 @@ with catchtime("init"):
 
 def search(query, top_k=10, filter_path=""):
     if filter_path:
-        filter =  {filter_path:{'$eq': filter_path}}
+        filter = {filter_path: {"$eq": filter_path}}
     else:
         filter = None
 

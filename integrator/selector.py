@@ -1,10 +1,10 @@
 import itertools
-import torch
-
 import os
 import random
 
+import torch
 from helper import tree
+
 from integrator.embedding import get_embedding
 
 
@@ -54,6 +54,9 @@ class DataGenerator:
         pass
 
     def generate_data(self, n_samples=10):
-        samples, labels = itertools.islice(tree_walker(os.environ["SYSTEM"], random.choice("valid", "random" )), n_samples)
-        embeddings =  get_embedding(samples)
+        samples, labels = itertools.islice(
+            tree_walker(os.environ["SYSTEM"], random.choice("valid", "random")),
+            n_samples,
+        )
+        embeddings = get_embedding(samples)
         return torch.stack(embeddings), torch.tensor(labels)

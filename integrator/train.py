@@ -1,12 +1,11 @@
 import torch
-from torch.optim import Adam
 from sklearn.metrics import f1_score
+from torch import nn
+from torch.optim import Adam
 
 from integrator.config import MODEL_PATH, OPTIMIZER_PATH
 from integrator.selector import DataGenerator
 from integrator.teacher import Classifier
-from torch import nn
-
 
 # Initialization
 model = Classifier()
@@ -33,21 +32,28 @@ for epoch in range(epochs):
 
     # Calculate F-score for training data
     _, predicted = torch.max(outputs, 1)
-    train_fscore = f1_score(train_labels.numpy(), predicted.numpy(), average='macro')
+    train_fscore = f1_score(train_labels.numpy(), predicted.numpy(), average="macro")
 
     # Fetch validation data
-    valid_data, valid_labels = data_gen.generate_data()  # ideally use separate method for validation data
+    (
+        valid_data,
+        valid_labels,
+    ) = data_gen.generate_data()  # ideally use separate method for validation data
     model.eval()
     with torch.no_grad():
         valid_outputs = model(valid_data)
         valid_loss = criterion(valid_outputs, valid_labels)
         _, valid_predicted = torch.max(valid_outputs, 1)
-        valid_fscore = f1_score(valid_labels.numpy(), valid_predicted.numpy(), average='macro')
+        valid_fscore = f1_score(
+            valid_labels.numpy(), valid_predicted.numpy(), average="macro"
+        )
 
     # Adjust data distribution
     data_gen.adjust_data_distribution(train_fscore)
 
-    print(f"Epoch {epoch+1}, Loss: {loss.item()}, F-Score: {train_fscore}, Validation Loss: {valid_loss.item()}, Validation F-Score: {valid_fscore}")
+    print(
+        f"Epoch {epoch+1}, Loss: {loss.item()}, F-Score: {train_fscore}, Validation Loss: {valid_loss.item()}, Validation F-Score: {valid_fscore}"
+    )
 
 # Save the model and optimizer
 torch.save(model.state_dict(), MODEL_PATH)

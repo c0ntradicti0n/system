@@ -25,15 +25,15 @@ function makeNoHorizon() {
 }
 
 function parseHash(hash) {
-    const params = {};
-    const pairs = (hash[0] === '#' ? hash.substr(1) : hash).split('&');
+  const params = {}
+  const pairs = (hash[0] === '#' ? hash.substr(1) : hash).split('&')
 
-    for (let i = 0; i < pairs.length; i++) {
-        const pair = pairs[i].split('=');
-        params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
-    }
+  for (let i = 0; i < pairs.length; i++) {
+    const pair = pairs[i].split('=')
+    params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '')
+  }
 
-    return params;
+  return params
 }
 
 const Fractal = ({ setContent }) => {
@@ -71,7 +71,6 @@ const Fractal = ({ setContent }) => {
 
   const [tooltipData, setTooltipData] = useState(null)
 
-    console.log('tooltipData', tooltipData)
   const [isWindowWide, setIsWindowWide] = useState(
     window.innerWidth > window.innerHeight,
   )
@@ -101,23 +100,6 @@ const Fractal = ({ setContent }) => {
   )
   const [initialPageLoad, setInitialPageLoad] = useState(true) // New state to track initial page load
 
-  useEffect(() => {
-    if (initialPageLoad) {
-    const params = parseHash(window.location.hash);
-
-    if (params.hiddenId !== undefined) {
-        setHiddenId(params.hiddenId);
-    }
-    if (params.searchText !== undefined) {
-        setSearchText(params.searchText);
-    }
-    if (params.tooltipData !== undefined) {
-        setTooltipData(params.tooltipData);
-    }
-
-    setInitialPageLoad(false);  // Mark that the initial page load logic is done
-}
-  }, [initialPageLoad, setDetailId, setHiddenId]) // Depend on initialPageLoad so that this useEffect runs only once
 
   useEffect(() => {
     const handleResize = () => {
@@ -132,17 +114,18 @@ const Fractal = ({ setContent }) => {
 
   const searchCall = async () => {
     try {
-      const response = await fetch(`/api/search?filter_path=${hiddenId.replace(
-        /\//g,""
-      ) ??''}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        `/api/search?filter_path=${hiddenId.replace(/\//g, '') ?? ''}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            string: searchText,
+          }),
         },
-        body: JSON.stringify({
-          string: searchText,
-        }),
-      })
+      )
 
       if (!response.ok) {
         console.error('Network response was not ok', response)
@@ -155,12 +138,13 @@ const Fractal = ({ setContent }) => {
     }
   }
 
-  const {
-    data: searchResults,
-  } = useQuery(['search', searchText, hiddenId], searchCall)
+  const { data: searchResults } = useQuery(
+    ['search', searchText, hiddenId],
+    searchCall,
+  )
 
   const fetchTree = async () => {
-    const id = (hiddenId ?? '')
+    const id = hiddenId ?? ''
     const res = await fetch(`/api/toc/${id}`)
     if (!res.ok) {
       console.error('Network response was not ok', res)
@@ -186,7 +170,7 @@ const Fractal = ({ setContent }) => {
     fetchTree,
     {
       staleTime: 0,
-      enabled: detailId !== null,
+      initialData: null,
     },
   )
 
@@ -234,21 +218,37 @@ const Fractal = ({ setContent }) => {
     makeNoHorizon()
   }, [scale, collectedData, detailId, hoverId, setHiddenId, setDetailId])
 
-  if (status === 'loading') {
-    return <span>Loading...</span>
-  }
 
-  if (status === 'error') {
-    return <span>{JSON.stringify(error)}</span>
+  const linkInfo = {
+    hiddenId,
+    searchText,
+    tooltipData: tooltipData?.replace(/\//g, ''),
   }
-  const linkInfo = {hiddenId, searchText, tooltipData: tooltipData?.replace(/\//g,"")}
-
 
   const triggerAnimation = (searchText) => {
     setAnimationClass('fallAnimation')
     makeNoHorizon()
     setSearchText(searchText)
   }
+
+    useEffect(() => {
+    if (initialPageLoad) {
+      const params = parseHash(window.location.hash)
+
+      if (params.hiddenId !== undefined) {
+        setHiddenId(slashIt(params.hiddenId))
+      }
+      if (params.searchText !== undefined) {
+        console.log("searchTEXT", params)
+        triggerAnimation(params.searchText)
+      }
+      if (params.tooltipData !== undefined) {
+        setTooltipData(slashIt(params.tooltipData))
+      }
+
+      setInitialPageLoad(false) // Mark that the initial page load logic is done
+    }
+  }, [initialPageLoad, setDetailId, setHiddenId]) // Depend on initialPageLoad so that this useEffect runs only once
 
   return (
     <div className="App" style={{}}>
@@ -282,6 +282,7 @@ const Fractal = ({ setContent }) => {
                   top: 0,
                   width: isWindowWide && tooltipData ? '70vw' : '100vw',
                   height: '100vh',
+                  perspective: '1000px',
                 }}
               >
                 <Triangle
@@ -304,6 +305,7 @@ const Fractal = ({ setContent }) => {
                     scale,
                     setTooltipData,
                   }}
+                  animate={true}
                 />
               </div>
             </TransformComponent>
@@ -312,6 +314,7 @@ const Fractal = ({ setContent }) => {
       </TransformWrapper>
       <div className="right-container">
         <MobileControls
+            searchText={searchText}
           triggerSearch={triggerAnimation}
           onLeft={() => go({ ...params, direction: 'left' })}
           onZoomIn={() => go({ ...params, direction: 'lower' })}
