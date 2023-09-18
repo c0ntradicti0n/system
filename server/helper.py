@@ -328,12 +328,14 @@ def tree(
                 try:
                     k = regex.match(r"(\d+-|\.|_)", name).group(0)
                 except Exception as e:
-                    logging.error(
-                        f"error matching prefix {path=}/{name=}"
+                    logging.error(f"error matching prefix {path=}/{name=}")
+                    should_we_fix = input(
+                        "Should we fix this by adding a `.` to the beginning of the filename? (y/n)"
                     )
-                    should_we_fix = input("Should we fix this by adding a `.` to the beginning of the filename? (y/n)")
                     if should_we_fix == "y":
-                        os.rename(os.path.join(path, name), os.path.join(path, "." + name))
+                        os.rename(
+                            os.path.join(path, name), os.path.join(path, "." + name)
+                        )
                         k = "."
                     else:
                         raise Exception("error matching prefix", name) from e

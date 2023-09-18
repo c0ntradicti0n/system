@@ -1,11 +1,21 @@
+import contextlib
 import os
 import random
+import timeit
 
 import torch
 from helper import OutputLevel, e, tree
-from integrator import config
 
-from integrator.embedding import get_embedding
+from integrator import config
+from integrator.embedding import get_embeddings
+
+
+@contextlib.contextmanager
+def time_it(name):
+    start = timeit.default_timer()
+    yield
+    end = timeit.default_timer()
+    print(f"{name} took {end - start} seconds")
 
 
 def list_all_subdirs(dir_path, exclude):
@@ -17,8 +27,6 @@ def list_all_subdirs(dir_path, exclude):
         for dirname in dirnames:
             if not any(e in dirname or e in dirpath for e in exclude):
                 subdirs.append(os.path.join(dirpath, dirname))
-
-
 
     return subdirs
 
@@ -38,15 +46,13 @@ def random_subdir(dir_path):
     return random.choice(gold_samples)
 
 
-
-
 def tree_walker(yield_mode="valid", n_samples=10):
     samples = []
     while len(samples) < n_samples:
         random_dir = random.choice(gold_samples)
         d = tree(
             basepath="",
-            startpath= random_dir,
+            startpath=random_dir,
             depth=1,
             format="json",
             info_radius=10,
@@ -86,6 +92,7 @@ def tree_walker(yield_mode="valid", n_samples=10):
             if c:
                 samples.append((c, 0))
     random.shuffle(samples)
+    samples.reverse()
     return samples
 
 
@@ -94,7 +101,7 @@ class DataGenerator:
         pass
 
     def adjust_data_distribution(self, fscore):
-        # Adjust data distribution based on fscore
+        # Adjust data distribution based on f score
         pass
 
     def generate_data(self, n_samples=config.n_samples):
@@ -102,10 +109,13 @@ class DataGenerator:
         labels = []
         embeddings = []
         for _ in range(config.batch_size):
-            sample, label = list(zip(*tree_walker(random.choice(["valid", "random"]), n_samples)))
+            sample, label = list(
+                zip(*tree_walker(random.choice(["valid"#, "random"
+                                                ]), n_samples))
+            )
             texts.append(sample)
             labels.append(label)
 
-            embeddings.append(get_embedding(sample))
+            embeddings.append(get_embeddings(sample))
 
         return torch.tensor(embeddings), torch.tensor(labels, dtype=torch.long)

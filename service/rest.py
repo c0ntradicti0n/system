@@ -1,16 +1,13 @@
 import json
 import logging
 import os
-from pprint import pprint
 
 import coloredlogs
-import config
 import flask
 from flask import Flask
 from flask_cors import CORS
 from flask_restx import Api, Namespace, Resource, reqparse
-from helper import (CustomEncoder, OutputLevel, get_from_nested_dict,
-                    nested_str_dict, tree)
+from helper import CustomEncoder
 from main import search as semantic_search
 
 logging.basicConfig(level=logging.DEBUG)
