@@ -14,8 +14,6 @@ export const MobileControls = ({
   isWindowWide,
   labels,
 }) => {
-  console.log('SSEEEARRRCHHH', _searchText)
-
   const [searchText, setSearchText] = useState(_searchText ?? '')
   useEffect(() => {
     setSearchText(_searchText)
@@ -51,7 +49,11 @@ export const MobileControls = ({
     }
   }, [onLeft, onRight, onZoomIn, onZoomOut])
 
-  const mobileStyles = { left: 50, top: 50, position: 'fixed' }
+  const mobileStyles = !isWindowWide
+            ? { left: 50, top: "27vh", position: 'fixed' }
+            : {
+                top: '5vh',
+              }
   return (
     <div className="mobile-controls" style={{}}>
       <div

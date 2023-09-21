@@ -14,6 +14,10 @@ function getRandomElement(arr) {
   const randomIndex = Math.floor(Math.random() * arr.length)
   return arr[randomIndex]
 }
+
+
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
 function Triangle({
   id,
   detailId,
@@ -49,12 +53,17 @@ function Triangle({
   const triangleId = 'triangle-' + fullId.replace(/\//g, '')
 
   useEffect(() => {
-    if (!ref?.current) return
+
+
+    if (!ref?.current || !isMobile) return
     const isWithinViewport = isElementInViewportAndBigAndNoChildren(
       ref?.current,
     )
+              console.log(isWithinViewport )
 
     if (isWithinViewport) {
+          console.log({ isWithinViewport, fullId, hoverObjects })
+
       addHoverObject(fullId)
     } else {
       removeHoverObject(fullId)
@@ -82,13 +91,6 @@ function Triangle({
         height: size,
         left: left,
         top: top,
-        //filter: _hover ? 'invert(1)' : 'invert(0)',
-        /*//transform: _hover ? 'scale(1.05)' : 'scale(1)', // this line scales the triangle up a bit on hover
-        visibility: true
-          ? 'visible'
-          : linkedElementsHas(fullId)
-          ? 'hidden'
-          : 'visible',*/
       }}
       onClick={(e) => {
         console.log(scale)
@@ -108,7 +110,7 @@ function Triangle({
         style={{
           backgroundColor: stringToColour(fullId.replace('/', ''), 1),
           zIndex: 1000 - level,
-          filter: hover ? 'invert(1)' : 'invert(0)',
+          filter: _hover ? 'invert(1)' : 'invert(0)',
           animationDuration: `${animationTime}s`,
         }}
       >

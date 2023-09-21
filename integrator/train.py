@@ -1,3 +1,5 @@
+import os
+
 import torch
 from pytorch_lamb import Lamb
 from pytorch_optimizer import AdaBelief
@@ -7,13 +9,13 @@ from torch.optim import Adam
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 
 from integrator import config
-from integrator.classifier import MultiInputNetwork
+from integrator.classifier import SiameseNetwork
 from integrator.config import MODEL_PATH, OPTIMIZER_PATH
 from integrator.exclusive_labels import assign_labels
 from integrator.selector import DataGenerator
 
 
-def colorized_comparison(predicted_labels, train_labels_reshaped):
+def colorized_comparison(predicted_labels, gold_labels):
     ANSI_RED = "\033[91m"
     ANSI_GREEN = "\033[92m"
     ANSI_RESET = "\033[0m"
@@ -22,20 +24,20 @@ def colorized_comparison(predicted_labels, train_labels_reshaped):
 
     # Ensure the tensors are on the CPU and detached from the computation graph
     predicted_labels = predicted_labels.cpu().detach().numpy()
-    train_labels_reshaped = train_labels_reshaped.cpu().detach().numpy()
+    gold_labels = gold_labels.cpu().detach().numpy()
 
-    for pred, true in zip(predicted_labels, train_labels_reshaped):
+    for pred, true in zip(predicted_labels, gold_labels):
         if pred == true:
             comparison_results.append(f"{ANSI_GREEN}{pred}{ANSI_RESET}")
         else:
             comparison_results.append(f"{ANSI_RED}{pred}{ANSI_RESET}")
-
-    print("".join(comparison_results))
+    return "\n".join(["".join([str(i) for i in gold_labels]),
+    ("".join(comparison_results))])
 
 
 # Initialization
-model = MultiInputNetwork()
-optimizer = Adam(model.parameters(), lr=0.0753)
+model = SiameseNetwork(config.embedding_dim, config.n_classes)
+optimizer = Adam(model.parameters(),  weight_decay= 0.00001)
 criterion = nn.CrossEntropyLoss()
 data_gen = DataGenerator()
 epochs = 10000
@@ -46,6 +48,8 @@ scheduler = ReduceLROnPlateau(
 
 max_fscore = 0
 old_gradient_norm = 0
+if not os.path.exists("models"):
+    os.makedirs("models")
 # Train the model
 for epoch in range(epochs):
     model.train()
@@ -61,8 +65,10 @@ for epoch in range(epochs):
 
     # Reshape outputs and labels
     outputs_reshaped = outputs.view(-1, config.n_classes)
+
     train_labels_reshaped = train_labels.view(-1)
 
+    criterion = nn.CrossEntropyLoss()
     loss = criterion(outputs_reshaped, train_labels_reshaped)
 
     # Backward pass and optimizer step
@@ -70,7 +76,7 @@ for epoch in range(epochs):
     optimizer.step()
 
     train_labels_reshaped = train_labels.view(-1)  # Flatten the labels
-    predicted_labels = assign_labels(outputs)
+    predicted_labels = torch.argmax(outputs, dim=-1)
     # print(f"{predicted.shape=}, {sigmoid_outputs.shape=}, {predicted_reshaped.shape=}, {train_labels_reshaped.shape=}, {predicted_labels.shape=}")
 
     # Calculate F-score for training data using reshaped tensors
@@ -91,10 +97,10 @@ for epoch in range(epochs):
         valid_outputs = model(*input_data)
 
         # Reshape outputs and labels
-        outputs_reshaped = outputs.view(-1, config.n_classes)
-        valid_labels_reshaped = train_labels.view(-1)
+        outputs_reshaped = valid_outputs.view(-1, config.n_classes)
+        valid_labels_reshaped = valid_labels.view(-1)
 
-        predicted_labels = assign_labels(valid_outputs)
+        predicted_labels = torch.argmax(valid_outputs, dim=-1)
 
         valid_loss = criterion(outputs_reshaped, valid_labels_reshaped)
 
@@ -109,25 +115,22 @@ for epoch in range(epochs):
     # Adjust data distribution
     data_gen.adjust_data_distribution(train_fscore)
 
-    if valid_fscore + train_fscore > max_fscore:
+    if valid_fscore > max_fscore:
         print(
             f"Epoch {epoch + 1}, loss: {loss.item():.2f}, f1-valid: {valid_fscore:.2f}, f1-train: {train_fscore:.2f}, lr: {optimizer.param_groups[0]['lr']}"
         )
-        max_fscore = valid_fscore + train_fscore
-        torch.save(model.state_dict(), MODEL_PATH)
-        torch.save(optimizer.state_dict(), OPTIMIZER_PATH)
-    colorized_comparison(predicted_labels.view(-1), valid_labels_reshaped)
+        max_fscore = valid_fscore
+        torch.save(model.state_dict(), "models/"+ f"f1v={valid_fscore:.2f}-" + MODEL_PATH)
+        torch.save(optimizer.state_dict(), "models/"+ f"f1v={valid_fscore:.2f}-" +  OPTIMIZER_PATH)
+        with open("models/"+ f"f1v={valid_fscore:.2f}-comp" +  ".txt", "w") as f:
+            f.write(f"Epoch {epoch + 1}, loss: {loss.item():.2f}, f1-valid: {valid_fscore:.2f}, f1-train: {train_fscore:.2f}, lr: {optimizer.param_groups[0]['lr']}")
+            f.write("\n")
+            f.write(colorized_comparison(predicted_labels.view(-1), valid_labels_reshaped))
+    print (colorized_comparison(predicted_labels.view(-1), valid_labels_reshaped))
     # print("".join(valid_labels_reshaped.detach().numpy().astype(str)))
     grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=10)
 
-    if old_gradient_norm == grad_norm:
-        print("Gradient norm is the same")
-        scheduler.step(loss)
-        for param_group in optimizer.param_groups:
-            param_group["lr"] *= 2  # Double the learning rate for one step
-    torch.nn.utils.clip_grad_norm_(model.parameters(), 20)
 
-    old_gradient_norm = grad_norm
     print(
         f"f={max_fscore:.2f}"
         f" {epoch=}, {loss=}, {train_fscore=:.2f}, {valid_fscore=:.2f}"

@@ -53,7 +53,7 @@ class SearchProxy(Resource):
             print(f"FILTER PATH {filter_path=}")
 
             response = semantic_search(
-                string_to_search, top_k=4, filter_path=filter_path
+                string_to_search, top_k=5, filter_path=filter_path
             )
             print(response)
 

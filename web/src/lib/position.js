@@ -29,12 +29,12 @@ export function isElementInViewportAndBigAndNoChildren(el, data) {
 
   if (!rect) return false
   return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
+    rect.top >= -(window.innerHeight || document.documentElement.clientHeight)*0.15 &&
+    rect.left >= -(window.innerHeight || document.documentElement.clientHeight)*0.15 &&
     rect.bottom <=
-      (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.right <= (window.innerWidth || document.documentElement.clientWidth) &&
-    rect.height > window.innerHeight * 0.4
+      (window.innerHeight || document.documentElement.clientHeight)*1.15 &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)*1.15 &&
+    rect.height > window.innerHeight * 0.3
     //typeof data !== 'object'
   )
 }
