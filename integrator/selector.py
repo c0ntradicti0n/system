@@ -91,6 +91,8 @@ def tree_walker(yield_mode="valid", n_samples=10):
                 raise ValueError(f"{c=}")
             if c:
                 samples.append((c, 0))
+
+    samples = [(text.replace(".md", "").strip(), label) for text, label in samples]
     random.shuffle(samples)
     samples.reverse()
     return samples
