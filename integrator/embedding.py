@@ -3,7 +3,7 @@ from langchain.embeddings import SentenceTransformerEmbeddings
 from integrator import config
 
 embeddings = SentenceTransformerEmbeddings(
-    model_name="sentence-transformers/all-mpnet-base-v2"
+    model_name="BAAI/bge-large-en-v1.5"
 )
 
 

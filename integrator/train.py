@@ -110,7 +110,6 @@ for epoch in range(epochs):
             average="macro",
         )
 
-        scheduler.step(valid_loss)
 
     # Adjust data distribution
     data_gen.adjust_data_distribution(train_fscore)
@@ -138,6 +137,9 @@ for epoch in range(epochs):
             f.write("\n")
             f.write("\n")
             f.write(str(texts))
+
+        scheduler.step(valid_loss)
+
 
     print(colorized_comparison(predicted_labels.view(-1), valid_labels_reshaped))
     grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=10)
