@@ -1,41 +1,36 @@
-3133 "Economy"
-3133_ "Scarcity-Abundance"
-
-31331 {1: "Resources", 2: "Production", 3: "Distribution", "_": "Input-Output", ".": "Resource Management"}
 31332 {1: "Supply", 2: "Demand", 3: "Equilibrium", "_": "Excess-Shortage", ".": "Market Dynamics"}
-31333 {1: "Public Goods", 2: "Common Resources", 3: "Non-excludable Services", "_": "Rivalry-Nonrivalry", ".": "Free Goods Systems"}
 
-313311 {1: "Natural Resources", 2: "Human Resources", 3: "Capital Resources", "_": "Renewable-Nonrenewable", ".": "Resources"}
-313312 {1: "Goods", 2: "Services", 3: "Information", "_": "Tangible-Intangible", ".": "Production"}
-313313 {1: "Market", 2: "State", 3: "Commons", "_": "Private-Public", ".": "Distribution"}
+313321 {1: "Production Capacity", 2: "Stock Levels", 3: "Logistics", "_": "Overproduction-Underproduction", ".": "Supply"}
+313322 {1: "Consumer Preferences", 2: "Market Needs", 3: "Purchasing Power", "_": "Wants-Needs", ".": "Demand"}
+313323 {1: "Price", 2: "Quantity", 3: "Market Forces", "_": "Inflation-Deflation", ".": "Equilibrium"}
 
-3133111 {1: "Land", 2: "Water", 3: "Air", "_": "Solid-Liquid-Gas", ".": "Natural Resources"}
-3133112 {1: "Labor", 2: "Skills", 3: "Knowledge", "_": "Unskilled-Skilled", ".": "Human Resources"}
-3133113 {1: "Machinery", 2: "Technology", 3: "Infrastructure", "_": "Fixed-Variable", ".": "Capital Resources"}
+3133211 {1: "Raw Materials", 2: "Labor", 3: "Technology", "_": "Input-Output", ".": "Production Capacity"}
+3133212 {1: "Inventory", 2: "Warehousing", 3: "Distribution", "_": "Storage-Movement", ".": "Stock Levels"}
+3133213 {1: "Transport", 2: "Delivery", 3: "Tracking", "_": "Speed-Accuracy", ".": "Logistics"}
 
-31331211 {1: "Manufacturing", 2: "Assembly", 3: "Quality Control", "_": "Raw-Finished", ".": "Goods"}
-31331212 {1: "Healthcare", 2: "Education", 3: "Entertainment", "_": "Essential-Nonessential", ".": "Services"}
-31331213 {1: "Data", 2: "Analysis", 3: "Insight", "_": "Raw-Processed", ".": "Information"}
+3133221 {1: "Trends", 2: "Culture", 3: "Necessity", "_": "Fad-Fundamental", ".": "Consumer Preferences"}
+3133222 {1: "Basic Needs", 2: "Luxuries", 3: "Services", "_": "Essential-Nonessential", ".": "Market Needs"}
+3133223 {1: "Income", 2: "Credit", 3: "Savings", "_": "Cash-Debt", ".": "Purchasing Power"}
 
-31331221 {1: "Retail", 2: "Wholesale", 3: "Export", "_": "Local-Global", ".": "Market"}
-31331222 {1: "Welfare", 2: "Regulation", 3: "Subsidy", "_": "Direct-Indirect", ".": "State"}
-31331223 {1: "Common Land", 2: "Open Source", 3: "Public Goods", "_": "Excludable-Nonexcludable", ".": "Commons"}
+3133231 {1: "Cost", 2: "Markup", 3: "Discount", "_": "Low-High", ".": "Price"}
+3133232 {1: "Supply", 2: "Demand", 3: "Excess", "_": "Scarcity-Abundance", ".": "Quantity"}
+3133233 {1: "Competition", 2: "Regulation", 3: "Innovation", "_": "Constriction-Expansion", ".": "Market Forces"}
 
-31331231 {1: "Raw Materials", 2: "Components", 3: "Final Product", "_": "Unprocessed-Processed", ".": "Manufacturing"}
-31331232 {1: "Preventive", 2: "Curative", 3: "Rehabilitative", "_": "Before-During-After", ".": "Healthcare"}
-31331233 {1: "Collection", 2: "Processing", 3: "Visualization", "_": "Unstructured-Structured", ".": "Data"}
+3133312233 {1: "Non-Excludable", 2: "Non-Rivalrous", 3: "Collective Consumption", "_": "Individual-Collective", ".": "Public Goods"}
 
-313313111 {1: "B2C", 2: "C2C", 3: "B2B", "_": "Consumer-Business", ".": "Retail"}
-313313121 {1: "Social Security", 2: "Healthcare", 3: "Education", "_": "Mandatory-Optional", ".": "Welfare"}
-313313131 {1: "Parks", 2: "Libraries", 3: "Museums", "_": "Recreational-Educational", ".": "Common Land"}
+31333122331 {1: "Open Access", 2: "Universal Provision", 3: "Free Entry", "_": "Inclusion-Exclusion", ".": "Non-Excludable"}
+31333122332 {1: "Shared Resources", 2: "Unlimited Use", 3: "Sustainability", "_": "Finite-Infinite", ".": "Non-Rivalrous"}
+31333122333 {1: "Public Services", 2: "Common Goods", 3: "Community Benefits", "_": "Private-Public", ".": "Collective Consumption"}
 
-313332 {1: "Taxation", 2: "Legislation", 3: "Enforcement", "_": "Revenue-Rule", ".": "State Functions"}
-313333 {1: "Natural Goods", 2: "Cultural Heritage", 3: "Digital Commons", "_": "Physical-Digital", ".": "Commons Types"}
+313331223311 {1: "Public Parks", 2: "Public Libraries", 3: "Public Transport", "_": "Local-Global", ".": "Open Access"}
+313331223312 {1: "Healthcare", 2: "Education", 3: "Security", "_": "Essential-Nonessential", ".": "Universal Provision"}
+31331223313 {1: "Internet", 2: "Broadcasting", 3: "Public Data", "_": "Virtual-Physical", ".": "Free Entry"}
 
-3133321 {1: "Income Tax", 2: "Sales Tax", 3: "Property Tax", "_": "Direct-Indirect", ".": "Taxation"}
-3133322 {1: "Civil Law", 2: "Criminal Law", 3: "International Law", "_": "Individual-Society", ".": "Legislation"}
-3133323 {1: "Police", 2: "Courts", 3: "Prisons", "_": "Prevention-Punishment", ".": "Enforcement"}
+313331223321 {1: "Air", 2: "Water", 3: "Land", "_": "Renewable-Nonrenewable", ".": "Shared Resources"}
+313331223322 {1: "Information", 2: "Culture", 3: "Knowledge", "_": "Tangible-Intangible", ".": "Unlimited Use"}
+313331223323 {1: "Ecosystems", 2: "Climate", 3: "Biodiversity", "_": "Local-Global", ".": "Sustainability"}
 
-3133331 {1: "Forests", 2: "Oceans", 3: "Wildlife", "_": "Land-Water", ".": "Natural Reserves"}
-3133332 {1: "Monuments", 2: "Artifacts", 3: "Traditions", "_": "Tangible-Intangible", ".": "Cultural Heritage"}
-3133333 {1: "Open Source Software", 2: "Creative Commons", 3: "Public Domain", "_": "Restrictive-Permissive", ".": "Digital Commons"}
+313331223331 {1: "Fire Services", 2: "Police Services", 3: "Health Services", "_": "Emergency-Routine", ".": "Public Services"}
+313331223332 {1: "Parks", 2: "Museums", 3: "Historical Sites", "_": "Recreational-Educational", ".": "Common Goods"}
+313331223333 {1: "Community Centers", 2: "Public Schools", 3: "Public Hospitals", "_": "Local-Regional", ".": "Community Benefits"}
+

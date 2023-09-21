@@ -138,7 +138,7 @@ for epoch in range(epochs):
             f.write("\n")
             f.write(str(texts))
 
-        scheduler.step(valid_loss)
+    scheduler.step(valid_loss)
 
 
     print(colorized_comparison(predicted_labels.view(-1), valid_labels_reshaped))
