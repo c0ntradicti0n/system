@@ -174,16 +174,27 @@ const Fractal = ({ setContent }) => {
   )
 
   useEffect(() => {
-    if (scale === null || detailId === null) return
+    console.log('useEffect', { scale, detailId, hoverId })
+    if (scale === null || hoverId === null) return
 
     if (!hoverId) {
       console.error('hoverId is null', hoverId, detailId)
     }
 
     if (scale > maxZoomThreshold) {
-      const [newHiddenId, newRestId] = shiftIn(detailId, hoverId ?? detailId, {
+      const [newHiddenId, newRestId] = shiftIn(hiddenId, hoverId ?? detailId, {
         left: true,
       })
+      console.log('scale in', {
+        scale,
+        minZoomThreshold,
+        maxZoomThreshold,
+        newHiddenId,
+        newRestId,
+        detailId,
+        hoverId,
+      })
+
       beamDataTo(
         newHiddenId,
         collectedData,
@@ -195,10 +206,11 @@ const Fractal = ({ setContent }) => {
         setVisualData,
       )
 
-      setDetailId(newHiddenId) // Or set it to another appropriate value.
+      setHiddenId(newHiddenId)
+      setDetailId('')
     }
     if (scale < minZoomThreshold) {
-      const [newHiddenId, newRestId] = shiftIn(detailId, hoverId ?? detailId, {
+      const [newHiddenId, newRestId] = shiftIn(hiddenId, hoverId ?? detailId, {
         left: false,
       })
       beamDataTo(
@@ -211,7 +223,8 @@ const Fractal = ({ setContent }) => {
         setHiddenId,
         setVisualData,
       )
-      setDetailId(newHiddenId) // Or set it to another appropriate value.
+      setHiddenId(newHiddenId)
+      setDetailId('')
     }
 
     makeNoHorizon()

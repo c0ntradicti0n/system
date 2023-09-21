@@ -2,7 +2,9 @@ from langchain.embeddings import SentenceTransformerEmbeddings
 
 from integrator import config
 
-embeddings = SentenceTransformerEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
+embeddings = SentenceTransformerEmbeddings(
+    model_name="sentence-transformers/all-mpnet-base-v2"
+)
 
 
 def get_embeddings(texts):

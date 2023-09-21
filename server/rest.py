@@ -10,6 +10,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_restx import Api, Namespace, Resource, reqparse
 from helper import OutputLevel, get_from_nested_dict, nested_str_dict, tree
+from string_beauty import remove_duplicates
 
 logging.basicConfig(level=logging.DEBUG)
 coloredlogs.install(level="DEBUG")
@@ -133,6 +134,13 @@ class SearchProxy(Resource):
             data = response.json()
 
             pprint(data)
+            data = [{**d, "content": remove_duplicates(d["content"])} for d in data]
+            data = list(
+                sorted(
+                    data,
+                    key=lambda x: x["path"],
+                )
+            )
 
             return data, 200
 

@@ -4,36 +4,33 @@ from scipy.optimize import linear_sum_assignment
 
 
 def assign_labels(output_logits):
-    # Apply softmax to convert logits to probabilities
-    probabilities = torch.softmax(output_logits, dim=2)
-
-    # Remove the probabilities corresponding to label 0
-    probs_without_zero = probabilities[:, :, 1:]
-
-    # Convert probabilities to costs
-    cost_matrix = 1 - probs_without_zero
-
-    batch_size = cost_matrix.shape[0]
-    sample_size = cost_matrix.shape[1]
+    batch_size, sample_size, num_labels = output_logits.shape
 
     all_assigned_labels = []
 
-    for i in range(batch_size):
-        # Apply the Hungarian algorithm for each batch
-        _, assigned_labels_without_zero = linear_sum_assignment(
-            cost_matrix[i].detach().numpy()
-        )
-        assigned_labels = []
+    for b in range(batch_size):
+        probs = torch.softmax(output_logits[b], dim=1)
+        max_probs, max_labels = torch.max(probs, dim=1)
 
-        # Adjust the assigned labels to account for the removed zero label
-        for label in assigned_labels_without_zero:
-            assigned_labels.append(label + 1)
+        # Sort indices by maximum probability.
+        sorted_indices = torch.argsort(max_probs, descending=True)
 
-        # For any remaining unassigned embeddings, assign them label 0
-        while len(assigned_labels) < sample_size:
-            assigned_labels.append(0)
+        assigned = set()
+        final_labels = [-1] * sample_size
 
-        all_assigned_labels.append(assigned_labels)
+        for idx in sorted_indices:
+            label = max_labels[idx].item()
+
+            if label == 0:
+                final_labels[idx] = 0
+            else:
+                if label not in assigned:
+                    final_labels[idx] = label
+                    assigned.add(label)
+                else:
+                    final_labels[idx] = 0
+
+        all_assigned_labels.append(final_labels)
 
     return torch.tensor(all_assigned_labels)
 
@@ -43,12 +40,26 @@ if __name__ == "__main__":
     output_logits = torch.tensor(
         [
             [
-                [0.1286, -0.1598, 0.0437, -0.0665],  # 1
-                [0.2352, -0.0980, 0.1643, 0.0702],  # 0
-                [0.2352, -0.0980, 0.1643, 0.0702],  # 0
-                [0.1923, -0.0892, 0.1502, 0.0461],  # 3
-                [0.1349, -0.1502, 0.1297, -0.0061],
-            ]  # 2
+                [0.1286, 0.6, 0.0437, -0.0665],  # 1
+                [0.9, -0.0980, 0.1643, 0.0702],  # 0
+                [0.8, -0.0980, 0.1643, 0.0702],  # 0
+                [0.1923, -0.0892, 0.1502, 0.5],  # 3
+                [0.1349, -0.1502, 0.4, -0.0061],  # 2
+            ],
+            [
+                [0.1286, 0.6, 0.0437, -0.0665],  # 1
+                [0.9, -0.0980, 0.1643, 0.0702],  # 0
+                [-0.8, -0.0980, 0.1643, 0.0702],  # 0
+                [0.1923, -0.0892, 0.1502, 0.5],  # 3
+                [0.1349, -0.1502, 0.4, -0.0061],  # 2
+            ],
+            [
+                [0.1349, -0.1502, 0.4, -0.0061],  # 2
+                [0.1923, -0.0892, 0.1502, 0.5],  # 3
+                [-0.8, -0.0980, 0.1643, 0.0702],  # 0
+                [0.9, -0.0980, 0.1643, 0.0702],  # 0
+                [0.1286, 0.6, 0.0437, -0.0665],  # 1
+            ],
         ]
     )
 

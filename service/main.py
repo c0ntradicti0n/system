@@ -93,13 +93,13 @@ with catchtime("init"):
         )
 
 
-def search(query, top_k=10, filter_path=""):
+def search(query, top_k=5, filter_path=""):
     if filter_path:
         filter = {filter_path: {"$eq": filter_path}}
     else:
         filter = None
 
-    results = vector_store.search(query, top_k=top_k, search_type="mmr", filter=filter)
+    results = vector_store.search(query, k=top_k, search_type="mmr", filter=filter)
     return results
 
 
@@ -117,3 +117,6 @@ if __name__ == "__main__":
 
     with catchtime("filter"):
         pprint(search("best food?", top_k=4, filter_path="2"))
+
+    with catchtime("search"):
+        pprint(search("best food?", filter_path="2"))

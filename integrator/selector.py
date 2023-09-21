@@ -110,12 +110,11 @@ class DataGenerator:
         embeddings = []
         for _ in range(config.batch_size):
             sample, label = list(
-                zip(*tree_walker(random.choice(["valid"#, "random"
-                                                ]), n_samples))
+                zip(*tree_walker(random.choice(["valid"]), n_samples))  # , "random"
             )
             texts.append(sample)
             labels.append(label)
 
             embeddings.append(get_embeddings(sample))
 
-        return torch.tensor(embeddings), torch.tensor(labels, dtype=torch.long)
+        return torch.tensor(embeddings), torch.tensor(labels, dtype=torch.long), texts

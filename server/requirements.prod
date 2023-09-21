@@ -53,3 +53,4 @@ typing_extensions==4.6.3
 urllib3==2.0.2
 Werkzeug==2.3.4
 yarg==0.1.9
+fuzzywuzzy
