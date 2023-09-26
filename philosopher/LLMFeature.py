@@ -43,7 +43,7 @@ class Block(LLMFeature):
     def __init__(self, **kwargs):
         super().__init__(
             "block",
-            pattern_instruction=""" - add multiple things like (but with other contents)
+            pattern_instruction=""" - add multiple things like (but with other contents). PREFER THIS FOR MANY ENTRIES
 31 {1: "Force", 2: "Motion", 3: "Energy", "_": "Inertia-Dynamics", ".": "Physics"}
 32 {1: "Cell", 2: "Organism", 3: "Ecosystem", "_": "Individual-Community", ".": "Biology"}
 31 {1: "Atom", 2: "Molecule", 3: "Compound", "_": "Element-Compound", ".": "Chemistry"}

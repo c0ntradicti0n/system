@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useQuery } from 'react-query'
 import { Tree } from 'antd'
 import { mergeDeep } from '../lib/nesting'
+import ReactMarkdown from 'react-markdown';
 
 const generateExpandedKeys = (path) => {
   const segments = path.split('-')
@@ -41,8 +42,9 @@ const convertToAntdTreeData = (node, prefix = '') => {
             textAlignLast: 'none',
             background: '#fff2d4',
           }}
-        >
+        >         <ReactMarkdown>
           {postProcessTitle(node[key])}
+            </ReactMarkdown>
         </div>
       )
     }
@@ -57,7 +59,7 @@ const convertToAntdTreeData = (node, prefix = '') => {
     }
 
     // Check if the node has children (ignoring special keys like "." and "_")
-    if (typeof childNode === 'object' && key !== '.' && key !== '_') {
+    if (typeof childNode === 'object' && key !== '.' && key !== '_' && ! key.includes("text")) {
       treeNode.children = convertToAntdTreeData(childNode, currentKey)
     }
 
@@ -80,7 +82,8 @@ const nestTexts = (path, texts) => {
       obj[key] = Object.fromEntries(
         Object.entries(texts).map(([key, value]) => [
           ['.', '_'].includes(key) ? key + 'text' : key,
-          ['.', '_'].includes(key) ? value : { text: value },
+          ['.', '_'].includes(key) ? value : { text: value
+ },
         ]),
       )
     } else {

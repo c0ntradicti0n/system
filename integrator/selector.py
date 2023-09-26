@@ -60,8 +60,15 @@ def tree_walker(yield_mode="valid", n_samples=10):
             pre_set_output_level=OutputLevel.FILENAMES,
             prefix_items=True,
         )
-
-        if yield_mode == "valid":
+        if yield_mode == "labels":
+            a, b, c = (
+                "thesis - main topic",
+                "antithesis - opposite",
+                "synthesis - combination of thesis and antithesis",
+            )
+            samples.extend([(a, 1), (b, 2), (c, 3)])
+            yield_mode = "random"
+        elif yield_mode == "valid":
             a, b, c = None, None, None
             with e:
                 a = d[1]["."]
@@ -112,7 +119,9 @@ class DataGenerator:
         embeddings = []
         for _ in range(config.batch_size):
             sample, label = list(
-                zip(*tree_walker(random.choice(["valid"]), n_samples))  # , "random"
+                zip(
+                    *tree_walker(random.choice(["labels", "valid"]), n_samples)
+                )  # , "random"
             )
             texts.append(sample)
             labels.append(label)

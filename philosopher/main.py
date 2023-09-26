@@ -7,15 +7,21 @@ import re
 import config
 import openai
 from dotenv import load_dotenv
-from helper import (OutputLevel, extract, get_prefix,
-                    nested_dict_to_filesystem, post_process_tree,
-                    sanitize_nested_dict, tree, update_nested_dict)
+from helper import (
+    OutputLevel,
+    extract,
+    get_prefix,
+    nested_dict_to_filesystem,
+    post_process_tree,
+    sanitize_nested_dict,
+    tree,
+    update_nested_dict,
+)
 from regex import regex
 
 from philosopher.llm_update_text import custom_parser, llm_update_text
 from philosopher.llm_update_toc import llm_update_toc
-from philosopher.yaml_tools import (object_to_yaml_str, rec_sort,
-                                    single_key_completion)
+from philosopher.yaml_tools import object_to_yaml_str, rec_sort, single_key_completion
 from server.os_tools import git_auto_commit
 
 load_dotenv()
@@ -142,6 +148,7 @@ def dialectic_triangle(
             if "{" in v and "}" in v:
                 vv = m["value"]
                 vv = regex.sub(r"(\d):", '"\\1":', vv)
+                vv = vv.replace('""', "_")
                 v = json.loads(vv)
                 if not keys[-1] == ".":
                     keys.append(".")
@@ -237,7 +244,7 @@ if __name__ == "__main__":
                 preset_output_level=OutputLevel.FILENAMES,
                 # llm features
                 block=True,
-                shift=True,
+                shift=False,
                 topic=True,
                 antithesis=True,
                 thesis=True,

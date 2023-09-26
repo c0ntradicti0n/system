@@ -3,8 +3,7 @@ import pathlib
 
 import regex
 from compare import weighted_fuzzy_compare
-from helper import (get_analogue_from_nested_dict, get_from_nested_dict,
-                    unique_by_func)
+from helper import get_analogue_from_nested_dict, get_from_nested_dict, unique_by_func
 
 from philosopher.analyser import analyse_toc
 from philosopher.LLMFeature import create_path, features
@@ -40,7 +39,10 @@ def llm_update_toc(toc, kwargs, t):
         )
         for k, v in themes
     ]
-    topics = [f"{k}, {v}," for k, v in themes]
+    topics = [f"{k}, {v}," for k, v in themes if not k.endswith("_")]
+
+    antonym_relations = "\n".join([f"{k}, {v}," for k, v in themes if k.endswith("_")])
+
     analogs = unique_by_func(
         [
             (l, a)
@@ -51,7 +53,6 @@ def llm_update_toc(toc, kwargs, t):
         lambda x: str(x[0]),
     )
     analogies = "\n".join("".join(l) + f" {a}" for l, a in analogs).replace(".md", "")
-    # paths_to_fill = [p for p in paths_to_fill if not p.startswith("11")]
 
     instruction = (
         """
@@ -101,7 +102,7 @@ needs to be changed, it should be changed, there must not be a hint, that someth
 
 You'll work with a representation reflecting your current progress. Each unit is addressed via a key as "13221." 
 for the thesis in "1322".
-Your goal is to enhance and enrich the thematic structure of the fractal triples and also diving deeper by creating 
+Your goal is enrich the thematic structure of the fractal triples by diving deeper by creating 
 new triples.
 
 Every nesting level should have a bare path for telling the theme and also a '_'-entry to mark dialectical conceptual 
@@ -133,7 +134,18 @@ about consciousness, the language is partying there too much.
 Focus on a top-down approach to get to some more systematic dialectical structure; first all upper levels, then the lower levels.
 Focus on completeness of the fractal, please fill up all incomplete triples, rather add new triples than improving existing ones.
 
-So, please dump all your knowledge accurately about """
+
+"""
+        + (
+            ""
+            if not antonym_relations
+            else f"""
+Plase provide something that causes the conflict in
+{antonym_relations}
+"""
+        )
+        + """
+And please dump all your knowledge accurately about """
         + " and ".join(topics)
     )
 
@@ -149,7 +161,19 @@ Here is a truncated version of the current dialectical system to the path, where
 
 {toc}
 
-So, please dump all you wisdom accurately about \n"""
+
+"""
+        + (
+            ""
+            if not antonym_relations
+            else f"""
+Plase provide something that causes the conflict in
+{antonym_relations}
+"""
+        )
+        + """
+And, please dump all you wisdom as a table of contents (only provide titles for chapters) by using our number format accurately and deeply nested about 
+ \n"""
         + "\n".join(topics)
         + (
             (
@@ -165,6 +189,7 @@ Respect that it should work on analogies resembling the following topics"""
             if analogies
             else ""
         )
+        + """\nand don't output any other commentary, the code will extract the titles from your output."""
     )
     return instruction, prompt
 
@@ -180,10 +205,12 @@ def filter_similar_paths(paths_to_fill, toc, target_count=100, precision=0.05):
         for l in toc.split("\n"):
             lp = regex.match(r"^\d*", l).group(0)
             if len(lp) < 3:
-                toc_lines.append(l)
+                if l not in toc_lines:
+                    toc_lines.append(l)
             for pf in paths_to_fill:
                 if weighted_fuzzy_compare(lp, pf, threshold)[0]:
-                    toc_lines.append(l)
+                    if l not in toc_lines:
+                        toc_lines.append(l)
                     break
 
         count = len(toc_lines)

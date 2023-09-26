@@ -2,9 +2,7 @@ from langchain.embeddings import SentenceTransformerEmbeddings
 
 from integrator import config
 
-embeddings = SentenceTransformerEmbeddings(
-    model_name="BAAI/bge-large-en-v1.5"
-)
+embeddings = SentenceTransformerEmbeddings(model_name="barisaydin/bge-large-en")
 
 
 def get_embeddings(texts):
