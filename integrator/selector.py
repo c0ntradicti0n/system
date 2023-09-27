@@ -7,7 +7,7 @@ import torch
 from helper import OutputLevel, e, tree
 
 from integrator import config
-from integrator.embedding import get_embeddings
+from lib.embedding import get_embeddings
 
 
 @contextlib.contextmanager
@@ -120,7 +120,8 @@ class DataGenerator:
         for _ in range(config.batch_size):
             sample, label = list(
                 zip(
-                    *tree_walker(random.choice(["labels", "valid"]), n_samples)
+                    *tree_walker(random.choice(["labels", "valid"
+                                                ]), n_samples)
                 )  # , "random"
             )
             texts.append(sample)

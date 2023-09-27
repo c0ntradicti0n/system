@@ -1,15 +1,13 @@
 import os
 
 import torch
-from pytorch_lamb import Lamb
-from pytorch_optimizer import AdaBelief
 from sklearn.metrics import f1_score
-from torch import nn, optim
+from torch import nn
 from torch.optim import Adam
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 
 from integrator import config
-from integrator.classifier import SiameseNetwork
+from integrator.classifier import NTupleNetwork
 from integrator.config import MODEL_PATH, OPTIMIZER_PATH
 from integrator.selector import DataGenerator
 
@@ -36,13 +34,13 @@ def colorized_comparison(predicted_labels, gold_labels):
 
 
 # Initialization
-model = SiameseNetwork(config.embedding_dim, config.n_classes)
-optimizer = Adam(model.parameters(), weight_decay=0.00001)
+model = NTupleNetwork(config.embedding_dim, 300, config.n_classes)
+optimizer = Adam(model.parameters(), lr=0.003)
 criterion = nn.CrossEntropyLoss()
 data_gen = DataGenerator()
 epochs = 10000
 scheduler = ReduceLROnPlateau(
-    optimizer, "min", patience=10, factor=0.85, verbose=True
+    optimizer, "min", patience=5, factor=0.5, verbose=True
 )  # Reduce the LR if validation loss doesn't improve for 10 epochs
 
 
@@ -61,7 +59,7 @@ for epoch in range(epochs):
     input_data = train_data.view(config.n_samples, -1, config.embedding_dim)
     optimizer.zero_grad()
 
-    outputs = model(*input_data)
+    outputs = model(input_data)
 
     # Reshape outputs and labels
     outputs_reshaped = outputs.view(-1, config.n_classes)
@@ -91,7 +89,7 @@ for epoch in range(epochs):
 
     model.eval()
 
-    with torch.no_grad():
+    """with torch.no_grad():
         input_data = valid_data.view(config.n_samples, -1, config.embedding_dim)
 
         valid_outputs = model(*input_data)
@@ -109,41 +107,43 @@ for epoch in range(epochs):
             predicted_labels.view(-1).numpy(),
             average="macro",
         )
+        
 
     # Adjust data distribution
     data_gen.adjust_data_distribution(train_fscore)
+    """
 
-    if valid_fscore > max_fscore:
+    if train_fscore > max_fscore:
         print(
-            f"Epoch {epoch + 1}, loss: {loss.item():.2f}, f1-valid: {valid_fscore:.2f}, f1-train: {train_fscore:.2f}, lr: {optimizer.param_groups[0]['lr']}"
+            f"Epoch {epoch + 1}, loss: {loss.item():.2f}, f1-valid: valid_fscore:.2, f1-train: {train_fscore:.2f}, lr: {optimizer.param_groups[0]['lr']}"
         )
-        max_fscore = valid_fscore
+        max_fscore = train_fscore
         torch.save(
-            model.state_dict(), "models/" + f"f1v={valid_fscore:.2f}-" + MODEL_PATH
+            model.state_dict(), "models/" + f"f1v={train_fscore:.2f}-" + MODEL_PATH
         )
         torch.save(
             optimizer.state_dict(),
-            "models/" + f"f1v={valid_fscore:.2f}-" + OPTIMIZER_PATH,
+            "models/" + f"f1v={train_fscore:.2f}-" + OPTIMIZER_PATH,
         )
-        with open("models/" + f"f1v={valid_fscore:.2f}-comp" + ".txt", "w") as f:
+        with open("models/" + f"f1v={train_fscore:.2f}-comp" + ".txt", "w") as f:
             f.write(
-                f"Epoch {epoch + 1}, loss: {loss.item():.2f}, f1-valid: {valid_fscore:.2f}, f1-train: {train_fscore:.2f}, lr: {optimizer.param_groups[0]['lr']}"
+                f"Epoch {epoch + 1}, loss: {loss.item():.2f}, f1-valid: {train_fscore:.2f}, f1-train: {train_fscore:.2f}, lr: {optimizer.param_groups[0]['lr']}"
             )
             f.write("\n")
             f.write(
-                colorized_comparison(predicted_labels.view(-1), valid_labels_reshaped)
+                colorized_comparison(predicted_labels.view(-1), train_labels_reshaped)
             )
             f.write("\n")
             f.write("\n")
             f.write(str(texts))
 
-    scheduler.step(valid_loss)
+    scheduler.step(loss)
 
-    print(colorized_comparison(predicted_labels.view(-1), valid_labels_reshaped))
+    print(colorized_comparison(predicted_labels.view(-1), train_labels_reshaped))
     grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=10)
 
     print(
         f"f={max_fscore:.2f}"
-        f" {epoch=}, {loss=}, {train_fscore=:.2f}, {valid_fscore=:.2f}"
+        f" {epoch=}, {loss=}, {train_fscore=:.2f}, {train_fscore=:.2f}"
         f" {grad_norm=}"
     )
