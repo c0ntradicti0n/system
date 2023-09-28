@@ -22,3 +22,11 @@ sskeys:
 
 logs:
 	docker compose logs -f
+
+train:
+	docker build -t train:latest integrator/.
+	docker run -v "./models:/models" -it train:latest
+
+viz:
+	tensorboard --logdir integrator/runs
+

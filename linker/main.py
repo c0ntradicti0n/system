@@ -8,6 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 from lib.doc import get_documents
 from lib.embedding import get_embeddings
+from lib.md import remove_links
 from lib.t import catchtime
 
 
@@ -25,9 +26,6 @@ def write_generator(gen, tmp_dir="", strip_path=""):
             file.write(content)
 
 
-def remove_links(text, pattern):
-    # Use the named group 'text' to keep the text of the link while removing the URL
-    return pattern.sub(r"\g<text>", text)
 
 
 def link_texts(
@@ -53,7 +51,7 @@ def link_texts(
             logging.info(f"Skipping empty file {file_path}")
             continue
 
-        text = remove_links(text, link_pattern)
+        text = remove_links(text)
 
         doc_embedding = get_embeddings([text])
 

@@ -58,7 +58,7 @@ def tree_walker(yield_mode="valid", n_samples=10):
             format="json",
             info_radius=10,
             exclude=[".git", ".git.md", ".gitignore", ".DS_Store", ".idea"],
-            pre_set_output_level=OutputLevel.FILENAMES,
+            pre_set_output_level=OutputLevel.FILE,
             prefix_items=True,
         )
         if yield_mode == "labels":
@@ -123,7 +123,7 @@ class DataGenerator:
                 zip(
                     *tree_walker(
                         np.random.choice(
-                            ["labels", "valid", "random"], p=[0.2, 0.6, 0.2]
+                            ["labels", "valid", "random"], p=[0.1, 0.8, 0.1]
                         ),
                         n_samples,
                     )

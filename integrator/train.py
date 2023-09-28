@@ -1,10 +1,12 @@
+import json
 import os
 
 import torch
-from sklearn.metrics import f1_score
+from sklearn.metrics import f1_score, accuracy_score, precision_score, recall_score
+from tensorboardX import SummaryWriter
 from torch import nn
 from torch.optim import Adam
-from torch.optim.lr_scheduler import ReduceLROnPlateau
+from torch.optim.lr_scheduler import ReduceLROnPlateau, CyclicLR
 
 from integrator import config
 from integrator.classifier import NTupleNetwork
@@ -12,7 +14,7 @@ from integrator.config import MODEL_PATH, OPTIMIZER_PATH
 from integrator.selector import DataGenerator
 
 
-def colorized_comparison(predicted_labels, gold_labels):
+def colorized_comparison(prefix, predicted_labels, gold_labels):
     ANSI_RED = "\033[91m"
     ANSI_GREEN = "\033[92m"
     ANSI_RESET = "\033[0m"
@@ -29,7 +31,7 @@ def colorized_comparison(predicted_labels, gold_labels):
         else:
             comparison_results.append(f"{ANSI_RED}{pred}{ANSI_RESET}")
     return "\n".join(
-        ["".join([str(i) for i in gold_labels]), ("".join(comparison_results))]
+        [prefix + "".join([str(i) for i in gold_labels]), (prefix + "".join(comparison_results))]
     )
 
 
@@ -39,13 +41,17 @@ optimizer = Adam(model.parameters(), lr=0.003)
 criterion = nn.CrossEntropyLoss()
 data_gen = DataGenerator()
 epochs = 10000
-scheduler = ReduceLROnPlateau(
-    optimizer, "min", patience=5, factor=0.5, verbose=True
-)  # Reduce the LR if validation loss doesn't improve for 10 epochs
+scheduler = CyclicLR(optimizer, base_lr=0.001, max_lr=0.006, step_size_up=2000, mode="triangular", cycle_momentum=False)
+writer = SummaryWriter('runs/experiment_1')  # Initialize the SummaryWriter
+
 
 
 max_fscore = 0
 old_gradient_norm = 0
+best_lr = 0.003  # Initial learning rate
+counter = 0  # Counter to track the number of epochs since the last best F-score
+
+
 if not os.path.exists("models"):
     os.makedirs("models")
 # Train the model
@@ -58,29 +64,27 @@ for epoch in range(epochs):
     # Forward pass
     input_data = train_data.view(config.n_samples, -1, config.embedding_dim)
     optimizer.zero_grad()
+    if epoch == 0:
+        writer.add_graph(model, input_data)
 
     outputs = model(input_data)
 
     # Reshape outputs and labels
     outputs_reshaped = outputs.view(-1, config.n_classes)
-
     train_labels_reshaped = train_labels.view(-1)
 
-    criterion = nn.CrossEntropyLoss()
     loss = criterion(outputs_reshaped, train_labels_reshaped)
 
     # Backward pass and optimizer step
     loss.backward()
     optimizer.step()
 
-    train_labels_reshaped = train_labels.view(-1)  # Flatten the labels
-    predicted_labels = torch.argmax(outputs, dim=-1)
-    # print(f"{predicted.shape=}, {sigmoid_outputs.shape=}, {predicted_reshaped.shape=}, {train_labels_reshaped.shape=}, {predicted_labels.shape=}")
+    train_predicted_labels = torch.argmax(outputs, dim=-1)
 
     # Calculate F-score for training data using reshaped tensors
     train_fscore = f1_score(
-        train_labels.view(-1).numpy(),
-        predicted_labels.view(-1).numpy(),
+        train_labels_reshaped.numpy(),
+        train_predicted_labels.view(-1).numpy(),
         average="macro",
     )
 
@@ -89,10 +93,9 @@ for epoch in range(epochs):
 
     model.eval()
 
-    """with torch.no_grad():
+    with torch.no_grad():
         input_data = valid_data.view(config.n_samples, -1, config.embedding_dim)
-
-        valid_outputs = model(*input_data)
+        valid_outputs = model(input_data)
 
         # Reshape outputs and labels
         outputs_reshaped = valid_outputs.view(-1, config.n_classes)
@@ -103,47 +106,83 @@ for epoch in range(epochs):
         valid_loss = criterion(outputs_reshaped, valid_labels_reshaped)
 
         valid_fscore = f1_score(
-            valid_labels.view(-1).numpy(),
+            valid_labels_reshaped.numpy(),
             predicted_labels.view(-1).numpy(),
             average="macro",
         )
-        
 
-    # Adjust data distribution
-    data_gen.adjust_data_distribution(train_fscore)
-    """
+        # Convert tensor to numpy for sklearn metrics
+        predicted_labels_np = predicted_labels.cpu().numpy().ravel()
+        true_labels_np = valid_labels_reshaped.cpu().numpy().ravel()
 
-    if train_fscore > max_fscore:
+        # Calculate accuracy, precision, and recall
+        accuracy = accuracy_score(true_labels_np, predicted_labels_np)
+        precision = precision_score(true_labels_np, predicted_labels_np, average='macro')
+        recall = recall_score(true_labels_np, predicted_labels_np, average='macro')
+
+    if valid_fscore > max_fscore:
         print(
-            f"Epoch {epoch + 1}, loss: {loss.item():.2f}, f1-valid: valid_fscore:.2, f1-train: {train_fscore:.2f}, lr: {optimizer.param_groups[0]['lr']}"
+            f"Epoch {epoch + 1}, loss: {loss.item():.2f}, f1-valid: {valid_fscore:.2f}, f1-train: {train_fscore:.2f}, lr: {optimizer.param_groups[0]['lr']}"
         )
-        max_fscore = train_fscore
+        max_fscore = valid_fscore
         torch.save(
-            model.state_dict(), "models/" + f"f1v={train_fscore:.2f}-" + MODEL_PATH
+            model.state_dict(), "models/" + f"f1v={valid_fscore:.2f}-" + MODEL_PATH
         )
         torch.save(
             optimizer.state_dict(),
-            "models/" + f"f1v={train_fscore:.2f}-" + OPTIMIZER_PATH,
+            "models/" + f"f1v={valid_fscore:.2f}-" + OPTIMIZER_PATH,
         )
-        with open("models/" + f"f1v={train_fscore:.2f}-comp" + ".txt", "w") as f:
+        with open("models/" + f"f1v={valid_fscore:.2f}-comp" + ".txt", "w") as f:
             f.write(
-                f"Epoch {epoch + 1}, loss: {loss.item():.2f}, f1-valid: {train_fscore:.2f}, f1-train: {train_fscore:.2f}, lr: {optimizer.param_groups[0]['lr']}"
+                f"Epoch {epoch + 1}, loss: {loss.item():.2f}, f1-valid: {valid_fscore:.2f}, f1-train: {train_fscore:.2f}, lr: {optimizer.param_groups[0]['lr']}"
             )
             f.write("\n")
             f.write(
-                colorized_comparison(predicted_labels.view(-1), train_labels_reshaped)
+                colorized_comparison("v: " , predicted_labels.view(-1), valid_labels_reshaped)
             )
             f.write("\n")
             f.write("\n")
             f.write(str(texts))
+        counter = 0  # Reset the counter
+    else:
+        counter += 1  # Increment the counter
 
-    scheduler.step(loss)
+    if counter >= 17:  # If n epochs have passed since the last best F-score
+        # Reload the last best model and optimizer state
+        model.load_state_dict(torch.load("models/" + f"f1v={max_fscore:.2f}-" + MODEL_PATH))
+        optimizer.load_state_dict(torch.load("models/" + f"f1v={max_fscore:.2f}-" + OPTIMIZER_PATH))
+        optimizer.param_groups[0]['lr'] = best_lr  # Reset the learning rate
+        counter = 0  # Reset the counter
 
-    print(colorized_comparison(predicted_labels.view(-1), train_labels_reshaped))
+    scheduler.step(valid_loss)
+
+    print(colorized_comparison("t: " , predicted_labels.view(-1), valid_labels_reshaped))
+    print(colorized_comparison("v: " , train_predicted_labels.view(-1), train_labels_reshaped))
+
     grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=10)
+
+    # Log parameters to TensorBoard
+    writer.add_scalar('Loss', loss.item(), epoch)
+    writer.add_scalar('Train F-score', train_fscore, epoch)
+    writer.add_scalar('Validation F-score', valid_fscore, epoch)
+    writer.add_scalar('Learning Rate', optimizer.param_groups[0]['lr'], epoch)
+    writer.add_scalar('Gradient Norm', grad_norm.item(), epoch)
+    writer.add_scalar('Accuracy', accuracy, epoch)
+    writer.add_scalar('Precision', precision, epoch)
+    writer.add_scalar('Recall', recall, epoch)
+
+    # Assuming `predictions` are the model predictions and `labels` are the true labels
+    writer.add_pr_curve('precision_recall_valid', predicted_labels.view(-1), valid_labels_reshaped, epoch)
+    writer.add_pr_curve('precision_recall_valid', train_predicted_labels.view(-1), train_labels_reshaped, epoch)
+
+    hparams = {'lr': 0.1, 'batch_size': 64}
+    metrics = {'accuracy': accuracy, 'loss': loss}
+    writer.add_hparams(hparams, metrics)
+    for name, param in model.named_parameters():
+        writer.add_histogram(name, param, epoch)
 
     print(
         f"f={max_fscore:.2f}"
-        f" {epoch=}, {loss=}, {train_fscore=:.2f}, {train_fscore=:.2f}"
+        f" {epoch=}, {loss=}, {train_fscore=:.2f}, {valid_fscore=:.2f}"
         f" {grad_norm=}"
     )

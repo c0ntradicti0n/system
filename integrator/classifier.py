@@ -67,17 +67,31 @@ class NTupleNetwork(nn.Module):
     def __init__(self, embedding_dim, hidden_dim, output_dim):
         super(NTupleNetwork, self).__init__()
         self.embedding_dim = embedding_dim
-        self.attention = SimpleSelfAttention(embedding_dim)  # Add attention layer
+
         self.fc = nn.Sequential(
             nn.Linear(embedding_dim, embedding_dim // 2),
-            nn.ReLU(),
-            nn.Linear(embedding_dim // 2, hidden_dim),
-            nn.ReLU(),
-            nn.Linear(hidden_dim, output_dim),
+            nn.GELU(),
+            nn.Linear(embedding_dim // 2, embedding_dim // 2),
+            nn.GELU(),
+            nn.Linear(embedding_dim // 2, embedding_dim // 2),
+            nn.GELU(),
+            nn.Linear(embedding_dim // 2, embedding_dim // 2),
+            nn.GELU(),
+            nn.Linear(embedding_dim // 2, embedding_dim // 2),
+            nn.GELU(),
+            nn.Linear(embedding_dim // 2, embedding_dim // 2),
+            nn.GELU(),
+            nn.Linear( embedding_dim // 2, output_dim),
         )
+        # Initialize the Linear layers in relation_network
+        for layer in self.fc:
+            if isinstance(layer, nn.Linear):
+                nn.init.kaiming_normal_(layer.weight)
+
 
     def forward(self, x):
-        # x = self.attention(x)  # Pass input through attention layer
+        #x = self.attention(x)  # Pass input through attention layer
+
         x = self.fc(x)
         return x
 

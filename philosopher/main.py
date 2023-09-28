@@ -84,8 +84,8 @@ def dialectic_triangle(
     task_cache = f".cache_{task}/"
     if not os.path.exists(task_cache):
         os.makedirs(task_cache, exist_ok=True)
-    lllm_output = task_cache + "response.txt"
-    lllm_input = task_cache + "prompt.txt"
+    lllm_output = task_cache + f"response" + ("" if os.environ.get("MANUAL",False) else ".manual") + ".txt"
+    lllm_input = task_cache + f"prompt" + ("" if os.environ.get("MANUAL", False) else ".manual") + ".txt"
 
     os.makedirs(".cache_text/", exist_ok=True)
 
@@ -93,10 +93,14 @@ def dialectic_triangle(
         with open(lllm_input, "w") as f:
             f.write(instruction.strip() + "\n" + prompt + "\n")
 
-        api_result = llm(
-            instruction=instruction.strip(), text=prompt, model=kwargs["model"]
-        )
-        output = api_result["choices"][0]["message"]["content"]
+
+        if not os.environ.get("MANUAL", False):
+            api_result = llm(
+                instruction=instruction.strip(), text=prompt, model=kwargs["model"]
+            )
+            output = api_result["choices"][0]["message"]["content"]
+        else:
+            output = input("Enter output: ")
 
         with open(lllm_output, "w") as f:
             f.write(output + "\n")
@@ -201,7 +205,7 @@ def dialectic_triangle(
 
 
 if __name__ == "__main__":
-    for i in range(0):
+    for i in range(100):
         with git_auto_commit(
             config.system_path, commit_message_prefix="Automated TEXT Commit"
         ) as ctx:
