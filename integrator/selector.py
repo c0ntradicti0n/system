@@ -3,6 +3,7 @@ import os
 import random
 import timeit
 
+import numpy as np
 import torch
 from helper import OutputLevel, e, tree
 
@@ -120,9 +121,13 @@ class DataGenerator:
         for _ in range(config.batch_size):
             sample, label = list(
                 zip(
-                    *tree_walker(random.choice(["labels", "valid"
-                                                ]), n_samples)
-                )  # , "random"
+                    *tree_walker(
+                        np.random.choice(
+                            ["labels", "valid", "random"], p=[0.2, 0.6, 0.2]
+                        ),
+                        n_samples,
+                    )
+                )
             )
             texts.append(sample)
             labels.append(label)

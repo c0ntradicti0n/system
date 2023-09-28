@@ -1,9 +1,9 @@
-import torch
-from scipy.stats import multivariate_normal
-from torch import nn, optim
-import torch.nn.functional as F
 import numpy as np
+import torch
+import torch.nn.functional as F
+from scipy.stats import multivariate_normal
 from sklearn.metrics import f1_score
+from torch import nn, optim
 
 
 def generate_samples(num_samples=1000, embedding_dim=128):
@@ -13,30 +13,73 @@ def generate_samples(num_samples=1000, embedding_dim=128):
     samples = []
 
     for i in range(4):
-        sample = multivariate_normal.rvs(mean=means[i], cov=covs[i], size=num_samples // 4)
+        sample = multivariate_normal.rvs(
+            mean=means[i], cov=covs[i], size=num_samples // 4
+        )
         samples.extend(sample)
         labels.extend([i] * (num_samples // 4))
 
-    return torch.tensor(np.array(samples), dtype=torch.float32), torch.tensor(np.array(labels), dtype=torch.long)
+    return torch.tensor(np.array(samples), dtype=torch.float32), torch.tensor(
+        np.array(labels), dtype=torch.long
+    )
+
+
+class SimpleSelfAttention(nn.Module):
+    def __init__(self, input_dim):
+        super(SimpleSelfAttention, self).__init__()
+        self.query = nn.Linear(input_dim, input_dim)
+        self.key = nn.Linear(input_dim, input_dim)
+        self.value = nn.Linear(input_dim, input_dim)
+        self.dropout = nn.Dropout(0.2)
+
+        # Initialize the Linear layers
+        nn.init.kaiming_normal_(self.query.weight)
+        nn.init.kaiming_normal_(self.key.weight)
+        nn.init.kaiming_normal_(self.value.weight)
+
+        self.relation_network = nn.Sequential(
+            nn.Linear(input_dim, input_dim),
+            nn.Dropout(0.5),
+            nn.ReLU(),
+            nn.Linear(input_dim, input_dim),
+            nn.ReLU(),
+            nn.Linear(input_dim, input_dim),
+            nn.ReLU(),
+        )
+
+        # Initialize the Linear layers in relation_network
+        for layer in self.relation_network:
+            if isinstance(layer, nn.Linear):
+                nn.init.kaiming_normal_(layer.weight)
+
+    def forward(self, x):
+        Q = self.query(x)
+        K = self.key(x)
+        V = self.value(x)
+
+        attention_weights = F.softmax(Q @ K.transpose(-2, -1), dim=-1)
+        attention_weights = self.dropout(attention_weights)
+
+        return attention_weights @ V
 
 
 class NTupleNetwork(nn.Module):
     def __init__(self, embedding_dim, hidden_dim, output_dim):
         super(NTupleNetwork, self).__init__()
         self.embedding_dim = embedding_dim
+        self.attention = SimpleSelfAttention(embedding_dim)  # Add attention layer
         self.fc = nn.Sequential(
-            nn.Linear(embedding_dim, hidden_dim),
+            nn.Linear(embedding_dim, embedding_dim // 2),
             nn.ReLU(),
-            nn.Linear(hidden_dim, output_dim)
+            nn.Linear(embedding_dim // 2, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, output_dim),
         )
 
-    def forward_one(self, x):
-        out = self.fc(x)
-        return out
-
-    def forward(self, samples):
-        outputs = torch.stack([self.forward_one(sample) for sample in samples])
-        return outputs
+    def forward(self, x):
+        # x = self.attention(x)  # Pass input through attention layer
+        x = self.fc(x)
+        return x
 
 
 if __name__ == "__main__":
@@ -68,5 +111,5 @@ if __name__ == "__main__":
         with torch.no_grad():
             outputs = n_tuple_network(samples)
             _, predicted = torch.max(outputs, 1)
-            f1 = f1_score(labels, predicted, average='micro')
+            f1 = f1_score(labels, predicted, average="micro")
             print(f"Epoch {epoch + 1}, F1 Score: {f1:.4f}, Loss: {loss.item()}")

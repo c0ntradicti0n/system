@@ -1,9 +1,10 @@
 import logging
 import os
 import re
-from sklearn.metrics.pairwise import cosine_similarity
+
 from langchain.embeddings import SentenceTransformerEmbeddings
 from langchain.vectorstores import Chroma
+from sklearn.metrics.pairwise import cosine_similarity
 
 from lib.doc import get_documents
 from lib.embedding import get_embeddings
@@ -14,17 +15,20 @@ def write_generator(gen, tmp_dir="", strip_path=""):
     for path, content in gen:
         if strip_path:
             path = path.replace(strip_path, "")
-        p = os.path.join(tmp_dir,path)
+        p = os.path.join(tmp_dir, path)
         d = os.path.dirname(p)
         if tmp_dir:
             os.makedirs(d, exist_ok=True)
         if not os.path.exists(p) and not tmp_dir:
-            raise(ValueError(f"File {p} does not exist and so can't be changed."))
+            raise (ValueError(f"File {p} does not exist and so can't be changed."))
         with open(p, "w", encoding="utf-8") as file:
             file.write(content)
+
+
 def remove_links(text, pattern):
     # Use the named group 'text' to keep the text of the link while removing the URL
     return pattern.sub(r"\g<text>", text)
+
 
 def link_texts(
     document_dir,
@@ -43,9 +47,6 @@ def link_texts(
     link_pattern = re.compile(r"\[(?P<text>[^\]]+)\]\(([^)]+)\)")
 
     for file_path in all_files:
-
-
-
         with open(file_path, "r", encoding="utf-8") as file:
             text = file.read()
         if not text or len(text) < 150:
@@ -60,13 +61,10 @@ def link_texts(
         processed_segments = []
 
         for segment in segments:
-
-            lines = segment.split('\n')
+            lines = segment.split("\n")
             processed_lines = []
 
             for line in lines:
-
-
                 words = line.split()
                 i = 0
                 linked_text = []
@@ -105,7 +103,9 @@ def link_texts(
                                 if results:
                                     best_match = results[0]
                                     link_path = best_match.metadata["file_path"]
-                                    link_path = link_path.replace(".md", "").replace(" ", "%20")
+                                    link_path = link_path.replace(".md", "").replace(
+                                        " ", "%20"
+                                    )
                                     linked_text.append(f"[{n_grams[j]}]({link_path})")
                                 else:
                                     linked_text.extend(
@@ -161,9 +161,6 @@ if __name__ == "__main__":
     with catchtime("linking"):
         for i in range(3):
             write_generator(
-                link_texts(os.environ["SYSTEM"]
-
-                           , vector_store
-                           )
-                #strip_path=os.environ["SYSTEM"]
+                link_texts(os.environ["SYSTEM"], vector_store)
+                # strip_path=os.environ["SYSTEM"]
             )
