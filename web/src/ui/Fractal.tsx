@@ -36,7 +36,7 @@ function parseHash(hash) {
   return params
 }
 
-const Fractal = ({ setContent }) => {
+const Fractal = ({}) => {
   const [detailId, _setDetailId] = useState(null)
   const [transformState, setTransformState] = useState(null)
   const [collectedData, setCollectedData] = useState({})
@@ -260,9 +260,9 @@ const Fractal = ({ setContent }) => {
       setInitialPageLoad(false) // Mark that the initial page load logic is done
     }
   }, [initialPageLoad, setDetailId, setHiddenId]) // Depend on initialPageLoad so that this useEffect runs only once
-
+  console.log(visualData)
   return (
-    <div className="App" style={{}}>
+    <div className="Fractal" style={{}}>
       <div style={{ position: 'absolute', width: 0, height: 0, top: 0 }}>
         {searchResults ? (
           <MuuriComponent labels={searchResults} setHiddenId={setHiddenId} />
@@ -310,7 +310,6 @@ const Fractal = ({ setContent }) => {
                   {...{
                     hoverId,
                     setHoverId,
-                    setContent,
                     detailId,
                     transformState,
                     scale,

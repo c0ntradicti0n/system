@@ -36,7 +36,6 @@ function Triangle({
   top,
 
   transformState,
-  setContent,
   setTooltipData,
   setHoverId,
   animate,
@@ -130,7 +129,6 @@ function Triangle({
                 {...{
                   scale,
                   setCurrentId,
-                  setContent,
                   setTooltipData,
                   setHoverId,
                   index,

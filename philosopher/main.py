@@ -84,15 +84,24 @@ def dialectic_triangle(
     task_cache = f".cache_{task}/"
     if not os.path.exists(task_cache):
         os.makedirs(task_cache, exist_ok=True)
-    lllm_output = task_cache + f"response" + ("" if os.environ.get("MANUAL",False) else ".manual") + ".txt"
-    lllm_input = task_cache + f"prompt" + ("" if os.environ.get("MANUAL", False) else ".manual") + ".txt"
+    lllm_output = (
+        task_cache
+        + f"response"
+        + ("" if os.environ.get("MANUAL", False) else ".manual")
+        + ".txt"
+    )
+    lllm_input = (
+        task_cache
+        + f"prompt"
+        + ("" if os.environ.get("MANUAL", False) else ".manual")
+        + ".txt"
+    )
 
     os.makedirs(".cache_text/", exist_ok=True)
 
     if not os.path.exists(lllm_output):
         with open(lllm_input, "w") as f:
             f.write(instruction.strip() + "\n" + prompt + "\n")
-
 
         if not os.environ.get("MANUAL", False):
             api_result = llm(

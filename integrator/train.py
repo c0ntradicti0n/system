@@ -2,11 +2,12 @@ import json
 import os
 
 import torch
-from sklearn.metrics import f1_score, accuracy_score, precision_score, recall_score
+from sklearn.metrics import (accuracy_score, f1_score, precision_score,
+                             recall_score)
 from tensorboardX import SummaryWriter
 from torch import nn
 from torch.optim import Adam
-from torch.optim.lr_scheduler import ReduceLROnPlateau, CyclicLR
+from torch.optim.lr_scheduler import CyclicLR, ReduceLROnPlateau
 
 from integrator import config
 from integrator.classifier import NTupleNetwork
@@ -31,7 +32,10 @@ def colorized_comparison(prefix, predicted_labels, gold_labels):
         else:
             comparison_results.append(f"{ANSI_RED}{pred}{ANSI_RESET}")
     return "\n".join(
-        [prefix + "".join([str(i) for i in gold_labels]), (prefix + "".join(comparison_results))]
+        [
+            prefix + "".join([str(i) for i in gold_labels]),
+            (prefix + "".join(comparison_results)),
+        ]
     )
 
 
@@ -41,9 +45,15 @@ optimizer = Adam(model.parameters(), lr=0.003)
 criterion = nn.CrossEntropyLoss()
 data_gen = DataGenerator()
 epochs = 10000
-scheduler = CyclicLR(optimizer, base_lr=0.001, max_lr=0.006, step_size_up=2000, mode="triangular", cycle_momentum=False)
-writer = SummaryWriter('runs/experiment_1')  # Initialize the SummaryWriter
-
+scheduler = CyclicLR(
+    optimizer,
+    base_lr=0.001,
+    max_lr=0.006,
+    step_size_up=2000,
+    mode="triangular",
+    cycle_momentum=False,
+)
+writer = SummaryWriter("runs/experiment_1")  # Initialize the SummaryWriter
 
 
 max_fscore = 0
@@ -117,8 +127,10 @@ for epoch in range(epochs):
 
         # Calculate accuracy, precision, and recall
         accuracy = accuracy_score(true_labels_np, predicted_labels_np)
-        precision = precision_score(true_labels_np, predicted_labels_np, average='macro')
-        recall = recall_score(true_labels_np, predicted_labels_np, average='macro')
+        precision = precision_score(
+            true_labels_np, predicted_labels_np, average="macro"
+        )
+        recall = recall_score(true_labels_np, predicted_labels_np, average="macro")
 
     if valid_fscore > max_fscore:
         print(
@@ -138,7 +150,9 @@ for epoch in range(epochs):
             )
             f.write("\n")
             f.write(
-                colorized_comparison("v: " , predicted_labels.view(-1), valid_labels_reshaped)
+                colorized_comparison(
+                    "v: ", predicted_labels.view(-1), valid_labels_reshaped
+                )
             )
             f.write("\n")
             f.write("\n")
@@ -149,34 +163,52 @@ for epoch in range(epochs):
 
     if counter >= 17:  # If n epochs have passed since the last best F-score
         # Reload the last best model and optimizer state
-        model.load_state_dict(torch.load("models/" + f"f1v={max_fscore:.2f}-" + MODEL_PATH))
-        optimizer.load_state_dict(torch.load("models/" + f"f1v={max_fscore:.2f}-" + OPTIMIZER_PATH))
-        optimizer.param_groups[0]['lr'] = best_lr  # Reset the learning rate
+        model.load_state_dict(
+            torch.load("models/" + f"f1v={max_fscore:.2f}-" + MODEL_PATH)
+        )
+        optimizer.load_state_dict(
+            torch.load("models/" + f"f1v={max_fscore:.2f}-" + OPTIMIZER_PATH)
+        )
+        optimizer.param_groups[0]["lr"] = best_lr  # Reset the learning rate
         counter = 0  # Reset the counter
 
     scheduler.step(valid_loss)
 
-    print(colorized_comparison("t: " , predicted_labels.view(-1), valid_labels_reshaped))
-    print(colorized_comparison("v: " , train_predicted_labels.view(-1), train_labels_reshaped))
+    print(colorized_comparison("t: ", predicted_labels.view(-1), valid_labels_reshaped))
+    print(
+        colorized_comparison(
+            "v: ", train_predicted_labels.view(-1), train_labels_reshaped
+        )
+    )
 
     grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=10)
 
     # Log parameters to TensorBoard
-    writer.add_scalar('Loss', loss.item(), epoch)
-    writer.add_scalar('Train F-score', train_fscore, epoch)
-    writer.add_scalar('Validation F-score', valid_fscore, epoch)
-    writer.add_scalar('Learning Rate', optimizer.param_groups[0]['lr'], epoch)
-    writer.add_scalar('Gradient Norm', grad_norm.item(), epoch)
-    writer.add_scalar('Accuracy', accuracy, epoch)
-    writer.add_scalar('Precision', precision, epoch)
-    writer.add_scalar('Recall', recall, epoch)
+    writer.add_scalar("Loss", loss.item(), epoch)
+    writer.add_scalar("Train F-score", train_fscore, epoch)
+    writer.add_scalar("Validation F-score", valid_fscore, epoch)
+    writer.add_scalar("Learning Rate", optimizer.param_groups[0]["lr"], epoch)
+    writer.add_scalar("Gradient Norm", grad_norm.item(), epoch)
+    writer.add_scalar("Accuracy", accuracy, epoch)
+    writer.add_scalar("Precision", precision, epoch)
+    writer.add_scalar("Recall", recall, epoch)
 
     # Assuming `predictions` are the model predictions and `labels` are the true labels
-    writer.add_pr_curve('precision_recall_valid', predicted_labels.view(-1), valid_labels_reshaped, epoch)
-    writer.add_pr_curve('precision_recall_valid', train_predicted_labels.view(-1), train_labels_reshaped, epoch)
+    writer.add_pr_curve(
+        "precision_recall_valid",
+        predicted_labels.view(-1),
+        valid_labels_reshaped,
+        epoch,
+    )
+    writer.add_pr_curve(
+        "precision_recall_valid",
+        train_predicted_labels.view(-1),
+        train_labels_reshaped,
+        epoch,
+    )
 
-    hparams = {'lr': 0.1, 'batch_size': 64}
-    metrics = {'accuracy': accuracy, 'loss': loss}
+    hparams = {"lr": 0.1, "batch_size": 64}
+    metrics = {"accuracy": accuracy, "loss": loss}
     writer.add_hparams(hparams, metrics)
     for name, param in model.named_parameters():
         writer.add_histogram(name, param, epoch)

@@ -86,7 +86,7 @@ services:
       - "./service:/flask_app"
       - "./lib:/flask_app/lib"
 
-      - "./.chroma:/flask_app/.chroma:rw"
+      - "./.cache-cr:/chroma:rw"
       - "./.cache-hf:/.cache:rw"
 
 

@@ -81,16 +81,15 @@ class NTupleNetwork(nn.Module):
             nn.GELU(),
             nn.Linear(embedding_dim // 2, embedding_dim // 2),
             nn.GELU(),
-            nn.Linear( embedding_dim // 2, output_dim),
+            nn.Linear(embedding_dim // 2, output_dim),
         )
         # Initialize the Linear layers in relation_network
         for layer in self.fc:
             if isinstance(layer, nn.Linear):
                 nn.init.kaiming_normal_(layer.weight)
 
-
     def forward(self, x):
-        #x = self.attention(x)  # Pass input through attention layer
+        # x = self.attention(x)  # Pass input through attention layer
 
         x = self.fc(x)
         return x

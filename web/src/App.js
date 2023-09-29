@@ -1,28 +1,27 @@
 import React, { useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import './App.css'
+
 import Fractal from './ui/Fractal.tsx'
+import { Puzzle } from './ui/Puzzle'
+
+import { useRoutes } from 'raviger'
+
+const routes = {
+  '/': () => <Fractal />,
+  '/puzzle': () => <Puzzle />,
+}
+
 const queryClient = new QueryClient()
 function App() {
-  const [content, setContent] = useState('')
+  const routeResult = useRoutes(routes)
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Fractal setContent={setContent} />
-      <div
-        style={{
-          position: 'absolute',
-          left: 0,
-          top: 0,
-          zIndex: 9999,
-          fontSize: '2.5rem',
-          wordWrap: 'break-word',
-          width: '40%',
-        }}
-      >
-        {content}
-      </div>
-    </QueryClientProvider>
+    <div className="App">
+      <QueryClientProvider client={queryClient}>
+        {routeResult || '404'}
+      </QueryClientProvider>
+    </div>
   )
 }
 

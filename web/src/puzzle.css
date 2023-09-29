@@ -1,0 +1,45 @@
+.puzzle-grid {
+  height: 100% !important;
+  width: 100% !important;
+  margin: 0;
+  box-sizing: border-box;
+  position: absolute;
+}
+.puzzle-item {
+  position: absolute;
+
+  z-index: 1;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 600px) {
+  .puzzle-item {
+    width: 68px;
+  }
+  .grid {
+    left: 10px;
+  }
+}
+.puzzle-item.muuri-item-hidden {
+  z-index: 0;
+}
+.puzzle-item.muuri-item-releasing {
+  z-index: 20;
+}
+.puzzle-item.muuri-item-dragging {
+  z-index: 30;
+}
+.puzzle-item-content {
+  font-family: serif;
+  height: 100%;
+  color: white;
+  cursor: pointer;
+  font-size: clamp(12px, 4vw, 24px);
+  vertical-align: bottom;
+}
+.puzzle-item.muuri-item-dragging .item-content {
+  background: blue;
+}
+.puzzle-item.muuri-item-releasing .item-content {
+  background: blueViolet;
+}
