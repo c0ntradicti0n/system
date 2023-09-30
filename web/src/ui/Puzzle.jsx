@@ -2,11 +2,13 @@ import React, { useEffect, useRef, useState } from 'react'
 import Muuri from 'muuri'
 import '../puzzle.css'
 import { stringToColour } from '../lib/color'
-import {postProcessTitle} from "../lib/position";
+import { postProcessTitle } from '../lib/position'
+import useMuuriStore from '../lib/MuuriStore'
+import useMuuriGrid from '../lib/useMuuriGrid'
 
 const SIZE = 300
 
-const moptions = (size, nest) => ({
+const moptions = (size, nest, all_muris) => ({
   dragEnabled: true,
   layout: function (grid, layoutId, items, width, height, callback) {
     var layout = {
@@ -54,26 +56,37 @@ const moptions = (size, nest) => ({
   itemHiddenClass: 'puzzle-item-hidden',
   itemPositioningClass: 'puzzle-item-positioning',
   itemPlaceholderClass: 'puzzle-item-placeholder',
+  dragSortPredicate: function (item, e) {
+    return Muuri.ItemDrag.defaultSortPredicate(item, {
+      action: 'swap',
+      threshold: 75,
+    })
+  },
   dragContainer: document.body,
   dragStartPredicate: (item, event) => {
     event.srcEvent.stopPropagation()
     return Muuri.ItemDrag.defaultStartPredicate(item, event)
   },
-
+  dragSort: () => {
+    console.log('dragSort', all_muris)
+    return all_muris
+  },
+  size: size,
 })
 
 const Triangle = ({ nest, fullId, data, _key, size }) => {
   const gridRef = useRef(null)
+  const { addInstance, removeInstance, muuriInstances } = useMuuriStore()
 
   console.log('Triangle', { data, _key, fullId, size })
 
-  useEffect(() => {
-    if (!gridRef.current) return
-
-    const grid = new Muuri(gridRef.current, moptions(size, 2))
-
-    return () => grid.destroy()
-  }, [gridRef, data, size, nest])
+  useMuuriGrid(
+    gridRef,
+    moptions(size, 2, muuriInstances),
+    addInstance,
+    removeInstance,
+    size,
+  )
 
   const isLeafNode =
     data && !Object.values(data).some((value) => typeof value === 'object')
@@ -86,14 +99,23 @@ const Triangle = ({ nest, fullId, data, _key, size }) => {
 
         height: size.toString() + 'px',
         width: size.toString() + 'px',
-        fontSize: (size/10).toString()+  "px",
+        fontSize: (size / 10).toString() + 'px',
         zIndex: 1000 * nest,
       }}
       key={_key}
     >
-      <div style={{ position: 'absolute', top: size/2,textAlign:"center", width:size,
-        fontSize: (size/10).toString()+  "px",
-      }}>{_key} <br />{postProcessTitle(data['.'])}</div>
+      <div
+        style={{
+          position: 'absolute',
+          top: size / 2,
+          textAlign: 'center',
+          width: size,
+          fontSize: (size / 10).toString() + 'px',
+        }}
+      >
+        {_key} <br />
+        {postProcessTitle(data['.'])}
+      </div>
 
       <div className="puzzle-item-content triangle-content"></div>
       {!isLeafNode && data && (
@@ -118,6 +140,8 @@ const Triangle = ({ nest, fullId, data, _key, size }) => {
 
 export const Puzzle = ({ children, ...props }) => {
   const gridRef = useRef(null)
+  const { addInstance, removeInstance, muuriInstances } = useMuuriStore()
+
   const [items, setItems] = useState(
     {
       1: {
@@ -153,14 +177,13 @@ export const Puzzle = ({ children, ...props }) => {
     // '.': 'Ontology.md',
     // _: 'Vanishing-of-vanishing.md',
   )
-  useEffect(() => {
-    if (!gridRef.current) return
-    const grid = new Muuri(gridRef.current, {
-      ...moptions(SIZE, 1),
-    })
-
-    return () => grid.destroy()
-  }, [gridRef, items])
+  useMuuriGrid(
+    gridRef,
+    moptions(SIZE, 1, muuriInstances),
+    addInstance,
+    removeInstance,
+    SIZE,
+  )
 
   if (!items) return null
 
