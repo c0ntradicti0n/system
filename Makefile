@@ -31,6 +31,18 @@ viz:
 	tensorboard --logdir integrator/runs
 
 mod:
+	rm -rf ./.cache-cr
+	rm -rf ./.cache-cr-linker
+	rm -rf ./.cache-hf
+	rm -rf ./.models-classifier
+	rm -rf ./.chroma
+
+	mkdir -p ./.cache-cr
+	mkdir -p ./.cache-cr-linker
+	mkdir -p ./.cache-hf
+	mkdir -p ./.models-classifier
+	mkdir -p ./.chroma
+
 	chmod 777 ./.cache-cr
 	chmod 777 ./.cache-cr-linker
 	chmod 777 ./.cache-hf

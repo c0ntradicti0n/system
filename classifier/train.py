@@ -176,8 +176,10 @@ for config in gen_config():
                 )
             )
             optimizer.load_state_dict(
-                torch.load("models/" + f"f1v={max_fscore:.2f}-" + config.OPTIMIZER_PATH)
-            )
+                torch.load(
+                    os.path.join(
+                        config.MODEL_DIR, f"f1v={max_fscore:.2f}-" + f"f1v={max_fscore:.2f}-" + config.OPTIMIZER_PATH)
+            ))
             optimizer.param_groups[0]["lr"] = best_lr  # Reset the learning rate
             counter = 0  # Reset the counter
 
