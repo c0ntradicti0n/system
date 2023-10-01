@@ -91,7 +91,8 @@ services:
       - "./.cache-cr:/chroma:rw"
       - "./.cache-hf:/.cache:rw"
   linker:
-    mem_limit: 2g
+    mem_limit: 10g
+
     logging:
       driver: "json-file"
       options:
@@ -124,7 +125,7 @@ services:
 
 
   classifier:
-    mem_limit: 2g
+    mem_limit: 10g
     logging:
       driver: "json-file"
       options:
