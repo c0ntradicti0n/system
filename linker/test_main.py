@@ -71,8 +71,8 @@ class TestLinkTexts(unittest.TestCase):
         with open(os.path.join(self.temp_dir, "test_multiple_links.md"), "r") as f:
             linked_text = f.read()
 
-        self.assertIn("[test](/path/of/test)", linked_text)
-        self.assertIn("[linking](/path/of/linking)", linked_text)
+        self.assertIn("[This is a](RESULT)", linked_text)
+        self.assertIn("[test sentence for](RESULT)", linked_text)
 
     def test_overlapping_links(self):
         sample_text = "This is a linking function test." + "".join([" a"] * 1000)

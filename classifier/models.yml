@@ -1,0 +1,55 @@
+defaults: &defaults
+  embedding_dim: 1024
+  batch_size: 64
+  n_epochs: 10000
+  stop_f1_score: 0.93
+
+# We speak of model classes in the way, we need models for conmparing n samples
+# varying from 4 to 10.
+
+
+# This model class determines the "dialectical role" of three concepts compared
+# to each other and some additional samples. It selects the "good" ones and
+# assigns labels for "thesis", "antithesis" and "synthesis".
+tas_selector: &tas_selector
+  <<: *defaults
+  n_classes: 4
+  classes:
+    - labels
+    - valid
+    - random
+  probs:
+    - 0.1
+    - 0.8
+    - 0.1
+
+# This model class is concerned if one concept is a class of other concepts.
+# The model selects, which one might be the class for maximum 3 others.
+# The model also decides, if the concept is not a class of any other.
+hie_selector: &hie_selector
+  <<: *defaults
+  n_classes: 3
+  classes:
+    - labels_hie
+    - valid_hie
+    - random_hie
+    - random
+  probs:
+    - 0.1
+    - 0.3
+    - 0.3
+    - 0.3
+
+models:
+  hierarchical:
+    <<: *hie_selector
+    n_samples: 5
+
+  tas_4:
+    <<: *tas_selector
+    n_samples: 4
+  tas_5:
+    <<: *tas_selector
+    n_samples: 5
+
+

@@ -30,3 +30,8 @@ train:
 viz:
 	tensorboard --logdir integrator/runs
 
+mod:
+	chmod 777 ./.cache-cr
+	chmod 777 ./.cache-hf
+	chmod 777 ./.models-classifier
+	chmod 777 ./.chroma

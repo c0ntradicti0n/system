@@ -64,7 +64,7 @@ class SimpleSelfAttention(nn.Module):
 
 
 class NTupleNetwork(nn.Module):
-    def __init__(self, embedding_dim, hidden_dim, output_dim):
+    def __init__(self, embedding_dim, output_dim):
         super(NTupleNetwork, self).__init__()
         self.embedding_dim = embedding_dim
 
@@ -97,10 +97,9 @@ class NTupleNetwork(nn.Module):
 
 if __name__ == "__main__":
     embedding_dim = 128
-    hidden_dim = 64
     output_dim = 4
     n_samples = 4
-    n_tuple_network = NTupleNetwork(embedding_dim, hidden_dim, output_dim)
+    n_tuple_network = NTupleNetwork(embedding_dim, output_dim)
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(n_tuple_network.parameters(), lr=0.001)
 

@@ -10,23 +10,23 @@ ENV PYTHONUNBUFFERED 1
 
 
 # create root directory for our project in the container
-RUN mkdir /flask_app
+RUN mkdir /app
 
-# Set the working directory in the container to /flask_app
-WORKDIR /flask_app
+# Set the working directory in the container to /app
+WORKDIR /app
 
 # Install any needed packages specified in requirements.txt
-COPY requirements.prod /flask_app/
+COPY requirements.prod /app/
 
 # Install system dependencies
 RUN pip install --upgrade pip
 RUN pip install uwsgi
 RUN --mount=type=cache,target=/root/.cache/pip  pip install --no-cache-dir -r requirements.prod
 RUN apt-get purge -y --auto-remove gcc
-# Copy the current directory contents into the container at /flask_app
-ADD . /flask_app/
+# Copy the current directory contents into the container at /app
+ADD . /app/
 
-RUN ls -la /flask_app
+RUN ls -la /app
 
 ENV PYTHONIOENCODING=utf-8
 ENV LC_ALL=C.UTF-8

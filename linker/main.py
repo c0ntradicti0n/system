@@ -2,15 +2,13 @@ import logging
 import os
 import re
 
-from langchain.embeddings import SentenceTransformerEmbeddings
-from langchain.vectorstores import Chroma
 from sklearn.metrics.pairwise import cosine_similarity
 
-from lib.doc import get_documents
 from lib.embedding import get_embeddings
 from lib.md import remove_links
 from lib.t import catchtime
-
+from lib.vector_store import get_vector_store
+import lib.default_config
 
 def write_generator(gen, tmp_dir="", strip_path=""):
     for path, content in gen:
@@ -51,7 +49,7 @@ def link_texts(
 
         text = remove_links(text)
 
-        doc_embedding = get_embeddings([text])
+        doc_embedding = get_embeddings([text], lib.default_config)
 
         segments = link_pattern.split(text)
         processed_segments = []
@@ -78,7 +76,7 @@ def link_texts(
 
                     # If batch is full or all n-grams are added, process the batch
                     if len(n_grams) == batch_size or i >= len(words):
-                        n_gram_embeddings = get_embeddings(n_grams)
+                        n_gram_embeddings = get_embeddings(n_grams, lib.default_config)
 
                         similarities = cosine_similarity(
                             doc_embedding, n_gram_embeddings
@@ -134,6 +132,7 @@ persist_directory = ".chroma"
 
 if __name__ == "__main__":
     with catchtime("linking"):
+        vector_store = get_vector_store(persist_directory=persist_directory)
         for i in range(3):
             write_generator(
                 link_texts(os.environ["SYSTEM"], vector_store)

@@ -5,9 +5,8 @@ import timeit
 
 import numpy as np
 import torch
-from helper import OutputLevel, e, tree
 
-from integrator import config
+from lib.helper import OutputLevel, e, tree
 from lib.embedding import get_embeddings
 
 
@@ -50,6 +49,8 @@ def random_subdir(dir_path):
 def tree_walker(yield_mode="valid", n_samples=10):
     samples = []
     while len(samples) < n_samples:
+        a, b, c, X = None, None, None, None
+
         random_dir = random.choice(gold_samples)
         d = tree(
             basepath="",
@@ -58,7 +59,7 @@ def tree_walker(yield_mode="valid", n_samples=10):
             format="json",
             info_radius=10,
             exclude=[".git", ".git.md", ".gitignore", ".DS_Store", ".idea"],
-            pre_set_output_level=OutputLevel.FILE,
+            pre_set_output_level=OutputLevel.FILENAMES,
             prefix_items=True,
         )
         if yield_mode == "labels":
@@ -70,7 +71,6 @@ def tree_walker(yield_mode="valid", n_samples=10):
             samples.extend([(a, 1), (b, 2), (c, 3)])
             yield_mode = "random"
         elif yield_mode == "valid":
-            a, b, c = None, None, None
             with e:
                 a = d[1]["."]
             with e:
@@ -88,7 +88,6 @@ def tree_walker(yield_mode="valid", n_samples=10):
                 yield_mode = "random"
         elif yield_mode == "random":
             r = random.choice([1, 2, 3])
-            c = None
             with e:
                 c = d[r]["."]
             if not c:
@@ -100,6 +99,59 @@ def tree_walker(yield_mode="valid", n_samples=10):
             if c:
                 samples.append((c, 0))
 
+        elif yield_mode == "labels_hie":
+            X, a, b,c  = (
+                "class - superordinated",
+                "instance - subordinated",
+                "instance - subordinated",
+                "instance - subordinated",
+            )
+            samples.extend([(a, 1), (b, 2), (c, 2), (X, 2)])
+            yield_mode = "random"
+
+        elif yield_mode == "valid_hie":
+            with e:
+                a = d[1]["."]
+            with e:
+                b = d[2]["."]
+            with e:
+                c = d[3]["."]
+            with e:
+                X = d["."]
+            if (
+                all([a, b, c, X])
+                and a not in samples
+                and b not in samples
+                and c not in samples
+                and X not in samples
+            ):
+                samples.extend([(a, 2), (b, 2), (c, 2), (X, 1)])
+                yield_mode = "random"
+            else:
+                gold_samples.pop(gold_samples.index(random_dir))
+
+        elif yield_mode == "random_hie":
+            with e:
+                a = d[1]["."]
+            with e:
+                b = d[2]["."]
+            with e:
+                c = d[3]["."]
+
+            if (
+                all([a, b, c])
+                and a not in samples
+                and b not in samples
+                and c not in samples
+            ):
+                samples.extend([(a, 0), (b, 0), (c, 0)])
+                yield_mode = "random"
+            else:
+                gold_samples.pop(gold_samples.index(random_dir))
+
+        elif True:
+            raise NotImplementedError(f"{yield_mode=} not implemented!")
+
     samples = [(text.replace(".md", "").strip(), label) for text, label in samples]
     random.shuffle(samples)
     samples.reverse()
@@ -107,31 +159,29 @@ def tree_walker(yield_mode="valid", n_samples=10):
 
 
 class DataGenerator:
-    def __init__(self):
-        pass
+    def __init__(self, config):
+        self.config = config
 
     def adjust_data_distribution(self, fscore):
         # Adjust data distribution based on f score
         pass
 
-    def generate_data(self, n_samples=config.n_samples):
+    def generate_data(self):
         texts = []
         labels = []
         embeddings = []
-        for _ in range(config.batch_size):
+        for _ in range(self.config.batch_size):
             sample, label = list(
                 zip(
                     *tree_walker(
-                        np.random.choice(
-                            ["labels", "valid", "random"], p=[0.1, 0.8, 0.1]
-                        ),
-                        n_samples,
+                        np.random.choice(self.config.classes, p=self.config.probs),
+                        self.config.n_samples,
                     )
                 )
             )
             texts.append(sample)
             labels.append(label)
 
-            embeddings.append(get_embeddings(sample))
+            embeddings.append(get_embeddings(sample, self.config))
 
         return torch.tensor(embeddings), torch.tensor(labels, dtype=torch.long), texts

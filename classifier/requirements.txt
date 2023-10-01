@@ -1,0 +1,17 @@
+coloredlogs
+jsonpath-ng
+jsonschema
+Levenshtein
+MarkupSafe
+PyYAML
+regex
+requests
+cython
+pyyaml
+ruamel.yaml
+langchain
+chromadb
+sentence-transformers
+tensorboardX
+tensorboard
+addict

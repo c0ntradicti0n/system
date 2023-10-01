@@ -1,15 +1,25 @@
-# Use a base image with Python
-FROM python:3.9-slim
+# Use an official Python runtime as a parent image
+FROM kalilinux/kali-rolling:latest
 
-# Set the working directory
+ENV PYTHONUNBUFFERED 1
+USER root
+
+RUN mkdir /app
 WORKDIR /app
 
-# Copy the script and any other necessary files
-COPY ./your_script_name.py /app/
-COPY ./requirements.txt /app/
+RUN uname -a
+ENV PIP_CACHE_DIR=/root/.cache/pip
+RUN apt update -y
+RUN apt upgrade -y
+RUN apt install -y gcc python3-pip
+RUN pip3 install --upgrade pip
+RUN pip3 config list
+RUN --mount=type=cache,target=/root/.cache/pip  pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 
-# Install any necessary dependencies
+COPY ./requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Command to run the script in a loop
-CMD while true; do python your_script_name.py; sleep 86400; done
+
+COPY . /app/
+
+ENTRYPOINT ["python3", "main.py"]

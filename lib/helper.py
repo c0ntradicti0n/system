@@ -1,13 +1,11 @@
 import logging
 import os
 import pathlib
-import re
 import shlex
 import subprocess
 from enum import Enum
 from functools import total_ordering
 
-from cache import file_based_cache
 from jsonpath_ng import parse
 from Levenshtein import distance
 from regex import regex

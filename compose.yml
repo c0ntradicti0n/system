@@ -52,7 +52,9 @@ services:
         - "host.docker.internal:host-gateway"
     volumes:
       - "$SYSTEM:/system"
-      - "./server:/flask_app"
+      - "./server:/app"
+      - "./lib:/app/lib"
+
   service:
     logging:
       driver: "json-file"
@@ -83,11 +85,76 @@ services:
       DISABLE_TELEMETRY: True
     volumes:
       - "$SYSTEM:/system"
-      - "./service:/flask_app"
-      - "./lib:/flask_app/lib"
+      - "./service:/app"
+      - "./lib:/app/lib"
 
       - "./.cache-cr:/chroma:rw"
       - "./.cache-hf:/.cache:rw"
+  linker:
+    mem_limit: 2g
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+    build:
+      context: linker
+      args:
+         SYSTEM: /system
+    container_name: linker
+    env_file:
+      - .env
+    tty: true
+    user: 1000:1000
+    environment:
+      DEBUG: "true"
+      HOST: $HOST
+      SYSTEM: /system
+      PYTHONIOENCODING: utf-8
+      HAYSTACK_TELEMETRY_ENABLED: "False"
+      HF_HUB_DISABLE_TELEMETRY: True
+      DISABLE_TELEMETRY: True
+    volumes:
+      - "$SYSTEM:/system"
+      - "./service:/app"
+      - "./lib:/app/lib"
+
+      - "./.cache-cr:/chroma:rw"
+      - "./.cache-hf:/.cache:rw"
+
+
+  classifier:
+    mem_limit: 2g
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+    build:
+      context: classifier
+      args:
+         SYSTEM: /system
+    container_name: classifier
+    env_file:
+      - .env
+    tty: true
+    user: 1000:1000
+    environment:
+      DEBUG: "true"
+      HOST: $HOST
+      SYSTEM: /system
+      PYTHONIOENCODING: utf-8
+      HAYSTACK_TELEMETRY_ENABLED: "False"
+      HF_HUB_DISABLE_TELEMETRY: True
+      DISABLE_TELEMETRY: True
+    volumes:
+      - "$SYSTEM:/system"
+      - "./classifier:/app"
+      - "./lib:/app/lib"
+
+      - "./.cache-cr:/chroma:rw"
+      - "./.cache-hf:/.cache:rw"
+      - "./.models-classifier:/app/models:rw"
 
 
 
