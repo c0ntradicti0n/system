@@ -4,11 +4,12 @@ import re
 
 from sklearn.metrics.pairwise import cosine_similarity
 
+import lib.default_config
 from lib.embedding import get_embeddings
 from lib.md import remove_links
 from lib.t import catchtime
 from lib.vector_store import get_vector_store
-import lib.default_config
+
 
 def write_generator(gen, tmp_dir="", strip_path=""):
     for path, content in gen:

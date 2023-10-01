@@ -169,8 +169,10 @@ for config in gen_config():
         if counter >= 17:  # If n epochs have passed since the last best F-score
             # Reload the last best model and optimizer state
             model.load_state_dict(
-                os.path.join(
-                    config.MODEL_DIR, f"f1v={max_fscore:.2f}-" + config.MODEL_PATH
+                torch.load(
+                    os.path.join(
+                        config.MODEL_DIR, f"f1v={max_fscore:.2f}-" + config.MODEL_PATH
+                    )
                 )
             )
             optimizer.load_state_dict(

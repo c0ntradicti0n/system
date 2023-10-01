@@ -6,8 +6,8 @@ import timeit
 import numpy as np
 import torch
 
-from lib.helper import OutputLevel, e, tree
 from lib.embedding import get_embeddings
+from lib.helper import OutputLevel, e, tree
 
 
 @contextlib.contextmanager
@@ -100,7 +100,7 @@ def tree_walker(yield_mode="valid", n_samples=10):
                 samples.append((c, 0))
 
         elif yield_mode == "labels_hie":
-            X, a, b,c  = (
+            X, a, b, c = (
                 "class - superordinated",
                 "instance - subordinated",
                 "instance - subordinated",

@@ -11,4 +11,3 @@ try:
 except KeyError:
     system_path = 's.environ["SYSTEM"] not set'
 embedding_dim = 1024
-
