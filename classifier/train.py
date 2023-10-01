@@ -39,7 +39,7 @@ def colorized_comparison(prefix, predicted_labels, gold_labels):
 
 for config in gen_config():
     model = NTupleNetwork(config.embedding_dim, config.n_classes)
-    optimizer = Adam(model.parameters(), lr=0.003)
+    optimizer = Adam(model.parameters(), lr=config.lr)
     criterion = nn.CrossEntropyLoss()
     data_gen = DataGenerator(config)
     epochs = config.n_epochs

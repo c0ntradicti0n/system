@@ -101,12 +101,12 @@ def tree_walker(yield_mode="valid", n_samples=10):
 
         elif yield_mode == "labels_hie":
             X, a, b, c = (
-                "class - superordinated",
-                "instance - subordinated",
-                "instance - subordinated",
-                "instance - subordinated",
+                "super - superordinated",
+                "thesis - subordinated",
+                "antithesis - subordinated",
+                "synthesis - subordinated",
             )
-            samples.extend([(a, 1), (b, 2), (c, 2), (X, 2)])
+            samples.extend([(a, 1), (b, 2), (c, 3), (X,  4)])
             yield_mode = "random"
 
         elif yield_mode == "valid_hie":
@@ -125,7 +125,7 @@ def tree_walker(yield_mode="valid", n_samples=10):
                 and c not in samples
                 and X not in samples
             ):
-                samples.extend([(a, 2), (b, 2), (c, 2), (X, 1)])
+                samples.extend([(a, 1), (b, 2), (c,3), (X, 4)])
                 yield_mode = "random"
             else:
                 gold_samples.pop(gold_samples.index(random_dir))
@@ -144,7 +144,7 @@ def tree_walker(yield_mode="valid", n_samples=10):
                 and b not in samples
                 and c not in samples
             ):
-                samples.extend([(a, 0), (b, 0), (c, 0)])
+                samples.extend([(a, 1), (b,2), (c, 3)])
                 yield_mode = "random"
             else:
                 gold_samples.pop(gold_samples.index(random_dir))

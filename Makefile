@@ -28,7 +28,7 @@ train:
 	docker run -v "./models:/models" -it train:latest
 
 viz:
-	tensorboard --logdir integrator/runs
+	tensorboard --logdir classifier/models
 
 mod:
 	rm -rf ./.cache-cr
