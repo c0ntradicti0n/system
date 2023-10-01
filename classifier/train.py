@@ -183,12 +183,12 @@ for config in gen_config():
 
         print(
             colorized_comparison(
-                "t: ", predicted_labels.view(-1), valid_labels_reshaped
+                "v: ", predicted_labels.view(-1), valid_labels_reshaped
             )
         )
         print(
             colorized_comparison(
-                "v: ", train_predicted_labels.view(-1), train_labels_reshaped
+                "t: ", train_predicted_labels.view(-1), train_labels_reshaped
             )
         )
 
