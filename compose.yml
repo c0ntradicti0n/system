@@ -120,7 +120,7 @@ services:
       - "./service:/app"
       - "./lib:/app/lib"
 
-      - "./.cache-cr:/chroma:rw"
+      - "./.cache-cr-linker:/chroma:rw"
       - "./.cache-hf:/.cache:rw"
 
 
