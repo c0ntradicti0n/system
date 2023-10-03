@@ -58,7 +58,7 @@ for config in gen_config():
     scheduler = CyclicLR(
         optimizer,
         base_lr=0.000000000000001,
-        max_lr=0.0006,
+        max_lr=0.006,
         step_size_up=27,
         mode="triangular2",
         cycle_momentum=False,
