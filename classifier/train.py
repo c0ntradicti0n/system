@@ -59,10 +59,10 @@ for config in gen_config():
     # meandering learning rate, that gets smaller over time
     scheduler = CyclicLR(
         optimizer,
-        base_lr=0.000000000000001,
+        base_lr=0,
         max_lr=0.0006,
-        step_size_up=config.batch_size * config.batches_per_epoch * math.pi,
-        mode="triangular2",
+        step_size_up=config.batch_size * config.batches_per_epoch * 0.7,
+        mode="triangular",
         cycle_momentum=False,
     )
     if not os.path.exists(config.MODEL_DIR):
