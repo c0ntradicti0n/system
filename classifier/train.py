@@ -1,4 +1,5 @@
 import logging
+import math
 import os
 
 import torch
@@ -60,7 +61,7 @@ for config in gen_config():
         optimizer,
         base_lr=0.000000000000001,
         max_lr=0.0006,
-        step_size_up=27,
+        step_size_up=config.batch_size * config.batches_per_epoch * math.pi,
         mode="triangular2",
         cycle_momentum=False,
     )

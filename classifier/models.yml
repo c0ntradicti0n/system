@@ -4,6 +4,7 @@ defaults: &defaults
   n_epochs: 10000
   stop_f1_score: 0.93
   weight_decay: 0.0001
+  batches_per_epoch: 17
 
 # ONE MODEL PER TASK
 # decide:
