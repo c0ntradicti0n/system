@@ -82,6 +82,7 @@ class NTupleNetwork(nn.Module):
             nn.Linear(int(embedding_dim * 0.25 // 1), int(embedding_dim * 0.125 // 1)),
             nn.GELU(),
             nn.Linear(int(embedding_dim * 0.125 // 1), int(output_dim)),
+
         )
         # Initialize the Linear layers in relation_network
         for layer in self.fc:

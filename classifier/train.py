@@ -61,7 +61,7 @@ for config in gen_config():
         optimizer,
         base_lr=0,
         max_lr=0.006,
-        step_size_up=config.batch_size * config.batches_per_epoch * 0.7,
+        step_size_up=config.batches_per_epoch * 0.7,
         mode="triangular",
         cycle_momentum=False,
     )
