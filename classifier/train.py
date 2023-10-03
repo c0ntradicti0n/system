@@ -59,7 +59,7 @@ for config in gen_config():
     # meandering learning rate, that gets smaller over time
     scheduler = CyclicLR(
         optimizer,
-        mode='exp_range', gamma=0.999,
+        mode='exp_range', gamma=0.99,
         base_lr=0,
         max_lr=0.006,
         step_size_up=config.batches_per_epoch * 0.7,
