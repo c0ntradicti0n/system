@@ -5,8 +5,7 @@ import torch
 from different_models import gen_config
 from model import NTupleNetwork
 from selector import DataGenerator
-from sklearn.metrics import (accuracy_score, f1_score, precision_score,
-                             recall_score)
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 from tensorboardX import SummaryWriter
 from torch import nn
 from torch.optim import Adam
@@ -55,6 +54,8 @@ for config in gen_config():
     criterion = nn.CrossEntropyLoss()
     data_gen = DataGenerator(config)
     epochs = config.n_epochs
+
+    # meandering learning rate, that gets smaller over time
     scheduler = CyclicLR(
         optimizer,
         base_lr=0.000000000000001,
@@ -114,7 +115,9 @@ for config in gen_config():
 
             scheduler.step()
 
-            print (f"Epoch {epoch + 1}, {batch=}, {loss=}, {train_fscore=:.2f} {optimizer.param_groups[0]['lr']:.12f}")
+            print(
+                f"Epoch {epoch + 1}, {batch=}, {loss=}, {train_fscore=:.2f} {optimizer.param_groups[0]['lr']:.12f}"
+            )
 
         avg_loss = total_loss / BATCHES_PER_EPOCH
         avg_train_fscore = total_train_fscore / BATCHES_PER_EPOCH
@@ -211,7 +214,6 @@ for config in gen_config():
             counter = 0  # Reset the counter
         """
 
-
         print(
             colorized_comparison(
                 "v: ", predicted_labels.view(-1), valid_labels_reshaped
@@ -226,8 +228,8 @@ for config in gen_config():
         grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=10)
 
         # Log parameters to TensorBoard
-        writer.add_scalar("Loss", loss.item(), epoch)
-        writer.add_scalar("Train F-score", train_fscore, epoch)
+        writer.add_scalar("Loss", avg_loss.item(), epoch)
+        writer.add_scalar("Train F-score", avg_train_fscore, epoch)
         writer.add_scalar("Validation F-score", valid_fscore, epoch)
         writer.add_scalar("Learning Rate", optimizer.param_groups[0]["lr"], epoch)
         writer.add_scalar("Gradient Norm", grad_norm.item(), epoch)
@@ -249,8 +251,12 @@ for config in gen_config():
             epoch,
         )
 
-        hparams = {"lr": 0.1, "batch_size": 64}
-        metrics = {"accuracy": accuracy, "loss": loss}
+        hparams = {
+            "lr": optimizer.param_groups[0]["lr"],
+            "batch_size": config.batch_size,
+            "weight_decay": config.weight_decay,
+        }
+        metrics = {"accuracy": accuracy, "loss": avg_loss}
         writer.add_hparams(hparams, metrics)
         for name, param in model.named_parameters():
             writer.add_histogram(name, param, epoch)

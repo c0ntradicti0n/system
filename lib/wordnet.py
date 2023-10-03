@@ -2,12 +2,14 @@ import csv
 import random
 from nltk.corpus import wordnet as wn
 
+
 def hypernym_generator():
     try:
         synsets = list(wn.all_synsets())
     except:
         import nltk
-        nltk.download('wordnet')
+
+        nltk.download("wordnet")
         synsets = list(wn.all_synsets())
 
     while True:
@@ -22,10 +24,11 @@ def write_to_csv(filename):
         synsets = list(wn.all_synsets())
     except:
         import nltk
-        nltk.download('wordnet')
+
+        nltk.download("wordnet")
         synsets = list(wn.all_synsets())
 
-    with open(filename, 'w', newline='') as csvfile:
+    with open(filename, "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
 
         added = []
@@ -37,7 +40,11 @@ def write_to_csv(filename):
             if synset.lemmas()[0].name() not in added:
                 row = [
                     synset.lemmas()[0].name(),
-                    [lemma.name() for hypernym in hypernyms for lemma in hypernym.lemmas()],
+                    [
+                        lemma.name()
+                        for hypernym in hypernyms
+                        for lemma in hypernym.lemmas()
+                    ],
                 ]
                 writer.writerow(row)
                 added.append(synset.lemmas()[0].name())
@@ -46,4 +53,4 @@ def write_to_csv(filename):
                 break
 
 
-write_to_csv('hypernyms.csv')
+write_to_csv("hypernyms.csv")

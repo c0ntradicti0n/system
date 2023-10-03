@@ -1,6 +1,8 @@
 from langchain.embeddings import SentenceTransformerEmbeddings
 
 d = {}
+
+
 def embedder(model_name="BAAI/bge-large-en-v1.5"):
     if model_name in d:
         return d[model_name]
