@@ -114,7 +114,7 @@ for config in gen_config():
 
             scheduler.step()
 
-            print (f"Epoch {epoch + 1}, {batch=}, {loss=}, {train_fscore=:.2f} {optimizer.param_groups[0]['lr']:.2f}")
+            print (f"Epoch {epoch + 1}, {batch=}, {loss=}, {train_fscore=:.2f} {optimizer.param_groups[0]['lr']:.12f}")
 
         avg_loss = total_loss / BATCHES_PER_EPOCH
         avg_train_fscore = total_train_fscore / BATCHES_PER_EPOCH
