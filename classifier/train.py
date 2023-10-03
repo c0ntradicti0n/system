@@ -13,6 +13,17 @@ from torch.optim import Adam
 from torch.optim.lr_scheduler import CyclicLR
 
 
+"""
+Use WordNet for more samples
+
+Build networkX graph from Text by linking paragraphs by levels of numbers and sequence of text
+
+Fan Modal for user input
+
+Use Proportional Integral Derivative (PID) controller for adjusting the data connection
+"""
+
+
 def colorized_comparison(prefix, predicted_labels, gold_labels):
     ANSI_RED = "\033[91m"
     ANSI_GREEN = "\033[92m"
@@ -166,7 +177,7 @@ for config in gen_config():
         else:
             counter += 1  # Increment the counter
 
-        if counter >= 17:  # If n epochs have passed since the last best F-score
+        """if counter >= 17:  # If n epochs have passed since the last best F-score
             # Reload the last best model and optimizer state
             model.load_state_dict(
                 torch.load(
@@ -175,13 +186,14 @@ for config in gen_config():
                     )
                 )
             )
-            optimizer.load_state_dict(
+           optimizer.load_state_dict(
                 torch.load(
                     os.path.join(
                         config.MODEL_DIR, f"f1v={max_fscore:.2f}-" + config.OPTIMIZER_PATH)
             ))
-            optimizer.param_groups[0]["lr"] = best_lr  # Reset the learning rate
+            #optimizer.param_groups[0]["lr"] = best_lr  # Reset the learning rate
             counter = 0  # Reset the counter
+        """
 
         scheduler.step(valid_loss)
 

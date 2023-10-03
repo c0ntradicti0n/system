@@ -4,6 +4,13 @@ defaults: &defaults
   n_epochs: 10000
   stop_f1_score: 0.93
 
+# ONE MODEL PER TASK
+# decide:
+#   - is a subclass-set of class
+#   - which is subclass of which
+#   - is dialectical triple
+#   - which is thesis, antithesis, synthesis
+
 # We speak of model classes in the way, we need models for conmparing n samples
 # varying from 4 to 10.
 
@@ -25,6 +32,20 @@ tas_selector: &tas_selector
   lr: 0.001
   embedding_model: BAAI/bge-large-en-v1.5
 
+
+#   - which is thesis, antithesis, synthesis
+tas_selector_only: &tas_selector_only
+  <<: *tas_selector
+  n_classes: 4
+  classes:
+    - labels
+    - valid
+  probs:
+    - 0.05
+    - 0.95
+  lr: 0.001
+  embedding_model: BAAI/bge-large-en-v1.5
+
 # This model class is concerned if one concept is a class of other concepts.
 # The model selects, which one might be the class for maximum 3 others.
 # The model also decides, if the concept is not a class of any other.
@@ -34,13 +55,13 @@ hie_selector: &hie_selector
   classes:
     - labels_hie
     - valid_hie
-    - random_hie
-    - random
+    #- random_hie
+    #- random
   probs:
     - 0.05
-    - 0.5
-    - 0.45
-    - 0.0
+    - 0.95
+    #- 0.45
+    #- 0.0
   lr: 0.003
   #embedding_model: BAAI/bge-large-en-v1.5
 
@@ -48,6 +69,15 @@ hie_selector: &hie_selector
   embedding_dim: 768
 
 models:
+  tas_4_only:
+    <<: *tas_selector_only
+    n_samples:
+      4
+
+  hierarchical:
+    <<: *hie_selector
+    n_samples: 5
+
   tas_4:
     <<: *tas_selector
     n_samples: 4
@@ -55,9 +85,7 @@ models:
     <<: *tas_selector
     n_samples: 5
 
-  hierarchical:
-    <<: *hie_selector
-    n_samples: 5
+
 
 
 

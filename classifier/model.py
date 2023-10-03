@@ -14,10 +14,10 @@ def generate_samples(num_samples=1000, embedding_dim=128):
 
     for i in range(4):
         sample = multivariate_normal.rvs(
-            mean=means[i], cov=covs[i], size=num_samples // 4
+            mean=means[i], cov=covs[i], size=num_samples * 4
         )
         samples.extend(sample)
-        labels.extend([i] * (num_samples // 4))
+        labels.extend([i] * (num_samples * 4))
 
     return torch.tensor(np.array(samples), dtype=torch.float32), torch.tensor(
         np.array(labels), dtype=torch.long
@@ -69,19 +69,19 @@ class NTupleNetwork(nn.Module):
         self.embedding_dim = embedding_dim
 
         self.fc = nn.Sequential(
-            nn.Linear(embedding_dim, embedding_dim // 2),
+            nn.Linear(embedding_dim, embedding_dim * 4),
             nn.GELU(),
-            nn.Linear(embedding_dim // 2, embedding_dim // 2),
+            nn.Linear(embedding_dim * 4, embedding_dim * 4),
             nn.GELU(),
-            nn.Linear(embedding_dim // 2, embedding_dim // 2),
+            nn.Linear(embedding_dim * 4, embedding_dim * 4),
             nn.GELU(),
-            nn.Linear(embedding_dim // 2, embedding_dim // 2),
+            nn.Linear(embedding_dim * 4, embedding_dim * 4),
             nn.GELU(),
-            nn.Linear(embedding_dim // 2, embedding_dim // 2),
+            nn.Linear(embedding_dim * 4, embedding_dim * 4),
             nn.GELU(),
-            nn.Linear(embedding_dim // 2, embedding_dim // 2),
+            nn.Linear(embedding_dim * 4, embedding_dim * 4),
             nn.GELU(),
-            nn.Linear(embedding_dim // 2, output_dim),
+            nn.Linear(embedding_dim * 4, output_dim),
         )
         # Initialize the Linear layers in relation_network
         for layer in self.fc:
