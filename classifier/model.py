@@ -71,17 +71,17 @@ class NTupleNetwork(nn.Module):
         self.fc = nn.Sequential(
             nn.Linear(embedding_dim, embedding_dim * 4),
             nn.GELU(),
-            nn.Linear(embedding_dim * 4, embedding_dim * 4),
+            nn.Linear(embedding_dim * 4, embedding_dim * 2),
             nn.GELU(),
-            nn.Linear(embedding_dim * 4, embedding_dim * 4),
+            nn.Linear(embedding_dim * 2, embedding_dim * 1),
             nn.GELU(),
-            nn.Linear(embedding_dim * 4, embedding_dim * 4),
+            nn.Linear(embedding_dim * 1, int(embedding_dim * 0.5 //1)),
             nn.GELU(),
-            nn.Linear(embedding_dim * 4, embedding_dim * 4),
+            nn.Linear(int(embedding_dim * 0.5//1),int( embedding_dim * 0.25//1)),
             nn.GELU(),
-            nn.Linear(embedding_dim * 4, embedding_dim * 4),
+            nn.Linear(int(embedding_dim * 0.25//1), int(embedding_dim * 0.125//1)),
             nn.GELU(),
-            nn.Linear(embedding_dim * 4, output_dim),
+            nn.Linear(int(embedding_dim * 0.125//1), int(output_dim)),
         )
         # Initialize the Linear layers in relation_network
         for layer in self.fc:

@@ -12,6 +12,7 @@ from torch import nn
 from torch.optim import Adam
 from torch.optim.lr_scheduler import CyclicLR
 
+BATCHES_PER_EPOCH = 10  # You can adjust this value based on your needs
 
 """
 Use WordNet for more samples
@@ -50,16 +51,16 @@ def colorized_comparison(prefix, predicted_labels, gold_labels):
 
 for config in gen_config():
     model = NTupleNetwork(config.embedding_dim, config.n_classes)
-    optimizer = Adam(model.parameters(), lr=config.lr)
+    optimizer = Adam(model.parameters(), lr=config.lr, weight_decay=config.weight_decay)
     criterion = nn.CrossEntropyLoss()
     data_gen = DataGenerator(config)
     epochs = config.n_epochs
     scheduler = CyclicLR(
         optimizer,
-        base_lr=0.001,
-        max_lr=0.006,
-        step_size_up=2000,
-        mode="triangular",
+        base_lr=0.000000000000001,
+        max_lr=0.0006,
+        step_size_up=27,
+        mode="triangular2",
         cycle_momentum=False,
     )
     if not os.path.exists(config.MODEL_DIR):
@@ -76,39 +77,54 @@ for config in gen_config():
     # Train the model
     for epoch in range(epochs):
         model.train()
+        total_loss = 0
+        total_train_fscore = 0
 
-        # Fetch training data
-        train_data, train_labels, texts = data_gen.generate_data()
+        for batch in range(BATCHES_PER_EPOCH):
+            # Fetch training data
+            train_data, train_labels, texts = data_gen.generate_data()
 
-        # Forward pass
-        input_data = train_data.view(config.n_samples, -1, config.embedding_dim)
-        optimizer.zero_grad()
-        if epoch == 0:
-            writer.add_graph(model, input_data)
+            # Forward pass
+            input_data = train_data.view(config.n_samples, -1, config.embedding_dim)
+            optimizer.zero_grad()
 
-        outputs = model(input_data)
+            outputs = model(input_data)
 
-        # Reshape outputs and labels
-        outputs_reshaped = outputs.view(-1, config.n_classes)
-        train_labels_reshaped = train_labels.view(-1)
+            # Reshape outputs and labels
+            outputs_reshaped = outputs.view(-1, config.n_classes)
+            train_labels_reshaped = train_labels.view(-1)
 
-        loss = criterion(outputs_reshaped, train_labels_reshaped)
+            loss = criterion(outputs_reshaped, train_labels_reshaped)
 
-        # Backward pass and optimizer step
-        loss.backward()
-        optimizer.step()
+            # Backward pass and optimizer step
+            loss.backward()
+            optimizer.step()
 
-        train_predicted_labels = torch.argmax(outputs, dim=-1)
+            train_predicted_labels = torch.argmax(outputs, dim=-1)
 
-        # Calculate F-score for training data using reshaped tensors
-        train_fscore = f1_score(
-            train_labels_reshaped.numpy(),
-            train_predicted_labels.view(-1).numpy(),
-            average="macro",
+            # Calculate F-score for training data using reshaped tensors
+            train_fscore = f1_score(
+                train_labels_reshaped.numpy(),
+                train_predicted_labels.view(-1).numpy(),
+                average="macro",
+            )
+
+            total_loss += loss.item()
+            total_train_fscore += train_fscore
+
+            scheduler.step()
+
+            print (f"Epoch {epoch + 1}, {batch=}, {loss=}, {train_fscore=:.2f} {optimizer.param_groups[0]['lr']:.2f}")
+
+        avg_loss = total_loss / BATCHES_PER_EPOCH
+        avg_train_fscore = total_train_fscore / BATCHES_PER_EPOCH
+
+        print(
+            f"Epoch {epoch + 1}, avg loss: {avg_loss:.2f}, avg f1-train: {avg_train_fscore:.2f}"
         )
 
         # Fetch validation data
-        valid_data, valid_labels, texts = data_gen.generate_data()
+        valid_data, valid_labels, texts = data_gen.generate_data(100)
 
         model.eval()
 
@@ -195,7 +211,6 @@ for config in gen_config():
             counter = 0  # Reset the counter
         """
 
-        scheduler.step(valid_loss)
 
         print(
             colorized_comparison(

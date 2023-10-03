@@ -166,11 +166,11 @@ class DataGenerator:
         # Adjust data distribution based on f score
         pass
 
-    def generate_data(self):
+    def generate_data(self, batch_size=None):
         texts = []
         labels = []
         embeddings = []
-        for _ in range(self.config.batch_size):
+        for _ in range(batch_size if batch_size else self.config.batch_size):
             sample, label = list(
                 zip(
                     *tree_walker(

@@ -1,8 +1,9 @@
 defaults: &defaults
   embedding_dim: 1024
-  batch_size: 64
+  batch_size: 8
   n_epochs: 10000
   stop_f1_score: 0.93
+  weight_decay: 0.0001
 
 # ONE MODEL PER TASK
 # decide:
@@ -43,7 +44,7 @@ tas_selector_only: &tas_selector_only
   probs:
     - 0.05
     - 0.95
-  lr: 0.001
+  lr: 0.00003
   embedding_model: BAAI/bge-large-en-v1.5
 
 # This model class is concerned if one concept is a class of other concepts.
