@@ -229,7 +229,7 @@ for config in gen_config():
         grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=10)
 
         # Log parameters to TensorBoard
-        writer.add_scalar("Loss", avg_loss.item(), epoch)
+        writer.add_scalar("Loss", avg_loss, epoch)
         writer.add_scalar("Train F-score", avg_train_fscore, epoch)
         writer.add_scalar("Validation F-score", valid_fscore, epoch)
         writer.add_scalar("Learning Rate", optimizer.param_groups[0]["lr"], epoch)
