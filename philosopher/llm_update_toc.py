@@ -3,7 +3,8 @@ import pathlib
 
 import regex
 from compare import weighted_fuzzy_compare
-from helper import get_analogue_from_nested_dict, get_from_nested_dict, unique_by_func
+from helper import (get_analogue_from_nested_dict, get_from_nested_dict,
+                    unique_by_func)
 
 from philosopher.analyser import analyse_toc
 from philosopher.LLMFeature import create_path, features

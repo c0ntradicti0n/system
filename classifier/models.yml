@@ -71,14 +71,16 @@ hie_selector: &hie_selector
   embedding_dim: 768
 
 models:
-  tas_4_only:
-    <<: *tas_selector_only
-    n_samples:
-      4
+
 
   hierarchical:
     <<: *hie_selector
     n_samples: 5
+
+  tas_4_only:
+    <<: *tas_selector_only
+    n_samples:
+      4
 
   tas_4:
     <<: *tas_selector

@@ -1,16 +1,17 @@
 import logging
-import math
 import os
 
 import torch
 from different_models import gen_config
-from model import NTupleNetwork
 from selector import DataGenerator
-from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
+from sklearn.metrics import (accuracy_score, f1_score, precision_score,
+                             recall_score)
 from tensorboardX import SummaryWriter
 from torch import nn
 from torch.optim import Adam
 from torch.optim.lr_scheduler import CyclicLR
+
+from classifier.think import get_model, get_prediction
 
 BATCHES_PER_EPOCH = 10  # You can adjust this value based on your needs
 
@@ -50,7 +51,7 @@ def colorized_comparison(prefix, predicted_labels, gold_labels):
 
 
 for config in gen_config():
-    model = NTupleNetwork(config.embedding_dim, config.n_classes)
+    model = get_model(config)
     optimizer = Adam(model.parameters(), lr=config.lr, weight_decay=config.weight_decay)
     criterion = nn.CrossEntropyLoss()
     data_gen = DataGenerator(config)
@@ -59,11 +60,11 @@ for config in gen_config():
     # meandering learning rate, that gets smaller over time
     scheduler = CyclicLR(
         optimizer,
-        mode='exp_range', gamma=0.99,
+        mode="exp_range",
+        gamma=0.99,
         base_lr=0,
         max_lr=0.006,
         step_size_up=config.batches_per_epoch * 0.7,
-
         cycle_momentum=False,
     )
     if not os.path.exists(config.MODEL_DIR):
@@ -88,13 +89,12 @@ for config in gen_config():
             train_data, train_labels, texts = data_gen.generate_data()
 
             # Forward pass
-            input_data = train_data.view(config.n_samples, -1, config.embedding_dim)
             optimizer.zero_grad()
 
-            outputs = model(input_data)
+            train_predicted_labels, outputs_reshaped = get_prediction(
+                model, train_data, config
+            )
 
-            # Reshape outputs and labels
-            outputs_reshaped = outputs.view(-1, config.n_classes)
             train_labels_reshaped = train_labels.view(-1)
 
             loss = criterion(outputs_reshaped, train_labels_reshaped)
@@ -102,8 +102,6 @@ for config in gen_config():
             # Backward pass and optimizer step
             loss.backward()
             optimizer.step()
-
-            train_predicted_labels = torch.argmax(outputs, dim=-1)
 
             # Calculate F-score for training data using reshaped tensors
             train_fscore = f1_score(
@@ -134,14 +132,11 @@ for config in gen_config():
         model.eval()
 
         with torch.no_grad():
-            input_data = valid_data.view(config.n_samples, -1, config.embedding_dim)
-            valid_outputs = model(input_data)
+            predicted_labels, outputs_reshaped = get_prediction(
+                model, valid_data, config
+            )
 
-            # Reshape outputs and labels
-            outputs_reshaped = valid_outputs.view(-1, config.n_classes)
             valid_labels_reshaped = valid_labels.view(-1)
-
-            predicted_labels = torch.argmax(valid_outputs, dim=-1)
 
             valid_loss = criterion(outputs_reshaped, valid_labels_reshaped)
 

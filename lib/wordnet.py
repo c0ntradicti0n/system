@@ -1,5 +1,6 @@
 import csv
 import random
+
 from nltk.corpus import wordnet as wn
 
 
