@@ -1,4 +1,6 @@
+import ast
 import csv
+import json
 import random
 
 from nltk.corpus import wordnet as wn
@@ -54,4 +56,14 @@ def write_to_csv(filename):
                 break
 
 
-write_to_csv("hypernyms.csv")
+def yield_random_wordnet_sample():
+    with open("hypernyms.csv", newline="") as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            x = ast.literal_eval(row[1])
+            r = random.randint(1, len(row) - 1)
+
+            yield row[0], x[r]
+
+if __name__ == "__main__":
+    write_to_csv("hypernyms.csv")

@@ -1,27 +1,8 @@
+import random
+
+from classifier.predict import MODELS
 from integrator.reader import get_inputs
-
-
-class TripletNode:
-    def __init__(self, value):
-        self.value = value
-        self.children = []
-
-    def add_child(self, child_node):
-        if len(self.children) < 3:
-            self.children.append(child_node)
-
-
-class TripletTree:
-    def __init__(self):
-        self.root = None
-
-    def insert(self, value, parent=None):
-        new_node = TripletNode(value)
-        if not self.root:
-            self.root = new_node
-        elif parent:
-            parent.add_child(new_node)
-        return new_node
+from integrator.tree import Tree
 
 
 class PIDController:
@@ -39,50 +20,50 @@ class PIDController:
         return self.kp * error + self.ki * self.integral + self.kd * derivative
 
 
-def classifier(triplet1, triplet2):
-    # Call the AI model to classify the relation and get the certainty score
-    relation, certainty_score = AI_MODEL_1.classify(triplet1, triplet2)
-    return relation, certainty_score
+def classifier(t):
+    keys, inp = t.pull_lz(MODELS["tas_4_only"].config.n_samples)
+    labels, score = MODELS["tas_4_only"].predict(inp)
+    labells, score = list(labels.view(-1).tolist()), list(score.view(-1).tolist())
+    if not all(i in list(labels) for i in [1, 2, 3]):
+
+        return None, None
+
+    labels = list(sorted(zip(keys, labells), key=lambda x: x[1]))
+    return labels, score
 
 
-def organizer(inputs):
-    # Call the AI model to organize the inputs into a triplet and get the certainty score
-    triplet, certainty_score = AI_MODEL_2.organize(inputs)
-    return triplet, certainty_score
+def organizer(t):
+    keys, inp = t.pull_lz(MODELS["hierarchical_2"].config.n_samples)
+    labels, score = MODELS["hierarchical_2"].predict(inp)
+    labels, score = list(labels.view(-1).tolist()), list(score.view(-1).tolist())
+    if not all(i in list(labels) for i in [1,2]):
 
+        return None, None
 
-def minimax(node, depth, is_maximizer, alpha, beta, threshold):
-    if depth == 0 or is_terminal(node):
-        return evaluate(node)
+    labels = list(sorted(zip(keys, labels), key=lambda x: x[1]))
+    return labels, score
 
-    if is_maximizer:
-        max_eval = float("-inf")
-        for child in node.children:
-            eval = minimax(child, depth - 1, False, alpha, beta, threshold)
-            max_eval = max(max_eval, eval)
-            alpha = max(alpha, eval)
-            if beta <= alpha:
-                break
-        return max_eval
-    else:
-        min_eval = float("inf")
-        for child in node.children:
-            eval = minimax(child, depth - 1, True, alpha, beta, threshold)
-            min_eval = min(min_eval, eval)
-            beta = min(beta, eval)
-            if beta <= alpha:
-                break
-        return min_eval
+control_score = 0.5
 
+def minimax(t: Tree, pid):
+    while True:
+        added = False
+        if random.choice(["|", "---"]) == "|":
+            r, s = organizer(t)
+            if r:
+                added = True
+                t.add_relation(r[0][0], r[1][0], "v", h_score = s[0])
+        else:
+            r, s = classifier(t)
+            if r:
+                added = True
 
-def evaluate(node):
-    # Evaluate the node based on the certainty score and other criteria
-    return node.value.certainty_score
-
-
-def is_terminal(node):
-    # Check if the node is a terminal node
-    return len(node.children) == 0
+                t.add_relation(r[0][0], r[1][0], "_t", t_score=s[0])
+                t.add_relation(r[1][0], r[2][0], "_a", a_score=s[1])
+                t.add_relation(r[2][0], r[0][0], "_s", s_score=s[2])
+        if added:
+            t.draw_graph(Tree.max_score_path(t.graph, "blub.png" ))
+            print (".")
 
 
 # Initialize the PID controller
@@ -91,30 +72,16 @@ threshold = 0.5  # Initial threshold for certainty score
 
 
 not_done = True
-tree = TripletTree()
+# Get the inputs
+inputs = get_inputs("tlp.txt")
+T = Tree(list(inputs.items())[:100])
+T.draw_graph()
 
 
 while not_done:
-    # Get the inputs
-    inputs = get_inputs("tlp.txt")
-
-    # Organize the inputs into a triplet
-    triplet, certainty_score = organizer(inputs)
-
-    # If the certainty score is below the threshold, try more classifications
-    while certainty_score < threshold:
-        # Adjust the threshold using the PID controller
-        error = threshold - certainty_score
-        threshold += pid.adjust_threshold(error)
-
-        # Try more classifications
-        triplet, certainty_score = organizer(inputs)
-
-    # Insert the triplet into the tree
-    tree.insert(triplet)
 
     # Use the minimax algorithm to find the best combinations
-    best_value = minimax(tree.root, 3, True, float("-inf"), float("inf"), threshold)
+    best_element, best_value = minimax(T,  pid)
 
     # Update the tree based on the best value
-    update_tree(tree, best_value)
+    T.update_tree(T, best_element, score=best_value)

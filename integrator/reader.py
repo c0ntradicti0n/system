@@ -59,18 +59,19 @@ def get_inputs(filename):
         text = f.read()
     return parse_text(text)
 
+if __name__ == "__main__":
 
-# Test
-text = """
-1 * 	Die Welt ist alles, was der Fall ist.
-OTHER TEXT
-1.1 	Die Welt ist die Gesamtheit der Tatsachen, nicht der Dinge.
-1.11 	Die Welt ist durch die Tatsachen bestimmt und dadurch, daß es alle Tatsachen sind.
-1.12 	Denn, die Gesamtheit der Tatsachen bestimmt, was der Fall ist und auch, was alles nicht der Fall ist.
-1.13 	Die Tatsachen im logischen Raum sind die Welt.
-1.2 	Die Welt zerfällt in Tatsachen.
-1.21 	Eines kann der Fall sein oder nicht der Fall sein und alles übrige gleich blieben.
-"""
+    # Test
+    text = """
+    1 * 	Die Welt ist alles, was der Fall ist.
+    OTHER TEXT
+    1.1 	Die Welt ist die Gesamtheit der Tatsachen, nicht der Dinge.
+    1.11 	Die Welt ist durch die Tatsachen bestimmt und dadurch, daß es alle Tatsachen sind.
+    1.12 	Denn, die Gesamtheit der Tatsachen bestimmt, was der Fall ist und auch, was alles nicht der Fall ist.
+    1.13 	Die Tatsachen im logischen Raum sind die Welt.
+    1.2 	Die Welt zerfällt in Tatsachen.
+    1.21 	Eines kann der Fall sein oder nicht der Fall sein und alles übrige gleich blieben.
+    """
 
-parsed_data = parse_text(text)
-pprint(parsed_data)
+    parsed_data = parse_text(text)
+    pprint(parsed_data)

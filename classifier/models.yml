@@ -5,6 +5,7 @@ defaults: &defaults
   stop_f1_score: 0.93
   weight_decay: 0.0001
   batches_per_epoch: 17
+  embedding_model: BAAI/bge-large-en-v1.5
 
 # ONE MODEL PER TASK
 # decide:
@@ -32,7 +33,6 @@ tas_selector: &tas_selector
     - 0.6
     - 0.35
   lr: 0.001
-  embedding_model: BAAI/bge-large-en-v1.5
 
 
 #   - which is thesis, antithesis, synthesis
@@ -46,7 +46,6 @@ tas_selector_only: &tas_selector_only
     - 0.05
     - 0.95
   lr: 0.00003
-  embedding_model: BAAI/bge-large-en-v1.5
 
 # This model class is concerned if one concept is a class of other concepts.
 # The model selects, which one might be the class for maximum 3 others.
@@ -65,22 +64,37 @@ hie_selector: &hie_selector
     #- 0.45
     #- 0.0
   lr: 0.003
-  #embedding_model: BAAI/bge-large-en-v1.5
 
-  embedding_model: legacy107/multi-qa-mpnet-base-dot-v1-wikipedia-search
-  embedding_dim: 768
+# This model class is concerned if one concept is a class of other concepts.
+# The model selects, which one might be the class for maximum 3 others.
+# The model also decides, if the concept is not a class of any other.
+hie_selector_wn: &hie_selector_wn
+  <<: *defaults
+  n_classes: 5
+  classes:
+    - valid_hie_wordnet
+    - random_hie_wordnet
+  probs:
+    - 0.5
+    - 0.5
+  lr: 0.003
+
 
 models:
-
-
-  hierarchical:
-    <<: *hie_selector
-    n_samples: 5
 
   tas_4_only:
     <<: *tas_selector_only
     n_samples:
       4
+  hierarchical_2:
+    <<: *hie_selector_wn
+    n_samples: 2
+
+  hierarchical:
+    <<: *hie_selector
+    n_samples: 5
+
+
 
   tas_4:
     <<: *tas_selector

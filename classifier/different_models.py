@@ -1,7 +1,14 @@
 from addict import Dict
 from ruamel import yaml
+import os
 
-with open("models.yml") as f:
+
+def get_models_root_dir():
+    return os.environ.get("MODELS_CONFIG", "./")
+def get_models_congig_path():
+    return get_models_root_dir()+"models.yml"
+
+with open(get_models_congig_path()) as f:
     models = yaml.load(f, yaml.Loader)
 
 
@@ -21,7 +28,7 @@ def gen_config():
 def configure_model(key, model):
     model = Dict(model)
     MODEL_DIR = f"models/{key}/"
-    model.MODEL_DIR = MODEL_DIR
+    model.MODEL_DIR = get_models_root_dir() + MODEL_DIR
     MODEL_PATH = f"model.pth"
     model.MODEL_PATH = MODEL_PATH
     OPTIMIZER_PATH = "optimizer.pth"

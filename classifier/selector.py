@@ -8,6 +8,7 @@ import torch
 
 from lib.embedding import get_embeddings
 from lib.helper import OutputLevel, e, tree
+from lib.wordnet import hypernym_generator, yield_random_wordnet_sample
 
 
 @contextlib.contextmanager
@@ -48,6 +49,8 @@ def random_subdir(dir_path):
 
 def tree_walker(yield_mode="valid", n_samples=10):
     samples = []
+    hie_wn_gen = None
+
     while len(samples) < n_samples:
         a, b, c, X = None, None, None, None
 
@@ -148,6 +151,21 @@ def tree_walker(yield_mode="valid", n_samples=10):
                 yield_mode = "random"
             else:
                 gold_samples.pop(gold_samples.index(random_dir))
+        elif yield_mode == "valid_hie_wordnet":
+            if not hie_wn_gen:
+                hie_wn_gen = yield_random_wordnet_sample()
+            hyper, hypo = next(hie_wn_gen)
+            samples.extend([(hyper, 1), (hypo, 2)])
+            yield_mode = "random"
+
+        elif yield_mode == "random_hie_wordnet":
+            if not hie_wn_gen:
+                hie_wn_gen = yield_random_wordnet_sample()
+            hyper1, _ = next(hie_wn_gen)
+            _, hypo2 = next(hie_wn_gen)
+
+            samples.extend([(hyper1, 0), (hypo2, 0)])
+            yield_mode = "random"
 
         elif True:
             raise NotImplementedError(f"{yield_mode=} not implemented!")

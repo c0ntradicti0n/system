@@ -4,7 +4,7 @@ import torch
 from addict import Dict
 from ruamel import yaml
 
-from classifier.different_models import configure_model, get_best_model
+from classifier.different_models import configure_model, get_best_model, get_models_congig_path, get_models_root_dir
 from classifier.think import get_model, get_prediction
 from lib.embedding import get_embeddings
 from lib.t import catchtime
@@ -14,7 +14,7 @@ class Models:
     def __init__(self):
         self.models = {}
 
-        with open("models.yml") as f:
+        with open(get_models_congig_path()) as f:
             self.model_configs = Dict(yaml.load(f, Loader=yaml.Loader))["models"]
 
     def __getitem__(self, item):
@@ -27,6 +27,9 @@ class Models:
 
     def load_model(self, model_name):
         config = self.model_configs[model_name]
+        if not config:
+            raise ValueError(f"Model {model_name} not found in models.yml\nOptions are {list(self.model_configs.keys())}")
+
         self.model_configs[model_name] = configure_model(model_name, config)
         model = self.load_torch_model(self.model_configs[model_name])
         return model
@@ -41,15 +44,21 @@ class Models:
     def encode(self, inputs, config):
         return torch.tensor(get_embeddings(inputs, config))
 
+    @property
+    def config(self):
+        return self.model_configs[self.active_model_name]
     def predict(self, inputs):
-        embeddings = self.encode(inputs, self.model_configs[self.active_model_name])
+        c = self.model_configs[self.active_model_name]
+        embeddings = self.encode(inputs, c)
         labels, certainty_scores = get_prediction(
             self.models[self.active_model_name],
             embeddings,
-            self.model_configs[self.active_model_name],
+            c,
             compute_confidence=True,
         )
         return labels, certainty_scores
+
+MODELS = Models()
 
 
 if __name__ == "__main__":

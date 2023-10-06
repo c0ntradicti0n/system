@@ -23,53 +23,85 @@ def generate_samples(num_samples=1000, embedding_dim=128):
         np.array(labels), dtype=torch.long
     )
 
-class SiameseNTupleNetwork(nn.Module):
-    def __init__(self, embedding_dim, output_dim, n_samples):
-        super(SiameseNTupleNetwork, self).__init__()
-        self.embedding_dim = embedding_dim
-        self.n_samples = n_samples
 
-        # Shared network for pairwise comparisons
-        self.shared_net = nn.Sequential(
-            nn.Linear(embedding_dim, embedding_dim),
+class SimpleSelfAttention(nn.Module):
+    def __init__(self, input_dim):
+        super(SimpleSelfAttention, self).__init__()
+        self.query = nn.Linear(input_dim, input_dim)
+        self.key = nn.Linear(input_dim, input_dim)
+        self.value = nn.Linear(input_dim, input_dim)
+        self.dropout = nn.Dropout(0.2)
+
+        # Initialize the Linear layers
+        nn.init.kaiming_normal_(self.query.weight)
+        nn.init.kaiming_normal_(self.key.weight)
+        nn.init.kaiming_normal_(self.value.weight)
+
+        self.relation_network = nn.Sequential(
+            nn.Linear(input_dim, input_dim),
+            nn.Dropout(0.5),
             nn.ReLU(),
-            nn.Linear(embedding_dim, embedding_dim),
+            nn.Linear(input_dim, input_dim),
+            nn.ReLU(),
+            nn.Linear(input_dim, input_dim),
             nn.ReLU(),
         )
 
-        # Classifier
-        # Classifier
-        self.classifier = nn.Sequential(
-            nn.Linear(embedding_dim , embedding_dim),
-            nn.ReLU(),
-            nn.Linear(embedding_dim, output_dim),
-        )
+        # Initialize the Linear layers in relation_network
+        for layer in self.relation_network:
+            if isinstance(layer, nn.Linear):
+                nn.init.kaiming_normal_(layer.weight)
 
     def forward(self, x):
-        comparisons = []
-        for i in range(self.n_samples):
-            for j in range(self.n_samples):
-                if i != j:
-                    diff = x[i] - x[j]
-                    comparisons.append(self.shared_net(diff))
+        Q = self.query(x)
+        K = self.key(x)
+        V = self.value(x)
 
-        print(len(comparisons))
-        # Stack the comparisons to create a 2D tensor
-        stacked = torch.stack(comparisons, dim=0)
+        attention_weights = F.softmax(Q @ K.transpose(-2, -1), dim=-1)
+        attention_weights = self.dropout(attention_weights)
 
-        # Reshape the 2D tensor to retain the batch dimension
-        # Classify
-        output = self.classifier(stacked)
-        return output
+        return attention_weights @ V
+
+
+class NTupleNetwork(nn.Module):
+    def __init__(self, embedding_dim, output_dim):
+        super(NTupleNetwork, self).__init__()
+        self.embedding_dim = embedding_dim
+
+        self.fc = nn.Sequential(
+            nn.Linear(embedding_dim, embedding_dim * 4),
+            nn.GELU(),
+            nn.Linear(embedding_dim * 4, embedding_dim * 2),
+            nn.GELU(),
+            nn.Linear(embedding_dim * 2, embedding_dim * 1),
+            nn.GELU(),
+            nn.Linear(embedding_dim * 1, int(embedding_dim * 0.5 // 1)),
+            nn.GELU(),
+            nn.Linear(int(embedding_dim * 0.5 // 1), int(embedding_dim * 0.25 // 1)),
+            nn.GELU(),
+            nn.Linear(int(embedding_dim * 0.25 // 1), int(embedding_dim * 0.125 // 1)),
+            nn.GELU(),
+            nn.Linear(int(embedding_dim * 0.125 // 1), int(output_dim)),
+        )
+        # Initialize the Linear layers in relation_network
+        for layer in self.fc:
+            if isinstance(layer, nn.Linear):
+                nn.init.kaiming_normal_(layer.weight)
+
+    def forward(self, x):
+        # x = self.attention(x)  # Pass input through attention layer
+
+        x = self.fc(x)
+        return x
 
 
 if __name__ == "__main__":
     embedding_dim = 128
     output_dim = 4
     n_samples = 4
-    siamese_network = SiameseNTupleNetwork(embedding_dim, output_dim, n_samples)
+    n_tuple_network = NTupleNetwork(embedding_dim, output_dim)
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(siamese_network.parameters(), lr=0.001)
+    optimizer = torch.optim.Adagrad(n_tuple_network.parameters(), lr=0.01)
 
     samples, labels = generate_samples()
 
@@ -78,15 +110,9 @@ if __name__ == "__main__":
 
         indices = np.random.choice(len(samples), size=n_samples, replace=False)
         selected_samples = torch.stack([samples[index] for index in indices])
-        selected_labels = torch.tensor([labels[index] for index in indices], dtype=torch.long)
+        selected_labels = torch.tensor([labels[index] for index in indices])
 
-        outputs = siamese_network(selected_samples).float()
-        outputs = outputs.view(n_samples, n_samples - 1, output_dim).mean(dim=1)
-
-        selected_labels.reshape(-1)
-        print (outputs.shape, selected_labels.shape)
-        print(outputs.shape, outputs.dtype)
-        print(selected_labels.shape, selected_labels.dtype)
+        outputs = n_tuple_network(selected_samples)
 
         loss = criterion(outputs, selected_labels)
         loss.backward()
@@ -95,11 +121,7 @@ if __name__ == "__main__":
 
         # Evaluation
         with torch.no_grad():
-            outputs = siamese_network(selected_samples)
-            outputs = outputs.view(n_samples, n_samples - 1, output_dim).mean(dim=1)
-
+            outputs = n_tuple_network(samples)
             _, predicted = torch.max(outputs, 1)
-            f1 = f1_score(predicted, selected_labels, average="micro")
+            f1 = f1_score(labels, predicted, average="micro")
             print(f"Epoch {epoch + 1}, F1 Score: {f1:.4f}, Loss: {loss.item()}")
-
-

@@ -52,7 +52,7 @@ def colorized_comparison(prefix, predicted_labels, gold_labels):
 
 for config in gen_config():
     model = get_model(config)
-    optimizer = Adam(model.parameters(), lr=config.lr, weight_decay=config.weight_decay)
+    optimizer = torch.optim.Adagrad(model.parameters(), lr=0.01)
     criterion = nn.CrossEntropyLoss()
     data_gen = DataGenerator(config)
     epochs = config.n_epochs
