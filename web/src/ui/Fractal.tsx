@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react'
 import { useQuery } from 'react-query'
 import Triangle from './Triangle'
 import { mergeDeep, lookupDeep, shiftIn, slashIt } from '../lib/nesting'
+import { parseHash } from '../lib/read_link_params'
+
 import {
   TransformWrapper,
   TransformComponent,
@@ -22,18 +24,6 @@ function makeNoHorizon() {
   elements.forEach((element) => {
     element.style.overflow = 'visible'
   })
-}
-
-function parseHash(hash) {
-  const params = {}
-  const pairs = (hash[0] === '#' ? hash.substr(1) : hash).split('&')
-
-  for (let i = 0; i < pairs.length; i++) {
-    const pair = pairs[i].split('=')
-    params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '')
-  }
-
-  return params
 }
 
 const Fractal = ({}) => {

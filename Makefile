@@ -1,5 +1,7 @@
 -include .env
 
+export COMPOSE_PROFILES=default
+
 format:
 	black **/*.py
 	isort .
@@ -27,8 +29,18 @@ train:
 	docker build -t train:latest integrator/.
 	docker run -v "./models:/models" -it train:latest
 
+
 viz:
 	tensorboard --logdir classifier/models
+
+
+hotreload-%:
+	@while inotifywait -e modify,create,delete -r --include '\.(py|txt)$$' ./$*; do \
+		docker compose build $*; \
+		docker compose down -v -t 0 $*; \
+		docker compose up  --build --force-recreate  -d $*; \
+	done
+
 
 mod:
 	rm -rf ./.cache-cr

@@ -102,6 +102,12 @@ hie_selector_wn_only: &hie_selector_wn_only
   lr: 0.003
 
 models:
+
+  tas_4_only:
+    <<: *tas_selector_only
+    n_samples:
+      4
+
   hierarchical_2:
     <<: *hie_selector_wn_only
     n_samples: 2
@@ -109,12 +115,6 @@ models:
     <<: *tas_selector_only_3
     n_samples:
       3
-  tas_4_only:
-    <<: *tas_selector_only
-    n_samples:
-      4
-
-
 
 
   hierarchical:

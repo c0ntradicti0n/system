@@ -53,7 +53,6 @@ class Models:
         return self.model_configs[self.active_model_name]
 
     def predict(self, inputs):
-
         c = self.model_configs[self.active_model_name]
         embeddings = self.encode(inputs, c)
         for param in self.models[self.active_model_name].parameters():
@@ -72,19 +71,33 @@ MODELS = Models()
 
 if __name__ == "__main__":
     models = Models()
-
     with catchtime("loading and predicting"):
-        labels, certainty_scores = models["hierarchical"].predict(
-            ["fuck", "yellow", "blue", "red", "colors"]
+        labels, certainty_scores = models["hierarchical_2"].predict(
+            ["class", "instance"]
+        )
+        print(labels, certainty_scores)
+    with catchtime("loading and predicting"):
+        labels, certainty_scores = models["hierarchical_2"].predict(["plant", "tree"])
+        print(labels, certainty_scores)
+    with catchtime("loading and predicting"):
+        labels, certainty_scores = models["hierarchical_2"].predict(["yellow", "color"])
+        print(labels, certainty_scores)
+    with catchtime("loading and predicting"):
+        labels, certainty_scores = models["tas_3_only"].predict(
+            ["light", "dawn", "night"]
         )
         print(labels, certainty_scores)
     with catchtime("predicting"):
-        labels, certainty_scores = models["hierarchical"].predict(
-            ["fuck", "yellow", "blue", "red", "colors"]
+        labels, certainty_scores = models["tas_3_only"].predict(
+            ["diplomat", "enemy", "friend"]
         )
         print(labels, certainty_scores)
     with catchtime("predicting"):
-        labels, certainty_scores = models["hierarchical"].predict(
-            ["WAHT", "black", "white", "grey", "color"]
+        labels, certainty_scores = models["tas_3_only"].predict(
+            [
+                "change it to have the same length",
+                "insert a value in line and it will be more",
+                "delete a char in a line to make it be less",
+            ]
         )
         print(labels, certainty_scores)

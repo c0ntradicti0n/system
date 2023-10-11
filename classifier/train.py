@@ -12,7 +12,7 @@ from torch.optim.lr_scheduler import CyclicLR
 
 from classifier.think import get_model, get_prediction
 
-BATCHES_PER_EPOCH = 10  # You can adjust this value based on your needs
+BATCHES_PER_EPOCH = 10
 
 """
 Use WordNet for more samples
@@ -126,7 +126,7 @@ for config in gen_config():
         )
 
         # Fetch validation data
-        valid_data, valid_labels, texts = data_gen.generate_data(config.batch_size *5)
+        valid_data, valid_labels, texts = data_gen.generate_data(config.batch_size * 5)
 
         model.eval()
 

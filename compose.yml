@@ -27,6 +27,7 @@ services:
       - ./certs:$CERTS
 
   server:
+
     logging:
       driver: "json-file"
       options:
@@ -56,6 +57,7 @@ services:
       - "./lib:/app/lib"
 
   service:
+
     logging:
       driver: "json-file"
       options:
@@ -91,6 +93,7 @@ services:
       - "./.cache-cr:/chroma:rw"
       - "./.cache-hf:/.cache:rw"
   integrator:
+
     logging:
       driver: "json-file"
       options:
@@ -119,12 +122,19 @@ services:
       HAYSTACK_TELEMETRY_ENABLED: "False"
       HF_HUB_DISABLE_TELEMETRY: True
       DISABLE_TELEMETRY: True
+      NO_IMAGES: "true"
     volumes:
       - "$SYSTEM:/system"
       - "./integrator:/app"
+      - "./classifier:/app/classifier"
       - "./lib:/app/lib"
+      - "./.cache-cr:/chroma:rw"
+      - "./.cache-hf:/.cache:rw"
+      - "./.cache-mpl:/.config:rw"
 
   linker:
+    profiles:
+      - linker
     mem_limit: 10g
 
     logging:
@@ -159,6 +169,8 @@ services:
 
 
   classifier:
+    profiles:
+      - classifier
     mem_limit: 10g
     logging:
       driver: "json-file"
@@ -193,6 +205,7 @@ services:
 
 
   web:
+
     logging:
       driver: "json-file"
       options:

@@ -41,8 +41,11 @@ def write_to_csv(filename):
                 continue
             if synset.lemmas()[0].name() not in added:
                 row = [
-                    synset.definition()+ " "  + " ".join(list(synset.examples())),
-                    [hyponym.definition()+ " " + " ".join(list(hyponym.examples())) for hyponym in hyponyms],
+                    synset.definition() + " " + " ".join(list(synset.examples())),
+                    [
+                        hyponym.definition() + " " + " ".join(list(hyponym.examples()))
+                        for hyponym in hyponyms
+                    ],
                 ]
                 writer.writerow(row)
                 added.append(synset.lemmas()[0].name())

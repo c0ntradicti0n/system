@@ -3,7 +3,7 @@ import { Modal, Button, Input } from 'antd'
 import { ShareAltOutlined, CopyOutlined } from '@ant-design/icons'
 import { removeMultipleSlashes } from '../lib/nesting'
 
-const ShareModal = ({ linkInfo }) => {
+const ShareModal = ({ url = '', linkInfo }) => {
   const [isVisible, setIsVisible] = useState(false)
   const [isCopied, setIsCopied] = useState(false)
   const linkInfoNoNull = Object.fromEntries(
@@ -14,7 +14,7 @@ const ShareModal = ({ linkInfo }) => {
   const fullUrl =
     `${window.location.protocol}//` +
     removeMultipleSlashes(
-      `${window.location.host}#${new URLSearchParams(
+      `${window.location.host}${url}#${new URLSearchParams(
         linkInfoNoNull,
       ).toString()}`,
     )

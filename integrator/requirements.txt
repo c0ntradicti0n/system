@@ -17,3 +17,5 @@ tensorboard
 addict
 Flask-SocketIO
 eventlet
+parsimonious
+matplotlib

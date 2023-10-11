@@ -1,9 +1,8 @@
 import numpy as np
 import torch
-import torch.nn.functional as F
 from scipy.stats import multivariate_normal
 from sklearn.metrics import f1_score
-from torch import nn, optim
+from torch import nn
 
 
 def generate_samples(num_samples=1000, embedding_dim=128):
@@ -24,7 +23,6 @@ def generate_samples(num_samples=1000, embedding_dim=128):
     )
 
 
-
 class NTupleNetwork(nn.Module):
     def __init__(self, embedding_dim, output_dim):
         super(NTupleNetwork, self).__init__()
@@ -42,9 +40,7 @@ class NTupleNetwork(nn.Module):
             nn.Linear(int(embedding_dim * 0.5 // 1), int(embedding_dim * 0.25 // 1)),
             nn.GELU(),
             nn.Linear(int(embedding_dim * 0.25 // 1), int(embedding_dim * 0.125 // 1)),
-
             nn.Dropout(0.5),
-
             nn.GELU(),
             nn.Linear(int(embedding_dim * 0.125 // 1), int(output_dim)),
         )
