@@ -90,6 +90,40 @@ services:
 
       - "./.cache-cr:/chroma:rw"
       - "./.cache-hf:/.cache:rw"
+  integrator:
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+    ports:
+      - "9876:5000"
+    build:
+      context: integrator
+      args:
+        SYSTEM: /system
+
+    restart: unless-stopped
+
+    container_name: integrator
+    env_file:
+      - .env
+    tty: true
+    user: 1000:1000
+
+    environment:
+      DEBUG: "true"
+      HOST: $HOST
+      SYSTEM: /system
+      PYTHONIOENCODING: utf-8
+      HAYSTACK_TELEMETRY_ENABLED: "False"
+      HF_HUB_DISABLE_TELEMETRY: True
+      DISABLE_TELEMETRY: True
+    volumes:
+      - "$SYSTEM:/system"
+      - "./integrator:/app"
+      - "./lib:/app/lib"
+
   linker:
     mem_limit: 10g
 
@@ -157,28 +191,6 @@ services:
       - "./.cache-hf:/.cache:rw"
       - "./.models-classifier:/app/models:rw"
 
-
-
-  philospher:
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: "10m"
-    build: philosopher
-    container_name: philosopher
-    env_file:
-      - .env
-    tty: true
-    user: 1000:1000
-    environment:
-      DEBUG: "true"
-      HOST: $HOST
-      SYSTEM: /system
-    extra_hosts:
-        - "host.docker.internal:host-gateway"
-    volumes:
-      - "$SYSTEM:/system"
 
   web:
     logging:

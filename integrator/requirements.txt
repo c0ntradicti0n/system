@@ -15,3 +15,5 @@ sentence-transformers
 tensorboardX
 tensorboard
 addict
+Flask-SocketIO
+eventlet

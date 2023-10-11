@@ -1,5 +1,7 @@
 from langchain.embeddings import SentenceTransformerEmbeddings
 
+from lib.shape import view_shape
+
 d = {}
 
 
@@ -12,7 +14,7 @@ def embedder(model_name="BAAI/bge-large-en-v1.5"):
 
 
 def get_embeddings(texts, config):
-    r = embedder(config.embedding_model).embed_documents(texts)
+    r = embedder(config.embedding_model).embed_documents(view_shape(texts, (-1,)))
     if not len(r[0]) == config.embedding_dim:
         raise ValueError(
             f"Embedding dimension mismatch: {len(r[0])} != {config.embedding_dim}"

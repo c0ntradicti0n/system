@@ -1,6 +1,5 @@
 import ast
 import csv
-import json
 import random
 
 from nltk.corpus import wordnet as wn
@@ -37,17 +36,13 @@ def write_to_csv(filename):
         added = []
         n = 0
         for synset in synsets:
-            hypernyms = list(synset.hyponyms())
-            if len(hypernyms) < 4:
+            hyponyms = list(synset.hyponyms())
+            if len(hyponyms) < 4:
                 continue
             if synset.lemmas()[0].name() not in added:
                 row = [
-                    synset.lemmas()[0].name(),
-                    [
-                        lemma.name()
-                        for hypernym in hypernyms
-                        for lemma in hypernym.lemmas()
-                    ],
+                    synset.definition()+ " "  + " ".join(list(synset.examples())),
+                    [hyponym.definition()+ " " + " ".join(list(hyponym.examples())) for hyponym in hyponyms],
                 ]
                 writer.writerow(row)
                 added.append(synset.lemmas()[0].name())
@@ -57,7 +52,7 @@ def write_to_csv(filename):
 
 
 def yield_random_wordnet_sample():
-    with open("hypernyms.csv", newline="") as csvfile:
+    with open("hyponyms.csv", newline="") as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
             x = ast.literal_eval(row[1])
@@ -65,5 +60,6 @@ def yield_random_wordnet_sample():
 
             yield row[0], x[r]
 
+
 if __name__ == "__main__":
-    write_to_csv("hypernyms.csv")
+    write_to_csv("hyponyms.csv")

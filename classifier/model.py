@@ -24,44 +24,6 @@ def generate_samples(num_samples=1000, embedding_dim=128):
     )
 
 
-class SimpleSelfAttention(nn.Module):
-    def __init__(self, input_dim):
-        super(SimpleSelfAttention, self).__init__()
-        self.query = nn.Linear(input_dim, input_dim)
-        self.key = nn.Linear(input_dim, input_dim)
-        self.value = nn.Linear(input_dim, input_dim)
-        self.dropout = nn.Dropout(0.2)
-
-        # Initialize the Linear layers
-        nn.init.kaiming_normal_(self.query.weight)
-        nn.init.kaiming_normal_(self.key.weight)
-        nn.init.kaiming_normal_(self.value.weight)
-
-        self.relation_network = nn.Sequential(
-            nn.Linear(input_dim, input_dim),
-            nn.Dropout(0.5),
-            nn.ReLU(),
-            nn.Linear(input_dim, input_dim),
-            nn.ReLU(),
-            nn.Linear(input_dim, input_dim),
-            nn.ReLU(),
-        )
-
-        # Initialize the Linear layers in relation_network
-        for layer in self.relation_network:
-            if isinstance(layer, nn.Linear):
-                nn.init.kaiming_normal_(layer.weight)
-
-    def forward(self, x):
-        Q = self.query(x)
-        K = self.key(x)
-        V = self.value(x)
-
-        attention_weights = F.softmax(Q @ K.transpose(-2, -1), dim=-1)
-        attention_weights = self.dropout(attention_weights)
-
-        return attention_weights @ V
-
 
 class NTupleNetwork(nn.Module):
     def __init__(self, embedding_dim, output_dim):
@@ -80,6 +42,9 @@ class NTupleNetwork(nn.Module):
             nn.Linear(int(embedding_dim * 0.5 // 1), int(embedding_dim * 0.25 // 1)),
             nn.GELU(),
             nn.Linear(int(embedding_dim * 0.25 // 1), int(embedding_dim * 0.125 // 1)),
+
+            nn.Dropout(0.5),
+
             nn.GELU(),
             nn.Linear(int(embedding_dim * 0.125 // 1), int(output_dim)),
         )

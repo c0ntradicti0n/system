@@ -20,50 +20,67 @@ class PIDController:
         return self.kp * error + self.ki * self.integral + self.kd * derivative
 
 
+def infer(model_name, tree, valid_labels):
+    keys, inp = tree.pull_lz(
+        MODELS[model_name].config.batch_size, MODELS[model_name].config.n_samples
+    )
+    labels, score = MODELS[model_name].predict(inp)
+    labels, score = list(
+        labels.view(-1, MODELS[model_name].config.n_samples).tolist()
+    ), list(score.view(-1, MODELS[model_name].config.n_samples).tolist())
+    lsk = [
+        (l, s, k)
+        for l, s, k in zip(labels, score, keys)
+        if all(i in list(l) for i in valid_labels)
+    ]
+    if not lsk:
+        return []
+
+    l_s_ks = list(
+        list(zip(*sorted(zip(l, s, k), key=lambda x: x[0], reverse=True)))
+        for l, s, k in lsk
+    )
+
+    return l_s_ks
+
+
 def classifier(t):
-    keys, inp = t.pull_lz(MODELS["tas_4_only"].config.n_samples)
-    labels, score = MODELS["tas_4_only"].predict(inp)
-    labells, score = list(labels.view(-1).tolist()), list(score.view(-1).tolist())
-    if not all(i in list(labels) for i in [1, 2, 3]):
-
-        return None, None
-
-    labels = list(sorted(zip(keys, labells), key=lambda x: x[1]))
-    return labels, score
+    return infer("tas_3_only", t, [1, 2, 3])
 
 
 def organizer(t):
-    keys, inp = t.pull_lz(MODELS["hierarchical_2"].config.n_samples)
-    labels, score = MODELS["hierarchical_2"].predict(inp)
-    labels, score = list(labels.view(-1).tolist()), list(score.view(-1).tolist())
-    if not all(i in list(labels) for i in [1,2]):
+    return infer("hierarchical_2", t, [1, 2])
 
-        return None, None
-
-    labels = list(sorted(zip(keys, labels), key=lambda x: x[1]))
-    return labels, score
 
 control_score = 0.5
 
-def minimax(t: Tree, pid):
-    while True:
-        added = False
-        if random.choice(["|", "---"]) == "|":
-            r, s = organizer(t)
-            if r:
-                added = True
-                t.add_relation(r[0][0], r[1][0], "v", h_score = s[0])
-        else:
-            r, s = classifier(t)
-            if r:
-                added = True
 
-                t.add_relation(r[0][0], r[1][0], "_t", t_score=s[0])
-                t.add_relation(r[1][0], r[2][0], "_a", a_score=s[1])
-                t.add_relation(r[2][0], r[0][0], "_s", s_score=s[2])
-        if added:
-            t.draw_graph(Tree.max_score_path(t.graph, "blub.png" ))
-            print (".")
+def minimax(t: Tree, i):
+
+    added = False
+    if random.choice(["|", "---"]) == "|":
+        lsk = organizer(t)
+        for l, s, k in lsk:
+            added = "organizer"
+            t.add_relation(k[1], k[0], "sub", h_score=s[0])
+    else:
+        lsk = classifier(t)
+        for l, s, k in lsk:
+            added = "synantithesis"
+
+            t.add_relation(k[2], k[1], "ant", t_score=s[1], trident=i)
+            t.add_relation(k[2], k[0], "syn", a_score=s[0], trident=i)
+    if added:
+        start = sorted(t.graph.degree, key=lambda x: x[1], reverse=True)[0][0]
+
+        t.draw_graph(
+            Tree.max_score_path(t.graph, start=start), root=start, path=f"{i}.png"
+        )
+        t.draw_graph_without_text_sequence(t.graph, path=f"{i}_without_text.png")
+        t.save_state(i)
+
+        print(f"{i} {added}")
+        i += 1
 
 
 # Initialize the PID controller
@@ -74,14 +91,15 @@ threshold = 0.5  # Initial threshold for certainty score
 not_done = True
 # Get the inputs
 inputs = get_inputs("tlp.txt")
-T = Tree(list(inputs.items())[:100])
+T, i = Tree.load_state()
+if not i:
+    T, i = Tree(list(inputs.items())), 0
+
+
 T.draw_graph()
 
 
 while not_done:
+    minimax(T, i)
+    i+=1
 
-    # Use the minimax algorithm to find the best combinations
-    best_element, best_value = minimax(T,  pid)
-
-    # Update the tree based on the best value
-    T.update_tree(T, best_element, score=best_value)

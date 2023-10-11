@@ -8,7 +8,6 @@ from sklearn.metrics import (accuracy_score, f1_score, precision_score,
                              recall_score)
 from tensorboardX import SummaryWriter
 from torch import nn
-from torch.optim import Adam
 from torch.optim.lr_scheduler import CyclicLR
 
 from classifier.think import get_model, get_prediction
@@ -127,7 +126,7 @@ for config in gen_config():
         )
 
         # Fetch validation data
-        valid_data, valid_labels, texts = data_gen.generate_data(100)
+        valid_data, valid_labels, texts = data_gen.generate_data(config.batch_size *5)
 
         model.eval()
 
