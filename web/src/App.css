@@ -19,6 +19,11 @@
   height: 40vmin;
 }
 
+.ant-tabs-tab,  .ant-input, ant-btn {
+  color: white;
+  background-color: #282c34;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import './App.css'
 
-import Fractal from './ui/Fractal.tsx'
+import Fractal from './ui/Fractal'
 import { Puzzle } from './ui/Puzzle'
-import { Editor } from './ui/Editor'
+import { Editor } from './ui/editor/Editor'
 
 import { useRoutes } from 'raviger'
 

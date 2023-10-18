@@ -22,7 +22,7 @@ const customSort = (a, b) => {
   if (b === '_text') return -1
   return Number(a) - Number(b)
 }
-const convertToAntdTreeData = (node, prefix = '') => {
+export const convertToAntdTreeData = (node, prefix = '') => {
   const result = []
 
   if (!node) return []

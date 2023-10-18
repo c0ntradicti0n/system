@@ -19,3 +19,6 @@ Flask-SocketIO
 eventlet
 parsimonious
 matplotlib
+gevent
+gevent-websocket
+gunicorn

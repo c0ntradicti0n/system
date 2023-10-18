@@ -7,7 +7,6 @@ import { parseHash } from '../lib/read_link_params'
 import {
   TransformWrapper,
   TransformComponent,
-  ReactZoomPanPinchRef,
 } from 'react-zoom-pan-pinch'
 import { go, beamDataTo } from '../lib/navigate'
 
@@ -26,7 +25,7 @@ function makeNoHorizon() {
   })
 }
 
-const Fractal = ({}) => {
+const Fractal = ({PRESET_DATA = undefined}) => {
   const [detailId, _setDetailId] = useState(null)
   const [transformState, setTransformState] = useState(null)
   const [collectedData, setCollectedData] = useState({})
@@ -57,7 +56,7 @@ const Fractal = ({}) => {
       ? window.innerHeight
       : window.innerWidth
   const left = (window.innerWidth - size) * 0
-  const transformComponentRef = useRef<ReactZoomPanPinchRef | null>(null)
+  const transformComponentRef = useRef(null)
 
   const [tooltipData, setTooltipData] = useState(null)
 
@@ -133,13 +132,19 @@ const Fractal = ({}) => {
   )
 
   const fetchTree = async () => {
-    const id = hiddenId ?? ''
-    const res = await fetch(`/api/toc/${id}`)
-    if (!res.ok) {
-      console.error('Network response was not ok', res)
-      return
+    let newData = null
+          const id = hiddenId ?? ''
+
+    if (!PRESET_DATA) {
+      const res = await fetch(`/api/toc/${id}`)
+      if (!res.ok) {
+        console.error('Network response was not ok', res)
+        return
+      }
+       newData = await res.json()
+    } else {
+         newData = PRESET_DATA
     }
-    const newData = await res.json()
 
     const mergedData = mergeDeep(
       collectedData,
