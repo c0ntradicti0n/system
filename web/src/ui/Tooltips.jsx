@@ -104,6 +104,7 @@ export const Tooltips = ({
   path,
   isWindowWide,
   setTooltipData,
+    refill
 }) => {
   const tree = structuredClone(_tree)
 
@@ -116,6 +117,8 @@ export const Tooltips = ({
     setExpandedKeys(expandedKeysValue)
   }
   const fetchTexts = async () => {
+    if (!refill)
+      return {}
     const p = openedKeys ?? path ?? ''
     const res = await fetch(`/api/text/${p}`)
 

@@ -331,6 +331,7 @@ const Fractal = ({PRESET_DATA = undefined}) => {
         />
         {tooltipData && (
           <Tooltips
+              refill = {PRESET_DATA? false: true}
             tree={collectedData}
             path={tooltipData !== '' ? tooltipData : hiddenId}
             isWindowWide={isWindowWide}

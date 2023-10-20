@@ -52,8 +52,8 @@ def handle_update(hash_id):
         update_triangle_graph(old_state, i, hash_id), return_start_node=True
     )
 
-    print(f"{old_graph=}")
-    print(f"{new_graph=}")
+    #print(f"{old_graph=}")
+    #print(f"{new_graph=}")
 
     new_state, i = (
         old_state,
@@ -71,7 +71,7 @@ def handle_update(hash_id):
         print(f"error making patch {old_graph=} {new_graph=}")
         serialized_patch = []
 
-    print(f"{str(serialized_patch)[:200]=}")
+    #print(f"{str(serialized_patch)[:200]=}")
     return serialized_patch
 
 
@@ -86,7 +86,7 @@ def handle_set_state(hash_id):
 
     old_state, i = states[hash_id]
 
-    print(f"{old_state=}")
+    #print(f"{old_state=}")
 
     active_version = Tree.serialize_graph_to_structure(
         *Tree.max_score_triangle_subgraph(old_state.graph, return_start_node=True)
