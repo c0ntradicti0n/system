@@ -22,3 +22,4 @@ matplotlib
 gevent
 gevent-websocket
 gunicorn
+redis

@@ -9,6 +9,7 @@ import { addHoverObject, hoverObjects, removeHoverObject } from '../lib/hover'
 import { MAX_LEVEL } from '../config/const'
 import { stringToColour } from '../lib/color'
 import useLinkedElementsStore from '../lib/PinnedElements'
+import {trim} from "../lib/string";
 
 function getRandomElement(arr) {
   const randomIndex = Math.floor(Math.random() * arr.length)
@@ -42,7 +43,6 @@ function Triangle({
 }) {
   const [_hover, _setHover] = useState(false)
   const devicePixelRatio = window.devicePixelRatio || 1
-  const fontSize = size / 30 / Math.log1p(devicePixelRatio)
   const [animationClass, setAnimationClass] = useState('')
   useEffect(() => {
     setAnimationClass(
@@ -79,6 +79,18 @@ function Triangle({
 
   const title = data?.['.']
   const anto = data?.['_']
+// Calculate base font size
+let baseFontSize = size / 30 / Math.log1p(devicePixelRatio);
+const shortTitle = (postProcessTitle(title?? "")??"").split(' ').slice(0, 100).join(' ');
+// Check the combined text length
+const combinedTextLength = shortTitle.length;
+
+// Adjust font size if the combined text length is more than 100 chars
+if (combinedTextLength > 50) {
+  baseFontSize *= 0.5; // you can adjust this factor to your needs
+}
+
+const fontSize = baseFontSize;
 
   return (
     <div
@@ -107,7 +119,7 @@ function Triangle({
         className={'triangle ' + (animate ? animationClass ?? '' : '')}
         onAnimationEnd={(div) => setAnimationClass(null)}
         style={{
-          backgroundColor: stringToColour(fullId.replace('/', ''), 1),
+          backgroundColor: fullId ? stringToColour(fullId.replace('/', ''), 1) : 'black',
           zIndex: 1000 - level,
           filter: _hover ? 'invert(1)' : 'invert(0)',
           animationDuration: `${animationTime}s`,
@@ -144,6 +156,7 @@ function Triangle({
           onClick={() => setTooltipData(fullId)}
           style={{
             fontSize,
+            color: fullId ? 'black' : 'white',
 
             width: `${size / 3}px`,
           }}
@@ -154,7 +167,7 @@ function Triangle({
             <div>
               <div>{animate ? animationClass ?? '' : ''}</div>
               <div id={triangleId} className="triangle-title">
-                {fullId.replace(/\//g, '.')}. {postProcessTitle(title)}
+                {trim(fullId.replace(/\//g, '.'), '.')} {postProcessTitle(shortTitle.slice(0,100))}
               </div>
 
               {postProcessTitle(anto)

@@ -41,6 +41,8 @@ hotreload-%:
 		docker compose up  --build --force-recreate  -d $*; \
 	done
 
+redis:
+	docker compose up -d redis
 
 mod:
 	rm -rf ./.cache-cr

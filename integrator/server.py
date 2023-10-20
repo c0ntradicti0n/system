@@ -1,17 +1,17 @@
 from gevent import monkey
+
 monkey.patch_all()
 import gevent
+from states import states
+from functools import wraps
 import json
-import os
 import pickle
 from hashlib import sha256
-from pprint import pprint
 
 import jsonpatch
 from flask import Flask, copy_current_request_context
 from flask_socketio import SocketIO, emit
 from main import update_triangle_graph
-from reader import parse_text
 from tree import Tree
 from werkzeug.middleware.proxy_fix import ProxyFix
 
@@ -21,155 +21,103 @@ socketio = SocketIO(app, cors_allowed_origins="*", async_mode='gevent')
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 
-# Sample in-memory state
-class States:
-    def __init__(self):
-        self.states = {}
+def socket_event(event_name, emit_event_name=None):
+    def decorator(f):
+        @socketio.on(event_name)
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            @copy_current_request_context
+            def subfunction(*args, **kwargs):
+                result = f(*args, **kwargs)
+                if emit_event_name:
+                    socketio.emit(emit_event_name, result)
 
-    @classmethod
-    def path(cls, hash_id):
-        return os.path.join("states/", f"{hash_id}.pkl")
+            gevent.spawn(subfunction, *args, **kwargs)
 
-    def get(self, hash_id, default=None):
-        return self.states.get(hash_id, default)
+        return wrapper
 
-    def __getitem__(self, hash_id):
-        if hash_id in self.states:
-            return self.states[hash_id]
-        else:
-            if hash_id.endswith("-text"):
-                with open(self.path(hash_id), "rb") as f:
-                    text = pickle.load(f)
-                self.states[hash_id] = text
-                print(f"loaded text {hash}")
-                return text
-            else:
-                if os.path.exists(self.path(hash_id + "-text")):
-                    tree, i = Tree.load_state(hash_id)
-                    if not i:
-                        with open(self.path(hash_id + "-text"), "rb") as f:
-                            text = pickle.load(f)
-                        inputs = parse_text(text)
-                        if not inputs:
-                            socketio.emit("error", "text is invalid")
-
-                            print(f"invalid text for {hash}")
-
-                            return None, -1
-                        print(f"loaded tree from text {hash}")
-
-                        tree, i = Tree(list(inputs.items())), 0
-                    else:
-                        print(f"loaded {i=} {hash_id} {tree=} ")
-                    self.states[hash_id] = tree, i
-                    print(f"loaded tree {hash}")
-
-                    return tree, i
-                print(f"loaded nothing {hash}")
-
-                return None, None
-
-    def set(self, hash_id, state):
-        self.states[hash_id] = state
-
-    def __setitem__(self, hash_id, state):
-        if hash_id.endswith("-text"):
-            with open(self.path(hash_id), "wb") as f:
-                pickle.dump(state, f)
-        self.states[hash_id] = state
+    return decorator
 
 
-states = States()
+@socket_event("update_state", "state_patch")
+def handle_update(hash_id):
+    print(f"update_state {hash_id}")
+    old_state, i = states[hash_id]
 
+    old_graph = Tree.max_score_triangle_subgraph(
+        old_state.graph, return_start_node=True
+    )
 
-@socketio.on("update_state")
-def _handle_update(hash):
-    @copy_current_request_context
-    def handle_update(hash):
-        print(f"update_state {hash}")
-        old_state, i = states[hash]
+    new_graph = Tree.max_score_triangle_subgraph(
+        update_triangle_graph(old_state, i, hash_id), return_start_node=True
+    )
 
-        old_graph = Tree.max_score_triangle_subgraph(
-            old_state.graph, return_start_node=True
-        )
-        new_graph = Tree.max_score_triangle_subgraph(
-            update_triangle_graph(old_state, i, hash), return_start_node=True
-        )
-        print(f"{old_graph=}")
-        print(f"{new_graph=}")
+    print(f"{old_graph=}")
+    print(f"{new_graph=}")
 
-        new_state, i = (
-            old_state,
-            i + 1,
-        )
-        states[hash] = new_state, i
+    new_state, i = (
+        old_state,
+        i + 1,
+    )
+    states[hash_id] = new_state, i
 
+    try:
         patch = jsonpatch.make_patch(
             Tree.serialize_graph_to_structure(*old_graph),
             Tree.serialize_graph_to_structure(*new_graph),
         )
         serialized_patch = json.loads(patch.to_string())
+    except:
+        print(f"error making patch {old_graph=} {new_graph=}")
+        serialized_patch = []
 
-        print(f"{serialized_patch=}")
-        socketio.emit("state_patch", serialized_patch)
-    gevent.spawn(handle_update, hash)
-
-
-
-
-@socketio.on("set_init_state")
-def _handle_set_state(hash):
-    @copy_current_request_context
-
-    def handle_set_state(hash):
-        old_state, i = states[hash]
-
-        print(f"handle_set_state {hash}" + str(old_state))
-        active_version = Tree.serialize_graph_to_structure(
-            *Tree.max_score_triangle_subgraph(old_state.graph, return_start_node=True)
-        )
-        pprint(f"{active_version=}")
-        socketio.emit("set_state", active_version)
-    gevent.spawn(handle_set_state, hash)
+    print(f"{str(serialized_patch)[:200]=}")
+    return serialized_patch
 
 
+@socket_event("set_initial_mods", "set_mods")
+def handle_set_user_mods():
+    print (f"handle_set_user_mods")
+    return states.get_all()
 
-@socketio.on("set_init_text")
-def _handle_set_text(text):
-    @copy_current_request_context
-    def handle_set_text(text):
-        print(f"handle_set_text '{text[:10]}...'")
+@socket_event("set_init_state", "set_state")
+def handle_set_state(hash_id):
+    print(f"handle_set_state {hash_id}")
 
-        if not text.strip():
-            return
+    old_state, i = states[hash_id]
 
-        # Convert the received text into a pickled object
-        pickled_obj = pickle.dumps(text)
-        hash = sha256(pickled_obj).hexdigest()
-        states[hash + "-text"] = text
-        # Emit the hash back to the client
-        emit("set_hash", hash)
-        emit("initial_state")
+    print(f"{old_state=}")
 
-    gevent.spawn(handle_set_text, text)
+    active_version = Tree.serialize_graph_to_structure(
+        *Tree.max_score_triangle_subgraph(old_state.graph, return_start_node=True)
+    )
+    return active_version
 
 
+@socket_event("set_init_text", "set_hash")
+def handle_set_text(text):
+    print(f"handle_set_text '{text[:10]}...'")
 
-@socketio.on("set_init_hash")
-def _handle_set_hash(hash_id):
-    @copy_current_request_context
-    def handle_set_hash(hash_id):
-        print(f"set_init_hash {hash_id}")
-        if not hash_id:
-            return
-        print(f"set_init_hash {hash_id}")
-        # Return the state associated with the hash
-        text = states[hash_id + "-text"]
-        emit("set_text", text)
-        emit("initial_state")
-    gevent.spawn(handle_set_hash, hash_id)
+    if not text.strip():
+        return
+
+    # Convert the received text into a pickled object
+    pickled_obj = pickle.dumps(text)
+    hash_id = sha256(pickled_obj).hexdigest()
+    states[hash_id + "-text"] = text
+    # Emit the hash back to the client
+    return hash_id
 
 
+@socket_event("set_init_hash", "set_text")
+def handle_set_hash(hash_id):
+    print(f"set_init_hash {hash_id}")
+    if not hash_id:
+        return
+    print(f"set_init_hash {hash_id}")
+    # Return the state associated with the hash
+    text = states[hash_id + "-text"]
+    return text
 
 
 if __name__ == "__main__":

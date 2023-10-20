@@ -1,3 +1,4 @@
+import math
 import os
 import pickle
 from pprint import pprint
@@ -48,9 +49,6 @@ class Tree:
 
     @staticmethod
     def graph_without_text_sequence(graph=None):
-        if graph is None:
-            graph = self.graph
-
         # Create a new DiGraph without "text_sequence" edges
         filtered_graph = nx.DiGraph()
         for u, v, data in graph.edges(data=True):
@@ -120,18 +118,18 @@ class Tree:
             print("Error in drawing graph")
             pass
 
-    def pull(self, n):
+    def pull(self, n, _score=None):
         return [
             (n, self.graph.nodes[n]["text"])
-            for n in self.nodes_with_least_info(self.graph, n)
+            for n in self.nodes_with_least_info(self.graph, n,_score= _score)
         ]
 
-    def pull_lz(self, n, m):
-        return view_shape(list(zip(*self.pull(n * m))), (2, n, m))
+    def pull_lz(self, n, m, _score=None):
+        return view_shape(list(zip(*self.pull(n * m, _score))), (2, n, m))
 
     yielded = []
 
-    def nodes_with_least_info(self, G, n):
+    def nodes_with_least_info(self, G, n, _score=None):
         # Dictionary to store the sum of "_score" attributes for each node
         node_scores = {}
         all_nodes = list(G.nodes())
@@ -140,7 +138,7 @@ class Tree:
             total_score = 0
             for _, _, data in G.edges(node, data=True):
                 for key, value in data.items():
-                    if key.endswith("_score"):
+                    if key.endswith("_score") and (_score and key.startswith(_score) or not _score):
                         total_score += value
             node_scores[node] = total_score
 
@@ -198,21 +196,21 @@ class Tree:
         return result
 
     @staticmethod
-    def edge_score(e, not_h=False):
+    def edge_score(e, _score=[]):
         total_score = 0
         for k, v in e.items():
             if v is None:  # Skip if the score is None
                 continue
             if k.endswith("_score"):
-                if not_h and k.startswith("h_"):
+                if not any(k.startswith(s) for s in _score):
                     continue
                 total_score += v
         return total_score
 
     @staticmethod
-    def node_score(G, node):
+    def node_score(G, node, _score=None):
         return sum(
-            Tree.edge_score(attr, not_h=True)
+            Tree.edge_score(attr, _score=_score)
             for _, _, attr in Tree.computed_out_edges(G, node)
         )
 
@@ -239,7 +237,7 @@ class Tree:
 
     @staticmethod
     def grow_subgraph(G, node, visited, depth, is_tri=False):
-        if depth == 0:
+        if depth < 0:
             return [], []
 
         selected_edges = []
@@ -270,13 +268,13 @@ class Tree:
 
             # Recursively grow subgraph for ant and syn branches
             ant_nodes, ant_edges = Tree.grow_subgraph(
-                G, ant_node, visited, depth - 1, is_tri=True
+                G, ant_node, visited, depth , is_tri=True
             )
             syn_nodes, syn_edges = Tree.grow_subgraph(
-                G, syn_node, visited, depth - 1, is_tri=True
+                G, syn_node, visited, depth , is_tri=True
             )
             the_nodes, the_edges = Tree.grow_subgraph(
-                G, node, visited, depth - 1, is_tri=True
+                G, node, visited, depth , is_tri=True
             )
 
             selected_edges.extend(the_edges)
@@ -296,7 +294,7 @@ class Tree:
 
             # If there are sub nodes, select the one with highest score
             if sub_nodes:
-                sub_scores = {n: Tree.node_score(G, n) for n in sub_nodes}
+                sub_scores = {n: Tree.node_score(G, n, _score="h_") for n in sub_nodes}
                 best_sub_node = max(sub_scores, key=sub_scores.get)
                 best_sub_edge_attr = next(
                     attr for n1, n2, attr in sub_out_edges if n2 == best_sub_node
@@ -316,15 +314,63 @@ class Tree:
                 selected_nodes = []
 
         return selected_nodes, selected_edges
+    @staticmethod
+    def compute_node_score(G, node, scores, subsumption_score_sum, outgoing_edge_count):
+        # If score already computed, return it
+        if scores[node] is not None:
+            return scores[node]
+
+        # Compute direct average subsumption score
+        if outgoing_edge_count[node] != 0:  # Avoid division by zero
+            scores[node] = subsumption_score_sum[node] / outgoing_edge_count[node]
+        else:
+            scores[node] = 0
+
+        # Add scores of nodes that this node subsumes
+        for _, m, data in G.out_edges(node, data=True):
+            scores[node] += Tree.compute_node_score(G, m, scores, subsumption_score_sum, outgoing_edge_count)
+
+        # Store the computed score in the graph and return
+        G.nodes[node]['score'] = scores[node]
+        return scores[node]
+    @staticmethod
+    def top_n_subsuming_nodes(G, n=10):
+        # Initialization
+        scores = {node: None for node in G.nodes()}
+        subsumption_score_sum = {node: 0 for node in G.nodes()}
+        outgoing_edge_count = {node: 0 for node in G.nodes()}
+
+        # Compute sum of scores and edge count
+        for node in G.nodes():
+            for _, _, data in G.out_edges(node, data=True):
+                if "h_score" in data and data["h_score"]:
+                    subsumption_score_sum[node] += data['h_score']
+                    outgoing_edge_count[node] += 1
+
+        # Compute recursive scores for each node
+        for node in G.nodes():
+            Tree.compute_node_score(G, node, scores, subsumption_score_sum, outgoing_edge_count)
+
+        # Sort nodes by their scores in descending order
+        sorted_nodes = sorted(scores.keys(), key=lambda x: scores[x], reverse=True)
+
+        # Return top n nodes
+        return sorted_nodes[:n]
 
     @staticmethod
-    def max_score_triangle_subgraph(G, depth=8, return_start_node=False):
+    def max_score_triangle_subgraph(G,  return_start_node=False):
         _G = G.copy()
+
         G = Tree.graph_without_text_sequence(G)
-        scores = {node: Tree.node_score(G, node) for node in G.nodes()}
+        print (G)
+        try:
+            depth = math.log(len(G.nodes()), 3) -2
+        except:
+            depth = 0
+        print(f"depth {depth}")
 
         # Sort nodes by score and get the top 10
-        sorted_nodes = sorted(scores, key=scores.get, reverse=True)[:10]
+        sorted_nodes = Tree.top_n_subsuming_nodes(G, n=1)
 
         best_subgraph = None
         best_start_node = None
@@ -334,7 +380,7 @@ class Tree:
             visited = {node}
 
             # Grow subgraph recursively
-            result_nodes, result_edges = Tree.grow_subgraph(G, node, visited, depth)
+            result_nodes, result_edges = Tree.grow_subgraph(G, node=node, visited=visited, depth=depth)
 
             # Create a temporary subgraph for this start_node
             temp_subgraph = nx.DiGraph()
@@ -347,14 +393,14 @@ class Tree:
                 best_subgraph = temp_subgraph
                 best_start_node = node
 
-        # If the best subgraph's start_node exists in the subgraph, mark it
-        if best_subgraph and sorted_nodes[0] in best_subgraph.nodes:
-            best_subgraph.nodes[sorted_nodes[0]]["start"] = True
-        # transfer node attributes from graph to bestsubgraph
+
         if best_subgraph:
             for node in best_subgraph.nodes:
                 best_subgraph.nodes[node].update(_G.nodes[node])
+            # If the best subgraph's start_node exists in the subgraph, mark it
 
+
+            best_subgraph.nodes[best_start_node]["start"] = True
         if return_start_node:
             return best_subgraph or nx.DiGraph(), best_start_node
 

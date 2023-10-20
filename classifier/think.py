@@ -14,8 +14,11 @@ def get_prediction(model, input_data, config, compute_confidence=False):
     outputs = model(input_reshaped)
 
     # Reshape outputs and labels
-    outputs_reshaped = outputs.view(-1, config.n_classes)
-
+    try:
+        outputs_reshaped = outputs.view(-1, config.n_classes)
+    except:
+        print(f"{outputs=} {outputs.shape=} {config.n_classes=}")
+        raise
     # Initialize arrays to store predictions and outputs
     all_predicted_labels = []
     all_outputs_reshaped = []

@@ -24,6 +24,7 @@ const ShareModal = ({ url = '', linkInfo }) => {
     setIsCopied(true)
     setTimeout(() => {
       setIsCopied(false)
+      setIsVisible(false)
     }, 2000) // Reset after 2 seconds
   }
 

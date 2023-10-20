@@ -8,6 +8,7 @@ import {Button, Tabs} from "antd";
 import {JsonView} from "./JsonView";
 import {TreeView} from "./TreeView";
 import {TriangleView} from "./TriangleView";
+import {ExperimentsView} from "./ExperimentsView";
 
 localStorage.debug = '*'
 const socket = io('', { transports: ['websocket'] })
@@ -16,7 +17,8 @@ let inited = false
 export const Editor = () => {
   const [state, setState] = useState(null)
   const [patch, setPatch] = useState(null)
-  const [activeTab, setActiveTab] = useState(1)
+  const [mods, setMods] = useState(null)
+  const [activeTab, setActiveTab] = useState("json")
 
   const [_text, _setText] = useState('')
 
@@ -25,7 +27,7 @@ export const Editor = () => {
 
   useEffect(() => {
     const params = parseHash(window.location.hash)
-
+console.log(params)
     if (params.hash !== undefined && params.hash !== hash) {
       setHash(params.hash)
       socket.emit('set_init_hash', params.hash)
@@ -50,8 +52,15 @@ export const Editor = () => {
                 setPatch(null)
         setState(null)
     })
+          socket.on('set_mods', (mods) => {
+      console.log('set_mods', mods)
+      setMods(mods)
+
+    })
+
 
     socket.on('initial_state', (data) => {
+        console.log('initial_state', hash)
       socket.emit('set_init_state', hash)
     })
     socket.on('set_state', (state) => {
@@ -61,11 +70,17 @@ export const Editor = () => {
     })
 
     socket.on('state_patch', (patch) => {
-      console.log('patch', patch)
-      if (patch &&state) {
-          setPatch(patch)
-          const newState = jsonPatch.applyPatch(state, patch).newDocument;
-          setState(newState);
+      console.log('patch', patch, state)
+      if (patch &&  state) {
+          try {
+              setPatch(patch)
+              const newState = jsonPatch.applyPatch(state, patch).newDocument;
+              setState(newState);
+              console.log('patched')
+            } catch (e) {
+                console.log('patch error', e)
+              socket.emit('set_init_state', hash)
+          }
       }
       socket.emit('update_state', hash)
     })
@@ -95,12 +110,15 @@ export const Editor = () => {
       socket.off('set_hash')
       socket.off('set_text')
     }
-  }, [hash])
+  }, [hash, state])
 
   useEffect(() => {
     console.log('useEffect', { hash, text })
     if (text && hash) socket.emit('set_init_state', hash)
   }, [hash, text])
+    useEffect(() => {
+     socket.emit('set_initial_mods')
+    }, []);
 
   return (
     <div className="App" style={{overflowY: "scroll"}}>
@@ -135,23 +153,28 @@ export const Editor = () => {
                 tabPosition={"left"}
                 width={"100%"}
                 items={[
+                              {
+                        key: 'ex',
+                        label: 'Experiments',
+                        children:  <ExperimentsView  {...{mods}}/>,
+                    },
                                         {
-                        key: '1',
+                        key: 'pz',
                         label: 'Puzzle',
                         children:  state && <TriangleView  {...{hash, text,patch,state}}/>,
                     },
                     {
-                        key: '2',
+                        key: '3',
                         label: 'Triangle',
                         children:  state && <TriangleView  {...{hash, text,patch,state}}/>,
                     },
                     {
-                        key: '3',
+                        key: 'tree',
                         label: 'Tree',
                         children: <TreeView  {...{hash, text,patch,state}}/>,
                     },
                     {
-                        key: '4',
+                        key: 'json',
                         label: 'JSON',
                         children:<JsonView {...{hash, text,patch,state}}/>
 ,

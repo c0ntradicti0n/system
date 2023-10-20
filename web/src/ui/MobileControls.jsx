@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import ShareModal from './ShareModal'
 import { Button, Input } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
+import {useNavigate} from "raviger";
 
 export const MobileControls = ({
   triggerSearch,
@@ -14,6 +15,8 @@ export const MobileControls = ({
   isWindowWide,
   labels,
 }) => {
+      const navigate = useNavigate();
+
   const [searchText, setSearchText] = useState(_searchText ?? '')
   useEffect(() => {
     setSearchText(_searchText)
@@ -118,6 +121,8 @@ export const MobileControls = ({
           ↓
         </button>
         <ShareModal linkInfo={linkInfo} />
+       <Button style={{position: "relative", translateX: "50px", translateY: 50}} onClick={() => navigate("/editor#activeTab=ex")} className="button editor-controls" aria-label="Editor" title="Editor"
+        >✎</Button>
       </div>
     </div>
   )
