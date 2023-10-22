@@ -184,7 +184,7 @@ class DataGenerator:
         # Adjust data distribution based on f score
         pass
 
-    def generate_data(self, batch_size=None):
+    def generate_data(self, config,batch_size=None):
         texts = []
         labels = []
         embeddings = []
@@ -201,5 +201,7 @@ class DataGenerator:
             labels.append(label)
 
             embeddings.append(get_embeddings(sample, self.config))
-
-        return torch.tensor(embeddings), torch.tensor(labels, dtype=torch.long), texts
+        labels = torch.tensor(labels, dtype=torch.long)
+        if config.result_add:
+            labels = labels - config.result_add
+        return torch.tensor(embeddings), labels, texts

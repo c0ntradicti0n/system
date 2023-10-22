@@ -85,7 +85,7 @@ for config in gen_config():
 
         for batch in range(BATCHES_PER_EPOCH):
             # Fetch training data
-            train_data, train_labels, texts = data_gen.generate_data()
+            train_data, train_labels, texts = data_gen.generate_data(config=config)
 
             # Forward pass
             optimizer.zero_grad()
@@ -95,6 +95,7 @@ for config in gen_config():
             )
 
             train_labels_reshaped = train_labels.view(-1)
+
 
             loss = criterion(outputs_reshaped, train_labels_reshaped)
 
@@ -126,7 +127,7 @@ for config in gen_config():
         )
 
         # Fetch validation data
-        valid_data, valid_labels, texts = data_gen.generate_data(config.batch_size * 5)
+        valid_data, valid_labels, texts = data_gen.generate_data(config=config, batch_size=config.batch_size * 5)
 
         model.eval()
 

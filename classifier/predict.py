@@ -63,6 +63,8 @@ class Models:
             c,
             compute_confidence=True,
         )
+        if self.model_configs[self.active_model_name].result_add:
+            labels = labels + self.model_configs[self.active_model_name].result_add
         return labels, certainty_scores
 
 
