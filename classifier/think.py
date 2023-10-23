@@ -31,8 +31,13 @@ def get_prediction(model, input_data, config, compute_confidence=False):
         predicted_labels = torch.tensor(assignment, dtype=torch.long).to(logits.device)
 
         # Reshape the logits to match the original shape
-        logits_reshaped = logits.view(-1, config.n_classes)
-
+        try:
+            logits_reshaped = logits.view(-1, config.n_classes)
+        except:
+            print(f"{input_data=}  {logits.shape=} {config.n_classes=}"
+                  f"{predicted_labels=} {predicted_labels.shape=}"
+                  f"{assignment=}")
+            raise
         # Append results to the lists
         all_predicted_labels.append(predicted_labels)
         all_outputs_reshaped.append(logits_reshaped)
