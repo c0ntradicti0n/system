@@ -12,6 +12,9 @@ const BibTeXViewer = ({ entry }) => {
         return <div>{entry}</div>;
     }
 
+    if (!parsedData || !parsedData.length) {
+        return <div>{entry}</div>;
+    }
     // Assuming only one entry for simplicity
     const data = parsedData[0].entryTags;
 
