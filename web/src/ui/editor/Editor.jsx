@@ -21,6 +21,7 @@ export const Editor = () => {
   const [activeTab, setActiveTab] = useState("json")
 
   const [_text, _setText] = useState('')
+    const [meta, setMeta] = useState('')
 
   const [text, setText] = useState('')
   const [hash, setHash] = useState(null)
@@ -52,6 +53,10 @@ console.log(params)
                 setPatch(null)
         setState(null)
     })
+          socket.on('set_meta', (meta) => {
+      console.log('set_meta', meta)
+      setMeta(meta)
+    })
           socket.on('set_mods', (mods) => {
       console.log('set_mods', mods)
       setMods(mods)
@@ -62,6 +67,7 @@ console.log(params)
     socket.on('initial_state', (data) => {
         console.log('initial_state', hash)
       socket.emit('set_init_state', hash)
+
     })
     socket.on('set_state', (state) => {
       console.log('set_state', state)
@@ -114,7 +120,11 @@ console.log(params)
 
   useEffect(() => {
     console.log('useEffect', { hash, text })
-    if (text && hash) socket.emit('set_init_state', hash)
+    if (text && hash) {
+        socket.emit('set_init_state', hash)
+                      socket.emit('get_meta', hash)
+
+    }
   }, [hash, text])
     useEffect(() => {
      socket.emit('set_initial_mods')
@@ -137,6 +147,7 @@ console.log(params)
             }}
             placeholder="Paste your paragraphed text here"
         />
+
         <Button
             onClick={() => {
                 setText(_text)
@@ -146,6 +157,31 @@ console.log(params)
             }}
         >
                         Send Text
+
+        </Button>
+
+                <TextArea
+            showCount
+            value={meta}
+            maxLength={1000}
+            style={{
+                height: 120,
+                marginBottom: 24,
+                backgroundColor: '#111 !important',
+            }}
+            onChange={(e) => {
+                setMeta(e.target.value)
+            }}
+            placeholder="Paste some Metadata here, can have bib-text-formatted references"
+        />
+                <Button
+            onClick={() => {
+                console.log('set_meta', meta)
+                socket.emit('set_init_meta', hash, meta)
+            }}
+        >
+                        Set Metadata
+
         </Button>
             <Tabs
                 activeKey={activeTab}

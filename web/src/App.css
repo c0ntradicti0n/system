@@ -369,3 +369,15 @@ ant-tree-icon__customize,
     font-size: xx-small !important;
   }
 }
+
+.bibtex-entry {
+}
+
+.bibtex-entry strong {
+  font-size: 1.2em;
+}
+
+.bibtex-entry a {
+  color: #007bff;
+  text-decoration: none;
+}

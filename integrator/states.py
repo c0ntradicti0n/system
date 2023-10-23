@@ -11,60 +11,77 @@ from tree import Tree
 
 class States:
     def __init__(self):
-        self.states = {}
-
+        pass
     @classmethod
     def path(cls, hash_id):
         return os.path.join("states/", f"{hash_id}.pkl")
 
-    def get(self, hash_id, default=None):
-        return self.states.get(hash_id, default)
 
     @staticmethod
     def get_all():
-        return list_files_with_regex("states/", "(?P<hash>.*)\-text.pkl")
+        matched_files = list_files_with_regex("states/", "(?P<hash>.*)\-text.pkl")
+
+        results = []
+        for matched_file in matched_files:
+            hash_value = matched_file["hash"]
+            meta_filename = os.path.join("states", f"{hash_value}-meta.pkl")
+
+            if os.path.exists(meta_filename):
+                with open(meta_filename, "rb") as meta_file:
+                    metadata = pickle.load(meta_file)
+            else:
+                metadata = None
+
+            matched_file["meta"] = metadata
+
+            results.append(matched_file)
+        return results
 
     def __getitem__(self, hash_id):
-        if hash_id in self.states:
-            return self.states[hash_id]
+        if hash_id.endswith("-text"):
+            with open(self.path(hash_id), "rb") as f:
+                text = pickle.load(f)
+            print(f"loaded text {hash_id}")
+            return text
+        elif hash_id.endswith("-meta"):
+            with open(self.path(hash_id), "rb") as f:
+                meta = pickle.load(f)
+            print(f"loaded meta {hash_id}")
+            return meta
         else:
-            if hash_id.endswith("-text"):
-                with open(self.path(hash_id), "rb") as f:
-                    text = pickle.load(f)
-                self.states[hash_id] = text
-                print(f"loaded text {hash_id}")
-                return text
-            else:
-                if os.path.exists(self.path(hash_id + "-text")):
-                    tree, i = Tree.load_state(hash_id)
-                    if not i:
-                        with open(self.path(hash_id + "-text"), "rb") as f:
-                            text = pickle.load(f)
-                        inputs = parse_text(text)
-                        if not inputs:
-                            print(f"invalid text for {hash_id}")
-                            return None, -1
-                        print(f"loaded tree from text {hash_id}")
+            if os.path.exists(self.path(hash_id + "-text")):
+                tree, i = Tree.load_state(hash_id)
+                if not i:
+                    with open(self.path(hash_id + "-text"), "rb") as f:
+                        text = pickle.load(f)
+                    inputs = parse_text(text)
+                    if not inputs:
+                        print(f"invalid text for {hash_id}")
+                        return None, -1
+                    print(f"loaded tree from text {hash_id}")
 
-                        tree, i = Tree(list(inputs.items())), 0
-                    else:
-                        print(f"loaded {i=} {hash_id} {tree=} ")
-                    self.states[hash_id] = tree, i
-                    print(f"loaded tree {hash_id}")
+                    tree, i = Tree(list(inputs.items())), 0
+                else:
+                    print(f"loaded {i=} {hash_id} {tree=} ")
+                print(f"loaded tree {hash_id}")
 
-                    return tree, i
-                print(f"loaded nothing {hash_id}")
+                return tree, i
+            print(f"loaded nothing {hash_id}")
 
-                return None, None
+            return None, None
 
-    def set(self, hash_id, state):
-        self.states[hash_id] = state
 
     def __setitem__(self, hash_id, state):
         if hash_id.endswith("-text"):
             with open(self.path(hash_id), "wb") as f:
                 pickle.dump(state, f)
-        self.states[hash_id] = state
+        elif hash_id.endswith("-meta"):
+            with open(self.path(hash_id), "wb") as f:
+                pickle.dump(state, f)
+        else:
+            tree, i = state
+            tree.save_state(i, hash_id)
+            print(f"saved {i=} {hash_id} {tree=} ")
 
 
 states = States()

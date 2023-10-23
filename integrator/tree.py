@@ -315,10 +315,15 @@ class Tree:
 
         return selected_nodes, selected_edges
     @staticmethod
-    def compute_node_score(G, node, scores, subsumption_score_sum, outgoing_edge_count):
+    def compute_node_score(G, node, scores, subsumption_score_sum, outgoing_edge_count, visited=None):
         # If score already computed, return it
+        visited = set() if visited is None else visited
+
         if scores[node] is not None:
             return scores[node]
+
+        if node in visited:
+            return 0
 
         # Compute direct average subsumption score
         if outgoing_edge_count[node] != 0:  # Avoid division by zero
@@ -328,7 +333,7 @@ class Tree:
 
         # Add scores of nodes that this node subsumes
         for _, m, data in G.out_edges(node, data=True):
-            scores[node] += Tree.compute_node_score(G, m, scores, subsumption_score_sum, outgoing_edge_count)
+            scores[node] += Tree.compute_node_score(G, m, scores, subsumption_score_sum, outgoing_edge_count, visited=visited | {node, m})
 
         # Store the computed score in the graph and return
         G.nodes[node]['score'] = scores[node]

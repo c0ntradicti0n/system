@@ -63,6 +63,8 @@ def update_triangle_graph(t: Tree, i, hash, return_start_node=None):
                 lsk = classifier(t)
                 for l, s, k in lsk:
                     added = "synantithesis"
+                    if t.graph.get_edge_data(k[2], k[1], key="ant") and t.graph.get_edge_data(k[2], k[0], key="syn"):
+                        t.graph.remove_edge(k[2], k[1], key="ant")
 
                     t.add_relation(k[2], k[1], "ant", t_score=s[1], trident=t.j)
                     t.add_relation(k[2], k[0], "syn", a_score=s[0], trident=t.j)
