@@ -4,10 +4,7 @@ import Triangle from './Triangle'
 import { mergeDeep, lookupDeep, shiftIn, slashIt } from '../lib/nesting'
 import { parseHash } from '../lib/read_link_params'
 
-import {
-  TransformWrapper,
-  TransformComponent,
-} from 'react-zoom-pan-pinch'
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 import { go, beamDataTo } from '../lib/navigate'
 
 import { Tooltips } from './Tooltips'
@@ -25,7 +22,7 @@ function makeNoHorizon() {
   })
 }
 
-const Fractal = ({PRESET_DATA = undefined}) => {
+const Fractal = ({ PRESET_DATA = undefined }) => {
   const [detailId, _setDetailId] = useState(null)
   const [transformState, setTransformState] = useState(null)
   const [collectedData, setCollectedData] = useState({})
@@ -133,7 +130,7 @@ const Fractal = ({PRESET_DATA = undefined}) => {
 
   const fetchTree = async () => {
     let newData = null
-          const id = hiddenId ?? ''
+    const id = hiddenId ?? ''
 
     if (!PRESET_DATA) {
       const res = await fetch(`/api/toc/${id}`)
@@ -141,9 +138,9 @@ const Fractal = ({PRESET_DATA = undefined}) => {
         console.error('Network response was not ok', res)
         return
       }
-       newData = await res.json()
+      newData = await res.json()
     } else {
-         newData = PRESET_DATA
+      newData = PRESET_DATA
     }
 
     const mergedData = mergeDeep(
@@ -331,7 +328,7 @@ const Fractal = ({PRESET_DATA = undefined}) => {
         />
         {tooltipData && (
           <Tooltips
-              refill = {PRESET_DATA? false: true}
+            refill={PRESET_DATA ? false : true}
             tree={collectedData}
             path={tooltipData !== '' ? tooltipData : hiddenId}
             isWindowWide={isWindowWide}

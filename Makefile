@@ -38,11 +38,11 @@ hotreload-%:
 	@while inotifywait -e modify,create,delete -r --include '\.(py|txt)$$' ./$*; do \
 		docker compose build $*; \
 		docker compose down -v -t 0 $*; \
-		docker compose up  --build --force-recreate  -d $*; \
+		docker compose up  --build --force-recreate -d $*; \
 	done
 
 redis:
-	docker compose up -d redis
+	docker compose up --build --force-recreate  -d redis worker queue
 
 mod:
 	rm -rf ./.cache-cr

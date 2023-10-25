@@ -1,12 +1,15 @@
+import fcntl
 import os
 
 import torch
 from addict import Dict
-from ruamel import yaml
+from gevent.lock import BoundedSemaphore
+from ruamel.yaml import YAML
+
+yaml = YAML(typ="rt")
 
 from classifier.different_models import (configure_model, get_best_model,
-                                         get_models_congig_path,
-                                         get_models_root_dir)
+                                         get_models_congig_path)
 from classifier.think import get_model, get_prediction
 from lib.embedding import get_embeddings
 from lib.t import catchtime
@@ -17,7 +20,7 @@ class Models:
         self.models = {}
 
         with open(get_models_congig_path()) as f:
-            self.model_configs = Dict(yaml.load(f, Loader=yaml.Loader))["models"]
+            self.model_configs = Dict(yaml.load(f))["models"]
 
     def __getitem__(self, item):
         self.active_model_name = item
@@ -52,19 +55,34 @@ class Models:
     def config(self):
         return self.model_configs[self.active_model_name]
 
-    def predict(self, inputs):
-        c = self.model_configs[self.active_model_name]
-        embeddings = self.encode(inputs, c)
-        for param in self.models[self.active_model_name].parameters():
-            param.grad = None
-        labels, certainty_scores = get_prediction(
-            self.models[self.active_model_name],
-            embeddings,
-            c,
-            compute_confidence=True,
-        )
-        if self.model_configs[self.active_model_name].result_add:
-            labels = labels + self.model_configs[self.active_model_name].result_add
+    def predict(self, inputs, infer=False):
+        # Get the current process ID (PID)
+        pid = os.getpid()
+
+        # Use the PID to create a unique lock file for this worker
+        lockfile_name = f'lockfile_{pid}'
+
+        #with open(lockfile_name, 'w') as f:
+        #    fcntl.flock(f, fcntl.LOCK_EX)
+
+        semaphore = BoundedSemaphore()
+        with semaphore:
+            # critical section of code
+            c = self.model_configs[self.active_model_name]
+            embeddings = self.encode(inputs, c)
+            for param in self.models[self.active_model_name].parameters():
+                param.grad = None
+            labels, certainty_scores = get_prediction(
+                self.models[self.active_model_name],
+                embeddings,
+                c,
+                compute_confidence=True,
+
+            )
+            if self.model_configs[self.active_model_name].result_add:
+                labels = labels + self.model_configs[self.active_model_name].result_add
+        # critical section of code
+        #    fcntl.flock(f, fcntl.LOCK_UN)
         return labels, certainty_scores
 
 

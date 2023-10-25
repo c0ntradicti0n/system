@@ -9,8 +9,10 @@ def get_model(config):
     return NTupleNetwork(config.embedding_dim, config.n_classes)
 
 
-def get_prediction(model, input_data, config, compute_confidence=False):
-    input_reshaped = input_data.view(-1, config.n_samples, config.embedding_dim)
+def get_prediction(model, input_data, config, compute_confidence=False, n_samples=None):
+    input_reshaped = input_data.view(
+        -1, n_samples if n_samples else config.n_samples, config.embedding_dim
+    )
     outputs = model(input_reshaped)
 
     # Reshape outputs and labels
@@ -23,39 +25,47 @@ def get_prediction(model, input_data, config, compute_confidence=False):
     all_predicted_labels = []
     all_outputs_reshaped = []
 
-    for logits in outputs:
+    for i, logits in enumerate(outputs):
         # Apply Hungarian assignment to determine class assignment for each sample in the set
         assignment = hungarian_assignment(logits.detach().cpu().numpy())
 
         # Assign class labels based on the Hungarian assignment
         predicted_labels = torch.tensor(assignment, dtype=torch.long).to(logits.device)
 
+        if 0 in predicted_labels:
+            predicted_labels.fill_(0)
+
         # Reshape the logits to match the original shape
         try:
-            logits_reshaped = logits.view(-1, config.n_classes)
+            logits_reshaped = logits.view(-1, config.n_samples, config.n_classes)
         except:
-            print(f"{input_data=}  {logits.shape=} {config.n_classes=}"
-                  f"{predicted_labels=} {predicted_labels.shape=}"
-                  f"{assignment=}")
-            raise
-        # Append results to the lists
+            print(
+                f"{i=}\n"
+                f"{outputs.shape=}\n"
+                f"{input_data.shape=}\n"
+                f"{logits.shape=}\n"
+                f"{config.n_classes=}\n"
+                f"{predicted_labels=}\n"
+                f"{predicted_labels.shape=}\n"
+                f"{assignment=}"
+            )
+            logits_reshaped = logits.view(-1, config.n_samples, config.n_classes -1)
         all_predicted_labels.append(predicted_labels)
         all_outputs_reshaped.append(logits_reshaped)
 
-    # Stack the results back into tensors
     all_predicted_labels = torch.cat(all_predicted_labels)
     all_outputs_reshaped = torch.cat(all_outputs_reshaped)
 
-    # Convert to a PyTorch tensor
-    train_predicted_labels = torch.tensor(all_predicted_labels)
     if compute_confidence:
         # Apply softmax to convert logits to probabilities
-        probabilities = F.softmax(all_outputs_reshaped, dim=1)
+        outputs_without_0 = all_outputs_reshaped[:, :, 1:]
+        probabilities = F.softmax(outputs_without_0, dim=1)
 
         # Get the maximum probability for each sample
         confidence_scores = probabilities.max(dim=1).values
-        return train_predicted_labels, confidence_scores
-    return train_predicted_labels, outputs_reshaped
+        return all_predicted_labels, confidence_scores
+
+    return all_predicted_labels, outputs_reshaped
 
 
 def hungarian_assignment(scores):

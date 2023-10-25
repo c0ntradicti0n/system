@@ -16,5 +16,5 @@ def list_files_with_regex(directory, pattern):
     return matched_groups
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     print(list_files_with_regex("../integrator/states/", "(?P<hash>.*)\-text.pkl"))

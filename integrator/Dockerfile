@@ -1,5 +1,4 @@
-# Use an official Python runtime as a parent image
-FROM kalilinux/kali-rolling:latest
+FROM python:3.11-slim-buster
 
 ENV PYTHONUNBUFFERED 1
 USER root
@@ -22,4 +21,8 @@ ENV PYTHONIOENCODING=utf-8
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 ENV FLASK_ENV=development
-ENTRYPOINT ["gunicorn", "-k", "geventwebsocket.gunicorn.workers.GeventWebSocketWorker", "-w", "6", "-b", "0.0.0.0:5000", "--timeout", "300" , "--graceful-timeout", "200", "server:app"]
+ENV MPLCONFIGDIR=/config/matplotlib
+RUN mkdir /matplotlib
+RUN chmod 777 /matplotlib
+CMD ["python3", "server.py"]
+#ENTRYPOINT ["gunicorn", "-k", "geventwebsocket.gunicorn.workers.GeventWebSocketWorker", "-w", "4", "-b", "0.0.0.0:5000", "--timeout", "2000" , "--graceful-timeout", "200", "server:app"]

@@ -184,7 +184,7 @@ class DataGenerator:
         # Adjust data distribution based on f score
         pass
 
-    def generate_data(self, config,batch_size=None):
+    def generate_data(self, config, batch_size=None):
         texts = []
         labels = []
         embeddings = []

@@ -1,7 +1,10 @@
 import os
+import re
 
 from addict import Dict
-from ruamel import yaml
+from ruamel.yaml import YAML
+
+yaml = YAML(typ="rt")
 
 
 def get_models_root_dir():
@@ -12,8 +15,8 @@ def get_models_congig_path():
     return get_models_root_dir() + "models.yml"
 
 
-with open(get_models_congig_path()) as f:
-    models = yaml.load(f, yaml.Loader)
+with open(get_models_congig_path(), "r") as f:
+    models = yaml.load(f)
 
 
 def gen_config():
@@ -38,10 +41,6 @@ def configure_model(key, model):
     OPTIMIZER_PATH = "optimizer.pth"
     model.OPTIMIZER_PATH = OPTIMIZER_PATH
     return model
-
-
-import os
-import re
 
 
 def get_best_model(folder_path):

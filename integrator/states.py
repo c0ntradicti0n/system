@@ -1,10 +1,10 @@
 import os
 import pickle
 
-from lib.ls import list_files_with_regex
-from reader import parse_text
-from tree import Tree
+from integrator.reader import parse_text
+from integrator.tree import Tree
 
+from lib.ls import list_files_with_regex
 
 # Sample in-memory state
 
@@ -12,10 +12,10 @@ from tree import Tree
 class States:
     def __init__(self):
         pass
+
     @classmethod
     def path(cls, hash_id):
         return os.path.join("states/", f"{hash_id}.pkl")
-
 
     @staticmethod
     def get_all():
@@ -69,7 +69,6 @@ class States:
             print(f"loaded nothing {hash_id}")
 
             return None, None
-
 
     def __setitem__(self, hash_id, state):
         if hash_id.endswith("-text"):

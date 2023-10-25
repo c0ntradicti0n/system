@@ -1,23 +1,55 @@
+import requests
 from gevent import monkey
 
 monkey.patch_all()
-import gevent
-from states import states
-from functools import wraps
-import json
 import pickle
+from functools import wraps
 from hashlib import sha256
-
-import jsonpatch
+import gevent
 from flask import Flask, copy_current_request_context
-from flask_socketio import SocketIO, emit
-from main import update_triangle_graph
-from tree import Tree
+from flask_socketio import SocketIO
+from states import states
+from integrator.tree import Tree
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins="*", async_mode='gevent')
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode="gevent")
+import atexit
+import sys
 
+
+class ExitHooks(object):
+    def __init__(self):
+        self.exit_code = None
+        self.exception = None
+
+    def hook(self):
+        self._orig_exit = sys.exit
+        self._orig_exc_handler = self.exc_handler
+        sys.exit = self.exit
+        sys.excepthook = self.exc_handler
+
+    def exit(self, code=0):
+        self.exit_code = code
+        self._orig_exit(code)
+
+    def exc_handler(self, exc_type, exc, *args):
+        self.exception = exc
+        self._orig_exc_handler(self, exc_type, exc, *args)
+
+
+def exit_handler():
+    if hooks.exit_code is not None:
+        print("death by sys.exit(%d)" % hooks.exit_code)
+    elif hooks.exception is not None:
+        print("death by exception: %s" % hooks.exception)
+    else:
+        print("natural death")
+
+
+hooks = ExitHooks()
+hooks.hook()
+atexit.register(exit_handler)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 
@@ -39,42 +71,32 @@ def socket_event(event_name, emit_event_name=None):
     return decorator
 
 
-@socket_event("update_state", "state_patch")
+@socket_event("update_state", "state_wait")
 def handle_update(hash_id):
-    print(f"update_state {hash_id}")
-    old_state, i = states[hash_id]
+    # trigger celery
+    print(f"handle_update {hash_id}")
+    result = requests.post("http://queue:5000/threerarchy", json={"hash": hash_id}).json()
+    print (f"result {result}")
+    return result["task_id"], hash_id
 
-    old_graph = Tree.max_score_triangle_subgraph(
-        old_state.graph, return_start_node=True
-    )
-
-    new_graph = Tree.max_score_triangle_subgraph(
-        update_triangle_graph(old_state, i, hash_id), return_start_node=True
-    )
-
-    new_state, i = (
-        old_state,
-        i + 1,
-    )
-    states[hash_id] = new_state, i
-
-    try:
-        patch = jsonpatch.make_patch(
-            Tree.serialize_graph_to_structure(*old_graph),
-            Tree.serialize_graph_to_structure(*new_graph),
-        )
-        serialized_patch = json.loads(patch.to_string())
-    except:
-        print(f"error making patch {old_graph=} {new_graph=}")
-        serialized_patch = []
-
-    return serialized_patch
+@socket_event("await_state", "state_patch")
+def handle_trigger_celery(task_id, hash_id):
+    while True:
+        result = requests.get(f"http://queue:5000/task_result/{task_id}").json()
+        print(f"handle_trigger_celery {result=}")
+        if result["status"] == "SUCCESS":
+            break
+        gevent.sleep(5)
+    patch = result["result"]
+    print(f"handle_trigger_celery {hash_id=} {patch=}")
+    return patch, hash_id
 
 
 @socket_event("set_initial_mods", "set_mods")
 def handle_set_user_mods():
-    print (f"handle_set_user_mods")
+    print(f"handle_set_user_mods")
     return states.get_all()
+
 
 @socket_event("set_init_state", "set_state")
 def handle_set_state(hash_id):
@@ -101,6 +123,7 @@ def handle_set_text(text):
     states[hash_id + "-text"] = text
     return hash_id
 
+
 @socket_event("get_meta", "set_meta")
 def handle_get_meta(hash_id):
     print(f"handle_get_meta {hash_id=} ")
@@ -109,8 +132,9 @@ def handle_get_meta(hash_id):
         return
 
     meta = states[hash_id + "-meta"]
-    print (f"handle_get_meta {meta=}")
+    print(f"handle_get_meta {meta=}")
     return meta
+
 
 @socket_event("set_init_meta")
 def handle_set_meta(hash_id, meta):
@@ -135,5 +159,5 @@ def handle_set_hash(hash_id):
 
 
 if __name__ == "__main__":
-    print("RUNNING FROM SCRATCH")
+    print("RUNNING FROM PYTHON MAIN")
     socketio.run(app, host="0.0.0.0", port=5000)

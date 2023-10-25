@@ -17,7 +17,9 @@
   height: 40vmin;
 }
 
-.ant-tabs-tab,  .ant-input, ant-btn {
+.ant-tabs-tab,
+.ant-input,
+ant-btn {
   color: white;
   background-color: #282c34;
 }

@@ -6,12 +6,15 @@ from lib.shape import view_shape
 
 d = {}
 
-import redis
 import pickle
+
+import redis
 
 
 class RedisEmbedder:
-    def __init__(self, model_name, host=os.environ.get("REDIS_HOST", 'redis'), port=6379, db=0):
+    def __init__(
+        self, model_name, host=os.environ.get("REDIS_HOST", "redis"), port=6379, db=0
+    ):
         self.embedder = SentenceTransformerEmbeddings(model_name=model_name)
 
         # Connect to Redis

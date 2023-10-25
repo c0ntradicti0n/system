@@ -75,8 +75,6 @@ services:
       - .env
     tty: true
     user: 1000:1000
-    ports:
-      - "5000:5000"
     environment:
       DEBUG: "true"
       HOST: $HOST
@@ -101,12 +99,15 @@ services:
         max-size: "10m"
     ports:
       - "9876:5000"
+    extra_hosts:
+        - "host.docker.internal:host-gateway"
     build:
       context: integrator
       args:
         SYSTEM: /system
 
     restart: unless-stopped
+    image: integrator
 
     container_name: integrator
     env_file:
@@ -116,6 +117,7 @@ services:
 
     environment:
       DEBUG: "true"
+      PYDEV_DEBUG: "true"
       HOST: $HOST
       SYSTEM: /system
       PYTHONIOENCODING: utf-8
@@ -127,6 +129,8 @@ services:
       - "$SYSTEM:/system"
       - "./integrator:/app"
       - "./classifier:/app/classifier"
+      - "./integrator:/app/integrator"
+
       - "./lib:/app/lib"
       - "./.cache-cr:/chroma:rw"
       - "./.cache-hf:/.cache:rw"
@@ -166,6 +170,7 @@ services:
 
       - "./.cache-cr-linker:/chroma:rw"
       - "./.cache-hf:/.cache:rw"
+
 
 
   classifier:
@@ -214,6 +219,7 @@ services:
     build:
       context: web
       target:  $TARGET
+
     container_name: web
     volumes:
       - ./web/src:/app/src
@@ -230,4 +236,39 @@ services:
       - ./.redis:/data
     command: redis-server --appendonly yes
 
+  worker:
+    build: queue
+    command:  ["celery", "-A", "tasks", "worker", "--loglevel=info"]
+    depends_on:
+      - redis
+    env_file:
+      - .env
+    volumes:
+        - "$SYSTEM:/system"
+        - "./integrator:/app/integrator"
+        - "./integrator/states:/app/states"
+        - "./classifier:/app/classifier"
+        - "./lib:/app/lib"
+        - "./.cache-cr:/chroma:rw"
+        - "./.cache-hf:/.cache:rw"
+        - "./.cache-mpl:/.config:rw"
 
+  queue:
+    build: queue
+    command: ["python", "app.py"]
+    ports:
+      - "5000:5000"
+    container_name: queue
+
+    depends_on:
+      - redis
+    env_file:
+      - .env
+    volumes:
+      - "$SYSTEM:/system"
+      - "./integrator:/app/integrator"
+      - "./classifier:/app/classifier"
+      - "./lib:/app/lib"
+      - "./.cache-cr:/chroma:rw"
+      - "./.cache-hf:/.cache:rw"
+      - "./.cache-mpl:/.config:rw"

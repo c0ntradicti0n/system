@@ -9,7 +9,7 @@ import { addHoverObject, hoverObjects, removeHoverObject } from '../lib/hover'
 import { MAX_LEVEL } from '../config/const'
 import { stringToColour } from '../lib/color'
 import useLinkedElementsStore from '../lib/PinnedElements'
-import {trim} from "../lib/string";
+import { trim } from '../lib/string'
 
 function getRandomElement(arr) {
   const randomIndex = Math.floor(Math.random() * arr.length)
@@ -79,18 +79,21 @@ function Triangle({
 
   const title = data?.['.']
   const anto = data?.['_']
-// Calculate base font size
-let baseFontSize = size / 30 / Math.log1p(devicePixelRatio);
-const shortTitle = (postProcessTitle(title?? "")??"").split(' ').slice(0, 100).join(' ');
-// Check the combined text length
-const combinedTextLength = shortTitle.length;
+  // Calculate base font size
+  let baseFontSize = size / 30 / Math.log1p(devicePixelRatio)
+  const shortTitle = (postProcessTitle(title ?? '') ?? '')
+    .split(' ')
+    .slice(0, 100)
+    .join(' ')
+  // Check the combined text length
+  const combinedTextLength = shortTitle.length
 
-// Adjust font size if the combined text length is more than 100 chars
-if (combinedTextLength > 50) {
-  baseFontSize *= 0.5; // you can adjust this factor to your needs
-}
+  // Adjust font size if the combined text length is more than 100 chars
+  if (combinedTextLength > 50) {
+    baseFontSize *= 0.5 // you can adjust this factor to your needs
+  }
 
-const fontSize = baseFontSize;
+  const fontSize = baseFontSize
 
   return (
     <div
@@ -119,7 +122,9 @@ const fontSize = baseFontSize;
         className={'triangle ' + (animate ? animationClass ?? '' : '')}
         onAnimationEnd={(div) => setAnimationClass(null)}
         style={{
-          backgroundColor: fullId ? stringToColour(fullId.replace('/', ''), 1) : 'black',
+          backgroundColor: fullId
+            ? stringToColour(fullId.replace('/', ''), 1)
+            : 'black',
           zIndex: 1000 - level,
           filter: _hover ? 'invert(1)' : 'invert(0)',
           animationDuration: `${animationTime}s`,
@@ -167,7 +172,8 @@ const fontSize = baseFontSize;
             <div>
               <div>{animate ? animationClass ?? '' : ''}</div>
               <div id={triangleId} className="triangle-title">
-                {trim(fullId.replace(/\//g, '.'), '.')} {postProcessTitle(shortTitle.slice(0,100))}
+                {trim(fullId.replace(/\//g, '.'), '.')}{' '}
+                {postProcessTitle(shortTitle.slice(0, 100))}
               </div>
 
               {postProcessTitle(anto)

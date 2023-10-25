@@ -96,7 +96,6 @@ for config in gen_config():
 
             train_labels_reshaped = train_labels.view(-1)
 
-
             loss = criterion(outputs_reshaped, train_labels_reshaped)
 
             # Backward pass and optimizer step
@@ -127,7 +126,9 @@ for config in gen_config():
         )
 
         # Fetch validation data
-        valid_data, valid_labels, texts = data_gen.generate_data(config=config, batch_size=config.batch_size * 5)
+        valid_data, valid_labels, texts = data_gen.generate_data(
+            config=config, batch_size=config.batch_size * 5
+        )
 
         model.eval()
 

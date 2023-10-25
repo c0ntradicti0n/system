@@ -2,10 +2,9 @@
 from io import StringIO
 from pathlib import Path
 
-import ruamel.yaml
+from ruamel.yaml import YAML
 
-# setup loader (basically options)
-yaml = ruamel.yaml.YAML()
+yaml = YAML(typ="rt")
 yaml.version = (1, 2)
 yaml.indent(mapping=1, sequence=1, offset=0)
 yaml.allow_duplicate_keys = True
