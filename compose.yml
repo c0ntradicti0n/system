@@ -243,9 +243,14 @@ services:
       - redis
     env_file:
       - .env
+    environment:
+      CELERYD_CONCURRENCY: 1
+
     volumes:
         - "$SYSTEM:/system"
         - "./integrator:/app/integrator"
+        - "./integrator/models:/app/models"
+
         - "./integrator/states:/app/states"
         - "./classifier:/app/classifier"
         - "./lib:/app/lib"
