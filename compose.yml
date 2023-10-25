@@ -238,7 +238,7 @@ services:
 
   worker:
     build: queue
-    command:  ["celery", "-A", "tasks", "worker", "--loglevel=info"]
+    command:  ["celery", "-A", "tasks", "worker", "--loglevel=info", "-c", "1"]
     depends_on:
       - redis
     env_file:
