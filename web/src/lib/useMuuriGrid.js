@@ -10,6 +10,7 @@ function isFullTriangle(grid) {
 }
 const useMuuriGrid = (gridRef, options, addInstance, removeInstance, size) => {
   useEffect(() => {
+    try {
     if (!gridRef.current) return
 
     const grid = new Muuri(gridRef.current, options)
@@ -54,7 +55,14 @@ const useMuuriGrid = (gridRef, options, addInstance, removeInstance, size) => {
       // Remove event listener for dragReleaseEnd event
       grid.off('dragReleaseEnd')
       removeInstance(grid)
-      grid.destroy()
+      try {
+        grid.destroy()
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    } catch (e) {
+        console.log(e)
     }
   }, [gridRef, options, addInstance, removeInstance])
 }
