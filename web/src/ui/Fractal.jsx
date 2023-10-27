@@ -252,7 +252,6 @@ const Fractal = ({ PRESET_DATA = undefined }) => {
       setInitialPageLoad(false) // Mark that the initial page load logic is done
     }
   }, [initialPageLoad, setDetailId, setHiddenId]) // Depend on initialPageLoad so that this useEffect runs only once
-  console.log(visualData)
   return (
     <div className="Fractal" style={{}}>
       <div style={{ position: 'absolute', width: 0, height: 0, top: 0 }}>

@@ -2,9 +2,9 @@ import atexit
 import logging
 
 import numpy as np
-from integrator.tree import Tree
 
 from classifier.predict import MODELS
+from integrator.tree import Tree
 
 
 @atexit.register
@@ -85,7 +85,7 @@ def update_triangle_graph(t: Tree, i, hash, return_start_node=None):
 
 
 if __name__ == "__main__":
-    hash = "54c8764cbde0f8f502ad2778b11ab7fd9a575c339349e1696b2d1dbacc2f4186"
+    hash = "b3607805fa4d6ef807e825b44c081446dee7a5b14a796981262f9234686d4ff9"
     T, i = Tree.load_state(hash)
 
     while True:
@@ -98,7 +98,7 @@ if __name__ == "__main__":
         i += 1
 
     path = "texts/cookbook.txt"
-    hash = "hash" +  path.replace("/", "_").replace(".", "_")
+    hash = "hash" + path.replace("/", "_").replace(".", "_")
     not_done = True
 
     inputs = get_inputs(path)

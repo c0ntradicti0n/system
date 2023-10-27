@@ -1,9 +1,9 @@
 import numpy as np
 import torch
+import torch.nn.functional as F
 from scipy.stats import multivariate_normal
 from sklearn.metrics import f1_score
 from torch import nn
-import torch.nn.functional as F
 
 
 def generate_samples(num_samples=1000, embedding_dim=128):
@@ -51,10 +51,10 @@ class NTupleNetwork(nn.Module):
 
         # Final layers
         self.fc_final = nn.Sequential(
-            nn.Linear(embedding_dim , (n_samples +1)),
+            nn.Linear(embedding_dim, (n_samples + 1)),
             nn.GELU(),
             nn.Dropout(0.5),
-            nn.Linear((n_samples +1), output_dim ),
+            nn.Linear((n_samples + 1), output_dim),
         )
 
         # Initialize weights
@@ -68,7 +68,9 @@ class NTupleNetwork(nn.Module):
         interactions = []
         for i in range(self.n):
             for j in range(self.n):
-                similarity = F.cosine_similarity(x[i:i + 1, :], x[j:j + 1, :], dim=1, eps=1e-8)
+                similarity = F.cosine_similarity(
+                    x[i : i + 1, :], x[j : j + 1, :], dim=1, eps=1e-8
+                )
                 interactions.append(similarity)
 
         interactions = torch.stack(interactions, dim=1)
@@ -82,14 +84,13 @@ class NTupleNetwork(nn.Module):
         return interactions
 
     def forward(self, x):
-
         outputs = []
         for samples in x:
             interactions = self.compute_interactions(samples)
             combined = torch.cat([samples, interactions], dim=0)
             out = self.fc_final(combined)
             outputs.append(out)
-        return torch.stack(outputs, dim=0)[:,1:]
+        return torch.stack(outputs, dim=0)[:, 1:]
 
 
 if __name__ == "__main__":
@@ -117,7 +118,9 @@ if __name__ == "__main__":
             selected_samples_list.append(selected_samples)
             selected_labels_list.append(selected_labels)
 
-        selected_samples = torch.stack(selected_samples_list).view(batch_size, n_samples, embedding_dim)
+        selected_samples = torch.stack(selected_samples_list).view(
+            batch_size, n_samples, embedding_dim
+        )
         selected_labels = torch.stack(selected_labels_list).view(batch_size, n_samples)
 
         outputs = n_tuple_network(selected_samples)
@@ -143,4 +146,6 @@ if __name__ == "__main__":
                 total_f1 += f1
 
             avg_f1 = total_f1 / batch_size
-            print(f"Epoch {epoch + 1}, Average F1 Score: {avg_f1:.4f}, Loss: {loss.item()}")
+            print(
+                f"Epoch {epoch + 1}, Average F1 Score: {avg_f1:.4f}, Loss: {loss.item()}"
+            )

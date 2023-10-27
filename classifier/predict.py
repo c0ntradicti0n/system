@@ -60,9 +60,9 @@ class Models:
         pid = os.getpid()
 
         # Use the PID to create a unique lock file for this worker
-        lockfile_name = f'lockfile_{pid}'
+        lockfile_name = f"lockfile_{pid}"
 
-        #with open(lockfile_name, 'w') as f:
+        # with open(lockfile_name, 'w') as f:
         #    fcntl.flock(f, fcntl.LOCK_EX)
 
         semaphore = BoundedSemaphore()
@@ -77,7 +77,6 @@ class Models:
                 embeddings,
                 c,
                 compute_confidence=True,
-
             )
             if self.model_configs[self.active_model_name].result_add:
                 labels = labels + self.model_configs[self.active_model_name].result_add

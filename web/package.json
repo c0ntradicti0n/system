@@ -13,6 +13,7 @@
     "hammerjs": "^2.0.8",
     "leader-line": "^1.0.7",
     "localforage": "^1.10.0",
+    "lodash.debounce": "^4.0.8",
     "match-sorter": "^6.3.1",
     "muuri": "^0.9.5",
     "raviger": "^4.1.2",

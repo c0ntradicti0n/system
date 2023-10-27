@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import io from 'socket.io-client'
 import ShareModal from '../ShareModal'
 import { parseHash } from '../../lib/read_link_params'
@@ -9,35 +9,87 @@ import { JsonView } from './JsonView'
 import { TreeView } from './TreeView'
 import { TriangleView } from './TriangleView'
 import { ExperimentsView } from './ExperimentsView'
+import { PuzzleView } from './PuzzleView'
+var debounce = require('lodash.debounce')
+
+let taskId = null
+const setTaskId = (tI) => (taskId = tI)
 
 localStorage.debug = '*'
-const socket = io('', { transports: ['websocket'] })
+const socket = io('', { transports: ['websocket'], retries: 1 })
 let inited = false
+let active_patching = false
+let init_phase = false
 
 export const Editor = () => {
   const [state, setState] = useState(null)
-  const [patch, setPatch] = useState(null)
+  const [patch, _setPatch] = useState(null)
   const [mods, setMods] = useState(null)
   const [activeTab, setActiveTab] = useState('json')
 
   const [_text, _setText] = useState('')
   const [meta, setMeta] = useState('')
+  const [consumedTaskIds, setConsumedTaskIds] = useState([]) // List of taskIds that have been consumed by the server
 
   const [text, setText] = useState('')
   const [hash, setHash] = useState(null)
+  const setPatch = (patch) => {
+    if (!patch) return
+    console.log('setPatch', patch, state)
+    let newState
+    try {
+      newState = jsonPatch.applyPatch(state, patch).newDocument
+    } catch (e) {
+      console.log('setPatch error', e)
+      if (hash) socket.timeout(3000).emit('set_init_state', hash)
+    }
+    _setPatch(patch)
+    setState(newState)
+  }
+
+  const timeoutId = useRef(null)
+
+  const checkAwaitState = useCallback(() => {
+    console.log('CHECK ', taskId)
+    if (taskId) {
+      console.log('CHECK AWAIT STATE', taskId)
+      socket.timeout(3000).emit('patch_poll', taskId)
+
+      // Clear previous timeout, just in case
+      if (timeoutId.current) {
+        clearTimeout(timeoutId.current)
+      }
+      timeoutId.current = setTimeout(checkAwaitState, 1000) // Recursive call
+    }
+  }, [taskId])
 
   useEffect(() => {
     const params = parseHash(window.location.hash)
     console.log(params)
     if (params.hash !== undefined && params.hash !== hash) {
       setHash(params.hash)
-      socket.emit('set_init_hash', params.hash)
+      if (!init_phase) {
+        console.log('INIT FROM HASH')
+        init_phase = true
+        socket.timeout(3000).emit('set_init_hash', params.hash)
+      }
     }
     if (params.activeTab !== undefined && params.activeTab !== activeTab) {
       setActiveTab(params.activeTab)
     }
-  }, [hash]) // Depend on initialPageLoad so that this useEffect runs only once
+  }, [hash])
 
+  useEffect(() => {
+    if (hash && state && !active_patching) {
+      console.log('START PATCHING', hash, state)
+      socket.timeout(3000).emit('update_state', hash)
+      active_patching = true
+    }
+  }, [hash, state])
+
+  const applyPatch = (patch) => {
+    console.log('FE patch', patch, state)
+  }
   useEffect(() => {
     // Listen for the hash from the server after sending the text
     socket.on('set_hash', (hash) => {
@@ -58,40 +110,38 @@ export const Editor = () => {
       setMeta(meta)
     })
     socket.on('set_mods', (mods) => {
-      console.log('set_mods', mods)
+      console.log('set_mods')
       setMods(mods)
     })
+    socket.on('set_task_id', (task_id) => {
+      if (task_id !== taskId) {
+        console.log('set_task_id', task_id, task_id)
 
+        setTaskId(task_id)
+        checkAwaitState()
+      }
+    })
     socket.on('initial_state', (data) => {
       console.log('initial_state', hash)
-      socket.emit('set_init_state', hash)
+      socket.timeout(3000).emit('set_init_state', hash)
     })
     socket.on('set_state', (state) => {
-      console.log('set_state', state)
+      console.log('set_state')
       setState(state)
-      if (hash) socket.emit('update_state', hash)
     })
 
-    socket.on('state_patch', (patch) => {
-      console.log('patch', patch, state)
-      if (patch && state) {
-        try {
-          setPatch(patch)
-          const newState = jsonPatch.applyPatch(state, patch).newDocument
-          setState(newState)
-          console.log('patched')
-        } catch (e) {
-          console.log('patch error', e)
-          socket.emit('set_init_state', hash)
-        }
+    socket.on('patch_receive', (result) => {
+      console.log('patch_receive')
+      if (result.status === 'SUCCESS') {
+        console.log('patch_receive SUCCESS')
+        setPatch(result.result)
+        active_patching = false
+        setTaskId(null) // Reset taskId after getting result
+
+        console.log('RESTART PATCHING', hash, state)
+        socket.timeout(3000).emit('update_state', hash)
+        active_patching = true
       }
-      socket.emit('update_state', hash)
-    })
-
-    socket.on("state_wait", (task_id, hash) => {
-      console.log("state_wait", state)
-            socket.emit('await_state', task_id, hash)
-
     })
 
     socket.on('connect_error', (error) => {
@@ -124,12 +174,12 @@ export const Editor = () => {
   useEffect(() => {
     console.log('useEffect', { hash, text })
     if (text && hash) {
-      socket.emit('set_init_state', hash)
-      socket.emit('get_meta', hash)
+      socket.timeout(3000).emit('set_init_state', hash)
+      socket.timeout(3000).emit('get_meta', hash)
     }
   }, [hash, text])
   useEffect(() => {
-    socket.emit('set_initial_mods')
+    socket.timeout(3000).emit('set_initial_mods')
   }, [])
 
   return (
@@ -149,18 +199,16 @@ export const Editor = () => {
         }}
         placeholder="Paste your paragraphed text here"
       />
-
       <Button
         onClick={() => {
           setText(_text)
           setHash(null)
           console.log('set_text', _text)
-          socket.emit('set_init_text', _text)
+          socket.timeout(3000).emit('set_init_text', _text)
         }}
       >
         Send Text
       </Button>
-
       <TextArea
         showCount
         value={meta}
@@ -178,11 +226,12 @@ export const Editor = () => {
       <Button
         onClick={() => {
           console.log('set_meta', meta)
-          socket.emit('set_init_meta', hash, meta)
+          socket.timeout(3000).emit('set_init_meta', hash, meta)
         }}
       >
         Set Metadata
-      </Button>
+      </Button>{' '}
+      {taskId}
       <Tabs
         activeKey={activeTab}
         onChange={(key) => {
@@ -200,7 +249,10 @@ export const Editor = () => {
             key: 'pz',
             label: 'Puzzle',
             children: state && (
-              <TriangleView {...{ hash, text, patch, state }} />
+              <PuzzleView
+                {...{ hash, text, patch, state }}
+                applyPatch={applyPatch}
+              />
             ),
           },
           {

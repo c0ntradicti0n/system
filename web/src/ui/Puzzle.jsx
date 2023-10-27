@@ -1,13 +1,36 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Muuri from 'muuri'
 import '../puzzle.css'
 import { stringToColour } from '../lib/color'
 import { postProcessTitle } from '../lib/position'
 import useMuuriStore from '../lib/MuuriStore'
 import useMuuriGrid from '../lib/useMuuriGrid'
+import jsonPatch from 'fast-json-patch'
 
 const SIZE = 300
+const  getPosition = (key, size, nest) => {
+  ""
+  "Calculate the position of the triangle based on its key."
+  ""
+  let x = 0
+  let y = 0
+  if (key === 1) {
+    x = 0.5 * size * (1 / nest)
+    y = 0
+  }
+  if (key === 2) {
 
+    x = 0
+    y = size * (1 / nest)
+  }
+  if (key === 3) {
+
+    x = size * (1 / nest)
+    y = size * (1 / nest)
+  }
+
+  return [x, y]
+}
 const moptions = (size, nest, all_muris) => ({
   dragEnabled: true,
   layout: function (grid, layoutId, items, width, height, callback) {
@@ -23,6 +46,7 @@ const moptions = (size, nest, all_muris) => ({
 
     for (var i = 0; i < items.length; i++) {
       var x, y
+      console.log('layout ITEM', items[i].getElement())
 
       // For the first item, place it at the top middle
       if (i === 0) {
@@ -31,12 +55,14 @@ const moptions = (size, nest, all_muris) => ({
       }
       // For the second item, place it at the bottom left
       else if (i === 1) {
-        x = 0
+        x = size * (1 / nest)
         y = size * (1 / nest)
       }
       // For the third item, place it at the bottom right
       else if (i === 2) {
-        x = size * (1 / nest)
+
+
+                x = 0
         y = size * (1 / nest)
       }
 
@@ -74,7 +100,7 @@ const moptions = (size, nest, all_muris) => ({
   size: size,
 })
 
-const Triangle = ({ nest, fullId, data, _key, size }) => {
+const MutableTriangle = ({ nest, fullId, data, _key, size }) => {
   const gridRef = useRef(null)
   const { addInstance, removeInstance, muuriInstances } = useMuuriStore()
 
@@ -120,10 +146,12 @@ const Triangle = ({ nest, fullId, data, _key, size }) => {
       <div className="puzzle-item-content triangle-content"></div>
       {!isLeafNode && data && (
         <div ref={gridRef} className="puzzle-grid">
-          {Object.entries(data).map(
+          {Object.entries(data).sort(([a], [b]) => b - a
+
+          ).map(
             ([key, item]) =>
-              data && (
-                <Triangle
+              data && key !== "." &&(
+                <MutableTriangle
                   nest={nest + 1}
                   fullId={fullId + _key}
                   data={item}
@@ -138,45 +166,62 @@ const Triangle = ({ nest, fullId, data, _key, size }) => {
   )
 }
 
-export const Puzzle = ({ children, ...props }) => {
+export const Puzzle = ({
+  children,
+  data = undefined,
+  applyPatch,
+  ...props
+}) => {
   const gridRef = useRef(null)
   const { addInstance, removeInstance, muuriInstances } = useMuuriStore()
 
-  const [items, setItems] = useState(
-    {
-      1: {
-        '.': 'Be.md',
-      },
-      2: {
-        '.': 'Nothing.md',
-      },
-      3: {
+  const [items, _setItems] = useState(
+    data ?? {
         1: {
-          '.': 'Transition.md',
+          '.': 'Be.md',
         },
         2: {
-          '.': 'Coming-into-Being and Ceasing-to-Be.md',
+          '.': 'Nothing.md',
         },
         3: {
-          '.': 'Sublation.md',
-
           1: {
-            '.': 'Becoming.md',
+            '.': 'Transition.md',
           },
           2: {
-            '.': 'Sameness-Different.md',
+            '.': 'Coming-into-Being and Ceasing-to-Be.md',
           },
           3: {
-            '.': 'Contradiction.md',
+            '.': 'Sublation.md',
+
+            1: {
+              '.': 'Becoming.md',
+            },
+            2: {
+              '.': 'Sameness-Different.md',
+            },
+            3: {
+              '.': 'Contradiction.md',
+            },
           },
+
+          '.': 'Becoming.md',
         },
-      },
-      //  '.': 'Becoming.md',
-      //  _: 'Sameness-Different.md',
-    },
-    // '.': 'Ontology.md',
-    // _: 'Vanishing-of-vanishing.md',
+        '.': 'Ontology.md',
+      }
   )
+
+  const setItems = (items) => {
+    _setItems(items)
+    const patch = jsonPatch.compare(data, items)
+    applyPatch(patch)
+  }
+
+  useEffect(() => {
+    if (data) {
+      _setItems(data)
+    }
+  }, [data])
+
   useMuuriGrid(
     gridRef,
     moptions(SIZE, 1, muuriInstances),
@@ -187,10 +232,19 @@ export const Puzzle = ({ children, ...props }) => {
 
   if (!items) return null
 
+  console.log('Puzzle', { items })
+
   return (
     <div ref={gridRef} className="puzzle-grid" id="#puzzle-drag-container">
-      {Object.entries(items).map(([key, item]) => (
-        <Triangle nest={2} fullId={key} data={item} _key={key} size={SIZE} />
+      {Object.entries(items).sort(([a], [b]) => b - a).map(([key, item]) => (
+        <MutableTriangle
+          key={key}
+          nest={2}
+          fullId={key}
+          data={item}
+          _key={key}
+          size={SIZE}
+        />
       ))}
     </div>
   )

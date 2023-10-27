@@ -4,6 +4,8 @@ import Muuri from 'muuri'
 // Function to check if a grid is a "full" triangle
 function isFullTriangle(grid) {
   // Assuming a full triangle grid contains 3 items
+  console.log("IS FULL TRIANGLE", grid)
+  if (!grid) return false
   return grid.getItems().length >= 3
 }
 const useMuuriGrid = (gridRef, options, addInstance, removeInstance, size) => {
@@ -35,11 +37,14 @@ const useMuuriGrid = (gridRef, options, addInstance, removeInstance, size) => {
           // Set the new height to the item's element
           item.getElement().style.height = `${newHeight}px`
           item.getElement().style.width = `${newHeight}px`
-
+            // Refresh the old grid to update the item positions
+          if (oldGrid)
           oldGrid.refreshItems().layout()
         } else {
           // Otherwise, allow the item to be added to the new grid
           // You may also want to refresh the new grid to update the item positions
+                    if (newGrid)
+
           newGrid.refreshItems().layout()
         }
       }

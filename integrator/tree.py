@@ -116,7 +116,9 @@ class Tree:
     def pull(self, n, _score=None, on_relation=None):
         result = []
         while len(result) != n:
-            for nn in self.nodes_with_least_info(self.graph, n, _score=_score, on_relation=on_relation):
+            for nn in self.nodes_with_least_info(
+                self.graph, n, _score=_score, on_relation=on_relation
+            ):
                 if len(result) < n:
                     result.append((nn, self.graph.nodes[nn]["text"]))
                 else:
@@ -124,7 +126,9 @@ class Tree:
         return result
 
     def pull_lz(self, n, m, _score=None, on_relation=None):
-        return view_shape(list(zip(*self.pull(n * m, _score, on_relation=on_relation))), (2, n, m))
+        return view_shape(
+            list(zip(*self.pull(n * m, _score, on_relation=on_relation))), (2, n, m)
+        )
 
     yielded = []
 
@@ -136,8 +140,11 @@ class Tree:
         for node in all_nodes:
             total_score = 0
             for _, _, data in G.edges(node, data=True):
-                if on_relation  and not any (u for u, v, d in G.in_edges(node, data=True)
-                            if d["relation"] == on_relation):
+                if on_relation and not any(
+                    u
+                    for u, v, d in G.in_edges(node, data=True)
+                    if d["relation"] == on_relation
+                ):
                     continue
 
                 for key, value in data.items():
@@ -268,13 +275,13 @@ class Tree:
 
             # Recursively grow subgraph for ant and syn branches
             ant_nodes, ant_edges = Tree.grow_subgraph(
-                G, ant_node, visited, depth-1, is_tri=True
+                G, ant_node, visited, depth - 1, is_tri=True
             )
             syn_nodes, syn_edges = Tree.grow_subgraph(
-                G, syn_node, visited, depth-1, is_tri=True
+                G, syn_node, visited, depth - 1, is_tri=True
             )
             the_nodes, the_edges = Tree.grow_subgraph(
-                G, node, visited, depth-1, is_tri=True
+                G, node, visited, depth - 1, is_tri=True
             )
 
             selected_edges.extend(the_edges)
@@ -306,8 +313,12 @@ class Tree:
 
                 # Recursively grow subgraph for the selected sub node
                 sub_nodes, sub_edges = Tree.grow_subgraph(
-                    G, best_sub_node, visited, depth - 1, is_tri=False,
-                    last_subnode=[best_sub_node, best_sub_edge_attr]
+                    G,
+                    best_sub_node,
+                    visited,
+                    depth - 1,
+                    is_tri=False,
+                    last_subnode=[best_sub_node, best_sub_edge_attr],
                 )
                 selected_nodes = [node, best_sub_node] + sub_nodes
                 selected_edges.extend(sub_edges)
@@ -364,11 +375,11 @@ class Tree:
                     subsumption_score_sum[node] += data["h_score"]
                     outgoing_edge_count[node] += 1
                 if "a_score" in data and data["a_score"]:
-                    subsumption_score_sum[node] += data["a_score"]/3
-                    outgoing_edge_count[node] += 1/3
+                    subsumption_score_sum[node] += data["a_score"] / 1
+                    outgoing_edge_count[node] += 1 / 3
                 if "s_score" in data and data["s_score"]:
-                    subsumption_score_sum[node] += data["s_score"]/3
-                    outgoing_edge_count[node] += 1/3
+                    subsumption_score_sum[node] += data["s_score"] / 1
+                    outgoing_edge_count[node] += 1 / 3
 
         # Compute recursive scores for each node
         for node in G.nodes():
@@ -392,8 +403,12 @@ class Tree:
         except:
             depth = 0
 
+        print (f"{depth=}")
+
         # Sort nodes by score and get the top 10
-        sorted_nodes = Tree.top_n_subsuming_nodes(G, n=1)
+        sorted_nodes = Tree.top_n_subsuming_nodes(G, n=4)
+
+        print (f"{sorted_nodes=}")
 
         best_subgraph = None
         best_start_node = None

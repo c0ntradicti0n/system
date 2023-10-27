@@ -95,7 +95,6 @@ ant-btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000;
   color: #000 !important;
   perspective: 1000px;
 }

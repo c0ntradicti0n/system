@@ -49,7 +49,7 @@ def get_prediction(model, input_data, config, compute_confidence=False, n_sample
                 f"{predicted_labels.shape=}\n"
                 f"{assignment=}"
             )
-            logits_reshaped = logits.view(-1, config.n_samples, config.n_classes -1)
+            logits_reshaped = logits.view(-1, config.n_samples, config.n_classes - 1)
         all_predicted_labels.append(predicted_labels)
         all_outputs_reshaped.append(logits_reshaped)
 

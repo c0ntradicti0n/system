@@ -1,3 +1,4 @@
+import gc
 import os
 from pprint import pprint
 
@@ -6,12 +7,13 @@ from lib.vector_store import get_vector_store
 
 with catchtime("init"):
     persist_directory = "/chroma"
-    os.system("ls -la " + persist_directory)
     os.system("pwd")
     vector_store = get_vector_store(persist_directory)
 
 
 def search(query, top_k=5, filter_path=""):
+    gc.collect()
+
     if filter_path:
         filter = {filter_path: {"$eq": filter_path}}
     else:

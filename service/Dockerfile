@@ -25,8 +25,6 @@ RUN chmod 777 /.cache
 
 ADD . /app/
 
-RUN ls -la /app
-
 ENV PYTHONIOENCODING=utf-8
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8

@@ -3,7 +3,6 @@ import pickle
 
 from integrator.reader import parse_text
 from integrator.tree import Tree
-
 from lib.ls import list_files_with_regex
 
 # Sample in-memory state

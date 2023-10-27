@@ -26,8 +26,6 @@ RUN apt-get purge -y --auto-remove gcc
 # Copy the current directory contents into the container at /app
 ADD . /app/
 
-RUN ls -la /app
-
 ENV PYTHONIOENCODING=utf-8
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8

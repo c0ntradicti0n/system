@@ -8,6 +8,8 @@ server {
     server_name polarity.science www.polarity.science;
     access_log /dev/stdout;
 
+
+
     location / {
         return 301 https://$host$request_uri;
     }

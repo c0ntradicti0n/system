@@ -1,3 +1,6 @@
+import gc
+import time
+
 import requests
 from gevent import monkey
 
@@ -5,12 +8,14 @@ monkey.patch_all()
 import pickle
 from functools import wraps
 from hashlib import sha256
+
 import gevent
 from flask import Flask, copy_current_request_context
 from flask_socketio import SocketIO
 from states import states
-from integrator.tree import Tree
 from werkzeug.middleware.proxy_fix import ProxyFix
+
+from integrator.tree import Tree
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="gevent")
@@ -71,25 +76,31 @@ def socket_event(event_name, emit_event_name=None):
     return decorator
 
 
-@socket_event("update_state", "state_wait")
+@socket_event("update_state", "set_task_id")
 def handle_update(hash_id):
+    if not hash_id:
+        print (f"handle_update hash id null!!! {hash_id=}")
+        return
+    gc.collect()
+
     # trigger celery
     print(f"handle_update {hash_id}")
-    result = requests.post("http://queue:5000/threerarchy", json={"hash": hash_id}).json()
-    print (f"result {result}")
-    return result["task_id"], hash_id
+    result = requests.post(
+        "http://queue:5000/threerarchy", json={"hash": hash_id}
+    ).json()
+    print(f"result {result}")
+    return result["task_id"]
 
-@socket_event("await_state", "state_patch")
-def handle_trigger_celery(task_id, hash_id):
-    while True:
+
+@socket_event("patch_poll", "patch_receive")
+def handle_trigger_celery(task_id):
+    try:
         result = requests.get(f"http://queue:5000/task_result/{task_id}").json()
-        print(f"handle_trigger_celery {result=}")
-        if result["status"] == "SUCCESS":
-            break
-        gevent.sleep(5)
-    patch = result["result"]
-    print(f"handle_trigger_celery {hash_id=} {patch=}")
-    return patch, hash_id
+    except Exception as e:
+        print(f"error getting task result {task_id=}" + str(e))
+        return []
+    print(f"handle_trigger_celery {result=}")
+    return result
 
 
 @socket_event("set_initial_mods", "set_mods")
