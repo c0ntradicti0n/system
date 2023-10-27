@@ -8,29 +8,7 @@ import useMuuriGrid from '../lib/useMuuriGrid'
 import jsonPatch from 'fast-json-patch'
 
 const SIZE = 300
-const  getPosition = (key, size, nest) => {
-  ""
-  "Calculate the position of the triangle based on its key."
-  ""
-  let x = 0
-  let y = 0
-  if (key === 1) {
-    x = 0.5 * size * (1 / nest)
-    y = 0
-  }
-  if (key === 2) {
 
-    x = 0
-    y = size * (1 / nest)
-  }
-  if (key === 3) {
-
-    x = size * (1 / nest)
-    y = size * (1 / nest)
-  }
-
-  return [x, y]
-}
 const moptions = (size, nest, all_muris) => ({
   dragEnabled: true,
   layout: function (grid, layoutId, items, width, height, callback) {
@@ -90,10 +68,16 @@ const moptions = (size, nest, all_muris) => ({
   },
   dragContainer: document.body,
   dragStartPredicate: (item, event) => {
-    event.srcEvent.stopPropagation()
-    return Muuri.ItemDrag.defaultStartPredicate(item, event)
+    try {
+      event.srcEvent.stopPropagation()
+      return Muuri.ItemDrag.defaultStartPredicate(item, event)
+    } catch (e) {
+        console.log('dragStartPredicate', e)
+    }
+
   },
   dragSort: () => {
+
     console.log('dragSort', all_muris)
     return all_muris
   },
@@ -146,20 +130,28 @@ const MutableTriangle = ({ nest, fullId, data, _key, size }) => {
       <div className="puzzle-item-content triangle-content"></div>
       {!isLeafNode && data && (
         <div ref={gridRef} className="puzzle-grid">
-          {Object.entries(data).sort(([a], [b]) => b - a
-
-          ).map(
-            ([key, item]) =>
-              data && key !== "." &&(
-                <MutableTriangle
+          {<MutableTriangle
                   nest={nest + 1}
-                  fullId={fullId + _key}
-                  data={item}
-                  _key={key}
+                  fullId={fullId +  "3"}
+                  data={data[3] ?? {".": ""} }
+                  _key={fullId + "3"}
                   size={size / 2}
-                />
-              ),
-          )}
+                /> }
+                    {<MutableTriangle
+                  nest={nest + 1}
+                  fullId={fullId +  "2"}
+                  data={data[2]  ?? {".": ""}}
+                  _key={fullId + "2"}
+                  size={size / 2}
+                /> }
+                              {<MutableTriangle
+                  nest={nest + 1}
+                  fullId={fullId +  "1"}
+                  data={data[1]  ?? {".": ""}}
+                  _key={fullId + "1"}
+                  size={size / 2}
+                /> }
+
         </div>
       )}
     </div>
@@ -175,52 +167,15 @@ export const Puzzle = ({
   const gridRef = useRef(null)
   const { addInstance, removeInstance, muuriInstances } = useMuuriStore()
 
-  const [items, _setItems] = useState(
-    data ?? {
-        1: {
-          '.': 'Be.md',
-        },
-        2: {
-          '.': 'Nothing.md',
-        },
-        3: {
-          1: {
-            '.': 'Transition.md',
-          },
-          2: {
-            '.': 'Coming-into-Being and Ceasing-to-Be.md',
-          },
-          3: {
-            '.': 'Sublation.md',
-
-            1: {
-              '.': 'Becoming.md',
-            },
-            2: {
-              '.': 'Sameness-Different.md',
-            },
-            3: {
-              '.': 'Contradiction.md',
-            },
-          },
-
-          '.': 'Becoming.md',
-        },
-        '.': 'Ontology.md',
-      }
-  )
-
-  const setItems = (items) => {
-    _setItems(items)
-    const patch = jsonPatch.compare(data, items)
-    applyPatch(patch)
-  }
+  const [items, setItems] = useState(JSON.parse(JSON.stringify(data)))
 
   useEffect(() => {
-    if (data) {
-      _setItems(data)
-    }
-  }, [data])
+    setItems(JSON.parse(JSON.stringify(data)))
+  }, [data]);
+
+
+
+
 
   useMuuriGrid(
     gridRef,
