@@ -1,5 +1,6 @@
 import os
 import pickle
+from shutil import rmtree
 
 from integrator.reader import parse_text
 from integrator.tree import Tree
@@ -80,6 +81,17 @@ class States:
             tree, i = state
             tree.save_state(i, hash_id)
             print(f"saved {i=} {hash_id} {tree=} ")
+
+    def __delitem__(self, key):
+        rmtree(self.path(key), ignore_errors=True)
+        try:
+            os.unlink(self.path(key + "-text"))
+        except FileNotFoundError:
+            pass
+        try:
+            os.unlink(self.path(key + "-meta"))
+        except FileNotFoundError:
+            pass
 
 
 states = States()

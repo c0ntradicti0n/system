@@ -1,7 +1,7 @@
 import React from 'react'
 import { toJSON } from 'bibtex-parse-js'
 
-const BibTeXViewer = ({ entry }) => {
+const BibTeXViewer = ({ entry, setIsGood, isGood }) => {
   let parsedData
   console.log(entry)
   try {
@@ -18,6 +18,9 @@ const BibTeXViewer = ({ entry }) => {
   // Assuming only one entry for simplicity
   const data = parsedData[0].entryTags
 
+  if (data.title && !isGood) {
+    setIsGood(true)
+  }
   return (
     <div className="bibtex-entry">
       <strong>{data.title}</strong> {data.author}

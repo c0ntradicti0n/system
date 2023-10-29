@@ -1,0 +1,1372 @@
+
+1.1-Definition: A point is that which has no part.
+
+1.2-Definition: A line is breadthless length.
+
+1.3-Definition: The ends of a line are points.
+
+1.4-Definition: A straight line is a line which lies evenly with the points on itself.
+
+1.5-Definition: A surface is that which has length and breadth only.
+
+1.6-Definition: The edges of a surface are lines.
+
+1.7-Definition: A plane surface is a surface which lies evenly with the straight lines on itself.
+
+1.8-Definition: A plane angle is the inclination to one another of two lines in a plane which meet one another and do not lie in a straight line.
+
+1.9-Definition: And when the lines containing the angle are straight, the angle is called rectilinear.
+
+1.10-Definition: When a straight line standing on a straight line makes the adjacent angles equal to one another, each of the equal angles is right, and the straight line standing on the other is called a perpendicular to that on which it stands.
+
+1.11-Definition: An obtuse angle is an angle greater than a right angle.
+
+1.12-Definition: An acute angle is an angle less than a right angle.
+
+1.13-Definition: A boundary is that which is an extremity of anything.
+
+1.14-Definition: A figure is that which is contained by any boundary or boundaries.
+
+1.15-Definition: A circle is a plane figure contained by one line such that all the straight lines falling upon it from one point among those lying within the figure equal one another.
+
+1.16-Definition: And the point is called the center of the circle.
+
+1.17-Definition: A diameter of the circle is any straight line drawn through the center and terminated in both directions by the circumference of the circle, and such a straight line also bisects the circle.
+
+1.18-Definition: A semicircle is the figure contained by the diameter and the circumference cut off by it. And the center of the semicircle is the same as that of the circle.
+
+1.19-Definition: Rectilinear figures are those which are contained by straight lines, trilateral figures being those contained by three, quadrilateral those contained by four, and multilateral those contained by more than four straight lines.
+
+1.20-Definition: Of trilateral figures, an equilateral triangle is that which has its three sides equal, an isosceles triangle that which has two of its sides alone equal, and a scalene triangle that which has its three sides unequal.
+
+1.21-Definition: Further, of trilateral figures, a right-angled triangle is that which has a right angle, an obtuse-angled triangle that which has an obtuse angle, and an acute-angled triangle that which has its three angles acute.
+
+1.22-Definition: Of quadrilateral figures, a square is that which is both equilateral and right-angled; an oblong that which is right-angled but not equilateral; a rhombus that which is equilateral but not right-angled; and a rhomboid that which has its opposite sides and angles equal to one another but is neither equilateral nor right-angled. And let quadrilaterals other than these be called trapezia.
+
+1.23-Definition: Parallel straight lines are straight lines which, being in the same plane and being produced indefinitely in both directions, do not meet one another in either direction.
+
+1.1-Postulate: To draw a straight line from any point to any point.
+
+1.2-Postulate: To produce a finite straight line continuously in a straight line.
+
+1.3-Postulate: To describe a circle with any center and radius.
+
+1.4-Postulate: That all right angles equal one another.
+
+1.5-Postulate: That, if a straight line falling on two straight lines makes the interior angles on the same side less than two right angles, the two straight lines, if produced indefinitely, meet on that side on which are the angles less than the two right angles.
+Common Notions
+
+1.1-Common notion: Things which equal the same thing also equal one another.
+
+1.2-Common notion: If equals are added to equals, then the wholes are equal.
+
+1.3-Common notion: If equals are subtracted from equals, then the remainders are equal.
+
+1.4-Common notion: Things which coincide with one another equal one another.
+
+1.5-Common notion: The whole is greater than the part.
+1.1-Proposition: To construct an equilateral triangle on a given finite straight line.
+
+1.2-Proposition: To place a straight line equal to a given straight line with one end at a given point.
+
+1.3-Proposition: To cut off from the greater of two given unequal straight lines a straight line equal to the less.
+
+1.4-Proposition: If two triangles have two sides equal to two sides respectively, and have the angles contained by the equal straight lines equal, then they also have the base equal to the base, the triangle equals the triangle, and the remaining angles equal the remaining angles respectively, namely those opposite the equal sides.
+
+1.5-Proposition: In isosceles triangles the angles at the base equal one another, and, if the equal straight lines are produced further, then the angles under the base equal one another.
+
+1.6-Proposition: If in a triangle two angles equal one another, then the sides opposite the equal angles also equal one another.
+
+1.7-Proposition: Given two straight lines constructed from the ends of a straight line and meeting in a point, there cannot be constructed from the ends of the same straight line, and on the same side of it, two other straight lines meeting in another point and equal to the former two respectively, namely each equal to that from the same end.
+
+1.8-Proposition: If two triangles have the two sides equal to two sides respectively, and also have the base equal to the base, then they also have the angles equal which are contained by the equal straight lines.
+
+1.9-Proposition: To bisect a given rectilinear angle.
+
+1.10-Proposition: To bisect a given finite straight line.
+
+1.11-Proposition: To draw a straight line at right angles to a given straight line from a given point on it.
+
+1.12-Proposition: To draw a straight line perpendicular to a given infinite straight line from a given point not on it.
+
+1.13-Proposition: If a straight line stands on a straight line, then it makes either two right angles or angles whose sum equals two right angles.
+
+1.14-Proposition: If with any straight line, and at a point on it, two straight lines not lying on the same side make the sum of the adjacent angles equal to two right angles, then the two straight lines are in a straight line with one another.
+
+1.15-Proposition: If two straight lines cut one another, then they make the vertical angles equal to one another.
+Corollary. If two straight lines cut one another, then they will make the angles at the point of section equal to four right angles.
+
+
+1.16-Proposition: In any triangle, if one of the sides is produced, then the exterior angle is greater than either of the interior and opposite angles.
+
+1.17-Proposition: In any triangle the sum of any two angles is less than two right angles.
+
+1.18-Proposition: In any triangle the angle opposite the greater side is greater.
+
+1.19-Proposition: In any triangle the side opposite the greater angle is greater.
+
+1.20-Proposition: In any triangle the sum of any two sides is greater than the remaining one.
+
+1.21-Proposition: If from the ends of one of the sides of a triangle two straight lines are constructed meeting within the triangle, then the sum of the straight lines so constructed is less than the sum of the remaining two sides of the triangle, but the constructed straight lines contain a greater angle than the angle contained by the remaining two sides.
+
+1.22-Proposition: To construct a triangle out of three straight lines which equal three given straight lines: thus it is necessary that the sum of any two of the straight lines should be greater than the remaining one.
+
+1.23-Proposition: To construct a rectilinear angle equal to a given rectilinear angle on a given straight line and at a point on it.
+
+1.24-Proposition: If two triangles have two sides equal to two sides respectively, but have one of the angles contained by the equal straight lines greater than the other, then they also have the base greater than the base.
+
+1.25-Proposition: If two triangles have two sides equal to two sides respectively, but have the base greater than the base, then they also have the one of the angles contained by the equal straight lines greater than the other.
+
+1.26-Proposition: If two triangles have two angles equal to two angles respectively, and one side equal to one side, namely, either the side adjoining the equal angles, or that opposite one of the equal angles, then the remaining sides equal the remaining sides and the remaining angle equals the remaining angle.
+
+1.27-Proposition: If a straight line falling on two straight lines makes the alternate angles equal to one another, then the straight lines are parallel to one another.
+
+1.28-Proposition: If a straight line falling on two straight lines makes the exterior angle equal to the interior and opposite angle on the same side, or the sum of the interior angles on the same side equal to two right angles, then the straight lines are parallel to one another.
+
+1.29-Proposition: A straight line falling on parallel straight lines makes the alternate angles equal to one another, the exterior angle equal to the interior and opposite angle, and the sum of the interior angles on the same side equal to two right angles.
+
+1.30-Proposition: Straight lines parallel to the same straight line are also parallel to one another.
+
+1.31-Proposition: To draw a straight line through a given point parallel to a given straight line.
+
+1.32-Proposition: In any triangle, if one of the sides is produced, then the exterior angle equals the sum of the two interior and opposite angles, and the sum of the three interior angles of the triangle equals two right angles.
+
+1.33-Proposition: Straight lines which join the ends of equal and parallel straight lines in the same directions are themselves equal and parallel.
+
+1.34-Proposition: In parallelogrammic areas the opposite sides and angles equal one another, and the diameter bisects the areas.
+
+1.35-Proposition: Parallelograms which are on the same base and in the same parallels equal one another.
+
+1.36-Proposition: Parallelograms which are on equal bases and in the same parallels equal one another.
+
+1.37-Proposition: Triangles which are on the same base and in the same parallels equal one another.
+
+1.38-Proposition: Triangles which are on equal bases and in the same parallels equal one another.
+
+1.39-Proposition: Equal triangles which are on the same base and on the same side are also in the same parallels.
+
+1.40-Proposition: Equal triangles which are on equal bases and on the same side are also in the same parallels.
+
+1.41-Proposition: If a parallelogram has the same base with a triangle and is in the same parallels, then the parallelogram is double the triangle.
+
+1.42-Proposition: To construct a parallelogram equal to a given triangle in a given rectilinear angle.
+
+1.43-Proposition: In any parallelogram the complements of the parallelograms about the diameter equal one another.
+
+1.44-Proposition: To a given straight line in a given rectilinear angle, to apply a parallelogram equal to a given triangle.
+
+1.45-Proposition: To construct a parallelogram equal to a given rectilinear figure in a given rectilinear angle.
+
+1.46-Proposition: To describe a square on a given straight line.
+
+1.47-Proposition: In right-angled triangles the square on the side opposite the right angle equals the sum of the squares on the sides containing the right angle.
+
+1.48-Proposition: If in a triangle the square on one of the sides equals the sum of the squares on the remaining two sides of the triangle, then the angle contained by the remaining two sides of the triangle is right.
+
+
+2.1-Definition: Any rectangular parallelogram is said to be contained by the two straight lines containing the right angle.
+
+2.2-Definition: And in any parallelogrammic area let any one whatever of the parallelograms about its diameter with the two complements be called a gnomon.
+2.1-Proposition: If there are two straight lines, and one of them is cut into any number of segments whatever, then the rectangle contained by the two straight lines equals the sum of the rectangles contained by the uncut straight line and each of the segments.
+
+2.2-Proposition: If a straight line is cut at random, then the sum of the rectangles contained by the whole and each of the segments equals the square on the whole.
+
+2.3-Proposition: If a straight line is cut at random, then the rectangle contained by the whole and one of the segments equals the sum of the rectangle contained by the segments and the square on the aforesaid segment.
+
+2.4-Proposition: If a straight line is cut at random, the square on the whole equals the squares on the segments plus twice the rectangle contained by the segments.
+
+2.5-Proposition: If a straight line is cut into equal and unequal segments, then the rectangle contained by the unequal segments of the whole together with the square on the straight line between the points of section equals the square on the half.
+
+2.6-Proposition: If a straight line is bisected and a straight line is added to it in a straight line, then the rectangle contained by the whole with the added straight line and the added straight line together with the square on the half equals the square on the straight line made up of the half and the added straight line.
+
+2.7-Proposition: If a straight line is cut at random, then the sum of the square on the whole and that on one of the segments equals twice the rectangle contained by the whole and the said segment plus the square on the remaining segment.
+
+2.8-Proposition: If a straight line is cut at random, then four times the rectangle contained by the whole and one of the segments plus the square on the remaining segment equals the square described on the whole and the aforesaid segment as on one straight line.
+
+2.9-Proposition: If a straight line is cut into equal and unequal segments, then the sum of the squares on the unequal segments of the whole is double the sum of the square on the half and the square on the straight line between the points of section.
+
+2.10-Proposition: If a straight line is bisected, and a straight line is added to it in a straight line, then the square on the whole with the added straight line and the square on the added straight line both together are double the sum of the square on the half and the square described on the straight line made up of the half and the added straight line as on one straight line.
+
+2.11-Proposition: To cut a given straight line so that the rectangle contained by the whole and one of the segments equals the square on the remaining segment.
+
+2.12-Proposition: In obtuse-angled triangles the square on the side opposite the obtuse angle is greater than the sum of the squares on the sides containing the obtuse angle by twice the rectangle contained by one of the sides about the obtuse angle, namely that on which the perpendicular falls, and the straight line cut off outside by the perpendicular towards the obtuse angle.
+
+2.13-Proposition: In acute-angled triangles the square on the side opposite the acute angle is less than the sum of the squares on the sides containing the acute angle by twice the rectangle contained by one of the sides about the acute angle, namely that on which the perpendicular falls, and the straight line cut off within by the perpendicular towards the acute angle.
+
+2.14-Proposition: To construct a square equal to a given rectilinear figure.
+
+
+3.1-Definition: Equal circles are those whose diameters are equal, or whose radii are equal.
+
+3.2-Definition: A straight line is said to touch a circle which, meeting the circle and being produced, does not cut the circle.
+
+3.3-Definition: Circles are said to touch one another which meet one another but do not cut one another.
+
+3.4-Definition: Straight lines in a circle are said to be equally distant from the center when the perpendiculars drawn to them from the center are equal.
+
+3.5-Definition: And that straight line is said to be at a greater distance on which the greater perpendicular falls.
+
+3.6-Definition: A segment of a circle is the figure contained by a straight line and a circumference of a circle.
+
+3.7-Definition: An angle of a segment is that contained by a straight line and a circumference of a circle.
+
+3.8-Definition: An angle in a segment is the angle which, when a point is taken on the circumference of the segment and straight lines are joined from it to the ends of the straight line which is the base of the segment, is contained by the straight lines so joined.
+
+3.9-Definition: And, when the straight lines containing the angle cut off a circumference, the angle is said to stand upon that circumference.
+
+3.10-Definition: A sector of a circle is the figure which, when an angle is constructed at the center of the circle, is contained by the straight lines containing the angle and the circumference cut off by them.
+
+3.11-Definition: Similar segments of circles are those which admit equal angles, or in which the angles equal one another.
+3.1-Proposition: To find the center of a given circle.
+Corollary. If in a circle a straight line cuts a straight line into two equal parts and at right angles, then the center of the circle lies on the cutting straight line.
+
+
+3.2-Proposition: If two points are taken at random on the circumference of a circle, then the straight line joining the points falls within the circle.
+
+3.3-Proposition: If a straight line passing through the center of a circle bisects a straight line not passing through the center, then it also cuts it at right angles; and if it cuts it at right angles, then it also bisects it.
+
+3.4-Proposition: If in a circle two straight lines which do not pass through the center cut one another, then they do not bisect one another.
+
+3.5-Proposition: If two circles cut one another, then they do not have the same center.
+
+3.6-Proposition: If two circles touch one another, then they do not have the same center.
+
+3.7-Proposition: If on the diameter of a circle a point is taken which is not the center of the circle, and from the point straight lines fall upon the circle, then that is greatest on which passes through the center, the remainder of the same diameter is least, and of the rest the nearer to the straight line through the center is always greater than the more remote; and only two equal straight lines fall from the point on the circle, one on each side of the least straight line.
+
+3.8-Proposition: If a point is taken outside a circle and from the point straight lines are drawn through to the circle, one of which is through the center and the others are drawn at random, then, of the straight lines which fall on the concave circumference, that through the center is greatest, while of the rest the nearer to that through the center is always greater than the more remote, but, of the straight lines falling on the convex circumference, that between the point and the diameter is least, while of the rest the nearer to the least is always less than the more remote; and only two equal straight lines fall on the circle from the point, one on each side of the least.
+
+3.9-Proposition: If a point is taken within a circle, and more than two equal straight lines fall from the point on the circle, then the point taken is the center of the circle.
+
+3.10-Proposition: A circle does not cut a circle at more than two points.
+
+3.11-Proposition: If two circles touch one another internally, and their centers are taken, then the straight line joining their centers, being produced, falls on the point of contact of the circles.
+
+3.12-Proposition: If two circles touch one another externally, then the straight line joining their centers passes through the point of contact.
+
+3.13-Proposition: A circle does not touch another circle at more than one point whether it touches it internally or externally..
+
+3.14-Proposition: Equal straight lines in a circle are equally distant from the center, and those which are equally distant from the center equal one another.
+
+3.15-Proposition: Of straight lines in a circle the diameter is greatest, and of the rest the nearer to the center is always greater than the more remote.
+
+3.16-Proposition: The straight line drawn at right angles to the diameter of a circle from its end will fall outside the circle, and into the space between the straight line and the circumference another straight line cannot be interposed, further the angle of the semicircle is greater, and the remaining angle less, than any acute rectilinear angle.
+Corollary. From this it is manifest that the straight line drawn at right angles to the diameter of a circle from its end touches the circle.
+
+
+3.17-Proposition: From a given point to draw a straight line touching a given circle.
+
+3.18-Proposition: If a straight line touches a circle, and a straight line is joined from the center to the point of contact, the straight line so joined will be perpendicular to the tangent.
+
+3.19-Proposition: If a straight line touches a circle, and from the point of contact a straight line is drawn at right angles to the tangent, the center of the circle will be on the straight line so drawn.
+
+3.20-Proposition: In a circle the angle at the center is double the angle at the circumference when the angles have the same circumference as base.
+
+3.21-Proposition: In a circle the angles in the same segment equal one another.
+
+3.22-Proposition: The sum of the opposite angles of quadrilaterals in circles equals two right angles.
+
+3.23-Proposition: On the same straight line there cannot be constructed two similar and unequal segments of circles on the same side.
+
+3.24-Proposition: Similar segments of circles on equal straight lines equal one another.
+
+3.25-Proposition: Given a segment of a circle, to describe the complete circle of which it is a segment.
+
+3.26-Proposition: In equal circles equal angles stand on equal circumferences whether they stand at the centers or at the circumferences.
+
+3.27-Proposition: In equal circles angles standing on equal circumferences equal one another whether they stand at the centers or at the circumferences.
+
+3.28-Proposition: In equal circles equal straight lines cut off equal circumferences, the greater circumference equals the greater and the less equals the less.
+
+3.29-Proposition: In equal circles straight lines that cut off equal circumferences are equal.
+
+3.30-Proposition: To bisect a given circumference.
+
+3.31-Proposition: In a circle the angle in the semicircle is right, that in a greater segment less than a right angle, and that in a less segment greater than a right angle; further the angle of the greater segment is greater than a right angle, and the angle of the less segment is less than a right angle.
+
+3.32-Proposition: If a straight line touches a circle, and from the point of contact there is drawn across, in the circle, a straight line cutting the circle, then the angles which it makes with the tangent equal the angles in the alternate segments of the circle.
+
+3.33-Proposition: On a given straight line to describe a segment of a circle admitting an angle equal to a given rectilinear angle.
+
+3.34-Proposition: From a given circle to cut off a segment admitting an angle equal to a given rectilinear angle.
+
+3.35-Proposition: If in a circle two straight lines cut one another, then the rectangle contained by the segments of the one equals the rectangle contained by the segments of the other.
+
+3.36-Proposition: If a point is taken outside a circle and two straight lines fall from it on the circle, and if one of them cuts the circle and the other touches it, then the rectangle contained by the whole of the straight line which cuts the circle and the straight line intercepted on it outside between the point and the convex circumference equals the square on the tangent.
+
+3.37-Proposition: If a point is taken outside a circle and from the point there fall on the circle two straight lines, if one of them cuts the circle, and the other falls on it, and if further the rectangle contained by the whole of the straight line which cuts the circle and the straight line intercepted on it outside between the point and the convex circumference equals the square on the straight line which falls on the circle, then the straight line which falls on it touches the circle.
+
+4.1-Definition: Equal circles are those whose diameters are equal, or whose radii are equal.
+
+4.2-Definition: A straight line is said to touch a circle which, meeting the circle and being produced, does not cut the circle.
+
+4.3-Definition: Circles are said to touch one another which meet one another but do not cut one another.
+
+4.4-Definition: Straight lines in a circle are said to be equally distant from the center when the perpendiculars drawn to them from the center are equal.
+
+4.5-Definition: And that straight line is said to be at a greater distance on which the greater perpendicular falls.
+
+4.6-Definition: A segment of a circle is the figure contained by a straight line and a circumference of a circle.
+
+4.7-Definition: An angle of a segment is that contained by a straight line and a circumference of a circle.
+
+4.8-Definition: An angle in a segment is the angle which, when a point is taken on the circumference of the segment and straight lines are joined from it to the ends of the straight line which is the base of the segment, is contained by the straight lines so joined.
+
+4.9-Definition: And, when the straight lines containing the angle cut off a circumference, the angle is said to stand upon that circumference.
+
+4.10-Definition: A sector of a circle is the figure which, when an angle is constructed at the center of the circle, is contained by the straight lines containing the angle and the circumference cut off by them.
+
+4.11-Definition: Similar segments of circles are those which admit equal angles, or in which the angles equal one another.
+4.1-Proposition: To find the center of a given circle.
+Corollary. If in a circle a straight line cuts a straight line into two equal parts and at right angles, then the center of the circle lies on the cutting straight line.
+
+
+4.2-Proposition: If two points are taken at random on the circumference of a circle, then the straight line joining the points falls within the circle.
+
+4.3-Proposition: If a straight line passing through the center of a circle bisects a straight line not passing through the center, then it also cuts it at right angles; and if it cuts it at right angles, then it also bisects it.
+
+4.4-Proposition: If in a circle two straight lines which do not pass through the center cut one another, then they do not bisect one another.
+
+4.5-Proposition: If two circles cut one another, then they do not have the same center.
+
+4.6-Proposition: If two circles touch one another, then they do not have the same center.
+
+4.7-Proposition: If on the diameter of a circle a point is taken which is not the center of the circle, and from the point straight lines fall upon the circle, then that is greatest on which passes through the center, the remainder of the same diameter is least, and of the rest the nearer to the straight line through the center is always greater than the more remote; and only two equal straight lines fall from the point on the circle, one on each side of the least straight line.
+
+4.8-Proposition: If a point is taken outside a circle and from the point straight lines are drawn through to the circle, one of which is through the center and the others are drawn at random, then, of the straight lines which fall on the concave circumference, that through the center is greatest, while of the rest the nearer to that through the center is always greater than the more remote, but, of the straight lines falling on the convex circumference, that between the point and the diameter is least, while of the rest the nearer to the least is always less than the more remote; and only two equal straight lines fall on the circle from the point, one on each side of the least.
+
+4.9-Proposition: If a point is taken within a circle, and more than two equal straight lines fall from the point on the circle, then the point taken is the center of the circle.
+
+4.10-Proposition: A circle does not cut a circle at more than two points.
+
+4.11-Proposition: If two circles touch one another internally, and their centers are taken, then the straight line joining their centers, being produced, falls on the point of contact of the circles.
+
+4.12-Proposition: If two circles touch one another externally, then the straight line joining their centers passes through the point of contact.
+
+4.13-Proposition: A circle does not touch another circle at more than one point whether it touches it internally or externally..
+
+4.14-Proposition: Equal straight lines in a circle are equally distant from the center, and those which are equally distant from the center equal one another.
+
+4.15-Proposition: Of straight lines in a circle the diameter is greatest, and of the rest the nearer to the center is always greater than the more remote.
+
+4.16-Proposition: The straight line drawn at right angles to the diameter of a circle from its end will fall outside the circle, and into the space between the straight line and the circumference another straight line cannot be interposed, further the angle of the semicircle is greater, and the remaining angle less, than any acute rectilinear angle.
+Corollary. From this it is manifest that the straight line drawn at right angles to the diameter of a circle from its end touches the circle.
+
+
+4.17-Proposition: From a given point to draw a straight line touching a given circle.
+
+4.18-Proposition: If a straight line touches a circle, and a straight line is joined from the center to the point of contact, the straight line so joined will be perpendicular to the tangent.
+
+4.19-Proposition: If a straight line touches a circle, and from the point of contact a straight line is drawn at right angles to the tangent, the center of the circle will be on the straight line so drawn.
+
+4.20-Proposition: In a circle the angle at the center is double the angle at the circumference when the angles have the same circumference as base.
+
+4.21-Proposition: In a circle the angles in the same segment equal one another.
+
+4.22-Proposition: The sum of the opposite angles of quadrilaterals in circles equals two right angles.
+
+4.23-Proposition: On the same straight line there cannot be constructed two similar and unequal segments of circles on the same side.
+
+4.24-Proposition: Similar segments of circles on equal straight lines equal one another.
+
+4.25-Proposition: Given a segment of a circle, to describe the complete circle of which it is a segment.
+
+4.26-Proposition: In equal circles equal angles stand on equal circumferences whether they stand at the centers or at the circumferences.
+
+4.27-Proposition: In equal circles angles standing on equal circumferences equal one another whether they stand at the centers or at the circumferences.
+
+4.28-Proposition: In equal circles equal straight lines cut off equal circumferences, the greater circumference equals the greater and the less equals the less.
+
+4.29-Proposition: In equal circles straight lines that cut off equal circumferences are equal.
+
+4.30-Proposition: To bisect a given circumference.
+
+4.31-Proposition: In a circle the angle in the semicircle is right, that in a greater segment less than a right angle, and that in a less segment greater than a right angle; further the angle of the greater segment is greater than a right angle, and the angle of the less segment is less than a right angle.
+
+4.32-Proposition: If a straight line touches a circle, and from the point of contact there is drawn across, in the circle, a straight line cutting the circle, then the angles which it makes with the tangent equal the angles in the alternate segments of the circle.
+
+4.33-Proposition: On a given straight line to describe a segment of a circle admitting an angle equal to a given rectilinear angle.
+
+4.34-Proposition: From a given circle to cut off a segment admitting an angle equal to a given rectilinear angle.
+
+4.35-Proposition: If in a circle two straight lines cut one another, then the rectangle contained by the segments of the one equals the rectangle contained by the segments of the other.
+
+4.36-Proposition: If a point is taken outside a circle and two straight lines fall from it on the circle, and if one of them cuts the circle and the other touches it, then the rectangle contained by the whole of the straight line which cuts the circle and the straight line intercepted on it outside between the point and the convex circumference equals the square on the tangent.
+
+4.37-Proposition: If a point is taken outside a circle and from the point there fall on the circle two straight lines, if one of them cuts the circle, and the other falls on it, and if further the rectangle contained by the whole of the straight line which cuts the circle and the straight line intercepted on it outside between the point and the convex circumference equals the square on the straight line which falls on the circle, then the straight line which falls on it touches the circle.
+
+
+5.1-Definition: A magnitude is a part of a magnitude, the less of the greater, when it measures the greater.
+
+5.2-Definition: The greater is a multiple of the less when it is measured by the less.
+
+5.3-Definition: A ratio is a sort of relation in respect of size between two magnitudes of the same kind.
+
+5.4-Definition: Magnitudes are said to have a ratio to one another which can, when multiplied, exceed one another.
+
+5.5-Definition: Magnitudes are said to be in the same ratio, the first to the second and the third to the fourth, when, if any equimultiples whatever are taken of the first and third, and any equimultiples whatever of the second and fourth, the former equimultiples alike exceed, are alike equal to, or alike fall short of, the latter equimultiples respectively taken in corresponding order.
+
+5.6-Definition: Let magnitudes which have the same ratio be called proportional.
+
+5.7-Definition: When, of the equimultiples, the multiple of the first magnitude exceeds the multiple of the second, but the multiple of the third does not exceed the multiple of the fourth, then the first is said to have a greater ratio to the second than the third has to the fourth.
+
+5.8-Definition: A proportion in three terms is the least possible.
+
+5.9-Definition: When three magnitudes are proportional, the first is said to have to the third the duplicate ratio of that which it has to the second.
+
+5.10-Definition: When four magnitudes are continuously proportional, the first is said to have to the fourth the triplicate ratio of that which it has to the second, and so on continually, whatever be the proportion.
+
+5.11-Definition: Antecedents are said to correspond to antecedents, and consequents to consequents.
+
+5.12-Definition: Alternate ratio means taking the antecedent in relation to the antecedent and the consequent in relation to the consequent.
+
+5.13-Definition: Inverse ratio means taking the consequent as antecedent in relation to the antecedent as consequent.
+
+5.14-Definition: A ratio taken jointly means taking the antecedent together with the consequent as one in relation to the consequent by itself.
+
+5.15-Definition: A ratio taken separately means taking the excess by which the antecedent exceeds the consequent in relation to the consequent by itself.
+
+5.16-Definition: Conversion of a ratio means taking the antecedent in relation to the excess by which the antecedent exceeds the consequent.
+
+5.17-Definition: A ratio ex aequali arises when, there being several magnitudes and another set equal to them in multitude which taken two and two are in the same proportion, the first is to the last among the first magnitudes as the first is to the last among the second magnitudes. Or, in other words, it means taking the extreme terms by virtue of the removal of the intermediate terms.
+
+5.18-Definition: A perturbed proportion arises when, there being three magnitudes and another set equal to them in multitude, antecedent is to consequent among the first magnitudes as antecedent is to consequent among the second magnitudes, while, the consequent is to a third among the first magnitudes as a third is to the antecedent among the second magnitudes.
+5.1-Proposition: If any number of magnitudes are each the same multiple of the same number of other magnitudes, then the sum is that multiple of the sum.
+
+5.2-Proposition: If a first magnitude is the same multiple of a second that a third is of a fourth, and a fifth also is the same multiple of the second that a sixth is of the fourth, then the sum of the first and fifth also is the same multiple of the second that the sum of the third and sixth is of the fourth.
+
+5.3-Proposition: If a first magnitude is the same multiple of a second that a third is of a fourth, and if equimultiples are taken of the first and third, then the magnitudes taken also are equimultiples respectively, the one of the second and the other of the fourth.
+
+5.4-Proposition: If a first magnitude has to a second the same ratio as a third to a fourth, then any equimultiples whatever of the first and third also have the same ratio to any equimultiples whatever of the second and fourth respectively, taken in corresponding order.
+
+5.5-Proposition: If a magnitude is the same multiple of a magnitude that a subtracted part is of a subtracted part, then the remainder also is the same multiple of the remainder that the whole is of the whole.
+
+5.6-Proposition: If two magnitudes are equimultiples of two magnitudes, and any magnitudes subtracted from them are equimultiples of the same, then the remainders either equal the same or are equimultiples of them.
+
+5.7-Proposition: Equal magnitudes have to the same the same ratio; and the same has to equal magnitudes the same ratio.
+Corollary If any magnitudes are proportional, then they are also proportional inversely.
+
+
+5.8-Proposition: Of unequal magnitudes, the greater has to the same a greater ratio than the less has; and the same has to the less a greater ratio than it has to the greater.
+
+5.9-Proposition: Magnitudes which have the same ratio to the same equal one another; and magnitudes to which the same has the same ratio are equal.
+
+5.10-Proposition: Of magnitudes which have a ratio to the same, that which has a greater ratio is greater; and that to which the same has a greater ratio is less.
+
+5.11-Proposition: Ratios which are the same with the same ratio are also the same with one another.
+
+5.12-Proposition: If any number of magnitudes are proportional, then one of the antecedents is to one of the consequents as the sum of the antecedents is to the sum of the consequents.
+
+5.13-Proposition: If a first magnitude has to a second the same ratio as a third to a fourth, and the third has to the fourth a greater ratio than a fifth has to a sixth, then the first also has to the second a greater ratio than the fifth to the sixth.
+
+5.14-Proposition: If a first magnitude has to a second the same ratio as a third has to a fourth, and the first is greater than the third, then the second is also greater than the fourth; if equal, equal; and if less, less.
+
+5.15-Proposition: Parts have the same ratio as their equimultiples.
+
+5.16-Proposition: If four magnitudes are proportional, then they are also proportional alternately.
+
+5.17-Proposition: If magnitudes are proportional taken jointly, then they are also proportional taken separately.
+
+5.18-Proposition: If magnitudes are proportional taken separately, then they are also proportional taken jointly.
+
+5.19-Proposition: If a whole is to a whole as a part subtracted is to a part subtracted, then the remainder is also to the remainder as the whole is to the whole.
+Corollary. If magnitudes are proportional taken jointly, then they are also proportional in conversion.
+
+
+5.20-Proposition: If there are three magnitudes, and others equal to them in multitude, which taken two and two are in the same ratio, and if ex aequali the first is greater than the third, then the fourth is also greater than the sixth; if equal, equal, and; if less, less.
+
+5.21-Proposition: If there are three magnitudes, and others equal to them in multitude, which taken two and two together are in the same ratio, and the proportion of them is perturbed, then, if ex aequali the first magnitude is greater than the third, then the fourth is also greater than the sixth; if equal, equal; and if less, less.
+
+5.22-Proposition: If there are any number of magnitudes whatever, and others equal to them in multitude, which taken two and two together are in the same ratio, then they are also in the same ratio ex aequali.
+
+5.23-Proposition: If there are three magnitudes, and others equal to them in multitude, which taken two and two together are in the same ratio, and the proportion of them be perturbed, then they are also in the same ratio ex aequali.
+
+5.24-Proposition: If a first magnitude has to a second the same ratio as a third has to a fourth, and also a fifth has to the second the same ratio as a sixth to the fourth, then the sum of the first and fifth has to the second the same ratio as the sum of the third and sixth has to the fourth.
+
+5.25-Proposition: If four magnitudes are proportional, then the sum of the greatest and the least is greater than the sum of the remaining two.
+
+
+6.1-Definition: Similar rectilinear figures are such as have their angles severally equal and the sides about the equal angles proportional.
+
+6.2-Definition: Two figures are reciprocally related when the sides about corresponding angles are reciprocally proportional.
+
+6.3-Definition: A straight line is said to have been cut in extreme and mean ratio when, as the whole line is to the greater segment, so is the greater to the less.
+
+6.4-Definition: The height of any figure is the perpendicular drawn from the vertex to the base.
+6.1-Proposition: Triangles and parallelograms which are under the same height are to one another as their bases.
+
+6.2-Proposition: If a straight line is drawn parallel to one of the sides of a triangle, then it cuts the sides of the triangle proportionally; and, if the sides of the triangle are cut proportionally, then the line joining the points of section is parallel to the remaining side of the triangle.
+
+6.3-Proposition: If an angle of a triangle is bisected by a straight line cutting the base, then the segments of the base have the same ratio as the remaining sides of the triangle; and, if segments of the base have the same ratio as the remaining sides of the triangle, then the straight line joining the vertex to the point of section bisects the angle of the triangle.
+
+6.4-Proposition: In equiangular triangles the sides about the equal angles are proportional where the corresponding sides are opposite the equal angles.
+
+6.5-Proposition: If two triangles have their sides proportional, then the triangles are equiangular with the equal angles opposite the corresponding sides.
+
+6.6-Proposition: If two triangles have one angle equal to one angle and the sides about the equal angles proportional, then the triangles are equiangular and have those angles equal opposite the corresponding sides.
+
+6.7-Proposition: If two triangles have one angle equal to one angle, the sides about other angles proportional, and the remaining angles either both less or both not less than a right angle, then the triangles are equiangular and have those angles equal the sides about which are proportional.
+
+6.8-Proposition: If in a right-angled triangle a perpendicular is drawn from the right angle to the base, then the triangles adjoining the perpendicular are similar both to the whole and to one another.
+Corollary. If in a right-angled triangle a perpendicular is drawn from the right angle to the base, then the straight line so drawn is a mean proportional between the segments of the base.
+
+
+6.9-Proposition: To cut off a prescribed part from a given straight line.
+
+6.10-Proposition: To cut a given uncut straight line similarly to a given cut straight line.
+
+6.11-Proposition: To find a third proportional to two given straight lines.
+
+6.12-Proposition: To find a fourth proportional to three given straight lines.
+
+6.13-Proposition: To find a mean proportional to two given straight lines.
+
+6.14-Proposition: In equal and equiangular parallelograms the sides about the equal angles are reciprocally proportional; and equiangular parallelograms in which the sides about the equal angles are reciprocally proportional are equal.
+
+6.15-Proposition: In equal triangles which have one angle equal to one angle the sides about the equal angles are reciprocally proportional; and those triangles which have one angle equal to one angle, and in which the sides about the equal angles are reciprocally proportional, are equal.
+
+6.16-Proposition: If four straight lines are proportional, then the rectangle contained by the extremes equals the rectangle contained by the means; and, if the rectangle contained by the extremes equals the rectangle contained by the means, then the four straight lines are proportional.
+
+6.17-Proposition: If three straight lines are proportional, then the rectangle contained by the extremes equals the square on the mean; and, if the rectangle contained by the extremes equals the square on the mean, then the three straight lines are proportional.
+
+6.18-Proposition: To describe a rectilinear figure similar and similarly situated to a given rectilinear figure on a given straight line.
+
+6.19-Proposition: Similar triangles are to one another in the duplicate ratio of the corresponding sides.
+Corollary. If three straight lines are proportional, then the first is to the third as the figure described on the first is to that which is similar and similarly described on the second.
+
+
+6.20-Proposition: Similar polygons are divided into similar triangles, and into triangles equal in multitude and in the same ratio as the wholes, and the polygon has to the polygon a ratio duplicate of that which the corresponding side has to the corresponding side.
+Corollary. Similar rectilinear figures are to one another in the duplicate ratio of the corresponding sides.
+
+
+6.21-Proposition: Figures which are similar to the same rectilinear figure are also similar to one another.
+
+6.22-Proposition: If four straight lines are proportional, then the rectilinear figures similar and similarly described upon them are also proportional; and, if the rectilinear figures similar and similarly described upon them are proportional, then the straight lines are themselves also proportional.
+
+6.23-Proposition: Equiangular parallelograms have to one another the ratio compounded of the ratios of their sides.
+
+6.24-Proposition: In any parallelogram the parallelograms about the diameter are similar both to the whole and to one another.
+
+6.25-Proposition: To construct a figure similar to one given rectilinear figure and equal to another.
+
+6.26-Proposition: If from a parallelogram there is taken away a parallelogram similar and similarly situated to the whole and having a common angle with it, then it is about the same diameter with the whole.
+
+6.27-Proposition: Of all the parallelograms applied to the same straight line falling short by parallelogrammic figures similar and similarly situated to that described on the half of the straight line, that parallelogram is greatest which is applied to the half of the straight line and is similar to the difference.
+
+6.28-Proposition: To apply a parallelogram equal to a given rectilinear figure to a given straight line but falling short by a parallelogram similar to a given one; thus the given rectilinear figure must not be greater than the parallelogram described on the half of the straight line and similar to the given parallelogram.
+
+6.29-Proposition: To apply a parallelogram equal to a given rectilinear figure to a given straight line but exceeding it by a parallelogram similar to a given one.
+
+6.30-Proposition: To cut a given finite straight line in extreme and mean ratio.
+
+6.31-Proposition: In right-angled triangles the figure on the side opposite the right angle equals the sum of the similar and similarly described figures on the sides containing the right angle.
+
+6.32-Proposition: If two triangles having two sides proportional to two sides are placed together at one angle so that their corresponding sides are also parallel, then the remaining sides of the triangles are in a straight line.
+
+6.33-Proposition: Angles in equal circles have the same ratio as the circumferences on which they stand whether they stand at the centers or at the circumferences.
+
+
+7.1-Definition: A unit is that by virtue of which each of the things that exist is called one.
+
+7.2-Definition: A number is a multitude composed of units.
+
+7.3-Definition: A number is a part of a number, the less of the greater, when it measures the greater;
+
+7.4-Definition: But parts when it does not measure it.
+
+7.5-Definition: The greater number is a multiple of the less when it is measured by the less.
+
+7.6-Definition: An even number is that which is divisible into two equal parts.
+
+7.7-Definition: An odd number is that which is not divisible into two equal parts, or that which differs by a unit from an even number.
+
+7.8-Definition: An even-times-even number is that which is measured by an even number according to an even number.
+
+7.9-Definition: An even-times-odd number is that which is measured by an even number according to an odd number.
+
+7.10-Definition: An odd-times-odd number is that which is measured by an odd number according to an odd number.
+
+7.11-Definition: A prime number is that which is measured by a unit alone.
+
+7.12-Definition: Numbers relatively prime are those which are measured by a unit alone as a common measure.
+
+7.13-Definition: A composite number is that which is measured by some number.
+
+7.14-Definition: Numbers relatively composite are those which are measured by some number as a common measure.
+
+7.15-Definition: A number is said to multiply a number when the latter is added as many times as there are units in the former.
+
+7.16-Definition: And, when two numbers having multiplied one another make some number, the number so produced be called plane, and its sides are the numbers which have multiplied one another.
+
+7.17-Definition: And, when three numbers having multiplied one another make some number, the number so produced be called solid, and its sides are the numbers which have multiplied one another.
+
+7.18-Definition: A square number is equal multiplied by equal, or a number which is contained by two equal numbers.
+
+7.19-Definition: And a cube is equal multiplied by equal and again by equal, or a number which is contained by three equal numbers.
+
+7.20-Definition: Numbers are proportional when the first is the same multiple, or the same part, or the same parts, of the second that the third is of the fourth.
+
+7.21-Definition: Similar plane and solid numbers are those which have their sides proportional.
+
+7.22-Definition: A perfect number is that which is equal to the sum its own parts.
+7.1-Proposition: When two unequal numbers are set out, and the less is continually subtracted in turn from the greater, if the number which is left never measures the one before it until a unit is left, then the original numbers are relatively prime.
+
+7.2-Proposition: To find the greatest common measure of two given numbers not relatively prime.
+Corollary. If a number measures two numbers, then it also measures their greatest common measure.
+
+
+7.3-Proposition: To find the greatest common measure of three given numbers not relatively prime.
+
+7.4-Proposition: Any number is either a part or parts of any number, the less of the greater.
+
+7.5-Proposition: If a number is part of a number, and another is the same part of another, then the sum is also the same part of the sum that the one is of the one.
+
+7.6-Proposition: If a number is parts of a number, and another is the same parts of another, then the sum is also the same parts of the sum that the one is of the one.
+
+7.7-Proposition: If a number is that part of a number which a subtracted number is of a subtracted number, then the remainder is also the same part of the remainder that the whole is of the whole.
+
+7.8-Proposition: If a number is the same parts of a number that a subtracted number is of a subtracted number, then the remainder is also the same parts of the remainder that the whole is of the whole.
+
+7.9-Proposition: If a number is a part of a number, and another is the same part of another, then alternately, whatever part or parts the first is of the third, the same part, or the same parts, the second is of the fourth.
+
+7.10-Proposition: If a number is a parts of a number, and another is the same parts of another, then alternately, whatever part of parts the first is of the third, the same part, or the same parts, the second is of the fourth.
+
+7.11-Proposition: If a whole is to a whole as a subtracted number is to a subtracted number, then the remainder is to the remainder as the whole is to the whole.
+
+7.12-Proposition: If any number of numbers are proportional, then one of the antecedents is to one of the consequents as the sum of the antecedents is to the sum of the consequents.
+
+7.13-Proposition: If four numbers are proportional, then they are also proportional alternately.
+
+7.14-Proposition: If there are any number of numbers, and others equal to them in multitude, which taken two and two together are in the same ratio, then they are also in the same ratio ex aequali.
+
+7.15-Proposition: If a unit number measures any number, and another number measures any other number the same number of times, then alternately, the unit measures the third number the same number of times that the second measures the fourth.
+
+7.16-Proposition: If two numbers multiplied by one another make certain numbers, then the numbers so produced equal one another.
+
+7.17-Proposition: If a number multiplied by two numbers makes certain numbers, then the numbers so produced have the same ratio as the numbers multiplied.
+
+7.18-Proposition: If two number multiplied by any number make certain numbers, then the numbers so produced have the same ratio as the multipliers.
+
+7.19-Proposition: If four numbers are proportional, then the number produced from the first and fourth equals the number produced from the second and third; and, if the number produced from the first and fourth equals that produced from the second and third, then the four numbers are proportional.
+
+7.20-Proposition: The least numbers of those which have the same ratio with them measure those which have the same ratio with them the same number of times; the greater the greater; and the less the less.
+
+7.21-Proposition: Numbers relatively prime are the least of those which have the same ratio with them.
+
+7.22-Proposition: The least numbers of those which have the same ratio with them are relatively prime.
+
+7.23-Proposition: If two numbers are relatively prime, then any number which measures one of them is relatively prime to the remaining number.
+
+7.24-Proposition: If two numbers are relatively prime to any number, then their product is also relatively prime to the same.
+
+7.25-Proposition: If two numbers are relatively prime, then the product of one of them with itself is relatively prime to the remaining one.
+
+7.26-Proposition: If two numbers are relatively prime to two numbers, both to each, then their products are also relatively prime.
+
+7.27-Proposition: If two numbers are relatively prime, and each multiplied by itself makes a certain number, then the products are relatively prime; and, if the original numbers multiplied by the products make certain numbers, then the latter are also relatively prime.
+
+7.28-Proposition: If two numbers are relatively prime, then their sum is also prime to each of them; and, if the sum of two numbers is relatively prime to either of them, then the original numbers are also relatively prime.
+
+7.29-Proposition: Any prime number is relatively prime to any number which it does not measure.
+
+7.30-Proposition: If two numbers, multiplied by one another make some number, and any prime number measures the product, then it also measures one of the original numbers.
+
+7.31-Proposition: Any composite number is measured by some prime number.
+
+7.32-Proposition: Any number is either prime or is measured by some prime number.
+
+7.33-Proposition: Given as many numbers as we please, to find the least of those which have the same ratio with them.
+
+7.34-Proposition: To find the least number which two given numbers measure.
+
+7.35-Proposition: If two numbers measure any number, then the least number measured by them also measures the same.
+
+7.36-Proposition: To find the least number which three given numbers measure.
+
+7.37-Proposition: If a number is measured by any number, then the number which is measured has a part called by the same name as the measuring number.
+
+7.38-Proposition: If a number has any part whatever, then it is measured by a number called by the same name as the part.
+
+7.39-Proposition: To find the number which is the least that has given parts.
+
+8.1-Proposition: If there are as many numbers as we please in continued proportion, and the extremes of them are relatively prime, then the numbers are the least of those which have the same ratio with them.
+
+8.2-Proposition: To find as many numbers as are prescribed in continued proportion, and the least that are in a given ratio.
+Corollary. If three numbers in continued proportion are the least of those which have the same ratio with them, then the extremes are squares, and, if four numbers, cubes.
+
+
+8.3-Proposition: If as many numbers as we please in continued proportion are the least of those which have the same ratio with them, then the extremes of them are relatively prime.
+
+8.4-Proposition: Given as many ratios as we please in least numbers, to find numbers in continued proportion which are the least in the given ratios.
+
+8.5-Proposition: Plane numbers have to one another the ratio compounded of the ratios of their sides.
+
+8.6-Proposition: If there are as many numbers as we please in continued proportion, and the first does not measure the second, then neither does any other measure any other.
+
+8.7-Proposition: If there are as many numbers as we please in continued proportion, and the first measures the last, then it also measures the second.
+
+8.8-Proposition: If between two numbers there fall numbers in continued proportion with them, then, however many numbers fall between them in continued proportion, so many also fall in continued proportion between the numbers which have the same ratios with the original numbers.
+
+8.9-Proposition: If two numbers are relatively prime, and numbers fall between them in continued proportion, then, however many numbers fall between them in continued proportion, so many also fall between each of them and a unit in continued proportion.
+
+8.10-Proposition: If numbers fall between two numbers and a unit in continued proportion, then however many numbers fall between each of them and a unit in continued proportion, so many also fall between the numbers themselves in continued proportion.
+
+8.11-Proposition: Between two square numbers there is one mean proportional number, and the square has to the square the duplicate ratio of that which the side has to the side.
+
+8.12-Proposition: Between two cubic numbers there are two mean proportional numbers, and the cube has to the cube the triplicate ratio of that which the side has to the side.
+
+8.13-Proposition: If there are as many numbers as we please in continued proportion, and each multiplied by itself makes some number, then the products are proportional; and, if the original numbers multiplied by the products make certain numbers, then the latter are also proportional.
+
+8.14-Proposition: If a square measures a square, then the side also measures the side; and, if the side measures the side, then the square also measures the square.
+
+8.15-Proposition: If a cubic number measures a cubic number, then the side also measures the side; and, if the side measures the side, then the cube also measures the cube.
+
+8.16-Proposition: If a square does not measure a square, then neither does the side measure the side; and, if the side does not measure the side, then neither does the square measure the square.
+
+8.17-Proposition: If a cubic number does not measure a cubic number, then neither does the side measure the side; and, if the side does not measure the side, then neither does the cube measure the cube.
+
+8.18-Proposition: Between two similar plane numbers there is one mean proportional number, and the plane number has to the plane number the ratio duplicate of that which the corresponding side has to the corresponding side.
+
+8.19-Proposition: Between two similar solid numbers there fall two mean proportional numbers, and the solid number has to the solid number the ratio triplicate of that which the corresponding side has to the corresponding side.
+
+8.20-Proposition: If one mean proportional number falls between two numbers, then the numbers are similar plane numbers.
+
+8.21-Proposition: If two mean proportional numbers fall between two numbers, then the numbers are similar solid numbers.
+
+8.22-Proposition: If three numbers are in continued proportion, and the first is square, then the third is also square.
+
+8.23-Proposition: If four numbers are in continued proportion, and the first is a cube, then the fourth is also a cube.
+
+8.24-Proposition: If two numbers have to one another the ratio which a square number has to a square number, and the first is square, then the second is also a square.
+
+8.25-Proposition: If two numbers have to one another the ratio which a cubic number has to a cubic number, and the first is a cube, then the second is also a cube.
+
+8.26-Proposition: Similar plane numbers have to one another the ratio which a square number has to a square number.
+
+8.27-Proposition: Similar solid numbers have to one another the ratio which a cubic number has to a cubic number.
+
+9.1-Proposition: If two similar plane numbers multiplied by one another make some number, then the product is square.
+
+9.2-Proposition: If two numbers multiplied by one another make a square number, then they are similar plane numbers.
+
+9.3-Proposition: If a cubic number multiplied by itself makes some number, then the product is a cube.
+
+9.4-Proposition: If a cubic number multiplied by a cubic number makes some number, then the product is a cube.
+
+9.5-Proposition: If a cubic number multiplied by any number makes a cubic number, then the multiplied number is also cubic.
+
+9.6-Proposition: If a number multiplied by itself makes a cubic number, then it itself is also cubic.
+
+9.7-Proposition: If a composite number multiplied by any number makes some number, then the product is solid.
+
+9.8-Proposition: If as many numbers as we please beginning from a unit are in continued proportion, then the third from the unit is square as are also those which successively leave out one, the fourth is cubic as are also all those which leave out two, and the seventh is at once cubic and square are also those which leave out five.
+
+9.9-Proposition: If as many numbers as we please beginning from a unit are in continued proportion, and the number after the unit is square, then all the rest are also square; and if the number after the unit is cubic, then all the rest are also cubic.
+
+9.10-Proposition: If as many numbers as we please beginning from a unit are in continued proportion, and the number after the unit is not square, then neither is any other square except the third from the unit and all those which leave out one; and, if the number after the unit is not cubic, then neither is any other cubic except the fourth from the unit and all those which leave out two.
+
+9.11-Proposition: If as many numbers as we please beginning from a unit are in continued proportion, then the less measures the greater according to some one of the numbers which appear among the proportional numbers.
+Corollary. Whatever place the measuring number has, reckoned from the unit, the same place also has the number according to which it measures, reckoned from the number measured, in the direction of the number before it.
+
+
+9.12-Proposition: If as many numbers as we please beginning from a unit are in continued proportion, then by whatever prime numbers the last is measured, the next to the unit is also measured by the same.
+
+9.13-Proposition: If as many numbers as we please beginning from a unit are in continued proportion, and the number after the unit is prime, then the greatest is not measured by any except those which have a place among the proportional numbers.
+
+9.14-Proposition: If a number is the least that is measured by prime numbers, then it is not measured by any other prime number except those originally measuring it.
+
+9.15-Proposition: If three numbers in continued proportion are the least of those which have the same ratio with them, then the sum of any two is relatively prime to the remaining number.
+
+9.16-Proposition: If two numbers are relatively prime, then the second is not to any other number as the first is to the second.
+
+9.17-Proposition: If there are as many numbers as we please in continued proportion, and the extremes of them are relatively prime, then the last is not to any other number as the first is to the second.
+
+9.18-Proposition: Given two numbers, to investigate whether it is possible to find a third proportional to them.
+
+9.19-Proposition: Given three numbers, to investigate when it is possible to find a fourth proportional to them.
+
+9.20-Proposition: Prime numbers are more than any assigned multitude of prime numbers.
+
+9.21-Proposition: If as many even numbers as we please are added together, then the sum is even.
+
+9.22-Proposition: If as many odd numbers as we please are added together, and their multitude is even, then the sum is even.
+
+9.23-Proposition: If as many odd numbers as we please are added together, and their multitude is odd, then the sum is also odd.
+
+9.24-Proposition: If an even number is subtracted from an even number, then the remainder is even.
+
+9.25-Proposition: If an odd number is subtracted from an even number, then the remainder is odd.
+
+9.26-Proposition: If an odd number is subtracted from an odd number, then the remainder is even.
+
+9.27-Proposition: If an even number is subtracted from an odd number, then the remainder is odd.
+
+9.28-Proposition: If an odd number is multiplied by an even number, then the product is even.
+
+9.29-Proposition: If an odd number is multiplied by an odd number, then the product is odd.
+
+9.30-Proposition: If an odd number measures an even number, then it also measures half of it.
+
+9.31-Proposition: If an odd number is relatively prime to any number, then it is also relatively prime to double it.
+
+9.32-Proposition: Each of the numbers which are continually doubled beginning from a dyad is even-times even only.
+
+9.33-Proposition: If a number has its half odd, then it is even-times odd only.
+
+9.34-Proposition: If an [even] number neither is one of those which is continually doubled from a dyad, nor has its half odd, then it is both even-times even and even-times odd.
+
+9.35-Proposition: If as many numbers as we please are in continued proportion, and there is subtracted from the second and the last numbers equal to the first, then the excess of the second is to the first as the excess of the last is to the sum of all those before it.
+
+9.36-Proposition: If as many numbers as we please beginning from a unit are set out continuously in double proportion until the sum of all becomes prime, and if the sum multiplied into the last makes some number, then the product is perfect.
+
+Definitions I
+
+10.1-Definition: Those magnitudes are said to be commensurable which are measured by the same measure, and those incommensurable which cannot have any common measure.
+
+10.2-Definition: Straight lines are commensurable in square when the squares on them are measured by the same area, and incommensurable in square when the squares on them cannot possibly have any area as a common measure.
+
+10.3-Definition: With these hypotheses, it is proved that there exist straight lines infinite in multitude which are commensurable and incommensurable respectively, some in length only, and others in square also, with an assigned straight line. Let then the assigned straight line be called rational, and those straight lines which are commensurable with it, whether in length and in square, or in square only, rational, but those that are incommensurable with it irrational.
+
+10.4-Definition: And the let the square on the assigned straight line be called rational, and those areas which are commensurable with it rational, but those which are incommensurable with it irrational, and the straight lines which produce them irrational, that is, in case the areas are squares, the sides themselves, but in case they are any other rectilineal figures, the straight lines on which are described squares equal to them.
+Propositions 1-47
+
+10.1-Proposition: Two unequal magnitudes being set out, if from the greater there is subtracted a magnitude greater than its half, and from that which is left a magnitude greater than its half, and if this process is repeated continually, then there will be left some magnitude less than the lesser magnitude set out. And the theorem can similarly be proven even if the parts subtracted are halves.
+
+10.2-Proposition: If, when the less of two unequal magnitudes is continually subtracted in turn from the greater that which is left never measures the one before it, then the two magnitudes are incommensurable.
+
+10.3-Proposition: To find the greatest common measure of two given commensurable magnitudes.
+Corollary. If a magnitude measures two magnitudes, then it also measures their greatest common measure.
+
+
+10.4-Proposition: To find the greatest common measure of three given commensurable magnitudes.
+Corollary. If a magnitude measures three magnitudes, then it also measures their greatest common measure. The greatest common measure can be found similarly for more magnitudes, and the corollary extended.
+
+
+10.5-Proposition: Commensurable magnitudes have to one another the ratio which a number has to a number.
+
+10.6-Proposition: If two magnitudes have to one another the ratio which a number has to a number, then the magnitudes are commensurable.
+Corollary.
+
+
+10.7-Proposition: Incommensurable magnitudes do not have to one another the ratio which a number has to a number.
+
+10.8-Proposition: If two magnitudes do not have to one another the ratio which a number has to a number, then the magnitudes are incommensurable.
+
+10.9-Proposition: The squares on straight lines commensurable in length have to one another the ratio which a square number has to a square number; and squares which have to one another the ratio which a square number has to a square number also have their sides commensurable in length. But the squares on straight lines incommensurable in length do not have to one another the ratio which a square number has to a square number; and squares which do not have to one another the ratio which a square number has to a square number also do not have their sides commensurable in length either.
+Corollary. Straight lines commensurable in length are always commensurable in square also, but those commensurable in square are not always also commensurable in length.
+
+Lemma. Similar plane numbers have to one another the ratio which a square number has to a square number, and if two numbers have to one another the ratio which a square number has to a square number, then they are similar plane numbers.
+
+Corollary 2. Numbers which are not similar plane numbers, that is, those which do not have their sides proportional, do not have to one another the ratio which a square number has to a square number
+
+
+10.10-Proposition: To find two straight lines incommensurable, the one in length only, and the other in square also, with an assigned straight line.
+
+10.11-Proposition: If four magnitudes are proportional, and the first is commensurable with the second, then the third also is commensurable with the fourth; but, if the first is incommensurable with the second, then the third also is incommensurable with the fourth.
+
+10.12-Proposition: Magnitudes commensurable with the same magnitude are also commensurable with one another.
+
+10.13-Proposition: If two magnitudes are commensurable, and one of them is incommensurable with any magnitude, then the remaining one is also incommensurable with the same.
+
+10.14-Proposition: Lemma. Given two unequal straight lines, to find by what square the square on the greater is greater than the square on the less. And, given two straight lines, to find the straight line the square on which equals the sum of the squares on them.
+Proposition 14. If four straight lines are proportional, and the square on the first is greater than the square on the second by the square on a straight line commensurable with the first, then the square on the third is also greater than the square on the fourth by the square on a third line commensurable with the third. And, if the square on the first is greater than the square on the second by the square on a straight line incommensurable with the first, then the square on the third is also greater than the square on the fourth by the square on a third line incommensurable with the third.
+
+
+10.15-Proposition: If two commensurable magnitudes are added together, then the whole is also commensurable with each of them; and, if the whole is commensurable with one of them, then the original magnitudes are also commensurable.
+
+10.16-Proposition: If two incommensurable magnitudes are added together, the sum is also incommensurable with each of them; but, if the sum is incommensurable with one of them, then the original magnitudes are also incommensurable.
+
+10.17-Proposition: Lemma. If to any straight line there is applied a parallelogram but falling short by a square, then the applied parallelogram equals the rectangle contained by the segments of the straight line resulting from the application.
+Proposition 17. If there are two unequal straight lines, and to the greater there is applied a parallelogram equal to the fourth part of the square on the less but falling short by a square, and if it divides it into parts commensurable in length, then the square on the greater is greater than the square on the less by the square on a straight line commensurable with the greater. And if the square on the greater is greater than the square on the less by the square on a straight line commensurable with the greater, and if there is applied to the greater a parallelogram equal to the fourth part of the square on the less falling short by a square, then it divides it into parts commensurable in length.
+
+
+10.18-Proposition: If there are two unequal straight lines, and to the greater there is applied a parallelogram equal to the fourth part of the square on the less but falling short by a square, and if it divides it into incommensurable parts, then the square on the greater is greater than the square on the less by the square on a straight line incommensurable with the greater. And if the square on the greater is greater than the square on the less by the square on a straight line incommensurable with the greater, and if there is applied to the greater a parallelogram equal to the fourth part of the square on the less but falling short by a square, then it divides it into incommensurable parts.
+
+10.19-Proposition: Lemma.
+Proposition 19. The rectangle contained by rational straight lines commensurable in length is rational.
+
+
+10.20-Proposition: If a rational area is applied to a rational straight line, then it produces as breadth a straight line rational and commensurable in length with the straight line to which it is applied.
+
+10.21-Proposition: The rectangle contained by rational straight lines commensurable in square only is irrational, and the side of the square equal to it is irrational. Let the latter be called medial.
+
+10.22-Proposition: Lemma. If there are two straight lines, then the first is to the second as the square on the first is to the rectangle contained by the two straight lines.
+Proposition 22. The square on a medial straight line, if applied to a rational straight line, produces as breadth a straight line rational and incommensurable in length with that to which it is applied.
+
+
+10.23-Proposition: A straight line commensurable with a medial straight line is medial.
+Corollary. An area commensurable with a medial area is medial.
+
+
+10.24-Proposition: The rectangle contained by medial straight lines commensurable in length is medial.
+
+10.25-Proposition: The rectangle contained by medial straight lines commensurable in square only is either rational or medial.
+
+10.26-Proposition: A medial area does not exceed a medial area by a rational area.
+
+10.27-Proposition: To find medial straight lines commensurable in square only which contain a rational rectangle.
+
+10.28-Proposition: To find medial straight lines commensurable in square only which contain a medial rectangle.
+
+10.29-Proposition: Lemma 1. To find two square numbers such that their sum is also square.
+Lemma 2. To find two square numbers such that their sum is not square.
+
+Proposition 29. To find two rational straight lines commensurable in square only such that the square on the greater is greater than the square on the less by the square on a straight line commensurable in length with the greater.
+
+
+10.30-Proposition: To find two rational straight lines commensurable in square only such that the square on the greater is greater than the square on the less by the square on a straight line incommensurable in length with the greater.
+
+10.31-Proposition: To find two medial straight lines commensurable in square only, containing a rational rectangle, such that the square on the greater is greater than the square on the less by the square on a straight line commensurable in length with the greater.
+
+10.32-Proposition: To find two medial straight lines commensurable in square only, containing a medial rectangle, such that the square on the greater is greater than the square on the less by the square on a straight line commensurable with the greater.
+
+10.33-Proposition: Lemma.
+Proposition 33. To find two straight lines incommensurable in square which make the sum of the squares on them rational but the rectangle contained by them medial.
+
+
+10.34-Proposition: To find two straight lines incommensurable in square which make the sum of the squares on them medial but the rectangle contained by them rational.
+
+10.35-Proposition: To find two straight lines incommensurable in square which make the sum of the squares on them medial and the rectangle contained by them medial and moreover incommensurable with the sum of the squares on them.
+
+10.36-Proposition: If two rational straight lines commensurable in square only are added together, then the whole is irrational; let it be called binomial.
+
+10.37-Proposition: If two medial straight lines commensurable in square only and containing a rational rectangle are added together, the whole is irrational; let it be called the first bimedial straight line.
+
+10.38-Proposition: If two medial straight lines commensurable in square only and containing a medial rectangle are added together, then the whole is irrational; let it be called the second bimedial straight line.
+
+10.39-Proposition: If two straight lines incommensurable in square which make the sum of the squares on them rational but the rectangle contained by them medial are added together, then the whole straight line is irrational; let it be called major.
+
+10.40-Proposition: If two straight lines incommensurable in square which make the sum of the squares on them medial but the rectangle contained by them rational are added together, then the whole straight line is irrational; let it be called the side of a rational plus a medial area.
+
+10.41-Proposition: If two straight lines incommensurable in square which make the sum of the squares on them medial and the rectangle contained by them medial and also incommensurable with the sum of the squares on them are added together, then the whole straight line is irrational; let it be called the side of the sum of two medial areas.
+Lemma.
+
+
+10.42-Proposition: A binomial straight line is divided into its terms at one point only.
+
+10.43-Proposition: A first bimedial straight line is divided at one and the same point only.
+
+10.44-Proposition: A second bimedial straight line is divided at one point only.
+
+10.45-Proposition: A major straight line is divided at one point only.
+
+10.46-Proposition: The side of a rational plus a medial area is divided at one point only.
+
+10.47-Proposition: The side of the sum of two medial areas is divided at one point only.
+Definitions II
+
+10.1-Definition: Given a rational straight line and a binomial, divided into its terms, such that the square on the greater term is greater than the square on the lesser by the square on a straight line commensurable in length with the greater, then, if the greater term is commensurable in length with the rational straight line set out, let the whole be called a first binomial straight line;
+
+10.2-Definition: But if the lesser term is commensurable in length with the rational straight line set out, let the whole be called a second binomial;
+
+10.3-Definition: And if neither of the terms is commensurable in length with the rational straight line set out, let the whole be called a third binomial.
+
+10.4-Definition: Again, if the square on the greater term is greater than the square on the lesser by the square on a straight line incommensurable in length with the greater, then, if the greater term is commensurable in length with the rational straight line set out, let the whole be called a fourth binomial;
+
+10.5-Definition: If the lesser, a fifth binomial;
+
+10.6-Definition: And, if neither, a sixth binomial.
+Propositions 48-84
+
+10.48-Proposition: To find the first binomial line.
+
+10.49-Proposition: To find the second binomial line.
+
+10.50-Proposition: To find the third binomial line.
+
+10.51-Proposition: To find the fourth binomial line.
+
+10.52-Proposition: To find the fifth binomial line.
+
+10.53-Proposition: To find the sixth binomial line.
+
+10.54-Proposition: Lemma.
+Proposition 54. If an area is contained by a rational straight line and the first binomial, then the side of the area is the irrational straight line which is called binomial.
+
+
+10.55-Proposition: If an area is contained by a rational straight line and the second binomial, then the side of the area is the irrational straight line which is called a first bimedial.
+
+10.56-Proposition: If an area is contained by a rational straight line and the third binomial, then the side of the area is the irrational straight line called a second bimedial.
+
+10.57-Proposition: If an area is contained by a rational straight line and the fourth binomial, then the side of the area is the irrational straight line called major.
+
+10.58-Proposition: If an area is contained by a rational straight line and the fifth binomial, then the side of the area is the irrational straight line called the side of a rational plus a medial area.
+
+10.59-Proposition: If an area is contained by a rational straight line and the sixth binomial, then the side of the area is the irrational straight line called the side of the sum of two medial areas.
+
+10.60-Proposition: Lemma. If a straight line is cut into unequal parts, then the sum of the squares on the unequal parts is greater than twice the rectangle contained by the unequal parts.
+Proposition 60. The square on the binomial straight line applied to a rational straight line produces as breadth the first binomial.
+
+
+10.61-Proposition: The square on the first bimedial straight line applied to a rational straight line produces as breadth the second binomial.
+
+10.62-Proposition: The square on the second bimedial straight line applied to a rational straight line produces as breadth the third binomial.
+
+10.63-Proposition: The square on the major straight line applied to a rational straight line produces as breadth the fourth binomial.
+
+10.64-Proposition: The square on the side of a rational plus a medial area applied to a rational straight line produces as breadth the fifth binomial.
+
+10.65-Proposition: The square on the side of the sum of two medial areas applied to a rational straight line produces as breadth the sixth binomial.
+
+10.66-Proposition: A straight line commensurable with a binomial straight line is itself also binomial and the same in order.
+
+10.67-Proposition: A straight line commensurable with a bimedial straight line is itself also bimedial and the same in order.
+
+10.68-Proposition: A straight line commensurable with a major straight line is itself also major.
+
+10.69-Proposition: A straight line commensurable with the side of a rational plus a medial area is itself also the side of a rational plus a medial area.
+
+10.70-Proposition: A straight line commensurable with the side of the sum of two medial areas is the side of the sum of two medial areas.
+
+10.71-Proposition: If a rational and a medial are added together, then four irrational straight lines arise, namely a binomial or a first bimedial or a major or a side of a rational plus a medial area.
+
+10.72-Proposition: If two medial areas incommensurable with one another are added together, then the remaining two irrational straight lines arise, namely either a second bimedial or a side of the sum of two medial areas.
+Proposition. The binomial straight line and the irrational straight lines after it are neither the same with the medial nor with one another.
+
+
+10.73-Proposition: If from a rational straight line there is subtracted a rational straight line commensurable with the whole in square only, then the remainder is irrational; let it be called an apotome.
+
+10.74-Proposition: If from a medial straight line there is subtracted a medial straight line which is commensurable with the whole in square only, and which contains with the whole a rational rectangle, then the remainder is irrational; let it be called first apotome of a medial straight line.
+
+10.75-Proposition: If from a medial straight line there is subtracted a medial straight line which is commensurable with the whole in square only, and which contains with the whole a medial rectangle, then the remainder is irrational; let it be called second apotome of a medial straight line.
+
+10.76-Proposition: If from a straight line there is subtracted a straight line which is incommensurable in square with the whole and which with the whole makes the sum of the squares on them added together rational, but the rectangle contained by them medial, then the remainder is irrational; let it be called minor.
+
+10.77-Proposition: If from a straight line there is subtracted a straight line which is incommensurable in square with the whole, and which with the whole makes the sum of the squares on them medial but twice the rectangle contained by them rational, then the remainder is irrational; let it be called that which produces with a rational area a medial whole.
+
+10.78-Proposition: If from a straight line there is subtracted a straight line which is incommensurable in square with the whole and which with the whole makes the sum of the squares on them medial, twice the rectangle contained by them medial, and further the squares on them incommensurable with twice the rectangle contained by them, then the remainder is irrational; let it be called that which produces with a medial area a medial whole.
+
+10.79-Proposition: To an apotome only one rational straight line can be annexed which is commensurable with the whole in square only.
+
+10.80-Proposition: To a first apotome of a medial straight line only one medial straight line can be annexed which is commensurable with the whole in square only and which contains with the whole a rational rectangle.
+
+10.81-Proposition: To a second apotome of a medial straight line only one medial straight line can be annexed which is commensurable with the whole in square only and which contains with the whole a medial rectangle.
+
+10.82-Proposition: To a minor straight line only one straight line can be annexed which is incommensurable in square with the whole and which makes, with the whole, the sum of squares on them rational but twice the rectangle contained by them medial.
+
+10.83-Proposition: To a straight line which produces with a rational area a medial whole only one straight line can be annexed which is incommensurable in square with the whole straight line and which with the whole straight line makes the sum of squares on them medial but twice the rectangle contained by them rational.
+
+10.84-Proposition: To a straight line which produces with a medial area a medial whole only one straight line can be annexed which is incommensurable in square with the whole straight line and which with the whole straight line makes the sum of squares on them medial and twice the rectangle contained by them both medial and also incommensurable with the sum of the squares on them.
+Definitions III
+
+10.1-Definition: Given a rational straight line and an apotome, if the square on the whole is greater than the square on the annex by the square on a straight line commensurable in length with the whole, and the whole is commensurable in length with the rational line set out, let the apotome be called a first apotome.
+
+10.2-Definition: But if the annex is commensurable with the rational straight line set out, and the square on the whole is greater than that on the annex by the square on a straight line commensurable with the whole, let the apotome be called a second apotome.
+
+10.3-Definition: But if neither is commensurable in length with the rational straight line set out, and the square on the whole is greater than the square on the annex by the square on a straight line commensurable with the whole, let the apotome be called a third apotome.
+
+10.4-Definition: Again, if the square on the whole is greater than the square on the annex by the square on a straight line incommensurable with the whole, then, if the whole is commensurable in length with the rational straight line set out, let the apotome be called a fourth apotome;
+
+10.5-Definition: If the annex be so commensurable, a fifth;
+
+10.6-Definition: And, if neither, a sixth.
+Propositions 85-115
+
+10.85-Proposition: To find the first apotome.
+
+10.86-Proposition: To find the second apotome.
+
+10.87-Proposition: To find the third apotome.
+
+10.88-Proposition: To find the fourth apotome.
+
+10.89-Proposition: To find the fifth apotome.
+
+10.90-Proposition: To find the sixth apotome.
+
+10.91-Proposition: If an area is contained by a rational straight line and a first apotome, then the side of the area is an apotome.
+
+10.92-Proposition: If an area is contained by a rational straight line and a second apotome, then the side of the area is a first apotome of a medial straight line.
+
+10.93-Proposition: If an area is contained by a rational straight line and a third apotome, then the side of the area is a second apotome of a medial straight line.
+
+10.94-Proposition: If an area is contained by a rational straight line and a fourth apotome, then the side of the area is minor.
+
+10.95-Proposition: If an area is contained by a rational straight line and a fifth apotome, then the side of the area is a straight line which produces with a rational area a medial whole.
+
+10.96-Proposition: If an area is contained by a rational straight line and a sixth apotome, then the side of the area is a straight line which produces with a medial area a medial whole.
+
+10.97-Proposition: The square on an apotome of a medial straight line applied to a rational straight line produces as breadth a first apotome.
+
+10.98-Proposition: The square on a first apotome of a medial straight line applied to a rational straight line produces as breadth a second apotome.
+
+10.99-Proposition: The square on a second apotome of a medial straight line applied to a rational straight line produces as breadth a third apotome.
+
+10.100-Proposition: The square on a minor straight line applied to a rational straight line produces as breadth a fourth apotome.
+
+10.101-Proposition: The square on the straight line which produces with a rational area a medial whole, if applied to a rational straight line, produces as breadth a fifth apotome.
+
+10.102-Proposition: The square on the straight line which produces with a medial area a medial whole, if applied to a rational straight line, produces as breadth a sixth apotome.
+
+10.103-Proposition: A straight line commensurable in length with an apotome is an apotome and the same in order.
+
+10.104-Proposition: A straight line commensurable with an apotome of a medial straight line is an apotome of a medial straight line and the same in order.
+
+10.105-Proposition: A straight line commensurable with a minor straight line is minor.
+
+10.106-Proposition: A straight line commensurable with that which produces with a rational area a medial whole is a straight line which produces with a rational area a medial whole.
+
+10.107-Proposition: A straight line commensurable with that which produces a medial area and a medial whole is itself also a straight line which produces with a medial area a medial whole.
+
+10.108-Proposition: If from a rational area a medial area is subtracted, the side of the remaining area becomes one of two irrational straight lines, either an apotome or a minor straight line.
+
+10.109-Proposition: If from a medial area a rational area is subtracted, then there arise two other irrational straight lines, either a first apotome of a medial straight line or a straight line which produces with a rational area a medial whole.
+
+10.110-Proposition: If from a medial area there is subtracted a medial area incommensurable with the whole, then the two remaining irrational straight lines arise, either a second apotome of a medial straight line or a straight line which produce with a medial area a medial whole.
+
+10.111-Proposition: The apotome is not the same with the binomial straight line.
+Proposition. The apotome and the irrational straight lines following it are neither the same with the medial straight line nor with one another. There are, in order, thirteen irrational straight lines in all:
+
+Medial
+Binomial
+First bimedial
+Second bimedial
+Major
+Side of a rational plus a medial area
+Side of the sum of two medial areas
+Apotome
+First apotome of a medial straight line
+Second apotome of a medial straight line
+Minor
+Producing with a rational area a medial whole
+Producing with a medial area a medial whole
+
+10.112-Proposition: The square on a rational straight line applied to the binomial straight line produces as breadth an apotome the terms of which are commensurable with the terms of the binomial straight line and moreover in the same ratio; and further the apotome so arising has the same order as the binomial straight line.
+
+10.113-Proposition: The square on a rational straight line, if applied to an apotome, produces as breadth the binomial straight line the terms of which are commensurable with the terms of the apotome and in the same ratio; and further the binomial so arising has the same order as the apotome.
+
+10.114-Proposition: If an area is contained by an apotome and the binomial straight line the terms of which are commensurable with the terms of the apotome and in the same ratio, then the side of the area is rational.
+Corollary. It is possible for a rational area to be contained by irrational straight lines.
+
+
+10.115-Proposition: From a medial straight line there arise irrational straight lines infinite in number, and none of them is the same as any preceding.
+
+
+11.1-Definition: A solid is that which has length, breadth, and depth.
+
+11.2-Definition: A face of a solid is a surface.
+
+11.3-Definition: A straight line is at right angles to a plane when it makes right angles with all the straight lines which meet it and are in the plane.
+
+11.4-Definition: A plane is at right angles to a plane when the straight lines drawn in one of the planes at right angles to the intersection of the planes are at right angles to the remaining plane.
+
+11.5-Definition: The inclination of a straight line to a plane is, assuming a perpendicular drawn from the end of the straight line which is elevated above the plane to the plane, and a straight line joined from the point thus arising to the end of the straight line which is in the plane, the angle contained by the straight line so drawn and the straight line standing up.
+
+11.6-Definition: The inclination of a plane to a plane is the acute angle contained by the straight lines drawn at right angles to the intersection at the same point, one in each of the planes.
+
+11.7-Definition: A plane is said to be similarly inclined to a plane as another is to another when the said angles of the inclinations equal one another.
+
+11.8-Definition: Parallel planes are those which do not meet.
+
+11.9-Definition: Similar solid figures are those contained by similar planes equal in multitude.
+
+11.10-Definition: Equal and similar solid figures are those contained by similar planes equal in multitude and magnitude.
+
+11.11-Definition: A solid angle is the inclination constituted by more than two lines which meet one another and are not in the same surface, towards all the lines, that is, a solid angle is that which is contained by more than two plane angles which are not in the same plane and are constructed to one point.
+
+11.12-Definition: A pyramid is a solid figure contained by planes which is constructed from one plane to one point.
+
+11.13-Definition: A prism is a solid figure contained by planes two of which, namely those which are opposite, are equal, similar, and parallel, while the rest are parallelograms.
+
+11.14-Definition: When a semicircle with fixed diameter is carried round and restored again to the same position from which it began to be moved, the figure so comprehended is a sphere.
+
+11.15-Definition: The axis of the sphere is the straight line which remains fixed and about which the semicircle is turned.
+
+11.16-Definition: The center of the sphere is the same as that of the semicircle.
+
+11.17-Definition: A diameter of the sphere is any straight line drawn through the center and terminated in both directions by the surface of the sphere.
+
+11.18-Definition: When a right triangle with one side of those about the right angle remains fixed is carried round and restored again to the same position from which it began to be moved, the figure so comprehended is a cone. And, if the straight line which remains fixed equals the remaining side about the right angle which is carried round, the cone will be right-angled; if less, obtuse-angled; and if greater, acute-angled.
+
+11.19-Definition: The axis of the cone is the straight line which remains fixed and about which the triangle is turned.
+
+11.20-Definition: And the base is the circle described by the straight in which is carried round.
+
+11.21-Definition: When a rectangular parallelogram with one side of those about the right angle remains fixed is carried round and restored again to the same position from which it began to be moved, the figure so comprehended is a cylinder.
+
+11.22-Definition: The axis of the cylinder is the straight line which remains fixed and about which the parallelogram is turned.
+
+11.23-Definition: And the bases are the circles described by the two sides opposite to one another which are carried round.
+
+11.24-Definition: Similar cones and cylinders are those in which the axes and the diameters of the bases are proportional.
+
+11.25-Definition: A cube is a solid figure contained by six equal squares.
+
+11.26-Definition: An octahedron is a solid figure contained by eight equal and equilateral triangles.
+
+11.27-Definition: An icosahedron is a solid figure contained by twenty equal and equilateral triangles.
+
+11.28-Definition: A dodecahedron is a solid figure contained by twelve equal, equilateral and equiangular pentagons.
+11.1-Proposition: A part of a straight line cannot be in the plane of reference and a part in plane more elevated.
+
+11.2-Proposition: If two straight lines cut one another, then they lie in one plane; and every triangle lies in one plane.
+
+11.3-Proposition: If two planes cut one another, then their intersection is a straight line.
+
+11.4-Proposition: If a straight line is set up at right angles to two straight lines which cut one another at their common point of section, then it is also at right angles to the plane passing through them.
+
+11.5-Proposition: If a straight line is set up at right angles to three straight lines which meet one another at their common point of section, then the three straight lines lie in one plane.
+
+11.6-Proposition: If two straight lines are at right angles to the same plane, then the straight lines are parallel.
+
+11.7-Proposition: If two straight lines are parallel and points are taken at random on each of them, then the straight line joining the points is in the same plane with the parallel straight lines.
+
+11.8-Proposition: If two straight lines are parallel, and one of them is at right angles to any plane, then the remaining one is also at right angles to the same plane.
+
+11.9-Proposition: Straight lines which are parallel to the same straight line but do not lie in the same plane with it are also parallel to each other.
+
+11.10-Proposition: If two straight lines meeting one another are parallel to two straight lines meeting one another not in the same plane, then they contain equal angles.
+
+11.11-Proposition: To draw a straight line perpendicular to a given plane from a given elevated point.
+
+11.12-Proposition: To set up a straight line at right angles to a give plane from a given point in it.
+
+11.13-Proposition: From the same point two straight lines cannot be set up at right angles to the same plane on the same side.
+
+11.14-Proposition: Planes to which the same straight line is at right angles are parallel.
+
+11.15-Proposition: If two straight lines meeting one another are parallel to two straight lines meeting one another not in the same plane, then the planes through them are parallel.
+
+11.16-Proposition: If two parallel planes are cut by any plane, then their intersections are parallel.
+
+11.17-Proposition: If two straight lines are cut by parallel planes, then they are cut in the same ratios.
+
+11.18-Proposition: If a straight line is at right angles to any plane, then all the planes through it are also at right angles to the same plane.
+
+11.19-Proposition: If two planes which cut one another are at right angles to any plane, then their intersection is also at right angles to the same plane.
+
+11.20-Proposition: If a solid angle is contained by three plane angles, then the sum of any two is greater than the remaining one.
+
+11.21-Proposition: Any solid angle is contained by plane angles whose sum is less than four right angles.
+
+11.22-Proposition: If there are three plane angles such that the sum of any two is greater than the remaining one, and they are contained by equal straight lines, then it is possible to construct a triangle out of the straight lines joining the ends of the equal straight lines.
+
+11.23-Proposition: To construct a solid angles out of three plane angles such that the sum of any two is greater than the remaining one: thus the sum of the three angles must be less than four right angles.
+Lemma for XI.23.
+
+
+11.24-Proposition: If a solid is contained by parallel planes, then the opposite planes in it are equal and parallelogrammic.
+
+11.25-Proposition: If a parallelepipedal solid is cut by a plane parallel to the opposite planes, then the base is to the base as the solid is to the solid.
+
+11.26-Proposition: To construct a solid angle equal to a given solid angle on a given straight line at a given point on it.
+
+11.27-Proposition: To describe a parallelepipedal solid similar and similarly situated to a given parallelepipedal solid on a given straight line.
+
+11.28-Proposition: If a parallelepipedal solid is cut by a plane through the diagonals of the opposite planes, then the solid is bisected by the plane.
+
+11.29-Proposition: Parallelepipedal solids which are on the same base and of the same height, and in which the ends of their edges which stand up are on the same straight lines, equal one another.
+
+11.30-Proposition: Parallelepipedal solids which are on the same base and of the same height, and in which the ends of their edges which stand up are not on the same straight lines, equal one another.
+
+11.31-Proposition: Parallelepipedal solids which are on equal bases and of the same height equal one another.
+
+11.32-Proposition: Parallelepipedal solids which are of the same height are to one another as their bases.
+
+11.33-Proposition: Similar parallelepipedal solids are to one another in the triplicate ratio of their corresponding sides.
+Corollary. If four straight lines are continuously proportional, then the first is to the fourth as a parallelepipedal solid on the first is to the similar and similarly situated parallelepipedal solid on the second, in as much as the first has to the fourth the ratio triplicate of that which it has to the second.
+
+
+11.34-Proposition: In equal parallelepipedal solids the bases are reciprocally proportional to the heights; and those parallelepipedal solids in which the bases are reciprocally proportional to the heights are equal.
+
+11.35-Proposition: If there are two equal plane angles, and on their vertices there are set up elevated straight lines containing equal angles with the original straight lines respectively, if on the elevated straight lines points are taken at random and perpendiculars are drawn from them to the planes in which the original angles are, and if from the points so arising in the planes straight lines are joined to the vertices of the original angles, then they contain with the elevated straight lines equal angles.
+
+11.36-Proposition: If three straight lines are proportional, then the parallelepipedal solid formed out of the three equals the parallelepipedal solid on the mean which is equilateral, but equiangular with the aforesaid solid.
+
+11.37-Proposition: If four straight lines are proportional, then parallelepipedal solids on them which are similar and similarly described are also proportional; and, if the parallelepipedal solids on them which are similar and similarly described are proportional, then the straight lines themselves are also proportional.
+
+11.38-Proposition: If the sides of the opposite planes of a cube are bisected, and the planes are carried through the points of section, then the intersection of the planes and the diameter of the cube bisect one another.
+
+11.39-Proposition: If there are two prisms of equal height, and one has a parallelogram as base and the other a triangle, and if the parallelogram is double the triangle, then the prisms are equal.
+
+12.1-Proposition: Similar polygons inscribed in circles are to one another as the squares on their diameters.
+
+12.2-Proposition: Circles are to one another as the squares on their diameters.
+Lemma for XII.2.
+
+
+12.3-Proposition: Any pyramid with a triangular base is divided into two pyramids equal and similar to one another, similar to the whole, and having triangular bases, and into two equal prisms, and the two prisms are greater than half of the whole pyramid.
+
+12.4-Proposition: If there are two pyramids of the same height with triangular bases, and each of them is divided into two pyramids equal and similar to one another and similar to the whole, and into two equal prisms, then the base of the one pyramid is to the base of the other pyramid as all the prisms in the one pyramid are to all the prisms, being equal in multitude, in the other pyramid.
+Lemma for XII.4.
+
+
+12.5-Proposition: Pyramids of the same height with triangular bases are to one another as their bases.
+
+12.6-Proposition: Pyramids of the same height with polygonal bases are to one another as their bases.
+
+12.7-Proposition: Any prism with a triangular base is divided into three pyramids equal to one another with triangular bases.
+Corollary. Any pyramid is a third part of the prism with the same base and equal height.
+
+
+12.8-Proposition: Similar pyramids with triangular bases are in triplicate ratio of their corresponding sides.
+Corollary. Similar pyramids with polygonal bases are also to one another in triplicate ratio of their corresponding sides.
+
+
+12.9-Proposition: In equal pyramids with triangular bases the bases are reciprocally proportional to the heights; and those pyramids are equal in which the bases are reciprocally proportional to the heights.
+
+12.10-Proposition: Any cone is a third part of the cylinder with the same base and equal height.
+
+12.11-Proposition: Cones and cylinders of the same height are to one another as their bases.
+
+12.12-Proposition: Similar cones and cylinders are to one another in triplicate ratio of the diameters of their bases.
+
+12.13-Proposition: If a cylinder is cut by a plane parallel to its opposite planes, then the cylinder is to the cylinder as the axis is to the axis.
+
+12.14-Proposition: Cones and cylinders on equal bases are to one another as their heights.
+
+12.15-Proposition: In equal cones and cylinders the bases are reciprocally proportional to the heights; and those cones and cylinders in which the bases are reciprocally proportional to the heights are equal.
+
+12.16-Proposition: Given two circles about the same center, to inscribe in the greater circle an equilateral polygon with an even number of sides which does not touch the lesser circle.
+
+12.17-Proposition: Given two spheres about the same center, to inscribe in the greater sphere a polyhedral solid which does not touch the lesser sphere at its surface.
+Corollary to XII.17.
+
+
+12.18-Proposition: Spheres are to one another in triplicate ratio of their respective diameters.
+
+13.1-Proposition: If a straight line is cut in extreme and mean ratio, then the square on the greater segment added to the half of the whole is five times the square on the half.
+
+13.2-Proposition: If the square on a straight line is five times the square on a segment on it, then, when the double of the said segment is cut in extreme and mean ratio, the greater segment is the remaining part of the original straight line.
+Lemma for XIII.2.
+
+
+13.3-Proposition: If a straight line is cut in extreme and mean ratio, then the square on the sum of the lesser segment and the half of the greater segment is five times the square on the half of the greater segment.
+
+13.4-Proposition: If a straight line is cut in extreme and mean ratio, then the sum of the squares on the whole and on the lesser segment is triple the square on the greater segment.
+
+13.5-Proposition: If a straight line is cut in extreme and mean ratio, and a straight line equal to the greater segment is added to it, then the whole straight line has been cut in extreme and mean ratio, and the original straight line is the greater segment.
+
+13.6-Proposition: If a rational straight line is cut in extreme and mean ratio, then each of the segments is the irrational straight line called apotome.
+
+13.7-Proposition: If three angles of an equilateral pentagon, taken either in order or not in order, are equal, then the pentagon is equiangular.
+
+13.8-Proposition: If in an equilateral and equiangular pentagon straight lines subtend two angles are taken in order, then they cut one another in extreme and mean ratio, and their greater segments equal the side of the pentagon.
+
+13.9-Proposition: If the side of the hexagon and that of the decagon inscribed in the same circle are added together, then the whole straight line has been cut in extreme and mean ratio, and its greater segment is the side of the hexagon.
+
+13.10-Proposition: If an equilateral pentagon is inscribed ina circle, then the square on the side of the pentagon equals the sum of the squares on the sides of the hexagon and the decagon inscribed in the same circle.
+
+13.11-Proposition: If an equilateral pentagon is inscribed in a circle which has its diameter rational, then the side of the pentagon is the irrational straight line called minor.
+
+13.12-Proposition: If an equilateral triangle is inscribed in a circle, then the square on the side of the triangle is triple the square on the radius of the circle.
+
+13.13-Proposition: To construct a pyramid, to comprehend it in a given sphere; and to prove that the square on the diameter of the sphere is one and a half times the square on the side of the pyramid.
+Lemma for XIII.13.
+
+
+13.14-Proposition: To construct an octahedron and comprehend it in a sphere, as in the preceding case; and to prove that the square on the diameter of the sphere is double the square on the side of the octahedron.
+
+13.15-Proposition: To construct a cube and comprehend it in a sphere, like the pyramid; and to prove that the square on the diameter of the sphere is triple the square on the side of the cube.
+
+13.16-Proposition: To construct an icosahedron and comprehend it in a sphere, like the aforesaid figures; and to prove that the square on the side of the icosahedron is the irrational straight line called minor.
+Corollary. The square on the diameter of the sphere is five times the square on the radius of the circle from which the icosahedron has been described, and the diameter of the sphere is composed of the side of the hexagon and two of the sides of the decagon inscribed in the same circle.
+
+
+13.17-Proposition: To construct a dodecahedron and comprehend it in a sphere, like the aforesaid figures; and to prove that the square on the side of the dodecahedron is the irrational straight line called apotome.
+Corollary. When the side of the cube is cut in extreme and mean ratio, the greater segment is the side of the dodecahedron.
+
+
+13.18-Proposition: To set out the sides of the five figures and compare them with one another.
+Remark.
+No other figure, besides the said five figures, can be constructed by equilateral and equiangular figures equal to one another.
+Lemma. The angle of the equilateral and equiangular pentagon is a right angle and a fifth.

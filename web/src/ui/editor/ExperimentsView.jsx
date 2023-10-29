@@ -5,11 +5,19 @@ import BibTeXViewer from '../BibtexViewer'
 
 export function ExperimentsView(props) {
   console.log(props)
-
+  const [isGood, setIsGood] = React.useState({})
   return (
     <>
       {props.mods?.map((mod) => (
         <div>
+          {!isGood[mod.hash] && (
+            <Button
+              style={{ width: '5vw', backgroundColor: '#123', color: 'yellow' }}
+              onClick={() => props.deleteMod(mod.hash)}
+            >
+              🗑
+            </Button>
+          )}
           <Button
             style={{ width: '70vw', backgroundColor: '#123', color: 'yellow' }}
             onClick={() => {
@@ -17,7 +25,17 @@ export function ExperimentsView(props) {
               window.location.reload()
             }}
           >
-            {mod.meta ? <BibTeXViewer entry={mod.meta} /> : mod.hash}
+            {mod.meta ? (
+              <BibTeXViewer
+                entry={mod.meta}
+                isGood={isGood[mod.hash]}
+                setIsGood={() => {
+                  setIsGood({ ...isGood, [mod.hash]: !isGood[mod.hash] })
+                }}
+              />
+            ) : (
+              mod.hash
+            )}
           </Button>
         </div>
       ))}

@@ -398,17 +398,18 @@ class Tree:
         _G = G.copy()
 
         G = Tree.graph_without_text_sequence(G)
+
         try:
-            depth = math.log(len(G.nodes()), 3)
+            depth = math.log(len(G.nodes()), 3) + 1
         except:
             depth = 0
 
-        print (f"{depth=}")
+        print(f"{depth=}")
 
         # Sort nodes by score and get the top 10
         sorted_nodes = Tree.top_n_subsuming_nodes(G, n=4)
 
-        print (f"{sorted_nodes=}")
+        print(f"{sorted_nodes=}")
 
         best_subgraph = None
         best_start_node = None

@@ -17,17 +17,15 @@ def threerarchy(hash_id):
 
     old_state, i = states[hash_id]
 
-    print (f"{len(old_state.graph.edges())=}")
+    print(f"{len(old_state.graph.edges())=}")
 
     old_graph = Tree.max_score_triangle_subgraph(
         old_state.graph, return_start_node=True
     )
     new_graph = update_triangle_graph(old_state, i, hash_id, return_start_node=True)
 
-    print (f"----------- **** { new_graph[0].nodes=}")
-    print (f"----------- **** { new_graph[0].edges=}")
-
-
+    print(f"----------- **** { new_graph[0].nodes=}")
+    print(f"----------- **** { new_graph[0].edges=}")
 
     new_state, i = (
         old_state,
@@ -35,10 +33,10 @@ def threerarchy(hash_id):
     )
     states[hash_id] = new_state, i
 
-    print (f"MAKE PATCH FROM   ----------------------- {len(old_graph[0].edges())=}")
-    print (f"MAKE PATCH FROM   ----------------------- {len(new_graph[0].edges())=}")
-    print (f"MAKE PATCH FROM   ----------------------- {old_graph[1]=}")
-    print (f"MAKE PATCH FROM   ----------------------- {new_graph[1]=}")
+    print(f"MAKE PATCH FROM   ----------------------- {len(old_graph[0].edges())=}")
+    print(f"MAKE PATCH FROM   ----------------------- {len(new_graph[0].edges())=}")
+    print(f"MAKE PATCH FROM   ----------------------- {old_graph[1]=}")
+    print(f"MAKE PATCH FROM   ----------------------- {new_graph[1]=}")
 
     try:
         patch = jsonpatch.make_patch(

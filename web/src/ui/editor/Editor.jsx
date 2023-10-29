@@ -25,7 +25,7 @@ export const Editor = () => {
   const [state, setState] = useState(null)
   const [patch, _setPatch] = useState(null)
   const [mods, setMods] = useState(null)
-  const [activeTab, setActiveTab] = useState('json')
+  const [activeTab, setActiveTab] = useState('ex')
 
   const [_text, _setText] = useState('')
   const [meta, setMeta] = useState('')
@@ -113,6 +113,7 @@ export const Editor = () => {
       console.log('set_mods')
       setMods(mods)
     })
+
     socket.on('set_task_id', (task_id) => {
       if (task_id !== taskId) {
         console.log('set_task_id', task_id, task_id)
@@ -169,6 +170,10 @@ export const Editor = () => {
       socket.off('set_hash')
       socket.off('set_text')
     }
+    socket.on('refresh', (mods) => {
+      console.log('set_initial_mods')
+      setMods(mods)
+    })
   }, [hash, state])
 
   useEffect(() => {
@@ -181,6 +186,11 @@ export const Editor = () => {
   useEffect(() => {
     socket.timeout(3000).emit('set_initial_mods')
   }, [])
+
+  const deleteMod = (hash) => {
+    console.log('deleteMod', hash)
+    socket.timeout(3000).emit('delete_mod', hash)
+  }
 
   return (
     <div className="App" style={{ overflowY: 'scroll' }}>
@@ -243,7 +253,7 @@ export const Editor = () => {
           {
             key: 'ex',
             label: 'Experiments',
-            children: <ExperimentsView {...{ mods }} />,
+            children: <ExperimentsView {...{ mods, deleteMod }} />,
           },
           {
             key: 'pz',

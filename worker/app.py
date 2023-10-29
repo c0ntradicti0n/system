@@ -21,7 +21,7 @@ def enqueue_update_task():
     try:
         # If the file exists, read the task_id from it
         if os.path.exists(file_path):
-            with open(file_path, 'r') as f:
+            with open(file_path, "r") as f:
                 existing_task = f.read().strip()
 
             if existing_task:
@@ -36,10 +36,11 @@ def enqueue_update_task():
     task = threerarchy.delay(hash_id)
 
     # Save the new task_id to the file
-    with open(file_path, 'w') as f:
+    with open(file_path, "w") as f:
         f.write(task.id)
 
     return jsonify({"task_id": task.id}), 202
+
 
 @app.route("/task_status/<task_id>", methods=["GET"])
 def get_task_status(task_id):

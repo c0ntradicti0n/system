@@ -38,9 +38,7 @@ const moptions = (size, nest, all_muris) => ({
       }
       // For the third item, place it at the bottom right
       else if (i === 2) {
-
-
-                x = 0
+        x = 0
         y = size * (1 / nest)
       }
 
@@ -72,12 +70,10 @@ const moptions = (size, nest, all_muris) => ({
       event.srcEvent.stopPropagation()
       return Muuri.ItemDrag.defaultStartPredicate(item, event)
     } catch (e) {
-        console.log('dragStartPredicate', e)
+      console.log('dragStartPredicate', e)
     }
-
   },
   dragSort: () => {
-
     console.log('dragSort', all_muris)
     return all_muris
   },
@@ -130,28 +126,33 @@ const MutableTriangle = ({ nest, fullId, data, _key, size }) => {
       <div className="puzzle-item-content triangle-content"></div>
       {!isLeafNode && data && (
         <div ref={gridRef} className="puzzle-grid">
-          {<MutableTriangle
-                  nest={nest + 1}
-                  fullId={fullId +  "3"}
-                  data={data[3] ?? {".": ""} }
-                  _key={fullId + "3"}
-                  size={size / 2}
-                /> }
-                    {<MutableTriangle
-                  nest={nest + 1}
-                  fullId={fullId +  "2"}
-                  data={data[2]  ?? {".": ""}}
-                  _key={fullId + "2"}
-                  size={size / 2}
-                /> }
-                              {<MutableTriangle
-                  nest={nest + 1}
-                  fullId={fullId +  "1"}
-                  data={data[1]  ?? {".": ""}}
-                  _key={fullId + "1"}
-                  size={size / 2}
-                /> }
-
+          {
+            <MutableTriangle
+              nest={nest + 1}
+              fullId={fullId + '3'}
+              data={data[3] ?? { '.': '' }}
+              _key={fullId + '3'}
+              size={size / 2}
+            />
+          }
+          {
+            <MutableTriangle
+              nest={nest + 1}
+              fullId={fullId + '2'}
+              data={data[2] ?? { '.': '' }}
+              _key={fullId + '2'}
+              size={size / 2}
+            />
+          }
+          {
+            <MutableTriangle
+              nest={nest + 1}
+              fullId={fullId + '1'}
+              data={data[1] ?? { '.': '' }}
+              _key={fullId + '1'}
+              size={size / 2}
+            />
+          }
         </div>
       )}
     </div>
@@ -171,11 +172,7 @@ export const Puzzle = ({
 
   useEffect(() => {
     setItems(JSON.parse(JSON.stringify(data)))
-  }, [data]);
-
-
-
-
+  }, [data])
 
   useMuuriGrid(
     gridRef,
@@ -191,16 +188,18 @@ export const Puzzle = ({
 
   return (
     <div ref={gridRef} className="puzzle-grid" id="#puzzle-drag-container">
-      {Object.entries(items).sort(([a], [b]) => b - a).map(([key, item]) => (
-        <MutableTriangle
-          key={key}
-          nest={2}
-          fullId={key}
-          data={item}
-          _key={key}
-          size={SIZE}
-        />
-      ))}
+      {Object.entries(items)
+        .sort(([a], [b]) => b - a)
+        .map(([key, item]) => (
+          <MutableTriangle
+            key={key}
+            nest={2}
+            fullId={key}
+            data={item}
+            _key={key}
+            size={SIZE}
+          />
+        ))}
     </div>
   )
 }

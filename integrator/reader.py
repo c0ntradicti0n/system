@@ -8,7 +8,7 @@ grammar = Grammar(
     text = (line / other_line)*
     line = ws? number ws? content ws?
     other_line = ~"[^\\n]*" ws?
-    number = ~"[0-9.]+"
+    number = ~"[0-9\\.]+\\-[^:]+\\:"  / ~"[0-9][0-9\\.]+" 
     content = ~"(?:(?!\\d+\\s*\\.).)*"  # Match any character until another numbered line or end of text
     ws = ~"\\s+"
     """
@@ -79,3 +79,5 @@ Every tautology itself shows that it is a tautology.
 
     parsed_data = parse_text(text)
     pprint(parsed_data)
+
+    pprint(get_inputs("texts/euclid.txt"))

@@ -1,4 +1,5 @@
 import gc
+import re
 import time
 
 import requests
@@ -79,7 +80,7 @@ def socket_event(event_name, emit_event_name=None):
 @socket_event("update_state", "set_task_id")
 def handle_update(hash_id):
     if not hash_id:
-        print (f"handle_update hash id null!!! {hash_id=}")
+        print(f"handle_update hash id null!!! {hash_id=}")
         return
     gc.collect()
 
@@ -107,6 +108,17 @@ def handle_trigger_celery(task_id):
 def handle_set_user_mods():
     print(f"handle_set_user_mods")
     return states.get_all()
+
+
+@socket_event("delete_mod", "refresh")
+def handle_delete_mod(hash):
+    if not hash:
+        print(f"handle_delete_mod hash id null!!! {hash=}")
+        return
+    assert re.match(r"[a-f0-9]{64}", hash)
+    print(f"delete_mod", hash)
+    del states[hash]
+    return hash
 
 
 @socket_event("set_init_state", "set_state")
