@@ -370,7 +370,7 @@ class Tree:
 
         # Compute sum of scores and edge count
         for node in G.nodes():
-            for _, _, data in G.out_edges(node, data=True):
+            for _, _, data in G.in_edges(node, data=True):
                 if "h_score" in data and data["h_score"]:
                     subsumption_score_sum[node] += data["h_score"]
                     outgoing_edge_count[node] += 1
