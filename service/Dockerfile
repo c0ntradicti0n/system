@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM kalilinux/kali-rolling:latest
+FROM python:3.11
 
 ENV PYTHONUNBUFFERED 1
 USER root
@@ -20,6 +20,7 @@ RUN pip3 config list
 RUN pip3 install uwsgi
 RUN --mount=type=cache,target=/root/.cache/pip  pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 RUN --mount=type=cache,target=/root/.cache/pip  pip3 install --no-cache-dir -r requirements.prod
+
 RUN mkdir /.cache
 RUN chmod 777 /.cache
 

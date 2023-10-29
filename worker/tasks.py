@@ -19,7 +19,7 @@ def threerarchy(hash_id):
 
     print(f"{len(old_state.graph.edges())=}")
 
-    old_graph = Tree.max_score_triangle_subgraph(
+    old_graph = old_state.max_score_triangle_subgraph(
         old_state.graph, return_start_node=True
     )
     new_graph = update_triangle_graph(old_state, i, hash_id, return_start_node=True)

@@ -9,11 +9,8 @@ requests
 cython
 pyyaml
 ruamel.yaml
-langchain
-chromadb
-sentence-transformers
-tensorboardX
-tensorboard
+
+
 addict
 Flask-SocketIO
 eventlet
@@ -24,3 +21,4 @@ gevent-websocket
 gunicorn
 redis
 
+networkx

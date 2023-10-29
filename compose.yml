@@ -1,6 +1,7 @@
 version: "3"
 services:
   nginx:
+
     image: nginx:latest
     container_name: nginx
     restart: unless-stopped
@@ -27,6 +28,7 @@ services:
       - ./.certs:$CERTS
 
   server:
+    image: server
 
     logging:
       driver: "json-file"
@@ -57,6 +59,7 @@ services:
       - "./lib:/app/lib"
 
   service:
+    image: service
 
     logging:
       driver: "json-file"
@@ -91,6 +94,7 @@ services:
       - "./.caches/.cache-cr:/chroma:rw"
       - "./.caches/.cache-hf:/.cache:rw"
   integrator:
+    image: integrator:latest
 
     logging:
       driver: "json-file"
@@ -107,7 +111,6 @@ services:
         SYSTEM: /system
 
     restart: unless-stopped
-    image: integrator
 
     container_name: integrator
     env_file:
@@ -137,6 +140,7 @@ services:
       - "./.caches/.cache-mpl:/.config:rw"
 
   linker:
+    image: linker:latest
     profiles:
       - linker
     mem_limit: 10g
@@ -174,6 +178,8 @@ services:
 
 
   classifier:
+    image: classifier
+
     profiles:
       - classifier
     mem_limit: 10g
@@ -210,7 +216,7 @@ services:
 
 
   web:
-
+    image: web:latest
     logging:
       driver: "json-file"
       options:
@@ -261,6 +267,7 @@ services:
         - "./.caches/.cache-mpl:/.config:rw"
 
   queue:
+    image: queue:latest
     build: worker
     command: ["python", "app.py"]
     ports:

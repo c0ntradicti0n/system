@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM kalilinux/kali-rolling:latest
+FROM python:3.11-slim-buster
 
 ENV PYTHONUNBUFFERED 1
 USER root

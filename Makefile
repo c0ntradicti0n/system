@@ -1,4 +1,8 @@
 -include .env
+ifneq ($(ENV_FILE),)
+	include $(ENV_FILE)
+	export
+endif
 
 export COMPOSE_PROFILES=default
 
@@ -13,6 +17,25 @@ start:
 	BUILDKIT_PROGRESS=plain docker compose build
 	docker compose up -d
 
+
+build:
+	eval $(minikube docker-env)  &&docker compose down -v
+	BUILDKIT_PROGRESS=plain docker compose build
+
+kompose:
+	$(MAKE) ENV_FILE=.env _kompose
+_kompose:
+	kompose convert -f compose.yml -o k8s/
+
+apply:
+	eval $$(minikube docker-env) && kubectl apply -f k8s/
+
+minikube-add-images:
+	eval $$(minikube docker-env) && docker build -t worker:latest worker/.
+	eval $$(minikube docker-env) && docker build -t queue:latest worker/.
+	eval $$(minikube docker-env) && docker build -t web:latest web/.
+	eval $$(minikube docker-env) && docker build -t classifier:latest classifier/.
+	eval $$(minikube docker-env) && docker build -t integrator:latest integrator/.
 
 stop:
 	docker compose down -v

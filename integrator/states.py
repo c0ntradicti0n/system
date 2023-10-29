@@ -2,6 +2,8 @@ import os
 import pickle
 from shutil import rmtree
 
+import regex as re
+
 from integrator.reader import parse_text
 from integrator.tree import Tree
 from lib.ls import list_files_with_regex
@@ -82,6 +84,20 @@ class States:
             tree.save_state(i, hash_id)
             print(f"saved {i=} {hash_id} {tree=} ")
 
+            # Get all state filenames
+            state_indices = list_files_with_regex(
+                "states/" + hash_id, r"(?P<filename>tree_state_(?P<i>\d+)\.pkl)"
+            )
+
+            # Extract and sort the numeric parts of the filenames
+            state_indices.sort(reverse=True, key=lambda x: int(x["i"]))
+
+            for state_index in state_indices[3:]:
+                try:
+                    os.unlink(f"states/{hash_id}/{state_index['filename']}")
+                except FileNotFoundError:
+                    pass
+
     def __delitem__(self, key):
         rmtree(self.path(key), ignore_errors=True)
         try:
@@ -95,3 +111,8 @@ class States:
 
 
 states = States()
+
+
+if __name__ == "__main__":
+    v, i = states["1cb10b667a508d3585b760a6ef9e8567b38af5421469a767678007a8a525d911"]
+    states["1cb10b667a508d3585b760a6ef9e8567b38af5421469a767678007a8a525d911"] = v, i

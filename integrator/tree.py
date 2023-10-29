@@ -1,3 +1,4 @@
+# cython: language_level=3
 import math
 import os
 import pickle
@@ -19,6 +20,7 @@ class Tree:
         self.inputs = enumerated_texts
         self._populate_graph(enumerated_texts)
         self._create_sequence_edges()
+        self.start_node = None
 
     def _populate_graph(self, enumerated_texts):
         for key, text in enumerated_texts:
@@ -393,23 +395,25 @@ class Tree:
         # Return top n nodes
         return sorted_nodes[:n]
 
-    @staticmethod
-    def max_score_triangle_subgraph(G, return_start_node=False):
-        _G = G.copy()
+    def max_score_triangle_subgraph(self, __G, return_start_node=False):
+        _G = __G.copy()
 
-        G = Tree.graph_without_text_sequence(G)
+        G = Tree.graph_without_text_sequence(_G)
 
         try:
-            depth = math.log(len(G.nodes()), 3) + 1
+            depth = math.log(len(G.nodes()), 3)
         except:
             depth = 0
 
-        print(f"{depth=}")
+        # print(f"{depth=}")
 
         # Sort nodes by score and get the top 10
-        sorted_nodes = Tree.top_n_subsuming_nodes(G, n=4)
+        if not self.start_node:
+            sorted_nodes = Tree.top_n_subsuming_nodes(G, n=4)
+        else:
+            sorted_nodes = [self.start_node]
 
-        print(f"{sorted_nodes=}")
+        # print(f"{sorted_nodes=}")
 
         best_subgraph = None
         best_start_node = None
@@ -456,6 +460,7 @@ class Tree:
             "graph": self.graph,
             "yielded": self.yielded,
             "j": self.j,
+            "start_node": self.start_node
         }
         with open(filename, "wb") as file:
             pickle.dump(state, file)
@@ -487,15 +492,33 @@ class Tree:
             )
             latest_number = number
 
-        with open(filename, "rb") as file:
-            state = pickle.load(file)
-            tree = cls([])
-            tree.inputs = state["inputs"]
-            tree.graph = state["graph"]
-            tree.yielded = state["yielded"]
-            tree.j = state["j"] + 1
+        try:
 
-            return tree, latest_number + 1
+            with open(filename, "rb") as file:
+                state = pickle.load(file)
+                tree = cls([])
+                tree.inputs = state["inputs"]
+                tree.graph = state["graph"]
+                tree.yielded = state["yielded"]
+                tree.start_node = state["start_node"] if "start_node" in state else None
+                tree.j = state["j"] + 1
+
+                return tree, latest_number + 1
+        except MemoryError:
+            print("Memory error in loading state")
+            filename = os.path.join(
+                cls.pickle_folder_path(hash), f"tree_state_{latest_number-1}.pkl"
+            )
+            with open(filename, "rb") as file:
+                state = pickle.load(file)
+                tree = cls([])
+                tree.inputs = state["inputs"]
+                tree.graph = state["graph"]
+                tree.yielded = state["yielded"]
+                tree.start_node = state["start_node"] if "start_node" in state else None
+                tree.j = state["j"] + 1
+
+                return tree, latest_number + 1
 
     def dump_graph(self, hash, graph=None, filename=None):
         if graph is None:
@@ -583,7 +606,7 @@ def test_max_score_triangle_subgraph():
         tree.add_relation(n1, n2, relation_type=rel, trident=trident, **attr)
 
     # Get the max score path
-    result_graph = Tree.max_score_triangle_subgraph(tree.graph)
+    result_graph = tree.max_score_triangle_subgraph(tree.graph)
 
     print(result_graph.edges(data=True))
     for n1, n2, rel, trident, attr in edges_to_create:
@@ -616,7 +639,7 @@ def test_max_score_triangle_subgraph_worse_paths():
         tree.add_relation(n1, n2, relation_type=rel, trident=trident, **attr)
 
     # Get the max score path
-    result_graph = Tree.max_score_triangle_subgraph(tree.graph)
+    result_graph = tree.max_score_triangle_subgraph(tree.graph)
 
     print(result_graph.edges(data=True))
     for n1, n2, rel, trident, attr in edges_to_create:
@@ -714,7 +737,7 @@ def generate_test_data(num_nodes=100, max_score=1.0):
 
 def test_with_generated_data():
     tree = generate_test_data()
-    result_graph, start_node = Tree.max_score_triangle_subgraph(
+    result_graph, start_node = tree.max_score_triangle_subgraph(
         tree.graph, return_start_node=True
     )
     tree.draw_graph(result_graph, path="generated_graph.png", text_relation=False)

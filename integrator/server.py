@@ -128,7 +128,21 @@ def handle_set_state(hash_id):
     old_state, i = states[hash_id]
 
     active_version = Tree.serialize_graph_to_structure(
-        *Tree.max_score_triangle_subgraph(old_state.graph, return_start_node=True)
+        *old_state.max_score_triangle_subgraph(old_state.graph, return_start_node=True)
+    )
+    return active_version
+
+
+@socket_event("set_start_node", "set_state")
+def set_start_node(new_start_node, hash_id):
+    print(f"set_start_node {new_start_node} {hash_id}")
+
+    old_state, i = states[hash_id]
+    old_state.start_node = new_start_node
+    states[hash_id] = old_state, i
+
+    active_version = Tree.serialize_graph_to_structure(
+        *old_state.max_score_triangle_subgraph(old_state.graph, return_start_node=True)
     )
     return active_version
 

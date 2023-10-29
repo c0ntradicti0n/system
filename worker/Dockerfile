@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+FROM python:3.11-slim-buster
 
 WORKDIR /app
 RUN --mount=type=cache,target=/root/.cache/pip  pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu

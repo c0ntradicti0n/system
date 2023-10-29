@@ -24,7 +24,6 @@ const moptions = (size, nest, all_muris) => ({
 
     for (var i = 0; i < items.length; i++) {
       var x, y
-      console.log('layout ITEM', items[i].getElement())
 
       // For the first item, place it at the top middle
       if (i === 0) {
@@ -43,7 +42,7 @@ const moptions = (size, nest, all_muris) => ({
       }
 
       layout.slots.push(x, y)
-      console.log('layout', { x, y })
+      //console.log('layout', { x, y })
     }
 
     // Call the callback function to apply the layout.
@@ -80,11 +79,19 @@ const moptions = (size, nest, all_muris) => ({
   size: size,
 })
 
-const MutableTriangle = ({ nest, fullId, data, _key, size }) => {
+const MutableTriangle = ({
+  nest,
+  fullId,
+  data,
+  _key,
+  size,
+  level = 0,
+  action = null,
+}) => {
   const gridRef = useRef(null)
   const { addInstance, removeInstance, muuriInstances } = useMuuriStore()
 
-  console.log('Triangle', { data, _key, fullId, size })
+  //console.log('Triangle', { data, _key, fullId, size })
 
   useMuuriGrid(
     gridRef,
@@ -106,7 +113,7 @@ const MutableTriangle = ({ nest, fullId, data, _key, size }) => {
         height: size.toString() + 'px',
         width: size.toString() + 'px',
         fontSize: (size / 10).toString() + 'px',
-        zIndex: 1000 * nest,
+        zIndex: 1,
       }}
       key={_key}
     >
@@ -119,13 +126,30 @@ const MutableTriangle = ({ nest, fullId, data, _key, size }) => {
           fontSize: (size / 10).toString() + 'px',
         }}
       >
-        {_key} <br />
-        {postProcessTitle(data['.'])}
+        <div className="puzzle-item-content triangle-content">
+          <div style={{ zIndex: level + 1000 * nest, position: 'relative' }}>
+            {_key}{' '}
+          </div>
+          {postProcessTitle(data['.'])}
+        </div>
       </div>
-
-      <div className="puzzle-item-content triangle-content"></div>
       {!isLeafNode && data && (
-        <div ref={gridRef} className="puzzle-grid">
+        <div
+          ref={gridRef}
+          style={{ zIndex: nest + 10 }}
+          className="puzzle-grid"
+          onMouseDown={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            console.log('ACTION !!!', fullId, action)
+
+            if (action !== null) {
+              console.log('do action !!!', fullId, action)
+              action(fullId)
+            }
+            else console.log('haLLOOOOO', fullId, action)
+          }}
+        >
           {
             <MutableTriangle
               nest={nest + 1}
@@ -133,6 +157,7 @@ const MutableTriangle = ({ nest, fullId, data, _key, size }) => {
               data={data[3] ?? { '.': '' }}
               _key={fullId + '3'}
               size={size / 2}
+              action={action}
             />
           }
           {
@@ -142,6 +167,7 @@ const MutableTriangle = ({ nest, fullId, data, _key, size }) => {
               data={data[2] ?? { '.': '' }}
               _key={fullId + '2'}
               size={size / 2}
+              action={action}
             />
           }
           {
@@ -151,6 +177,7 @@ const MutableTriangle = ({ nest, fullId, data, _key, size }) => {
               data={data[1] ?? { '.': '' }}
               _key={fullId + '1'}
               size={size / 2}
+              action={action}
             />
           }
         </div>
@@ -163,6 +190,7 @@ export const Puzzle = ({
   children,
   data = undefined,
   applyPatch,
+  action = null,
   ...props
 }) => {
   const gridRef = useRef(null)
@@ -173,6 +201,7 @@ export const Puzzle = ({
   useEffect(() => {
     setItems(JSON.parse(JSON.stringify(data)))
   }, [data])
+  console.log("ACTION", action)
 
   useMuuriGrid(
     gridRef,
@@ -198,6 +227,7 @@ export const Puzzle = ({
             data={item}
             _key={key}
             size={SIZE}
+            action={action}
           />
         ))}
     </div>

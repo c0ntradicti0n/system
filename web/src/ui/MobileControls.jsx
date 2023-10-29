@@ -122,7 +122,12 @@ export const MobileControls = ({
         </button>
         <ShareModal linkInfo={linkInfo} />
         <Button
-          style={{ position: 'relative', left: '40px', top: '40px' }}
+          style={{
+            zIndex: 999999999,
+            position: 'relative',
+            left: '40px',
+            top: '40px',
+          }}
           onClick={() => navigate('/editor#activeTab=ex')}
           className="button editor-controls"
           aria-label="Editor"

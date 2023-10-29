@@ -79,7 +79,7 @@ def update_triangle_graph(t: Tree, i, hash, return_start_node=None):
             t.save_state(i, hash)
 
     with catchtime("NEW GRAPH"):
-        return Tree.max_score_triangle_subgraph(
+        return t.max_score_triangle_subgraph(
             t.graph, return_start_node=return_start_node
         )
 

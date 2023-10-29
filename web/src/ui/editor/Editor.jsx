@@ -50,9 +50,7 @@ export const Editor = () => {
   const timeoutId = useRef(null)
 
   const checkAwaitState = useCallback(() => {
-    console.log('CHECK ', taskId)
     if (taskId) {
-      console.log('CHECK AWAIT STATE', taskId)
       socket.timeout(3000).emit('patch_poll', taskId)
 
       // Clear previous timeout, just in case
@@ -139,7 +137,6 @@ export const Editor = () => {
         active_patching = false
         setTaskId(null) // Reset taskId after getting result
 
-        console.log('RESTART PATCHING', hash, state)
         socket.timeout(3000).emit('update_state', hash)
         active_patching = true
       }
@@ -260,7 +257,7 @@ export const Editor = () => {
             label: 'Puzzle',
             children: state && (
               <PuzzleView
-                {...{ hash, text, patch, state }}
+                {...{ socket, hash, text, patch, state }}
                 applyPatch={applyPatch}
               />
             ),
