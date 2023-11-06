@@ -78,7 +78,7 @@ def socket_event(event_name, emit_event_name=None):
 
 
 @socket_event("update_state", "set_task_id")
-def handle_update(hash_id):
+def update_state(hash_id):
     if not hash_id:
         print(f"handle_update hash id null!!! {hash_id=}")
         return
@@ -104,14 +104,14 @@ def handle_trigger_celery(task_id):
     return result
 
 
-@socket_event("set_initial_mods", "set_mods")
-def handle_set_user_mods():
+@socket_event("get_mods", "set_mods")
+def get_mods():
     print(f"handle_set_user_mods")
     return states.get_all()
 
 
 @socket_event("delete_mod", "refresh")
-def handle_delete_mod(hash):
+def delete_mod(hash):
     if not hash:
         print(f"handle_delete_mod hash id null!!! {hash=}")
         return
@@ -121,7 +121,7 @@ def handle_delete_mod(hash):
     return hash
 
 
-@socket_event("set_init_state", "set_state")
+@socket_event("get_state", "set_state")
 def handle_set_state(hash_id):
     print(f"handle_set_state {hash_id}")
 
@@ -133,13 +133,27 @@ def handle_set_state(hash_id):
     return active_version
 
 
-@socket_event("set_start_node", "set_state")
-def set_start_node(new_start_node, hash_id):
-    print(f"set_start_node {new_start_node} {hash_id}")
+@socket_event("get_params", "set_params")
+def get_params(hash_id):
+    print(f"get_params {hash_id}")
+    if not hash_id.strip():
+        return None
+    try:
+        params = states[hash_id + "-params"]
+        return params
+
+    except Exception as e:
+        print(f"error getting params {hash_id=}" + str(e))
+        return None
+
+
+@socket_event("save_params", "set_state")
+def save_params(params, hash_id):
+    print(f"save_params {params} {hash_id}")
+
+    states[hash_id + "-params"] = params
 
     old_state, i = states[hash_id]
-    old_state.start_node = new_start_node
-    states[hash_id] = old_state, i
 
     active_version = Tree.serialize_graph_to_structure(
         *old_state.max_score_triangle_subgraph(old_state.graph, return_start_node=True)
@@ -147,9 +161,9 @@ def set_start_node(new_start_node, hash_id):
     return active_version
 
 
-@socket_event("set_init_text", "set_hash")
-def handle_set_text(text):
-    print(f"handle_set_text '{text[:10]}...'")
+@socket_event("get_text", "set_hash")
+def get_text(text):
+    print(f"get_text '{text[:10]}...'")
 
     if not text.strip():
         return
@@ -162,20 +176,20 @@ def handle_set_text(text):
 
 
 @socket_event("get_meta", "set_meta")
-def handle_get_meta(hash_id):
-    print(f"handle_get_meta {hash_id=} ")
+def get_meta(hash_id):
+    print(f"get_meta {hash_id=} ")
 
     if not hash_id.strip():
         return
 
     meta = states[hash_id + "-meta"]
-    print(f"handle_get_meta {meta=}")
+    print(f"get_meta {meta=}")
     return meta
 
 
-@socket_event("set_init_meta")
-def handle_set_meta(hash_id, meta):
-    print(f"handle_set_meta {hash_id=} '{meta[:10]}...'")
+@socket_event("save_meta")
+def save_meta(hash_id, meta):
+    print(f"save_meta {hash_id=} '{meta[:10]}...'")
 
     if not meta.strip():
         return
@@ -184,12 +198,12 @@ def handle_set_meta(hash_id, meta):
     return hash_id
 
 
-@socket_event("set_init_hash", "set_text")
-def handle_set_hash(hash_id):
-    print(f"set_init_hash {hash_id}")
+@socket_event("get_hash", "set_text")
+def get_hash(hash_id):
+    print(f"get_hash {hash_id}")
     if not hash_id:
         return
-    print(f"set_init_hash {hash_id}")
+    print(f"get_hash {hash_id}")
 
     text = states[hash_id + "-text"]
     return text[:1000]

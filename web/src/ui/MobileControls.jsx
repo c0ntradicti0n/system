@@ -89,7 +89,7 @@ export const MobileControls = ({
       <div className="navigation-controls" style={mobileStyles}>
         <button
           onClick={onZoomIn}
-          className="button top-controls"
+          className="button red top-controls"
           aria-label="Up"
           title="Hotkey: ArrowUp"
         >
@@ -97,7 +97,7 @@ export const MobileControls = ({
         </button>
         <button
           onClick={onLeft}
-          className="button left-controls"
+          className="button red left-controls"
           aria-label="Left"
           title="Hotkey: ArrowLeft"
         >
@@ -106,7 +106,7 @@ export const MobileControls = ({
 
         <button
           onClick={onRight}
-          className="button right-controls"
+          className="button red right-controls"
           aria-label="Right"
           title="Hotkey: ArrowRight"
         >
@@ -114,7 +114,7 @@ export const MobileControls = ({
         </button>
         <button
           onClick={onZoomOut}
-          className="button bottom-controls"
+          className="button red bottom-controls"
           aria-label="Down"
           title="Hotkey: ArrowDown"
         >
@@ -129,7 +129,7 @@ export const MobileControls = ({
             top: '40px',
           }}
           onClick={() => navigate('/editor#activeTab=ex')}
-          className="button editor-controls"
+          className="button red editor-controls"
           aria-label="Editor"
           title="Editor"
         >

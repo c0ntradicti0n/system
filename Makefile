@@ -13,13 +13,13 @@ format:
 
 
 start:
-	docker compose down -v
+	docker compose down -v -t 1
 	BUILDKIT_PROGRESS=plain docker compose build
 	docker compose up -d
 
 
 build:
-	eval $(minikube docker-env)  &&docker compose down -v
+	eval $(minikube docker-env)  && docker compose down -v -t 1
 	BUILDKIT_PROGRESS=plain docker compose build
 
 kompose:
@@ -38,7 +38,7 @@ minikube-add-images:
 	eval $$(minikube docker-env) && docker build -t integrator:latest integrator/.
 
 stop:
-	docker compose down -v
+	docker compose down -v -t 0
 
 
 sskeys:

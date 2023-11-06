@@ -209,6 +209,10 @@ ant-btn {
   z-index: 10;
 }
 
+.red {
+  background-color: crimson;
+}
+
 .button {
   color: #fff;
   border: none;

@@ -11,7 +11,7 @@ count=1
 
 # Append built-in commands to the list with a brief description
 compgen -b | while IFS= read -r builtin; do
-    description=$(LANG=C help "$builtin" 2>/dev/null | head -n 1) # Get the first line of the help text for a brief description
+    description=$(LANG=C help "$builtin" 2>/dev/null) # Get the first line of the help text for a brief description
     echo "$count. $builtin - $description" >> "$OUTPUT_FILE"
     ((count++))
 done

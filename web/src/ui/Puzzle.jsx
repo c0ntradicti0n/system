@@ -6,6 +6,7 @@ import { postProcessTitle } from '../lib/position'
 import useMuuriStore from '../lib/MuuriStore'
 import useMuuriGrid from '../lib/useMuuriGrid'
 import jsonPatch from 'fast-json-patch'
+import calculateFontSize from '../lib/FontSize'
 
 const SIZE = 300
 
@@ -103,6 +104,8 @@ const MutableTriangle = ({
 
   const isLeafNode =
     data && !Object.values(data).some((value) => typeof value === 'object')
+  const title = postProcessTitle(data['.'])?.slice(0, 100)
+  const { shortTitle, fontSize } = calculateFontSize(size, title, 2)
 
   return (
     <div
@@ -112,7 +115,6 @@ const MutableTriangle = ({
 
         height: size.toString() + 'px',
         width: size.toString() + 'px',
-        fontSize: (size / 10).toString() + 'px',
         zIndex: 1,
       }}
       key={_key}
@@ -121,16 +123,28 @@ const MutableTriangle = ({
         style={{
           position: 'absolute',
           top: size / 2,
-          textAlign: 'center',
-          width: size,
+            left: size / 2,
+          textAlign: 'left',
+          maxWidth: `${size / 4}px`,
+          zIndex: 1000 * nest,
           fontSize: (size / 10).toString() + 'px',
         }}
       >
-        <div className="puzzle-item-content triangle-content">
+        <div
+          className="puzzle-item-content triangle-content"
+          style={{
+            fontSize,
+            color: 'black',
+            whiteSpace: 'pre-wrap',
+            overflowWrap: 'break-word',
+            width: size,
+            transform: 'translateX(-25%)',
+          }}
+        >
           <div style={{ zIndex: level + 1000 * nest, position: 'relative' }}>
             {_key}{' '}
           </div>
-          {postProcessTitle(data['.'])}
+          {shortTitle}
         </div>
       </div>
       {!isLeafNode && data && (
@@ -146,8 +160,7 @@ const MutableTriangle = ({
             if (action !== null) {
               console.log('do action !!!', fullId, action)
               action(fullId)
-            }
-            else console.log('haLLOOOOO', fullId, action)
+            } else console.log('haLLOOOOO', fullId, action)
           }}
         >
           {
@@ -201,7 +214,7 @@ export const Puzzle = ({
   useEffect(() => {
     setItems(JSON.parse(JSON.stringify(data)))
   }, [data])
-  console.log("ACTION", action)
+  console.log('ACTION', action)
 
   useMuuriGrid(
     gridRef,

@@ -37,19 +37,14 @@ const ShareModal = ({ url = '', linkInfo }) => {
     }
   }
 
-  useEffect(() => {
-    window.addEventListener('keydown', handleHotkey)
-    return () => {
-      window.removeEventListener('keydown', handleHotkey)
-    }
-  }, [])
+
 
   return (
     <div style={{ zIndex: 112323213214213 }}>
       <Button
         onClick={() => setIsVisible(true)}
         icon={<ShareAltOutlined />}
-        className={'share-button'}
+        className="share-button red"
         aria-label="Share (Hotkey: s)"
       />
       <Modal

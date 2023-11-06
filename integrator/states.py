@@ -40,6 +40,11 @@ class States:
         return results
 
     def __getitem__(self, hash_id):
+        if hash_id.endswith("-params"):
+            with open(self.path(hash_id), "rb") as f:
+                params = pickle.load(f)
+            print(f"loaded params {hash_id}")
+            return params
         if hash_id.endswith("-text"):
             with open(self.path(hash_id), "rb") as f:
                 text = pickle.load(f)
@@ -52,7 +57,11 @@ class States:
             return meta
         else:
             if os.path.exists(self.path(hash_id + "-text")):
-                tree, i = Tree.load_state(hash_id)
+                try:
+                    tree, i = Tree.load_state(hash_id)
+                except Exception as e:
+                    print(f"Corrupt file; error loading {hash_id} {e}")
+                    i = None
                 if not i:
                     with open(self.path(hash_id + "-text"), "rb") as f:
                         text = pickle.load(f)
@@ -68,11 +77,15 @@ class States:
                 print(f"loaded tree {hash_id}")
 
                 return tree, i
+
             print(f"loaded nothing {hash_id}")
 
             return None, None
 
     def __setitem__(self, hash_id, state):
+        if hash_id.endswith("-params"):
+            with open(self.path(hash_id), "wb") as f:
+                pickle.dump(state, f)
         if hash_id.endswith("-text"):
             with open(self.path(hash_id), "wb") as f:
                 pickle.dump(state, f)

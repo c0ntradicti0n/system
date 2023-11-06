@@ -2,6 +2,7 @@
 import math
 import os
 import pickle
+from collections import defaultdict
 from pprint import pprint
 
 import networkx as nx
@@ -20,7 +21,7 @@ class Tree:
         self.inputs = enumerated_texts
         self._populate_graph(enumerated_texts)
         self._create_sequence_edges()
-        self.start_node = None
+        self.params = defaultdict(lambda: None)
 
     def _populate_graph(self, enumerated_texts):
         for key, text in enumerated_texts:
@@ -400,20 +401,21 @@ class Tree:
 
         G = Tree.graph_without_text_sequence(_G)
 
-        try:
-            depth = math.log(len(G.nodes()), 3)
-        except:
-            depth = 0
+        depth = self.params["depth"]
+        if not depth:
+            try:
+                depth = math.log(len(G.nodes()), 3)
+            except:
+                depth = 0
 
         # print(f"{depth=}")
 
         # Sort nodes by score and get the top 10
-        if not self.start_node:
+        start_node = self.params["start_node"]
+        if not start_node:
             sorted_nodes = Tree.top_n_subsuming_nodes(G, n=4)
         else:
-            sorted_nodes = [self.start_node]
-
-        # print(f"{sorted_nodes=}")
+            sorted_nodes = [start_node]
 
         best_subgraph = None
         best_start_node = None
@@ -460,7 +462,7 @@ class Tree:
             "graph": self.graph,
             "yielded": self.yielded,
             "j": self.j,
-            "start_node": self.start_node
+            "params": dict(self.params),
         }
         with open(filename, "wb") as file:
             pickle.dump(state, file)
@@ -493,32 +495,40 @@ class Tree:
             latest_number = number
 
         try:
-
             with open(filename, "rb") as file:
                 state = pickle.load(file)
                 tree = cls([])
                 tree.inputs = state["inputs"]
                 tree.graph = state["graph"]
                 tree.yielded = state["yielded"]
-                tree.start_node = state["start_node"] if "start_node" in state else None
+                params = defaultdict(lambda: None)
+                params.update(state["params"] if "params" in state else {})
+                tree.params = params
                 tree.j = state["j"] + 1
 
                 return tree, latest_number + 1
         except MemoryError:
             print("Memory error in loading state")
-            filename = os.path.join(
-                cls.pickle_folder_path(hash), f"tree_state_{latest_number-1}.pkl"
-            )
-            with open(filename, "rb") as file:
-                state = pickle.load(file)
-                tree = cls([])
-                tree.inputs = state["inputs"]
-                tree.graph = state["graph"]
-                tree.yielded = state["yielded"]
-                tree.start_node = state["start_node"] if "start_node" in state else None
-                tree.j = state["j"] + 1
 
-                return tree, latest_number + 1
+            try:
+                filename = os.path.join(
+                    cls.pickle_folder_path(hash), f"tree_state_{latest_number-1}.pkl"
+                )
+                with open(filename, "rb") as file:
+                    state = pickle.load(file)
+                    tree = cls([])
+                    tree.inputs = state["inputs"]
+                    tree.graph = state["graph"]
+                    tree.yielded = state["yielded"]
+                    params = defaultdict(lambda: None)
+                    params.update(state["params"] if "params" in state else {})
+                    tree.params = params
+                    tree.j = state["j"] + 1
+
+                    return tree, latest_number + 1
+            except:
+                print("Memory error in loading state")
+                return None, None
 
     def dump_graph(self, hash, graph=None, filename=None):
         if graph is None:

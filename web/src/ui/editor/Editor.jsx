@@ -2,14 +2,15 @@ import React, { useState, useEffect, useCallback, useRef } from 'react'
 import io from 'socket.io-client'
 import ShareModal from '../ShareModal'
 import { parseHash } from '../../lib/read_link_params'
-import TextArea from 'antd/es/input/TextArea'
 import jsonPatch from 'fast-json-patch'
-import { Button, Tabs } from 'antd'
+import { Tabs } from 'antd'
 import { JsonView } from './JsonView'
 import { TreeView } from './TreeView'
 import { TriangleView } from './TriangleView'
 import { ExperimentsView } from './ExperimentsView'
 import { PuzzleView } from './PuzzleView'
+import TextModal from './TextModal'
+import MetaModal from './MetaModal'
 var debounce = require('lodash.debounce')
 
 let taskId = null
@@ -26,6 +27,7 @@ export const Editor = () => {
   const [patch, _setPatch] = useState(null)
   const [mods, setMods] = useState(null)
   const [activeTab, setActiveTab] = useState('ex')
+  const [params, setParams] = useState({})
 
   const [_text, _setText] = useState('')
   const [meta, setMeta] = useState('')
@@ -41,7 +43,7 @@ export const Editor = () => {
       newState = jsonPatch.applyPatch(state, patch).newDocument
     } catch (e) {
       console.log('setPatch error', e)
-      if (hash) socket.timeout(3000).emit('set_init_state', hash)
+      if (hash) socket.timeout(3000).emit('get_state', hash)
     }
     _setPatch(patch)
     setState(newState)
@@ -69,7 +71,7 @@ export const Editor = () => {
       if (!init_phase) {
         console.log('INIT FROM HASH')
         init_phase = true
-        socket.timeout(3000).emit('set_init_hash', params.hash)
+        socket.timeout(3000).emit('get_hash', params.hash)
       }
     }
     if (params.activeTab !== undefined && params.activeTab !== activeTab) {
@@ -81,6 +83,7 @@ export const Editor = () => {
     if (hash && state && !active_patching) {
       console.log('START PATCHING', hash, state)
       socket.timeout(3000).emit('update_state', hash)
+      socket.timeout(3000).emit('get_params', hash)
       active_patching = true
     }
   }, [hash, state])
@@ -103,6 +106,10 @@ export const Editor = () => {
       setPatch(null)
       setState(null)
     })
+    socket.on('set_params', (params) => {
+      console.log('set_params', params)
+      setParams(params)
+    })
     socket.on('set_meta', (meta) => {
       console.log('set_meta', meta)
       setMeta(meta)
@@ -122,7 +129,7 @@ export const Editor = () => {
     })
     socket.on('initial_state', (data) => {
       console.log('initial_state', hash)
-      socket.timeout(3000).emit('set_init_state', hash)
+      socket.timeout(3000).emit('get_state', hash)
     })
     socket.on('set_state', (state) => {
       console.log('set_state')
@@ -167,21 +174,17 @@ export const Editor = () => {
       socket.off('set_hash')
       socket.off('set_text')
     }
-    socket.on('refresh', (mods) => {
-      console.log('set_initial_mods')
-      setMods(mods)
-    })
   }, [hash, state])
 
   useEffect(() => {
     console.log('useEffect', { hash, text })
     if (text && hash) {
-      socket.timeout(3000).emit('set_init_state', hash)
+      socket.timeout(3000).emit('get_state', hash)
       socket.timeout(3000).emit('get_meta', hash)
     }
   }, [hash, text])
   useEffect(() => {
-    socket.timeout(3000).emit('set_initial_mods')
+    socket.timeout(3000).emit('get_mods')
   }, [])
 
   const deleteMod = (hash) => {
@@ -192,53 +195,15 @@ export const Editor = () => {
   return (
     <div className="App" style={{ overflowY: 'scroll' }}>
       <ShareModal url={'/editor'} linkInfo={{ hash, activeTab }} />
-      <TextArea
-        showCount
-        value={_text}
-        maxLength={1000000}
-        style={{
-          height: 120,
-          marginBottom: 24,
-          backgroundColor: '#111 !important',
-        }}
-        onChange={(e) => {
-          _setText(e.target.value)
-        }}
-        placeholder="Paste your paragraphed text here"
+      <TextModal
+        socket={socket}
+        text={text}
+        setText={setText}
+        _text={_text}
+        _setText={_setText}
       />
-      <Button
-        onClick={() => {
-          setText(_text)
-          setHash(null)
-          console.log('set_text', _text)
-          socket.timeout(3000).emit('set_init_text', _text)
-        }}
-      >
-        Send Text
-      </Button>
-      <TextArea
-        showCount
-        value={meta}
-        maxLength={1000}
-        style={{
-          height: 120,
-          marginBottom: 24,
-          backgroundColor: '#111 !important',
-        }}
-        onChange={(e) => {
-          setMeta(e.target.value)
-        }}
-        placeholder="Paste some Metadata here, can have bib-text-formatted references"
-      />
-      <Button
-        onClick={() => {
-          console.log('set_meta', meta)
-          socket.timeout(3000).emit('set_init_meta', hash, meta)
-        }}
-      >
-        Set Metadata
-      </Button>{' '}
-      {taskId}
+      <MetaModal socket={socket} meta={meta} setMeta={setMeta} hash={hash} />
+
       <Tabs
         activeKey={activeTab}
         onChange={(key) => {
@@ -257,7 +222,7 @@ export const Editor = () => {
             label: 'Puzzle',
             children: state && (
               <PuzzleView
-                {...{ socket, hash, text, patch, state }}
+                {...{ socket, hash, text, patch, state, params }}
                 applyPatch={applyPatch}
               />
             ),
@@ -281,6 +246,9 @@ export const Editor = () => {
           },
         ]}
       />
+      <div style={{ position: 'fixed', left: 0, bottom:0 }} >
+        {taskId}</div>
+
     </div>
   )
 }
