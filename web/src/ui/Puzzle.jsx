@@ -104,8 +104,8 @@ const MutableTriangle = ({
 
   const isLeafNode =
     data && !Object.values(data).some((value) => typeof value === 'object')
-  const title = postProcessTitle(data['.'])?.slice(0, 100)
-  const { shortTitle, fontSize } = calculateFontSize(size, title, 2)
+  const title = postProcessTitle(data['.'])
+  const { shortTitle, fontSize } = calculateFontSize(size, title?.slice(0,100), 2)
 
   return (
     <div
@@ -140,12 +140,13 @@ const MutableTriangle = ({
             width: size,
             transform: 'translateX(-25%)',
           }}
+              title={title} // Full title as a tooltip
+
         >
           <div style={{ zIndex: level + 1000 * nest, position: 'relative' }}>
             {_key}{' '}
           </div>
-          {shortTitle}
-        </div>
+ <span title={title}>{shortTitle}</span>        </div>
       </div>
       {!isLeafNode && data && (
         <div
