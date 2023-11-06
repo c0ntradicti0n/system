@@ -1,0 +1,219 @@
+ 1. ls - Lists directory contents.
+ 2. cd - Changes the current directory.
+ 3. pwd - Prints the working directory path.
+ 4. mkdir - Creates a new directory.
+ 5. rmdir - Removes an empty directory.
+ 6. rm - Removes files or directories.
+ 7. cp - Copies files and directories.
+ 8. mv - Moves or renames files and directories.
+ 9. touch - Creates an empty file or updates the timestamp of an existing file.
+10. cat - Concatenates and displays file contents.
+11. less - Views file contents page by page.
+12. grep - Searches text using patterns.
+13. find - Searches for files in a directory hierarchy.
+14. chmod - Changes the file mode (permissions).
+15. chown - Changes file owner and group.
+16. ps - Reports a snapshot of current processes.
+17. top - Displays tasks and system status in real-time.
+18. kill - Sends a signal to a process, often used to stop the process.
+19. tar - Archives files, often used with compression.
+20. gzip/gunzip - Compresses or decompresses files using gzip.
+21. zip/unzip - Compresses and decompresses files in zip format.
+22. df - Displays disk space usage.
+23. du - Estimates file space usage.
+24. echo - Displays a line of text/string that is passed as an argument.
+25. which - Locates a command.
+26. man - Displays the manual page for a command.
+27. sudo - Executes a command as another user, typically the superuser.
+28. ssh - Secure Shell, a protocol for securely logging into remote machines.
+29. scp - Securely copies files between hosts on a network.
+30. wget/curl - Command-line tools for downloading files from the web.
+31. history - Displays command history.
+32. alias - Creates an alias for a command.
+33. env - Displays environment variables.
+34. export - Sets environment variables.
+35. diff - Compares files line by line.
+36. tail - Displays the last part of a file.
+37. head - Displays the beginning parts of a file.
+38. ln - Creates a link to a file.
+39. tee - Reads from the standard input and writes to both standard output and files.
+40. cut - Removes sections from each line of files.
+41. awk - A versatile programming language for working on files.
+42. sed - Stream editor for filtering and transforming text.
+43. tr - Translates or deletes characters.
+44. sort - Sorts lines of text files.
+45. uniq - Reports or omits repeated lines.
+46. xargs - Builds and executes command lines from standard input.
+47. jobs - Lists active jobs.
+48. fg - Continues a job in the foreground.
+49. bg - Continues a job in the background.
+50. crontab - Schedules commands to run periodically at fixed times, dates, or intervals.
+
+// Adding 50 more useful commands
+
+51. netstat - Shows network statistics.
+52. ifconfig/ip - Configures or displays network interface parameters for a network using TCP/IP.
+53. ping - Tests connectivity between two hosts.
+54. traceroute/tracert - Shows the route packets take to a network host.
+55. nslookup/dig - Queries Internet domain name servers.
+56. chmod - Changes file access permissions.
+57. chgrp - Changes group ownership of a file.
+58. umask - Sets the default permission for new files.
+59. useradd/userdel - Adds or deletes user accounts.
+60. groupadd/groupdel - Adds or deletes groups.
+61. passwd - Changes user password.
+62. who - Shows who is logged on.
+63. w - Displays who is online and what they are doing.
+64. last - Shows a listing of last logged in users.
+65. uptime - Shows how long the system has been running.
+66. uname - Shows system information.
+67. hostname - Sets or displays the host name of the system.
+68. dmesg - Displays bootup messages.
+69. mount - Mounts a filesystem.
+70. umount - Unmounts a filesystem.
+71. fsck - Checks and repairs a Linux filesystem.
+72. dd - Converts and copies a file.
+73. fdisk - Partition table manipulator for Linux.
+74. parted - A partition manipulation program.
+75. mkfs - Builds a Linux filesystem.
+76. sync - Synchronizes cached writes to persistent storage.
+77. shutdown - Shuts down or reboots the system.
+78. reboot - Reboots the system.
+79. wall - Broadcasts a message to all users.
+80. write - Sends a message to another user.
+81. mesg - Enables or disables messaging for the current terminal.
+82. renice - Alters the priority of running processes.
+83. nohup - Allows a command to continue running after logging out.
+84. screen - Multiplexes a physical terminal between several processes.
+85. tmux - Terminal multiplexer, similar to screen but more advanced.
+86. watch - Executes a program periodically, showing output fullscreen.
+87. lsof - Lists open files and the processes that opened them.
+88. strace - Traces system calls and signals.
+89. free - Displays amount of free and used memory in the system.
+90. vmstat - Shows virtual memory statistics.
+91. iotop - Displays I/O usage information by process.
+92. htop - Interactive process viewer, similar to top.
+93. df - Reports file system disk space usage.
+94. rsync - Fast and versatile file copying tool.
+95. git - Version control system for tracking changes in files.
+96. svn - Subversion, a version control system.
+97. make - Utility for directing compilation.
+98. gcc/g++ - GNU C and C++ compiler.
+99. perl/python/ruby - Popular programming languages for scripting and automation.
+100. service/systemctl - Manages system services (init.d or systemd).
+
+
+101. bash - The Bourne Again SHell, a widely-used default shell on Unix systems.
+102. zsh - Z shell, a powerful shell that incorporates many enhancements from other shells.
+103. fish - The Friendly Interactive SHell, a user-friendly shell with autosuggestions.
+104. csh - The C shell, a shell with C-like syntax.
+105. tcsh - An enhanced version of csh with additional features.
+106. ksh - The Korn Shell, a shell with many advanced interactive features.
+
+// Setting themes in some shells
+
+107. oh-my-zsh - A framework for managing zsh configuration, which includes themes.
+     Command: sh -c "\$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+     Then set a theme by editing the `.zshrc` file: ZSH_THEME="agnoster"
+
+108. fisher - A plugin manager for fish that allows you to install themes.
+     Command: curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+     Then install a theme: fisher install ilancosman/tide
+
+// Shell tricks
+
+109. !! - Repeats the last command you typed.
+110. !$ - Uses the last word of the previous command.
+111. ^old^new - Replaces the first occurrence of 'old' with 'new' in the last command and runs it.
+112. {} - Brace expansion to create multiple files or folders. e.g., touch {file1,file2}.{txt,md}
+113. ctrl+r - Searches through command history as you type.
+114. ctrl+z - Puts the foreground job to background (suspend).
+115. fg - Brings the most recent job to foreground.
+116. bg - Resumes suspended jobs without bringing them to foreground.
+117. & - Puts the command following it into the background.
+118. ; - Command chaining, allows you to run multiple commands in one line.
+119. && - Conditional command chaining, runs the next command only if the previous one succeeded.
+120. || - Conditional command chaining, runs the next command only if the previous one failed.
+121. > - Redirects output to a file, overwriting existing content.
+122. >> - Redirects output to a file, appending to existing content.
+123. < - Redirects input from a file to a command.
+124. | - Pipe, passes the output of one command as input to another.
+125. * - Wildcard, matches zero or more characters in filename expansion.
+126. ? - Wildcard, matches exactly one character in filename expansion.
+127. ctrl+a - Moves to the beginning of the line.
+128. ctrl+e - Moves to the end of the line.
+129. alt+f - Moves forward a word.
+130. alt+b - Moves back a word.
+131. ctrl+u - Deletes from the cursor to the beginning of the line.
+132. ctrl+k - Deletes from the cursor to the end of the line.
+133. ctrl+w - Deletes the word before the cursor.
+134. ctrl+l - Clears the screen.
+135. tab - Auto-completes files, directories, and command names.
+
+// Easter eggs and fun commands
+
+136. sl - A program that shows a steam locomotive if you type 'ls' incorrectly.
+137. cmatrix - Displays a scrolling 'Matrix'-like screen.
+138. fortune - Prints a random, hopefully interesting, adage.
+139. cowsay - Generates an ASCII picture of a cow saying something provided by the user.
+140. figlet - Creates large text out of ASCII characters.
+141. toilet - Similar to figlet but with more options like color output.
+142. espeak - A command-line text-to-speech converter.
+143. aafire - Displays a fire animation inside the terminal (from the package libaa-bin).
+144. bb - A high-quality audio-visual demonstration for your text terminal.
+145. telnet towel.blinkenlights.nl - Watch ASCII Star Wars in your terminal.
+146. rev - Reverses the characters in each line of input.
+147. factor - Factors numbers, useful for math tricks.
+148. yes - Outputs a string repeatedly until killed.
+149. cal - Shows the calendar of the current month.
+150. banner - Prints a large banner on the terminal.
+
+152. lolcat - Combines other commands with this to output rainbow-colored text.
+153. rig - Generates random fake identities.
+154. oneko - Makes a cute cat chase your mouse cursor around the screen.
+155. xeyes - A graphical program showing two googly eyes that follow the cursor.
+156. fortune | cowsay | lolcat - Combines commands to display a colored, speaking cow with a fortune.
+157. sl - If you mistype `ls` as `sl`, a steam locomotive chugs across your terminal.
+158. asciiquarium - Enjoy an ASCII art aquarium in your terminal.
+159. cacafire - A color ASCII fireplace similar to `aafire` (from the caca-utils package).
+160. moon-buggy - A simple game that lets you drive a car across the moon’s surface.
+161. nethack - A single-player roguelike video game.
+162. cmatrix -r - The `cmatrix` command with the rainbow option for colored Matrix-like output.
+163. hollywood - Fills your terminal with Hollywood-style hacker content.
+164. pi - Shows the number Pi to the arbitrary precision.
+165. bb - A high-quality audio-visual demonstration for your text terminal.
+166. emacs -batch -l dunnet - Run an emacs-based text adventure game named Dunnet.
+167. figlet "Hello World" - Creates ASCII art from the text "Hello World".
+168. banner "Hello" - Prints the word "Hello" in large ASCII characters.
+169. watch -n 1 date - Watch the date command update every second.
+170. rev - Reverses any input text, useful for simple text transformations.
+171. script - Starts a terminal recording session that you can replay later.
+172. factor 42 - Outputs the prime factors of the number 42.
+173. look - Display lines beginning with a given string. Useful for finding words that start with certain letters.
+174. jot - Generates sequences of numbers or characters and can output random data.
+175. cowsay -f tux "Hello" - Makes Tux the penguin say "Hello".
+176. pv - Pipe Viewer - monitors the progress of data through a pipeline.
+177. mtr - Combines the functionality of 'traceroute' and 'ping' in a single network diagnostic tool.
+178. dog - Similar to `cat` but with more features like syntax highlighting and URL support.
+179. rig - Outputs a random name and address, commonly used for testing database or form entry.
+180. shuf - Randomly permutes lines from a file or input.
+181. ansiweather - Displays the current weather in your terminal using ANSI colors and Unicode symbols.
+182. neofetch - Shows system information with ASCII operating system logo.
+183. screenfetch - Similar to neofetch, provides a screenshot information tool in terminal.
+184. tty-clock - A simple terminal clock.
+185. pipes.sh - Shows animated pipes that grow across the screen.
+186. ascii-art - Generate ASCII art graphics.
+187. lolcat -f /path/to/script.sh - Runs a script with colorful output using lolcat.
+188. parrot - Displays a colorful ASCII art parrot (requires parrot installation).
+189. aview - View images in ASCII art (images need to be converted to ASCII with aalib).
+190. curl wttr.in - Fetches the weather forecast for your location in a terminal-friendly format.
+191. echo "You can mimic on-screen typing" | pv -qL 10 - Makes it look like the text is being typed out slowly.
+192. cal 12 2021 - Displays the calendar for December 2021.
+193. say "Hello" - Text-to-speech command on macOS that speaks out loud.
+194. git log --graph --decorate --oneline - A visually enhanced view of the git log.
+195. tput cup 10 10 && echo "Hello World" - Places "Hello World" at the coordinates 10,10 in the terminal.
+196. seq 1 10 | xargs -I {} echo "This is line number {}" - Repeats a phrase with incremented numbers.
+197. toilet -f mono12 -F metal "Hello" - Displays "Hello" in a metallic style with the mono12 font.
+198. ddate - Displays today's date in the Discordian date format.
+199. yes "Over and over again" - Repeats the phrase "Over and over again" indefinitely.
+200. cmatrix -L - Displays the Matrix-like screen in a different style with the "L" option for Linux mode.

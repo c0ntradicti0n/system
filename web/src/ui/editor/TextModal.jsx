@@ -18,7 +18,7 @@ const TextModal = ({ socket, text, setText, _text, _setText, hash }) => {
     // setHash(null);
     console.log('set_text', _text)
     // Assuming `socket` is defined elsewhere
-    // socket.timeout(3000).emit('save_text', _text);
+    socket.timeout(3000).emit('save_text', _text);
   }
 
   const handleCancel = () => {

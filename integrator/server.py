@@ -161,6 +161,19 @@ def save_params(params, hash_id):
     return active_version
 
 
+@socket_event("save_text", "set_hash")
+def get_text(text):
+    print(f"save_text '{text[:10]}...'")
+
+    if not text.strip():
+        return
+
+    # Convert the received text into a pickled object
+    pickled_obj = pickle.dumps(text)
+    hash_id = sha256(pickled_obj).hexdigest()
+    states[hash_id + "-text"] = text
+    return hash_id
+
 @socket_event("get_text", "set_hash")
 def get_text(text):
     print(f"get_text '{text[:10]}...'")
