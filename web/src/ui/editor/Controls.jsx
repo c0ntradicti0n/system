@@ -146,11 +146,14 @@ const UserInteractionMenu = ({ params, onDeleteAction }) => {
         position: 'fixed',
         left: 0,
         top: '10vh',
+          height: '30vh',
+          overflowY: "scroll"
       }}
     >
       <Menu mode="vertical" className=" red">
-        {params.actions?.map((action, index) => (
+        {params.actions?.reverse().map((action, index) => (
           <Menu.Item key={index} className="user-action red">
+              {index}
             <Popconfirm
               title="Are you sure to delete this action?"
               onConfirm={() => onDeleteAction(index)}

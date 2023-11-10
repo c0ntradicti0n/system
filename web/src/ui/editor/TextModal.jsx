@@ -30,6 +30,7 @@ const TextModal = ({ socket, text, setText, _text, _setText, hash }) => {
       className="red"
       style={{
         position: 'fixed',
+
         width: 'min-content',
         zIndex: 112323213214213,
       }}
