@@ -3,7 +3,7 @@
   width: 100% !important;
   margin: 0;
   box-sizing: border-box;
-  position: absolute;
+  position: fixed;
 }
 .puzzle-item {
   position: absolute;

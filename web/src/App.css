@@ -210,7 +210,7 @@ ant-btn {
 }
 
 .red {
-  background-color: crimson;
+  background-color: #1fafaf;
 }
 
 .button {
@@ -258,6 +258,8 @@ ant-btn {
 .top-search {
   width: 13vw;
   z-index: 999999999999;
+  left: 10vw;
+  top: 10vh;
 }
 
 #search {

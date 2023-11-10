@@ -86,7 +86,7 @@ class States:
         if hash_id.endswith("-params"):
             with open(self.path(hash_id), "wb") as f:
                 pickle.dump(state, f)
-        if hash_id.endswith("-text"):
+        elif hash_id.endswith("-text"):
             with open(self.path(hash_id), "wb") as f:
                 pickle.dump(state, f)
         elif hash_id.endswith("-meta"):
@@ -121,6 +121,9 @@ class States:
             os.unlink(self.path(key + "-meta"))
         except FileNotFoundError:
             pass
+
+    def reset(self, hash_id):
+        rmtree(self.path(hash_id), ignore_errors=True)
 
 
 states = States()

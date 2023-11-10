@@ -10,17 +10,17 @@ from philosopher.analyser import analyse_toc
 from philosopher.LLMFeature import create_path, features
 
 
-def llm_update_toc(toc, kwargs, t):
+def llm_update_toc(toc, kwargs, t, new_entries=1):
     if os.path.exists(os.environ.get("MISSING_CHAPTERS", "missing.txt")):
         paths_to_fill = pathlib.Path(
             os.environ.get("MISSING_CHAPTERS", "missing.txt")
         ).read_text()
-        paths_to_fill = [p for p in paths_to_fill.split("\n") if p][:5]
+        paths_to_fill = [p for p in paths_to_fill.split("\n") if p][:new_entries]
     else:
         paths_to_fill = [
             create_path(p)
             for p in analyse_toc(t, exclude=["111", "112"])["min_depth_paths"]
-        ][:3]
+        ][:new_entries]
     paths_to_fill = unique_by_func(paths_to_fill, func=lambda p: p.replace("_", ""))
 
     themes = [
@@ -190,7 +190,11 @@ Respect that it should work on analogies resembling the following topics"""
             if analogies
             else ""
         )
-        + """\nand don't output any other commentary, the code will extract the titles from your output."""
+        + """\nand don't output any other commentary, the code will extract the titles from your output.
+  
+Can you please stay on the ground and first develop the topics with quite normal knowledge? As motion is a kind combination of space and time.
+Another good hint to the structure, that MUST be observed, is: 1 - is the general, 2 - is the particular, 3 - is the individual as their combination.
+"""
     )
     return instruction, prompt
 

@@ -6,6 +6,7 @@ import re
 
 import config
 import openai
+import pyperclip
 from dotenv import load_dotenv
 from helper import (OutputLevel, extract, get_prefix,
                     nested_dict_to_filesystem, post_process_tree,
@@ -99,23 +100,40 @@ def dialectic_triangle(
 
     os.makedirs(".cache_text/", exist_ok=True)
 
-    if not os.path.exists(lllm_output):
-        with open(lllm_input, "w") as f:
-            f.write(instruction.strip() + "\n" + prompt + "\n")
+    hint = ""
+    while True:
+        if not os.path.exists(lllm_output):
+            with open(lllm_input, "w") as f:
+                f.write(instruction.strip() + "\n" + prompt + "\n")
 
-        if not os.environ.get("MANUAL", False):
             api_result = llm(
-                instruction=instruction.strip(), text=prompt, model=kwargs["model"]
+                instruction=instruction.strip(),
+                text=prompt + "\n\nThink also of " + hint,
+                model=kwargs["model"],
             )
             output = api_result["choices"][0]["message"]["content"]
-        else:
-            output = input("Enter output: ")
 
-        with open(lllm_output, "w") as f:
-            f.write(output + "\n")
-    else:
-        with open(lllm_output) as f:
-            output = f.read()
+            with open(lllm_output, "w") as f:
+                f.write(output + "\n")
+        else:
+            with open(lllm_output) as f:
+                output = f.read()
+
+        # ask user if output is ok
+        print(output)
+        if os.environ.get("MANUAL", False):
+            answer = input("Is output ok? (y/[give hint])")
+            if answer == "y":
+                # read output again, if user has changed it...
+                with open(lllm_output) as f:
+                    output = f.read()
+
+                break
+            else:
+                hint = answer
+                # Paste text from the clipboard (for demonstration)
+                pyperclip.copy(hint)
+                os.remove(lllm_output)
 
     if task == "index":
         xpaths = output.split("\n")
@@ -214,7 +232,7 @@ def dialectic_triangle(
 
 
 if __name__ == "__main__":
-    for i in range(100):
+    for i in range(0):
         with git_auto_commit(
             config.system_path, commit_message_prefix="Automated TEXT Commit"
         ) as ctx:
@@ -234,7 +252,7 @@ if __name__ == "__main__":
                     synthesis=True,
                     inversion_antonym=True,
                     # llm model
-                    model="gpt-4",
+                    model="gpt-4-1106-preview",
                 )
             )
         os.system("rm -rf .cache_text/")
@@ -258,6 +276,6 @@ if __name__ == "__main__":
                 synthesis=True,
                 inversion_antonym=True,
                 # llm model
-                model="gpt-4",
+                model="gpt-4-1106-preview",
             )
         )

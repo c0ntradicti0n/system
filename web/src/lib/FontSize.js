@@ -4,7 +4,7 @@ function calculateFontSize(size, title, factor = 1) {
   // Calculate base font size
   const devicePixelRatio = window.devicePixelRatio || 1
 
-  let baseFontSize = size / 30 / Math.log1p(devicePixelRatio)
+  let baseFontSize = size / 17 / Math.log1p(devicePixelRatio)
   const shortTitle = (postProcessTitle(title ?? '') ?? '')
     .split(' ')
     .slice(0, 100)

@@ -3,7 +3,6 @@ import { toJSON } from 'bibtex-parse-js'
 
 const BibTeXViewer = ({ entry, setIsGood, isGood }) => {
   let parsedData
-  console.log(entry)
   try {
     parsedData = toJSON(entry)
   } catch (e) {

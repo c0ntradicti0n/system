@@ -1,14 +1,8 @@
-// useMuuriGrid.js
 import { useEffect } from 'react'
 import Muuri from 'muuri'
-// Function to check if a grid is a "full" triangle
-function isFullTriangle(grid) {
-  // Assuming a full triangle grid contains 3 items
-  console.log('IS FULL TRIANGLE', grid)
-  if (!grid) return false
-  return grid.getItems().length >= 3
-}
-const useMuuriGrid = (gridRef, options, addInstance, removeInstance, size) => {
+import { idToSize, idToZIndex, positionToId } from '../ui/Puzzle'
+
+const useMuuriGrid = (gridRef, options, size, props) => {
   useEffect(() => {
     try {
       if (!gridRef.current) return
@@ -16,47 +10,58 @@ const useMuuriGrid = (gridRef, options, addInstance, removeInstance, size) => {
       const grid = new Muuri(gridRef.current, options)
       grid.size = size
 
-      addInstance(grid)
+      grid.on('dragEnd', (item, event) => {
+        console.log('DRAG RELEASE END', item, event)
 
-      // Add event listener for dragReleaseEnd event
-      grid.on('dragReleaseEnd', (item) => {
-        const oldGrid = item.getGrid()
-        const newGrid = item._drag._grid
+        const element = item.getElement()
+        const rect = element.getBoundingClientRect()
+        const x = (rect.left + rect.right) / 2
+        const y = (rect.top + rect.bottom) / 2
 
-        // If the item was dragged to a different grid
-        if (oldGrid !== newGrid) {
-          // Check if the newGrid is a "full" triangle
-          if (isFullTriangle(newGrid)) {
-            // If it's a full triangle, move the item back to the old grid
-            oldGrid.add(item)
-            // You may also want to refresh the grid to update the item positions
+        const oldId = element.id
+        const newId = positionToId(x, y)
 
-            // Calculate the new height
-            const newHeight = newGrid.size
+        console.log('NEW ID', newId, x, y)
 
-            console.log({
-              item,
-              newHeight,
-              gridHeight: newGrid._height,
-              newGrid,
-            })
-            // Set the new height to the item's element
-            item.getElement().style.height = `${newHeight}px`
-            item.getElement().style.width = `${newHeight}px`
-            // Refresh the old grid to update the item positions
-            if (oldGrid) oldGrid.refreshItems().layout()
-          } else {
-            // Otherwise, allow the item to be added to the new grid
-            // You may also want to refresh the new grid to update the item positions
-            if (newGrid) newGrid.refreshItems().layout()
-          }
-        }
+        const targetElement = document.getElementById(newId)
+        console.log('TARGET ELEMENT', newId, targetElement)
+        targetElement.setAttribute('id', oldId)
+        element.setAttribute('id', newId)
+
+        targetElement.style.width = idToSize(oldId)
+        targetElement.style.height = idToSize(oldId)
+        element.style.width = idToSize(newId)
+        element.style.height = idToSize(newId)
+
+        targetElement.style.zIndex = idToZIndex(oldId)
+        element.style.zIndex = idToZIndex(newId)
+
+        props.socket.timeout(3000).emit(
+          'save_params',
+
+          {
+            ...props.params,
+            actions: [
+              ...(props.params?.actions ?? []),
+              {
+                timestamp: Date.now(),
+                action: 'swap',
+                label: element.textContent.slice(0, 20),
+                source: oldId,
+                target: newId,
+              },
+            ],
+          },
+          props.hash,
+        )
+        console.log('SAVE PARAMS', props.params)
+
+        grid.refreshItems().layout()
       })
 
       return () => {
         // Remove event listener for dragReleaseEnd event
         grid.off('dragReleaseEnd')
-        removeInstance(grid)
         try {
           grid.destroy()
         } catch (e) {
@@ -66,7 +71,7 @@ const useMuuriGrid = (gridRef, options, addInstance, removeInstance, size) => {
     } catch (e) {
       console.log(e)
     }
-  }, [gridRef, options, addInstance, removeInstance])
+  }, [gridRef, options, size, props.params, props.socket, props.hash])
 }
 
 export default useMuuriGrid

@@ -121,6 +121,17 @@ def delete_mod(hash):
     return hash
 
 
+@socket_event("reset_mod", "refresh")
+def reset_mod(hash):
+    if not hash:
+        print(f"handle_reset_mod hash id null!!! {hash=}")
+        return
+    assert re.match(r"[a-f0-9]{64}", hash)
+    print(f"reset_mod", hash)
+    states.reset(hash)
+    return hash
+
+
 @socket_event("get_state", "set_state")
 def handle_set_state(hash_id):
     print(f"handle_set_state {hash_id}")
@@ -147,18 +158,18 @@ def get_params(hash_id):
         return None
 
 
-@socket_event("save_params", "set_state")
+@socket_event("save_params", "set_params")
 def save_params(params, hash_id):
     print(f"save_params {params} {hash_id}")
 
     states[hash_id + "-params"] = params
+    new_params = states[hash_id + "-params"]
 
-    old_state, i = states[hash_id]
+    handle_set_state(hash_id)
 
-    active_version = Tree.serialize_graph_to_structure(
-        *old_state.max_score_triangle_subgraph(old_state.graph, return_start_node=True)
-    )
-    return active_version
+    print(f"new params {new_params}")
+
+    return new_params
 
 
 @socket_event("save_text", "set_hash")
@@ -173,6 +184,7 @@ def get_text(text):
     hash_id = sha256(pickled_obj).hexdigest()
     states[hash_id + "-text"] = text
     return hash_id
+
 
 @socket_event("get_text", "set_hash")
 def get_text(text):

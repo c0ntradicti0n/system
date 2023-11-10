@@ -113,41 +113,25 @@ def tree_walker(yield_mode="valid", n_samples=10):
             yield_mode = "random"
 
         elif yield_mode == "valid_hie":
+            t = random.choice([1, 2, 3])
             with e:
-                a = d[1]["."]
-            with e:
-                b = d[2]["."]
-            with e:
-                c = d[3]["."]
+                a = d[t]["."]
             with e:
                 X = d["."]
-            if (
-                all([a, b, c, X])
-                and a not in samples
-                and b not in samples
-                and c not in samples
-                and X not in samples
-            ):
-                samples.extend([(a, 1), (b, 2), (c, 3), (X, 4)])
+            if all([a, X]) and a not in samples and X not in samples:
+                samples.extend([(X, 1), (a, 2)])
                 yield_mode = "random"
             else:
                 gold_samples.pop(gold_samples.index(random_dir))
 
         elif yield_mode == "random_hie":
-            with e:
-                a = d[1]["."]
-            with e:
-                b = d[2]["."]
-            with e:
-                c = d[3]["."]
+            t = random.choice([1, 2, 3])
 
-            if (
-                all([a, b, c])
-                and a not in samples
-                and b not in samples
-                and c not in samples
-            ):
-                samples.extend([(a, 1), (b, 2), (c, 3)])
+            with e:
+                X = d["."]
+
+            if all([X]) and X not in samples:
+                samples.extend([(X, 1)])
                 yield_mode = "random"
             else:
                 gold_samples.pop(gold_samples.index(random_dir))

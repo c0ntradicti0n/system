@@ -31,7 +31,7 @@ export const Editor = () => {
 
   const [_text, _setText] = useState('')
   const [meta, setMeta] = useState('')
-  const [consumedTaskIds, setConsumedTaskIds] = useState([]) // List of taskIds that have been consumed by the server
+  const [isPaused, setIsPaused] = useState(false)
 
   const [text, setText] = useState('')
   const [hash, setHash] = useState(null)
@@ -52,16 +52,16 @@ export const Editor = () => {
   const timeoutId = useRef(null)
 
   const checkAwaitState = useCallback(() => {
-    if (taskId) {
+    if (taskId && !isPaused) {
       socket.timeout(3000).emit('patch_poll', taskId)
 
       // Clear previous timeout, just in case
-      if (timeoutId.current) {
+      if (timeoutId.current || isPaused) {
         clearTimeout(timeoutId.current)
       }
       timeoutId.current = setTimeout(checkAwaitState, 1000) // Recursive call
     }
-  }, [taskId])
+  }, [isPaused])
 
   useEffect(() => {
     const params = parseHash(window.location.hash)
@@ -137,15 +137,16 @@ export const Editor = () => {
     })
 
     socket.on('patch_receive', (result) => {
-      console.log('patch_receive')
+      //console.log('patch_receive')
       if (result.status === 'SUCCESS') {
         console.log('patch_receive SUCCESS')
         setPatch(result.result)
         active_patching = false
-        setTaskId(null) // Reset taskId after getting result
-
-        socket.timeout(3000).emit('update_state', hash)
-        active_patching = true
+        setTaskId(null)
+        if (!isPaused) {
+          socket.timeout(7000).emit('update_state', hash)
+          active_patching = true
+        }
       }
     })
 
@@ -173,6 +174,10 @@ export const Editor = () => {
       socket.off('state_patch')
       socket.off('set_hash')
       socket.off('set_text')
+      socket.off('set_params')
+      socket.off('set_meta')
+      socket.off('set_mods')
+      socket.off('set_task_id')
     }
   }, [hash, state])
 
@@ -191,7 +196,10 @@ export const Editor = () => {
     console.log('deleteMod', hash)
     socket.timeout(3000).emit('delete_mod', hash)
   }
-
+  const resetMod = (hash) => {
+    console.log('deleteMod', hash)
+    socket.timeout(3000).emit('reset_mod', hash)
+  }
   return (
     <div className="App" style={{ overflowY: 'scroll' }}>
       <ShareModal url={'/editor'} linkInfo={{ hash, activeTab }} />
@@ -209,20 +217,29 @@ export const Editor = () => {
         onChange={(key) => {
           setActiveTab(key)
         }}
-        tabPosition={'left'}
+        tabPosition={'right'}
         width={'100%'}
         items={[
           {
             key: 'ex',
             label: 'Experiments',
-            children: <ExperimentsView {...{ mods, deleteMod }} />,
+            children: <ExperimentsView {...{ mods, deleteMod, resetMod }} />,
           },
           {
             key: 'pz',
             label: 'Puzzle',
             children: state && (
               <PuzzleView
-                {...{ socket, hash, text, patch, state, params }}
+                {...{
+                  socket,
+                  hash,
+                  text,
+                  patch,
+                  state,
+                  params,
+                  isPaused,
+                  setIsPaused,
+                }}
                 applyPatch={applyPatch}
               />
             ),
@@ -246,9 +263,7 @@ export const Editor = () => {
           },
         ]}
       />
-      <div style={{ position: 'fixed', left: 0, bottom:0 }} >
-        {taskId}</div>
-
+      <div style={{ position: 'fixed', left: 0, bottom: 0 }}>{taskId}</div>
     </div>
   )
 }

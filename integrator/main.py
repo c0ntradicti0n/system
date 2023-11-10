@@ -84,6 +84,22 @@ def update_triangle_graph(t: Tree, i, hash, return_start_node=None):
         )
 
 
+def make_dialectics(texts, epochs=10, hash="test"):
+    if not isinstance(texts[0], tuple):
+        inputs = [(t, t) for t in texts]
+
+    T, i = Tree(inputs), 0
+
+    for _ in range(epochs):
+        with catchtime(f"EPOCH {i}"):
+            new_graph = update_triangle_graph(T, i, hash, return_start_node=True)
+        with indented(f"GRAPH " + str(new_graph.__repr__())):
+            pass
+        i += 1
+
+    return T, new_graph
+
+
 if __name__ == "__main__":
     hash = "b3607805fa4d6ef807e825b44c081446dee7a5b14a796981262f9234686d4ff9"
     T, i = Tree.load_state(hash)

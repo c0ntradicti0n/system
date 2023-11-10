@@ -1,8 +1,69 @@
 import torch
 import torch.nn.functional as F
 from scipy.optimize import linear_sum_assignment
+from torch.nn.functional import cosine_similarity
 
 from classifier.model import NTupleNetwork
+
+
+def compute_cosine_similarity(embeddings, labels, config):
+    batch_size, n_samples = labels.shape
+    confidence_scores = torch.zeros(batch_size, n_samples, dtype=torch.float32)
+
+    for batch_idx in range(batch_size):
+        for sample_idx in range(n_samples):
+            label = labels[batch_idx, sample_idx].item()
+            if config == "HIE" and label in [1]:
+                # Find the pair for subsumed and subsuming concepts
+                pair_label = 3 - label  # 1 becomes 2, 2 becomes 1
+                pair_indices = (labels[batch_idx] == pair_label).nonzero(as_tuple=True)[
+                    0
+                ]
+                if pair_indices.nelement() > 0:
+                    pair_index = pair_indices[0]
+                    confidence_scores[batch_idx, sample_idx] = cosine_similarity(
+                        embeddings[batch_idx, sample_idx].unsqueeze(0),
+                        embeddings[batch_idx, pair_index].unsqueeze(0),
+                    )
+            elif config == "TAS" and label in [1, 2, 3]:
+                # Compute similarity for thesis-antithesis and synthesis
+                thesis_indices = (labels[batch_idx] == 1).nonzero(as_tuple=True)[0]
+                antithesis_indices = (labels[batch_idx] == 2).nonzero(as_tuple=True)[0]
+                if label == 3:  # Synthesis
+                    if (
+                        thesis_indices.nelement() > 0
+                        and antithesis_indices.nelement() > 0
+                    ):
+                        mean_embedding = (
+                            embeddings[batch_idx, thesis_indices]
+                            + embeddings[batch_idx, antithesis_indices]
+                        ) / 2
+                        confidence_scores[batch_idx, sample_idx] = cosine_similarity(
+                            embeddings[batch_idx, sample_idx].unsqueeze(0),
+                            mean_embedding.mean(dim=0, keepdim=True),
+                        )
+                else:
+                    if thesis_indices.nelement() > 0 and label == 2:  # Antithesis
+                        antithesis_embedding = embeddings[
+                            batch_idx, antithesis_indices
+                        ].mean(dim=0)
+                        thesis_embedding = embeddings[batch_idx, thesis_indices].mean(
+                            dim=0
+                        )
+
+                        cosine_sim = cosine_similarity(
+                            thesis_embedding.unsqueeze(0),
+                            antithesis_embedding.unsqueeze(0),
+                        )
+                        diff_vector_norm = torch.norm(
+                            thesis_embedding - antithesis_embedding
+                        )
+
+                        confidence_scores[batch_idx, sample_idx] = (
+                            cosine_sim - diff_vector_norm
+                        )
+
+    return confidence_scores
 
 
 def get_model(config):
@@ -56,13 +117,12 @@ def get_prediction(model, input_data, config, compute_confidence=False, n_sample
     all_predicted_labels = torch.cat(all_predicted_labels)
     all_outputs_reshaped = torch.cat(all_outputs_reshaped)
 
+    # Replace the existing confidence scoring method with the above function
     if compute_confidence:
-        # Apply softmax to convert logits to probabilities
-        outputs_without_0 = all_outputs_reshaped[:, :, 1:]
-        probabilities = F.softmax(outputs_without_0, dim=1)
-
-        # Get the maximum probability for each sample
-        confidence_scores = probabilities.max(dim=1).values
+        labels_reshaped = all_predicted_labels.view(-1, config.n_samples)
+        confidence_scores = compute_cosine_similarity(
+            input_reshaped, labels_reshaped, config.name
+        )
         return all_predicted_labels, confidence_scores
 
     return all_predicted_labels, outputs_reshaped

@@ -4,7 +4,7 @@ import { navigate } from 'raviger'
 import BibTeXViewer from '../BibtexViewer'
 
 export function ExperimentsView(props) {
-  console.log(props)
+  //console.log(props)
   const [isGood, setIsGood] = React.useState({})
   return (
     <>
@@ -18,10 +18,19 @@ export function ExperimentsView(props) {
               🗑
             </Button>
           )}
+          Reset
+          {
+            <Button
+              style={{ width: '5vw', backgroundColor: '#123', color: 'yellow' }}
+              onClick={() => props.resetMod(mod.hash)}
+            >
+              ↺
+            </Button>
+          }
           <Button
             style={{ width: '70vw', backgroundColor: '#123', color: 'yellow' }}
             onClick={() => {
-              navigate(`/editor#hash=${mod.hash}&activeTab=3`)
+              navigate(`/editor#hash=${mod.hash}&activeTab=px`)
               window.location.reload()
             }}
           >

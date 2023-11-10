@@ -314,17 +314,6 @@ const Fractal = ({ PRESET_DATA = undefined }) => {
         )}
       </TransformWrapper>
       <div className="right-container">
-        <MobileControls
-          searchText={searchText}
-          triggerSearch={triggerAnimation}
-          onLeft={() => go({ ...params, direction: 'left' })}
-          onZoomIn={() => go({ ...params, direction: 'lower' })}
-          onRight={() => go({ ...params, direction: 'right' })}
-          onZoomOut={() => go({ ...params, direction: 'higher' })}
-          linkInfo={linkInfo}
-          isWindowWide={isWindowWide}
-          labels={searchResults}
-        />
         {tooltipData && (
           <Tooltips
             refill={PRESET_DATA ? false : true}
@@ -335,6 +324,17 @@ const Fractal = ({ PRESET_DATA = undefined }) => {
           />
         )}
       </div>
+      <MobileControls
+        searchText={searchText}
+        triggerSearch={triggerAnimation}
+        onLeft={() => go({ ...params, direction: 'left' })}
+        onZoomIn={() => go({ ...params, direction: 'lower' })}
+        onRight={() => go({ ...params, direction: 'right' })}
+        onZoomOut={() => go({ ...params, direction: 'higher' })}
+        linkInfo={linkInfo}
+        isWindowWide={isWindowWide}
+        labels={searchResults}
+      />
     </div>
   )
 }

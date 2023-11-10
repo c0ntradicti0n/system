@@ -37,8 +37,6 @@ const ShareModal = ({ url = '', linkInfo }) => {
     }
   }
 
-
-
   return (
     <div style={{ zIndex: 112323213214213 }}>
       <Button

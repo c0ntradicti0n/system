@@ -252,16 +252,19 @@ class Tree:
 
         selected_edges = []
 
-        # Get ant-syn branching
-        tri_out_edges = Tree.computed_i_tri_out_edges(G, node, visited)
-
         # If no branching found, return
         if not is_tri:
-            if not tri_out_edges:
+            # Get ant-syn branching
+
+            all_tri_out_edges = Tree.computed_i_tri_out_edges(G, node, visited)
+            all_tri_out_edges = list(
+                sorted(all_tri_out_edges, key=lambda x: x[0][2]["trident"])
+            )
+            if not all_tri_out_edges:
                 return [], []
 
             tri_out_edges = max(
-                tri_out_edges,
+                all_tri_out_edges,
                 key=lambda x: Tree.edge_score(x[0][2]) + Tree.edge_score(x[1][2]),
             )
 
@@ -411,7 +414,7 @@ class Tree:
         # print(f"{depth=}")
 
         # Sort nodes by score and get the top 10
-        start_node = self.params["start_node"]
+        start_node = self.params["startNode"]
         if not start_node:
             sorted_nodes = Tree.top_n_subsuming_nodes(G, n=4)
         else:
@@ -501,10 +504,8 @@ class Tree:
                 tree.inputs = state["inputs"]
                 tree.graph = state["graph"]
                 tree.yielded = state["yielded"]
-                params = defaultdict(lambda: None)
-                params.update(state["params"] if "params" in state else {})
-                tree.params = params
                 tree.j = state["j"] + 1
+                tree.load_params(hash)
 
                 return tree, latest_number + 1
         except MemoryError:
@@ -520,15 +521,21 @@ class Tree:
                     tree.inputs = state["inputs"]
                     tree.graph = state["graph"]
                     tree.yielded = state["yielded"]
-                    params = defaultdict(lambda: None)
-                    params.update(state["params"] if "params" in state else {})
-                    tree.params = params
                     tree.j = state["j"] + 1
+                    tree.load_params(hash)
 
                     return tree, latest_number + 1
             except:
                 print("Memory error in loading state")
                 return None, None
+
+    def load_params(self, hash):
+        if os.path.exists(f"{self.pickle_folder_path()}/{hash}-params.pkl"):
+            with open(f"{self.pickle_folder_path()}/{hash}-params.pkl", "rb") as f:
+                params = pickle.load(f)
+            self.params.update(params)
+        else:
+            self.params = defaultdict(lambda: None)
 
     def dump_graph(self, hash, graph=None, filename=None):
         if graph is None:

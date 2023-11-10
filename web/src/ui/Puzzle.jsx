@@ -3,52 +3,101 @@ import Muuri from 'muuri'
 import '../puzzle.css'
 import { stringToColour } from '../lib/color'
 import { postProcessTitle } from '../lib/position'
-import useMuuriStore from '../lib/MuuriStore'
 import useMuuriGrid from '../lib/useMuuriGrid'
-import jsonPatch from 'fast-json-patch'
 import calculateFontSize from '../lib/FontSize'
 
-const SIZE = 300
+// Define the base length for the largest triangle
+const BASE_LENGTH = window.innerHeight * 0.5 // Modify as needed
+let TRIANGLE_CENTERS = []
 
-const moptions = (size, nest, all_muris) => ({
-  dragEnabled: true,
-  layout: function (grid, layoutId, items, width, height, callback) {
-    var layout = {
-      id: layoutId,
-      items: items,
-      slots: [],
-      styles: {},
+export const positionToId = (x, y) => {
+  return TRIANGLE_CENTERS.sort(
+    (a, b) =>
+      Math.sqrt((a.x - x) ** 2 + (a.y - y) ** 2) -
+      Math.sqrt((b.x - x) ** 2 + (b.y - y) ** 2),
+  )[0].id
+}
+function idToPosition(id) {
+  let x = 0 // Start from the bottom left corner
+  let y = window.innerHeight * 0.5
+  let power
+
+  // Iterate through all characters in the ID
+  for (let charIndex = 0; charIndex < id.length; charIndex++) {
+    const char = id.charAt(charIndex)
+    power = Math.pow(2, charIndex)
+    console.log('fullid', id, 'char', char, 'power', power)
+
+    // Adjust `x` and `y` based on the character
+    if (char === '2') {
+      x += BASE_LENGTH / power
+    } else if (char === '3') {
+      x += BASE_LENGTH / power / 2
+      y -= BASE_LENGTH / power
     }
-    console.log('layout', size, size / SIZE, Math.pow(2, nest))
+    if (charIndex > 0) {
+      y += BASE_LENGTH / (power / 2) / 2
+    }
+    // No need to adjust for '1', since it means we keep the current column
+  }
+  return { x, y, power }
+}
+export const idToSize = (id) => {
+  return `${BASE_LENGTH / Math.pow(2, id.length - 1)}px`
+}
+export const idToZIndex = (id) => {
+  return 1000 * (id.length + 1)
+}
+// Custom layout function for Muuri
+function layout(grid, layoutId, items, width, height, callback) {
+  // Initialize the layout object
+  const layout = {
+    id: layoutId,
+    items: items,
+    slots: [],
+    styles: null, // No specific styles needed for the grid itself
+    layoutOnResize: true,
+  }
+  TRIANGLE_CENTERS = []
 
-    // Size of the equilateral triangle
+  // Calculate positions for each item
+  items.forEach((item) => {
+    const isDragging = item.isDragging()
 
-    for (var i = 0; i < items.length; i++) {
-      var x, y
-
-      // For the first item, place it at the top middle
-      if (i === 0) {
-        x = 0.5 * size * (1 / nest)
-        y = 0
-      }
-      // For the second item, place it at the bottom left
-      else if (i === 1) {
-        x = size * (1 / nest)
-        y = size * (1 / nest)
-      }
-      // For the third item, place it at the bottom right
-      else if (i === 2) {
-        x = 0
-        y = size * (1 / nest)
-      }
-
+    console.log(isDragging)
+    if (isDragging) {
+      // For the item being dragged, don't change its position
+      const x = parseFloat(item.getElement().style.left)
+      const y = parseFloat(item.getElement().style.top)
       layout.slots.push(x, y)
-      //console.log('layout', { x, y })
+      return
     }
+    const id = item.getElement().getAttribute('id') // Assuming the ID is stored in a data attribute
+    let { x, y, power } = idToPosition(id)
 
-    // Call the callback function to apply the layout.
-    callback(layout)
-  },
+    const d_center = BASE_LENGTH / (power / 2) / 4
+    let d_y = 0
+    if (id.length < 3) {
+      d_y = BASE_LENGTH / 5.2 / (id.length + 1)
+    }
+    TRIANGLE_CENTERS.push({
+      id,
+      x: x + d_center,
+      y: y + d_center + d_y,
+    })
+
+    // Push the calculated position to the slots array
+    layout.slots.push(x, y)
+  })
+
+  // Call the callback function with the computed layout
+  callback(layout)
+}
+
+const muuriOptions = (size) => ({
+  dragEnabled: true,
+  layout: layout,
+
   rounding: true,
   itemClass: 'puzzle-item',
   containerClass: 'puzzle-container',
@@ -65,18 +114,6 @@ const moptions = (size, nest, all_muris) => ({
     })
   },
   dragContainer: document.body,
-  dragStartPredicate: (item, event) => {
-    try {
-      event.srcEvent.stopPropagation()
-      return Muuri.ItemDrag.defaultStartPredicate(item, event)
-    } catch (e) {
-      console.log('dragStartPredicate', e)
-    }
-  },
-  dragSort: () => {
-    console.log('dragSort', all_muris)
-    return all_muris
-  },
   size: size,
 })
 
@@ -89,140 +126,119 @@ const MutableTriangle = ({
   level = 0,
   action = null,
 }) => {
-  const gridRef = useRef(null)
-  const { addInstance, removeInstance, muuriInstances } = useMuuriStore()
-
-  //console.log('Triangle', { data, _key, fullId, size })
-
-  useMuuriGrid(
-    gridRef,
-    moptions(size, 2, muuriInstances),
-    addInstance,
-    removeInstance,
-    size,
-  )
-
   const isLeafNode =
     data && !Object.values(data).some((value) => typeof value === 'object')
   const title = postProcessTitle(data['.'])
-  const { shortTitle, fontSize } = calculateFontSize(size, title?.slice(0,100), 2)
+  const { shortTitle, fontSize } = calculateFontSize(
+    size,
+    title?.slice(0, 100),
+    1,
+  )
 
   return (
-    <div
-      className="triangle puzzle-item"
-      style={{
-        backgroundColor: stringToColour(_key),
-
-        height: size.toString() + 'px',
-        width: size.toString() + 'px',
-        zIndex: 1,
-      }}
-      key={_key}
-    >
+    <>
       <div
+        className="triangle puzzle-item"
         style={{
-          position: 'absolute',
-          top: size / 2,
-            left: size / 2,
-          textAlign: 'left',
-          maxWidth: `${size / 4}px`,
-          zIndex: 1000 * nest,
-          fontSize: (size / 10).toString() + 'px',
+          backgroundColor: stringToColour(fullId),
+          height: idToSize(fullId),
+          width: idToSize(fullId),
+          zIndex: idToZIndex(fullId),
         }}
+        key={_key}
+        id={fullId}
       >
         <div
-          className="puzzle-item-content triangle-content"
           style={{
-            fontSize,
-            color: 'black',
-            whiteSpace: 'pre-wrap',
-            overflowWrap: 'break-word',
-            width: size,
-            transform: 'translateX(-25%)',
+            position: 'absolute',
+            top: size / 2,
+            left: size / 2,
+            textAlign: 'left',
+            maxWidth: `${size / 4}px`,
+            zIndex: 1000 * nest,
+            fontSize: (size / 10).toString() + 'px',
           }}
-              title={title} // Full title as a tooltip
-
         >
-          <div style={{ zIndex: level + 1000 * nest, position: 'relative' }}>
-            {_key}{' '}
+          <div
+            className="puzzle-item-content triangle-content"
+            style={{
+              fontSize,
+              color: 'black',
+              whiteSpace: 'pre-wrap',
+              overflowWrap: 'break-word',
+              width: size,
+              transform: 'translateX(-25%)',
+            }}
+            title={title} // Full title as a tooltip
+            onMouseDown={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+
+              if (action !== null) {
+                const nodeId = /\[([\d.a-zA-Z]+)]/.exec(shortTitle)[1]
+                console.log('perform action', fullId, nodeId, shortTitle)
+
+                action(nodeId)
+              }
+            }}
+          >
+            <div style={{ zIndex: level + 1000 * nest, position: 'relative' }}>
+              {_key}{' '}
+            </div>
+            <span title={title}>{shortTitle}</span>{' '}
           </div>
- <span title={title}>{shortTitle}</span>        </div>
-      </div>
-      {!isLeafNode && data && (
-        <div
-          ref={gridRef}
-          style={{ zIndex: nest + 10 }}
-          className="puzzle-grid"
-          onMouseDown={(e) => {
-            e.preventDefault()
-            e.stopPropagation()
-            console.log('ACTION !!!', fullId, action)
-
-            if (action !== null) {
-              console.log('do action !!!', fullId, action)
-              action(fullId)
-            } else console.log('haLLOOOOO', fullId, action)
-          }}
-        >
-          {
-            <MutableTriangle
-              nest={nest + 1}
-              fullId={fullId + '3'}
-              data={data[3] ?? { '.': '' }}
-              _key={fullId + '3'}
-              size={size / 2}
-              action={action}
-            />
-          }
-          {
-            <MutableTriangle
-              nest={nest + 1}
-              fullId={fullId + '2'}
-              data={data[2] ?? { '.': '' }}
-              _key={fullId + '2'}
-              size={size / 2}
-              action={action}
-            />
-          }
-          {
-            <MutableTriangle
-              nest={nest + 1}
-              fullId={fullId + '1'}
-              data={data[1] ?? { '.': '' }}
-              _key={fullId + '1'}
-              size={size / 2}
-              action={action}
-            />
-          }
         </div>
+      </div>
+
+      {!isLeafNode && data && (
+        <>
+          <MutableTriangle
+            nest={nest + 1}
+            fullId={fullId + '3'}
+            data={data[3] ?? { '.': '' }}
+            _key={fullId + '3'}
+            size={size / 2}
+            action={action}
+          />
+
+          <MutableTriangle
+            nest={nest + 1}
+            fullId={fullId + '2'}
+            data={data[2] ?? { '.': '' }}
+            _key={fullId + '2'}
+            size={size / 2}
+            action={action}
+          />
+
+          <MutableTriangle
+            nest={nest + 1}
+            fullId={fullId + '1'}
+            data={data[1] ?? { '.': '' }}
+            _key={fullId + '1'}
+            size={size / 2}
+            action={action}
+          />
+        </>
       )}
-    </div>
+    </>
   )
 }
 
-export const Puzzle = ({
-  children,
-  data = undefined,
-  applyPatch,
-  action = null,
-  ...props
-}) => {
+export const Puzzle = ({ data = undefined, action = null, props }) => {
   const gridRef = useRef(null)
-  const { addInstance, removeInstance, muuriInstances } = useMuuriStore()
 
   const [items, setItems] = useState(JSON.parse(JSON.stringify(data)))
 
   useEffect(() => {
     setItems(JSON.parse(JSON.stringify(data)))
   }, [data])
-  console.log('ACTION', action)
 
   useMuuriGrid(
     gridRef,
-    moptions(SIZE, 1, muuriInstances),
-    addInstance,
-    removeInstance,
-    SIZE,
+    muuriOptions(BASE_LENGTH, 1),
+
+    BASE_LENGTH,
+    props,
   )
 
   if (!items) return null
@@ -230,20 +246,39 @@ export const Puzzle = ({
   console.log('Puzzle', { items })
 
   return (
-    <div ref={gridRef} className="puzzle-grid" id="#puzzle-drag-container">
-      {Object.entries(items)
-        .sort(([a], [b]) => b - a)
-        .map(([key, item]) => (
-          <MutableTriangle
-            key={key}
-            nest={2}
-            fullId={key}
-            data={item}
-            _key={key}
-            size={SIZE}
-            action={action}
-          />
-        ))}
-    </div>
+    <>
+      <div ref={gridRef} className="puzzle-grid" id="#puzzle-drag-container">
+        {Object.entries(items)
+          .sort(([a], [b]) => b - a)
+          .map(([key, item]) => (
+            <MutableTriangle
+              key={key}
+              nest={2}
+              fullId={key}
+              data={item}
+              _key={key}
+              size={BASE_LENGTH}
+              action={action}
+            />
+          ))}
+      </div>
+      {/*TRIANGLE_CENTERS.map(({ id, x, y }) => (
+        <div
+          key={id}
+          style={{
+            position: 'fixed',
+            top: y,
+            left: x,
+            textAlign: 'left',
+            border: '1px solid lime',
+            color: 'lime',
+            fontSize: '10px',
+            zIndex: 1000000,
+          }}
+        >
+          {id}
+        </div>
+      )) */}
+    </>
   )
 }

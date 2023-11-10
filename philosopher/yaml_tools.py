@@ -2,6 +2,7 @@
 from io import StringIO
 from pathlib import Path
 
+import ruamel
 from ruamel.yaml import YAML
 
 yaml = YAML(typ="rt")

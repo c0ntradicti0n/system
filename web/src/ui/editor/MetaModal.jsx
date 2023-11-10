@@ -27,6 +27,7 @@ const MetaModal = ({ socket, meta, setMeta, hash }) => {
       style={{
         width: 'min-content',
         zIndex: 112323213214213,
+        position: 'fixed',
       }}
     >
       <Button className="red" icon={<InfoCircleOutlined />} onClick={showModal}>

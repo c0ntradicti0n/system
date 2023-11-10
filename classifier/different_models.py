@@ -8,7 +8,7 @@ yaml = YAML(typ="rt")
 
 
 def get_models_root_dir():
-    return os.environ.get("MODELS_CONFIG", "./")
+    return os.environ.get("MODELS_CONFIG", "../classifier/")
 
 
 def get_models_congig_path():
