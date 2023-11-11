@@ -9,8 +9,16 @@ import { go, beamDataTo } from '../../lib/navigate'
 
 import { Tooltips } from './Tooltips'
 import { MAX_LEVEL } from '../../config/const'
-import { MobileControls } from './MobileControls'
+import {
+  EditorLink,
+  MobileControls,
+  Navigation,
+  Search,
+} from './MobileControls'
 import { MuuriComponent } from './MuuriComponent'
+import { ControlContainer } from '../ControlContainer'
+import ShareModal from '../ShareModal'
+import { navigate } from 'raviger'
 
 const maxZoomThreshold = 2
 const minZoomThreshold = 0.6
@@ -253,7 +261,18 @@ const Fractal = ({ PRESET_DATA = undefined }) => {
     }
   }, [initialPageLoad, setDetailId, setHiddenId]) // Depend on initialPageLoad so that this useEffect runs only once
   return (
-    <div className="Fractal" style={{}}>
+    <div className="Fractal">
+      <ControlContainer>
+        <Search searchText={searchText} triggerSearch={triggerAnimation} />
+        <ShareModal linkInfo={linkInfo} />
+        <Navigation
+          onLeft={() => go({ ...params, direction: 'left' })}
+          onZoomIn={() => go({ ...params, direction: 'lower' })}
+          onRight={() => go({ ...params, direction: 'right' })}
+          onZoomOut={() => go({ ...params, direction: 'higher' })}
+        />
+        <EditorLink />
+      </ControlContainer>
       <div style={{ position: 'absolute', width: 0, height: 0, top: 0 }}>
         {searchResults ? (
           <MuuriComponent labels={searchResults} setHiddenId={setHiddenId} />
@@ -324,17 +343,6 @@ const Fractal = ({ PRESET_DATA = undefined }) => {
           />
         )}
       </div>
-      <MobileControls
-        searchText={searchText}
-        triggerSearch={triggerAnimation}
-        onLeft={() => go({ ...params, direction: 'left' })}
-        onZoomIn={() => go({ ...params, direction: 'lower' })}
-        onRight={() => go({ ...params, direction: 'right' })}
-        onZoomOut={() => go({ ...params, direction: 'higher' })}
-        linkInfo={linkInfo}
-        isWindowWide={isWindowWide}
-        labels={searchResults}
-      />
     </div>
   )
 }

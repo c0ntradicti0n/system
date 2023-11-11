@@ -201,9 +201,6 @@ ant-btn {
   z-index: 99999998;
 }
 .mobile-controls {
-  position: absolute;
-  top: 50%;
-  width: 20vw;
   display: flex;
   justify-content: center; /* Center items horizontally */
   align-items: center; /* Center items vertically */
@@ -240,10 +237,6 @@ ant-btn {
     width: 7vw !important;
     height: 7vw !important;
   }
-
-  .top-search {
-    width: 20vw !important;
-  }
 }
 
 .top-search,
@@ -257,10 +250,7 @@ ant-btn {
 }
 
 .top-search {
-  width: 13vw;
   z-index: 999999999999;
-  left: 10vw;
-  top: 10vh;
 }
 
 #search {

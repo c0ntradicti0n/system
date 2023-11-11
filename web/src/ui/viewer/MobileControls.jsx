@@ -1,32 +1,59 @@
 import { useEffect, useState } from 'react'
-import ShareModal from '../ShareModal'
 import { Button, Input } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
-import { useNavigate } from 'raviger'
+import { Link, useNavigate } from 'raviger'
+import * as PropTypes from 'prop-types'
 
-export const MobileControls = ({
-  triggerSearch,
+export const Search = ({ triggerSearch, searchText: _searchText }) => {
+  const [searchText, setSearchText] = useState(_searchText ?? '')
+  useEffect(() => {
+    setSearchText(_searchText)
+  }, [_searchText])
+
+  return (
+    <div className="top-search">
+      <Input
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+        placeholder="How not to get murdered in the woods"
+        style={{ width: '100%' }}
+      />
+      <Button
+        type="primary"
+        icon={<SearchOutlined />}
+        onClick={() => triggerSearch(searchText)}
+      />
+    </div>
+  )
+}
+
+export function EditorLink(props) {
+  return (
+    <Link
+      href="/editor#activeTab=ex"
+      aria-label="Editor"
+      title="Editor"
+      link
+      style={{ color: 'lime' }}
+    >
+      Go to Editor
+    </Link>
+  )
+}
+
+EditorLink.propTypes = { onClick: PropTypes.func }
+export const Navigation = ({
   searchText: _searchText,
   onLeft,
   onZoomIn,
   onRight,
   onZoomOut,
   linkInfo,
-  isWindowWide,
-  labels,
 }) => {
   const navigate = useNavigate()
 
-  const [searchText, setSearchText] = useState(_searchText ?? '')
-  useEffect(() => {
-    setSearchText(_searchText)
-  }, [_searchText])
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.target.id === 'search') {
-        return // If it is, exit early and don't process the key event
-      }
-
       switch (e.key) {
         case 'ArrowLeft':
           onLeft()
@@ -52,41 +79,9 @@ export const MobileControls = ({
     }
   }, [onLeft, onRight, onZoomIn, onZoomOut])
 
-  const mobileStyles = !isWindowWide
-    ? { left: 50, top: '27vh', position: 'fixed' }
-    : {
-        top: '5vh',
-      }
   return (
-    <div className="mobile-controls" style={{}}>
-      <div
-        className="top-search"
-        style={
-          !isWindowWide
-            ? {
-                position: 'fixed',
-                left: labels?.length ? '5vw' : '76vw',
-                top: labels?.length ? '40vh' : '1vh',
-              }
-            : {
-                top: '5vh',
-              }
-        }
-      >
-        <Input.TextArea
-          id="search"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-          placeholder="How not to get murdered in the woods"
-          autoSize
-        />
-        <Button
-          type="primary"
-          icon={<SearchOutlined />}
-          onClick={() => triggerSearch(searchText)}
-        />
-      </div>
-      <div className="navigation-controls" style={mobileStyles}>
+    <div className="mobile-controls">
+      <div className="navigation-controls">
         <button
           onClick={onZoomIn}
           className="button red top-controls"
@@ -120,21 +115,6 @@ export const MobileControls = ({
         >
           ↓
         </button>
-        <ShareModal linkInfo={linkInfo} />
-        <Button
-          style={{
-            zIndex: 999999999,
-            position: 'relative',
-            left: '40px',
-            top: '40px',
-          }}
-          onClick={() => navigate('/editor#activeTab=ex')}
-          className="button red editor-controls"
-          aria-label="Editor"
-          title="Editor"
-        >
-          ✎
-        </Button>
       </div>
     </div>
   )

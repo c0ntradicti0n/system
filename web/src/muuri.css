@@ -1,17 +1,19 @@
 .grid {
-  position: relative;
-  height: 160px !important;
-  width: 70vw !important;
-  left: 150px;
+  position: fixed; /* Positioned relative to the viewport */
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  z-index: 0;
 }
 .item {
   position: absolute;
-  width: 90px;
-  height: 140px;
+  width: 15vw;
+  height: 17vh;
   margin: 5px;
-  z-index: 1;
   overflow: hidden;
   border-radius: 5px;
+  display: grid;
 }
 
 @media screen and (max-width: 600px) {
