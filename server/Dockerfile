@@ -21,7 +21,7 @@ COPY requirements.prod /app/
 # Install system dependencies
 RUN pip install --upgrade pip
 RUN pip install uwsgi
-RUN --mount=type=cache,target=/root/.cache/pip  pip install --no-cache-dir -r requirements.prod
+RUN --mount=type=cache,target=/root/.cache/pip3  pip install --no-cache-dir -r requirements.prod
 RUN apt-get purge -y --auto-remove gcc
 RUN apt install
 # Copy the current directory contents into the container at /app
