@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM pypy:latest
+FROM python:bullseye
 
 # Install uWSGI
 RUN apt-get update && apt-get install -y  gcc && rm -rf /var/lib/apt/lists/*
