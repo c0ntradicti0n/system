@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:bullseye
+FROM kalilinux/kali-last-release
 
 # Install uWSGI
 RUN apt-get update && apt-get install -y  gcc && rm -rf /var/lib/apt/lists/*
