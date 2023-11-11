@@ -42,7 +42,7 @@ const useMuuriGrid = (gridRef, options, size, props) => {
           {
             ...props.params,
             actions: [
-              ...(props.params?.actions ?? []),
+              ...(props?.params?.actions ?? []),
               {
                 timestamp: Date.now(),
                 action: 'swap',
