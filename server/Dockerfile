@@ -19,8 +19,8 @@ WORKDIR /app
 COPY requirements.prod /app/
 
 # Install system dependencies
-RUN pip install --upgrade pip
-RUN pip install uwsgi
+RUN pip3 install --upgrade pip
+RUN pip3 install uwsgi
 RUN --mount=type=cache,target=/root/.cache/pip3  pip install --no-cache-dir -r requirements.prod
 RUN apt-get purge -y --auto-remove gcc
 RUN apt install
