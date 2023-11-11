@@ -21,7 +21,7 @@ COPY requirements.prod /app/
 # Install system dependencies
 RUN pip3 install --upgrade pip
 RUN pip3 install uwsgi
-RUN  apt install  -y python-dev
+RUN  apt install  -y python3-dev
 RUN --mount=type=cache,target=/root/.cache/pip3  pip3 install --no-cache-dir -r requirements.prod
 RUN apt-get purge -y --auto-remove gcc
 RUN apt install
