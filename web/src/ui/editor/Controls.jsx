@@ -151,7 +151,7 @@ const UserInteractionMenu = ({ params, onDeleteAction }) => {
       }}
     >
       <Menu mode="vertical" className=" red">
-        {params.actions?.reverse().map((action, index) => (
+        {params.actions?.map((action, index) => [action, index]).reverse().map(([action, index]) => (
           <Menu.Item key={index} className="user-action red">
               {index}
             <Popconfirm

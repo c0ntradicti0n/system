@@ -201,6 +201,7 @@ ant-btn {
   z-index: 99999998;
 }
 .mobile-controls {
+  position: absolute;
   top: 50%;
   width: 20vw;
   display: flex;

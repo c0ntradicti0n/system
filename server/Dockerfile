@@ -23,8 +23,11 @@ RUN pip install --upgrade pip
 RUN pip install uwsgi
 RUN --mount=type=cache,target=/root/.cache/pip  pip install --no-cache-dir -r requirements.prod
 RUN apt-get purge -y --auto-remove gcc
+RUN apt install
 # Copy the current directory contents into the container at /app
 ADD . /app/
+RUN apt install sqlite3
+
 
 ENV PYTHONIOENCODING=utf-8
 ENV LC_ALL=C.UTF-8
