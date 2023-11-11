@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.11-buster
+FROM pypy:latest
 
 # Install uWSGI
 RUN apt-get update && apt-get install -y  gcc && rm -rf /var/lib/apt/lists/*
