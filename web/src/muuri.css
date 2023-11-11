@@ -5,8 +5,12 @@
   top: 0;
   right: 0;
   z-index: 0;
+    pointer-events: none; /* This is the key property */
+
 }
 .item {
+    pointer-events: auto; /* Enables pointer events for this child */
+
   position: absolute;
   width: 15vw;
   height: 17vh;

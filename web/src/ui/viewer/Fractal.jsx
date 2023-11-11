@@ -262,17 +262,7 @@ const Fractal = ({ PRESET_DATA = undefined }) => {
   }, [initialPageLoad, setDetailId, setHiddenId]) // Depend on initialPageLoad so that this useEffect runs only once
   return (
     <div className="Fractal">
-      <ControlContainer>
-        <Search searchText={searchText} triggerSearch={triggerAnimation} />
-        <ShareModal linkInfo={linkInfo} />
-        <Navigation
-          onLeft={() => go({ ...params, direction: 'left' })}
-          onZoomIn={() => go({ ...params, direction: 'lower' })}
-          onRight={() => go({ ...params, direction: 'right' })}
-          onZoomOut={() => go({ ...params, direction: 'higher' })}
-        />
-        <EditorLink />
-      </ControlContainer>
+
       <div style={{ position: 'absolute', width: 0, height: 0, top: 0 }}>
         {searchResults ? (
           <MuuriComponent labels={searchResults} setHiddenId={setHiddenId} />
@@ -343,6 +333,17 @@ const Fractal = ({ PRESET_DATA = undefined }) => {
           />
         )}
       </div>
+            <ControlContainer>
+        <Search searchText={searchText} triggerSearch={triggerAnimation} />
+        <ShareModal linkInfo={linkInfo} />
+        <Navigation
+          onLeft={() => go({ ...params, direction: 'left' })}
+          onZoomIn={() => go({ ...params, direction: 'lower' })}
+          onRight={() => go({ ...params, direction: 'right' })}
+          onZoomOut={() => go({ ...params, direction: 'higher' })}
+        />
+        <EditorLink />
+      </ControlContainer>
     </div>
   )
 }
