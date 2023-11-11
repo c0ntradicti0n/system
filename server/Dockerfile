@@ -26,7 +26,7 @@ RUN apt-get purge -y --auto-remove gcc
 RUN apt install
 # Copy the current directory contents into the container at /app
 ADD . /app/
-RUN apt install sqlite3
+RUN apt install -y sqlite3
 
 
 ENV PYTHONIOENCODING=utf-8
