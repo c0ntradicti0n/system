@@ -1,10 +1,9 @@
 import React from 'react'
 import { Button } from 'antd'
 import { navigate } from 'raviger'
-import BibTeXViewer from '../BibtexViewer'
+import BibTeXViewer from './BibtexViewer'
 
 export function ExperimentsView(props) {
-  //console.log(props)
   const [isGood, setIsGood] = React.useState({})
   return (
     <>

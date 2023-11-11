@@ -11,7 +11,6 @@ import { ExperimentsView } from './ExperimentsView'
 import { PuzzleView } from './PuzzleView'
 import TextModal from './TextModal'
 import MetaModal from './MetaModal'
-var debounce = require('lodash.debounce')
 
 let taskId = null
 const setTaskId = (tI) => (taskId = tI)

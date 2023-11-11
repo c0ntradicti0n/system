@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Muuri from 'muuri'
-import '../puzzle.css'
-import { stringToColour } from '../lib/color'
-import { postProcessTitle } from '../lib/position'
-import useMuuriGrid from '../lib/useMuuriGrid'
-import calculateFontSize from '../lib/FontSize'
+import '../../puzzle.css'
+import { stringToColour } from '../../lib/color'
+import { postProcessTitle } from '../../lib/position'
+import useMuuriGrid from '../../lib/useMuuriGrid'
+import calculateFontSize from '../../lib/FontSize'
 
 // Define the base length for the largest triangle
 const BASE_LENGTH = window.innerHeight * 0.5 // Modify as needed
@@ -168,6 +168,7 @@ const MutableTriangle = ({
               overflowWrap: 'break-word',
               width: size,
               transform: 'translateX(-25%)',
+              zIndex: 1000000000 - 1000 * nest,
             }}
             title={title} // Full title as a tooltip
             onMouseDown={(e) => {

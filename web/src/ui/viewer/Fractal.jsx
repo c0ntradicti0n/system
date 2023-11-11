@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react'
 import { useQuery } from 'react-query'
 import Triangle from './Triangle'
-import { mergeDeep, lookupDeep, shiftIn, slashIt } from '../lib/nesting'
-import { parseHash } from '../lib/read_link_params'
+import { mergeDeep, lookupDeep, shiftIn, slashIt } from '../../lib/nesting'
+import { parseHash } from '../../lib/read_link_params'
 
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
-import { go, beamDataTo } from '../lib/navigate'
+import { go, beamDataTo } from '../../lib/navigate'
 
 import { Tooltips } from './Tooltips'
-import { MAX_LEVEL } from '../config/const'
+import { MAX_LEVEL } from '../../config/const'
 import { MobileControls } from './MobileControls'
 import { MuuriComponent } from './MuuriComponent'
 

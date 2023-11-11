@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Puzzle } from '../Puzzle'
+import { Puzzle } from './Puzzle'
 import PuzzleControls from './Controls'
 
 export function PuzzleView(props) {

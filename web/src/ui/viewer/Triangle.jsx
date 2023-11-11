@@ -4,12 +4,16 @@ import {
   getTopPosition,
   isElementInViewportAndBigAndNoChildren,
   postProcessTitle,
-} from '../lib/position'
-import { addHoverObject, hoverObjects, removeHoverObject } from '../lib/hover'
-import { MAX_LEVEL } from '../config/const'
-import { stringToColour } from '../lib/color'
-import { trim } from '../lib/string'
-import calculateFontSize from '../lib/FontSize'
+} from '../../lib/position'
+import {
+  addHoverObject,
+  hoverObjects,
+  removeHoverObject,
+} from '../../lib/hover'
+import { MAX_LEVEL } from '../../config/const'
+import { stringToColour } from '../../lib/color'
+import { trim } from '../../lib/string'
+import calculateFontSize from '../../lib/FontSize'
 
 function getRandomElement(arr) {
   const randomIndex = Math.floor(Math.random() * arr.length)
@@ -69,8 +73,6 @@ function Triangle({
   }, [transformState, scale, fullId])
   if (!data) return null
 
-  //const { linkedElements, linkedElementsHas } = useLinkedElementsStore()
-
   const hover = hoverObjects.has(fullId)
   if (hover) {
     setHoverId(fullId)
@@ -78,7 +80,7 @@ function Triangle({
 
   const title = data?.['.']
   const anto = data?.['_']
-  const { shortTitle, fontSize } = calculateFontSize(size, title)
+  const { shortTitle, fontSize } = calculateFontSize(size, title, 0.7)
 
   return (
     <div
@@ -170,6 +172,7 @@ function Triangle({
                     style={{
                       whiteSpace: 'pre-wrap',
                       overflowWrap: 'break-word',
+                      fontStyle: 'italic',
                     }}
                   >
                     {word}

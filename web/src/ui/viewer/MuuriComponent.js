@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import Muuri from 'muuri'
-import '../muuri.css'
+import '../../muuri.css'
 import { Pin } from './Pin'
 
 const MuuriComponent = ({ labels, setHiddenId }) => {

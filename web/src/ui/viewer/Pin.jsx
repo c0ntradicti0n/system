@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import LeaderLine from 'leader-line'
-import useLinkedElementsStore from '../lib/PinnedElements'
+import useLinkedElementsStore from '../../lib/PinnedElements'
 
 function findElementById(id) {
   let currentId = id

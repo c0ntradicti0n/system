@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { Tree } from 'antd'
-import { convertToAntdTreeData } from '../Tooltips'
+import { convertToAntdTreeData } from '../../lib/convertToAntdTreeData'
 
 export function TreeView(props) {
   const treeData = convertToAntdTreeData(props.state)
   const [expandedKeys, setExpandedKeys] = useState([])
-  const [openedKeys, setOpenedKeys] = useState(null)
   const onExpand = (expandedKeysValue) => {
     console.log('onExpand', expandedKeysValue)
     setExpandedKeys(expandedKeysValue)
@@ -21,7 +20,6 @@ export function TreeView(props) {
       titleHeight={'10px'}
       loadData={async (node) => {
         console.log(node)
-        setOpenedKeys(node.key.replace(/-/g, '/').slice(0, -2))
       }}
     />
   )

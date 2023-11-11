@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Modal, Button, Input } from 'antd'
 import { ShareAltOutlined, CopyOutlined } from '@ant-design/icons'
 import { removeMultipleSlashes } from '../lib/nesting'

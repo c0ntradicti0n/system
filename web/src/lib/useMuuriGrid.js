@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import Muuri from 'muuri'
-import { idToSize, idToZIndex, positionToId } from '../ui/Puzzle'
+import { idToSize, idToZIndex, positionToId } from '../ui/editor/Puzzle'
 
 const useMuuriGrid = (gridRef, options, size, props) => {
   useEffect(() => {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import ShareModal from './ShareModal'
+import ShareModal from '../ShareModal'
 import { Button, Input } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import { useNavigate } from 'raviger'

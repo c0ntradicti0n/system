@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Menu, Popconfirm, Slider, Space } from 'antd'
+import { Button, Menu, Popconfirm, Slider } from 'antd'
 import { DeleteOutlined } from '@ant-design/icons'
 
 const ControlBar = {
@@ -146,27 +146,30 @@ const UserInteractionMenu = ({ params, onDeleteAction }) => {
         position: 'fixed',
         left: 0,
         top: '10vh',
-          height: '30vh',
-          overflowY: "scroll"
+        height: '30vh',
+        overflowY: 'scroll',
       }}
     >
       <Menu mode="vertical" className=" red">
-        {(params?.actions ??[]).map((action, index) => [action, index]).reverse().map(([action, index]) => (
-          <Menu.Item key={index} className="user-action red">
+        {(params?.actions ?? [])
+          .map((action, index) => [action, index])
+          .reverse()
+          .map(([action, index]) => (
+            <Menu.Item key={index} className="user-action red">
               {index}
-            <Popconfirm
-              title="Are you sure to delete this action?"
-              onConfirm={() => onDeleteAction(index)}
-              okText="Yes"
-              cancelText="No"
-            >
-              <Button type="link" style={{color: "#fff"}}>
-                <DeleteOutlined />
-              </Button>
-            </Popconfirm>
-            {action.source}↦{JSON.stringify(action.target)}
-          </Menu.Item>
-        ))}
+              <Popconfirm
+                title="Are you sure to delete this action?"
+                onConfirm={() => onDeleteAction(index)}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button type="link" style={{ color: '#fff' }}>
+                  <DeleteOutlined />
+                </Button>
+              </Popconfirm>
+              {action.source}↦{JSON.stringify(action.target)}
+            </Menu.Item>
+          ))}
       </Menu>
     </div>
   )
