@@ -9,16 +9,12 @@ import { go, beamDataTo } from '../../lib/navigate'
 
 import { Tooltips } from './Tooltips'
 import { MAX_LEVEL } from '../../config/const'
-import {
-  EditorLink,
-  MobileControls,
-  Navigation,
-  Search,
-} from './MobileControls'
-import { MuuriComponent } from './MuuriComponent'
+import { EditorLink, Navigation, Search } from './MobileControls'
+import { SearchResults } from './SearchResults'
 import { ControlContainer } from '../ControlContainer'
 import ShareModal from '../ShareModal'
-import { navigate } from 'raviger'
+import './controls.css'
+import { CONTROL_AREAS } from '../../config/areas'
 
 const maxZoomThreshold = 2
 const minZoomThreshold = 0.6
@@ -262,10 +258,9 @@ const Fractal = ({ PRESET_DATA = undefined }) => {
   }, [initialPageLoad, setDetailId, setHiddenId]) // Depend on initialPageLoad so that this useEffect runs only once
   return (
     <div className="Fractal">
-
       <div style={{ position: 'absolute', width: 0, height: 0, top: 0 }}>
         {searchResults ? (
-          <MuuriComponent labels={searchResults} setHiddenId={setHiddenId} />
+          <SearchResults labels={searchResults} setHiddenId={setHiddenId} />
         ) : null}
       </div>
       <TransformWrapper
@@ -333,7 +328,7 @@ const Fractal = ({ PRESET_DATA = undefined }) => {
           />
         )}
       </div>
-            <ControlContainer>
+      <ControlContainer areas={CONTROL_AREAS} cssPrefix="fractal">
         <Search searchText={searchText} triggerSearch={triggerAnimation} />
         <ShareModal linkInfo={linkInfo} />
         <Navigation

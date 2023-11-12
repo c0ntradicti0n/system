@@ -7,9 +7,11 @@ import { Puzzle } from './ui/editor/Puzzle'
 import { Editor } from './ui/editor/Editor'
 
 import { useRoutes } from 'raviger'
+import { ControlContainerTest } from './ui/ControlTest'
 
 const routes = {
   '/': () => <Fractal />,
+  '/control_test': () => <ControlContainerTest />,
   '/puzzle': () => (
     <Puzzle
       data={{

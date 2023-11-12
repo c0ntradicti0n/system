@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Puzzle } from './Puzzle'
-import PuzzleControls from './Controls'
+import PuzzleControls from './PuzzleControls'
+import './puzzle-controls.css'
 
 export function PuzzleView(props) {
   const [action, _setAction] = useState(null)

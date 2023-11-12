@@ -1,21 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Menu, Popconfirm, Slider } from 'antd'
 import { DeleteOutlined } from '@ant-design/icons'
-
-const ControlBar = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  position: 'fixed',
-  top: 0,
-  right: '100px',
-  width: '80%',
-  zIndex: 9999999,
-}
-
-const ControlColumn = {
-  textAlign: 'center',
-}
+import { ControlContainer } from '../ControlContainer'
+import {CONTROL_AREAS, RIGHT_BIG_TRIANGLE} from '../../config/areas'
 
 const SelectStartNodeButton = ({ setAction, action, socket, hash, params }) => {
   const [selectionMode, setSelectionMode] = useState(false)
@@ -44,18 +31,18 @@ const SelectStartNodeButton = ({ setAction, action, socket, hash, params }) => {
   }
 
   return (
-    <div className="red" style={ControlColumn}>
-      start {startNode}
+    <div className="red ">
+      Base node {startNode}
       <Button
-        className="button red"
+        className="button red "
         onClick={handleButtonClick}
         aria-label="Select Start Node"
         title="Select Start Node"
       >
-        🚩
+       Set  🚩
       </Button>
       <Button
-        className="button red"
+        className="button red "
         onClick={() => {
           socket
             .timeout(3000)
@@ -64,7 +51,7 @@ const SelectStartNodeButton = ({ setAction, action, socket, hash, params }) => {
         aria-label="Remove Start Node"
         title="Remove Start Node"
       >
-        🚫
+        Unset 🚫
       </Button>
     </div>
   )
@@ -91,7 +78,7 @@ const SelectDepth = ({ socket, hash, params }) => {
   }
 
   return (
-    <div className="red" style={{ ...ControlColumn, minWidth: '12%' }}>
+    <div className="red">
       Depth {params?.depth}
       <Slider
         min={1}
@@ -115,7 +102,6 @@ const PauseButton = ({ isPaused, setIsPaused }) => {
       onClick={handlePauseClick}
       aria-label={isPaused ? 'Resume' : 'Pause'}
       title={isPaused ? 'Resume' : 'Pause'}
-      style={ControlColumn}
     >
       {isPaused ? '▶️' : '⏸️'}
     </Button>
@@ -124,8 +110,9 @@ const PauseButton = ({ isPaused, setIsPaused }) => {
 
 const GenericSlider = ({ label, value, min, max, step, onChange }) => {
   return (
-    <div className="slider-container red" style={ControlColumn}>
-      <label>{label}</label>
+    <div className="red" key={label}>
+      <label>{label} = <span>{value}</span>
+</label>
       <Slider
         min={min}
         max={max}
@@ -133,7 +120,6 @@ const GenericSlider = ({ label, value, min, max, step, onChange }) => {
         onChange={onChange}
         value={value}
       />
-      <span>{value}</span>
     </div>
   )
 }
@@ -143,13 +129,11 @@ const UserInteractionMenu = ({ params, onDeleteAction }) => {
     <div
       className="user-interaction-menu red"
       style={{
-        position: 'fixed',
-        left: 0,
-        top: '10vh',
-        height: '30vh',
         overflowY: 'scroll',
+          height: "20vw"
       }}
     >
+        User action record
       <Menu mode="vertical" className=" red">
         {(params?.actions ?? [])
           .map((action, index) => [action, index])
@@ -194,96 +178,71 @@ const PuzzleControls = ({
   }
 
   return (
-    <div style={{ position: 'absolute' }}>
-      <div style={ControlBar}>
-        <SelectStartNodeButton
-          setAction={setAction}
-          action={action}
-          socket={socket}
-          hash={hash}
-          params={params}
-        />
-        <SelectDepth
-          socket={socket}
-          hash={hash}
-          value={params}
-          params={params}
-        />
-        <PauseButton isPaused={isPaused} setIsPaused={setIsPaused} />
-        <GenericSlider
-          label="Similarity"
-          value={params?.weight_similarity || 0}
-          min={0}
-          max={1}
-          step={0.01}
-          onChange={(value) =>
-            socket
-              .timeout(3000)
-              .emit(
-                'save_params',
-                { ...params, weight_similarity: value },
-                hash,
-              )
-          }
-        />
-        <GenericSlider
-          label="Subsumtion vs Threerarchy"
-          value={params?.weight_vs || 0}
-          min={0}
-          max={1}
-          step={0.01}
-          onChange={(value) =>
-            socket
-              .timeout(3000)
-              .emit('save_params', { ...params, weight_vs: value }, hash)
-          }
-        />
-        <GenericSlider
-          label="Normal Text Sequence"
-          value={params?.weight_vs || 0}
-          min={0}
-          max={1}
-          step={0.01}
-          onChange={(value) =>
-            socket
-              .timeout(3000)
-              .emit('save_params', { ...params, weight_sequence: value }, hash)
-          }
-        />
-        <GenericSlider
-          label="Importance of Text"
-          value={params?.weight_vs || 0}
-          min={0}
-          max={1}
-          step={0.01}
-          onChange={(value) =>
-            socket
-              .timeout(3000)
-              .emit(
-                'save_params',
-                { ...params, weight_importance: value },
-                hash,
-              )
-          }
-        />
-        <UserInteractionMenu
+    <ControlContainer areas={RIGHT_BIG_TRIANGLE} cssPrefix="puzzle">
+
+      <SelectStartNodeButton
+        setAction={setAction}
+        action={action}
+        socket={socket}
+        hash={hash}
+        params={params}
+      />
+      <SelectDepth socket={socket} hash={hash} value={params} params={params} />
+      <PauseButton isPaused={isPaused} setIsPaused={setIsPaused} />
+      <GenericSlider
+        label="Similarity"
+        value={params?.weight_similarity || 0}
+        min={0}
+        max={1}
+        step={0.01}
+        onChange={(value) =>
+          socket
+            .timeout(3000)
+            .emit('save_params', { ...params, weight_similarity: value }, hash)
+        }
+      />
+      <GenericSlider
+        label="Subsumtion vs Threerarchy"
+        value={params?.weight_vs || 0}
+        min={0}
+        max={1}
+        step={0.01}
+        onChange={(value) =>
+          socket
+            .timeout(3000)
+            .emit('save_params', { ...params, weight_vs: value }, hash)
+        }
+      />
+      <GenericSlider
+        label="Normal Text Sequence"
+        value={params?.weight_vs || 0}
+        min={0}
+        max={1}
+        step={0.01}
+        onChange={(value) =>
+          socket
+            .timeout(3000)
+            .emit('save_params', { ...params, weight_sequence: value }, hash)
+        }
+      />
+      <GenericSlider
+        label="Importance of Text"
+        value={params?.weight_vs || 0}
+        min={0}
+        max={1}
+        step={0.01}
+        onChange={(value) =>
+          socket
+            .timeout(3000)
+            .emit('save_params', { ...params, weight_importance: value }, hash)
+        }
+      />
+                        <UserInteractionMenu
           params={params}
           onDeleteAction={handleDeleteAction}
         />
-      </div>
-      <div
-        className="button red"
-        style={{
-          position: 'fixed',
-          bottom: 0,
-          right: 300,
-          margin: '1em',
-          color: 'white !important',
-        }}
-      >
-        {JSON.stringify(params ?? {}) ?? 'no params'}
-      </div>
-    </div>
+
+    </ControlContainer>
   )
 }
 

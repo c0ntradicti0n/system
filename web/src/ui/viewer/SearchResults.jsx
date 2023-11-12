@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 import Muuri from 'muuri'
-import '../../muuri.css'
 import { Pin } from './Pin'
-
-const MuuriComponent = ({ labels, setHiddenId }) => {
+import './search.css'
+const SearchResults = ({ labels, setHiddenId }) => {
   const gridRef = useRef(null)
 
   useEffect(() => {
@@ -29,4 +28,4 @@ const MuuriComponent = ({ labels, setHiddenId }) => {
   )
 }
 
-export { MuuriComponent }
+export { SearchResults }

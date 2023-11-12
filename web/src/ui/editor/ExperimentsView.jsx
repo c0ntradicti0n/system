@@ -29,7 +29,7 @@ export function ExperimentsView(props) {
           <Button
             style={{ width: '70vw', backgroundColor: '#123', color: 'yellow' }}
             onClick={() => {
-              navigate(`/editor#hash=${mod.hash}&activeTab=px`)
+              navigate(`/editor#hash=${mod.hash}&activeTab=pz`)
               window.location.reload()
             }}
           >

@@ -11,6 +11,9 @@ import { ExperimentsView } from './ExperimentsView'
 import { PuzzleView } from './PuzzleView'
 import TextModal from './TextModal'
 import MetaModal from './MetaModal'
+import { ControlContainer } from '../ControlContainer'
+import { RIGHT_BOTTOM_CORNER } from '../../config/areas'
+import './controls.css'
 
 let taskId = null
 const setTaskId = (tI) => (taskId = tI)
@@ -201,16 +204,25 @@ export const Editor = () => {
   }
   return (
     <div className="App" style={{ overflowY: 'scroll' }}>
-      <ShareModal url={'/editor'} linkInfo={{ hash, activeTab }} />
-      <TextModal
-        socket={socket}
-        text={text}
-        setText={setText}
-        _text={_text}
-        _setText={_setText}
-      />
-      <MetaModal socket={socket} meta={meta} setMeta={setMeta} hash={hash} />
+      <ControlContainer areas={RIGHT_BOTTOM_CORNER} cssPrefix="editor">
+        <TextModal
+          socket={socket}
+          text={text}
+          setText={setText}
+          _text={_text}
+          _setText={_setText}
+        />
+        <ShareModal url={'/editor'} linkInfo={{ hash, activeTab }} />
 
+        {hash && (
+          <MetaModal
+            socket={socket}
+            meta={meta}
+            setMeta={setMeta}
+            hash={hash}
+          />
+        )}
+      </ControlContainer>
       <Tabs
         activeKey={activeTab}
         onChange={(key) => {
@@ -224,42 +236,46 @@ export const Editor = () => {
             label: 'Experiments',
             children: <ExperimentsView {...{ mods, deleteMod, resetMod }} />,
           },
-          {
-            key: 'pz',
-            label: 'Puzzle',
-            children: state && (
-              <PuzzleView
-                {...{
-                  socket,
-                  hash,
-                  text,
-                  patch,
-                  state,
-                  params,
-                  isPaused,
-                  setIsPaused,
-                }}
-                applyPatch={applyPatch}
-              />
-            ),
-          },
-          {
-            key: '3',
-            label: 'Triangle',
-            children: state && (
-              <TriangleView {...{ hash, text, patch, state }} />
-            ),
-          },
-          {
-            key: 'tree',
-            label: 'Tree',
-            children: <TreeView {...{ hash, text, patch, state }} />,
-          },
-          {
-            key: 'json',
-            label: 'JSON',
-            children: <JsonView {...{ hash, text, patch, state }} />,
-          },
+          ...(hash
+            ? [
+                {
+                  key: 'pz',
+                  label: 'Puzzle',
+                  children: state && (
+                    <PuzzleView
+                      {...{
+                        socket,
+                        hash,
+                        text,
+                        patch,
+                        state,
+                        params,
+                        isPaused,
+                        setIsPaused,
+                      }}
+                      applyPatch={applyPatch}
+                    />
+                  ),
+                },
+                {
+                  key: '3',
+                  label: 'Triangle',
+                  children: state && (
+                    <TriangleView {...{ hash, text, patch, state }} />
+                  ),
+                },
+                {
+                  key: 'tree',
+                  label: 'Tree',
+                  children: <TreeView {...{ hash, text, patch, state }} />,
+                },
+                {
+                  key: 'json',
+                  label: 'JSON',
+                  children: <JsonView {...{ hash, text, patch, state }} />,
+                },
+              ]
+            : []),
         ]}
       />
       <div style={{ position: 'fixed', left: 0, bottom: 0 }}>{taskId}</div>

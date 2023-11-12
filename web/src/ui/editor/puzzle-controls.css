@@ -1,0 +1,10 @@
+.puzzle-item {
+  pointer-events: auto; /* Enables pointer events for this child */
+  position: absolute;
+  width: 12vw;
+  height: fit-content;
+  margin: 5px;
+  overflow: hidden;
+  border-radius: 5px;
+  display: grid;
+}

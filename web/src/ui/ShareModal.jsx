@@ -8,7 +8,7 @@ const ShareModal = ({ url = '', linkInfo }) => {
   const [isCopied, setIsCopied] = useState(false)
   const linkInfoNoNull = Object.fromEntries(
     Object.entries(linkInfo)
-      .filter(([_, v]) => v !== null)
+      .filter(([_, v]) => v !== null && v !== undefined)
       .map(([k, v]) => [k, v?.toString().replace(/\//g, '')]),
   )
   const fullUrl =
@@ -44,7 +44,10 @@ const ShareModal = ({ url = '', linkInfo }) => {
         icon={<ShareAltOutlined />}
         className="share-button red"
         aria-label="Share (Hotkey: s)"
-      />
+      >
+        {' '}
+        Share
+      </Button>
       <Modal
         title="Share this URL"
         open={isVisible}
