@@ -45,6 +45,12 @@ export const TEST_AREAS = {
     cy: window.innerHeight / 2,
     r: window.innerWidth / 7,
   },
+    circle2: {
+    type: 'circle',
+    cx: window.innerWidth / 3,
+    cy: window.innerHeight *2/ 3,
+    r: window.innerWidth / 9,
+  },
   rectangle: {
     type: 'rectangle',
 

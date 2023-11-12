@@ -3,10 +3,10 @@ import Muuri from 'muuri'
 
 function computeParallelLines(itemSize, margin) {
   const lines = []
-  const lineHeight = itemSize+ margin
+  const lineHeight = itemSize.height + margin
   const maxY = window.innerHeight
 
-  for (let y = itemSize.height; y < maxY; y += lineHeight) {
+  for (let y = itemSize.height/2; y < maxY; y += lineHeight) {
     lines.push(y)
   }
 
@@ -147,6 +147,7 @@ function layout(areas, cssPrefix) {
       shapes,
       items,
     )
+    console.log('layout', { layoutId, items, width, height, positions })
 
     items.forEach((item, index) => {
       if (index < positions.length) {
