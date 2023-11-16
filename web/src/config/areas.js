@@ -45,10 +45,10 @@ export const TEST_AREAS = {
     cy: window.innerHeight / 2,
     r: window.innerWidth / 7,
   },
-    circle2: {
+  circle2: {
     type: 'circle',
     cx: window.innerWidth / 3,
-    cy: window.innerHeight *2/ 3,
+    cy: (window.innerHeight * 2) / 3,
     r: window.innerWidth / 9,
   },
   rectangle: {
@@ -85,11 +85,12 @@ export const RIGHT_BIG_TRIANGLE = {
       { x: 0, y: 0 }, // Top left
       { x: window.innerWidth / 4, y: 0 }, // Middle top
     ],
-  },  triangle: {
+  },
+  triangle: {
     type: 'triangle',
 
     vertices: [
-      { x: window.innerWidth * 0.4, y:0 },
+      { x: window.innerWidth * 0.4, y: 0 },
       { x: window.innerWidth * 0.9, y: window.innerHeight },
       { x: window.innerWidth * 0.9, y: 0 },
     ],

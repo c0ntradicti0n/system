@@ -6,7 +6,7 @@ function computeParallelLines(itemSize, margin) {
   const lineHeight = itemSize.height + margin
   const maxY = window.innerHeight
 
-  for (let y = itemSize.height/2; y < maxY; y += lineHeight) {
+  for (let y = itemSize.height / 2; y < maxY; y += lineHeight) {
     lines.push(y)
   }
 
@@ -179,16 +179,16 @@ const ControlContainer = ({ children, areas, cssPrefix, debug = false }) => {
         grid.destroy()
       }
     } catch (e) {
-        console.error('Error in Muuri layout', e)
+      console.error('Error in Muuri layout', e)
     }
   }, [areas, cssPrefix, gridRef, children])
 
   console.log('ControlContainer', { children, areas, cssPrefix, debug })
   const nonNullitems = children?.filter((child) => child)
-    if (!nonNullitems) {
-      console.error('No children in ControlContainer')
-      return null
-    }
+  if (!nonNullitems) {
+    console.error('No children in ControlContainer')
+    return null
+  }
   return (
     <>
       <div ref={gridRef} className="grid">

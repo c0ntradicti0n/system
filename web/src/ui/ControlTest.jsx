@@ -6,9 +6,8 @@ export const ControlContainerTest = () => {
   return (
     <ControlContainer areas={TEST_AREAS} cssPrefix="test" debug>
       {[...Array(650).keys()].map((i) => (
-        <div key={i} style={{ backgroundColor: 'lime' }}>
-          {' '}
-          {i}{' '}
+        <div key={i} style={{ border: '1px solit white' }}>
+          {i}
         </div>
       ))}
     </ControlContainer>

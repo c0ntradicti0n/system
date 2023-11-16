@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button, Menu, Popconfirm, Slider } from 'antd'
 import { DeleteOutlined } from '@ant-design/icons'
 import { ControlContainer } from '../ControlContainer'
-import {CONTROL_AREAS, RIGHT_BIG_TRIANGLE} from '../../config/areas'
+import { CONTROL_AREAS, RIGHT_BIG_TRIANGLE } from '../../config/areas'
 
 const SelectStartNodeButton = ({ setAction, action, socket, hash, params }) => {
   const [selectionMode, setSelectionMode] = useState(false)
@@ -39,7 +39,7 @@ const SelectStartNodeButton = ({ setAction, action, socket, hash, params }) => {
         aria-label="Select Start Node"
         title="Select Start Node"
       >
-       Set  🚩
+        Set 🚩
       </Button>
       <Button
         className="button red "
@@ -111,8 +111,9 @@ const PauseButton = ({ isPaused, setIsPaused }) => {
 const GenericSlider = ({ label, value, min, max, step, onChange }) => {
   return (
     <div className="red" key={label}>
-      <label>{label} = <span>{value}</span>
-</label>
+      <label>
+        {label} = <span>{value}</span>
+      </label>
       <Slider
         min={min}
         max={max}
@@ -130,10 +131,10 @@ const UserInteractionMenu = ({ params, onDeleteAction }) => {
       className="user-interaction-menu red"
       style={{
         overflowY: 'scroll',
-          height: "20vw"
+        height: '20vw',
       }}
     >
-        User action record
+      User action record
       <Menu mode="vertical" className=" red">
         {(params?.actions ?? [])
           .map((action, index) => [action, index])
@@ -179,7 +180,6 @@ const PuzzleControls = ({
 
   return (
     <ControlContainer areas={RIGHT_BIG_TRIANGLE} cssPrefix="puzzle">
-
       <SelectStartNodeButton
         setAction={setAction}
         action={action}
@@ -237,11 +237,10 @@ const PuzzleControls = ({
             .emit('save_params', { ...params, weight_importance: value }, hash)
         }
       />
-                        <UserInteractionMenu
-          params={params}
-          onDeleteAction={handleDeleteAction}
-        />
-
+      <UserInteractionMenu
+        params={params}
+        onDeleteAction={handleDeleteAction}
+      />
     </ControlContainer>
   )
 }
