@@ -8,7 +8,8 @@ import torch
 
 from lib.embedding import get_embeddings
 from lib.helper import OutputLevel, e, tree
-from lib.wordnet import hypernym_generator, yield_random_wordnet_sample
+from lib.wordnet import (hypernym_generator, yield_random_ant_wordnet_sample,
+                         yield_random_hie_wordnet_sample)
 
 
 @contextlib.contextmanager
@@ -47,9 +48,13 @@ def random_subdir(dir_path):
     return random.choice(gold_samples)
 
 
+ant_wn_gen = None
+hie_wn_gen = None
+
+
 def tree_walker(yield_mode="valid", n_samples=10):
     samples = []
-    hie_wn_gen = None
+    global ant_wn_gen, hie_wn_gen
 
     while len(samples) < n_samples:
         a, b, c, X = None, None, None, None
@@ -89,6 +94,14 @@ def tree_walker(yield_mode="valid", n_samples=10):
             ):
                 samples.extend([(a, 1), (b, 2), (c, 3)])
                 yield_mode = "random"
+        elif yield_mode == "valid_ant":
+            with e:
+                a = d[1]["."]
+            with e:
+                b = d[2]["."]
+            if all([a, b]) and a not in samples and b not in samples:
+                samples.extend([(a, 1), (b, 2)])
+                yield_mode = "random"
         elif yield_mode == "random":
             r = random.choice([1, 2, 3])
             with e:
@@ -123,7 +136,6 @@ def tree_walker(yield_mode="valid", n_samples=10):
                 yield_mode = "random"
             else:
                 gold_samples.pop(gold_samples.index(random_dir))
-
         elif yield_mode == "random_hie":
             t = random.choice([1, 2, 3])
 
@@ -131,20 +143,25 @@ def tree_walker(yield_mode="valid", n_samples=10):
                 X = d["."]
 
             if all([X]) and X not in samples:
-                samples.extend([(X, 1)])
+                samples.extend([(X, 0)])
                 yield_mode = "random"
             else:
                 gold_samples.pop(gold_samples.index(random_dir))
         elif yield_mode == "valid_hie_wordnet":
             if not hie_wn_gen:
-                hie_wn_gen = yield_random_wordnet_sample()
+                hie_wn_gen = yield_random_hie_wordnet_sample()
             hyper, hypo = next(hie_wn_gen)
             samples.extend([(hyper, 1), (hypo, 2)])
             yield_mode = "random"
-
+        elif yield_mode == "valid_ant_wordnet":
+            if not ant_wn_gen:
+                ant_wn_gen = yield_random_ant_wordnet_sample()
+            word, anto = next(ant_wn_gen)
+            samples.extend([(word, 1), (anto, 2)])
+            yield_mode = "random"
         elif yield_mode == "random_hie_wordnet":
             if not hie_wn_gen:
-                hie_wn_gen = yield_random_wordnet_sample()
+                hie_wn_gen = yield_random_hie_wordnet_sample()
             hyper1, _ = next(hie_wn_gen)
             _, hypo2 = next(hie_wn_gen)
 

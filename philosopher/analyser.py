@@ -2,7 +2,6 @@ import logging
 from collections import Counter, defaultdict
 
 from helper import get_from_nested_dict
-
 from philosopher.missing import add_to_missing_in_toc
 
 

@@ -29,39 +29,59 @@ def compute_cosine_similarity(embeddings, labels, config):
                 # Compute similarity for thesis-antithesis and synthesis
                 thesis_indices = (labels[batch_idx] == 1).nonzero(as_tuple=True)[0]
                 antithesis_indices = (labels[batch_idx] == 2).nonzero(as_tuple=True)[0]
+                synthesis_indices = (labels[batch_idx] == 3).nonzero(as_tuple=True)[0]
+                thesis_embedding = embeddings[batch_idx, thesis_indices].mean(dim=0)
+
+                if (
+                    not thesis_indices.nelement() > 0
+                    and antithesis_indices.nelement() > 0
+                    and synthesis_indices.nelement() > 0
+                ):
+                    confidence_scores[batch_idx, sample_idx] = -1000
+                    continue
+
                 if label == 3:  # Synthesis
-                    if (
-                        thesis_indices.nelement() > 0
-                        and antithesis_indices.nelement() > 0
-                    ):
-                        mean_embedding = (
-                            embeddings[batch_idx, thesis_indices]
-                            + embeddings[batch_idx, antithesis_indices]
-                        ) / 2
-                        confidence_scores[batch_idx, sample_idx] = cosine_similarity(
-                            embeddings[batch_idx, sample_idx].unsqueeze(0),
-                            mean_embedding.mean(dim=0, keepdim=True),
-                        )
-                else:
-                    if thesis_indices.nelement() > 0 and label == 2:  # Antithesis
-                        antithesis_embedding = embeddings[
-                            batch_idx, antithesis_indices
-                        ].mean(dim=0)
-                        thesis_embedding = embeddings[batch_idx, thesis_indices].mean(
-                            dim=0
-                        )
+                    synthesis_embedding = embeddings[
+                        batch_idx, antithesis_indices
+                    ].mean(dim=0)
+                    mean_embedding = (
+                        embeddings[batch_idx, thesis_indices]
+                        + embeddings[batch_idx, antithesis_indices]
+                    ) / 2
+                    cosine_sim = cosine_similarity(
+                        embeddings[batch_idx, sample_idx].unsqueeze(0),
+                        mean_embedding.mean(dim=0, keepdim=True),
+                    )
 
-                        cosine_sim = cosine_similarity(
-                            thesis_embedding.unsqueeze(0),
-                            antithesis_embedding.unsqueeze(0),
-                        )
-                        diff_vector_norm = torch.norm(
-                            thesis_embedding - antithesis_embedding
-                        )
+                    diff_vector_norm = torch.norm(
+                        thesis_embedding - synthesis_embedding
+                    )
 
-                        confidence_scores[batch_idx, sample_idx] = (
-                            cosine_sim - diff_vector_norm
-                        )
+                elif label == 2:  # Antithesis
+                    antithesis_embedding = embeddings[
+                        batch_idx, antithesis_indices
+                    ].mean(dim=0)
+
+                    cosine_sim = cosine_similarity(
+                        thesis_embedding.unsqueeze(0),
+                        antithesis_embedding.unsqueeze(0),
+                    )
+                    diff_vector_norm = torch.norm(
+                        thesis_embedding - antithesis_embedding
+                    )
+                    diff_vector_norm = 0
+                    cosine_sim = 0
+
+                elif label == 1:
+                    cosine_sim = 0
+                    diff_vector_norm = 0
+                elif label == 0:
+                    cosine_sim = 0
+                    diff_vector_norm = 0
+
+                confidence_scores[batch_idx, sample_idx] = (
+                    cosine_sim + diff_vector_norm / 100
+                )
 
     return confidence_scores
 
@@ -71,9 +91,12 @@ def get_model(config):
 
 
 def get_prediction(model, input_data, config, compute_confidence=False, n_samples=None):
-    input_reshaped = input_data.view(
-        -1, n_samples if n_samples else config.n_samples, config.embedding_dim
-    )
+    try:
+        input_reshaped = input_data.view(
+            -1, n_samples if n_samples else config.n_samples, config.embedding_dim
+        )
+    except:
+        raise
     outputs = model(input_reshaped)
 
     # Reshape outputs and labels
@@ -95,6 +118,9 @@ def get_prediction(model, input_data, config, compute_confidence=False, n_sample
 
         if 0 in predicted_labels:
             predicted_labels.fill_(0)
+        if config.symmetric:
+            # sort labels to ensure that the first label is always the positive class
+            predicted_labels = torch.sort(predicted_labels)[0]
 
         # Reshape the logits to match the original shape
         try:
@@ -115,7 +141,6 @@ def get_prediction(model, input_data, config, compute_confidence=False, n_sample
         all_outputs_reshaped.append(logits_reshaped)
 
     all_predicted_labels = torch.cat(all_predicted_labels)
-    all_outputs_reshaped = torch.cat(all_outputs_reshaped)
 
     # Replace the existing confidence scoring method with the above function
     if compute_confidence:

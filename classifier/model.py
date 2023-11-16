@@ -40,7 +40,7 @@ class NTupleNetwork(nn.Module):
             nn.Linear(int(embedding_dim * 0.5 // 1), int(embedding_dim * 0.25 // 1)),
             nn.GELU(),
             nn.Linear(int(embedding_dim * 0.25 // 1), int(embedding_dim * 0.125 // 1)),
-            nn.Dropout(0.5),
+            # nn.Dropout(0.5),
             nn.GELU(),
             nn.Linear(int(embedding_dim * 0.125 // 1), int(output_dim)),
         )

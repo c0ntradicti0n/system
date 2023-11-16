@@ -17,6 +17,7 @@ from states import states
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from integrator.tree import Tree
+from integrator.serialize import serialize_graph_to_structure
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="gevent")
@@ -138,7 +139,7 @@ def handle_set_state(hash_id):
 
     old_state, i = states[hash_id]
 
-    active_version = Tree.serialize_graph_to_structure(
+    active_version = serialize_graph_to_structure(
         *old_state.max_score_triangle_subgraph(old_state.graph, return_start_node=True)
     )
     return active_version

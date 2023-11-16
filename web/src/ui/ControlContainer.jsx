@@ -126,7 +126,7 @@ let POINTS = []
 
 function layout(areas, cssPrefix) {
   return (grid, layoutId, items, width, height, callback) => {
-    console.log(`css prefix: ${cssPrefix}`, items)
+
     let itemSize = { width: 0, height: 0 }
     try {
       itemSize = {
@@ -157,13 +157,14 @@ function layout(areas, cssPrefix) {
       }
     })
     POINTS = positions
-    console.log('layout', { layoutId, items, width, height, positions })
+
     callback(layout)
   }
 }
 
 const ControlContainer = ({ children, areas, cssPrefix, debug = false }) => {
   const gridRef = useRef(null)
+  if (process.env.DEBUG) debug = true
 
   useEffect(() => {
     if (!gridRef.current) return
@@ -183,7 +184,7 @@ const ControlContainer = ({ children, areas, cssPrefix, debug = false }) => {
     }
   }, [areas, cssPrefix, gridRef, children])
 
-  console.log('ControlContainer', { children, areas, cssPrefix, debug })
+
   const nonNullitems = children?.filter((child) => child)
   if (!nonNullitems) {
     console.error('No children in ControlContainer')

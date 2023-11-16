@@ -5,666 +5,52 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="fix it">
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/.Linguistics.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/1/.Phonetics.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/1/1/.Phonetic Elements.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/1/1/1/.Consonants.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/1/1/2/.Vowels.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/1/1/3/.Tones.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/1/1/_Silence-Sound.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/1/2/.Articulatory Properties.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/1/2/1/.Place of Articulation.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/1/2/2/.Manner of Articulation.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/1/2/3/.Voice.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/1/3/.Acoustic Properties.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/1/3/1/.Amplitude.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/1/3/2/.Frequency.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/1/3/3/.Timbre.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/1/3/_Noise-Harmony.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/1/_Articulation-Acoustics.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/2/.Syntax.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/2/1/.Morphology.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/2/1/1/.Root.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/2/1/2/.Affix.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/2/1/3/.Compound.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/2/1/_Word-Phrase.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/2/2/.Grammar.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/2/2/1/.Tense.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/2/2/2/.Aspect.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/2/2/3/.Mood.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/2/2/_Rule-Variation.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/2/3/.Sentence Structure.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/2/3/1/.Simple Sentence.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/2/3/2/.Compound Sentence.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/2/3/3/.Complex Sentence.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/2/3/_Clause-Phrase.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/2/_Structure-Function.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/3/.Pragmatics.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/3/1/.Speech Acts.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/3/1/1/.Assertive.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/3/1/2/.Directive.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/3/1/3/.Commissive.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/3/1/_Intent-Interpretation.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/3/2/.Deixis.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/3/2/1/.Person Deixis.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/3/2/2/.Time Deixis.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/3/2/3/.Place Deixis.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/3/2/_Here-There.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/3/3/.Implicature.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/3/3/1/.Conventional.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/3/3/2/.Conversational.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/3/3/3/.Scalar.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/3/3/_Explicit-Implicit.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/3/_Context-Meaning.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/1/_Form-Function.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/.Music Theory.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/.Rhythm.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/.Beat.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/.Onset.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/1/.Attack.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/1/1/.Start.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/1/1/1/.Onset.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/1/1/2/.Initiation.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/1/1/3/.Commencement.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/1/1/_Alpha-Omega.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/1/2/.Rise.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/1/2/1/.Increase.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/1/2/2/.Boost.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/1/2/3/.Amplify.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/1/2/_Ascend-Dive.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/1/3/.Peak.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/1/3/1/.Summit.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/1/3/2/.Zenith.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/1/3/3/.Apex.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/1/3/_Max-Min.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/1/_Instant-Gradual.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/2/.Decay.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/2/1/.Fall.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/2/2/.Diminish.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/2/3/.Level.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/2/_Decline-Maintain.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/3/.Sustain.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/3/1/.Prolong.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/3/2/.Retain.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/3/3/.Extend.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/3/_Grip-LetGo.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/1/_Sharp-Soft.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/.Accent.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/1/.Strong Beat.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/1/1/.Downbeat.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/1/1/1/.Thud.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/1/1/2/.Impact.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/1/1/3/.Strike.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/1/1/_Drop-Lift.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/1/2/.Accentuation.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/1/2/1/.Emphasis.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/1/2/2/.Underline.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/1/2/3/.Stress.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/1/2/_Spotlight-Shadow.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/1/3/.Stressor.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/1/3/1/.Tension.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/1/3/2/.Force.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/1/3/3/.Load.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/1/3/_Compress-Release.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/1/_Highlight-Background.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/2/.Weak Beat.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/2/1/.Upbeat.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/2/2/.Deemphasis.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/2/3/.Lull.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/2/_Background-Foreground.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/3/.Offbeat.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/3/1/.Sync.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/3/2/.Mismatch.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/3/3/.Displacement.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/3/_OutAlign-InAlign.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/2/_Emphasized-Subdued.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/3/.Syncopation.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/3/1/.Anticipated Beat.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/3/2/.Delayed Beat.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/3/3/.Silent Beat.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/3/_Preemptive-Postponed.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/1/_Predictable-Unpredictable.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/.Meter.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/1/.Duple.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/1/1/.March.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/1/1/1/.Step.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/1/1/2/.Stride.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/1/1/3/.Progression.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/1/1/_Constant-Change.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/1/2/.Polka.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/1/2/1/.Hop.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/1/2/2/.Jump.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/1/2/3/.Skip.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/1/2/_Elevate-Ground.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/1/3/.Tango.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/1/3/1/.Embrace.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/1/3/2/.Stride.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/1/3/3/.Flourish.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/1/3/_Union-Separate.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/1/_Paired-Unpaired.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/2/.Triple.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/2/1/.Waltz.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/2/2/.Mazurka.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/2/3/.Minuet.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/2/_Trio-Solo.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/3/.Complex.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/3/1/.Five-Beat.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/3/2/.Seven-Beat.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/3/3/.Irregular.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/3/_Hybrid-Pure.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/2/_Even-Odd.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/3/.Tempo.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/3/1/.Adagio.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/3/2/.Andante.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/3/3/.Allegro.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/3/_Lethargic-Brisk.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/1/_Static-Dynamic.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/.Harmonics.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/1/.Frequency.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/1/1/.Bass.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/1/1/1/.Sub-Bass.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/1/1/2/.Bassline.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/1/1/3/.Lower Midrange.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/1/1/_Buried-Apparent.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/1/2/.Mid.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/1/2/1/.Middle.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/1/2/2/.Upper Midrange.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/1/2/3/.Lower Treble.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/1/2/_Balanced-Unbalanced.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/1/3/.Treble.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/1/3/1/.High Frequency.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/1/3/2/.Brightness.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/1/3/3/.Sharpness.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/1/3/_Climax-Nadir.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/1/_Deep-Shrill.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/.Series.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/.First Harmonic.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/1/.Fundamental.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/1/1/.Base.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/1/1/1/.Root.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/1/1/2/.Ground.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/1/1/3/.Bedrock.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/1/1/_Origin-Growth.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/1/2/.Foundation.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/1/2/1/.Base.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/1/2/2/.Bottom.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/1/2/3/.Underpinning.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/1/2/_Start-Build.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/1/3/.Groundwork.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/1/3/1/.Framework.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/1/3/2/.Structure.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/1/3/3/.Skeleton.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/1/3/_Plan-Outcome.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/1/_Start-Expand.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/2/.First Overtone.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/2/1/.Second Harmonic.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/2/2/.Deviation.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/2/3/.Variation.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/2/_Follow-Origin.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/3/.Second Overtone.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/3/1/.Third Harmonic.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/3/2/.Deviant.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/3/3/.Modifier.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/3/_Overlay-Origin.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/1/_Root-Branch.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/2/.Second Harmonic.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/2/1/.First Overtone.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/2/2/.Third Harmonic.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/2/3/.Fourth Harmonic.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/2/_Sheet-Underneath.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/3/.Higher Harmonics.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/3/1/.Third Overtone.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/3/2/.Fourth Overtone.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/3/3/.Fifth Overtone.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/3/_Principal-Auxiliary.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/2/_Base-Overtones.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/.Timbre.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/.Sinewave.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/1/.Simple Wave.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/1/1/.Steady State.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/1/1/1/.Unchanging.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/1/1/2/.Constant.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/1/1/3/.Fixed.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/1/1/_Same-Change.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/1/2/.Plain.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/1/2/1/.Unembellished.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/1/2/2/.Basic.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/1/2/3/.Simplistic.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/1/2/_Naked-Decorated.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/1/3/.Homogeneous.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/1/3/1/.Identical.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/1/3/2/.Consistent.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/1/3/3/.Monolithic.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/1/3/_Alike-Different.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/1/_Same-Vary.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/2/.Fundamental Wave.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/2/1/.Core.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/2/2/.Central.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/2/3/.Prime.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/2/_Main-Secondary.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/3/.Undistorted Wave.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/3/1/.Clean.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/3/2/.Pure.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/3/3/.Transparent.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/3/_Distinct-Blur.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/1/_Clean-Blended.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/2/.Sawtooth.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/2/1/.Jagged Wave.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/2/1/1/.Rough.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/2/1/2/.Irregular.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/2/1/3/.Zigzag.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/2/1/_Rugged-Smooth.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/2/2/.Buzzy Wave.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/2/2/1/.Vibration.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/2/2/2/.Pulse.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/2/2/3/.Echo.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/2/2/_Ring-Silent.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/2/3/.Harmonic-rich Wave.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/2/3/1/.Dense.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/2/3/2/.Layered.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/2/3/3/.Thick.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/2/3/_Saturated-Vacant.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/2/_Edgy-Sleek.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/3/.Squarewave.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/3/1/.Duty Cycle.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/3/2/.Width Pulse.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/3/3/.Harmonic Wave.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/3/_Symmetric-Asymmetric.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/3/_Clean-Distorted.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/2/_Simple-Rich.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/.Timing.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/.Duration.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/1/.Instant.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/1/1/.Second.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/1/1/1/.Milliseconds.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/1/1/1/_Brief-Extended.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/1/1/2/.Moments.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/1/1/2/_Glimpse-Span.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/1/1/_Tick-Tock.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/1/2/.Minute.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/1/2/1/.Countdown.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/1/2/1/_Start-Stop.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/1/2/2/.Timer.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/1/2/2/_Set-Elapsed.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/1/2/_Wait-Proceed.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/1/_Moment-Decade.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/2/.Eternity.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/2/1/.Decade.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/2/1/1/.1970s.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/2/1/1/_Retro-Modern.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/2/1/2/.1980s.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/2/1/2/_Classic-Contemporary.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/2/1/_Past-Future.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/2/2/.Century.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/2/2/1/.20th.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/2/2/1/_Industrial-Digital.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/2/2/2/.21st.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/2/2/2/_Internet-AI.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/2/2/_Aeon-Age.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/2/_Ephemeral-Endless.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/1/_Short-Long.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/2/.Chronology.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/2/1/.History.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/2/1/1/.Epoch.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/2/1/1/_Birth-End.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/2/1/2/.Era.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/2/1/2/_Beginning-Completion.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/2/1/_Yesterday-Tomorrow.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/2/2/.Forecast.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/2/2/1/.Weather.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/2/2/1/_Cloud-Sun.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/2/2/2/.Trend.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/2/2/2/_Rise-Fall.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/2/2/_Prediction-Reality.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/2/_Past-Future.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/.Sync.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/1/.Alignment.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/1/1/.Melody.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/1/1/1/.Chord.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/1/1/1/_Harmony-Disharmony.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/1/1/2/.Scale.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/1/1/2/_Ascending-Descending.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/1/1/_Tune-Note.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/1/2/.Rhythm.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/1/2/1/.Pulse.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/1/2/1/_Steady-Vary.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/1/2/2/.Metronome.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/1/2/2/_Regular-Irregular.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/1/2/_Beat-Pause.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/1/_Harmony-Discord.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/2/.Lag.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/2/1/.Delay.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/2/1/_Wait-Rush.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/2/2/.Haste.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/2/2/_Speedy-Slow.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/2/_Before-After.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/3/_Synchronized-Asynchronous.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/3/_Predictability-Unpredictability.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/2/_Tension-Release.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/.Social Relation.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/1/.Sociology.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/1/1/.Friendship.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/1/2/.Competitive.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/1/3/.Cooperative.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/1/_Individual-Society.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/2/.Social Structures.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/2/1/.Stratification.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/2/1/1/.Class.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/2/1/2/.Status.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/2/1/3/.Power.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/2/2/.Community.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/2/2/2/.Social Movements.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/2/3/.Society.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/2/3/3/.Cultural Patterns.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/2/_Inequality-Equality.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/.Dialogue.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/.Conversation.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/1/.Chat.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/1/1/.Greeting.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/1/1/1/.Salute.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/1/1/1/_Formal-Casual.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/1/1/2/.Wave.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/1/1/2/_Visible-Invisible.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/1/1/_Hello-Bye.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/1/2/.Farewell.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/1/2/1/.Goodbye.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/1/2/1/_Temporary-Permanent.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/1/2/2/.Adieu.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/1/2/2/_Definite-Indefinite.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/1/2/_Start-End.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/1/_Casual-Formal.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/2/.Interview.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/2/1/.Query.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/2/1/1/.Inquiry.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/2/1/1/_General-Specific.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/2/1/2/.Prompt.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/2/1/2/_Lead-Direct.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/2/1/_Ask-Tell.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/2/2/.Reply.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/2/2/1/.Answer.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/2/2/1/_Brief-Detailed.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/2/2/2/.Explanation.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/2/2/2/_Surface-Depth.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/2/2/_Respond-Elaborate.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/2/_Question-Answer.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/1/_Spontaneity-Structure.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/2/.Monologue.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/2/1/.Soliloquy.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/2/1/1/.Thought.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/2/1/1/_Silent-Vocal.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/2/1/2/.Speech.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/2/1/2/_Public-Private.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/2/1/_Inner-Outer.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/2/2/.Narrative.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/2/2/1/.Tale.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/2/2/1/_Fiction-Reality.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/2/2/2/.Exposition.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/2/2/2/_Breakdown-Overview.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/2/2/_Story-Analysis.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/2/_Self-Other.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/.Debate.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/1/.Discussion.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/1/1/.Agreement.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/1/1/1/.Consensus.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/1/1/1/_Together-Apart.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/1/1/2/.Unison.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/1/1/2/_One-Many.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/1/1/_Yes-No.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/1/2/.Conflict.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/1/2/1/.Dispute.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/1/2/1/_Quarrel-Settle.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/1/2/2/.Contest.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/1/2/2/_Compete-Cooperate.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/1/2/_For-Against.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/1/_Understanding-Misunderstanding.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/2/.Argument.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/2/1/.Support.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/2/1/_Evidence-Claim.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/2/2/.Opposition.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/2/2/_Rebuttal-Counter.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/2/_Pro-Con.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/3/_Agree-Disagree.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/3/_Speaker-Listener.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/3/_Conflict-Resolution.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/_Verbal-Nonverbal.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/.Cooperative.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/.Competitive.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/.Nomic.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/.Hacking.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/.Technical Evolution.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/philosopher/.cache_index/response.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/.Using.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/.Using.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/.Tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/.Tools.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/.Basic Hand Tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/1/.Basic Hand Tools.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/.Knife.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/1/1/.Knife.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/.Hammer.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/1/2/.Hammer.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/3/.Screwdriver.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/1/3/.Screwdriver.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/_Cutting-Gripping.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/1/_Cutting-Gripping.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/.Advanced Hand Tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/2/.Advanced Hand Tools.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/1/.Drill.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/2/1/.Drill.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/2/.Wrench.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/2/2/.Wrench.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/3/.Chisel.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/2/3/.Chisel.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/_Modify-Construct.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/2/_Modify-Construct.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/.Functional and Protection Tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/3/.Functional and Protection Tools.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/1/.Key.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/3/1/.Key.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/2/.Rope.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/3/2/.Rope.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/3/.Flashlight.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/3/3/.Flashlight.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/3/_Access-Defend.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/3/_Access-Defend.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/1/_Basic-Complex.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/1/_Basic-Complex.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/.Specialized Tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/.Specialized Tools.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/.Building and Construction.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/1/.Building and Construction.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/.Crane.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/1/1/.Crane.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/.Bulldozer.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/1/2/.Bulldozer.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/.Jackhammer.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/1/3/.Jackhammer.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/_Elevate-Compact.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/1/_Elevate-Compact.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/.Agriculture and Gardening.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/2/.Agriculture and Gardening.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/.Plough.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/2/1/.Plough.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/.Hoe.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/2/2/.Hoe.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/.Scythe.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/2/3/.Scythe.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/_Sow-Reap.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/2/_Sow-Reap.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/.Defense and Hunting.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/3/.Defense and Hunting.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/.Bow &amp; Arrow.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/3/1/.Bow &amp; Arrow.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/.Gun.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/3/2/.Gun.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/.Shield.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/3/3/.Shield.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/_Protect-Hunt.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/3/_Protect-Hunt.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/2/_Task-Specificity.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/2/_Task-Specificity.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/.Utility, Craft &amp; Mobility.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/.Utility, Craft &amp; Mobility.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/.Artistic Creation.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/1/.Artistic Creation.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/1/.Pencil.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/1/1/.Pencil.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/2/.Paintbrush.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/1/2/.Paintbrush.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/3/.Sculpting tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/1/3/.Sculpting tools.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/_Design-Express.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/1/_Design-Express.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/.Mobility Tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/2/.Mobility Tools.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/1/.Car.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/2/1/.Car.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/2/.Airplane.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/2/2/.Airplane.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/3/.Skateboard.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/2/3/.Skateboard.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/_Land-Air.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/2/_Land-Air.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/.Kitchen and Domestic Tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/3/.Kitchen and Domestic Tools.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/1/.Pot &amp; Pan.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/3/1/.Pot &amp; Pan.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/2/.Oven.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/3/2/.Oven.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/3/.Refrigerator.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/3/3/.Refrigerator.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/_Cook-Store.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/3/_Cook-Store.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/3/_Locate-Transport.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/3/_Locate-Transport.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/1/_Tool-User.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/1/_Tool-User.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/.Hacking.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/1/2/.Human Communication.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/.Tools &amp; Techniques.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/.Tools &amp; Techniques.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/1/.Physical.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/.Physical.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/1/1/.Lock picks.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/1/.Lock picks.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/1/1/1/.Torsion wrench.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/1/1/.Torsion wrench.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/1/1/2/.Ball pick.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/1/2/.Ball pick.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/1/1/3/.Diamond pick.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/1/3/.Diamond pick.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/1/2/.Disguise kits.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/2/.Disguise kits.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/1/2/1/.Makeup kits.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/2/1/.Makeup kits.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/1/2/2/.Voice changers.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/2/2/.Voice changers.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/1/2/3/.Forgery tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/2/3/.Forgery tools.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/1/3/.Adaptive tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/3/.Adaptive tools.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/1/3/1/.Modified gadgets.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/3/1/.Modified gadgets.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/1/3/2/.Makeshift devices.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/3/2/.Makeshift devices.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/1/3/3/.Repurposed items.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/3/3/.Repurposed items.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/1/_Direct-Manipulation.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/1/_Direct-Manipulation.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/2/.Digital.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/.Digital.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/2/1/.Software cracking tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/1/.Software cracking tools.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/2/1/1/.Debuggers.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/1/1/.Debuggers.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/2/1/2/.Decompilers.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/1/2/.Decompilers.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/2/1/3/.Hex editors.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/1/3/.Hex editors.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/2/2/.Rootkits.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/2/.Rootkits.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/2/2/1/.Kernel-level.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/2/1/.Kernel-level.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/2/2/2/.User-level.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/2/2/.User-level.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/2/2/3/.Firmware-level.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/2/3/.Firmware-level.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/2/3/.Keyloggers.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/3/.Keyloggers.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/2/3/1/.Hardware keyloggers.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/3/1/.Hardware keyloggers.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/2/3/2/.Memory-injecting.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/3/2/.Memory-injecting.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/2/3/3/.Kernel-based.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/3/3/.Kernel-based.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/2/_Code-Intrusion.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/2/_Code-Intrusion.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/3/.Hybrid.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/.Hybrid.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/3/1/.Signal jammers.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/1/.Signal jammers.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/3/1/1/.RF jammers.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/1/1/.RF jammers.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/3/1/2/.GPS jammers.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/1/2/.GPS jammers.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/3/1/3/.GSM jammers.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/1/3/.GSM jammers.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/3/2/.IoT exploits.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/2/.IoT exploits.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/3/2/1/.Device vulnerabilities.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/2/1/.Device vulnerabilities.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/3/2/2/.Network breaches.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/2/2/.Network breaches.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/3/2/3/.API manipulation.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/2/3/.API manipulation.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/3/3/.RFID manipulators.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/3/.RFID manipulators.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/3/3/1/.RFID cloners.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/3/1/.RFID cloners.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/3/3/2/.RFID blockers.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/3/2/.RFID blockers.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/3/3/3/.RFID skimmers.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/3/3/.RFID skimmers.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/3/_Integration-Disruption.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/3/_Integration-Disruption.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/1/_Bypass-Access.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/1/_Bypass-Access.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/.Exploits &amp; Sabotage.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/.Exploits &amp; Sabotage.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/1/.Hardware.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/.Hardware.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/1/1/.Firmware tampering.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/1/.Firmware tampering.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/1/1/1/.Memory overflow.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/1/1/.Memory overflow.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/1/1/2/.Boot process manipulation.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/1/2/.Boot process manipulation.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/1/1/3/.Code injection.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/1/3/.Code injection.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/1/2/.Port exploits.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/2/.Port exploits.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/1/2/1/.USB drops.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/2/1/.USB drops.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/1/2/2/.Serial port intrusion.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/2/2/.Serial port intrusion.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/1/2/3/.Ethernet vulnerabilities.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/2/3/.Ethernet vulnerabilities.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/1/3/.Physical damage.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/3/.Physical damage.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/1/3/1/.Overheating sabotage.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/3/1/.Overheating sabotage.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/1/3/2/.Power surge attacks.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/3/2/.Power surge attacks.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/1/3/3/.Mechanical interference.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/3/3/.Mechanical interference.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/1/_Circuit-Breach.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/1/_Circuit-Breach.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/2/.Software.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/.Software.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/2/1/.Zero-day exploits.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/1/.Zero-day exploits.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/2/1/1/.Buffer overflows.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/1/1/.Buffer overflows.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/2/1/2/.Cross-site scripting.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/1/2/.Cross-site scripting.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/2/1/3/.SQL injection.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/1/3/.SQL injection.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/2/2/.Ransomware.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/2/.Ransomware.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/2/2/1/.Encrypting ransomware.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/2/1/.Encrypting ransomware.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/2/2/2/.Screen-locking ransomware.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/2/2/.Screen-locking ransomware.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/2/2/3/.Scareware.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/2/3/.Scareware.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/2/3/.DDoS attacks.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/3/.DDoS attacks.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/2/3/1/.Volumetric attacks.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/3/1/.Volumetric attacks.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/2/3/2/.Protocol attacks.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/3/2/.Protocol attacks.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/2/3/3/.Application-layer attacks.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/3/3/.Application-layer attacks.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/2/_Bug-Feature.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/2/_Bug-Feature.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/3/.Social.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/.Social.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/3/1/.Phishing.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/1/.Phishing.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/3/1/1/.Spear phishing.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/1/1/.Spear phishing.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/3/1/2/.Whaling.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/1/2/.Whaling.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/3/1/3/.Clone phishing.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/1/3/.Clone phishing.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/3/2/.Pretexting.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/2/.Pretexting.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/3/2/1/.Tech support scams.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/2/1/.Tech support scams.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/3/2/2/.Insurance claim fraud.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/2/2/.Insurance claim fraud.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/3/2/3/.Identity deception.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/2/3/.Identity deception.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/3/3/.Baiting.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/3/.Baiting.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/3/3/1/.Malware-infected media.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/3/1/.Malware-infected media.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/3/3/2/.Enticing downloads.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/3/2/.Enticing downloads.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/3/3/3/.Exploit kits.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/3/3/.Exploit kits.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/3/_Trust-Deception.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/3/_Trust-Deception.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/2/_Vulnerability-Protection.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/2/_Vulnerability-Protection.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/.Ethics.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/.Ethics.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/1/.White hat.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/.White hat.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/1/1/.Penetration testing.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/1/.Penetration testing.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/1/1/1/.External testing.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/1/1/.External testing.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/1/1/2/.Internal testing.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/1/2/.Internal testing.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/1/1/3/.Blind testing.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/1/3/.Blind testing.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/1/2/.Bug bounties.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/2/.Bug bounties.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/1/2/1/.Public programs.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/2/1/.Public programs.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/1/2/2/.Private programs.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/2/2/.Private programs.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/1/2/3/.Platform-based.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/2/3/.Platform-based.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/1/3/.Vulnerability disclosure.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/3/.Vulnerability disclosure.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/1/3/1/.Full disclosure.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/3/1/.Full disclosure.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/1/3/2/.Responsible disclosure.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/3/2/.Responsible disclosure.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/1/3/3/.Coordinated disclosure.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/3/3/.Coordinated disclosure.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/1/_Fixing-Exposing.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/1/_Fixing-Exposing.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/2/.Black hat.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/.Black hat.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/2/1/.Malware development.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/1/.Malware development.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/2/1/1/.Trojans.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/1/1/.Trojans.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/2/1/2/.Worms.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/1/2/.Worms.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/2/1/3/.Viruses.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/1/3/.Viruses.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/2/2/.Data breaches.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/2/.Data breaches.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/2/2/1/.Targeted attacks.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/2/1/.Targeted attacks.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/2/2/2/.Opportunistic attacks.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/2/2/.Opportunistic attacks.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/2/2/3/.Insider threats.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/2/3/.Insider threats.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/2/3/.Unauthorized access.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/3/.Unauthorized access.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/2/3/1/.Brute force.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/3/1/.Brute force.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/2/3/2/.Credential stuffing.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/3/2/.Credential stuffing.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/2/3/3/.Session hijacking.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/3/3/.Session hijacking.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/2/_Harm-Profit.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/2/_Harm-Profit.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/3/.Grey hat.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/.Grey hat.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/3/1/.Exploit discovery.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/1/.Exploit discovery.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/3/1/1/.Vulnerability scanning.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/1/1/.Vulnerability scanning.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/3/1/2/.Code review.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/1/2/.Code review.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/3/1/3/.Fuzz testing.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/1/3/.Fuzz testing.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/3/2/.Anonymous actions.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/2/.Anonymous actions.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/3/2/1/.Hacktivism.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/2/1/.Hacktivism.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/3/2/2/.Leaks and whistleblowing.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/2/2/.Leaks and whistleblowing.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/3/2/3/.Digital protest.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/2/3/.Digital protest.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/3/3/.Boundary testing.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/3/.Boundary testing.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/3/3/1/.Web application tests.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/3/1/.Web application tests.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/3/3/2/.Network penetration.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/3/2/.Network penetration.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/3/3/3/.System audits.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/3/3/.System audits.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/3/_Curiosity-Boundary.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/3/_Curiosity-Boundary.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/3/_Freedom-Security.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/3/_Freedom-Security.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/2/_Unintended-Intended Usage.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/2/_Unintended-Intended Usage.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/.Technical Evolution.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/1/2/.Game.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/1/.Influence of Hacking.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/.Influence of Hacking.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/1/1/.Innovation Through Challenge.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/1/.Innovation Through Challenge.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/1/1/1/.Underground Communities.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/1/1/.Underground Communities.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/1/1/2/.Exploit Development.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/1/2/.Exploit Development.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/1/1/3/.Bug Bounties.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/1/3/.Bug Bounties.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/1/2/.Unintended Usage.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/2/.Unintended Usage.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/1/2/1/.Rooting &amp; Jailbreaking.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/2/1/.Rooting &amp; Jailbreaking.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/1/2/2/.Modding.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/2/2/.Modding.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/1/2/3/.Reverse Engineering.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/2/3/.Reverse Engineering.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/1/3/.Community Collaboration.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/3/.Community Collaboration.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/1/3/1/.Open Source Movement.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/3/1/.Open Source Movement.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/1/3/2/.Hackathons.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/3/2/.Hackathons.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/1/3/3/.White Hat Groups.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/3/3/.White Hat Groups.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/1/_Disruption-Integration.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/1/_Disruption-Integration.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/2/.Countermeasures &amp; Growth.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/.Countermeasures &amp; Growth.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/2/1/.Cybersecurity Innovations.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/1/.Cybersecurity Innovations.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/2/1/1/.Advanced Encryption.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/1/1/.Advanced Encryption.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/2/1/2/.Intrusion Detection Systems.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/1/2/.Intrusion Detection Systems.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/2/1/3/.Zero Trust Architecture.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/1/3/.Zero Trust Architecture.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/2/2/.Legal Evolution.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/2/.Legal Evolution.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/2/2/1/.Digital Rights Management.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/2/1/.Digital Rights Management.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/2/2/2/.Open Source Licenses.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/2/2/.Open Source Licenses.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/2/2/3/.Anti-hacking Laws.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/2/3/.Anti-hacking Laws.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/2/3/.Ethical Boundaries.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/3/.Ethical Boundaries.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/2/3/1/.Hacktivism.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/3/1/.Hacktivism.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/2/3/2/.Responsible Disclosure.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/3/2/.Responsible Disclosure.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/2/3/3/.Cyber Warfare Ethics.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/3/3/.Cyber Warfare Ethics.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/2/_Vulnerability-Resilience.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/2/_Vulnerability-Resilience.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/3/.Technological Ripple Effects.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/.Technological Ripple Effects.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/3/1/.Tool Enhancement.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/1/.Tool Enhancement.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/3/1/1/.Penetration Testing Tools.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/1/1/.Penetration Testing Tools.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/3/1/2/.Development Frameworks.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/1/2/.Development Frameworks.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/3/1/3/.Virtual &amp; Isolated Environments.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/1/3/.Virtual &amp; Isolated Environments.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/3/2/.Digital Citizenship.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/2/.Digital Citizenship.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/3/2/1/.Public Awareness Campaigns.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/2/1/.Public Awareness Campaigns.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/3/2/2/.Personal Security Practices.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/2/2/.Personal Security Practices.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/3/2/3/.Corporate Training.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/2/3/.Corporate Training.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/3/3/.Market Dynamics.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/3/.Market Dynamics.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/3/3/1/.Tech Startups.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/3/1/.Tech Startups.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/3/3/2/.Big Tech Responses.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/3/2/.Big Tech Responses.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/3/3/3/.Venture Capital in Cybersecurity.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/3/3/.Venture Capital in Cybersecurity.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/3/_Reaction-Ripple.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/3/_Reaction-Ripple.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dialectics/3/1/3/_Static-Progression.md" beforeDir="false" afterPath="$PROJECT_DIR$/../dialectics/3/1/1/3/_Static-Progression.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/classifier/antonyms.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/classifier/models/ant_wn_only/f1v=0.81-.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/classifier/models/hierarchical_2/f1v=0.84-.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/classifier/models/tas_3_only/f1v=0.82-.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integrator/mst.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integrator/mst_maximax.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integrator/serialize.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integrator/test_models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integrator/test_mst.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integrator/test_mst.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/antonyms.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/draw_graph.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/hyponyms.csv" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/hyponyms.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/models.yml" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/models.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/models/hierarchical_2/f1v=0.89-.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/models/hierarchical_2/f1v=0.89-model.pth" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/models/hierarchical_2/f1v=0.84-optimizer.pth" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/models/hierarchical_2/f1v=0.89-optimizer.pth" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/models/tas_3_only/f1v=0.82-optimizer.pth" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/models/tas_3_only/f1v=0.70-.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/models/tas_3_only/f1v=0.70-model.pth" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/models/hierarchical_2/f1v=0.84-model.pth" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/models/tas_3_only/f1v=0.70-optimizer.pth" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/models/ant_wn_only/f1v=0.81-optimizer.pth" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/models/tas_3_only/f1v=0.71-.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/models/tas_3_only/f1v=0.71-model.pth" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/models/ant_wn_only/f1v=0.81-model.pth" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/models/tas_3_only/f1v=0.71-optimizer.pth" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/models/tas_3_only/f1v=0.82-model.pth" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/selector.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/selector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/think.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/think.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrator/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrator/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrator/test_params.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/test_params.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrator/tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/tree.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/hyponyms.csv" beforeDir="false" afterPath="$PROJECT_DIR$/lib/hyponyms.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/wordnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/wordnet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philosopher/analyser.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/analyser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philosopher/llm_update_text.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/llm_update_text.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philosopher/llm_update_toc.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/llm_update_toc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philosopher/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/rest.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/rest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/config/areas.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/config/areas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/ControlContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/ControlContainer.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -716,7 +102,7 @@
         <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../dialectics" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
@@ -738,8 +124,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "3b30bb07",
-    "last_opened_file_path": "/home/qwerty/dialectics/3/1/1/1/1",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/stefan/programming/system/integrator",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -772,10 +158,7 @@
       <recent name="$PROJECT_DIR$/../dialectics/3/1" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.philosopher main">
-    <configuration name="nesting.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/web/test/nesting.js" working-dir="$PROJECT_DIR$/web/src/test">
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.mst_maximax">
     <configuration name="analyser" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="wdl" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -790,6 +173,39 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/philosopher/analyser.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="mst_maximax" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="wdl" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.11 (programming)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/integrator" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </EXTENSION>
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/integrator/mst_maximax.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -875,19 +291,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Node.js.nesting.js" />
       <item itemvalue="npm.start" />
+      <item itemvalue="Python.mst_maximax" />
       <item itemvalue="Python.analyser" />
       <item itemvalue="Python.philosopher main" />
       <item itemvalue="Python.rest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.mst_maximax" />
         <item itemvalue="Python.philosopher main" />
         <item itemvalue="Python.rest" />
         <item itemvalue="Python.analyser" />
         <item itemvalue="npm.start" />
-        <item itemvalue="Node.js.nesting.js" />
       </list>
     </recent_temporary>
   </component>
@@ -949,6 +365,7 @@
       <workItem from="1692035895803" duration="2365000" />
       <workItem from="1692094250119" duration="16314000" />
       <workItem from="1692326249417" duration="685000" />
+      <workItem from="1700129079258" duration="1867000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -1353,7 +770,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/analyser.py</url>
-          <line>383</line>
+          <line>382</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1434,7 +851,7 @@
         <line-breakpoint suspend="THREAD" type="python-line">
           <condition expression="&quot;331&quot; in &quot;&quot;.join(str(p) for p in path)" language="Python" />
           <url>file://$PROJECT_DIR$/philosopher/analyser.py</url>
-          <line>21</line>
+          <line>20</line>
           <option name="timeStamp" value="108" />
         </line-breakpoint>
       </breakpoints>
@@ -1449,9 +866,10 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/wdl$philosopher_main.coverage" NAME="philosopher main Coverage Results" MODIFIED="1691748704396" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
-    <SUITE FILE_PATH="coverage/wdl$rest.coverage" NAME="rest Coverage Results" MODIFIED="1690875061170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
     <SUITE FILE_PATH="coverage/wdl$analyser.coverage" NAME="analyser Coverage Results" MODIFIED="1690108599658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
-    <SUITE FILE_PATH="coverage/system$philosopher_main.coverage" NAME="philosopher main Coverage Results" MODIFIED="1692230805675" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
+    <SUITE FILE_PATH="coverage/system$mst_maximax.coverage" NAME="mst_maximax Coverage Results" MODIFIED="1700130703760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
+    <SUITE FILE_PATH="coverage/wdl$rest.coverage" NAME="rest Coverage Results" MODIFIED="1690875061170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
     <SUITE FILE_PATH="coverage/wdl$logic_generator.coverage" NAME="philosopher main Coverage Results" MODIFIED="1691407193115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
+    <SUITE FILE_PATH="coverage/system$philosopher_main.coverage" NAME="philosopher main Coverage Results" MODIFIED="1692230805675" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
   </component>
 </project>

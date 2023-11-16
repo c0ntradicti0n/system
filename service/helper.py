@@ -3,9 +3,11 @@ import os
 import pathlib
 import shlex
 import subprocess
+import traceback
 from enum import Enum
 from functools import total_ordering
 
+import networkx
 from regex import regex
 
 
@@ -14,10 +16,34 @@ class E:
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        return isinstance(exc_val, (KeyError, TypeError))
+        return isinstance(
+            exc_val, (KeyError, TypeError, networkx.exception.NetworkXError)
+        )
 
 
 e = E()
+
+
+import logging
+
+
+class T:
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if isinstance(exc_val, AssertionError):
+            tb = traceback.extract_tb(exc_tb)
+            last_call = tb[-1]
+            filename, line, func, text = last_call
+            logging.error(
+                f"AssertionError at {filename}, line {line}, in {func}:\n\t{text}"
+            )
+            # Additional introspection can be done here
+        return isinstance(exc_val, (AssertionError))
+
+
+t = T()
 
 
 def o(cmd, user=None, cwd="./", err_out=True):

@@ -1,3 +1,4 @@
+DEFAULT_GOAL := run
 -include .env
 ifneq ($(ENV_FILE),)
 	include $(ENV_FILE)
@@ -85,3 +86,5 @@ mod:
 	chmod 777 ./.cache-hf
 	chmod 777 ./.models-classifier
 	chmod 777 ./.chroma
+
+run: start logs

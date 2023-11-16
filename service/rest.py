@@ -7,8 +7,9 @@ import flask
 from flask import Flask
 from flask_cors import CORS
 from flask_restx import Api, Namespace, Resource, reqparse
-from helper import CustomEncoder
 from main import search as semantic_search
+
+from helper import CustomEncoder
 
 logging.basicConfig(level=logging.DEBUG)
 coloredlogs.install(level="DEBUG")

@@ -8,6 +8,7 @@ from pprint import pprint
 import networkx as nx
 from networkx.drawing.nx_agraph import graphviz_layout
 
+from integrator.mst_maximax import construct_mst
 from lib.shape import view_shape
 
 image_folder = "images/"
@@ -202,6 +203,7 @@ class Tree:
             ]
             if len(gs) != 2:  # might be in case we visited that yet for this branch
                 continue
+            gs = sorted(gs, key=lambda x: x[2]["relation"])
             result.append(tuple(gs))
         return result
 
@@ -399,7 +401,9 @@ class Tree:
         # Return top n nodes
         return sorted_nodes[:n]
 
-    def max_score_triangle_subgraph(self, __G, return_start_node=False):
+    def max_score_triangle_subgraph(
+        self, __G, return_start_node=False, start_with_sub=False
+    ):
         _G = __G.copy()
 
         G = Tree.graph_without_text_sequence(_G)
@@ -410,8 +414,6 @@ class Tree:
                 depth = math.log(len(G.nodes()), 3)
             except:
                 depth = 0
-
-        # print(f"{depth=}")
 
         # Sort nodes by score and get the top 10
         start_node = self.params["startNode"]
@@ -428,14 +430,11 @@ class Tree:
             visited = {node}
 
             # Grow subgraph recursively
-            result_nodes, result_edges = Tree.grow_subgraph(
-                G, node=node, visited=visited, depth=depth
+            temp_subgraph = construct_mst(
+                G, max_depth=depth, root=node, start_with_sub=start_with_sub
             )
 
             # Create a temporary subgraph for this start_node
-            temp_subgraph = nx.DiGraph()
-            for n1, n2, attr in result_edges:
-                temp_subgraph.add_edge(n1, n2, **attr)
 
             # If this subgraph has more edges than the best one found so far, update best_subgraph
             if len(temp_subgraph.edges) > max_edges:
@@ -542,64 +541,9 @@ class Tree:
             graph = self.graph
         if filename is None:
             filename = os.path.join(self.pickle_folder_path(hash), f"tree_graph.txt")
-        nx.write_edgelist(graph, filename)
 
-    @staticmethod
-    def serialize_graph_to_structure(graph, start_node):
-        def get_related_nodes(node):
-            """Return related nodes based on edges."""
-            # Filtering edges with the current node
-            edges = [
-                e
-                for e in graph.edges(node, data=True)
-                if e[2]["relation"] in ["ant", "syn", "sub"]
-            ]
-            return sorted(edges, key=lambda x: x[2]["relation"])
-
-        def get_sub_related_nodes(graph, node):
-            """Return nodes related to the given node by 'sub' relation."""
-            # Filtering edges with the current node that have 'sub' relation
-            sub_edges = [
-                e for e in graph.edges(node, data=True) if e[2]["relation"] == "sub"
-            ]
-            # Extracting target nodes from the edges
-            sub_nodes = [target for _, target, _ in sub_edges]
-            assert len(sub_nodes) in [
-                1,
-                0,
-            ], "sub nodes can be max only 1 in our DiGraph"
-            return sub_nodes[0] if sub_nodes else None
-
-        def node_key_text(n):
-            return f"[{n}] "
-
-        def construct_structure(node):
-            """Recursively construct the nested structure."""
-            structure = {}
-            if not node:
-                return structure
-
-            structure[1] = {
-                ".": node_key_text(node) + graph.nodes[node]["text"],
-                **construct_structure(get_sub_related_nodes(graph, node)),
-            }
-            edges = get_related_nodes(node)
-
-            for _, target, data in edges:
-                if data["relation"] == "ant":
-                    structure[2] = {
-                        ".": node_key_text(target) + graph.nodes[target]["text"],
-                        **construct_structure(get_sub_related_nodes(graph, target)),
-                    }
-                elif data["relation"] == "syn":
-                    structure[3] = {
-                        ".": node_key_text(target) + graph.nodes[target]["text"],
-                        **construct_structure(get_sub_related_nodes(graph, target)),
-                    }
-
-            return structure
-
-        return construct_structure(start_node)
+        with open(filename, "wb") as f:
+            pickle.dump(graph, f, pickle.HIGHEST_PROTOCOL)
 
 
 def test_max_score_triangle_subgraph():

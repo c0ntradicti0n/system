@@ -8,11 +8,11 @@ import config
 import openai
 import pyperclip
 from dotenv import load_dotenv
+from regex import regex
+
 from helper import (OutputLevel, extract, get_prefix,
                     nested_dict_to_filesystem, post_process_tree,
                     sanitize_nested_dict, tree, update_nested_dict)
-from regex import regex
-
 from philosopher.llm_update_text import custom_parser, llm_update_text
 from philosopher.llm_update_toc import llm_update_toc
 from philosopher.yaml_tools import (object_to_yaml_str, rec_sort,

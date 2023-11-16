@@ -94,6 +94,9 @@ for config in gen_config():
                 model, train_data, config
             )
 
+            if config.symmetric:
+                train_labels = torch.sort(train_labels)[0]
+
             train_labels_reshaped = train_labels.view(-1)
 
             loss = criterion(outputs_reshaped, train_labels_reshaped)
@@ -129,6 +132,8 @@ for config in gen_config():
         valid_data, valid_labels, texts = data_gen.generate_data(
             config=config, batch_size=config.batch_size * 5
         )
+        if config.symmetric:
+            valid_labels = torch.sort(valid_labels)[0]
 
         model.eval()
 

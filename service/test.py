@@ -1,7 +1,8 @@
 import json
 
-from helper import CustomEncoder
 from main import main
+
+from helper import CustomEncoder
 
 print(json.dumps(main("What is love?"), cls=CustomEncoder))
 print(json.dumps(main("Heart"), cls=CustomEncoder))

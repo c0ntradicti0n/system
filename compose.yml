@@ -110,7 +110,7 @@ services:
       args:
         SYSTEM: /system
 
-    restart: unless-stopped
+    #restart: unless-stopped
 
     container_name: integrator
     env_file:
@@ -133,7 +133,6 @@ services:
       - "./integrator:/app"
       - "./classifier:/app/classifier"
       - "./integrator:/app/integrator"
-
       - "./lib:/app/lib"
       - "./.caches/.cache-cr:/chroma:rw"
       - "./.caches/.cache-hf:/.cache:rw"
