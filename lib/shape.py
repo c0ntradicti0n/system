@@ -1,4 +1,11 @@
-import torch
+
+try:
+    import torch
+except ImportError:
+    torch = None
+    logging.warning(
+        "torch not found. Install PyTorch to enable shape inference and tensor support."
+    )
 
 
 def flatten(lst):
