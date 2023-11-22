@@ -275,7 +275,7 @@ def train(config_name):
             writer.add_histogram(name, param, epoch)
 
         print(
-            f"f={max_fscore:.2f}"
+            f"{config_name} f={max_fscore:.2f}"
             f" {epoch=}, {loss=}, {train_fscore=:.2f}, {valid_fscore=:.2f}"
             f" {grad_norm=}"
         )
