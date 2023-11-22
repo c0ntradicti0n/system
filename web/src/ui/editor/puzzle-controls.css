@@ -7,4 +7,5 @@
   overflow: hidden;
   border-radius: 5px;
   display: grid;
+  padding: 4px;
 }

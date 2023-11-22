@@ -5,52 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="fix it">
-      <change afterPath="$PROJECT_DIR$/classifier/antonyms.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/classifier/models/ant_wn_only/f1v=0.81-.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/classifier/models/hierarchical_2/f1v=0.84-.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/classifier/models/tas_3_only/f1v=0.82-.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integrator/mst.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integrator/mst_maximax.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integrator/serialize.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integrator/test_models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integrator/test_mst.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integrator/test_mst.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/antonyms.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/draw_graph.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier/hyponyms.csv" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/hyponyms.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier/models.yml" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/models.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier/models/hierarchical_2/f1v=0.89-.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier/models/hierarchical_2/f1v=0.89-model.pth" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/models/hierarchical_2/f1v=0.84-optimizer.pth" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier/models/hierarchical_2/f1v=0.89-optimizer.pth" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/models/tas_3_only/f1v=0.82-optimizer.pth" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier/models/tas_3_only/f1v=0.70-.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier/models/tas_3_only/f1v=0.70-model.pth" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/models/hierarchical_2/f1v=0.84-model.pth" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier/models/tas_3_only/f1v=0.70-optimizer.pth" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/models/ant_wn_only/f1v=0.81-optimizer.pth" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier/models/tas_3_only/f1v=0.71-.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier/models/tas_3_only/f1v=0.71-model.pth" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/models/ant_wn_only/f1v=0.81-model.pth" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier/models/tas_3_only/f1v=0.71-optimizer.pth" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/models/tas_3_only/f1v=0.82-model.pth" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier/selector.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/selector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier/think.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/think.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/data/hierarchy.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/data/hierarchy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/data/opposites.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/data/opposites.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integrator/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/test_params.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/test_params.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/tree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/hyponyms.csv" beforeDir="false" afterPath="$PROJECT_DIR$/lib/hyponyms.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/wordnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/wordnet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philosopher/analyser.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/analyser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philosopher/llm_update_text.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/llm_update_text.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philosopher/llm_update_toc.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/llm_update_toc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philosopher/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/philosopher/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/rest.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/rest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/config/areas.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/config/areas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/ControlContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/ControlContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrator/test_mst.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/test_mst.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/service/Makefile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,12 +23,15 @@
       <option value="directory" />
     </option>
   </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
-        <option value="Python Script" />
         <option value="TypeScript JSX File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -125,13 +89,13 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/stefan/programming/system/integrator",
+    "last_opened_file_path": "/home/stefan/programming/system/classifier/data",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable",
     "ts.external.directory.path": "/home/stefan/.local/share/JetBrains/Toolbox/apps/PyCharm-P/ch-0/231.9011.38/plugins/javascript-impl/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   },
@@ -144,54 +108,33 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/classifier/data" />
+      <recent name="$PROJECT_DIR$/classifier/train" />
+      <recent name="$PROJECT_DIR$/classifier" />
       <recent name="$PROJECT_DIR$/../dialectics/3/1/1/1/1" />
       <recent name="$PROJECT_DIR$/x" />
-      <recent name="$PROJECT_DIR$/../dialectics/3/1/2/2/1/2/3/2" />
-      <recent name="$PROJECT_DIR$/../dialectics/3/1/2/2/1/1" />
-      <recent name="$PROJECT_DIR$/philosopher" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/../dialectics/3/1/1/1/1/x" />
-      <recent name="$PROJECT_DIR$/../dialectics/3/1/1" />
-      <recent name="$PROJECT_DIR$/../dialectics/3/1/1/1/1" />
-      <recent name="$PROJECT_DIR$/../dialectics/3/1/1/x" />
-      <recent name="$PROJECT_DIR$/../dialectics/3/1" />
+      <recent name="$PROJECT_DIR$/classifier/train" />
+      <recent name="$PROJECT_DIR$/classifier/models" />
+      <recent name="$PROJECT_DIR$/classifier/read" />
+      <recent name="$PROJECT_DIR$/classifier/result" />
+      <recent name="$PROJECT_DIR$/classifier/model" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.mst_maximax">
-    <configuration name="analyser" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="wdl" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/philosopher" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/philosopher/analyser.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.train_opposites">
     <configuration name="mst_maximax" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="wdl" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="REDIS_HOST" value="$REDIS_HOST$" />
+        <env name="SYSTEM" value="../$SYTEM$" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (programming)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/integrator" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -214,31 +157,33 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="philosopher main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="test_models" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="wdl" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="REDIS_HOST" value="$REDIS_HOST$" />
+        <env name="SYSTEM" value="../$SYTEM$" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/philosopher" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="SDK_NAME" value="Python 3.11 (programming)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/integrator" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <EXTENSION ID="net.ashald.envfile">
-        <option name="IS_ENABLED" value="true" />
+        <option name="IS_ENABLED" value="false" />
         <option name="IS_SUBST" value="false" />
         <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
         <option name="IS_IGNORE_MISSING_FILES" value="false" />
         <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
         <ENTRIES>
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-          <ENTRY IS_ENABLED="true" PARSER="env" IS_EXECUTABLE="false" PATH=".env" />
         </ENTRIES>
       </EXTENSION>
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/philosopher/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/integrator/test_models.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -247,31 +192,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="rest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="test_mst" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="wdl" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="REDIS_HOST" value="$REDIS_HOST$" />
+        <env name="SYSTEM" value="../$SYTEM$" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/server" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/integrator" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <EXTENSION ID="net.ashald.envfile">
-        <option name="IS_ENABLED" value="true" />
+        <option name="IS_ENABLED" value="false" />
         <option name="IS_SUBST" value="false" />
         <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
         <option name="IS_IGNORE_MISSING_FILES" value="false" />
         <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
         <ENTRIES>
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-          <ENTRY IS_ENABLED="true" PARSER="env" IS_EXECUTABLE="false" PATH=".env" />
         </ENTRIES>
       </EXTENSION>
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/server/rest.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/integrator/test_mst.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -280,30 +226,123 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/web/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="start" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
+    <configuration name="train_hierarchy" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="wdl" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="REDIS_HOST" value="$REDIS_HOST$" />
+        <env name="SYSTEM" value="../$SYTEM$" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/classifier/" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </EXTENSION>
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/classifier/train/train_hierarchy.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train_opposites" type="PythonConfigurationType" factoryName="Python">
+      <module name="wdl" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="REDIS_HOST" value="$REDIS_HOST$" />
+        <env name="SYSTEM" value="../$SYTEM$" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/classifier/" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </EXTENSION>
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/classifier/train/train_opposites.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train_score_hierarchy" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="wdl" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="REDIS_HOST" value="$REDIS_HOST$" />
+        <env name="SYSTEM" value="../$SYTEM$" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/classifier" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </EXTENSION>
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/classifier/train/train_score_hierarchy.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="npm.start" />
+      <item itemvalue="Python.train_opposites" />
       <item itemvalue="Python.mst_maximax" />
-      <item itemvalue="Python.analyser" />
-      <item itemvalue="Python.philosopher main" />
-      <item itemvalue="Python.rest" />
+      <item itemvalue="Python.train_score_hierarchy" />
+      <item itemvalue="Python.test_mst" />
+      <item itemvalue="Python.train_hierarchy" />
+      <item itemvalue="Python.test_models" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.mst_maximax" />
-        <item itemvalue="Python.philosopher main" />
-        <item itemvalue="Python.rest" />
-        <item itemvalue="Python.analyser" />
-        <item itemvalue="npm.start" />
+        <item itemvalue="Python.train_score_hierarchy" />
+        <item itemvalue="Python.test_mst" />
+        <item itemvalue="Python.train_hierarchy" />
+        <item itemvalue="Python.test_models" />
       </list>
     </recent_temporary>
   </component>
@@ -365,7 +404,17 @@
       <workItem from="1692035895803" duration="2365000" />
       <workItem from="1692094250119" duration="16314000" />
       <workItem from="1692326249417" duration="685000" />
-      <workItem from="1700129079258" duration="1867000" />
+      <workItem from="1700129079258" duration="2409000" />
+      <workItem from="1700131654078" duration="2650000" />
+      <workItem from="1700134532894" duration="6303000" />
+      <workItem from="1700159995542" duration="6375000" />
+      <workItem from="1700244488196" duration="6858000" />
+      <workItem from="1700324291297" duration="3753000" />
+      <workItem from="1700469520998" duration="326000" />
+      <workItem from="1700523905233" duration="6903000" />
+      <workItem from="1700570154555" duration="10942000" />
+      <workItem from="1700587111582" duration="15378000" />
+      <workItem from="1700665235502" duration="23359000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -696,15 +745,23 @@
       <option name="project" value="LOCAL" />
       <updated>1691896932213</updated>
     </task>
-    <task id="LOCAL-00048" summary="fix mobile zoom">
+    <task id="LOCAL-00049" summary="fix it">
       <option name="closed" value="true" />
-      <created>1692229175312</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
+      <created>1700131161860</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
       <option name="project" value="LOCAL" />
-      <updated>1692229175312</updated>
+      <updated>1700131161860</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00050" summary="fix it">
+      <option name="closed" value="true" />
+      <created>1700687028547</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1700687028548</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -770,7 +827,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/analyser.py</url>
-          <line>382</line>
+          <line>383</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -840,7 +897,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philosopher/main.py</url>
-          <line>101</line>
+          <line>100</line>
           <option name="timeStamp" value="87" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -851,8 +908,80 @@
         <line-breakpoint suspend="THREAD" type="python-line">
           <condition expression="&quot;331&quot; in &quot;&quot;.join(str(p) for p in path)" language="Python" />
           <url>file://$PROJECT_DIR$/philosopher/analyser.py</url>
-          <line>20</line>
+          <line>21</line>
           <option name="timeStamp" value="108" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/integrator/mst_maximax.py</url>
+          <line>490</line>
+          <option name="timeStamp" value="109" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lib/score_matrix.py</url>
+          <line>32</line>
+          <option name="timeStamp" value="112" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/integrator/tree.py</url>
+          <line>231</line>
+          <option name="timeStamp" value="114" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/classifier/model/ntuple.py</url>
+          <line>59</line>
+          <option name="timeStamp" value="129" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lib/shape.py</url>
+          <line>38</line>
+          <option name="timeStamp" value="136" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lib/shape.py</url>
+          <line>37</line>
+          <option name="timeStamp" value="137" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/classifier/train/ntuple.py</url>
+          <line>89</line>
+          <option name="timeStamp" value="147" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/classifier/read/selector.py</url>
+          <line>233</line>
+          <option name="timeStamp" value="151" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/classifier/result/think.py</url>
+          <line>106</line>
+          <option name="timeStamp" value="161" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <condition expression="tou" language="Python" />
+          <url>file://$PROJECT_DIR$/integrator/tree.py</url>
+          <line>307</line>
+          <option name="timeStamp" value="215" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/integrator/tree.py</url>
+          <line>321</line>
+          <option name="timeStamp" value="216" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <condition expression="k[2]==&quot;linear operations&quot;" language="Python" />
+          <url>file://$PROJECT_DIR$/integrator/main.py</url>
+          <line>128</line>
+          <option name="timeStamp" value="220" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/integrator/main.py</url>
+          <line>124</line>
+          <option name="timeStamp" value="221" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
+          <url>notebook:///home/stefan/programming/system/integrator/test_mst.ipynb</url>
+          <line>5</line>
+          <option name="timeStamp" value="213" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -863,13 +992,28 @@
         </breakpoint>
       </default-breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="test_mst">
+        <watch expression="os.environ.get(&quot;MODELS_CONFIG&quot;, &quot;../classifier/models/&quot;)" language="Python" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/wdl$philosopher_main.coverage" NAME="philosopher main Coverage Results" MODIFIED="1691748704396" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
     <SUITE FILE_PATH="coverage/wdl$analyser.coverage" NAME="analyser Coverage Results" MODIFIED="1690108599658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
-    <SUITE FILE_PATH="coverage/system$mst_maximax.coverage" NAME="mst_maximax Coverage Results" MODIFIED="1700130703760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
-    <SUITE FILE_PATH="coverage/wdl$rest.coverage" NAME="rest Coverage Results" MODIFIED="1690875061170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
+    <SUITE FILE_PATH="coverage/system$test_models.coverage" NAME="test_models Coverage Results" MODIFIED="1700673872850" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
+    <SUITE FILE_PATH="coverage/system$model_siamese.coverage" NAME="model.siamese Coverage Results" MODIFIED="1700579341040" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
+    <SUITE FILE_PATH="coverage/system$model.coverage" NAME="model Coverage Results" MODIFIED="1700529933994" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
+    <SUITE FILE_PATH="coverage/system$main.coverage" NAME="main Coverage Results" MODIFIED="1700245296550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
+    <SUITE FILE_PATH="coverage/system$m_siamese.coverage" NAME="m_siamese Coverage Results" MODIFIED="1700592143090" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
     <SUITE FILE_PATH="coverage/wdl$logic_generator.coverage" NAME="philosopher main Coverage Results" MODIFIED="1691407193115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
+    <SUITE FILE_PATH="coverage/system$test_mst.coverage" NAME="test_mst Coverage Results" MODIFIED="1700681475382" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
+    <SUITE FILE_PATH="coverage/system$mst_maximax.coverage" NAME="mst_maximax Coverage Results" MODIFIED="1700686308049" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
+    <SUITE FILE_PATH="coverage/wdl$rest.coverage" NAME="rest Coverage Results" MODIFIED="1690875061170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
+    <SUITE FILE_PATH="coverage/system$train_score_hierarchy.coverage" NAME="train_score_hierarchy Coverage Results" MODIFIED="1700684917202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
+    <SUITE FILE_PATH="coverage/system$train.coverage" NAME="train Coverage Results" MODIFIED="1700591754683" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
+    <SUITE FILE_PATH="coverage/system$train_hierarchy.coverage" NAME="train_hierarchy Coverage Results" MODIFIED="1700679093768" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier/" />
+    <SUITE FILE_PATH="coverage/system$train_opposites.coverage" NAME="train_opposites Coverage Results" MODIFIED="1700686994280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier/" />
     <SUITE FILE_PATH="coverage/system$philosopher_main.coverage" NAME="philosopher main Coverage Results" MODIFIED="1692230805675" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
   </component>
 </project>

@@ -68,10 +68,10 @@ export const RIGHT_BOTTOM_CORNER = {
     type: 'rectangle',
 
     vertices: [
-      { x: window.innerWidth * 0.7, y: (window.innerHeight * 3) / 4 },
-      { x: window.innerWidth * 0.7, y: window.innerHeight },
-      { x: window.innerWidth, y: window.innerHeight },
-      { x: window.innerWidth, y: (window.innerHeight * 3) / 4 },
+      { x: window.innerWidth * 0.75, y: (window.innerHeight * 3) / 4 },
+      { x: window.innerWidth * 0.75, y: window.innerHeight },
+      { x: window.innerWidth * 0.95, y: window.innerHeight },
+      { x: window.innerWidth * 0.95, y: (window.innerHeight * 3) / 4 },
     ],
   },
 }
@@ -81,16 +81,16 @@ export const RIGHT_BIG_TRIANGLE = {
     type: 'triangle',
 
     vertices: [
-      { x: 0, y: window.innerHeight * 2 }, // Bottom left
+      { x: 0, y: window.innerHeight }, // Bottom left
       { x: 0, y: 0 }, // Top left
-      { x: window.innerWidth / 4, y: 0 }, // Middle top
+      { x: window.innerWidth / 7, y: 0 }, // Middle top
     ],
   },
   triangle: {
     type: 'triangle',
 
     vertices: [
-      { x: window.innerWidth * 0.4, y: 0 },
+      { x: window.innerWidth * 0.3, y: 0 },
       { x: window.innerWidth * 0.8, y: window.innerHeight },
       { x: window.innerWidth * 0.8, y: 0 },
     ],

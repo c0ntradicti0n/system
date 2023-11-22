@@ -65,6 +65,15 @@ hotreload-%:
 		docker compose up  --build --force-recreate -d $*; \
 	done
 
+train-%:
+	. venv/bin/activate && \
+	cd classifier && export PYTHONPATH=../ && \
+	export REDIS_HOST=localhost && \
+	export SYSTEM="../../dialectics" && \
+	export MODEL_CONFIG="models/$*/config.json" && \
+	python3 train/$*.py
+
+
 redis:
 	docker compose up --build --force-recreate  -d redis worker queue
 

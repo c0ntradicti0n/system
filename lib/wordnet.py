@@ -1,5 +1,6 @@
 import ast
 import csv
+import itertools
 import random
 
 from nltk.corpus import wordnet as wn
@@ -110,20 +111,36 @@ def write_to_csv():
                     break
 
 
-def yield_random_hie_wordnet_sample():
+def yield_extra_sample(filename):
     while True:
-        with open("hyponyms.csv", newline="") as csvfile:
+        with open(filename, newline="") as csvfile:
             reader = csv.reader(csvfile)
             for row in reader:
                 x = ast.literal_eval(row[1])
-                r = random.randint(1, len(row) - 1)
+                r = random.randint(0, len(x) - 1)
+
+                yield row[0], x[r]
+
+
+def yield_cycling_list(list):
+    gen = itertools.cycle(list)
+    yield from gen
+
+
+def yield_random_hie_wordnet_sample():
+    while True:
+        with open("data/hyponyms.csv", newline="") as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                x = ast.literal_eval(row[1])
+                r = random.randint(0, len(x) - 1)
 
                 yield row[0], x[r]
 
 
 def yield_random_ant_wordnet_sample():
     while True:
-        with open("antonyms.csv", newline="") as csvfile:
+        with open("data/antonyms.csv", newline="") as csvfile:
             reader = csv.reader(csvfile)
             for row in reader:
                 x = ast.literal_eval(row[1])

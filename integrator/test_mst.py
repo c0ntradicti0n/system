@@ -24,9 +24,8 @@ def recompute_tree(path, start_node, epochs=10, start_with_sub=False):
 
     os.system("echo $MODELS_CONFIG")
     os.system("echo $REDIS_HOST")
-    os.environ["MODELS_CONFIG"] = "../classifier/"
-    os.environ["REDIS_HOST"] = "localhost"
     os.system("rm -rf ./states/test")
+    os.environ["REDIS_HOST"] = "localhost"
 
     t, (g, best_start_node) = make_dialectics(
         texts, epochs=epochs, start_node=start_node, start_with_sub=start_with_sub
@@ -39,3 +38,26 @@ def from_texts(texts, start_node=None, epochs=10, start_with_sub=False):
         texts, epochs=epochs, start_node=start_node, start_with_sub=start_with_sub
     )
     return g, t
+
+
+if __name__ == "__main__":
+    g, t = from_texts(
+        [
+            "linear operations",
+            "multiplicative operations",
+            "exponential and logarithmic functions",
+            "addition",
+            "subtraction",
+            "multiplication",
+            "division",
+            "exponent",
+            "root",
+            "neutral element of addition and subtraction is 0",
+            "neutral element of multiplication and division is 1",
+            "basis of exponent and root",
+        ],
+        epochs=10,
+        start_node="linear operations",
+        start_with_sub=True,
+    )
+    t.dump_graph("calc", t.graph, "calc")

@@ -2,9 +2,9 @@ import logging
 import os
 
 import regex as re
+from helper import get_from_nested_dict
 from llm_update_toc import filter_similar_paths
 
-from helper import get_from_nested_dict
 from philosopher.analyser import without_text
 from philosopher.missing import add_to_missing_in_toc
 

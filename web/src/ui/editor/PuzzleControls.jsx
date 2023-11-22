@@ -38,6 +38,7 @@ const SelectStartNodeButton = ({ setAction, action, socket, hash, params }) => {
         onClick={handleButtonClick}
         aria-label="Select Start Node"
         title="Select Start Node"
+        style={{ marginLeft: '30px' }}
       >
         Set 🚩
       </Button>
@@ -50,6 +51,7 @@ const SelectStartNodeButton = ({ setAction, action, socket, hash, params }) => {
         }}
         aria-label="Remove Start Node"
         title="Remove Start Node"
+        style={{ marginLeft: '30px' }}
       >
         Unset 🚫
       </Button>

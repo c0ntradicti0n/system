@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import Muuri from 'muuri'
+import { DEBUG } from '../config/const'
 
 function computeParallelLines(itemSize, margin) {
   const lines = []
@@ -126,6 +127,12 @@ let POINTS = []
 
 function layout(areas, cssPrefix) {
   return (grid, layoutId, items, width, height, callback) => {
+    const layout = {
+      id: layoutId,
+      items: items,
+      slots: [],
+      styles: {},
+    }
 
     let itemSize = { width: 0, height: 0 }
     try {
@@ -134,7 +141,7 @@ function layout(areas, cssPrefix) {
         height: items[0].getHeight(),
       }
     } catch (e) {
-      console.error('Empty items in Muuri layout')
+      console.error('Items without size or no items', e, items)
     }
     const margin = 0
     const lines = computeParallelLines(itemSize, margin)
@@ -162,9 +169,8 @@ function layout(areas, cssPrefix) {
   }
 }
 
-const ControlContainer = ({ children, areas, cssPrefix, debug = false }) => {
+const ControlContainer = ({ children, areas, cssPrefix, debug = DEBUG }) => {
   const gridRef = useRef(null)
-  if (process.env.DEBUG) debug = true
 
   useEffect(() => {
     if (!gridRef.current) return
@@ -184,7 +190,6 @@ const ControlContainer = ({ children, areas, cssPrefix, debug = false }) => {
     }
   }, [areas, cssPrefix, gridRef, children])
 
-
   const nonNullitems = children?.filter((child) => child)
   if (!nonNullitems) {
     console.error('No children in ControlContainer')
@@ -203,7 +208,7 @@ const ControlContainer = ({ children, areas, cssPrefix, debug = false }) => {
           </div>
         ))}
       </div>
-      {debug && (
+      {DEBUG && (
         <svg
           key={'name'}
           style={{

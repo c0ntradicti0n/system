@@ -1,69 +1,92 @@
 import logging
 
-from main import antagonizer, classifier, organizer
+from main import classifier, hierarchy, opposite
 
-from helper import t
+from lib.helper import t
 
 logging.basicConfig(level=logging.ERROR)
 
 
-def test_antonym(pair):
-    lsk = antagonizer(pair)
-    if lsk and lsk[0] and lsk[0][0][0] == 2:
+def test_opposite(pair, expected):
+    (n1, n2), s = opposite(pair)[0]
+    print(s)
+    if (s > 0) == expected:
+        print(f"A {'t' if expected else 'f'} GOOD {pair=}")
         return True
-    return False
+    else:
+        print(f"A {'t' if expected else 'f'} BAD {pair=}")
 
 
-def test_classifier(tripple, expected):
-    lsk = classifier(tripple)
+def test_thesis_antithesis_synthesis(triple, expected):
+    lsk = classifier(triple)
+    lsk = [list(sorted(x[0])) for x in lsk]
     if lsk:
-        result = compare_prediction_to_expected(expected, lsk, tripple)
+        result = compare_prediction_to_expected(expected, lsk, triple)
         return result == expected
-    logging.error(f"no result for {tripple=} {expected=}")
+    logging.error(f"no result for {triple=}")
     return None
 
 
-def compare_prediction_to_expected(expected, lsk, tripple):
+def test_hierarchy(pair, expected):
+    (n1, n2), s = hierarchy(pair)[0]
+    if (s > 0) == expected:
+        print(f"H {'t' if expected else 'f'} GOOD {pair=}")
+        return True
+    else:
+        print(f"H {'t' if expected else 'f'} BAD {pair=}")
+        return False
+
+
+def compare_prediction_to_expected(expected, lsk, triple):
     matches = {v: k for k, s, v in zip(*lsk[0])}
-    result = [matches[i] for i in tripple]
+    result = [matches[i] for i in triple]
     if result != expected:
-        logging.error(f"{result=} {expected=} {tripple=}")
+        logging.error(f"{result=} {triple=}")
     return result
 
 
-def test_organizer(tripple, expected):
-    lsk = organizer(tripple)
-    if lsk:
-        result = compare_prediction_to_expected(expected, lsk, tripple)
-        return result == expected
-    logging.error(f"no result for {tripple=} {expected=}")
-    return None
-
-
 with t:
-    assert test_antonym(["good", "bad"])
+    assert test_opposite(["good", "bad"], True)
 with t:
-    assert test_antonym(["bad", "good"])
+    assert test_opposite(["yes", "no"], True)
 with t:
-    assert test_antonym(["up", "down"])
+    assert test_opposite(["true", "false"], True)
 with t:
-    assert test_antonym(["down", "up"])
+    assert not test_opposite(["good", "good"], False)
 with t:
-    assert test_antonym(["left", "right"])
-with t:
-    assert test_antonym(["right", "left"])
-with t:
-    assert test_antonym(["be", "not to be"])
+    assert not test_opposite(["bad", "green"], False)
 
 with t:
-    assert not test_antonym(["lazy", "fox"])
+    assert test_opposite(["bad", "good"], True)
 with t:
-    assert not test_antonym(["a", "b"])
+    assert test_opposite(["up", "down"], True)
+with t:
+    assert test_opposite(["down", "up"], True)
+with t:
+    assert test_opposite(["left", "right"], True)
+with t:
+    assert test_opposite(["right", "left"], True)
+with t:
+    assert test_opposite(["be", "not to be"], True)
 
 with t:
-    assert test_antonym(["linear operations", "multiplicative operations"])
+    assert test_opposite(["lazy", "fox"], False)
 with t:
-    assert test_classifier(
+    assert test_opposite(["a", "b"], False)
+with t:
+    assert test_opposite(["happy", "moon"], False)
+
+with t:
+    assert test_opposite(["subtraction", "addition"], True)
+with t:
+    assert test_opposite(["multiplication", "division"], True)
+with t:
+    assert test_opposite(["exponent", "root"], True)
+
+with t:
+    assert test_opposite(["linear operations", "multiplicative operations"], True)
+with t:
+    assert test_thesis_antithesis_synthesis(
         [
             "linear operations",
             "multiplicative operations",
@@ -73,45 +96,47 @@ with t:
     )
 
 with t:
-    assert test_classifier(["good", "bad", "neutral"], [1, 2, 3])
+    assert test_thesis_antithesis_synthesis(["good", "bad", "neutral"], [1, 2, 3])
 with t:
-    assert test_classifier(["black", "white", "grey"], [2, 1, 3])
+    assert test_thesis_antithesis_synthesis(["black", "white", "grey"], [2, 1, 3])
 with t:
-    assert test_classifier(["plus", "minus", "plus minus zero"], [1, 2, 3])
+    assert test_thesis_antithesis_synthesis(
+        ["plus", "minus", "plus minus zero"], [1, 2, 3]
+    )
 with t:
-    assert test_classifier(["up", "down", "straight"], [1, 2, 3])
+    assert test_thesis_antithesis_synthesis(["up", "down", "straight"], [1, 2, 3])
 with t:
-    assert test_classifier(["friend", "enemy", "diplomat"], [1, 2, 3])
+    assert test_thesis_antithesis_synthesis(["friend", "enemy", "diplomat"], [1, 2, 3])
 with t:
-    assert test_classifier(["to be", "not to be", "become"], [1, 2, 3])
+    assert test_thesis_antithesis_synthesis(["to be", "not to be", "become"], [1, 2, 3])
 
 with t:
-    assert test_organizer(["moral", "good"], [1, 2])
+    assert test_hierarchy(["moral", "good"], True)
 with t:
-    assert test_organizer(["moral", "bad"], [1, 2])
+    assert test_hierarchy(["moral", "bad"], True)
 with t:
-    assert test_organizer(["moral", "neutral"], [1, 2])
+    assert test_hierarchy(["moral", "neutral"], True)
 with t:
-    assert test_organizer(["color", "black"], [1, 2])
+    assert test_hierarchy(["color", "black"], True)
 with t:
-    assert test_organizer(["color", "white"], [1, 2])
+    assert test_hierarchy(["color", "white"], True)
 with t:
-    assert test_organizer(["color", "grey"], [1, 2])
+    assert test_hierarchy(["color", "grey"], True)
 with t:
-    assert test_organizer(["operation", "plus"], [1, 2])
+    assert test_hierarchy(["operation", "plus"], True)
 with t:
-    assert test_organizer(["operation", "minus"], [1, 2])
+    assert test_hierarchy(["operation", "minus"], True)
 with t:
-    assert test_organizer(["operation", "neutral element 0"], [1, 2])
+    assert test_hierarchy(["operation", "neutral element 0"], True)
 with t:
-    assert test_organizer(["body", "hand"], [1, 2])
+    assert test_hierarchy(["body", "hand"], True)
 with t:
-    assert test_organizer(["mathematics", "plus"], [1, 2])
+    assert test_hierarchy(["mathematics", "plus"], True)
 with t:
-    assert test_organizer(["mathematics", "multiplication"], [1, 2])
+    assert test_hierarchy(["mathematics", "multiplication"], True)
 with t:
-    assert test_organizer(["relation", "friend"], [1, 2])
+    assert test_hierarchy(["relation", "friend"], True)
 with t:
-    assert test_organizer(["relation", "enemy"], [1, 2])
+    assert test_hierarchy(["relation", "enemy"], True)
 with t:
-    assert test_organizer(["relation", "diplomat"], [1, 2])
+    assert test_hierarchy(["relation", "diplomat"], True)

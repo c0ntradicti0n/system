@@ -1,8 +1,9 @@
 import os
 
+import torch
 from langchain.embeddings import SentenceTransformerEmbeddings
 
-from lib.shape import view_shape
+from lib.shape import get_shape, view_shape
 
 d = {}
 
@@ -38,6 +39,9 @@ class RedisEmbedder:
                 # Serialize and store the embedding in Redis
                 self.redis_client.set(key, pickle.dumps(embedding))
 
+            # to tensor
+            embedding = torch.tensor(embedding)
+
             embeddings.append(embedding)
 
         return embeddings
@@ -51,10 +55,12 @@ def embedder(model_name="BAAI/bge-large-en-v1.5"):
     return e
 
 
-def get_embeddings(texts, config):
-    r = embedder(config.embedding_model).embed_documents(view_shape(texts, (-1,)))
-    if not len(r[0]) == config.embedding_dim:
-        raise ValueError(
-            f"Embedding dimension mismatch: {len(r[0])} != {config.embedding_dim}"
-        )
+def get_embeddings(texts, config=None):
+    r = view_shape(
+        embedder(
+            config.embedding_model if config else "BAAI/bge-large-en-v1.5"
+        ).embed_documents(view_shape(texts, (-1,))),
+        (get_shape(texts)),
+    )
+
     return r

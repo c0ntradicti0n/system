@@ -1,4 +1,5 @@
 # cython: language_level=3
+import itertools
 import math
 import os
 import pickle
@@ -8,7 +9,7 @@ from pprint import pprint
 import networkx as nx
 from networkx.drawing.nx_agraph import graphviz_layout
 
-from integrator.mst_maximax import construct_mst
+from integrator.mst import construct_mst
 from lib.shape import view_shape
 
 image_folder = "images/"
@@ -35,6 +36,36 @@ class Tree:
                 sorted_nodes[i], sorted_nodes[i + 1], relation="text_sequence"
             )
 
+    def add_unique_relation(self, source, target, relation_type, **attributes):
+        """
+        Add or update an edge in a MultiDiGraph with unique 'relation' attribute for each outgoing edge.
+
+        Parameters:
+        G (nx.MultiDiGraph): The graph to which the edge will be added.
+        source (node): The node from which the edge starts.
+        target (node): The node to which the edge connects.
+        **attributes: Edge attributes.
+        """
+        if relation_type is not None:
+            # Check for an edge with the same 'relation' attribute
+            for u, v, key, data in self.graph.edges(source, data=True, keys=True):
+                if v == target and data.get("relation") == relation_type:
+                    # Update the existing edge with new attributes
+                    self.graph[source][target][key].update(attributes)
+                    return 0
+
+        # Add a new edge if no matching edge was found
+        attributes["relation"] = relation_type
+
+        self.graph.add_edge(source, target, **attributes)
+        return 1
+
+    def get_relation(self, source, target, relation_type):
+        for u, v, key, data in self.graph.out_edges(source, data=True, keys=True):
+            if target == v and data.get("relation") == relation_type:
+                return data
+        return None
+
     def add_relation(self, key1, key2, relation_type, **kwargs):
         if key1 in self.graph and key2 in self.graph:
             self.graph.add_edge(key1, key2, relation=relation_type, **kwargs)
@@ -49,6 +80,34 @@ class Tree:
     def remove_edge(self, key1, key2):
         if self.graph.has_edge(key1, key2):
             self.graph.remove_edge(key1, key2)
+
+    @staticmethod
+    def has_edge_with_attribute(G, source, target, attr_name, attr_value):
+        """
+        Check if there is an edge between source and target with the specified attribute and value.
+
+        :param G: NetworkX graph
+        :param source: source node
+        :param target: target node
+        :param attr_name: attribute name
+        :param attr_value: attribute value
+        :return: True if such an edge exists, False otherwise
+        """
+        if G.is_multigraph():
+            # Check if the edge exists
+            if (source, target) not in G.edges():
+                return False
+            # Check each edge for the attribute
+            for key in G[source][target]:
+                if G[source][target][key].get(attr_name) == attr_value:
+                    return True
+        else:
+            # Check if the edge exists and has the attribute
+            if (source, target) in G.edges() and G[source][target].get(
+                attr_name
+            ) == attr_value:
+                return True
+        return False
 
     @staticmethod
     def graph_without_text_sequence(graph=None):
@@ -85,7 +144,7 @@ class Tree:
                 "the": "green",
                 "ant": "red",
                 "syn": "blue",
-                "sub": "orange",
+                "hie": "orange",
                 **({"text_sequence": "gray"} if text_relation is True else {}),
             }
             edge_color_list = [
@@ -117,29 +176,62 @@ class Tree:
             print("Error in drawing graph")
             pass
 
-    def pull(self, n, _score=None, on_relation=None):
+    def pull(self, n, _score=None, on_relation=None, for_relation=None):
         result = []
         while len(result) != n:
             for nn in self.nodes_with_least_info(
-                self.graph, n, _score=_score, on_relation=on_relation
+                self.graph,
+                n,
+                _score=_score,
+                on_relation=on_relation,
+                for_relation=for_relation,
             ):
                 if len(result) < n:
-                    result.append((nn, self.graph.nodes[nn]["text"]))
+                    if isinstance(nn, list):
+                        for nnn in nn:
+                            result.append((nnn, self.graph.nodes[nnn]["text"]))
+                    else:
+                        result.append((nn, self.graph.nodes[nn]["text"]))
                 else:
                     break
         return result
 
-    def pull_lz(self, n, m, _score=None, on_relation=None):
+    def pull_lz(self, n, m, _score=None, on_relation=None, for_relation=None):
         return view_shape(
-            list(zip(*self.pull(n * m, _score, on_relation=on_relation))), (2, n, m)
+            list(
+                zip(
+                    *self.pull(
+                        n * m,
+                        _score,
+                        on_relation=on_relation,
+                        for_relation=for_relation,
+                    )
+                )
+            ),
+            (2, n, m),
         )
 
     yielded = []
 
-    def nodes_with_least_info(self, G, n, _score=None, on_relation=None):
+    def nodes_with_least_info(
+        self, G, n, _score=None, on_relation=None, for_relation=None
+    ):
         # Dictionary to store the sum of "_score" attributes for each node
-        node_scores = {}
         all_nodes = list(G.nodes())
+
+        if for_relation:
+            results = []
+            for node1 in all_nodes:
+                for node2 in all_nodes:
+                    if node1 == node2:
+                        continue
+                    if not self.has_edge_with_attribute(
+                        G, node1, node2, for_relation, "relation"
+                    ):
+                        results.append([node1, node2])
+            return results
+
+        node_scores = {}
         random.shuffle(all_nodes)
         for node in all_nodes:
             total_score = 0
@@ -185,8 +277,30 @@ class Tree:
         return [
             (n1, n2, attr)
             for n1, n2, attr in G.out_edges(v, data=True)
-            if attr["relation"] == "sub"
+            if attr["relation"] == "hie"
         ]
+
+    def missing_edges(self, relation):
+        graph_with_only_relation = self.graph_without_relation(self.graph, relation)
+        result = [
+            (n1, n2)
+            for n1, n2 in itertools.permutations(graph_with_only_relation.nodes, 2)
+            if not graph_with_only_relation.has_edge(n1, n2)
+        ]
+
+        return result
+
+    def graph_without_relation(self, graph, relation):
+        filtered_graph = nx.DiGraph()
+        # add all nodes
+        filtered_graph.add_nodes_from(graph.nodes(data=True))
+
+        for node in graph.nodes:
+            for u, v, data in graph.out_edges(node, data=True):
+                if data.get("relation") == relation:
+                    filtered_graph.add_edge(u, v, **data)
+
+        return filtered_graph
 
     @staticmethod
     def computed_i_tri_out_edges(G, v, visited):
@@ -430,12 +544,14 @@ class Tree:
             visited = {node}
 
             # Grow subgraph recursively
-            temp_subgraph = construct_mst(
-                G, max_depth=depth, root=node, start_with_sub=start_with_sub
+            result_nodes, result_edges = Tree.grow_subgraph(
+                G, node=node, visited=visited, depth=depth
             )
 
             # Create a temporary subgraph for this start_node
-
+            temp_subgraph = nx.DiGraph()
+            for n1, n2, attr in result_edges:
+                temp_subgraph.add_edge(n1, n2, **attr)
             # If this subgraph has more edges than the best one found so far, update best_subgraph
             if len(temp_subgraph.edges) > max_edges:
                 max_edges = len(temp_subgraph.edges)
@@ -545,6 +661,9 @@ class Tree:
         with open(filename, "wb") as f:
             pickle.dump(graph, f, pickle.HIGHEST_PROTOCOL)
 
+    def get_text(self, node):
+        return self.graph.nodes[node]["text"]
+
 
 def test_max_score_triangle_subgraph():
     # Create a Tree instance with some nodes
@@ -554,13 +673,13 @@ def test_max_score_triangle_subgraph():
     edges_to_create = [
         ("2", "3", "ant", 1, {"v_score": 0.5}),
         ("2", "4", "syn", 1, {"v_score": 0.5}),
-        ("3", "5", "sub", None, {"h_score": 0.4}),
+        ("3", "5", "hie", None, {"h_score": 0.4}),
         ("5", "6", "ant", 2, {"v_score": 0.4}),
         ("5", "7", "syn", 2, {"v_score": 0.4}),
-        ("4", "8", "sub", None, {"h_score": 0.4}),
+        ("4", "8", "hie", None, {"h_score": 0.4}),
         ("8", "9", "ant", 3, {"v_score": 0.3}),
         ("8", "10", "syn", 3, {"v_score": 0.3}),
-        ("10", "11", "sub", None, {"h_score": 0.3}),
+        ("10", "11", "hie", None, {"h_score": 0.3}),
     ]
 
     for n1, n2, rel, trident, attr in edges_to_create:
@@ -587,13 +706,13 @@ def test_max_score_triangle_subgraph_worse_paths():
     edges_to_create = [
         ("2", "3", "ant", 1, {"v_score": 0.5}),
         ("2", "4", "syn", 1, {"v_score": 0.5}),
-        ("3", "5", "sub", None, {"h_score": 0.4}),
+        ("3", "5", "hie", None, {"h_score": 0.4}),
         ("5", "6", "ant", 2, {"v_score": 0.4}),
         ("5", "7", "syn", 2, {"v_score": 0.4}),
-        ("4", "8", "sub", None, {"h_score": 0.4}),
+        ("4", "8", "hie", None, {"h_score": 0.4}),
         ("8", "9", "ant", 3, {"v_score": 0.3}),
         ("8", "10", "syn", 3, {"v_score": 0.3}),
-        ("10", "11", "sub", None, {"h_score": 0.3}),
+        ("10", "11", "hie", None, {"h_score": 0.3}),
     ]
 
     for n1, n2, rel, trident, attr in edges_to_create:
@@ -630,7 +749,7 @@ def generate_test_data(num_nodes=100, max_score=1.0):
         while next_node == i:  # Ensure different nodes
             next_node = random.randint(1, num_nodes)
 
-        relation_type = random.choice(["ant", "syn", "sub"])
+        relation_type = random.choice(["ant", "syn_1", "syn_2", "hie"])
 
         if relation_type in ["ant", "syn"]:
             trident = random.randint(1, num_nodes // 2)
@@ -729,7 +848,7 @@ def test_with_generated_data():
     # Assertion 2: No sub-sub -relations:
     for edge in result_graph.edges(data=True):
         source, target, attr = edge
-        if attr["relation"] == "sub":
+        if attr["relation"] == "hie":
             # Flags to check if the intermediate node has both 'ant' and 'syn' edges
             has_ant = False
             has_syn = False
@@ -739,7 +858,7 @@ def test_with_generated_data():
                 elif next_attr["relation"] == "syn":
                     has_syn = True
                 # If the next relation is 'sub' and the intermediate node does not have both 'ant' and 'syn' relations
-                if next_attr["relation"] == "sub" and not (has_ant and has_syn):
+                if next_attr["relation"] == "hie" and not (has_ant and has_syn):
                     raise AssertionError(
                         f"Found a sub-sub relation from {source} -> {target} -> {next_target} without both 'ant' and 'syn' relations."
                     )
@@ -750,7 +869,7 @@ def test_with_generated_data():
             assert (
                 0.1 <= d.get("v_score") <= 1.0
             ), f"Invalid 'v_score' value {d.get('v_score')}"
-        if d.get("relation") == "sub":
+        if d.get("relation") == "hie":
             assert (
                 0.1 <= d.get("h_score") <= 1.0
             ), f"Invalid 'h_score' value {d.get('h_score')}"

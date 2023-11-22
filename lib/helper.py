@@ -21,14 +21,19 @@ class E:
 
 e = E()
 
+
 class T:
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
+        if isinstance(exc_val, AssertionError):
+            logging.error(exc_val, exc_info=False)
         return isinstance(exc_val, (KeyError, TypeError, AssertionError))
 
+
 t = T()
+
 
 def o(cmd, user=None, cwd="./", err_out=True):
     try:

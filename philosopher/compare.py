@@ -68,7 +68,6 @@ print(
     f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
 )
 
-
 str1 = "3221232323"
 str2 = "322"
 
@@ -85,7 +84,6 @@ print(
     f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
 )
 
-
 str1 = "32123"
 str2 = "322"
 
@@ -93,7 +91,6 @@ similar, score = weighted_fuzzy_compare(str1, str2, threshold)
 print(
     f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
 )
-
 
 str1 = "3212"
 str2 = "313"
@@ -110,7 +107,6 @@ similar, score = weighted_fuzzy_compare(str1, str2, threshold)
 print(
     f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
 )
-
 
 str1 = "3122"
 str2 = "312111"

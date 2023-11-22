@@ -5,6 +5,7 @@ import { stringToColour } from '../../lib/color'
 import { postProcessTitle } from '../../lib/position'
 import useMuuriGrid from '../../lib/useMuuriGrid'
 import calculateFontSize from '../../lib/FontSize'
+import { DEBUG } from '../../config/const'
 
 // Define the base length for the largest triangle
 const BASE_LENGTH = window.innerHeight * 0.5 // Modify as needed
@@ -26,7 +27,6 @@ function idToPosition(id) {
   for (let charIndex = 0; charIndex < id.length; charIndex++) {
     const char = id.charAt(charIndex)
     power = Math.pow(2, charIndex)
-    console.log('fullid', id, 'char', char, 'power', power)
 
     // Adjust `x` and `y` based on the character
     if (char === '2') {
@@ -64,7 +64,6 @@ function layout(grid, layoutId, items, width, height, callback) {
   items.forEach((item) => {
     const isDragging = item.isDragging()
 
-    console.log(isDragging)
     if (isDragging) {
       // For the item being dragged, don't change its position
       const x = parseFloat(item.getElement().style.left)
@@ -137,6 +136,36 @@ const MutableTriangle = ({
 
   return (
     <>
+      {!isLeafNode && data && (
+        <>
+          <MutableTriangle
+            nest={nest + 1}
+            fullId={fullId + '3'}
+            data={data[3] ?? { '.': '' }}
+            _key={fullId + '3'}
+            size={size / 2}
+            action={action}
+          />
+
+          <MutableTriangle
+            nest={nest + 1}
+            fullId={fullId + '2'}
+            data={data[2] ?? { '.': '' }}
+            _key={fullId + '2'}
+            size={size / 2}
+            action={action}
+          />
+
+          <MutableTriangle
+            nest={nest + 1}
+            fullId={fullId + '1'}
+            data={data[1] ?? { '.': '' }}
+            _key={fullId + '1'}
+            size={size / 2}
+            action={action}
+          />
+        </>
+      )}
       <div
         className="triangle puzzle-item"
         style={{
@@ -183,50 +212,22 @@ const MutableTriangle = ({
               }
             }}
           >
-            <div style={{ zIndex: level + 1000 * nest, position: 'relative' }}>
+            <div
+              style={{ zIndex: level + 100000 * nest, position: 'relative' }}
+            >
               {_key}{' '}
             </div>
             <span title={title}>{shortTitle}</span>{' '}
           </div>
         </div>
       </div>
-
-      {!isLeafNode && data && (
-        <>
-          <MutableTriangle
-            nest={nest + 1}
-            fullId={fullId + '3'}
-            data={data[3] ?? { '.': '' }}
-            _key={fullId + '3'}
-            size={size / 2}
-            action={action}
-          />
-
-          <MutableTriangle
-            nest={nest + 1}
-            fullId={fullId + '2'}
-            data={data[2] ?? { '.': '' }}
-            _key={fullId + '2'}
-            size={size / 2}
-            action={action}
-          />
-
-          <MutableTriangle
-            nest={nest + 1}
-            fullId={fullId + '1'}
-            data={data[1] ?? { '.': '' }}
-            _key={fullId + '1'}
-            size={size / 2}
-            action={action}
-          />
-        </>
-      )}
     </>
   )
 }
 
 export const Puzzle = ({ data = undefined, action = null, props }) => {
   const gridRef = useRef(null)
+  const [debug, setDebug] = useState(() => process.env['DEBUG'])
 
   const [items, setItems] = useState(JSON.parse(JSON.stringify(data)))
 
@@ -251,6 +252,7 @@ export const Puzzle = ({ data = undefined, action = null, props }) => {
       <div ref={gridRef} className="puzzle-grid" id="#puzzle-drag-container">
         {Object.entries(items)
           .sort(([a], [b]) => b - a)
+          .reverse()
           .map(([key, item]) => (
             <MutableTriangle
               key={key}
@@ -263,23 +265,24 @@ export const Puzzle = ({ data = undefined, action = null, props }) => {
             />
           ))}
       </div>
-      {/*TRIANGLE_CENTERS.map(({ id, x, y }) => (
-        <div
-          key={id}
-          style={{
-            position: 'fixed',
-            top: y,
-            left: x,
-            textAlign: 'left',
-            border: '1px solid lime',
-            color: 'lime',
-            fontSize: '10px',
-            zIndex: 1000000,
-          }}
-        >
-          {id}
-        </div>
-      )) */}
+      {DEBUG &&
+        TRIANGLE_CENTERS.map(({ id, x, y }) => (
+          <div
+            key={id}
+            style={{
+              position: 'fixed',
+              top: y,
+              left: x,
+              textAlign: 'left',
+              border: '1px solid lime',
+              color: 'lime',
+              fontSize: '10px',
+              zIndex: 1000000,
+            }}
+          >
+            {id}
+          </div>
+        ))}
     </>
   )
 }

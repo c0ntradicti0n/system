@@ -1,10 +1,10 @@
 import atexit
+import itertools
 import logging
 
-import numpy as np
-
-from classifier.predict import MODELS
+from classifier.result.predict import MODELS
 from integrator.tree import Tree
+from lib.t import catchtime, indented
 
 
 @atexit.register
@@ -12,16 +12,15 @@ def goodbye():
     print("You are now leaving the Python sector.")
 
 
-from lib.t import catchtime, indented
-
-
-def infer(model_name, t, valid_labels, on_relation=None):
+def infer(model_name, t, valid_labels, on_relation=None, for_relation=None):
     if isinstance(t, Tree):
+        config = MODELS[model_name].config
         keys, inp = t.pull_lz(
-            min(MODELS[model_name].config.batch_size, len(t.graph.nodes) ** 2),
-            MODELS[model_name].config.n_samples,
+            min(config.batch_size, len(t.graph.nodes) ** 2),
+            config.n_pull if config.n_pull else config.n_samples,
             _score=("h_" if model_name == "hierarchical_2" else "t_"),
             on_relation=on_relation,
+            for_relation=for_relation,
         )
     elif isinstance(t, list):
         keys, inp = [t], t
@@ -48,68 +47,114 @@ def infer(model_name, t, valid_labels, on_relation=None):
     return l_s_ks
 
 
+def score(model_name, t, relation):
+    if isinstance(t, Tree):
+        not_yet_computed = t.missing_edges(relation)
+        keys = [(n1, n2) for n1, n2 in not_yet_computed]
+        inp = [
+            (t.graph.nodes[n1]["text"], t.graph.nodes[n2]["text"])
+            for n1, n2 in not_yet_computed
+        ]
+    elif isinstance(t, list):
+        keys, inp = [t], [t]
+
+    if not inp:
+        print(f"All edges already computed for {relation}")
+        return []
+
+    result = MODELS[model_name].predict(inp)
+
+    result = list(zip(keys, result))
+
+    return result
+
+
 # classify thesis, antithesis, synthesis
 def classifier(t):
-    return infer("tas_3_only", t, [1, 2, 3], on_relation="sub")
+    return infer("thesis_antithesis_synthesis", t, [1, 2, 3])
 
 
 # classify hypernym, hyponym
-def organizer(t):
-    return infer("hierarchical_2", t, [1, 2])
+def hierarchy(t):
+    return infer("hierarchy", t, [1, 2])
 
 
-def antagonizer(t):
-    return infer("ant_wn_only", t, [1, 2], on_relation="ant")
+# score hypernym, hyponym
+def score_hierarchy(t):
+    return score("score_hierarchy", t, relation="hie")
+
+
+def opposite(t):
+    return score("opposites", t, relation="ant")
+
+
+ITERATORS = {}
 
 
 def update_triangle_graph(
     t: Tree, i, hash, return_start_node=None, start_with_sub=False
 ):
-    lsk = []
-    i_added = 0
-    i_continue = 0
+    if not hash in ITERATORS:
+        ITERATORS[hash] = itertools.cycle(["hie", "ant", "syn"])
+
+    i_added, i_continue = 0, 0
     try:
-        if np.random.choice(["|", "---"], p=[0.5, 0.5]) == "|":
+        choice = next(ITERATORS[hash])
+        if choice == "hie":
             with catchtime("SUBSUMTION"):
-                lsk = organizer(t)
+                lsk = hierarchy(t)
 
-            for l, s, k in lsk:
-                if any(
-                    k[0] == e[1]
-                    for e in t.graph.out_edges(k[1], data=True)
-                    if e[2].get("relation") == "sub"
-                ):
-                    i_continue += 1
-                    continue
+                for l, s, k in lsk:
+                    score = score_hierarchy([t.get_text(k[1]), t.get_text(k[0])])[0][1]
 
-                t.add_relation(k[1], k[0], "sub", h_score=s[1])
-                i_added += 1
-        else:
-            with catchtime("THESIS ANTITHESIS SYNTHESIS"):
+                    t.add_relation(k[1], k[0], "hie", h_score=-score)
+
+                    # negative score for other direction
+                    t.add_unique_relation(k[0], k[1], "hie", h_score=score)
+
+                    i_added += 1
+        elif choice == "syn":
+            with catchtime("SYNTHESIS"):
                 lsk = classifier(t)
 
             for l, s, k in lsk:
-                # make sure that we don't add the same relation twice
-                tri_edges = t.computed_i_tri_out_edges(t.graph, k[2], [])
-                if any(k[1] == a[1] and k[0] == b[1] for a, b in tri_edges):
+                ant1 = t.get_relation(k[2], k[1], "ant")
+                ant2 = t.get_relation(k[2], k[0], "ant")
+                ant3 = t.get_relation(k[1], k[0], "ant")
+
+                if not ant1 or not ant2 or not ant3:
                     i_continue += 1
                     continue
 
-                anto = antagonizer([[k[2], k[1]]])
-
-                ant_score = 1 if anto and anto[0] and anto[0][0][0] == 1 else 0
-
-                t.add_relation(k[2], k[1], "ant", a_score=ant_score + s[1], trident=t.j)
-                t.add_relation(k[2], k[0], "syn", s_score=s[0], trident=t.j)
+                t.add_relation(
+                    k[2], k[1], "syn_1", A_score=ant1["a_score"], trident=t.j
+                )
+                t.add_relation(
+                    k[2],
+                    k[0],
+                    "syn_2",
+                    T_score=(ant2["a_score"] + ant3["a_score"]) / 2,
+                    trident=t.j,
+                )
                 t.j += 1
                 i_added += 1
+
+        elif choice == "ant":
+            with catchtime("ANTITHESIS"):
+                ant_score = opposite(t)
+
+                for (n1, n2), s in ant_score:
+                    n_added = t.add_unique_relation(n1, n2, "ant", a_score=s)
+                    n_added += t.add_unique_relation(n2, n1, "ant", a_score=s)
+                    i_added += n_added
+
     except:
         logging.error(f"error in classifier {i=} {hash=}", exc_info=True)
-    if lsk:
-        with indented(f"added {i_added} relations"):
-            t.save_state(i, hash)
-        with indented(f"discarded {i_continue} relations"):
-            pass
+
+    with indented(f"added {i_added} relations"):
+        t.save_state(i, hash)
+    with indented(f"discarded {i_continue} relations"):
+        pass
     with catchtime("NEW GRAPH"):
         return t.max_score_triangle_subgraph(
             t.graph, return_start_node=return_start_node, start_with_sub=start_with_sub

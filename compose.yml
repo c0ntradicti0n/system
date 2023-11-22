@@ -226,6 +226,7 @@ services:
       target:  $TARGET
     environment:
       WDS_SOCKET_PORT: 0
+      DEBUG: Truev
 
     container_name: web
     volumes:

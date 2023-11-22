@@ -16,8 +16,8 @@ from flask_socketio import SocketIO
 from states import states
 from werkzeug.middleware.proxy_fix import ProxyFix
 
-from integrator.tree import Tree
 from integrator.serialize import serialize_graph_to_structure
+from integrator.tree import Tree
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="gevent")

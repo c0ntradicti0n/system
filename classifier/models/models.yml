@@ -1,0 +1,61 @@
+defaults: &defaults
+  embedding_dim: 1024
+  batch_size: 200
+  n_epochs: 10000
+  stop_f1_score: 0.93
+  weight_decay: 0.001
+  batches_per_epoch: 1
+  embedding_model: BAAI/bge-large-en-v1.5
+
+siamese: &siamese
+  <<: *defaults
+  model: siamese
+
+classifier: &classifier
+  <<: *defaults
+  model: ntuple
+  lr: 0.00003
+
+
+models:
+  thesis_antithesis_synthesis:
+    <<: *classifier
+    n_samples: 3
+    n_classes: 4
+    classes:
+      - valid
+    probs:
+      - 1
+
+
+  score_hierarchy:
+    <<: *siamese
+    samples: classifier.data.hierarchy
+    inverse: true
+
+  hierarchy:
+    <<: *classifier
+    n_classes: 3
+    n_samples: 2
+    batches_per_epoch: 17
+    batch_size: 100
+    classes:
+      - valid_hie_wordnet
+    probs:
+      - 1
+    lr: 0.003
+
+  opposites:
+    <<: *siamese
+    samples: classifier.data.opposites
+    inverse: true
+
+
+
+
+
+
+
+
+
+

@@ -8,7 +8,7 @@ def serialize_graph_to_structure(graph, start_node, no_title=False):
         edges = [
             e
             for e in graph.edges(node, data=True)
-            if e[2]["relation"] in ["ant", "syn", "sub"]
+            if e[2]["relation"] in ["ant", "syn_1", "syn_2", "hie"]
         ]
         return sorted(edges, key=lambda x: x[2]["relation"])
 
@@ -16,7 +16,7 @@ def serialize_graph_to_structure(graph, start_node, no_title=False):
         """Return nodes related to the given node by 'sub' relation."""
         # Filtering edges with the current node that have 'sub' relation
         sub_edges = [
-            e for e in graph.edges(node, data=True) if e[2]["relation"] == "sub"
+            e for e in graph.edges(node, data=True) if e[2]["relation"] == "hie"
         ]
         # Extracting target nodes from the edges
         sub_nodes = [target for _, target, _ in sub_edges]
@@ -38,6 +38,10 @@ def serialize_graph_to_structure(graph, start_node, no_title=False):
         if not node:
             return structure
 
+        if not node in graph.nodes:
+            logging.error(f"node {node} not in graph")
+            return structure
+
         structure[1] = {
             ".": node_key_text(node) + graph.nodes[node]["text"],
             **construct_structure(get_sub_related_nodes(graph, node)),
@@ -45,12 +49,12 @@ def serialize_graph_to_structure(graph, start_node, no_title=False):
         edges = get_related_nodes(node)
 
         for _, target, data in edges:
-            if data["relation"] == "ant":
+            if data["relation"] == "syn_1":
                 structure[2] = {
                     ".": node_key_text(target) + graph.nodes[target]["text"],
                     **construct_structure(get_sub_related_nodes(graph, target)),
                 }
-            elif data["relation"] == "syn":
+            elif data["relation"] == "syn_2":
                 structure[3] = {
                     ".": node_key_text(target) + graph.nodes[target]["text"],
                     **construct_structure(get_sub_related_nodes(graph, target)),

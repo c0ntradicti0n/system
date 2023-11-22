@@ -1,3 +1,6 @@
+import torch
+
+
 def flatten(lst):
     """Flatten a nested list."""
     for el in lst:
@@ -40,12 +43,32 @@ def view_shape(lst, shape):
     return build_nested_list(flat_list, shape)
 
 
+def get_shape(lst):
+    """Return the shape of a nested list."""
+    if isinstance(lst, (list, tuple, torch.Tensor)):
+        return [len(lst)] + get_shape(lst[0])
+    else:
+        return []
+
+
 def product(lst):
     """Return the product of a list of numbers."""
     result = 1
     for num in lst:
         result *= num
     return result
+
+
+def to_tensor(tensor_lists):
+    # Check if we are at the deepest level (i.e., the current element is a tensor)
+    if isinstance(tensor_lists[0], torch.Tensor):
+        return torch.stack(tensor_lists)
+
+    # Otherwise, recursively process each sublist
+    stacked_sublists = [to_tensor(sublist) for sublist in tensor_lists]
+
+    # Stack the resulting tensors
+    return torch.stack(stacked_sublists)
 
 
 if __name__ == "__main__":
