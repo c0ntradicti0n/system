@@ -1,2 +1,2 @@
 export const MAX_LEVEL = 3
-export const DEBUG = true
+export const DEBUG = false
