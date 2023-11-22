@@ -6,9 +6,10 @@ from torch.nn.functional import pairwise_distance
 
 
 def asymmetric_similarity(tensor_a, tensor_b):
-    similarity = pairwise_distance(tensor_a-tensor_a*0.2, tensor_b, p=2)
+    similarity = pairwise_distance(tensor_a - tensor_a * 0.2, tensor_b, p=2)
 
     return similarity
+
 
 class SiameseNetwork(nn.Module):
     def __init__(self, embedding_dim):
@@ -30,7 +31,8 @@ class SiameseNetwork(nn.Module):
     def forward(self, x):
         return self.fc(x)
 
-def triplet_loss(anchor, positive, negative, margin=1.0):
+
+def triplet_loss(anchor, positive, negative, margin=0.5):
     distance_positive = torch.norm(anchor - positive, p=2, dim=1)
     distance_negative = torch.norm(anchor - negative, p=2, dim=1)
     losses = torch.relu(distance_positive - distance_negative + margin)
