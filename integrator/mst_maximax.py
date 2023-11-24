@@ -1,7 +1,6 @@
 import copy
 import math
 import pickle
-import random
 from pprint import pprint
 
 import networkx as nx
@@ -10,26 +9,13 @@ from integrator.mst import edge_priority
 from integrator.serialize import serialize_graph_to_structure
 from lib.dict_diff import dict_diff
 from lib.draw_graph import draw_graph
-from lib.helper import e, t
 from lib.t import catchtime, indented
-
-
-def computed_out_edges(G, v):
-    return list(computed_tri_out_edges(G, v)) + list(computed_sub_out_edges(G, v))
-
-
-def computed_tri_out_edges(G, v):
-    return [
-        (n1, n2, attr)
-        for n1, n2, attr in G.out_edges(v, data=True)
-        if "trident" in attr
-    ]
 
 
 def find_sub_edge_score(G, u, v):
     for n1, n2, attr in G.out_edges(u, data=True):
         if n2 == v and attr["relation"] == "hie":
-            return attr["h_score"]
+            return attr["hie_score"]
     return 0.3
 
 
@@ -42,9 +28,9 @@ def computed_sub_out_edges(G, v, visited, parents):
                     n2,
                     {
                         **attr,
-                        "h_score": math.prod(
+                        "hie_score": math.prod(
                             [
-                                attr["h_score"],
+                                attr["hie_score"],
                                 *(
                                     find_sub_edge_score(G, parent, n2)
                                     for parent in parents
@@ -56,33 +42,32 @@ def computed_sub_out_edges(G, v, visited, parents):
                 for n1, n2, attr in G.out_edges(v, data=True)
                 if attr["relation"] == "hie" and n2 not in visited
             ],
-            key=lambda x: x[2]["h_score"],
+            key=lambda x: x[2]["hie_score"],
             reverse=True,
         )
     )
 
 
 def computed_i_tri_out_edges(G, v, visited):
-    tou = computed_tri_out_edges(G, v)
-    if not tou:
+    if v not in G.graph["branches"]:
         return []
-    i_s = set([attr["trident"] for n1, n2, attr in tou])
-    result = []
-    for i in i_s:
-        gs = [
-            (n1, n2, attr)
-            for n1, n2, attr in tou
-            if attr["trident"] == i and n2 not in visited
-        ]
-        if len(gs) != 2:  # might be in case we visited that yet for this branch
-            continue
-        gs = sorted(gs, key=lambda x: x[2]["relation"])
-        result.append(tuple(gs))
-    result = sorted(
-        result,
-        key=lambda x: x[0][2].get("A_score", 0) + x[1][2].get("T_score", 0),
-        reverse=True,
-    )
+    edges = [
+        ((n1, score1), (n2, score1))
+        for (n1, n2), (score1, score2) in G.graph["branches"][v].items()
+    ]
+    edges = [
+        pair
+        for pair in edges
+        if pair[0][0] not in visited and pair[0][1] not in visited
+    ]
+    try:
+        result = sorted(
+            edges,
+            key=lambda x: x[0][1] + x[1][1],
+            reverse=True,
+        )
+    except Exception:
+        raise
     return result
 
 
@@ -166,8 +151,8 @@ def maximax(node, depth, is_maximizing_player, G, visited, current_mst, parents=
         best_mst = None
 
         for edge_a, edge_b in tri_edges:
-            node, child_a, attr_a = edge_a
-            node, child_b, attr_b = edge_b
+            child_a, score1 = edge_a
+            child_b, score2 = edge_b
             if child_a == child_b:
                 print("same child")
                 continue
@@ -180,8 +165,8 @@ def maximax(node, depth, is_maximizing_player, G, visited, current_mst, parents=
                 visited.add(child_b)
                 visited.add(node)
 
-                current_mst.add_edge(node, child_a, **attr_a)
-                current_mst.add_edge(node, child_b, **attr_b)
+                current_mst.add_edge(node, child_a, relation="syn_1", A_score=score1)
+                current_mst.add_edge(node, child_b, relation="syn_2", T_score=score2)
 
                 eval_b, mst_b = maximax(
                     child_b,
@@ -253,7 +238,20 @@ def scenario_calc(G):
     G.update(g)
     # print sub score as a matrix
 
-    return {i: n["text"] for i, n in G.nodes(data=True)}, "linear operations", {}
+    return (
+        {i: n["text"] for i, n in G.nodes(data=True)},
+        "plus and minus",
+        {
+            1: {1: {".": "basis of exponent and root"}, ".": "plus and minus"},
+            2: {1: {".": "multiplication and division"}, ".": "addition"},
+            3: {
+                1: {".": "neutral element of addition and subtraction is 0"},
+                2: {".": "neutral element of multiplication and division is 1"},
+                3: {".": "division"},
+                ".": "exponential and logarithm",
+            },
+        },
+    )
 
 
 def scenario_1(G):
@@ -265,11 +263,20 @@ def scenario_1(G):
         5: "Coming-into-Being and Ceasing-to-Be",
         6: "Sublation",
     }
-    G.add_edge(N[1], N[2], A_score=1, relation="syn_1", trident=1)  # Antonym edge
-    G.add_edge(N[4], N[5], A_score=1.1, relation="syn_1", trident=1)  # Antonym edge
-    G.add_edge(N[1], N[3], T_score=2, relation="syn_2", trident=1)  # Synthesis edge
-    G.add_edge(N[4], N[6], T_score=2.1, relation="syn_2", trident=1)  # Synthesis edge
-    G.add_edge(N[3], N[4], h_score=3, relation="hie")  # Hypernym/Hyponym edge
+    G.add_edge(N[1], N[2], A_score=1, relation="syn_1")  # Antonym edge
+    G.add_edge(N[4], N[5], A_score=1.1, relation="syn_1")  # Antonym edge
+    G.add_edge(N[1], N[3], T_score=2, relation="syn_2")  # Synthesis edge
+    G.add_edge(N[4], N[6], T_score=2.1, relation="syn_2")  # Synthesis edge
+    G.add_edge(N[3], N[4], hie_score=3, relation="hie")  # Hypernym/Hyponym edge
+
+    G.graph["branches"] = {
+        N[1]: {
+            (N[2], N[3]): (1.5, 1.4),
+        },
+        N[4]: {
+            (N[5], N[6]): (1.6, 1.7),
+        },
+    }
 
     expectation = {
         1: {".": "Be"},
@@ -330,40 +337,63 @@ def scenario_2(G):
     38: "polynomial",
     39: "expression","""
 
-    G.add_edge(N[0], N[21], h_score=30, relation="hie")  # Hypernym/Hyponym edge
-    G.add_edge(N[21], N[20], A_score=10, relation="syn_1", trident=0)  # Antonym edge
-    G.add_edge(N[21], N[22], T_score=20, relation="syn_2", trident=0)  # Synthesis edge
+    G.add_edge(N[0], N[21], hie_score=30, relation="hie")  # Hypernym/Hyponym edge
+    G.add_edge(N[21], N[20], A_score=10, relation="syn_1")  # Antonym edge
+    G.add_edge(N[21], N[22], T_score=20, relation="syn_2")  # Synthesis edge
 
-    G.add_edge(N[21], N[10], h_score=30, relation="hie")  # Hypernym/Hyponym edge
+    G.add_edge(N[21], N[10], hie_score=30, relation="hie")  # Hypernym/Hyponym edge
 
-    G.add_edge(N[1], N[2], A_score=1, relation="syn_1", trident=1)  # Antonym edge
-    G.add_edge(N[1], N[3], T_score=2, relation="syn_2", trident=1)  # Synthesis edge
-    G.add_edge(N[4], N[5], A_score=1, relation="syn_1", trident=2)  # Antonym edge
-    G.add_edge(N[4], N[6], T_score=2, relation="syn_2", trident=2)  # Synthesis edge
-    G.add_edge(N[7], N[8], A_score=1, relation="syn_1", trident=3)  # Antonym edge
-    G.add_edge(N[7], N[9], T_score=2, relation="syn_2", trident=3)  # Synthesis edge
-    G.add_edge(N[10], N[11], A_score=1, relation="syn_1", trident=4)  # Antonym edge
-    G.add_edge(N[10], N[12], T_score=2, relation="syn_2", trident=4)  # Synthesis edge
-    G.add_edge(N[10], N[1], h_score=3, relation="hie")  # Hypernym/Hyponym edge
-    G.add_edge(N[11], N[4], h_score=3, relation="hie")  # Hypernym/Hyponym edge
-    G.add_edge(N[12], N[7], h_score=3, relation="hie")  # Hypernym/Hyponym edge
+    G.add_edge(N[1], N[2], A_score=1, relation="syn_1")  # Antonym edge
+    G.add_edge(N[1], N[3], T_score=2, relation="syn_2")  # Synthesis edge
+    G.add_edge(N[4], N[5], A_score=1, relation="syn_1")  # Antonym edge
+    G.add_edge(N[4], N[6], T_score=2, relation="syn_2")  # Synthesis edge
+    G.add_edge(N[7], N[8], A_score=1, relation="syn_1")  # Antonym edge
+    G.add_edge(N[7], N[9], T_score=2, relation="syn_2")  # Synthesis edge
+    G.add_edge(N[10], N[11], A_score=1, relation="syn_1")  # Antonym edge
+    G.add_edge(N[10], N[12], T_score=2, relation="syn_2")  # Synthesis edge
+    G.add_edge(N[10], N[1], hie_score=3, relation="hie")  # Hypernym/Hyponym edge
+    G.add_edge(N[11], N[4], hie_score=3, relation="hie")  # Hypernym/Hyponym edge
+    G.add_edge(N[12], N[7], hie_score=3, relation="hie")  # Hypernym/Hyponym edge
 
-    G.add_edge(N[14], N[15], A_score=1, relation="syn_1", trident=5)  # Antonym edge
-    G.add_edge(N[14], N[16], T_score=2, relation="syn_2", trident=5)  # Synthesis edge
-    G.add_edge(N[15], N[17], A_score=1, relation="syn_1", trident=6)  # Antonym edge
-    G.add_edge(N[15], N[18], T_score=2, relation="syn_2", trident=6)  # Synthesis edge
-    G.add_edge(N[16], N[19], A_score=1, relation="syn_1", trident=7)  # Antonym edge
-    G.add_edge(N[16], N[20], T_score=2, relation="syn_2", trident=7)  # Synthesis edge
-    G.add_edge(N[17], N[21], A_score=1, relation="syn_1", trident=8)  # Antonym edge
-    G.add_edge(N[17], N[22], T_score=2, relation="syn_2", trident=8)  # Synthesis edge
-    G.add_edge(N[18], N[15.5], A_score=1, relation="syn_1", trident=9)  # Antonym edge
-    G.add_edge(N[18], N[24], T_score=2, relation="syn_2", trident=9)  # Synthesis edge
+    G.add_edge(N[14], N[15], A_score=1, relation="syn_1")  # Antonym edge
+    G.add_edge(N[14], N[16], T_score=2, relation="syn_2")  # Synthesis edge
+    G.add_edge(N[15], N[17], A_score=1, relation="syn_1")  # Antonym edge
+    G.add_edge(N[15], N[18], T_score=2, relation="syn_2")  # Synthesis edge
+    G.add_edge(N[16], N[19], A_score=1, relation="syn_1")  # Antonym edge
+    G.add_edge(N[16], N[20], T_score=2, relation="syn_2")  # Synthesis edge
+    G.add_edge(N[17], N[21], A_score=1, relation="syn_1")  # Antonym edge
+    G.add_edge(N[17], N[22], T_score=2, relation="syn_2")  # Synthesis edge
+    G.add_edge(N[18], N[15.5], A_score=1, relation="syn_1")  # Antonym edge
+    G.add_edge(N[18], N[24], T_score=2, relation="syn_2")  # Synthesis edge
 
-    G.add_edge(N[20], N[25], A_score=1, relation="syn_1", trident=10)  # Antonym edge
-    G.add_edge(N[20], N[26], T_score=2, relation="syn_2", trident=10)  # Synthesis edge
-    G.add_edge(N[21], N[27], A_score=1, relation="syn_1", trident=11)  # Antonym edge
-    G.add_edge(N[21], N[28], T_score=2, relation="syn_2", trident=11)  # Synthesis edge
+    G.add_edge(N[20], N[25], A_score=1, relation="syn_1")  # Antonym edge
+    G.add_edge(N[20], N[26], T_score=2, relation="syn_2")  # Synthesis edge
+    G.add_edge(N[21], N[27], A_score=1, relation="syn_1")  # Antonym edge
+    G.add_edge(N[21], N[28], T_score=2, relation="syn_2")  # Synthesis edge
 
+    G.graph["branches"] = {
+        N[1]: {
+            (N[1], N[3]): (1.5, 1.4),
+        },
+        N[4]: {
+            (N[4], N[6]): (1.6, 1.7),
+        },
+        N[7]: {
+            (N[7], N[9]): (1.8, 1.9),
+        },
+        N[10]: {
+            (N[10], N[12]): (1.10, 1.11),
+        },
+        N[14]: {
+            (N[14], N[16]): (1.12, 1.13),
+        },
+        N[15]: {
+            (N[15], N[17]): (1.14, 1.15),
+        },
+        N[16]: {
+            (N[16], N[18]): (1.16, 1.17),
+        },
+    }
     return (
         N,
         N[21],
@@ -396,60 +426,14 @@ def scenario_2(G):
 
 
 def test(scenario):
-    # Function to add noise in the form of random edges and weights
-    def add_noise_to_graph(G, edge_count=10):
-        i = 100
-        nodes = list(G.nodes)
-        for _ in range(edge_count):
-            n1, n2, n3 = random.sample(nodes, 3)
-
-            A_score = -random.random()
-            T_score = -random.random()
-            h_score = -random.random()
-            relation = random.choice(["ant", "syn", "hie"])
-
-            if relation in ["ant", "syn"]:
-                if G.has_edge(n1, n2):
-                    co_edges = G[n1][n2]
-                    if any([e["relation"] == relation for e in co_edges.values()]):
-                        continue
-                if G.has_edge(n1, n3):
-                    co_edges2 = G[n1][n3]
-                    if any([e["relation"] == relation for e in co_edges2.values()]):
-                        continue
-
-            trident = i if relation in ["ant", "syn"] else None
-            G.add_edge(
-                n1,
-                n2,
-                A_score=A_score,
-                T_score=T_score,
-                h_score=h_score,
-                relation=relation,
-                trident=trident,
-            )
-            if relation in ["ant", "syn"]:
-                G.add_edge(
-                    n1,
-                    n3,
-                    A_score=A_score,
-                    T_score=T_score,
-                    h_score=h_score,
-                    relation={"ant": "syn", "syn": "ant"}[relation],
-                    trident=trident,
-                )
-
-            i += 1
-
     # Add noise to the graph
     G = nx.MultiDiGraph()
     N, root, expectation = scenario(G)
     print("\n".join([f"{k}. {v}" for k, v in enumerate(N.values())]))
     for node, text in N.items():
         G.nodes[text]["text"] = text
-    # add_noise_to_graph(G, edge_count=20)
 
-    mst = construct_mst(G, root, 5)
+    mst = construct_mst(G, root, 3)
     nested_result = serialize_graph_to_structure(mst, start_node=root, no_title=True)
     pprint(nested_result)
     try:
@@ -466,9 +450,9 @@ if __name__ == "__main__":
 
     g, t = from_texts(
         [
-            "linear operations",
-            "multiplicative operations",
-            "exponential and logarithmic functions",
+            "plus and minus",
+            "multiplication and division",
+            "exponential and logarithm",
             "addition",
             "subtraction",
             "multiplication",
@@ -480,7 +464,7 @@ if __name__ == "__main__":
             "basis of exponent and root",
         ],
         epochs=6,
-        start_node="linear operations",
+        start_node="plus and minus",
         start_with_sub=True,
     )
     t.dump_graph("calc", t.graph, "calc")
@@ -488,8 +472,10 @@ if __name__ == "__main__":
 
     while True:
         with catchtime("test"):
-            test(scenario_2)
-
             test(scenario_1)
 
+            test(scenario_2)
+
             test(scenario_calc)
+
+            break

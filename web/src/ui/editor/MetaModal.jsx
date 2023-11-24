@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Modal, Button, Input } from 'antd'
-import { InfoCircleOutlined } from '@ant-design/icons'
+import { EditOutlined } from '@ant-design/icons'
 
 const { TextArea } = Input
 
@@ -28,8 +28,8 @@ const MetaModal = ({ socket, meta, setMeta, hash }) => {
         zIndex: 112323213214213,
       }}
     >
-      <Button className="red" onClick={showModal}>
-        Edit bibliography
+      <Button className="red" onClick={showModal} icon={<EditOutlined />}>
+        Bibliography
       </Button>
       <Modal
         title="Metadata"

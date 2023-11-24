@@ -7,6 +7,18 @@ endif
 
 export COMPOSE_PROFILES=default
 
+
+more-contents:
+	. venv/bin/activate && \
+	cd philo  && \
+	export PYTHONPATH=../ && \
+	python3 philo/main.py
+
+
+clean-states:
+	find ./integrator/states -mindepth 1 -type d -exec rm -rf {} +
+
+
 format:
 	black **/*.py
 	isort .

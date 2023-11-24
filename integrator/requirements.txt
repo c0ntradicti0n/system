@@ -10,7 +10,7 @@ cython
 pyyaml
 ruamel.yaml
 
-
+scipy
 addict
 Flask-SocketIO
 eventlet

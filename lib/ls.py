@@ -12,7 +12,6 @@ def list_files_with_regex(directory, pattern):
         match = re.match(pattern, f)
         if match:
             matched_groups.append(match.groupdict())
-    print(f"{matched_groups=}")
     return matched_groups
 
 

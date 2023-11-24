@@ -3,7 +3,7 @@ import io from 'socket.io-client'
 import ShareModal from '../ShareModal'
 import { parseHash } from '../../lib/read_link_params'
 import jsonPatch from 'fast-json-patch'
-import { Tabs } from 'antd'
+import {Progress, Steps, Tabs} from 'antd'
 import { JsonView } from './JsonView'
 import { TreeView } from './TreeView'
 import { TriangleView } from './TriangleView'
@@ -17,6 +17,7 @@ import './controls.css'
 
 let taskId = null
 const setTaskId = (tI) => (taskId = tI)
+const conicColors = { '0%': '#87d068', '50%': '#ffe58f', '100%': '#ffccc7' };
 
 localStorage.debug = '*'
 const socket = io('', { transports: ['websocket'], retries: 1 })
@@ -30,10 +31,15 @@ export const Editor = () => {
   const [mods, setMods] = useState(null)
   const [activeTab, setActiveTab] = useState('ex')
   const [params, setParams] = useState({})
+  const [I, setI] = useState(0)
+  const [status, setStatus] = useState('')
+  const [percentages, setPercentages] = useState({})
 
   const [_text, _setText] = useState('')
   const [meta, setMeta] = useState('')
   const [isPaused, setIsPaused] = useState(false)
+
+  const sumPercent = Object.values(percentages).reduce((a, b) => a + b, 0)/3
 
   const [text, setText] = useState('')
   const [hash, setHash] = useState(null)
@@ -82,13 +88,13 @@ export const Editor = () => {
   }, [hash])
 
   useEffect(() => {
-    if (hash && state && !active_patching) {
+    if (hash && state && !active_patching && !isPaused && status !== 'end') {
       console.log('START PATCHING', hash, state)
       socket.timeout(3000).emit('update_state', hash)
       socket.timeout(3000).emit('get_params', hash)
       active_patching = true
     }
-  }, [hash, state])
+  }, [status, isPaused, hash, state])
 
   const applyPatch = (patch) => {
     console.log('FE patch', patch, state)
@@ -117,35 +123,37 @@ export const Editor = () => {
       setMeta(meta)
     })
     socket.on('set_mods', (mods) => {
-      console.log('set_mods')
+      console.log('set_mods', mods)
       setMods(mods)
     })
 
     socket.on('set_task_id', (task_id) => {
       if (task_id !== taskId) {
-        console.log('set_task_id', task_id, task_id)
+        console.log('set_task_id', task_id)
 
         setTaskId(task_id)
         checkAwaitState()
       }
     })
     socket.on('initial_state', (data) => {
-      console.log('initial_state', hash)
+      console.log('initial_state', hash, data)
       socket.timeout(3000).emit('get_state', hash)
     })
     socket.on('set_state', (state) => {
-      console.log('set_state')
+      console.log('set_state', state)
       setState(state)
     })
 
     socket.on('patch_receive', (result) => {
-      //console.log('patch_receive')
       if (result.status === 'SUCCESS') {
         console.log('patch_receive SUCCESS')
-        setPatch(result.result)
+        setPatch(result.result.patch)
+        setI(result.result.i)
+        setStatus(result.result.status)
+        setPercentages(result.result.percentages)
         active_patching = false
         setTaskId(null)
-        if (!isPaused) {
+        if (!isPaused && hash && !isPaused && status !== 'end') {
           socket.timeout(7000).emit('update_state', hash)
           active_patching = true
         }
@@ -184,7 +192,6 @@ export const Editor = () => {
   }, [hash, state])
 
   useEffect(() => {
-    console.log('useEffect', { hash, text })
     if (text && hash) {
       socket.timeout(3000).emit('get_state', hash)
       socket.timeout(3000).emit('get_meta', hash)
@@ -212,8 +219,6 @@ export const Editor = () => {
           _text={_text}
           _setText={_setText}
         />
-        <ShareModal url={'/editor'} linkInfo={{ hash, activeTab }} />
-
         {hash && (
           <MetaModal
             socket={socket}
@@ -222,6 +227,7 @@ export const Editor = () => {
             hash={hash}
           />
         )}
+        <ShareModal url={'/editor'} linkInfo={{ hash, activeTab }} />
       </ControlContainer>
       <Tabs
         activeKey={activeTab}
@@ -278,7 +284,41 @@ export const Editor = () => {
             : []),
         ]}
       />
-      <div style={{ position: 'fixed', left: 0, bottom: 0 }}>{taskId}</div>
+      {hash &&
+      <div style={{ fontFamily: "monospace", position: 'fixed', left: 0, bottom: 0 }}>
+        {taskId} epoch {I}
+
+        <Progress width={100} percent={sumPercent *100 ?? 100} strokeColor={conicColors} />
+                  <Steps
+              style={{
+                display: "inline-flex"
+              }}
+    current={
+        status === 'end'
+            ? 3
+            : status === 'syn'
+            ? 2
+            : status === 'ant'
+            ? 1
+            : 0
+    }
+    items={[
+      {
+        title: 'hyperonym',
+      },
+      {
+        title: 'atonyms',
+      },
+      {
+        title: '(anti-/syn)-thesis',
+      },
+      {
+        title: 'Finished',
+      },
+    ]}
+  />
+      </div>
+      }
     </div>
   )
 }

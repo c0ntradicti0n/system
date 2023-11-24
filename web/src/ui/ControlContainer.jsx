@@ -93,14 +93,6 @@ function positionItemsOnLines(lines, itemSize, margin, shapes, items) {
   const xStart = itemSize.width / 2
   const xEnd = window.innerWidth - itemSize.width / 2
 
-  console.log('positionItemsOnLines', {
-    lines,
-    itemSize,
-    margin,
-    shapes,
-    items,
-  })
-
   for (let item of items) {
     for (let lineY of lines) {
       const position = findFirstAvailablePositionInShapes(
@@ -154,7 +146,6 @@ function layout(areas, cssPrefix) {
       shapes,
       items,
     )
-    console.log('layout', { layoutId, items, width, height, positions })
 
     items.forEach((item, index) => {
       if (index < positions.length) {
@@ -177,7 +168,7 @@ const ControlContainer = ({ children, areas, cssPrefix, debug = DEBUG }) => {
     try {
       const grid = new Muuri(gridRef.current, {
         items: `.${cssPrefix}-item`,
-        dragEnabled: true,
+        dragEnabled: false,
         rounding: true,
         layout: layout(areas, cssPrefix),
       })

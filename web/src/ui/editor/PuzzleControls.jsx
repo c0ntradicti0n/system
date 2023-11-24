@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Menu, Popconfirm, Slider } from 'antd'
-import { DeleteOutlined } from '@ant-design/icons'
+import { UndoOutlined } from '@ant-design/icons'
 import { ControlContainer } from '../ControlContainer'
-import { CONTROL_AREAS, RIGHT_BIG_TRIANGLE } from '../../config/areas'
+import { RIGHT_BIG_TRIANGLE } from '../../config/areas'
 
 const SelectStartNodeButton = ({ setAction, action, socket, hash, params }) => {
   const [selectionMode, setSelectionMode] = useState(false)
@@ -151,7 +151,7 @@ const UserInteractionMenu = ({ params, onDeleteAction }) => {
                 cancelText="No"
               >
                 <Button type="link" style={{ color: '#fff' }}>
-                  <DeleteOutlined />
+                  <UndoOutlined />
                 </Button>
               </Popconfirm>
               {action.source}↦{JSON.stringify(action.target)}

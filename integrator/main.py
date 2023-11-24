@@ -1,9 +1,12 @@
 import atexit
+import hashlib
 import itertools
 import logging
 
 from classifier.result.predict import MODELS
+from integrator.states import states
 from integrator.tree import Tree
+from lib.max_islice import maxislice
 from lib.t import catchtime, indented
 
 
@@ -12,18 +15,27 @@ def goodbye():
     print("You are now leaving the Python sector.")
 
 
-def infer(model_name, t, valid_labels, on_relation=None, for_relation=None):
+def infer(model_name, t, valid_labels):
     if isinstance(t, Tree):
         config = MODELS[model_name].config
-        keys, inp = t.pull_lz(
-            min(config.batch_size, len(t.graph.nodes) ** 2),
+
+        if t.all_computed(
+            relations=config.relations,
+        ):
+            print(f"All edges computed for {model_name}")
+            return None
+
+        keys, inp = t.pull_batch(
+            config.batch_size,
             config.n_pull if config.n_pull else config.n_samples,
-            _score=("h_" if model_name == "hierarchical_2" else "t_"),
-            on_relation=on_relation,
-            for_relation=for_relation,
+            relations=config.relations,
         )
     elif isinstance(t, list):
         keys, inp = [t], t
+
+    if not inp:
+        print(f"All edges already computed for {model_name}")
+        return []
 
     labels, score = MODELS[model_name].predict(inp)
     labels, score = list(
@@ -49,12 +61,19 @@ def infer(model_name, t, valid_labels, on_relation=None, for_relation=None):
 
 def score(model_name, t, relation):
     if isinstance(t, Tree):
-        not_yet_computed = t.missing_edges(relation)
-        keys = [(n1, n2) for n1, n2 in not_yet_computed]
-        inp = [
-            (t.graph.nodes[n1]["text"], t.graph.nodes[n2]["text"])
-            for n1, n2 in not_yet_computed
-        ]
+        config = MODELS[model_name].config
+
+        if t.all_computed(
+            relations=config.relations,
+        ):
+            print(f"All edges computed for {model_name}")
+            return None
+
+        keys, inp = t.pull_batch(
+            config.batch_size,
+            config.n_pull if config.n_pull else config.n_samples,
+            relations=config.relations,
+        )
     elif isinstance(t, list):
         keys, inp = [t], [t]
 
@@ -91,125 +110,112 @@ def opposite(t):
 ITERATORS = {}
 
 
-def update_triangle_graph(
-    t: Tree, i, hash, return_start_node=None, start_with_sub=False
-):
-    if not hash in ITERATORS:
-        ITERATORS[hash] = itertools.cycle(["hie", "ant", "syn"])
+def update_triangle_graph(t: Tree, i, hash_id):
+    if not hash_id in ITERATORS:
+        ITERATORS[hash_id] = "hie"
+    if not ITERATORS[hash_id] == "end":
+        try:
+            choice = ITERATORS[hash_id]
+            if choice == "hie":
+                with catchtime("SUBSUMTION"):
+                    lsk = hierarchy(t)
+                    if not lsk:
+                        ITERATORS[hash_id] = "ant"
+                    else:
+                        for l, s, k in lsk:
+                            score = score_hierarchy(
+                                [t.get_text(k[1]), t.get_text(k[0])]
+                            )[0][1]
 
-    i_added, i_continue = 0, 0
-    try:
-        choice = next(ITERATORS[hash])
-        if choice == "hie":
-            with catchtime("SUBSUMTION"):
-                lsk = hierarchy(t)
+                            t.add_relation(k[1], k[0], "hie", -score)
+                            t.add_relation(k[0], k[1], "hie", score)
 
-                for l, s, k in lsk:
-                    score = score_hierarchy([t.get_text(k[1]), t.get_text(k[0])])[0][1]
+            elif choice == "syn":
+                with catchtime("SYNTHESIS"):
+                    lsk = classifier(t)
+                    if not lsk:
+                        ITERATORS[hash_id] = "end"
+                    else:
+                        for l, s, k in lsk:
+                            ant1 = t.get_relation(k[2], k[1], "ant")
+                            ant2 = t.get_relation(k[2], k[0], "ant")
+                            ant3 = t.get_relation(k[1], k[0], "ant")
 
-                    t.add_relation(k[1], k[0], "hie", h_score=-score)
+                            if not ant1 or not ant2 or not ant3:
+                                continue
 
-                    # negative score for other direction
-                    t.add_unique_relation(k[0], k[1], "hie", h_score=score)
+                            t.add_branching(k[2], k[1], k[0], ant1, ant2 + ant3)
 
-                    i_added += 1
-        elif choice == "syn":
-            with catchtime("SYNTHESIS"):
-                lsk = classifier(t)
+                            t.add_relation(k[2], k[1], "syn_1", ant1)
+                            t.add_relation(
+                                k[2],
+                                k[0],
+                                "syn_2",
+                                ant2 + ant3,
+                            )
+                            t.j += 1
 
-            for l, s, k in lsk:
-                ant1 = t.get_relation(k[2], k[1], "ant")
-                ant2 = t.get_relation(k[2], k[0], "ant")
-                ant3 = t.get_relation(k[1], k[0], "ant")
+            elif choice == "ant":
+                with catchtime("ANTITHESIS"):
+                    ant_score = opposite(t)
+                    if not ant_score:
+                        ITERATORS[hash_id] = "syn"
+                    else:
+                        for (n1, n2), score in ant_score:
+                            t.add_relation(n1, n2, "ant", score)
+        except:
+            logging.error(f"error in classifier {i=} {hash_id=}", exc_info=True)
+    t.save_state(i, hash_id)
 
-                if not ant1 or not ant2 or not ant3:
-                    i_continue += 1
-                    continue
-
-                t.add_relation(
-                    k[2], k[1], "syn_1", A_score=ant1["a_score"], trident=t.j
-                )
-                t.add_relation(
-                    k[2],
-                    k[0],
-                    "syn_2",
-                    T_score=(ant2["a_score"] + ant3["a_score"]) / 2,
-                    trident=t.j,
-                )
-                t.j += 1
-                i_added += 1
-
-        elif choice == "ant":
-            with catchtime("ANTITHESIS"):
-                ant_score = opposite(t)
-
-                for (n1, n2), s in ant_score:
-                    n_added = t.add_unique_relation(n1, n2, "ant", a_score=s)
-                    n_added += t.add_unique_relation(n2, n1, "ant", a_score=s)
-                    i_added += n_added
-
-    except:
-        logging.error(f"error in classifier {i=} {hash=}", exc_info=True)
-
-    with indented(f"added {i_added} relations"):
-        t.save_state(i, hash)
-    with indented(f"discarded {i_continue} relations"):
-        pass
-    with catchtime("NEW GRAPH"):
-        return t.max_score_triangle_subgraph(
-            t.graph, return_start_node=return_start_node, start_with_sub=start_with_sub
-        )
+    return ITERATORS[hash_id]
 
 
-def make_dialectics(
-    texts, epochs=10, hash="test", start_node=None, start_with_sub=False
-):
+def make_dialectics(texts, epochs=10, hash_id=None):
     if not isinstance(texts[0], tuple):
         inputs = [(t, t) for t in texts]
 
+    if not hash_id:
+        hash_id = "hash_id" + str(inputs).replace("/", "_").replace(".", "_")
+        hash_id = hashlib.sha256(hash_id.encode("utf-8")).hexdigest()[:4]
+        logging.warning(f"no hash_id provided, using {hash_id} and computed inputs")
     T, i = Tree(inputs), 0
-    if start_node:
-        T.params["startNode"] = start_node
 
     for _ in range(epochs):
         with catchtime(f"EPOCH {i}"):
-            new_graph, start_node = update_triangle_graph(
-                T, i, hash, return_start_node=True, start_with_sub=start_with_sub
-            )
-        with indented(
-            f"BEST GRAPH {len(new_graph.nodes)} nodes and {len(new_graph.edges)} edges"
-        ):
-            pass
+            update_triangle_graph(T, i, hash_id)
+        print (   {str("_".join(kind)): iterator.get_percentage() for kind, iterator in T.iterators.items()})
+
         i += 1
 
-    return T, (new_graph, start_node)
+    return T
 
 
 if __name__ == "__main__":
-    hash = "b3607805fa4d6ef807e825b44c081446dee7a5b14a796981262f9234686d4ff9"
-    T, i = Tree.load_state(hash)
+    hash_id = "f22421485e3987d60b5f98a8615413f4638587f56c783380c6810baf6fb4c457"
+    T, i = states[hash_id]
 
     while True:
         with catchtime(f"EPOCH {i}"):
-            new_graph = update_triangle_graph(T, i, hash, return_start_node=True)
-        with indented(f"GRAPH " + str(new_graph.__repr__())):
-            pass
+            STATE = update_triangle_graph(T, i, hash_id)
 
         # pprint (Tree.serialize_graph_to_structure(*new_graph))
         i += 1
 
+        if i > 40:
+            break
+
     path = "texts/cookbook.txt"
-    hash = "hash" + path.replace("/", "_").replace(".", "_")
+    hash_id = "hash_id" + path.replace("/", "_").replace(".", "_")
     not_done = True
 
     inputs = get_inputs(path)
-    T, i = Tree.load_state(hash)
+    T, i = Tree.load_state(hash_id)
     if not i:
         T, i = Tree(list(inputs.items())), 0
 
     while not_done:
         with catchtime(f"EPOCH {i}"):
-            new_graph = update_triangle_graph(T, i, hash, return_start_node=True)
+            new_graph = update_triangle_graph(T, i, hash_id, return_start_node=True)
         with indented(f"GRAPH " + str(new_graph.__repr__())):
             pass
 

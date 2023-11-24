@@ -26,20 +26,24 @@ def train(config_name):
         (a, b, samples[random.choice(range(len(samples)))][0] if isinstance(samples, list) else next(random_gen)[random.choice([0,1])])
         for i, (a, b) in enumerate(samples)
     )
-
+    triplets = (
+        (a, b,
+          next(samples)[1])
+        for i, (a, b) in enumerate(samples)
+    )
 
     model = SiameseNetwork(1024)
     optimizer = torch.optim.Adam(
         model.parameters(),
-        lr=0.03
+        lr=0.01
     )
     # meandering learning rate, that gets smaller over time
     scheduler = CyclicLR(
         optimizer,
         mode="exp_range",
-        gamma=0.98,
+        gamma=0.9,
         base_lr=0.000000001,
-        max_lr=0.03,
+        max_lr=0.01,
         step_size_up=10,
         cycle_momentum=False,
     )
@@ -56,7 +60,7 @@ def train(config_name):
         # Use mini-batches instead of single triplets
         batch_size = config.batch_size
         total_loss = 0
-        for _ in range(len(triplets_embeddings) // batch_size):
+        for i_epoch in range(len(triplets_embeddings) // batch_size):
             optimizer.zero_grad()
             batch_indices = np.random.choice(
                 len(triplets_embeddings), size=batch_size, replace=False
@@ -71,7 +75,7 @@ def train(config_name):
                 negative_output = model(negative.unsqueeze(0))
 
                 loss = triplet_loss(
-                    anchor_output, positive_output, negative_output
+                    anchor_output, positive_output, negative_output, margin=1 * (1.001 ** i_epoch)
                 )
                 batch_loss += loss / batch_size
 
@@ -83,10 +87,10 @@ def train(config_name):
         scheduler.step()
 
 
-        precision, recall, f1 = evaluate_model(model, triplets_embeddings)
-        avg_loss = total_loss
+        precision, recall, f1, threshold = evaluate_model(model, triplets_embeddings)
+
         print(
-            f"{config_name} Epoch {epoch + 1}, Avg Loss: {total_loss:.4f}, Precision: {precision:.4f}, Recall: {recall:.4f}, F1 Score: {f1:.4f}, LR: {optimizer.param_groups[0]['lr']:.2E} {'*' if f1 > best_f1 else ''}"
+            f"{config_name} Epoch {epoch + 1}, Avg Loss: {total_loss:.4f}, Precision: {precision:.4f}, Recall: {recall:.4f}, F1 Score: {f1:.4f}, LR: {optimizer.param_groups[0]['lr']:.2E} {threshold=} {'*' if f1 > best_f1 else ''}"
         )
         if f1 > best_f1:
             best_f1 = f1
@@ -103,3 +107,6 @@ def train(config_name):
                     config.MODEL_DIR, f"f1v={f1:.2f}-" + config.OPTIMIZER_PATH
                 ),
             )
+            # save threshold
+            with open(os.path.join(config.MODEL_DIR, "threshold.txt"), "w") as f:
+                f.write(str(threshold))

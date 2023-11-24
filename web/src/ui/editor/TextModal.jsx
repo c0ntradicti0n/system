@@ -30,7 +30,7 @@ const TextModal = ({ socket, text, setText, _text, _setText, hash }) => {
       }}
     >
       <Button className="red" icon={<EditOutlined />} onClick={showModal}>
-        View/Add Text
+        Text
       </Button>
       <Modal
         title="Edit Text"

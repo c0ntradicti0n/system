@@ -32,14 +32,18 @@ class SiameseNetwork(nn.Module):
         return self.fc(x)
 
 
-def triplet_loss(anchor, positive, negative, margin=0.5):
+def triplet_loss(anchor, positive, negative, margin=1):
     distance_positive = torch.norm(anchor - positive, p=2, dim=1)
     distance_negative = torch.norm(anchor - negative, p=2, dim=1)
     losses = torch.relu(distance_positive - distance_negative + margin)
-    return losses.mean()
+    result = torch.mean(losses)
+    if losses.shape[0] == 0 or result.isnan():
+        print("Losses shape is 0")
+        return losses
+    return result
 
 
-def evaluate_model(model, triplets_embeddings, threshold=0.5):
+def evaluate_model(model, triplets_embeddings, threshold=10):
     model.eval()
     with torch.no_grad():
         distances = []
@@ -59,10 +63,12 @@ def evaluate_model(model, triplets_embeddings, threshold=0.5):
             distances.append(neg_dist)
             labels.append(0)  # Dissimilar
 
+
         distances = np.array(distances)
+        threshold = np.mean(distances)
         predictions = (distances < threshold).astype(int)
 
         precision, recall, f1, _ = precision_recall_fscore_support(
             labels, predictions, average="binary"
         )
-        return precision, recall, f1
+        return precision, recall, f1, threshold

@@ -208,9 +208,17 @@ ant-btn {
 }
 
 .red {
-  background-color: #1fafaf;
+  background-color: orange;
+  opacity: 0.5 !important;
 }
 
+.ant-steps-item-title {
+  color: #00acc1 !important;
+}
+
+.ant-progress-inner {
+background-color: rgb(32 32 182 / 56%) !important;
+  }
 .button {
   color: #fff;
   border: none;

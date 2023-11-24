@@ -5,7 +5,7 @@ from lib.helper import OutputLevel, tree
 from lib.nested import extract_values
 
 
-def recompute_tree(path, start_node, epochs=10, start_with_sub=False):
+def recompute_tree(path, start_node=None, epochs=10, start_with_sub=False):
     file_dict = tree(
         basepath="../../dialectics/",
         startpath=path,
@@ -27,15 +27,21 @@ def recompute_tree(path, start_node, epochs=10, start_with_sub=False):
     os.system("rm -rf ./states/test")
     os.environ["REDIS_HOST"] = "localhost"
 
-    t, (g, best_start_node) = make_dialectics(
-        texts, epochs=epochs, start_node=start_node, start_with_sub=start_with_sub
+    t = make_dialectics(texts, epochs=epochs)
+    g, _ = t.max_score_triangle_subgraph(
+        t.graph,
+        start_node=start_node,
+        return_start_node=True,
+        start_with_sub=start_with_sub,
     )
+
     return g, t
 
 
-def from_texts(texts, start_node=None, epochs=10, start_with_sub=False):
-    t, (g, best_start_node) = make_dialectics(
-        texts, epochs=epochs, start_node=start_node, start_with_sub=start_with_sub
+def from_texts(texts, epochs=10, start_node=None, start_with_sub=False):
+    t = make_dialectics(texts, epochs=epochs)
+    g, _ = t.max_score_triangle_subgraph(
+        t.graph, return_start_node=True, start_with_sub=start_with_sub
     )
     return g, t
 
@@ -43,9 +49,9 @@ def from_texts(texts, start_node=None, epochs=10, start_with_sub=False):
 if __name__ == "__main__":
     g, t = from_texts(
         [
-            "linear operations",
-            "multiplicative operations",
-            "exponential and logarithmic functions",
+            "plus and minus",
+            "multiplication and division",
+            "exponential and logarithm",
             "addition",
             "subtraction",
             "multiplication",
@@ -56,8 +62,15 @@ if __name__ == "__main__":
             "neutral element of multiplication and division is 1",
             "basis of exponent and root",
         ],
-        epochs=10,
+        epochs=17,
         start_node="linear operations",
         start_with_sub=True,
     )
     t.dump_graph("calc", t.graph, "calc")
+    g, start_node = t.max_score_triangle_subgraph(
+        t.graph,
+        return_start_node=True,
+        start_with_sub=True,
+        start_node="linear operations",
+    )
+    t.draw_graph(g, root=start_node, path="calc.png")

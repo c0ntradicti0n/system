@@ -4,9 +4,11 @@ import json
 import jsonpatch
 from celery import Celery
 
-from integrator.main import update_triangle_graph
+from integrator.main import ITERATORS, update_triangle_graph
+from integrator.serialize import serialize_graph_to_structure
 from integrator.states import states
 from integrator.tree import Tree
+from lib.t import catchtime
 
 app = Celery("worker", broker="redis://redis:6379/1", backend="redis://redis:6379/1")
 
@@ -17,15 +19,13 @@ def threerarchy(hash_id):
 
     old_state, i = states[hash_id]
 
-    print(f"{len(old_state.graph.edges())=}")
+    print(f"task {hash_id} {i}")
 
     old_graph = old_state.max_score_triangle_subgraph(
-        old_state.graph, return_start_node=True
+        old_state.graph, return_start_node=True, start_with_sub=False
     )
-    new_graph = update_triangle_graph(old_state, i, hash_id, return_start_node=True)
-
-    print(f"----------- **** { new_graph[0].nodes=}")
-    print(f"----------- **** { new_graph[0].edges=}")
+    update_triangle_graph(old_state, i, hash_id)
+    STATE = ITERATORS[hash_id]
 
     new_state, i = (
         old_state,
@@ -33,19 +33,32 @@ def threerarchy(hash_id):
     )
     states[hash_id] = new_state, i
 
-    print(f"MAKE PATCH FROM   ----------------------- {len(old_graph[0].edges())=}")
-    print(f"MAKE PATCH FROM   ----------------------- {len(new_graph[0].edges())=}")
-    print(f"MAKE PATCH FROM   ----------------------- {old_graph[1]=}")
-    print(f"MAKE PATCH FROM   ----------------------- {new_graph[1]=}")
+    with catchtime("compute max score subgraph"):
+        new_graph = new_state.max_score_triangle_subgraph(
+            new_state.graph, return_start_node=True, start_with_sub=False
+        )
+    percentages = {str("_".join(kind)): iterator.get_percentage() for kind, iterator in new_state.iterators.items()}
+    if STATE != "end":
+        print(
+
+            f"Computed: {STATE=} nodes={ len(new_graph[0].nodes)} edges={len(new_graph[0].edges)}"
+            f" {str(percentages)=} {hash_id=} {i=}"
+        )
 
     try:
         patch = jsonpatch.make_patch(
-            Tree.serialize_graph_to_structure(*old_graph),
-            Tree.serialize_graph_to_structure(*new_graph),
+            serialize_graph_to_structure(*old_graph),
+            serialize_graph_to_structure(*new_graph),
         )
         serialized_patch = json.loads(patch.to_string())
     except:
         print(f"error making patch {old_graph=} {new_graph=}")
         serialized_patch = []
 
-    return serialized_patch
+    return {
+        "patch": serialized_patch,
+        "status": STATE,
+        "i": i,
+        "hash": hash_id,
+        "percentages": percentages,
+    }

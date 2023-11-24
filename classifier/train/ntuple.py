@@ -9,7 +9,8 @@ from tensorboardX import SummaryWriter
 from torch import nn
 from torch.optim.lr_scheduler import CyclicLR
 
-from classifier.model.different_models import get_model_config
+from classifier.model.different_models import (get_model_config,
+                                               print_model_config)
 from classifier.read.selector import DataGenerator
 from classifier.result.think import get_model, get_prediction
 
@@ -54,7 +55,9 @@ def train(config_name):
     optimizer = torch.optim.Adagrad(model.parameters(), lr=0.01)
     criterion = nn.CrossEntropyLoss()
     data_gen = DataGenerator(config)
-    pprint(config)
+
+
+    print_model_config(config)
 
     # meandering learning rate, that gets smaller over time
     scheduler = CyclicLR(
@@ -187,7 +190,7 @@ def train(config_name):
 
         if valid_fscore > max_fscore:
             print(
-                f"Epoch {epoch + 1}, loss: {loss.item():.2f}, f1-valid: {valid_fscore:.2f}, f1-train: {train_fscore:.2f}, lr: {optimizer.param_groups[0]['lr']}"
+                f"Epoch {epoch + 1}, loss: {loss.item()[0]:.2f}, f1-valid: {valid_fscore:.2f}, f1-train: {train_fscore:.2f}, lr: {optimizer.param_groups[0]['lr']}"
             )
             max_fscore = valid_fscore
             torch.save(

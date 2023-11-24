@@ -1,6 +1,6 @@
 defaults: &defaults
   embedding_dim: 1024
-  batch_size: 200
+  batch_size: 2000
   n_epochs: 10000
   stop_f1_score: 0.93
   weight_decay: 0.001
@@ -22,33 +22,46 @@ models:
     <<: *classifier
     n_samples: 3
     n_classes: 4
+    batch_size: 1000
+    from_file: classifier.data.thesis_antithesis_synthesis
+    batches_per_epoch: 17
     classes:
       - valid
+      - from_file
     probs:
-      - 1
-
-
+      - 0.95
+      - 0.05
+    relations:
+      - syn_1
+      - syn_2
   score_hierarchy:
     <<: *siamese
     samples: classifier.data.hierarchy
     inverse: true
-
+    relations:
+      - sub
   hierarchy:
     <<: *classifier
     n_classes: 3
     n_samples: 2
     batches_per_epoch: 17
-    batch_size: 100
+    batch_size: 1000
     classes:
       - valid_hie_wordnet
     probs:
       - 1
     lr: 0.003
+    relations:
+      - sub
 
   opposites:
     <<: *siamese
     samples: classifier.data.opposites
     inverse: true
+    batch_size: 1000
+    n_samples: 2
+    relations:
+      - ant
 
 
 

@@ -28,8 +28,9 @@ class T:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if isinstance(exc_val, AssertionError):
-            logging.error(exc_val, exc_info=False)
-        return isinstance(exc_val, (KeyError, TypeError, AssertionError))
+            logging.error(f"AssertionError: {exc_val}", exc_info=False)
+
+        return isinstance(exc_val, AssertionError)
 
 
 t = T()

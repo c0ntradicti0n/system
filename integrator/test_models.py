@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.ERROR)
 
 
 def test_opposite(pair, expected):
-    (n1, n2), s = opposite(pair)[0]
+    _, s = opposite(pair)[0]
     print(s)
     if (s > 0) == expected:
         print(f"A {'t' if expected else 'f'} GOOD {pair=}")
@@ -19,19 +19,21 @@ def test_opposite(pair, expected):
 
 def test_thesis_antithesis_synthesis(triple, expected):
     lsk = classifier(triple)
-    lsk = [list(sorted(x[0])) for x in lsk]
     if lsk:
         result = compare_prediction_to_expected(expected, lsk, triple)
+        print(f"△ {'t' if expected else 'f'} GOOD {triple=}")
         return result == expected
     logging.error(f"no result for {triple=}")
     return None
 
 
 def test_hierarchy(pair, expected):
-    (n1, n2), s = hierarchy(pair)[0]
-    if (s > 0) == expected:
-        print(f"H {'t' if expected else 'f'} GOOD {pair=}")
-        return True
+    lsk = hierarchy(pair)
+    if lsk:
+        result = compare_prediction_to_expected(expected, lsk, pair)
+        if result == expected:
+            print(f"H {'t' if expected else 'f'} GOOD {pair=}")
+        return result == expected
     else:
         print(f"H {'t' if expected else 'f'} BAD {pair=}")
         return False
@@ -45,6 +47,10 @@ def compare_prediction_to_expected(expected, lsk, triple):
     return result
 
 
+with t:
+    assert test_opposite(
+        ["addition and subtraction", "multiplication and division"], True
+    )
 with t:
     assert test_opposite(["good", "bad"], True)
 with t:
@@ -94,7 +100,25 @@ with t:
         ],
         [1, 2, 3],
     )
+with t:
+    assert test_thesis_antithesis_synthesis(
+        [
+            "addition and subtraction",
+            "multiplication and division",
+            "exponential and logarithm",
+        ],
+        [1, 2, 3],
+    )
 
+with t:
+    assert test_thesis_antithesis_synthesis(
+        [
+            "plus and minus",
+            "times and divide",
+            "exponent and root",
+        ],
+        [1, 2, 3],
+    )
 with t:
     assert test_thesis_antithesis_synthesis(["good", "bad", "neutral"], [1, 2, 3])
 with t:
@@ -111,32 +135,32 @@ with t:
     assert test_thesis_antithesis_synthesis(["to be", "not to be", "become"], [1, 2, 3])
 
 with t:
-    assert test_hierarchy(["moral", "good"], True)
+    assert test_hierarchy(["moral", "good"], [1, 2])
 with t:
-    assert test_hierarchy(["moral", "bad"], True)
+    assert test_hierarchy(["moral", "bad"], [1, 2])
 with t:
-    assert test_hierarchy(["moral", "neutral"], True)
+    assert test_hierarchy(["moral", "neutral"], [1, 2])
 with t:
-    assert test_hierarchy(["color", "black"], True)
+    assert test_hierarchy(["color", "black"], [1, 2])
 with t:
-    assert test_hierarchy(["color", "white"], True)
+    assert test_hierarchy(["color", "white"], [1, 2])
 with t:
-    assert test_hierarchy(["color", "grey"], True)
+    assert test_hierarchy(["color", "grey"], [1, 2])
 with t:
-    assert test_hierarchy(["operation", "plus"], True)
+    assert test_hierarchy(["operation", "plus"], [1, 2])
 with t:
-    assert test_hierarchy(["operation", "minus"], True)
+    assert test_hierarchy(["operation", "minus"], [1, 2])
 with t:
-    assert test_hierarchy(["operation", "neutral element 0"], True)
+    assert test_hierarchy(["operation", "neutral element 0"], [1, 2])
 with t:
-    assert test_hierarchy(["body", "hand"], True)
+    assert test_hierarchy(["body", "hand"], [1, 2])
 with t:
-    assert test_hierarchy(["mathematics", "plus"], True)
+    assert test_hierarchy(["mathematics", "plus"], [1, 2])
 with t:
-    assert test_hierarchy(["mathematics", "multiplication"], True)
+    assert test_hierarchy(["mathematics", "multiplication"], [1, 2])
 with t:
-    assert test_hierarchy(["relation", "friend"], True)
+    assert test_hierarchy(["human", "friend"], [1, 2])
 with t:
-    assert test_hierarchy(["relation", "enemy"], True)
+    assert test_hierarchy(["human", "enemy"], [1, 2])
 with t:
-    assert test_hierarchy(["relation", "diplomat"], True)
+    assert test_hierarchy(["human", "diplomat"], [1, 2])

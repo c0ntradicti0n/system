@@ -1,3 +1,4 @@
+import logging
 import os
 import pickle
 from shutil import rmtree
@@ -60,7 +61,9 @@ class States:
                 try:
                     tree, i = Tree.load_state(hash_id)
                 except Exception as e:
-                    print(f"Corrupt file; error loading {hash_id} {e}")
+                    logging.error(
+                        f"Corrupt file; error loading {hash_id} {e}", exc_info=True
+                    )
                     i = None
                 if not i:
                     with open(self.path(hash_id + "-text"), "rb") as f:

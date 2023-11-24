@@ -16,6 +16,7 @@ RUN pip3 install uwsgi
 COPY requirements.txt /app/
 RUN apt install libatlas-base-dev -y
 RUN apt install gfortran -y
+RUN apt install libopenblas-dev -y
 RUN --mount=type=cache,target=/root/.cache/pip  pip3 install --no-cache-dir -r requirements.txt
 RUN mkdir /.cache
 RUN chmod 777 /.cache

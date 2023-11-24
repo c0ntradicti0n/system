@@ -1,5 +1,5 @@
-# cython: language_level=3
 import itertools
+import logging
 import math
 import os
 import pickle
@@ -8,8 +8,10 @@ from pprint import pprint
 
 import networkx as nx
 from networkx.drawing.nx_agraph import graphviz_layout
+from scipy.sparse import lil_matrix
 
-from integrator.mst import construct_mst
+from integrator.combination_state import CustomCombinations
+from lib.max_islice import maxislice
 from lib.shape import view_shape
 
 image_folder = "images/"
@@ -18,96 +20,73 @@ pickle_folder = "states/"
 
 class Tree:
     def __init__(self, enumerated_texts):
-        self.graph = nx.MultiDiGraph()
         self.j = 0
         self.inputs = enumerated_texts
+        self.relation_types = ["hie", "ant", "syn_1", "syn_2"]
+        self.matrices = {
+            rel: lil_matrix((1000, 1000)) for rel in self.relation_types
+        }  # Adjust size as needed
+        self.node_index = {}
+        self.index_text = {}
         self._populate_graph(enumerated_texts)
-        self._create_sequence_edges()
+        self.iterators = {}
         self.params = defaultdict(lambda: None)
+        self.branches = defaultdict(lambda: dict())
 
     def _populate_graph(self, enumerated_texts):
         for key, text in enumerated_texts:
-            self.graph.add_node(key, text=text)
+            if key not in self.node_index:
+                self.node_index[key] = len(self.node_index)
+                self.index_text[key] = text
 
-    def _create_sequence_edges(self):
-        sorted_nodes = sorted(self.graph.nodes())
-        for i in range(len(sorted_nodes) - 1):
-            self.graph.add_edge(
-                sorted_nodes[i], sorted_nodes[i + 1], relation="text_sequence"
-            )
+    def add_relation(self, key1, key2, relation_type, score):
+        if relation_type not in self.relation_types:
+            raise ValueError(f"Unknown relation type: {relation_type}")
 
-    def add_unique_relation(self, source, target, relation_type, **attributes):
-        """
-        Add or update an edge in a MultiDiGraph with unique 'relation' attribute for each outgoing edge.
-
-        Parameters:
-        G (nx.MultiDiGraph): The graph to which the edge will be added.
-        source (node): The node from which the edge starts.
-        target (node): The node to which the edge connects.
-        **attributes: Edge attributes.
-        """
-        if relation_type is not None:
-            # Check for an edge with the same 'relation' attribute
-            for u, v, key, data in self.graph.edges(source, data=True, keys=True):
-                if v == target and data.get("relation") == relation_type:
-                    # Update the existing edge with new attributes
-                    self.graph[source][target][key].update(attributes)
-                    return 0
-
-        # Add a new edge if no matching edge was found
-        attributes["relation"] = relation_type
-
-        self.graph.add_edge(source, target, **attributes)
-        return 1
-
-    def get_relation(self, source, target, relation_type):
-        for u, v, key, data in self.graph.out_edges(source, data=True, keys=True):
-            if target == v and data.get("relation") == relation_type:
-                return data
-        return None
-
-    def add_relation(self, key1, key2, relation_type, **kwargs):
-        if key1 in self.graph and key2 in self.graph:
-            self.graph.add_edge(key1, key2, relation=relation_type, **kwargs)
+        if key1 in self.node_index and key2 in self.node_index:
+            i, j = self.node_index[key1], self.node_index[key2]
+            self.matrices[relation_type][i, j] = score
         else:
-            print(f"Nodes {key1} or {key2} not found in the graph.")
+            print(f"Nodes {key1} or {key2} not found in the node index.")
 
-    def filter_edges(self, relation_type):
-        for u, v, data in list(self.graph.edges(data=True)):
-            if data.get("relation") == relation_type:
-                yield (u, v)
+    def add_branching(self, source, target_1, target_2, score_1, score_2):
+        if not source in self.branches:
+            self.branches[source] = dict()
+        self.branches[source][(target_1, target_2)] = (score_1, score_2)
 
-    def remove_edge(self, key1, key2):
-        if self.graph.has_edge(key1, key2):
-            self.graph.remove_edge(key1, key2)
-
-    @staticmethod
-    def has_edge_with_attribute(G, source, target, attr_name, attr_value):
-        """
-        Check if there is an edge between source and target with the specified attribute and value.
-
-        :param G: NetworkX graph
-        :param source: source node
-        :param target: target node
-        :param attr_name: attribute name
-        :param attr_value: attribute value
-        :return: True if such an edge exists, False otherwise
-        """
-        if G.is_multigraph():
-            # Check if the edge exists
-            if (source, target) not in G.edges():
-                return False
-            # Check each edge for the attribute
-            for key in G[source][target]:
-                if G[source][target][key].get(attr_name) == attr_value:
-                    return True
+    def get_relation(self, source, target, relation):
+        if source in self.node_index and target in self.node_index:
+            source_idx = self.node_index[source]
+            target_idx = self.node_index[target]
+            if relation in self.matrices:
+                return self.matrices[relation][source_idx, target_idx]
+            else:
+                print(f"Relation type '{relation}' not recognized.")
+                return None
         else:
-            # Check if the edge exists and has the attribute
-            if (source, target) in G.edges() and G[source][target].get(
-                attr_name
-            ) == attr_value:
-                return True
-        return False
+            print(f"Nodes {source} or {target} not found.")
+            return None
+
+    @property
+    def graph(self):
+        g = nx.MultiDiGraph()
+        for key, idx in self.node_index.items():
+            g.add_node(key)
+            # add text
+            g.nodes[key]["text"] = self.index_text[key]
+
+        for rel_type, matrix in self.matrices.items():
+            coo = matrix.tocoo()
+            for i, j, v in zip(coo.row, coo.col, coo.data):
+                if v != 0:  # Assuming 0 means no edge
+                    g.add_edge(
+                        list(self.node_index.keys())[i],
+                        list(self.node_index.keys())[j],
+                        relation=rel_type,
+                        **{rel_type + "_score": v},
+                    )
+        g.graph["branches"] = dict(self.branches)
+        return g
 
     @staticmethod
     def graph_without_text_sequence(graph=None):
@@ -124,6 +103,8 @@ class Tree:
         if os.environ.get("NO_IMAGES", False):
             return
         try:
+            if not os.path.exists(image_folder):
+                os.makedirs(image_folder)
             import matplotlib.pyplot as plt
 
             if graph == None:
@@ -133,18 +114,20 @@ class Tree:
 
             # pos = nx.spring_layout(graph)
 
-            if isinstance(graph, nx.DiGraph):
-                pos = graphviz_layout(graph, root=root, prog="twopi")
-            else:
-                pos = graphviz_layout(graph, root=root, prog="twopi")
-            # pos = nx.circular_layout(self.graph)
+            try:
+                if isinstance(graph, nx.DiGraph):
+                    pos = graphviz_layout(graph, root=root, prog="twopi")
+                else:
+                    pos = graphviz_layout(graph, root=root, prog="twopi")
+            except Exception as e:
+                pos = nx.circular_layout(graph)
 
             # color-code the edges
             color_code = {
-                "the": "green",
-                "ant": "red",
-                "syn": "blue",
-                "hie": "orange",
+                "syn_1": "red",
+                "ant": "orange",
+                "syn_2": "magenta",
+                "hie": "blue",
                 **({"text_sequence": "gray"} if text_relation is True else {}),
             }
             edge_color_list = [
@@ -164,7 +147,6 @@ class Tree:
                 edge_color=edge_color_list,
                 node_color=node_colors,
             )
-            # edge_labels = nx.get_edge_attributes(graph, "relation")
 
             leg = plt.legend(color_code, labelcolor=color_code.values())
             for i, item in enumerate(leg.legendHandles):
@@ -172,91 +154,59 @@ class Tree:
 
             plt.savefig(image_folder + path, format="png", bbox_inches="tight")
             plt.close()
-        except:
-            print("Error in drawing graph")
-            pass
+        except Exception as e:
+            logging.error(f"Error in drawing graph {e}", exc_info=True)
 
-    def pull(self, n, _score=None, on_relation=None, for_relation=None):
-        result = []
-        while len(result) != n:
-            for nn in self.nodes_with_least_info(
-                self.graph,
-                n,
-                _score=_score,
-                on_relation=on_relation,
-                for_relation=for_relation,
-            ):
-                if len(result) < n:
-                    if isinstance(nn, list):
-                        for nnn in nn:
-                            result.append((nnn, self.graph.nodes[nnn]["text"]))
-                    else:
-                        result.append((nn, self.graph.nodes[nn]["text"]))
-                else:
-                    break
-        return result
+    def pull(self, n_samples, relations):
+        if not tuple(relations) in self.iterators:
+            self.iterators[tuple(relations)] = CustomCombinations(
+                list(self.node_index.keys()), n_samples
+            )
+        for k in self.iterators[tuple(relations)]:
+            yield [(i, self.index_text[i]) for i in k]
 
-    def pull_lz(self, n, m, _score=None, on_relation=None, for_relation=None):
+    def pull_batch(self, batch_size, n_samples, relations=None):
+        """
+        :param batch_size:
+        :param n_samples:
+        :param relations:
+        :return: keys, inputs
+        """
         return view_shape(
-            list(
+            tuple(
                 zip(
-                    *self.pull(
-                        n * m,
-                        _score,
-                        on_relation=on_relation,
-                        for_relation=for_relation,
-                    )
+                    *[
+                        ([i for i, _ in samples], [s for _, s in samples])
+                        for samples in maxislice(
+                            self.pull(n_samples, relations), batch_size
+                        )
+                    ]
                 )
             ),
-            (2, n, m),
+            (2, -1, n_samples),
         )
 
-    yielded = []
+    def missing_edges(self, relation):
+        graph_with_only_relation = self.graph_without_relation(self.graph, relation)
+        result = (
+            (n1, n2)
+            for n1, n2 in itertools.permutations(graph_with_only_relation.nodes, 2)
+            if not graph_with_only_relation.has_edge(n1, n2)
+        )
 
-    def nodes_with_least_info(
-        self, G, n, _score=None, on_relation=None, for_relation=None
-    ):
-        # Dictionary to store the sum of "_score" attributes for each node
-        all_nodes = list(G.nodes())
+        return result
 
-        if for_relation:
-            results = []
-            for node1 in all_nodes:
-                for node2 in all_nodes:
-                    if node1 == node2:
-                        continue
-                    if not self.has_edge_with_attribute(
-                        G, node1, node2, for_relation, "relation"
-                    ):
-                        results.append([node1, node2])
-            return results
+    def graph_without_relation(self, graph, relation):
+        filtered_graph = nx.DiGraph()
+        # add all nodes
+        filtered_graph.add_nodes_from(graph.nodes(data=True))
 
-        node_scores = {}
-        random.shuffle(all_nodes)
-        for node in all_nodes:
-            total_score = 0
-            for _, _, data in G.edges(node, data=True):
-                if on_relation and not any(
-                    u
-                    for u, v, d in G.in_edges(node, data=True)
-                    if d["relation"] == on_relation
-                ):
-                    continue
+        for node in graph.nodes:
+            for u, v, data in graph.out_edges(node, data=True):
+                if data.get("relation") == relation:
+                    filtered_graph.add_edge(u, v, **data)
 
-                for key, value in data.items():
-                    if key.endswith("_score") and (
-                        _score and key.startswith(_score) or not _score
-                    ):
-                        total_score += value
-            node_scores[node] = total_score
-
-        # Sort nodes based on their total_score
-        sorted_nodes = sorted(node_scores, key=node_scores.get)
-        if len(sorted_nodes) < n:
-            return sorted_nodes[:n]
-
-        # Return the top n nodes with the least information
-        return sorted_nodes[:n]
+        return filtered_graph
 
     @staticmethod
     def computed_out_edges(G, v):
@@ -279,28 +229,6 @@ class Tree:
             for n1, n2, attr in G.out_edges(v, data=True)
             if attr["relation"] == "hie"
         ]
-
-    def missing_edges(self, relation):
-        graph_with_only_relation = self.graph_without_relation(self.graph, relation)
-        result = [
-            (n1, n2)
-            for n1, n2 in itertools.permutations(graph_with_only_relation.nodes, 2)
-            if not graph_with_only_relation.has_edge(n1, n2)
-        ]
-
-        return result
-
-    def graph_without_relation(self, graph, relation):
-        filtered_graph = nx.DiGraph()
-        # add all nodes
-        filtered_graph.add_nodes_from(graph.nodes(data=True))
-
-        for node in graph.nodes:
-            for u, v, data in graph.out_edges(node, data=True):
-                if data.get("relation") == relation:
-                    filtered_graph.add_edge(u, v, **data)
-
-        return filtered_graph
 
     @staticmethod
     def computed_i_tri_out_edges(G, v, visited):
@@ -516,7 +444,7 @@ class Tree:
         return sorted_nodes[:n]
 
     def max_score_triangle_subgraph(
-        self, __G, return_start_node=False, start_with_sub=False
+        self, __G, return_start_node=False, start_with_sub=False, start_node=None
     ):
         _G = __G.copy()
 
@@ -530,7 +458,7 @@ class Tree:
                 depth = 0
 
         # Sort nodes by score and get the top 10
-        start_node = self.params["startNode"]
+        start_node = start_node if start_node else self.params["startNode"]
         if not start_node:
             sorted_nodes = Tree.top_n_subsuming_nodes(G, n=4)
         else:
@@ -577,10 +505,13 @@ class Tree:
             )
         state = {
             "inputs": self.inputs,
-            "graph": self.graph,
-            "yielded": self.yielded,
-            "j": self.j,
+            "matrices": self.matrices,
             "params": dict(self.params),
+            "iterators": self.iterators,
+            "node_index": self.node_index,
+            "index_text": self.index_text,
+            "branches": dict(self.branches),
+            "j": self.j,
         }
         with open(filename, "wb") as file:
             pickle.dump(state, file)
@@ -617,32 +548,23 @@ class Tree:
                 state = pickle.load(file)
                 tree = cls([])
                 tree.inputs = state["inputs"]
-                tree.graph = state["graph"]
-                tree.yielded = state["yielded"]
+                tree.matrices = state["matrices"]
                 tree.j = state["j"] + 1
+                tree.iterators = state["iterators"]
+                tree.node_index = state["node_index"]
+                tree.index_text = state["index_text"]
+                tree.branches = defaultdict(None)
+                if "branches" in state:
+                    tree.branches.update(state["branches"])
                 tree.load_params(hash)
 
                 return tree, latest_number + 1
-        except MemoryError:
-            print("Memory error in loading state")
-
-            try:
-                filename = os.path.join(
-                    cls.pickle_folder_path(hash), f"tree_state_{latest_number-1}.pkl"
-                )
-                with open(filename, "rb") as file:
-                    state = pickle.load(file)
-                    tree = cls([])
-                    tree.inputs = state["inputs"]
-                    tree.graph = state["graph"]
-                    tree.yielded = state["yielded"]
-                    tree.j = state["j"] + 1
-                    tree.load_params(hash)
-
-                    return tree, latest_number + 1
-            except:
-                print("Memory error in loading state")
-                return None, None
+        except (MemoryError, KeyError, EOFError) as e:
+            logging.error("Memory error in loading state", exc_info=True)
+            os.unlink(filename)
+            return Tree.load_state(hash, latest_number - 1)
+        except FileNotFoundError:
+            return None, None
 
     def load_params(self, hash):
         if os.path.exists(f"{self.pickle_folder_path()}/{hash}-params.pkl"):
@@ -662,7 +584,12 @@ class Tree:
             pickle.dump(graph, f, pickle.HIGHEST_PROTOCOL)
 
     def get_text(self, node):
-        return self.graph.nodes[node]["text"]
+        return self.index_text[node]
+
+    def all_computed(self, relations):
+        if not tuple(relations) in self.iterators:
+            return False
+        return self.iterators[tuple(relations)].is_exhausted()
 
 
 def test_max_score_triangle_subgraph():

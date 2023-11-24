@@ -131,7 +131,7 @@ const MutableTriangle = ({
   const { shortTitle, fontSize } = calculateFontSize(
     size,
     title?.slice(0, 100),
-    1,
+    0.7,
   )
 
   return (
@@ -166,59 +166,56 @@ const MutableTriangle = ({
           />
         </>
       )}
+
       <div
-        className="triangle puzzle-item"
+        className=" puzzle-item"
         style={{
-          backgroundColor: stringToColour(fullId),
           height: idToSize(fullId),
           width: idToSize(fullId),
-          zIndex: idToZIndex(fullId),
+          zIndex: 1000 + nest,
+          display: 'flex',
+          justifyContent: 'center' /* Center horizontally */,
+          alignItems: 'center' /* Center vertically */,
         }}
         key={_key}
         id={fullId}
       >
         <div
+          className="triangle-background"
           style={{
             position: 'absolute',
-            top: size / 2,
-            left: size / 2,
-            textAlign: 'left',
-            maxWidth: `${size / 4}px`,
-            zIndex: 1000 * nest,
-            fontSize: (size / 10).toString() + 'px',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: stringToColour(fullId, 0.5),
+            clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)',
+            zIndex: -1,
+          }}
+          onMouseDown={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+
+            if (action !== null) {
+              const nodeId = /\[([\d.a-zA-Z]+)]/.exec(shortTitle)[1]
+              console.log('perform action', fullId, nodeId, shortTitle)
+
+              action(nodeId)
+            }
+          }}
+          title={title} // Full title as a tooltip
+        />
+        <div
+          style={{
+            zIndex: 10000,
+            width: 'min-content',
+            maxWidth: '70%',
+            transform: `translateY(${Math.floor(size / 10)}px)`,
+            fontSize,
           }}
         >
-          <div
-            className="puzzle-item-content triangle-content"
-            style={{
-              fontSize,
-              color: 'black',
-              whiteSpace: 'pre-wrap',
-              overflowWrap: 'break-word',
-              width: size,
-              transform: 'translateX(-25%)',
-              zIndex: 1000000000 - 1000 * nest,
-            }}
-            title={title} // Full title as a tooltip
-            onMouseDown={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
-
-              if (action !== null) {
-                const nodeId = /\[([\d.a-zA-Z]+)]/.exec(shortTitle)[1]
-                console.log('perform action', fullId, nodeId, shortTitle)
-
-                action(nodeId)
-              }
-            }}
-          >
-            <div
-              style={{ zIndex: level + 100000 * nest, position: 'relative' }}
-            >
-              {_key}{' '}
-            </div>
-            <span title={title}>{shortTitle}</span>{' '}
-          </div>
+          <span>{_key}</span>
+          <span title={title}>{shortTitle}</span>
         </div>
       </div>
     </>
@@ -227,7 +224,6 @@ const MutableTriangle = ({
 
 export const Puzzle = ({ data = undefined, action = null, props }) => {
   const gridRef = useRef(null)
-  const [debug, setDebug] = useState(() => process.env['DEBUG'])
 
   const [items, setItems] = useState(JSON.parse(JSON.stringify(data)))
 
@@ -277,7 +273,6 @@ export const Puzzle = ({ data = undefined, action = null, props }) => {
               border: '1px solid lime',
               color: 'lime',
               fontSize: '10px',
-              zIndex: 1000000,
             }}
           >
             {id}

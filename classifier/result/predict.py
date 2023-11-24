@@ -1,3 +1,4 @@
+import logging
 import math
 import os
 
@@ -51,6 +52,14 @@ class Models:
         model.load_state_dict(
             torch.load(get_best_model(os.path.join(config.MODEL_DIR)))
         )
+        # try to load threshold
+        try:
+            with open(os.path.join(config.MODEL_DIR, "threshold.txt"), "r") as f:
+                config.threshold = float(f.read())
+                logging.info(f"Loaded threshold {config.threshold=} from file")
+        except FileNotFoundError:
+            pass
+
         return model
 
     def encode(self, inputs, config):
@@ -77,13 +86,15 @@ class Models:
                         tuned1 = self.models[self.active_model_name](anchor)
                         tuned2 = self.models[self.active_model_name](embedding_pair[1].view((-1, config.embedding_dim)))
 
-                        if config.inverse:
-                            scores.append(
-                                -math.log(pairwise_distance(tuned1, tuned2, p=2).view((-1,)).item()                            ))
-                        else:
-                            scores.append(
-                                asymmetric_similarity(tuned1, tuned2).view((-1,)).item()
-                            )
+                        scores.append(
+                            pairwise_distance(tuned1, tuned2, p=2   ).view((-1,)).item(
+
+                            ))
+
+
+                    if config.threshold:
+                        scores = [1- (abs(score)/config.threshold) for score in scores]
+
 
 
                     return view_shape(scores, (-1,))
