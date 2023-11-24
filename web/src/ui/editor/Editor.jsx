@@ -307,7 +307,7 @@ export const Editor = () => {
         title: 'hyperonym',
       },
       {
-        title: 'atonyms',
+        title: 'antonyms',
       },
       {
         title: '(anti-/syn)-thesis',
