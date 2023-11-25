@@ -9,3 +9,7 @@
   display: grid;
   padding: 4px;
 }
+
+.puzzle-grid {
+  z-index: -1 !important;
+}

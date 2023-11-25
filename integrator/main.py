@@ -193,18 +193,22 @@ def make_dialectics(texts, epochs=10, hash_id=None):
 
 
 if __name__ == "__main__":
-    hash_id = "f22421485e3987d60b5f98a8615413f4638587f56c783380c6810baf6fb4c457"
+    hash_id = "1cb10b667a508d3585b760a6ef9e8567b38af5421469a767678007a8a525d911"
     T, i = states[hash_id]
 
     while True:
-        with catchtime(f"EPOCH {i}"):
+        with catchtime(f"update {i}"):
             STATE = update_triangle_graph(T, i, hash_id)
 
-        new_graph = T.max_score_triangle_subgraph(T.graph, return_start_node=True)
-        pprint (serialize_graph_to_structure(*new_graph))
+        with catchtime(f"graph  {i}"):
+
+            new_graph = T.max_score_triangle_subgraph(T.graph, return_start_node=True)
+        with catchtime(f"serialize {i}"):
+
+            pprint (serialize_graph_to_structure(*new_graph))
         i += 1
 
-        if i > 40:
+        if i > 600:
             break
 
     path = "texts/cookbook.txt"

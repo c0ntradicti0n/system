@@ -103,8 +103,6 @@ services:
         max-size: "10m"
     ports:
       - "9876:5000"
-    extra_hosts:
-        - "host.docker.internal:host-gateway"
     build:
       context: integrator
       args:

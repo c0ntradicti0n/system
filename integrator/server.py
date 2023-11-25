@@ -5,6 +5,8 @@ import time
 import requests
 from gevent import monkey
 
+from lib.t import catchtime
+
 monkey.patch_all()
 import pickle
 from functools import wraps
@@ -104,11 +106,12 @@ def handle_set_state(hash_id):
     print(f"handle_set_state {hash_id}")
 
     old_state, i = states[hash_id]
+    with catchtime("serialize"):
+        serialized = serialize_graph_to_structure(
+            *old_state.max_score_triangle_subgraph(old_state.graph, return_start_node=True)
+        )
 
-    active_version = serialize_graph_to_structure(
-        *old_state.max_score_triangle_subgraph(old_state.graph, return_start_node=True)
-    )
-    return active_version
+    return serialized
 
 
 @socket_event("get_params", "set_params")

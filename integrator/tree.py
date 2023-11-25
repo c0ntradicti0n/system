@@ -4,16 +4,18 @@ import math
 import os
 import pickle
 from collections import defaultdict
+from functools import reduce
 from pprint import pprint
 
 import networkx as nx
 from networkx.drawing.nx_agraph import graphviz_layout
-from scipy.sparse import lil_matrix
-
+import numpy as np
 from integrator.combination_state import CustomCombinations
 from integrator.mst_maximax import maximax, computed_i_tri_out_edges, computed_sub_out_edges
+from lib.g_from_numpy_array import from_numpy_array
 from lib.max_islice import maxislice
 from lib.shape import view_shape, flatten
+from lib.t import catchtime
 
 image_folder = "images/"
 pickle_folder = "states/"
@@ -24,21 +26,25 @@ class Tree:
         self.j = 0
         self.inputs = enumerated_texts
         self.relation_types = ["hie", "ant", "syn_1", "syn_2"]
-        self.matrices = {
-            rel: lil_matrix((1000, 1000)) for rel in self.relation_types
-        }  # Adjust size as needed
+
         self.node_index = {}
         self.index_text = {}
+        self.i_to_key = {}
         self._populate_graph(enumerated_texts)
         self.iterators = {}
         self.params = defaultdict(lambda: None)
         self.branches = defaultdict(lambda: dict())
 
+        self.matrices = {}
+        for rel in self.relation_types:
+            self.matrices[rel] = np.zeros((len(self.node_index), len(self.node_index)), dtype=float)
+
     def _populate_graph(self, enumerated_texts):
-        for key, text in enumerated_texts:
+        for i, (key, text) in enumerate(enumerated_texts):
             if key not in self.node_index:
                 self.node_index[key] = len(self.node_index)
                 self.index_text[key] = text
+                self.i_to_key[i] = key
 
     def add_relation(self, key1, key2, relation_type, score):
         if relation_type not in self.relation_types:
@@ -70,24 +76,24 @@ class Tree:
 
     @property
     def graph(self):
-        g = nx.MultiDiGraph()
-        for key, idx in self.node_index.items():
-            g.add_node(key)
-            # add text
-            g.nodes[key]["text"] = self.index_text[key]
+        with catchtime("graph"):
+            g1 = from_numpy_array(self.matrices["hie"], parallel_edges=False, create_using=nx.MultiDiGraph, attr_name="hie_score", additional_attrs={"relation": "hie"})
+            g2 = from_numpy_array(self.matrices["ant"], parallel_edges=False, create_using=nx.MultiDiGraph, attr_name="ant_score", additional_attrs={"relation": "ant"})
+            g3 = from_numpy_array(self.matrices["syn_1"], parallel_edges=False, create_using=nx.MultiDiGraph, attr_name="A_score", additional_attrs={"relation": "syn_1"})
+            g4 = from_numpy_array(self.matrices["syn_2"], parallel_edges=False, create_using=nx.MultiDiGraph, attr_name="T_score", additional_attrs={"relation": "syn_2"})
 
-        for rel_type, matrix in self.matrices.items():
-            coo = matrix.tocoo()
-            for i, j, v in zip(coo.row, coo.col, coo.data):
-                if v != 0:  # Assuming 0 means no edge
-                    g.add_edge(
-                        list(self.node_index.keys())[i],
-                        list(self.node_index.keys())[j],
-                        relation=rel_type,
-                        **{rel_type + "_score": v},
-                    )
-        g.graph["branches"] = dict(self.branches)
-        return g
+            graph_list = [g1, g2, g3, g4]
+            g = reduce(nx.compose, graph_list)
+
+            for key, idx in self.node_index.items():
+                g.add_node(key)
+                # add text
+                g.nodes[key]["text"] = self.index_text[key]
+
+            g = nx.relabel_nodes(g, self.i_to_key)
+
+            g.graph["branches"] = dict(self.branches)
+            return g
 
     @staticmethod
     def graph_without_text_sequence(graph=None):
@@ -406,14 +412,14 @@ class Tree:
         # Compute sum of scores and edge count
         for node in G.nodes():
             for _, _, data in G.in_edges(node, data=True):
-                if "h_score" in data and data["h_score"]:
-                    subsumption_score_sum[node] += data["h_score"]
+                if "hie_score" in data and data["hie_score"]:
+                    subsumption_score_sum[node] += data["hie_score"]
                     outgoing_edge_count[node] += 1
-                if "a_score" in data and data["a_score"]:
-                    subsumption_score_sum[node] += data["a_score"] / 1
+                if "A_score" in data and data["A_score"]:
+                    subsumption_score_sum[node] += data["A_score"] / 1
                     outgoing_edge_count[node] += 1 / 3
-                if "s_score" in data and data["s_score"]:
-                    subsumption_score_sum[node] += data["s_score"] / 1
+                if "T_score" in data and data["T_score"]:
+                    subsumption_score_sum[node] += data["T_score"] / 1
                     outgoing_edge_count[node] += 1 / 3
 
         # Compute recursive scores for each node
@@ -442,10 +448,14 @@ class Tree:
             except:
                 depth = 0
 
+        if depth > 4:
+            depth = 4
+
         # Sort nodes by score and get the top 10
         start_node = start_node if start_node else self.params["startNode"]
         if not start_node:
-            sorted_nodes = Tree.top_n_subsuming_nodes(G, n=4)
+            with catchtime("top_n_subsuming_nodes"):
+                 sorted_nodes = Tree.top_n_subsuming_nodes(G, n=4)
         else:
             sorted_nodes = [start_node]
 
@@ -500,9 +510,11 @@ class Tree:
             "index_text": self.index_text,
             "branches": dict(self.branches),
             "j": self.j,
+            "i_to_key": self.i_to_key,
         }
-        with open(filename, "wb") as file:
-            pickle.dump(state, file)
+        with catchtime("pickle"):
+            with open(filename, "wb") as file:
+                pickle.dump(state, file)
 
     @classmethod
     def pickle_folder_path(cls, hash=None):
@@ -541,6 +553,7 @@ class Tree:
                 tree.iterators = state["iterators"]
                 tree.node_index = state["node_index"]
                 tree.index_text = state["index_text"]
+                tree.i_to_key = state["i_to_key"]
                 tree.branches = defaultdict(None)
                 if "branches" in state:
                     tree.branches.update(state["branches"])

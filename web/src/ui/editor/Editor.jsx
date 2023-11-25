@@ -20,12 +20,13 @@ const setTaskId = (tI) => (taskId = tI)
 const conicColors = { '0%': '#87d068', '50%': '#ffe58f', '100%': '#ffccc7' };
 
 localStorage.debug = '*'
-const socket = io('', { transports: ['websocket'], retries: 1 })
 let inited = false
 let active_patching = false
 let init_phase = false
 
 export const Editor = () => {
+  const [socket, setSocket] = useState(io('', { transports: ['websocket'], retries: 1 })
+)
   const [state, setState] = useState(null)
   const [patch, _setPatch] = useState(null)
   const [mods, setMods] = useState(null)
@@ -79,7 +80,7 @@ export const Editor = () => {
       if (!init_phase) {
         console.log('INIT FROM HASH')
         init_phase = true
-        socket.timeout(3000).emit('get_hash', params.hash)
+        socket.emit('get_hash', params.hash)
       }
     }
     if (params.activeTab !== undefined && params.activeTab !== activeTab) {
@@ -137,7 +138,7 @@ export const Editor = () => {
     })
     socket.on('initial_state', (data) => {
       console.log('initial_state', hash, data)
-      socket.timeout(3000).emit('get_state', hash)
+      socket.emit('get_state', hash)
     })
     socket.on('set_state', (state) => {
       console.log('set_state', state)
@@ -188,6 +189,13 @@ export const Editor = () => {
       socket.off('set_meta')
       socket.off('set_mods')
       socket.off('set_task_id')
+        socket.off('set_state')
+      socket.off('patch_receive')
+      socket.off('connect_error')
+        socket.off('error')
+        socket.off('connect')
+        socket.off('disconnect')
+
     }
   }, [hash, state])
 
@@ -285,7 +293,7 @@ export const Editor = () => {
         ]}
       />
       {hash &&
-      <div style={{ fontFamily: "monospace", position: 'fixed', left: 0, bottom: 0 }}>
+      <div style={{ fontFamily: "monospace", position: 'fixed', right: 50, bottom: 0 }}>
         {taskId} epoch {I}
 
         <Progress width={100} percent={sumPercent *100 ?? 100} strokeColor={conicColors} />
@@ -313,7 +321,7 @@ export const Editor = () => {
         title: '(anti-/syn)-thesis',
       },
       {
-        title: 'Finished',
+        title: '🏁',
       },
     ]}
   />
