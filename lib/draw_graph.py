@@ -1,4 +1,9 @@
-import matplotlib.pyplot as plt
+import logging
+
+try:
+    import matplotlib.pyplot as plt
+except ImportError:
+    logging.error("matplotlib not installed")
 import networkx as nx
 from networkx.drawing.nx_pydot import graphviz_layout
 

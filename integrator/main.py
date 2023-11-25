@@ -2,8 +2,10 @@ import atexit
 import hashlib
 import itertools
 import logging
+from pprint import pprint
 
 from classifier.result.predict import MODELS
+from integrator.serialize import serialize_graph_to_structure
 from integrator.states import states
 from integrator.tree import Tree
 from lib.max_islice import maxislice
@@ -198,7 +200,8 @@ if __name__ == "__main__":
         with catchtime(f"EPOCH {i}"):
             STATE = update_triangle_graph(T, i, hash_id)
 
-        # pprint (Tree.serialize_graph_to_structure(*new_graph))
+        new_graph = T.max_score_triangle_subgraph(T.graph, return_start_node=True)
+        pprint (serialize_graph_to_structure(*new_graph))
         i += 1
 
         if i > 40:

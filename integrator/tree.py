@@ -11,8 +11,9 @@ from networkx.drawing.nx_agraph import graphviz_layout
 from scipy.sparse import lil_matrix
 
 from integrator.combination_state import CustomCombinations
+from integrator.mst_maximax import maximax, computed_i_tri_out_edges, computed_sub_out_edges
 from lib.max_islice import maxislice
-from lib.shape import view_shape
+from lib.shape import view_shape, flatten
 
 image_folder = "images/"
 pickle_folder = "states/"
@@ -92,6 +93,7 @@ class Tree:
     def graph_without_text_sequence(graph=None):
         # Create a new DiGraph without "text_sequence" edges
         filtered_graph = nx.MultiDiGraph()
+        filtered_graph.graph = graph.graph
         for node in graph.nodes:
             for u, v, data in graph.out_edges(node, data=True):
                 if data.get("relation") != "text_sequence":
@@ -231,25 +233,6 @@ class Tree:
         ]
 
     @staticmethod
-    def computed_i_tri_out_edges(G, v, visited):
-        tou = Tree.computed_tri_out_edges(G, v)
-        if not tou:
-            return []
-        i_s = set([attr["trident"] for n1, n2, attr in tou])
-        result = []
-        for i in i_s:
-            gs = [
-                (n1, n2, attr)
-                for n1, n2, attr in tou
-                if attr["trident"] == i and n2 not in visited
-            ]
-            if len(gs) != 2:  # might be in case we visited that yet for this branch
-                continue
-            gs = sorted(gs, key=lambda x: x[2]["relation"])
-            result.append(tuple(gs))
-        return result
-
-    @staticmethod
     def edge_score(e, _score=[]):
         total_score = 0
         for k, v in e.items():
@@ -300,43 +283,48 @@ class Tree:
         if not is_tri:
             # Get ant-syn branching
 
-            all_tri_out_edges = Tree.computed_i_tri_out_edges(G, node, visited)
-            all_tri_out_edges = list(
-                sorted(all_tri_out_edges, key=lambda x: x[0][2]["trident"])
-            )
+            all_tri_out_edges = computed_i_tri_out_edges(G, node, visited)
+
             if not all_tri_out_edges:
                 return [], []
-
-            tri_out_edges = max(
-                all_tri_out_edges,
-                key=lambda x: Tree.edge_score(x[0][2]) + Tree.edge_score(x[1][2]),
-            )
+            tri_out_edges = all_tri_out_edges [0]
 
             # Extract ant and syn nodes
-            _, ant_node, ant_attr = tri_out_edges[0]
-            _, syn_node, syn_attr = tri_out_edges[1]
+            ant_node, score1 = tri_out_edges[0]
+            syn_node, score2 = tri_out_edges[1]
 
-            selected_edges.append((node, ant_node, ant_attr))
-            selected_edges.append((node, syn_node, syn_attr))
+            selected_edges.append((node, ant_node, {"relation": "syn_1", "syn_1_score": score1}))
+            selected_edges.append((node, syn_node, {"relation": "syn_2", "syn_2_score": score2}))
 
-            # Mark nodes as visited
-            visited.add(ant_node)
-            visited.add(syn_node)
 
             # Recursively grow subgraph for ant and syn branches
             ant_nodes, ant_edges = Tree.grow_subgraph(
                 G, ant_node, visited, depth - 1, is_tri=True
             )
+            ant_nodes = [n for n in ant_nodes if not n == []]
+            try:
+                visited.update(flatten(ant_nodes))
+            except:
+                raise
             syn_nodes, syn_edges = Tree.grow_subgraph(
                 G, syn_node, visited, depth - 1, is_tri=True
             )
+            syn_nodes = [n for n in syn_nodes if not n == []]
+
+            visited.update(flatten(syn_nodes))
+
             the_nodes, the_edges = Tree.grow_subgraph(
                 G, node, visited, depth - 1, is_tri=True
             )
+            the_nodes = [n for n in the_nodes if not n == []]
+            visited .update(flatten(the_nodes))
+
 
             selected_edges.extend(the_edges)
             selected_edges.extend(ant_edges)
             selected_edges.extend(syn_edges)
+
+
 
             return [
                 node,
@@ -346,20 +334,16 @@ class Tree:
             ] + ant_nodes + syn_nodes + the_nodes, selected_edges
         else:
             # Identify sub related nodes
-            sub_out_edges = Tree.computed_sub_out_edges(G, node)
-            sub_nodes = [n2 for _, n2, _ in sub_out_edges if n2 not in visited]
+            sub_edges = computed_sub_out_edges(G, node, visited, [])
 
             # If there are sub nodes, select the one with highest score
-            if sub_nodes:
-                sub_scores = {n: Tree.node_score(G, n, _score="h_") for n in sub_nodes}
-                best_sub_node = max(sub_scores, key=sub_scores.get)
-                best_sub_edge_attr = next(
-                    attr for n1, n2, attr in sub_out_edges if n2 == best_sub_node
-                )
-
+            if sub_edges:
+                if not sub_edges:
+                    return [], []
+                _, best_sub_node, best_sub_edge_attr = sub_edges[0]
                 selected_edges.append((node, best_sub_node, best_sub_edge_attr))
 
-                visited.add(best_sub_node)
+                visited .update( {n for e in selected_edges for n in e[:2] })
 
                 # Recursively grow subgraph for the selected sub node
                 sub_nodes, sub_edges = Tree.grow_subgraph(
@@ -370,6 +354,7 @@ class Tree:
                     is_tri=False,
                     last_subnode=[best_sub_node, best_sub_edge_attr],
                 )
+
                 selected_nodes = [node, best_sub_node] + sub_nodes
                 selected_edges.extend(sub_edges)
             else:
@@ -488,7 +473,10 @@ class Tree:
 
         if best_subgraph:
             for node in best_subgraph.nodes:
-                best_subgraph.nodes[node].update(_G.nodes[node])
+                try:
+                    best_subgraph.nodes[node].update(_G.nodes[node])
+                except:
+                    logging.error(f"Error in updating node {node}", exc_info=True)
             # If the best subgraph's start_node exists in the subgraph, mark it
 
             best_subgraph.nodes[best_start_node]["start"] = True
