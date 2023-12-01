@@ -26,6 +26,7 @@ ENV LANG=C.UTF-8
 ENV FLASK_ENV=development
 ENV MPLCONFIGDIR=/config/matplotlib
 RUN mkdir /matplotlib
+RUN pip install jsonpatch flask_cors
 RUN chmod 777 /matplotlib
 #CMD ["pypy3", "server.py"]
-ENTRYPOINT ["gunicorn", "-k", "geventwebsocket.gunicorn.workers.GeventWebSocketWorker", "-w", "4", "-b", "0.0.0.0:5000", "--timeout", "2000" , "--graceful-timeout", "200", "server:app"]
+ENTRYPOINT ["python3", "server_test.py"]

@@ -5,14 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="fix it">
-      <change afterPath="$PROJECT_DIR$/lib/g_from_numpy_array.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integrator/server_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/fatten_dict.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/query/useSocket.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/ui/SocketTest.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrator/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrator/combination_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/combination_state.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integrator/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integrator/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/server.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integrator/tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/tree.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/g_from_numpy_array.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/g_from_numpy_array.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/nginx.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/sites-enabled/default" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/sites-enabled/default" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/ui/editor/Editor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/Editor.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/ui/editor/puzzle-controls.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/puzzle-controls.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worker/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/worker/tasks.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +43,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="TypeScript JSX File" />
+        <option value="JavaScript File" />
         <option value="Python Script" />
       </list>
     </option>
@@ -90,14 +103,14 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/stefan/programming/system/classifier/data&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/stefan/programming/system/integrator&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/stefan/.local/share/JetBrains/Toolbox/apps/PyCharm-P/ch-0/231.9011.38/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/stefan/.local/share/JetBrains/Toolbox/apps/pycharm-professional/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -109,11 +122,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/integrator" />
+      <recent name="$PROJECT_DIR$/web/src/ui" />
       <recent name="$PROJECT_DIR$/classifier/data" />
       <recent name="$PROJECT_DIR$/classifier/train" />
       <recent name="$PROJECT_DIR$/classifier" />
-      <recent name="$PROJECT_DIR$/../dialectics/3/1/1/1/1" />
-      <recent name="$PROJECT_DIR$/x" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/classifier/train" />
@@ -423,7 +436,17 @@
       <workItem from="1700855824631" duration="6620000" />
       <workItem from="1700862623675" duration="4393000" />
       <workItem from="1700867267299" duration="4301000" />
-      <workItem from="1700871697716" duration="9305000" />
+      <workItem from="1700871697716" duration="10018000" />
+      <workItem from="1701101357351" duration="8724000" />
+      <workItem from="1701171625671" duration="3510000" />
+      <workItem from="1701175376761" duration="1259000" />
+      <workItem from="1701212850774" duration="2020000" />
+      <workItem from="1701248268633" duration="600000" />
+      <workItem from="1701265088679" duration="205000" />
+      <workItem from="1701265663842" duration="7599000" />
+      <workItem from="1701274249374" duration="8205000" />
+      <workItem from="1701349816122" duration="1216000" />
+      <workItem from="1701451521135" duration="6037000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -754,14 +777,6 @@
       <option name="project" value="LOCAL" />
       <updated>1691896932213</updated>
     </task>
-    <task id="LOCAL-00061" summary="fix it">
-      <option name="closed" value="true" />
-      <created>1700867464832</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1700867464832</updated>
-    </task>
     <task id="LOCAL-00062" summary="fix it">
       <option name="closed" value="true" />
       <created>1700871773207</created>
@@ -770,7 +785,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700871773207</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="fix it">
+      <option name="closed" value="true" />
+      <created>1700881800298</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1700881800298</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1012,37 +1035,37 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/integrator/tree.py</url>
-          <line>488</line>
+          <line>516</line>
           <option name="timeStamp" value="285" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/integrator/tree.py</url>
-          <line>325</line>
+          <line>356</line>
           <option name="timeStamp" value="293" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/integrator/tree.py</url>
-          <line>324</line>
+          <line>355</line>
           <option name="timeStamp" value="294" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/integrator/tree.py</url>
-          <line>354</line>
+          <line>382</line>
           <option name="timeStamp" value="297" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/integrator/tree.py</url>
-          <line>441</line>
+          <line>469</line>
           <option name="timeStamp" value="305" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/integrator/tree.py</url>
-          <line>291</line>
+          <line>319</line>
           <option name="timeStamp" value="306" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/integrator/tree.py</url>
-          <line>95</line>
+          <line>123</line>
           <option name="timeStamp" value="307" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">

@@ -8,13 +8,15 @@ from functools import reduce
 from pprint import pprint
 
 import networkx as nx
-from networkx.drawing.nx_agraph import graphviz_layout
 import numpy as np
+from networkx.drawing.nx_agraph import graphviz_layout
+
 from integrator.combination_state import CustomCombinations
-from integrator.mst_maximax import maximax, computed_i_tri_out_edges, computed_sub_out_edges
+from integrator.mst_maximax import (computed_i_tri_out_edges,
+                                    computed_sub_out_edges, maximax)
 from lib.g_from_numpy_array import from_numpy_array
 from lib.max_islice import maxislice
-from lib.shape import view_shape, flatten
+from lib.shape import flatten, view_shape
 from lib.t import catchtime
 
 image_folder = "images/"
@@ -37,7 +39,9 @@ class Tree:
 
         self.matrices = {}
         for rel in self.relation_types:
-            self.matrices[rel] = np.zeros((len(self.node_index), len(self.node_index)), dtype=float)
+            self.matrices[rel] = np.zeros(
+                (len(self.node_index), len(self.node_index)), dtype=float
+            )
 
     def _populate_graph(self, enumerated_texts):
         for i, (key, text) in enumerate(enumerated_texts):
@@ -77,10 +81,34 @@ class Tree:
     @property
     def graph(self):
         with catchtime("graph"):
-            g1 = from_numpy_array(self.matrices["hie"], parallel_edges=False, create_using=nx.MultiDiGraph, attr_name="hie_score", additional_attrs={"relation": "hie"})
-            g2 = from_numpy_array(self.matrices["ant"], parallel_edges=False, create_using=nx.MultiDiGraph, attr_name="ant_score", additional_attrs={"relation": "ant"})
-            g3 = from_numpy_array(self.matrices["syn_1"], parallel_edges=False, create_using=nx.MultiDiGraph, attr_name="A_score", additional_attrs={"relation": "syn_1"})
-            g4 = from_numpy_array(self.matrices["syn_2"], parallel_edges=False, create_using=nx.MultiDiGraph, attr_name="T_score", additional_attrs={"relation": "syn_2"})
+            g1 = from_numpy_array(
+                self.matrices["hie"],
+                parallel_edges=False,
+                create_using=nx.MultiDiGraph,
+                attr_name="hie_score",
+                additional_attrs={"relation": "hie"},
+            )
+            g2 = from_numpy_array(
+                self.matrices["ant"],
+                parallel_edges=False,
+                create_using=nx.MultiDiGraph,
+                attr_name="ant_score",
+                additional_attrs={"relation": "ant"},
+            )
+            g3 = from_numpy_array(
+                self.matrices["syn_1"],
+                parallel_edges=False,
+                create_using=nx.MultiDiGraph,
+                attr_name="A_score",
+                additional_attrs={"relation": "syn_1"},
+            )
+            g4 = from_numpy_array(
+                self.matrices["syn_2"],
+                parallel_edges=False,
+                create_using=nx.MultiDiGraph,
+                attr_name="T_score",
+                additional_attrs={"relation": "syn_2"},
+            )
 
             graph_list = [g1, g2, g3, g4]
             g = reduce(nx.compose, graph_list)
@@ -293,15 +321,18 @@ class Tree:
 
             if not all_tri_out_edges:
                 return [], []
-            tri_out_edges = all_tri_out_edges [0]
+            tri_out_edges = all_tri_out_edges[0]
 
             # Extract ant and syn nodes
             ant_node, score1 = tri_out_edges[0]
             syn_node, score2 = tri_out_edges[1]
 
-            selected_edges.append((node, ant_node, {"relation": "syn_1", "syn_1_score": score1}))
-            selected_edges.append((node, syn_node, {"relation": "syn_2", "syn_2_score": score2}))
-
+            selected_edges.append(
+                (node, ant_node, {"relation": "syn_1", "syn_1_score": score1})
+            )
+            selected_edges.append(
+                (node, syn_node, {"relation": "syn_2", "syn_2_score": score2})
+            )
 
             # Recursively grow subgraph for ant and syn branches
             ant_nodes, ant_edges = Tree.grow_subgraph(
@@ -323,14 +354,11 @@ class Tree:
                 G, node, visited, depth - 1, is_tri=True
             )
             the_nodes = [n for n in the_nodes if not n == []]
-            visited .update(flatten(the_nodes))
-
+            visited.update(flatten(the_nodes))
 
             selected_edges.extend(the_edges)
             selected_edges.extend(ant_edges)
             selected_edges.extend(syn_edges)
-
-
 
             return [
                 node,
@@ -349,7 +377,7 @@ class Tree:
                 _, best_sub_node, best_sub_edge_attr = sub_edges[0]
                 selected_edges.append((node, best_sub_node, best_sub_edge_attr))
 
-                visited .update( {n for e in selected_edges for n in e[:2] })
+                visited.update({n for e in selected_edges for n in e[:2]})
 
                 # Recursively grow subgraph for the selected sub node
                 sub_nodes, sub_edges = Tree.grow_subgraph(
@@ -455,7 +483,7 @@ class Tree:
         start_node = start_node if start_node else self.params["startNode"]
         if not start_node:
             with catchtime("top_n_subsuming_nodes"):
-                 sorted_nodes = Tree.top_n_subsuming_nodes(G, n=4)
+                sorted_nodes = Tree.top_n_subsuming_nodes(G, n=4)
         else:
             sorted_nodes = [start_node]
 

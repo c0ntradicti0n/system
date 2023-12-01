@@ -8,9 +8,11 @@ import { Editor } from './ui/editor/Editor'
 
 import { useRoutes } from 'raviger'
 import { ControlContainerTest } from './ui/ControlTest'
+import { SocketTest } from './ui/SocketTest'
 
 const routes = {
   '/': () => <Fractal />,
+  '/socket_test': () => <SocketTest />,
   '/control_test': () => <ControlContainerTest />,
   '/puzzle': () => (
     <Puzzle

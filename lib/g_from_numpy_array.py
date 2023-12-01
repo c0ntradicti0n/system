@@ -2,7 +2,11 @@ import itertools
 
 import networkx as nx
 import numpy as np
-def from_numpy_array(A, parallel_edges=False, create_using=None, attr_name="weight", additional_attrs= {}):
+
+
+def from_numpy_array(
+    A, parallel_edges=False, create_using=None, attr_name="weight", additional_attrs={}
+):
     """Returns a graph from a 2D NumPy array.
 
     The 2D NumPy array is interpreted as an adjacency matrix for the graph.
@@ -132,10 +136,14 @@ def from_numpy_array(A, parallel_edges=False, create_using=None, attr_name="weig
         #             G.add_edge(u, v, weight=1)
         #
         triples = chain(
-            ((u, v, {attr_name: 1, **additional_attrs}) for d in range(A[u, v])) for (u, v) in edges
+            ((u, v, {attr_name: 1, **additional_attrs}) for d in range(A[u, v]))
+            for (u, v) in edges
         )
     else:  # basic data type
-        triples = ((u, v, {**additional_attrs, attr_name: python_type(A[u, v])}) for u, v in edges)
+        triples = (
+            (u, v, {**additional_attrs, attr_name: python_type(A[u, v])})
+            for u, v in edges
+        )
     # If we are creating an undirected multigraph, only add the edges from the
     # upper triangle of the matrix. Otherwise, add all the edges. This relies
     # on the fact that the vertices created in the

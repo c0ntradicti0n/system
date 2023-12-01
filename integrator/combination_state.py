@@ -51,7 +51,7 @@ class CustomCombinations:
         return self.exhausted
 
     def get_percentage(self):
-        return round( self.yielded_count / math.comb(self.n, self.r), 2)
+        return round(self.yielded_count / math.comb(self.n, self.r), 2)
 
     def __getstate__(self):
         return (self.pool, self.r, self.indices, self.exhausted, self.yielded_count)

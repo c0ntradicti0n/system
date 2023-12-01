@@ -108,7 +108,9 @@ def handle_set_state(hash_id):
     old_state, i = states[hash_id]
     with catchtime("serialize"):
         serialized = serialize_graph_to_structure(
-            *old_state.max_score_triangle_subgraph(old_state.graph, return_start_node=True)
+            *old_state.max_score_triangle_subgraph(
+                old_state.graph, return_start_node=True
+            )
         )
 
     return serialized

@@ -3,7 +3,7 @@ import io from 'socket.io-client'
 import ShareModal from '../ShareModal'
 import { parseHash } from '../../lib/read_link_params'
 import jsonPatch from 'fast-json-patch'
-import {Progress, Steps, Tabs} from 'antd'
+import { Progress, Steps, Tabs } from 'antd'
 import { JsonView } from './JsonView'
 import { TreeView } from './TreeView'
 import { TriangleView } from './TriangleView'
@@ -17,7 +17,7 @@ import './controls.css'
 
 let taskId = null
 const setTaskId = (tI) => (taskId = tI)
-const conicColors = { '0%': '#87d068', '50%': '#ffe58f', '100%': '#ffccc7' };
+const conicColors = { '0%': '#87d068', '50%': '#ffe58f', '100%': '#ffccc7' }
 
 localStorage.debug = '*'
 let inited = false
@@ -25,8 +25,9 @@ let active_patching = false
 let init_phase = false
 
 export const Editor = () => {
-  const [socket, setSocket] = useState(io('', { transports: ['websocket'], retries: 1 })
-)
+  const [socket, setSocket] = useState(
+    io('', { transports: ['websocket'], retries: 1 }),
+  )
   const [state, setState] = useState(null)
   const [patch, _setPatch] = useState(null)
   const [mods, setMods] = useState(null)
@@ -40,7 +41,7 @@ export const Editor = () => {
   const [meta, setMeta] = useState('')
   const [isPaused, setIsPaused] = useState(false)
 
-  const sumPercent = Object.values(percentages).reduce((a, b) => a + b, 0)/3
+  const sumPercent = Object.values(percentages).reduce((a, b) => a + b, 0) / 3
 
   const [text, setText] = useState('')
   const [hash, setHash] = useState(null)
@@ -189,13 +190,12 @@ export const Editor = () => {
       socket.off('set_meta')
       socket.off('set_mods')
       socket.off('set_task_id')
-        socket.off('set_state')
+      socket.off('set_state')
       socket.off('patch_receive')
       socket.off('connect_error')
-        socket.off('error')
-        socket.off('connect')
-        socket.off('disconnect')
-
+      socket.off('error')
+      socket.off('connect')
+      socket.off('disconnect')
     }
   }, [hash, state])
 
@@ -292,41 +292,51 @@ export const Editor = () => {
             : []),
         ]}
       />
-      {hash &&
-      <div style={{ fontFamily: "monospace", position: 'fixed', right: 50, bottom: 0 }}>
-        {taskId} epoch {I}
-
-        <Progress width={100} percent={sumPercent *100 ?? 100} strokeColor={conicColors} />
-                  <Steps
-              style={{
-                display: "inline-flex"
-              }}
-    current={
-        status === 'end'
-            ? 3
-            : status === 'syn'
-            ? 2
-            : status === 'ant'
-            ? 1
-            : 0
-    }
-    items={[
-      {
-        title: 'hyperonym',
-      },
-      {
-        title: 'antonyms',
-      },
-      {
-        title: '(anti-/syn)-thesis',
-      },
-      {
-        title: '🏁',
-      },
-    ]}
-  />
-      </div>
-      }
+      {hash && (
+        <div
+          style={{
+            fontFamily: 'monospace',
+            position: 'fixed',
+            right: 50,
+            bottom: 0,
+          }}
+        >
+          {taskId} epoch {I}
+          <Progress
+            width={100}
+            percent={sumPercent * 100 ?? 100}
+            strokeColor={conicColors}
+          />
+          <Steps
+            style={{
+              display: 'inline-flex',
+            }}
+            current={
+              status === 'end'
+                ? 3
+                : status === 'syn'
+                ? 2
+                : status === 'ant'
+                ? 1
+                : 0
+            }
+            items={[
+              {
+                title: 'hyperonym',
+              },
+              {
+                title: 'antonyms',
+              },
+              {
+                title: '(anti-/syn)-thesis',
+              },
+              {
+                title: '🏁',
+              },
+            ]}
+          />
+        </div>
+      )}
     </div>
   )
 }

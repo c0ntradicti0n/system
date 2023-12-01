@@ -71,7 +71,7 @@ viz:
 
 
 hotreload-%:
-	@while inotifywait -e modify,create,delete -r --include '\.(py|txt)$$' ./$*; do \
+	@while inotifywait -e modify,create,delete -r --include '((\.(py|txt)$$)|default)' ./$*; do \
 		docker compose build $*; \
 		docker compose down -v -t 0 $*; \
 		docker compose up  --build --force-recreate -d $*; \

@@ -185,7 +185,12 @@ def make_dialectics(texts, epochs=10, hash_id=None):
     for _ in range(epochs):
         with catchtime(f"EPOCH {i}"):
             update_triangle_graph(T, i, hash_id)
-        print (   {str("_".join(kind)): iterator.get_percentage() for kind, iterator in T.iterators.items()})
+        print(
+            {
+                str("_".join(kind)): iterator.get_percentage()
+                for kind, iterator in T.iterators.items()
+            }
+        )
 
         i += 1
 
@@ -201,11 +206,9 @@ if __name__ == "__main__":
             STATE = update_triangle_graph(T, i, hash_id)
 
         with catchtime(f"graph  {i}"):
-
             new_graph = T.max_score_triangle_subgraph(T.graph, return_start_node=True)
         with catchtime(f"serialize {i}"):
-
-            pprint (serialize_graph_to_structure(*new_graph))
+            pprint(serialize_graph_to_structure(*new_graph))
         i += 1
 
         if i > 600:
