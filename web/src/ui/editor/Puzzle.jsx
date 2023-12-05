@@ -236,7 +236,7 @@ export const Puzzle = ({ data = undefined, action = null, props }) => {
     muuriOptions(BASE_LENGTH, 1),
 
     BASE_LENGTH,
-    props,
+    { ...props, action },
   )
 
   if (!items) return null

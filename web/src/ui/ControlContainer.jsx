@@ -181,6 +181,10 @@ const ControlContainer = ({ children, areas, cssPrefix, debug = DEBUG }) => {
     }
   }, [areas, cssPrefix, gridRef, children])
 
+  if (!children.filter) {
+    children = [children]
+  }
+
   const nonNullitems = children?.filter((child) => child)
   if (!nonNullitems) {
     console.error('No children in ControlContainer')

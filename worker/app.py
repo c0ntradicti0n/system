@@ -1,5 +1,6 @@
 import logging
 import os
+import time
 
 import redis
 from celery.result import AsyncResult
@@ -8,38 +9,25 @@ from tasks import threerarchy
 
 app = Flask(__name__)
 redis_client = redis.StrictRedis(host="redis", port=6379, db=1)
+not_flushed = True
+while not_flushed:
+    try:
+        redis_client.flushdb()
+        not_flushed = False
+
+    except:
+        print("redis not ready")
+        time.sleep(1)
+os.system("rm -rf /tmp/threerarchy")
+os.mkdir("/tmp/threerarchy")
 
 
 @app.route("/threerarchy", methods=["POST"])
 def enqueue_update_task():
     data = request.get_json()
     hash_id = data.get("hash")
-
-    # Define the file path based on the hash_id
-    file_path = f"./threerarchy_{hash_id}.txt"
-
-    try:
-        # If the file exists, read the task_id from it
-        if os.path.exists(file_path):
-            with open(file_path, "r") as f:
-                existing_task = f.read().strip()
-
-            if existing_task:
-                result = AsyncResult(existing_task, app=threerarchy.app)
-                if result.status not in ["SUCCESS", "FAILURE", "REVOKED"]:
-                    # If the task is still running (or pending, or retrying), return its task_id
-                    return jsonify({"task_id": existing_task}), 202
-    except:
-        logging.error("Error checking for existing task", exc_info=True)
-
-    # If no existing task or if the existing task has completed/failed, start a new task
     task = threerarchy.delay(hash_id)
-
-    # Save the new task_id to the file
-    with open(file_path, "w") as f:
-        f.write(task.id)
-
-    return jsonify({"task_id": task.id}), 202
+    return jsonify(task.id), 202
 
 
 @app.route("/task_status/<task_id>", methods=["GET"])
@@ -51,6 +39,8 @@ def get_task_status(task_id):
 @app.route("/task_result/<task_id>", methods=["GET"])
 def get_task_result(task_id):
     task_result = AsyncResult(task_id, app=threerarchy.app)
+    if task_result.status == "FAILURE":
+        task_result.forget()
     try:
         if task_result.ready():
             return jsonify(

@@ -4,7 +4,7 @@
   width: 13vw;
   height: 5vh;
   margin: 5px;
-  overflow: hidden;
+  overflow: visible;
   text-align: left;
   border-radius: 5px;
   display: grid;

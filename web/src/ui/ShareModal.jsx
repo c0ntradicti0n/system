@@ -38,14 +38,12 @@ const ShareModal = ({ url = '', linkInfo }) => {
   }
 
   return (
-    <div style={{ zIndex: 112323213214213 }}>
+    <>
       <Button
         onClick={() => setIsVisible(true)}
         icon={<ShareAltOutlined />}
-        className="share-button red"
         aria-label="Share (Hotkey: s)"
       >
-        {' '}
         Share
       </Button>
       <Modal
@@ -53,7 +51,6 @@ const ShareModal = ({ url = '', linkInfo }) => {
         open={isVisible}
         onCancel={() => setIsVisible(false)}
         footer={null}
-        centered
       >
         <Input
           value={fullUrl}
@@ -69,7 +66,7 @@ const ShareModal = ({ url = '', linkInfo }) => {
           className={isCopied ? 'copied-animation' : ''}
         />
       </Modal>
-    </div>
+    </>
   )
 }
 

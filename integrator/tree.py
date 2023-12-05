@@ -7,6 +7,7 @@ from collections import defaultdict
 from functools import reduce
 from pprint import pprint
 
+import _pickle
 import networkx as nx
 import numpy as np
 from networkx.drawing.nx_agraph import graphviz_layout
@@ -588,8 +589,22 @@ class Tree:
                 tree.load_params(hash)
 
                 return tree, latest_number + 1
-        except (MemoryError, KeyError, EOFError) as e:
+        except MemoryError:
             logging.error("Memory error in loading state", exc_info=True)
+            os.unlink(filename)
+            return Tree.load_state(hash, latest_number - 1)
+        except KeyError:
+            logging.error("Key error in loading state", exc_info=True)
+            os.unlink(filename)
+            return Tree.load_state(hash, latest_number - 1)
+        except EOFError:
+            logging.error("EOF error in loading state", exc_info=True)
+            os.unlink(filename)
+            return Tree.load_state(hash, latest_number - 1)
+        except _pickle.UnpicklingError as e:
+            logging.error(
+                f"Unpickling error in loading state {filename}", exc_info=True
+            )
             os.unlink(filename)
             return Tree.load_state(hash, latest_number - 1)
         except FileNotFoundError:
@@ -619,6 +634,18 @@ class Tree:
         if not tuple(relations) in self.iterators:
             return False
         return self.iterators[tuple(relations)].is_exhausted()
+
+    def finished(self):
+        return len(self.iterators) == 3 and all(
+            iterator.is_exhausted() for iterator in self.iterators.values()
+        )
+
+    def progress(self):
+        percentages = {
+            str("_".join(kind)): iterator.get_percentage()
+            for kind, iterator in self.iterators.items()
+        }
+        return percentages
 
 
 def test_max_score_triangle_subgraph():

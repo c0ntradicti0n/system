@@ -25,6 +25,11 @@ const useMuuriGrid = (gridRef, options, size, props) => {
 
         const targetElement = document.getElementById(newId)
         console.log('TARGET ELEMENT', newId, targetElement)
+
+        if (props.action && newId === oldId) {
+          props.action(newId)
+          return
+        }
         targetElement.setAttribute('id', oldId)
         element.setAttribute('id', newId)
 

@@ -1,109 +1,184 @@
-import gc
-import re
-import time
-
-import requests
 from gevent import monkey
 
-from lib.t import catchtime
-
 monkey.patch_all()
+import logging
 import pickle
-from functools import wraps
+import re
+import time
 from hashlib import sha256
 
-import gevent
-from flask import Flask, copy_current_request_context
-from flask_socketio import SocketIO
+import requests
+from flask import Flask
+from flask_socketio import SocketIO, join_room, leave_room
 from states import states
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from integrator.serialize import serialize_graph_to_structure
+from lib.t import catchtime
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="gevent")
-
-
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
+results = {}
 
-def socket_event(event_name, emit_event_name=None):
-    def decorator(f):
-        @socketio.on(event_name)
-        @wraps(f)
-        def wrapper(*args, **kwargs):
-            @copy_current_request_context
-            def subfunction(*args, **kwargs):
-                result = f(*args, **kwargs)
-                if emit_event_name:
-                    socketio.emit(emit_event_name, result)
-
-            gevent.spawn(subfunction, *args, **kwargs)
-
-        return wrapper
-
-    return decorator
+room_memberships = {}
 
 
-@socket_event("update_state", "set_task_id")
-def update_state(hash_id):
-    if not hash_id:
-        print(f"handle_update hash id null!!! {hash_id=}")
+@socketio.on("join")
+def on_join(hash_id):
+    join_room(hash_id)
+    if not hash_id or not hash_id.strip():
+        mods = states.get_all()
+        socketio.emit("set_mods", mods)
         return
-    gc.collect()
 
-    # trigger celery
-    print(f"handle_update {hash_id}")
-    result = requests.post(
-        "http://queue:5000/threerarchy", json={"hash": hash_id}
-    ).json()
-    print(f"result {result}")
-    return result["task_id"]
+    # Add the user to the room_memberships
+    if hash_id not in room_memberships:
+        room_memberships[hash_id] = set()
+    room_memberships[hash_id].add(hash_id)
+
+    t, i = states[hash_id]
+    progress = t.progress()
+
+    state = get_new_best_subgraph(progress, t)
+
+    socketio.emit("set_state", state)
+
+    meta = states[hash_id + "-meta"]
+    text = states[hash_id + "-text"]
+    params = states[hash_id + "-params"]
+    socketio.emit("set_meta", meta)
+    socketio.emit("set_text", text)
+    socketio.emit("set_params", params)
+    socketio.emit("set_progress", progress)
 
 
-@socket_event("patch_poll", "patch_receive")
-def handle_trigger_celery(task_id):
-    try:
-        result = requests.get(f"http://queue:5000/task_result/{task_id}").json()
-    except Exception as e:
-        print(f"error getting task result {task_id=}" + str(e))
-        return []
-    print(f"handle_trigger_celery {result=}")
-    result["task_id"] = task_id
-    return result
+def get_new_best_subgraph(progress, t):
+    if "syn_1_syn_2" in progress:
+        with catchtime("serialize"):
+            state = serialize_graph_to_structure(
+                *t.max_score_triangle_subgraph(t.graph, return_start_node=True)
+            )
+    else:
+        state = {}
+    return state
 
 
-@socket_event("get_mods", "set_mods")
-def get_mods():
-    print(f"handle_set_user_mods")
+@socketio.on("leave")
+def on_leave(hash_id):
+    leave_room(hash_id)
+
+    print(f"leave {hash_id=}")
+
+    # Remove the user from the room_memberships
+    if hash_id in room_memberships:
+        room_memberships[hash_id].discard(hash_id)
+        if not room_memberships[hash_id]:
+            del room_memberships[hash_id]  # Remove the room if it's empty
+
+
+tasks = {}
+running_serializations = {}
+
+
+def background_thread():
+    while True:
+        try:
+            active_rooms = list(room_memberships.keys())
+            for hash_id in active_rooms:
+                current_state, i = states[hash_id]
+                if current_state.finished():
+                    continue
+
+                if not hash_id in tasks or not tasks[hash_id]:
+                    try:
+                        tasks[hash_id] = requests.post(
+                            "http://queue:5000/threerarchy", json={"hash": hash_id}
+                        ).json()
+                    except Exception as e:
+                        logging.error("Error starting task", exc_info=True)
+
+                try:
+                    result = requests.get(
+                        f"http://queue:5000/task_result/{tasks[hash_id]}"
+                    ).json()
+
+                except Exception as e:
+                    logging.error("Error getting task result", exc_info=True)
+                    print(
+                        requests.get(f"http://queue:5000/task_result/{tasks[hash_id]}")
+                    )
+                    continue
+
+                if result["status"] == "SUCCESS":
+                    print(f"task {hash_id} ({tasks[hash_id]} finished")
+
+                    tasks[hash_id] = requests.post(
+                        "http://queue:5000/threerarchy", json={"hash": hash_id}
+                    ).json()
+
+                    print(f"new result {tasks[hash_id]}: {result}")
+
+                    # Emit the updated result to the room
+                    socketio.emit(
+                        "set_state",
+                        result["result"]["state"],
+                        room=hash_id,
+                    )
+                    socketio.emit(
+                        "set_i",
+                        i,
+                        room=hash_id,
+                    )
+                    socketio.emit(
+                        "set_progress",
+                        result["result"]["progress"],
+                        room=hash_id,
+                    )
+                    socketio.emit(
+                        "set_status",
+                        result["result"]["status"],
+                        room=hash_id,
+                    )
+
+                else:
+                    print(
+                        f"task {hash_id} ({tasks[hash_id]} still running {result['status']}"
+                    )
+
+        except Exception as e:
+            logging.error("Error in background thread", exc_info=True)
+
+        time.sleep(0.5)
+        # print(f"tick {active_rooms=}")
+
+
+@socketio.on("delete_mod")
+def delete_mod(hash_id):
+    if not hash_id:
+        print(f"handle_delete_mod hash id null!!! {hash_id=}")
+        return
+    assert re.match(r"[a-f0-9]{64}", hash_id)
+    print(f"delete_mod", hash_id)
+    del states[hash_id]
     return states.get_all()
 
 
-@socket_event("delete_mod", "refresh")
-def delete_mod(hash):
-    if not hash:
-        print(f"handle_delete_mod hash id null!!! {hash=}")
+@socketio.on("reset_mod")
+def reset_mod(hash_id):
+    if not hash_id:
+        print(f"handle_reset_mod hash id null!!! {hash_id=}")
         return
-    assert re.match(r"[a-f0-9]{64}", hash)
-    print(f"delete_mod", hash)
-    del states[hash]
-    return hash
+    assert re.match(r"[a-f0-9]{64}", hash_id)
+    print(f"reset_mod", hash_id)
+    states.reset(hash_id)
+    return hash_id
 
 
-@socket_event("reset_mod", "refresh")
-def reset_mod(hash):
-    if not hash:
-        print(f"handle_reset_mod hash id null!!! {hash=}")
-        return
-    assert re.match(r"[a-f0-9]{64}", hash)
-    print(f"reset_mod", hash)
-    states.reset(hash)
-    return hash
-
-
-@socket_event("get_state", "set_state")
-def handle_set_state(hash_id):
-    print(f"handle_set_state {hash_id}")
+@socketio.on("get_state")
+def get_state(hash_id):
+    print(f"get_state {hash_id}")
 
     old_state, i = states[hash_id]
     with catchtime("serialize"):
@@ -116,7 +191,7 @@ def handle_set_state(hash_id):
     return serialized
 
 
-@socket_event("get_params", "set_params")
+@socketio.on("get_params")
 def get_params(hash_id):
     print(f"get_params {hash_id}")
     if not hash_id.strip():
@@ -130,21 +205,22 @@ def get_params(hash_id):
         return None
 
 
-@socket_event("save_params", "set_params")
+@socketio.on("save_params")
 def save_params(params, hash_id):
     print(f"save_params {params} {hash_id}")
 
     states[hash_id + "-params"] = params
     new_params = states[hash_id + "-params"]
 
-    handle_set_state(hash_id)
+    t, i = states[hash_id]
+    progress = t.progress()
 
-    print(f"new params {new_params}")
+    state = get_new_best_subgraph(progress, t)
+    socketio.emit("set_state", state)
+    socketio.emit("set_params", new_params)
 
-    return new_params
 
-
-@socket_event("save_text", "set_hash")
+@socketio.on("save_text")
 def get_text(text):
     print(f"save_text '{text[:10]}...'")
 
@@ -158,21 +234,18 @@ def get_text(text):
     return hash_id
 
 
-@socket_event("get_text", "set_hash")
-def get_text(text):
-    print(f"get_text '{text[:10]}...'")
-
-    if not text.strip():
+@socketio.on("get_text")
+def get_text(hash_id):
+    print(f"get_text {hash_id}")
+    if not hash_id:
         return
+    print(f"get_text {hash_id}")
 
-    # Convert the received text into a pickled object
-    pickled_obj = pickle.dumps(text)
-    hash_id = sha256(pickled_obj).hexdigest()
-    states[hash_id + "-text"] = text
-    return hash_id
+    text = states[hash_id + "-text"]
+    return text[:1000]
 
 
-@socket_event("get_meta", "set_meta")
+@socketio.on("get_meta", "set_meta")
 def get_meta(hash_id):
     print(f"get_meta {hash_id=} ")
 
@@ -184,7 +257,7 @@ def get_meta(hash_id):
     return meta
 
 
-@socket_event("save_meta")
+@socketio.on("save_meta")
 def save_meta(hash_id, meta):
     print(f"save_meta {hash_id=} '{meta[:10]}...'")
 
@@ -195,17 +268,9 @@ def save_meta(hash_id, meta):
     return hash_id
 
 
-@socket_event("get_hash", "set_text")
-def get_hash(hash_id):
-    print(f"get_hash {hash_id}")
-    if not hash_id:
-        return
-    print(f"get_hash {hash_id}")
-
-    text = states[hash_id + "-text"]
-    return text[:1000]
-
+socketio.start_background_task(background_thread)
 
 if __name__ == "__main__":
     print("RUNNING FROM PYTHON MAIN")
+
     socketio.run(app, host="0.0.0.0", port=5000)

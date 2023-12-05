@@ -4,7 +4,7 @@
   width: 12vw;
   height: fit-content;
   margin: 5px;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 5px;
   display: grid;
   padding: 4px;

@@ -20,6 +20,7 @@ export function PuzzleView(props) {
         params={props.params}
         isPaused={props.isPaused}
         setIsPaused={props.setIsPaused}
+        activeTab={props.activeTab}
       />
       <Puzzle data={props.state} action={action} props={props} />
     </>

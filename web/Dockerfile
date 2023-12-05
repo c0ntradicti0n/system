@@ -3,9 +3,11 @@ FROM node:18 as base
 
 WORKDIR /app
 
+RUN npm install -g bun
+
 COPY package*.json ./
 
-RUN npm install
+RUN bun install
 
 COPY . .
 
@@ -16,24 +18,24 @@ WORKDIR /app
 
 ENV PORT=80
 
-CMD ["npm", "start"]
+CMD  bun start  | awk '{gsub(/\033c/,"") system("")}1'
 
 # Build stage
 FROM base as build
 
-RUN npm run build
+RUN bun run build
 
 # Stage 2: Serve the React application
-FROM node:14-alpine as prod
+FROM node:18-alpine as prod
 
 # Install serve
-RUN npm install -g serve
+RUN bun install -g serve
 
 # Copy build files from the builder stage
 COPY --from=build /app/build /app
 
 WORKDIR /app
 
-CMD ["serve", "-p", "80", "-s", "."]
+CMD serve -p 80 -s . | awk '{gsub(/\033c/,"") system("")}1'
 
 EXPOSE 80

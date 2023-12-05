@@ -48,6 +48,24 @@ def compare_prediction_to_expected(expected, lsk, triple):
 
 
 with t:
+    assert test_opposite(["good", "good"], True)
+with t:
+    assert test_opposite(["mkdir - create directory", "rmdir - remove directory"], True)
+with t:
+    assert test_opposite(
+        ["mkdir - create directory", "touch - create empty file"], True
+    )
+with t:
+    assert test_opposite(["fish", "mammal"], True)
+with t:
+    assert test_opposite(["good", "bread"], True)
+with t:
+    assert test_opposite(["good", "wood"], True)
+with t:
+    assert test_opposite(["good", "nice"], True)
+with t:
+    assert test_opposite(["ugly", "nice"], True)
+with t:
     assert test_opposite(
         ["addition and subtraction", "multiplication and division"], True
     )

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Button, Input } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
-import { Link, useNavigate } from 'raviger'
+import { useNavigate } from 'raviger'
 import * as PropTypes from 'prop-types'
 
 export const Search = ({ triggerSearch, searchText: _searchText }) => {
@@ -29,15 +29,24 @@ export const Search = ({ triggerSearch, searchText: _searchText }) => {
 
 export function EditorLink(props) {
   return (
-    <Link
-      href="/editor#activeTab=ex"
-      aria-label="Editor"
-      title="Editor"
+    <Button
+      className="red"
+      href="/editor#activeTab=lib"
+      title="Create a new fractal"
       link
-      style={{ color: 'lime' }}
+      style={{
+        color: 'lime',
+        //bold font
+        fontWeight: 'bold',
+        fontSize: '1.5vw',
+        height: '3vw',
+
+        // invert colors
+        filter: 'invert(100%)',
+      }}
     >
-      Go to Editor
-    </Link>
+      Create a new fractal
+    </Button>
   )
 }
 

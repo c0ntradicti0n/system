@@ -1,67 +1,110 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import io from 'socket.io-client'
-import jsonPatch from 'fast-json-patch' // Assuming you're using fast-json-patch
 const socket = io.connect('https://localhost', {
   debug: true,
   transports: ['websocket'],
-  perMessageDeflate: false ,
+  perMessageDeflate: false,
   retries: 1,
   pingInterval: 5000,
   pingTimeout: 2000,
+  reconnection: true,
+  reconnectionDelay: 1000,
+  reconnectionDelayMax: 5000,
+  reconnectionAttempts: 50,
+  timeout: 5000,
 })
+
 export const useSocket = (hash_id) => {
+  const [mods, setMods] = useState(null)
+  const [params, setParams] = useState(null)
+  const [text, setText] = useState(null)
+  const [meta, setMeta] = useState(null)
+  const [progress, setProgress] = useState(null)
+  const [status, setStatus] = useState(null)
+  const [prevHash, setPrevHash] = useState(null)
+
   const [state, setState] = useState(null)
-  const [hash] = useState(hash_id)
   const [isPaused, setIsPaused] = useState(false)
   const [i, setI] = useState(0)
+
+  const [once] = useState(false)
   const requestInitialState = useCallback(() => {
-    socket.emit('join', hash );
-    if (!socket) return
-    //console.log('sending get_state', hash)
-    socket.emit('set_state', hash, (response) => {
-      //console.log('response', response)
-      setState(response)
+    socket.emit('join', hash_id)
+  }, [hash_id])
+  useEffect(() => {
+    requestInitialState()
+  }, [once, requestInitialState])
+
+  const newModEntry = useCallback((text, meta) => {
+    socket.emit('save_text', text, (new_hash) => {
+      socket.emit('save_meta', new_hash, meta, () => {})
     })
+  })
+  useEffect(() => {
+    return () => {
+      console.log('useSocket unmount')
+      if (prevHash && hash_id !== prevHash) {
+        socket.emit('leave', prevHash)
+      } else {
+        setPrevHash(hash_id)
+      }
+    }
+  }, [hash_id, prevHash])
 
-
-  }, [hash])
   useEffect(() => {
     socket.on('connect_error', (error) => {
       console.error('Connection Error:', error)
     })
-
-
-
-socket.on('patch', (result) => {
-      //console.log('patch', { result, state })
-      if (!state) requestInitialState()
-      if (state && result.patch && !isPaused) {
-        const newState = jsonPatch.applyPatch(state, result.patch).newDocument
-        setState({...newState})
-        setI(i + 1)
-        //console.log('new state', newState)
+    socket.on('set_state', (result) => {
+      if (!isPaused) {
+        setState(result)
       }
     })
+    socket.on('set_mods', (result) => {
+      console.log('set_mods', result)
+      setMods(result)
+    })
+    socket.on('set_params', (result) => {
+      setParams(result)
+    })
+    socket.on('set_text', (result) => {
+      setText(result)
+    })
+    socket.on('set_meta', (result) => {
+      setMeta(result)
+    })
+    socket.on('set_progress', (result) => {
+      setProgress(result)
+    })
+    socket.on('set_status', (result) => {
+      setStatus(result)
+    })
+    socket.on('set_i', (result) => {
+      setI(result)
+    })
+
     return () => {
-        socket.off('patch')
-
-      socket.off('connect_error')
+      socket.removeAllListeners()
+      console.log('useSocket unmount')
     }
-
-  }, [state])
-
-
-
-
-  //console.log('state', state)
+  }, [hash_id, isPaused, i])
 
   return {
+    mods,
+    hash: hash_id,
+    params,
+    text,
+    meta,
+    progress,
+    status,
+
     socket,
     state,
     setState,
-    hash,
-    setIsPaused,
     i,
+
     requestInitialState,
+    newModEntry,
+    setIsPaused,
   }
 }

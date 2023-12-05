@@ -4,6 +4,7 @@ import os
 
 import coloredlogs
 import flask
+import requests
 from flask import Flask
 from flask_cors import CORS
 from flask_restx import Api, Namespace, Resource, reqparse

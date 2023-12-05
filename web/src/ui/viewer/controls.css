@@ -2,9 +2,9 @@
   pointer-events: auto; /* Enables pointer events for this child */
   position: absolute;
   width: 15vw;
+  overflow: visible;
   height: 19vh;
   margin: 5px;
-  overflow: hidden;
   border-radius: 5px;
   display: grid;
 }

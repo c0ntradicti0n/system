@@ -1,11 +1,13 @@
-from gevent import monkey
-from lib.fatten_dict import fatten_dict
 import time
+
 import jsonpatch
 from flask import Flask
 from flask_cors import CORS
-from flask_socketio import SocketIO, join_room, leave_room, emit
+from flask_socketio import SocketIO, emit, join_room, leave_room
+from gevent import monkey
 from werkzeug.middleware.proxy_fix import ProxyFix
+
+from lib.fatten_dict import fatten_dict
 
 monkey.patch_all()
 
@@ -15,23 +17,22 @@ socketio = SocketIO(
     cors_allowed_origins="*",
     port="5000",
     async_mode="gevent",
-
-    #debug=True,
-    #engineio_logger=True,
-    #logger=True,
+    # debug=True,
+    # engineio_logger=True,
+    # logger=True,
 )
 
 CORS(app, supports_credentials=True)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
+
 
 results = {}
 
 room_memberships = {}
 
 
-@socketio.on('join')
+@socketio.on("join")
 def on_join(hash_id):
-
     join_room(hash_id)
 
     # Add the user to the room_memberships
@@ -40,7 +41,7 @@ def on_join(hash_id):
     room_memberships[hash_id].add(hash_id)
 
 
-@socketio.on('leave')
+@socketio.on("leave")
 def on_leave(hash_id):
     leave_room(hash_id)
 
@@ -63,6 +64,7 @@ def background_thread():
             if hash_id not in results:
                 results[hash_id] = fatten_dict({})
             result = results[hash_id]
+
             new_result = fatten_dict(result)
 
             # generate a patch
@@ -72,21 +74,22 @@ def background_thread():
             results[hash_id] = jsonpatch.apply_patch(result, patch)
 
             # Emit the updated result to the room
-            socketio.emit('patch', {"status": "ok", "patch": patch}, room=hash_id)
+            socketio.emit("patch", {"status": "ok", "patch": patch}, room=hash_id)
+
         time.sleep(0.1)  # Adjust the sleep time as needed
-        #print(room_memberships)
+        # print(room_memberships)
 
 
-@socketio.on('connect')
+@socketio.on("connect")
 def on_connect():
-    print('Client connected')
+    print("Client connected")
 
 
-@socketio.on('disconnect')
+@socketio.on("disconnect")
 def on_disconnect():
-    print('Client disconnected')
+    print("Client disconnected")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     socketio.start_background_task(background_thread)
     socketio.run(app, host="0.0.0.0", port=5000)

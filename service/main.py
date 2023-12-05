@@ -7,7 +7,6 @@ from lib.vector_store import get_vector_store
 
 with catchtime("init"):
     persist_directory = "/chroma"
-    os.system("pwd")
     vector_store = get_vector_store(persist_directory)
 
 

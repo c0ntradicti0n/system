@@ -42,19 +42,23 @@ class States:
 
     def __getitem__(self, hash_id):
         if hash_id.endswith("-params"):
+            if not os.path.exists(self.path(hash_id)):
+                return {}
             with open(self.path(hash_id), "rb") as f:
                 params = pickle.load(f)
-            print(f"loaded params {hash_id}")
+            # print(f"loaded params {hash_id}")
             return params
         if hash_id.endswith("-text"):
             with open(self.path(hash_id), "rb") as f:
                 text = pickle.load(f)
-            print(f"loaded text {hash_id}")
+            # print(f"loaded text {hash_id}")
             return text
         elif hash_id.endswith("-meta"):
+            if not os.path.exists(self.path(hash_id)):
+                return ""
             with open(self.path(hash_id), "rb") as f:
                 meta = pickle.load(f)
-            print(f"loaded meta {hash_id}")
+            # print(f"loaded meta {hash_id}")
             return meta
         else:
             if os.path.exists(self.path(hash_id + "-text")):
@@ -72,16 +76,17 @@ class States:
                     if not inputs:
                         print(f"invalid text for {hash_id}")
                         return None, -1
-                    print(f"loaded tree from text {hash_id}")
+                    # print(f"loaded tree from text {hash_id}")
 
                     tree, i = Tree(list(inputs.items())), 0
                 else:
-                    print(f"loaded {i=} {hash_id} {tree=} ")
-                print(f"loaded tree {hash_id}")
+                    # print(f"loaded {i=} {hash_id} {tree=} ")
+                    pass
+                # print(f"loaded tree {hash_id}")
 
                 return tree, i
 
-            print(f"loaded nothing {hash_id}")
+            # print(f"loaded nothing {hash_id}")
 
             return None, None
 
@@ -89,12 +94,18 @@ class States:
         if hash_id.endswith("-params"):
             with open(self.path(hash_id), "wb") as f:
                 pickle.dump(state, f)
+            os.chmod(self.path(hash_id), 0o777)
+
         elif hash_id.endswith("-text"):
             with open(self.path(hash_id), "wb") as f:
                 pickle.dump(state, f)
+            os.chmod(self.path(hash_id), 0o777)
+
         elif hash_id.endswith("-meta"):
             with open(self.path(hash_id), "wb") as f:
                 pickle.dump(state, f)
+
+            os.chmod(self.path(hash_id), 0o777)
         else:
             tree, i = state
             tree.save_state(i, hash_id)

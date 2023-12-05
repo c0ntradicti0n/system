@@ -45,9 +45,6 @@ class CustomCombinations:
         return total_combinations - self.yielded_count
 
     def is_exhausted(self):
-        print(
-            f"number of elements left: {self.remaining_combinations()}/{math.comb(self.n, self.r)}"
-        )
         return self.exhausted
 
     def get_percentage(self):

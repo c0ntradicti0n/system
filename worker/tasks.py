@@ -1,4 +1,6 @@
 import gc
+import logging
+
 from celery import Celery
 
 from integrator.main import ITERATORS, update_triangle_graph
@@ -17,10 +19,11 @@ def threerarchy(hash_id):
 
     print(f"task {hash_id} {i}")
 
-    #old_graph = old_state.max_score_triangle_subgraph(
+    # old_graph = old_state.max_score_triangle_subgraph(
     #    old_state.graph, return_start_node=True, start_with_sub=False
-    #)
+    # )
     update_triangle_graph(old_state, i, hash_id)
+
     STATE = ITERATORS[hash_id]
 
     new_state, i = (
@@ -29,34 +32,22 @@ def threerarchy(hash_id):
     )
     states[hash_id] = new_state, i
 
-    with catchtime("compute max score subgraph"):
-        new_graph = new_state.max_score_triangle_subgraph(
-            new_state.graph, return_start_node=True, start_with_sub=False
-        )
-    percentages = {
-        str("_".join(kind)): iterator.get_percentage()
-        for kind, iterator in new_state.iterators.items()
-    }
-    if STATE != "end":
-        print(
-            f"Computed: {STATE=} nodes={ len(new_graph[0].nodes)} edges={len(new_graph[0].edges)}"
-            f" {str(percentages)=} {hash_id=} {i=}"
-        )
-
-    #try:
-    #    patch = jsonpatch.make_patch(
-    #        serialize_graph_to_structure(*old_graph),
-    #        serialize_graph_to_structure(*new_graph),
-    #    )
-    #    serialized_patch = json.loads(patch.to_string())
-    #except:
-    #    print(f"error making patch {old_graph=} {new_graph=}")
-    #    serialized_patch = []
+    if "syn_1_syn_2" in new_state.progress():
+        with catchtime("compute max score subgraph"):
+            new_graph = new_state.max_score_triangle_subgraph(
+                new_state.graph, return_start_node=True, start_with_sub=False
+            )
+        with catchtime("serialize"):
+            serialized = serialize_graph_to_structure(*new_graph)
+    else:
+        logging.info("Skipped graph, no results possible")
+        serialized = {}
+    progress = new_state.progress()
 
     return {
-        "state": serialize_graph_to_structure(*new_graph),
+        "state": serialized,
         "status": STATE,
         "i": i,
         "hash": hash_id,
-        "percentages": percentages,
+        "progress": progress,
     }

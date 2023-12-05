@@ -1,7 +1,7 @@
 import logging
 
 
-def serialize_graph_to_structure(graph, start_node, no_title=False):
+def serialize_graph_to_structure(graph, start_node, no_title=False, depth=10):
     def get_related_nodes(node):
         """Return related nodes based on edges."""
         # Filtering edges with the current node
@@ -32,9 +32,12 @@ def serialize_graph_to_structure(graph, start_node, no_title=False):
             return ""
         return f"[{n}] "
 
-    def construct_structure(node):
+    def construct_structure(node, depth=10):
         """Recursively construct the nested structure."""
         structure = {}
+        if depth == 0:
+            logging.error(f"depth exhausted for {node}")
+            return {}
         if not node:
             return structure
 
@@ -52,12 +55,16 @@ def serialize_graph_to_structure(graph, start_node, no_title=False):
             if data["relation"] == "syn_1":
                 structure[2] = {
                     ".": node_key_text(target) + graph.nodes[target]["text"],
-                    **construct_structure(get_sub_related_nodes(graph, target)),
+                    **construct_structure(
+                        get_sub_related_nodes(graph, target), depth - 1
+                    ),
                 }
             elif data["relation"] == "syn_2":
                 structure[3] = {
                     ".": node_key_text(target) + graph.nodes[target]["text"],
-                    **construct_structure(get_sub_related_nodes(graph, target)),
+                    **construct_structure(
+                        get_sub_related_nodes(graph, target), depth - 1
+                    ),
                 }
 
         return structure
