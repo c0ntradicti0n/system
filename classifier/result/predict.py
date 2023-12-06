@@ -69,10 +69,15 @@ class Models:
     def config(self):
         return self.model_configs[self.active_model_name]
 
+    def embed(self, inputs):
+        return self.models[self.active_model_name](inputs.unsqueeze(0))
+
     def predict(self, inputs):
         semaphore = BoundedSemaphore()
         with semaphore:
             config = self.model_configs[self.active_model_name]
+
+
             embeddings = self.encode(inputs, config)
             for param in self.models[self.active_model_name].parameters():
                 param.grad = None

@@ -194,15 +194,15 @@ class Tree:
         except Exception as e:
             logging.error(f"Error in drawing graph {e}", exc_info=True)
 
-    def pull(self, n_samples, relations):
+    def pull(self, n_samples, relations, on=None, on_indices =None):
         if not tuple(relations) in self.iterators:
             self.iterators[tuple(relations)] = CustomCombinations(
-                list(self.node_index.keys()), n_samples
+                list(self.node_index.keys()), n_samples, on=on, on_indices=on_indices
             )
         for k in self.iterators[tuple(relations)]:
             yield [(i, self.index_text[i]) for i in k]
 
-    def pull_batch(self, batch_size, n_samples, relations=None):
+    def pull_batch(self, batch_size, n_samples, relations=None, on=None ,on_indices =None):
         """
         :param batch_size:
         :param n_samples:
@@ -215,7 +215,7 @@ class Tree:
                     *[
                         ([i for i, _ in samples], [s for _, s in samples])
                         for samples in maxislice(
-                            self.pull(n_samples, relations), batch_size
+                            self.pull(n_samples, relations, on=on, on_indices=on_indices), batch_size
                         )
                     ]
                 )
@@ -647,6 +647,9 @@ class Tree:
         }
         return percentages
 
+    def get_all_texts(self):
+        return self.inputs
+
 
 def test_max_score_triangle_subgraph():
     # Create a Tree instance with some nodes
@@ -840,7 +843,7 @@ def test_with_generated_data():
                     has_ant = True
                 elif next_attr["relation"] == "syn":
                     has_syn = True
-                # If the next relation is 'sub' and the intermediate node does not have both 'ant' and 'syn' relations
+                # If the next relation is 'hie' and the intermediate node does not have both 'ant' and 'syn' relations
                 if next_attr["relation"] == "hie" and not (has_ant and has_syn):
                     raise AssertionError(
                         f"Found a sub-sub relation from {source} -> {target} -> {next_target} without both 'ant' and 'syn' relations."

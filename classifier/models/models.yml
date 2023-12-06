@@ -39,7 +39,7 @@ models:
     samples: classifier.data.hierarchy
     inverse: true
     relations:
-      - sub
+      - hie
   hierarchy:
     <<: *classifier
     n_classes: 3
@@ -52,7 +52,7 @@ models:
       - 1
     lr: 0.003
     relations:
-      - sub
+      - hie
 
   opposites:
     <<: *siamese

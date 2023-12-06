@@ -4,45 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="find a working integration with socket and background task for polling">
-      <change afterPath="$PROJECT_DIR$/web/src/ui/UnicodeIcon.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/worker/proximity.py" afterDir="false" />
+    <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="make a new menu and optimize socket communication">
+      <change afterPath="$PROJECT_DIR$/chroma_viz/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chroma_viz/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chroma_viz/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integrator/cluster_hierarchy.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/proximity.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/models/models.yml" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/models/models.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/result/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/result/predict.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integrator/combination_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/combination_state.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/serialize.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/serialize.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/server_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/server_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/states.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/states.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/states/e0d42e659a7313dccaf730b15231fff1e3b11746cddb1046ad299993774cef68-params.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/states/e0d42e659a7313dccaf730b15231fff1e3b11746cddb1046ad299993774cef68-params.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/test_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/test_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrator/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integrator/tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/tree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app.ini" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/rest.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/rest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/web/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/web/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/lib/read_link_params.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/lib/read_link_params.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/lib/useMuuriGrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/lib/useMuuriGrid.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/query/useSocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/query/useSocket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/ControlContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/ControlContainer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/ShareModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/ShareModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/SocketTest.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/SocketTest.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/Editor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/Editor.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/ExperimentsView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/ExperimentsView.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/MetaModal.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/doc.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/doc.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/ui/editor/Puzzle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/Puzzle.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/PuzzleControls.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/PuzzleControls.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/PuzzleView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/PuzzleView.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/TextModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/TextMetaModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/controls.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/controls.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/puzzle-controls.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/puzzle-controls.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/viewer/MobileControls.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/viewer/MobileControls.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/viewer/controls.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/viewer/controls.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worker/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/worker/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worker/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/worker/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/worker/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worker/proximity.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,8 +39,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript JSX File" />
-        <option value="Python Script" />
         <option value="JavaScript File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -120,7 +98,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/stefan/programming/system/integrator&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/stefan/programming/system/vector_db_inspect&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -146,14 +124,14 @@
       <recent name="$PROJECT_DIR$/classifier" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$/classifier/train" />
       <recent name="$PROJECT_DIR$/classifier/models" />
       <recent name="$PROJECT_DIR$/classifier/read" />
       <recent name="$PROJECT_DIR$/classifier/result" />
-      <recent name="$PROJECT_DIR$/classifier/model" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.test_models">
+  <component name="RunManager" selected="Python.cluster_hierarchy">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="wdl" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -189,14 +167,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="combination_state" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="cluster_hierarchy" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="wdl" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="PYTHONUNBUFFERED" value="1 " />
+        <env name="REDIS_HOST" value="$REDIS_HOST$" />
+        <env name="SYSTEM" value="../$SYTEM$" />
       </envs>
       <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.11 (system) (2)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/integrator" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -212,7 +193,42 @@
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
         </ENTRIES>
       </EXTENSION>
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/integrator/combination_state.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/integrator/cluster_hierarchy.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="wdl" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1 " />
+        <env name="REDIS_HOST" value="$REDIS_HOST$" />
+        <env name="SYSTEM" value="../$SYTEM$" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.11 (system) (2)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/service" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </EXTENSION>
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/service/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -323,40 +339,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test_mst" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="wdl" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-        <env name="REDIS_HOST" value="$REDIS_HOST$" />
-        <env name="SYSTEM" value="../$SYTEM$" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/integrator" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <EXTENSION ID="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </EXTENSION>
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/integrator/test_mst.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="train_opposites" type="PythonConfigurationType" factoryName="Python">
       <module name="wdl" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -393,19 +375,19 @@
     </configuration>
     <list>
       <item itemvalue="Python.train_opposites" />
+      <item itemvalue="Python.cluster_hierarchy" />
+      <item itemvalue="Python.main (1)" />
       <item itemvalue="Python.test_models" />
       <item itemvalue="Python.mst_maximax" />
       <item itemvalue="Python.main" />
-      <item itemvalue="Python.combination_state" />
-      <item itemvalue="Python.test_mst" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test_models" />
+        <item itemvalue="Python.cluster_hierarchy" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.main (1)" />
+        <item itemvalue="Python.test_models" />
         <item itemvalue="Python.mst_maximax" />
-        <item itemvalue="Python.test_mst" />
-        <item itemvalue="Python.combination_state" />
       </list>
     </recent_temporary>
   </component>
@@ -510,6 +492,10 @@
       <workItem from="1701731865551" duration="1320000" />
       <workItem from="1701733338846" duration="8987000" />
       <workItem from="1701770511322" duration="4979000" />
+      <workItem from="1701789622065" duration="16149000" />
+      <workItem from="1701881046068" duration="4097000" />
+      <workItem from="1701885663619" duration="873000" />
+      <workItem from="1701886638104" duration="82000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -840,14 +826,6 @@
       <option name="project" value="LOCAL" />
       <updated>1691896932213</updated>
     </task>
-    <task id="LOCAL-00063" summary="fix it">
-      <option name="closed" value="true" />
-      <created>1700881800298</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1700881800298</updated>
-    </task>
     <task id="LOCAL-00064" summary="find a working integration with socket and background task for polling">
       <option name="closed" value="true" />
       <created>1701457618440</created>
@@ -856,7 +834,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701457618441</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="make a new menu and optimize socket communication">
+      <option name="closed" value="true" />
+      <created>1701789880031</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1701789880031</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -906,7 +892,8 @@
     <MESSAGE value="fix mobile zoom" />
     <MESSAGE value="fix it" />
     <MESSAGE value="find a working integration with socket and background task for polling" />
-    <option name="LAST_COMMIT_MESSAGE" value="find a working integration with socket and background task for polling" />
+    <MESSAGE value="make a new menu and optimize socket communication" />
+    <option name="LAST_COMMIT_MESSAGE" value="make a new menu and optimize socket communication" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1059,7 +1046,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/integrator/combination_state.py</url>
-          <line>37</line>
+          <line>54</line>
           <option name="timeStamp" value="244" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1118,19 +1105,78 @@
           <option name="timeStamp" value="297" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/integrator/tree.py</url>
-          <line>470</line>
-          <option name="timeStamp" value="305" />
+          <url>file://$PROJECT_DIR$/classifier/result/predict.py</url>
+          <line>87</line>
+          <option name="timeStamp" value="309" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/integrator/tree.py</url>
-          <line>320</line>
-          <option name="timeStamp" value="306" />
+          <url>file://$PROJECT_DIR$/lib/vector_store.py</url>
+          <line>18</line>
+          <option name="timeStamp" value="310" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/integrator/tree.py</url>
-          <line>124</line>
-          <option name="timeStamp" value="307" />
+          <url>file://$PROJECT_DIR$/lib/vector_store.py</url>
+          <line>26</line>
+          <option name="timeStamp" value="311" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lib/vector_store.py</url>
+          <option name="timeStamp" value="312" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/lib/python3.11/site-packages/chromadb/api/types.py</url>
+          <line>480</line>
+          <option name="timeStamp" value="326" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/lib/python3.11/site-packages/chromadb/api/types.py</url>
+          <line>456</line>
+          <option name="timeStamp" value="329" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/integrator/main.py</url>
+          <line>28</line>
+          <option name="timeStamp" value="337" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/integrator/main.py</url>
+          <line>153</line>
+          <option name="timeStamp" value="338" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/integrator/main.py</url>
+          <line>41</line>
+          <option name="timeStamp" value="343" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/lib/python3.11/site-packages/langchain/embeddings/huggingface.py</url>
+          <line>85</line>
+          <option name="timeStamp" value="346" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/integrator/main.py</url>
+          <line>140</line>
+          <option name="timeStamp" value="347" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/integrator/main.py</url>
+          <line>80</line>
+          <option name="timeStamp" value="350" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/integrator/main.py</url>
+          <line>145</line>
+          <option name="timeStamp" value="354" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/integrator/main.py</url>
+          <line>188</line>
+          <option name="timeStamp" value="356" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/integrator/combination_state.py</url>
+          <line>44</line>
+          <option name="timeStamp" value="365" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
           <url>notebook:///home/stefan/programming/system/integrator/test_mst.ipynb</url>
@@ -1151,6 +1197,9 @@
         <watch expression="batch_size" />
         <watch expression="+" language="Python" />
         <watch expression="{n for e in selected_edges for n in e[:2] }" language="Python" />
+        <watch expression="self.on [i_a, i_b]" language="Python" />
+        <watch expression="self.on[self.on_indices[result[0]], self.on_indices[result[1]]]" language="Python" />
+        <watch expression="self.on[self.on_indices[result[1]], self.on_indices[result[2]]]" language="Python" />
       </configuration>
       <configuration name="test_mst">
         <watch expression="os.environ.get(&quot;MODELS_CONFIG&quot;, &quot;../classifier/models/&quot;)" language="Python" />
@@ -1164,11 +1213,13 @@
     <SUITE FILE_PATH="coverage/system$test_models.coverage" NAME="test_models Coverage Results" MODIFIED="1701735293631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
     <SUITE FILE_PATH="coverage/system$model_siamese.coverage" NAME="model.siamese Coverage Results" MODIFIED="1700579341040" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
     <SUITE FILE_PATH="coverage/system$model.coverage" NAME="model Coverage Results" MODIFIED="1700529933994" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
-    <SUITE FILE_PATH="coverage/system$main.coverage" NAME="main Coverage Results" MODIFIED="1700880076370" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
+    <SUITE FILE_PATH="coverage/system$main.coverage" NAME="main Coverage Results" MODIFIED="1701884308442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
     <SUITE FILE_PATH="coverage/system$m_siamese.coverage" NAME="m_siamese Coverage Results" MODIFIED="1700592143090" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
     <SUITE FILE_PATH="coverage/system$combination_state.coverage" NAME="combination_state Coverage Results" MODIFIED="1700854933474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
     <SUITE FILE_PATH="coverage/system$neighbor_joining.coverage" NAME="neighbor_joining Coverage Results" MODIFIED="1700853306690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
     <SUITE FILE_PATH="coverage/wdl$logic_generator.coverage" NAME="philosopher main Coverage Results" MODIFIED="1691407193115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
+    <SUITE FILE_PATH="coverage/system$cluster_hierarchy.coverage" NAME="cluster_hierarchy Coverage Results" MODIFIED="1701884560649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
+    <SUITE FILE_PATH="coverage/system$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1701793100705" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/service" />
     <SUITE FILE_PATH="coverage/system$test_mst.coverage" NAME="test_mst Coverage Results" MODIFIED="1700856083189" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
     <SUITE FILE_PATH="coverage/system$mst_maximax.coverage" NAME="mst_maximax Coverage Results" MODIFIED="1700866398909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
     <SUITE FILE_PATH="coverage/wdl$rest.coverage" NAME="rest Coverage Results" MODIFIED="1690875061170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />

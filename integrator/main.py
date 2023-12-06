@@ -3,12 +3,11 @@ import hashlib
 import itertools
 import logging
 from pprint import pprint
-
 from classifier.result.predict import MODELS
 from integrator.serialize import serialize_graph_to_structure
 from integrator.states import states
 from integrator.tree import Tree
-from lib.max_islice import maxislice
+from lib.proximity import set_up_db_from_model
 from lib.t import catchtime, indented
 
 
@@ -17,7 +16,9 @@ def goodbye():
     print("You are now leaving the Python sector.")
 
 
-def infer(model_name, t, valid_labels):
+def infer(model_name, t, valid_labels, tree=None, on=None, on_indices=None):
+    pre_computed_scores = None
+
     if isinstance(t, Tree):
         config = MODELS[model_name].config
 
@@ -31,9 +32,23 @@ def infer(model_name, t, valid_labels):
             config.batch_size,
             config.n_pull if config.n_pull else config.n_samples,
             relations=config.relations,
+            on=on,
+            on_indices=on_indices,
         )
     elif isinstance(t, list):
-        keys, inp = [t], t
+        if len(t) >= 1:
+
+            if isinstance(t[0], tuple):
+                texts = []
+                keys = []
+                pre_computed_scores = []
+                for (n1, n2), score in t:
+                    texts.append((tree.index_text[n1], tree.index_text[n2]))
+                    keys.append((n1, n2))
+                    pre_computed_scores.append(score)
+                keys, inp = keys, texts
+            else:
+                keys, inp = [t], t
 
     if not inp:
         print(f"All edges already computed for {model_name}")
@@ -44,7 +59,12 @@ def infer(model_name, t, valid_labels):
         labels.view(-1, MODELS[model_name].config.n_samples).tolist()
     ), list(score.view(-1, MODELS[model_name].config.n_samples).tolist())
 
-    # lsk.. list(labels, score, keys))
+    if pre_computed_scores:
+        score = [
+            [s, s]
+            for s in
+            pre_computed_scores
+        ]
     lsk = [
         (l, s, k)
         for l, s, k in zip(labels, score, keys)
@@ -61,43 +81,77 @@ def infer(model_name, t, valid_labels):
     return l_s_ks
 
 
-def score(model_name, t, relation):
-    if isinstance(t, Tree):
-        config = MODELS[model_name].config
+def score(model_name, t, relation, hash_id="default"):
+    config = MODELS[model_name].config
 
+    if isinstance(t, Tree):
         if t.all_computed(
             relations=config.relations,
         ):
             print(f"All edges computed for {model_name}")
             return None
 
-        keys, inp = t.pull_batch(
-            config.batch_size,
-            config.n_pull if config.n_pull else config.n_samples,
-            relations=config.relations,
+        input_dict = list(
+            t.pull(
+                1,
+                relations=config.relations,
+            )
         )
-    elif isinstance(t, list):
-        keys, inp = [t], [t]
+        input_dict = {k[0][0]: k[0][1] for k in input_dict}
 
-    if not inp:
+    elif isinstance(t, list):
+        input_dict = {i: i for i in t}
+
+    if not input_dict:
         print(f"All edges already computed for {relation}")
         return []
 
-    result = MODELS[model_name].predict(inp)
+    vector_store = set_up_db_from_model(
+        hash_id + "_" + relation, input_dict, MODELS[model_name], config
+    )
 
-    result = list(zip(keys, result))
+    results = []
+    for key, value in input_dict.items():
+        results.append(
+            (
+                key,
+                vector_store.similarity_search_with_score(
+                    value, k=config.get("top_k", 10), search_type="mmr"
+                ),
+            )
+        )
 
-    return result
+    results = list(
+        set(
+            [
+                (tuple(sorted([key, res.metadata["key"]])), round(score, 4))
+                for key, result in results
+                for res, score in result
+                if score != 0
+            ]
+        )
+    )
+
+    # normalize scores
+    scores = [score for _, score in results]
+    max_score = max(scores)
+    min_score = min(scores)
+    results = [(key, (score - min_score) / (max_score - min_score)) for key, score in results]
+
+    return results
 
 
 # classify thesis, antithesis, synthesis
-def classifier(t):
-    return infer("thesis_antithesis_synthesis", t, [1, 2, 3])
+def classifier(t, on=None, on_indices=None):
+    return infer("thesis_antithesis_synthesis", t, [1, 2, 3], on=on, on_indices=on_indices)
 
 
 # classify hypernym, hyponym
 def hierarchy(t):
-    return infer("hierarchy", t, [1, 2])
+    hie = score("hierarchy", t, relation="hie")
+    hie_directed = infer("hierarchy", hie, [1, 2], tree=t)
+
+    return hie_directed
 
 
 # score hypernym, hyponym
@@ -120,21 +174,19 @@ def update_triangle_graph(t: Tree, i, hash_id):
             choice = ITERATORS[hash_id]
             if choice == "hie":
                 with catchtime("SUBSUMTION"):
-                    lsk = hierarchy(t)
-                    if not lsk:
-                        ITERATORS[hash_id] = "ant"
-                    else:
-                        for l, s, k in lsk:
-                            score = score_hierarchy(
-                                [t.get_text(k[1]), t.get_text(k[0])]
-                            )[0][1]
+                    if not t.all_computed(relations=["hie"]):
+                        hie_score = hierarchy(t)
 
-                            t.add_relation(k[1], k[0], "hie", -score)
-                            t.add_relation(k[0], k[1], "hie", score)
+                        for l, s, k in hie_score:
+                            t.add_relation(k[0], k[1], "hie", s[0])
+                            t.add_relation(k[1], k[0], "hie", -s[1])
+
+                    else:
+                        ITERATORS[hash_id] = "ant"
 
             elif choice == "syn":
                 with catchtime("SYNTHESIS"):
-                    lsk = classifier(t)
+                    lsk = classifier(t, on=t.matrices["ant"], on_indices=t.node_index)
                     if not lsk:
                         ITERATORS[hash_id] = "end"
                     else:
@@ -165,8 +217,9 @@ def update_triangle_graph(t: Tree, i, hash_id):
                     else:
                         for (n1, n2), score in ant_score:
                             t.add_relation(n1, n2, "ant", score)
+                            t.add_relation(n2, n1, "ant", score)
         except:
-            logging.error(f"error in classifier {i=} {hash_id=}", exc_info=True)
+            logging.error(f"ERROR IN PREDICTION LOOP {i=} {hash_id=}", exc_info=True)
     t.save_state(i, hash_id)
 
     return ITERATORS[hash_id]

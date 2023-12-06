@@ -8,7 +8,9 @@ import calculateFontSize from '../../lib/FontSize'
 import { DEBUG } from '../../config/const'
 
 // Define the base length for the largest triangle
-const BASE_LENGTH = window.innerHeight * 0.5 // Modify as needed
+const max_length = Math.min(window.innerWidth, window.innerHeight)
+
+const BASE_LENGTH = max_length * 0.5 // Modify as needed
 let TRIANGLE_CENTERS = []
 
 export const positionToId = (x, y) => {
@@ -59,7 +61,9 @@ function layout(grid, layoutId, items, width, height, callback) {
     layoutOnResize: true,
   }
   TRIANGLE_CENTERS = []
-
+  const origin_x = (window.innerWidth - max_length) / 2
+  const origin_y = (window.innerHeight - max_length) / 2
+  console.log({ max_length, origin_x, origin_y, window })
   // Calculate positions for each item
   items.forEach((item) => {
     const isDragging = item.isDragging()
@@ -81,12 +85,12 @@ function layout(grid, layoutId, items, width, height, callback) {
     }
     TRIANGLE_CENTERS.push({
       id,
-      x: x + d_center,
-      y: y + d_center + d_y,
+      x: origin_x + x + d_center,
+      y: origin_y + y + d_center + d_y,
     })
 
     // Push the calculated position to the slots array
-    layout.slots.push(x, y)
+    layout.slots.push(origin_x + x, origin_y+ y)
   })
 
   // Call the callback function with the computed layout
@@ -136,6 +140,7 @@ const MutableTriangle = ({
 
   return (
     <>
+
       {!isLeafNode && data && (
         <>
           <MutableTriangle

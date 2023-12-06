@@ -109,3 +109,15 @@ mod:
 	chmod 777 ./.chroma
 
 run: start logs
+
+install-stackprinter:
+	@python_path=$$(which python); \
+	if [ -z "$$python_path" ]; then \
+		echo "Python not found"; \
+		exit 1; \
+	fi; \
+	echo "Installing stackprinter to $$python_path"; \
+	pip3 install stackprinter; \
+	site_packages_dir=$$($$python_path -c 'import site; print(site.getsitepackages()[0])'); \
+	echo "import stackprinter; stackprinter.set_excepthook(style='darkbg2')" >> "$$site_packages_dir/sitecustomize.py"; \
+	echo "Stackprinter installed and configured successfully."

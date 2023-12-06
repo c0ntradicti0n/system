@@ -9,7 +9,7 @@ def get_filename_without_extension(path):
 
 
 def get_documents(document_dir):
-    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+    text_splitter = CharacterTextSplitter(chunk_size=3000, chunk_overlap=0)
 
     all_files = []
     for root, _, files in os.walk(document_dir):
