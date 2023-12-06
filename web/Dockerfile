@@ -29,7 +29,7 @@ RUN bun run build
 FROM node:18-alpine as prod
 
 RUN apk add --no-cache curl
-RUN curl https://bun.sh/install | sudo bash
+RUN curl https://bun.sh/install |  bash
 
 # Install serve
 RUN bun install -g serve
