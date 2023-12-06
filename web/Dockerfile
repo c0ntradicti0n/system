@@ -28,6 +28,8 @@ RUN bun run build
 # Stage 2: Serve the React application
 FROM node:18-alpine as prod
 
+RUN bun install
+
 # Install serve
 RUN bun install -g serve
 
