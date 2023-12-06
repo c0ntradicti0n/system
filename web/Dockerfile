@@ -28,7 +28,7 @@ RUN bun run build
 # Stage 2: Serve the React application
 FROM node:18-alpine as prod
 
-RUN npm install -g bun
+RUN curl https://bun.sh/install | sudo bash
 
 # Install serve
 RUN bun install -g serve
