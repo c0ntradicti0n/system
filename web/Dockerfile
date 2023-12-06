@@ -26,10 +26,10 @@ FROM base as build
 RUN bun run build
 
 # Stage 2: Serve the React application
-FROM node:18-alpine as prod
+FROM node:18 as prod
 
-RUN apk add --no-cache curl bash
-RUN curl https://bun.sh/install |  bash
+RUN npm install -g bun
+
 
 # Install serve
 RUN bun install -g serve
