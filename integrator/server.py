@@ -30,7 +30,7 @@ def on_join(hash_id):
     join_room(hash_id)
     if not hash_id or not hash_id.strip():
         mods = states.get_all()
-        socketio.emit("set_mods", mods)
+        socketio.emit("set_mods", mods, room=hash_id)
         return
 
     # Add the user to the room_memberships
@@ -43,15 +43,15 @@ def on_join(hash_id):
 
     state = get_new_best_subgraph(progress, t)
 
-    socketio.emit("set_state", state)
+    socketio.emit("set_state", state, room=hash_id)
 
     meta = states[hash_id + "-meta"]
     text = states[hash_id + "-text"]
     params = states[hash_id + "-params"]
-    socketio.emit("set_meta", meta)
-    socketio.emit("set_text", text)
-    socketio.emit("set_params", params)
-    socketio.emit("set_progress", progress)
+    socketio.emit("set_meta", meta, room=hash_id)
+    socketio.emit("set_text", text, room=hash_id)
+    socketio.emit("set_params", params, room=hash_id)
+    socketio.emit("set_progress", progress, room=hash_id)
 
 
 def get_new_best_subgraph(progress, t):
@@ -216,8 +216,8 @@ def save_params(params, hash_id):
     progress = t.progress()
 
     state = get_new_best_subgraph(progress, t)
-    socketio.emit("set_state", state)
-    socketio.emit("set_params", new_params)
+    socketio.emit("set_state", state, room=hash_id)
+    socketio.emit("set_params", new_params, room=hash_id)
 
 
 @socketio.on("save_text")
