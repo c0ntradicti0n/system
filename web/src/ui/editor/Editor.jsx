@@ -9,6 +9,7 @@ import { PuzzleView } from './PuzzleView'
 import './controls.css'
 import { useSocket } from '../../query/useSocket'
 import { parseHash } from '../../lib/read_link_params'
+import BibTeXViewer from "./BibtexViewer";
 
 const conicColors = { '0%': '#87d068', '50%': '#ffe58f', '100%': '#ffccc7' }
 
@@ -104,6 +105,8 @@ export const Editor = () => {
             label: 'JSON',
             children: <JsonView {...{ hash, text, state }} />,
           },
+          { key: 'bib', label: <BibTeXViewer entry={meta} setIsGood={() => null} isGood />,
+          children: null}
         ]}
       />
 
