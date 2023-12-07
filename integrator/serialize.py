@@ -47,7 +47,7 @@ def serialize_graph_to_structure(graph, start_node, no_title=False, depth=10):
 
         structure[1] = {
             ".": node_key_text(node) + graph.nodes[node]["text"],
-            **construct_structure(get_sub_related_nodes(graph, node)),
+            **construct_structure(get_sub_related_nodes(graph, node), depth - 1),
         }
         edges = get_related_nodes(node)
 
