@@ -28,11 +28,9 @@ RUN bun run build
 # Stage 2: Serve the React application
 FROM node:18 as prod
 
-RUN npm install -g bun
+# Install serve globally using npm
+RUN npm install -g serve
 
-
-# Install serve
-RUN bun install -g serve
 
 # Copy build files from the builder stage
 COPY --from=build /app/build /app

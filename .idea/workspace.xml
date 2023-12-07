@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="make a new menu and optimize socket communication">
-      <change beforePath="$PROJECT_DIR$/web/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/web/Dockerfile" afterDir="false" />
-    </list>
+    <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="make a new menu and optimize socket communication" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -481,7 +479,7 @@
       <workItem from="1701881046068" duration="4097000" />
       <workItem from="1701885663619" duration="873000" />
       <workItem from="1701886638104" duration="82000" />
-      <workItem from="1701906243812" duration="667000" />
+      <workItem from="1701906243812" duration="1287000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -812,23 +810,23 @@
       <option name="project" value="LOCAL" />
       <updated>1691896932213</updated>
     </task>
-    <task id="LOCAL-00069" summary="make a new menu and optimize socket communication">
+    <task id="LOCAL-00072" summary="make a new menu and optimize socket communication">
       <option name="closed" value="true" />
-      <created>1701906791579</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
+      <created>1701906982137</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
       <option name="project" value="LOCAL" />
-      <updated>1701906791579</updated>
+      <updated>1701906982137</updated>
     </task>
-    <task id="LOCAL-00070" summary="make a new menu and optimize socket communication">
+    <task id="LOCAL-00073" summary="make a new menu and optimize socket communication">
       <option name="closed" value="true" />
-      <created>1701906840630</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
+      <created>1701907074991</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
       <option name="project" value="LOCAL" />
-      <updated>1701906840630</updated>
+      <updated>1701907074991</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
