@@ -477,8 +477,8 @@ class Tree:
             except:
                 depth = 0
 
-        if depth > 4:
-            depth = 4
+        if depth > 7:
+            depth = 7
 
         # Sort nodes by score and get the top 10
         start_node = start_node if start_node else self.params["startNode"]
