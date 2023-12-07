@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import io from 'socket.io-client'
-const socket = io.connect('https://localhost', {
+const socket = io.connect('', {
   debug: true,
   transports: ['websocket'],
   perMessageDeflate: false,
