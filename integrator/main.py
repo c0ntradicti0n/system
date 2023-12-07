@@ -43,6 +43,9 @@ def infer(model_name, t, valid_labels, tree=None, on=None, on_indices=None):
                 keys = []
                 pre_computed_scores = []
                 for (n1, n2), score in t:
+                    if n1 not in tree.index_text or n2 not in tree.index_text:
+                        logging.error(f"node {n1} or {n2} not in tree index: {tree.index_text}")
+                        continue
                     texts.append((tree.index_text[n1], tree.index_text[n2]))
                     keys.append((n1, n2))
                     pre_computed_scores.append(score)
@@ -251,7 +254,7 @@ def make_dialectics(texts, epochs=10, hash_id=None):
 
 
 if __name__ == "__main__":
-    hash_id = "1cb10b667a508d3585b760a6ef9e8567b38af5421469a767678007a8a525d911"
+    hash_id = "eac9fc66ccb6f08a5a5ef26ed20b23dc9d4f84e660daf4d40db84e6f11c17bd0"
     T, i = states[hash_id]
 
     while True:
