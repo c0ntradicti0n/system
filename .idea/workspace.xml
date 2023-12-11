@@ -5,9 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="make a new menu and optimize socket communication">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/main.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/main.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integrator/reader/reader_sentences.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/ui/editor/EventBroadcaster.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chroma_viz/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/chroma_viz/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrator/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrator/cluster_hierarchy.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/cluster_hierarchy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrator/combination_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/combination_state.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrator/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrator/reader/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/reader/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrator/tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/tree.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/lib/position.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/lib/position.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/lib/useMuuriGrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/lib/useMuuriGrid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/puzzle.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/puzzle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/BibtexViewer.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/BibtexViewer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/Editor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/Editor.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/Puzzle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/Puzzle.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/PuzzleView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/PuzzleView.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/worker/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +42,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript JSX File" />
-        <option value="JavaScript File" />
         <option value="Python Script" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -85,7 +101,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/stefan/programming/system/vector_db_inspect&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/stefan/programming/system/integrator/reader&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -104,11 +120,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/integrator/reader" />
       <recent name="$PROJECT_DIR$/integrator" />
       <recent name="$PROJECT_DIR$/web/src/ui" />
       <recent name="$PROJECT_DIR$/classifier/data" />
       <recent name="$PROJECT_DIR$/classifier/train" />
-      <recent name="$PROJECT_DIR$/classifier" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib" />
@@ -118,9 +134,10 @@
       <recent name="$PROJECT_DIR$/classifier/result" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.reader_sentences">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="wdl" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -156,6 +173,7 @@
     </configuration>
     <configuration name="cluster_hierarchy" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="wdl" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -191,6 +209,7 @@
     </configuration>
     <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="wdl" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -226,6 +245,7 @@
     </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="wdl" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -258,8 +278,9 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="mst_maximax" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="reader_dialogue" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="wdl" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -268,7 +289,7 @@
         <env name="SYSTEM" value="../$SYTEM$" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/integrator" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/integrator/" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -283,7 +304,7 @@
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
         </ENTRIES>
       </EXTENSION>
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/integrator/mst_maximax.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/integrator/reader/reader_dialogue.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -292,8 +313,9 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test_models" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="reader_sentences" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="wdl" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -302,7 +324,8 @@
         <env name="SYSTEM" value="../$SYTEM$" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/integrator" />
+      <option name="SDK_NAME" value="Python 3.11 (system) (2)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/integrator/reader" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -317,7 +340,7 @@
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
         </ENTRIES>
       </EXTENSION>
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/integrator/test_models.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/integrator/reader/reader_sentences.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -328,6 +351,7 @@
     </configuration>
     <configuration name="train_opposites" type="PythonConfigurationType" factoryName="Python">
       <module name="wdl" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -362,21 +386,28 @@
     </configuration>
     <list>
       <item itemvalue="Python.train_opposites" />
+      <item itemvalue="Python.reader_dialogue" />
       <item itemvalue="Python.cluster_hierarchy" />
       <item itemvalue="Python.main (1)" />
-      <item itemvalue="Python.test_models" />
-      <item itemvalue="Python.mst_maximax" />
       <item itemvalue="Python.main" />
+      <item itemvalue="Python.reader_sentences" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.reader_sentences" />
+        <item itemvalue="Python.reader_dialogue" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.cluster_hierarchy" />
         <item itemvalue="Python.main (1)" />
-        <item itemvalue="Python.test_models" />
-        <item itemvalue="Python.mst_maximax" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-67fca87a943a-c986f194a52a-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.11799.259" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -485,7 +516,15 @@
       <workItem from="1701886638104" duration="82000" />
       <workItem from="1701906243812" duration="3489000" />
       <workItem from="1701910036833" duration="330000" />
-      <workItem from="1701910395960" duration="1128000" />
+      <workItem from="1701910395960" duration="1831000" />
+      <workItem from="1701940913903" duration="31000" />
+      <workItem from="1701942476779" duration="1899000" />
+      <workItem from="1701956058230" duration="467000" />
+      <workItem from="1701957883887" duration="3100000" />
+      <workItem from="1702284804148" duration="1251000" />
+      <workItem from="1702290928962" duration="6346000" />
+      <workItem from="1702317033864" duration="9313000" />
+      <workItem from="1702334085400" duration="3611000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -816,14 +855,6 @@
       <option name="project" value="LOCAL" />
       <updated>1691896932213</updated>
     </task>
-    <task id="LOCAL-00078" summary="make a new menu and optimize socket communication">
-      <option name="closed" value="true" />
-      <created>1701910072318</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1701910072319</updated>
-    </task>
     <task id="LOCAL-00079" summary="make a new menu and optimize socket communication">
       <option name="closed" value="true" />
       <created>1701910410578</created>
@@ -832,7 +863,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701910410579</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="make a new menu and optimize socket communication">
+      <option name="closed" value="true" />
+      <created>1701912630706</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1701912630706</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1076,22 +1115,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/integrator/tree.py</url>
-          <line>517</line>
+          <line>522</line>
           <option name="timeStamp" value="285" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/integrator/tree.py</url>
-          <line>357</line>
+          <line>362</line>
           <option name="timeStamp" value="293" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/integrator/tree.py</url>
-          <line>356</line>
+          <line>361</line>
           <option name="timeStamp" value="294" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/integrator/tree.py</url>
-          <line>383</line>
+          <line>388</line>
           <option name="timeStamp" value="297" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1125,12 +1164,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/integrator/main.py</url>
-          <line>28</line>
+          <line>29</line>
           <option name="timeStamp" value="337" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/integrator/main.py</url>
-          <line>156</line>
+          <line>158</line>
           <option name="timeStamp" value="338" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1150,7 +1189,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/integrator/main.py</url>
-          <line>83</line>
+          <line>81</line>
           <option name="timeStamp" value="350" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1160,7 +1199,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/integrator/main.py</url>
-          <line>191</line>
+          <line>193</line>
           <option name="timeStamp" value="356" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1172,6 +1211,10 @@
           <url>notebook:///home/stefan/programming/system/integrator/test_mst.ipynb</url>
           <line>8</line>
           <option name="timeStamp" value="252" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/web/src/lib/useMuuriGrid.js</url>
+          <option name="timeStamp" value="366" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -1204,6 +1247,7 @@
     <SUITE FILE_PATH="coverage/system$model_siamese.coverage" NAME="model.siamese Coverage Results" MODIFIED="1700579341040" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
     <SUITE FILE_PATH="coverage/system$model.coverage" NAME="model Coverage Results" MODIFIED="1700529933994" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
     <SUITE FILE_PATH="coverage/system$main.coverage" NAME="main Coverage Results" MODIFIED="1701908981876" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
+    <SUITE FILE_PATH="coverage/system$reader_text.coverage" NAME="reader_text Coverage Results" MODIFIED="1701913291918" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator/reader" />
     <SUITE FILE_PATH="coverage/system$m_siamese.coverage" NAME="m_siamese Coverage Results" MODIFIED="1700592143090" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
     <SUITE FILE_PATH="coverage/system$combination_state.coverage" NAME="combination_state Coverage Results" MODIFIED="1700854933474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
     <SUITE FILE_PATH="coverage/system$neighbor_joining.coverage" NAME="neighbor_joining Coverage Results" MODIFIED="1700853306690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
@@ -1214,6 +1258,7 @@
     <SUITE FILE_PATH="coverage/system$mst_maximax.coverage" NAME="mst_maximax Coverage Results" MODIFIED="1700866398909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
     <SUITE FILE_PATH="coverage/wdl$rest.coverage" NAME="rest Coverage Results" MODIFIED="1690875061170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
     <SUITE FILE_PATH="coverage/system$train_score_hierarchy.coverage" NAME="train_score_hierarchy Coverage Results" MODIFIED="1700684917202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
+    <SUITE FILE_PATH="coverage/system$reader_dialogue.coverage" NAME="reader_dialogue Coverage Results" MODIFIED="1701913001879" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator/" />
     <SUITE FILE_PATH="coverage/system$train.coverage" NAME="train Coverage Results" MODIFIED="1700591754683" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
     <SUITE FILE_PATH="coverage/system$train_hierarchy.coverage" NAME="train_hierarchy Coverage Results" MODIFIED="1700679093768" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier/" />
     <SUITE FILE_PATH="coverage/system$train_opposites.coverage" NAME="train_opposites Coverage Results" MODIFIED="1700694621872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier/" />

@@ -12,6 +12,7 @@ export function PuzzleView(props) {
 
   return (
     <>
+      <Puzzle data={props.state} action={action} props={props} />
       <PuzzleControls
         hash={props.hash}
         socket={props.socket}
@@ -22,7 +23,6 @@ export function PuzzleView(props) {
         setIsPaused={props.setIsPaused}
         activeTab={props.activeTab}
       />
-      <Puzzle data={props.state} action={action} props={props} />
     </>
   )
 }

@@ -43,3 +43,49 @@
 .puzzle-item.muuri-item-releasing .item-content {
   background: blueViolet;
 }
+
+.top-left,
+.top-right {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background: transparent;
+}
+
+.top-left {
+  left: 0;
+  shape-outside: polygon(0% 0, 100% 0, 0% 100%);
+  clip-path: polygon(0% 0, 100% 0, 0% 100%);
+}
+
+.top-right {
+  right: 0;
+  shape-outside: polygon(100% 0, 100% 100%, 0 0);
+  clip-path: polygon(100% 0, 100% 100%, 0 0);
+}
+
+.react-transform-component {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.react-transform-wrapper {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.ant-steps-item-wait .ant-steps-item-icon {
+  background-color: yellowgreen !important;
+  opacity: 0.5;
+}

@@ -32,7 +32,7 @@ class CustomCombinations:
                         i_a, i_b = self.on_indices[a], self.on_indices[b]
                     else:
                         i_a, i_b = a, b
-                    if not self.on [i_a, i_b]:
+                    if not self.on[i_a, i_b]:
                         self._advance_generator()
                         self.yielded_count += 1
                         valid = False
@@ -68,10 +68,26 @@ class CustomCombinations:
         return round(self.yielded_count / math.comb(self.n, self.r), 2)
 
     def __getstate__(self):
-        return self.pool, self.r, self.indices, self.exhausted, self.yielded_count, self.on, self.on_indices
+        return (
+            self.pool,
+            self.r,
+            self.indices,
+            self.exhausted,
+            self.yielded_count,
+            self.on,
+            self.on_indices,
+        )
 
     def __setstate__(self, state):
-        self.pool, self.r, self.indices, self.exhausted, self.yielded_count, self.on, self.on_indices = state
+        (
+            self.pool,
+            self.r,
+            self.indices,
+            self.exhausted,
+            self.yielded_count,
+            self.on,
+            self.on_indices,
+        ) = state
         self.n = len(self.pool)
 
 

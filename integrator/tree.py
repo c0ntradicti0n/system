@@ -194,7 +194,7 @@ class Tree:
         except Exception as e:
             logging.error(f"Error in drawing graph {e}", exc_info=True)
 
-    def pull(self, n_samples, relations, on=None, on_indices =None):
+    def pull(self, n_samples, relations, on=None, on_indices=None):
         if not tuple(relations) in self.iterators:
             self.iterators[tuple(relations)] = CustomCombinations(
                 list(self.node_index.keys()), n_samples, on=on, on_indices=on_indices
@@ -202,7 +202,9 @@ class Tree:
         for k in self.iterators[tuple(relations)]:
             yield [(i, self.index_text[i]) for i in k]
 
-    def pull_batch(self, batch_size, n_samples, relations=None, on=None ,on_indices =None):
+    def pull_batch(
+        self, batch_size, n_samples, relations=None, on=None, on_indices=None
+    ):
         """
         :param batch_size:
         :param n_samples:
@@ -215,7 +217,10 @@ class Tree:
                     *[
                         ([i for i, _ in samples], [s for _, s in samples])
                         for samples in maxislice(
-                            self.pull(n_samples, relations, on=on, on_indices=on_indices), batch_size
+                            self.pull(
+                                n_samples, relations, on=on, on_indices=on_indices
+                            ),
+                            batch_size,
                         )
                     ]
                 )

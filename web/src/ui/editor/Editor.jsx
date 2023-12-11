@@ -9,7 +9,7 @@ import { PuzzleView } from './PuzzleView'
 import './controls.css'
 import { useSocket } from '../../query/useSocket'
 import { parseHash } from '../../lib/read_link_params'
-import BibTeXViewer from "./BibtexViewer";
+import BibTeXViewer from './BibtexViewer'
 
 const conicColors = { '0%': '#87d068', '50%': '#ffe58f', '100%': '#ffccc7' }
 
@@ -33,7 +33,7 @@ export const Editor = () => {
     params,
     socket,
   } = useSocket(hashId)
-  console.log({ progress, state, params, meta, status, i })
+  //console.log({ progress, state, params, meta, status, i })
   const sumPercent = useMemo(
     () => Object.values(progress ?? {}).reduce((a, b) => a + b, 0) / 3,
     [progress],
@@ -105,8 +105,13 @@ export const Editor = () => {
             label: 'JSON',
             children: <JsonView {...{ hash, text, state }} />,
           },
-          { key: 'bib', label: <BibTeXViewer entry={meta} setIsGood={() => null} isGood />,
-          children: null}
+          {
+            key: 'bib',
+            label: (
+              <BibTeXViewer entry={meta} short setIsGood={() => null} isGood />
+            ),
+            children: null,
+          },
         ]}
       />
 
@@ -115,17 +120,20 @@ export const Editor = () => {
           style={{
             fontFamily: 'monospace',
             position: 'fixed',
-            right: '20vw',
-            top: 0,
+            right: '0',
+            top: '50vh',
+            width: 'min-content',
           }}
         >
-          epoch {i}
           <Progress
-            width={100}
+            size={[200, 20]}
             percent={sumPercent * 100 ?? 100}
             strokeColor={conicColors}
+            showInfo={false}
           />
           <Steps
+            navArrowColor={'rgba(0.2,.2,.4,0)'}
+            direction="vertical"
             style={{
               display: 'inline-flex',
             }}

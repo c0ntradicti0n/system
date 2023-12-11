@@ -1,26 +1,32 @@
 from .reader_dialogue import parse_dialogue
 from .reader_enumerated import parse_enumerated
+from .reader_sentences import parse_sentences
 
 
-# Parse the text
 def parse_text(text):
 
     result = parse_enumerated(text)
+
+    if not result:
+        result = parse_sentences(text)
     if not result:
         result = parse_dialogue(text)
+
     return result
+
+
 def get_inputs(filename):
     with open(filename) as f:
         text = f.read()
     return parse_dialogue(text)
+
+
 if __name__ == "__main__":
 
     from pprint import pprint
 
-
-    if __name__ == "__main__":
-        # Test
-        text = """
+    # Test
+    text = """
     6.1265 Logic can always be conceived to be such that every proposition is its own proof.
     
     
@@ -35,8 +41,8 @@ if __name__ == "__main__":
     6.13 Logic is not a theory but a reflexion of the world.
         """
 
-        parsed_data = parse_text(text)
-        pprint(parsed_data)
+    parsed_data = parse_text(text)
+    pprint(parsed_data)
 
-        pprint(get_inputs("texts/euclid.txt"))
-        pprint(get_inputs("texts/phaedrus.1b.txt"))
+    pprint(get_inputs("texts/euclid.txt"))
+    pprint(get_inputs("texts/phaedrus.1b.txt"))

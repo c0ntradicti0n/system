@@ -18,6 +18,9 @@ ENV FLASK_ENV=development
 ENV MPLCONFIGDIR=/config/matplotlib
 RUN mkdir /matplotlib
 RUN chmod 777 /matplotlib
+RUN pip install spacy
+RUN python -m spacy download en_core_web_sm
+
 CMD ["celery", "-A", "tasks", "worker", "--loglevel=info"]
 
 CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]

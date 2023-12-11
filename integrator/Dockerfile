@@ -32,6 +32,9 @@ RUN apt install -y clang python3-dev build-essential uwsgi uwsgi-plugin-gevent-p
 #RUN pip install uwsgi==2.0.23 gevent
 #RUN pip install gevent-websocket
 #CMD ["pypy3", "server.py"]
+RUN pip install spacy
+RUN python -m spacy download en_core_web_sm
+
 ENTRYPOINT ["gunicorn", "-k", "geventwebsocket.gunicorn.workers.GeventWebSocketWorker", "-w", "1", "--threads", "100", "-b", "0.0.0.0:5000", "--timeout", "2000" , "--graceful-timeout", "200", "server:app"]
 
 #ENTRYPOINT uwsgi --plugins-list

@@ -3,6 +3,7 @@ import hashlib
 import itertools
 import logging
 from pprint import pprint
+
 from classifier.result.predict import MODELS
 from integrator.serialize import serialize_graph_to_structure
 from integrator.states import states
@@ -37,14 +38,15 @@ def infer(model_name, t, valid_labels, tree=None, on=None, on_indices=None):
         )
     elif isinstance(t, list):
         if len(t) >= 1:
-
             if isinstance(t[0], tuple):
                 texts = []
                 keys = []
                 pre_computed_scores = []
                 for (n1, n2), score in t:
                     if n1 not in tree.index_text or n2 not in tree.index_text:
-                        logging.error(f"node {n1} or {n2} not in tree index: {tree.index_text}")
+                        logging.error(
+                            f"node {n1} or {n2} not in tree index: {tree.index_text}"
+                        )
                         continue
                     texts.append((tree.index_text[n1], tree.index_text[n2]))
                     keys.append((n1, n2))
@@ -63,11 +65,7 @@ def infer(model_name, t, valid_labels, tree=None, on=None, on_indices=None):
     ), list(score.view(-1, MODELS[model_name].config.n_samples).tolist())
 
     if pre_computed_scores:
-        score = [
-            [s, s]
-            for s in
-            pre_computed_scores
-        ]
+        score = [[s, s] for s in pre_computed_scores]
     lsk = [
         (l, s, k)
         for l, s, k in zip(labels, score, keys)
@@ -139,14 +137,18 @@ def score(model_name, t, relation, hash_id="default"):
     scores = [score for _, score in results]
     max_score = max(scores)
     min_score = min(scores)
-    results = [(key, (score - min_score) / (max_score - min_score)) for key, score in results]
+    results = [
+        (key, (score - min_score) / (max_score - min_score)) for key, score in results
+    ]
 
     return results
 
 
 # classify thesis, antithesis, synthesis
 def classifier(t, on=None, on_indices=None):
-    return infer("thesis_antithesis_synthesis", t, [1, 2, 3], on=on, on_indices=on_indices)
+    return infer(
+        "thesis_antithesis_synthesis", t, [1, 2, 3], on=on, on_indices=on_indices
+    )
 
 
 # classify hypernym, hyponym
