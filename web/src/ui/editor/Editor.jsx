@@ -53,7 +53,7 @@ export const Editor = () => {
   })
 
   return (
-    <div className="App" style={{ overflowY: 'scroll' }}>
+    <div className="App" style={{ overflow: 'hidden' }}>
       <Tabs
         activeKey={activeTab}
         onChange={(key) => {
