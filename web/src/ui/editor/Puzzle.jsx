@@ -47,29 +47,19 @@ console.log("handleInteractionStart", mouseX, mouseY)
   }
 }
 
-const handleInteractionStart2 = (event) => {
-  console.log('handleInteractionStart2', event)
-  const mouseX = event.clientX
-  const mouseY = event.clientY
-  const element = event.target
-  console.log('handleInteractionStart2', element, event)
 
-  const rect = element.getBoundingClientRect()
-
-  const ax = rect.left
-  const ay = rect.bottom
-  const bx = rect.right
-  const by = rect.bottom
-  const cx = rect.left + rect.width / 2
-  const cy = rect.top
-
-  if (pointInTriangle(mouseX, mouseY, ax, ay, bx, by, cx, cy)) {
-    event.preventDefault()
-  }
-}
 const handleInterActionElement = (element, event) => {
-  const mouseX = event.clientX
-  const mouseY = event.clientY
+    let mouseX, mouseY;
+    if (event.touches?.length) {
+      const touch = event.touches[0];
+
+      // Get the touch coordinates
+      mouseX = touch.clientX;
+      mouseY = touch.clientY;
+    } else {
+      mouseX = event.clientX
+      mouseY = event.clientY
+    }
 
   const rect = element.getBoundingClientRect()
   const ax = rect.left
@@ -144,7 +134,7 @@ function layout(grid, layoutId, items, width, height, callback) {
   TRIANGLE_CENTERS = []
   const origin_x = (window.innerWidth - max_length) / 2
   const origin_y = (window.innerHeight - max_length) / 2
-  //console.log({ max_length, origin_x, origin_y, window })
+
   // Calculate positions for each item
   items.forEach((item) => {
     const isDragging = item.isDragging()
@@ -234,12 +224,15 @@ const MutableTriangle = ({
         style={{
           height: idToSize(fullId),
           width: idToSize(fullId),
+
           zIndex: fullId.length,
+
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           dominantBaseline: 'middle',
           textAnchor: 'middle',
+
           clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)',
           pointerEvents: 'visiblePainted',
           backgroundColor: stringToColour(fullId, 0.5),

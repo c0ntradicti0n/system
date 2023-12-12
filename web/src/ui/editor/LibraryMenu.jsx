@@ -61,7 +61,7 @@ const LibraryMenu = ({
         type="primary"
         icon={<BookOutlined />}
         onClick={() => setCollapsed(!collapsed)}
-        style={{ width: '40vw' }}
+        style={{ width: '45vw', minWidth: '300' }}
       >
         <BibTeXViewer entry={meta} short setIsGood={() => null} isGood inline />
         <div style={{ maxWidth: '10vw', display: 'inline' }}>
