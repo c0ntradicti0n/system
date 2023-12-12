@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="repair pointer events and add zoom and drag and drop in editor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/puzzle.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/puzzle.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -367,12 +368,12 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.train_opposites" />
+      <item itemvalue="Python.reader_dialogue" />
       <item itemvalue="Python.cluster_hierarchy" />
       <item itemvalue="Python.main (1)" />
       <item itemvalue="Python.main" />
-      <item itemvalue="Python.reader_dialogue" />
       <item itemvalue="Python.reader_sentences" />
-      <item itemvalue="Python.train_opposites" />
     </list>
     <recent_temporary>
       <list>
@@ -507,6 +508,7 @@
       <workItem from="1702290928962" duration="6346000" />
       <workItem from="1702317033864" duration="9313000" />
       <workItem from="1702334085400" duration="4385000" />
+      <workItem from="1702339638425" duration="1361000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -837,14 +839,6 @@
       <option name="project" value="LOCAL" />
       <updated>1691896932213</updated>
     </task>
-    <task id="LOCAL-00080" summary="make a new menu and optimize socket communication">
-      <option name="closed" value="true" />
-      <created>1701912630706</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1701912630706</updated>
-    </task>
     <task id="LOCAL-00081" summary="repair pointer events and add zoom and drag and drop in editor">
       <option name="closed" value="true" />
       <created>1702338412581</created>
@@ -853,7 +847,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702338412582</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="repair pointer events and add zoom and drag and drop in editor">
+      <option name="closed" value="true" />
+      <created>1702339730768</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1702339730769</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
