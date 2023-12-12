@@ -21,8 +21,10 @@ const BibTeXViewer = ({ entry, setIsGood, isGood, short = false }) => {
   if (data.title && !isGood) {
     setIsGood(true)
   }
+  console.log(data)
   return (
     <div className="bibtex-entry" style={{ display: 'inline' }}>
+      <i>{parsedData[0].entryType}</i>{' '}
       <strong>{data.title}</strong>{' '}
       {!short && (
         <>
