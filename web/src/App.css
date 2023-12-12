@@ -9,6 +9,10 @@
   color: white;
 }
 
+.ant-tabs-nav {
+  height: 100vh;
+}
+
 .App > * {
   /* filter: invert(1); */
 }

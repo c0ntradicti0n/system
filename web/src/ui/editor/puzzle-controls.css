@@ -1,7 +1,7 @@
 .puzzle-item {
   pointer-events: auto; /* Enables pointer events for this child */
   position: absolute;
-  width: 12vw;
+  width: 15vw;
   height: fit-content;
   margin: 5px;
   overflow: visible;

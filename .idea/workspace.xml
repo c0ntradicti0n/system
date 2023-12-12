@@ -5,8 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="repair pointer events and add zoom and drag and drop in editor">
+      <change afterPath="$PROJECT_DIR$/lib/flatten.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/ui/editor/LibraryMenu.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrator/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/config/areas.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/config/areas.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/puzzle.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/puzzle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/BibtexViewer.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/BibtexViewer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/Editor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/Editor.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/ExperimentsView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/LibraryView.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/PuzzleControls.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/PuzzleControls.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/PuzzleView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/PuzzleView.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/TextMetaModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/TextMetaModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/puzzle-controls.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/puzzle-controls.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +37,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript JSX File" />
-        <option value="Python Script" />
         <option value="JavaScript File" />
+        <option value="JSX File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -79,12 +92,14 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Node.js.TextMetaModal.jsx.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.scratch_31.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/stefan/programming/system/integrator/reader&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/stefan/programming/system/integrator&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -96,8 +111,8 @@
   },
   &quot;keyToStringList&quot;: {
     &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;Exasol&quot;,
-      &quot;Python&quot;
+      &quot;Python&quot;,
+      &quot;Exasol&quot;
     ]
   }
 }</component>
@@ -117,7 +132,10 @@
       <recent name="$PROJECT_DIR$/classifier/result" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.reader_sentences">
+  <component name="RunManager" selected="Python.scratch_31">
+    <configuration name="TextMetaModal.jsx" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/web/src/ui/editor/TextMetaModal.jsx" working-dir="$PROJECT_DIR$/web/src/ui/editor">
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="wdl" />
       <option name="ENV_FILES" value="" />
@@ -146,78 +164,6 @@
         </ENTRIES>
       </EXTENSION>
       <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="cluster_hierarchy" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="wdl" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1 " />
-        <env name="REDIS_HOST" value="$REDIS_HOST$" />
-        <env name="SYSTEM" value="../$SYTEM$" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (system) (2)" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/integrator" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <EXTENSION ID="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </EXTENSION>
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/integrator/cluster_hierarchy.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="wdl" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1 " />
-        <env name="REDIS_HOST" value="$REDIS_HOST$" />
-        <env name="SYSTEM" value="../$SYTEM$" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (system) (2)" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/service" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <EXTENSION ID="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </EXTENSION>
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/service/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -332,6 +278,42 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="scratch_31" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="wdl" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1 " />
+        <env name="REDIS_HOST" value="$REDIS_HOST$" />
+        <env name="SYSTEM" value="../$SYTEM$" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.11 (system) (2)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/integrator" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </EXTENSION>
+      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch_31.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="train_opposites" type="PythonConfigurationType" factoryName="Python">
       <module name="wdl" />
       <option name="ENV_FILES" value="" />
@@ -368,20 +350,20 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Node.js.TextMetaModal.jsx" />
       <item itemvalue="Python.train_opposites" />
+      <item itemvalue="Python.scratch_31" />
       <item itemvalue="Python.reader_dialogue" />
-      <item itemvalue="Python.cluster_hierarchy" />
-      <item itemvalue="Python.main (1)" />
       <item itemvalue="Python.main" />
       <item itemvalue="Python.reader_sentences" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.scratch_31" />
+        <item itemvalue="Node.js.TextMetaModal.jsx" />
         <item itemvalue="Python.reader_sentences" />
         <item itemvalue="Python.reader_dialogue" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.cluster_hierarchy" />
-        <item itemvalue="Python.main (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -508,7 +490,9 @@
       <workItem from="1702290928962" duration="6346000" />
       <workItem from="1702317033864" duration="9313000" />
       <workItem from="1702334085400" duration="4385000" />
-      <workItem from="1702339638425" duration="1361000" />
+      <workItem from="1702339638425" duration="2127000" />
+      <workItem from="1702409655039" duration="7192000" />
+      <workItem from="1702421257531" duration="827000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -839,14 +823,6 @@
       <option name="project" value="LOCAL" />
       <updated>1691896932213</updated>
     </task>
-    <task id="LOCAL-00081" summary="repair pointer events and add zoom and drag and drop in editor">
-      <option name="closed" value="true" />
-      <created>1702338412581</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1702338412582</updated>
-    </task>
     <task id="LOCAL-00082" summary="repair pointer events and add zoom and drag and drop in editor">
       <option name="closed" value="true" />
       <created>1702339730768</created>
@@ -855,7 +831,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702339730769</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="repair pointer events and add zoom and drag and drop in editor">
+      <option name="closed" value="true" />
+      <created>1702341145416</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1702341145416</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1225,28 +1209,29 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/wdl$philosopher_main.coverage" NAME="philosopher main Coverage Results" MODIFIED="1691748704396" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
-    <SUITE FILE_PATH="coverage/wdl$analyser.coverage" NAME="analyser Coverage Results" MODIFIED="1690108599658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
-    <SUITE FILE_PATH="coverage/system$train_thesis_antithesis_synthesis.coverage" NAME="train_thesis_antithesis_synthesis Coverage Results" MODIFIED="1700703633058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier/" />
-    <SUITE FILE_PATH="coverage/system$test_models.coverage" NAME="test_models Coverage Results" MODIFIED="1701735293631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
     <SUITE FILE_PATH="coverage/system$model_siamese.coverage" NAME="model.siamese Coverage Results" MODIFIED="1700579341040" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
-    <SUITE FILE_PATH="coverage/system$model.coverage" NAME="model Coverage Results" MODIFIED="1700529933994" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
-    <SUITE FILE_PATH="coverage/system$main.coverage" NAME="main Coverage Results" MODIFIED="1701908981876" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
-    <SUITE FILE_PATH="coverage/system$reader_text.coverage" NAME="reader_text Coverage Results" MODIFIED="1701913291918" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator/reader" />
-    <SUITE FILE_PATH="coverage/system$m_siamese.coverage" NAME="m_siamese Coverage Results" MODIFIED="1700592143090" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
-    <SUITE FILE_PATH="coverage/system$combination_state.coverage" NAME="combination_state Coverage Results" MODIFIED="1700854933474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
-    <SUITE FILE_PATH="coverage/system$neighbor_joining.coverage" NAME="neighbor_joining Coverage Results" MODIFIED="1700853306690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
-    <SUITE FILE_PATH="coverage/wdl$logic_generator.coverage" NAME="philosopher main Coverage Results" MODIFIED="1691407193115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
-    <SUITE FILE_PATH="coverage/system$cluster_hierarchy.coverage" NAME="cluster_hierarchy Coverage Results" MODIFIED="1701884560649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
-    <SUITE FILE_PATH="coverage/system$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1701793100705" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/service" />
-    <SUITE FILE_PATH="coverage/system$test_mst.coverage" NAME="test_mst Coverage Results" MODIFIED="1700856083189" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
+    <SUITE FILE_PATH="coverage/wdl$philosopher_main.coverage" NAME="philosopher main Coverage Results" MODIFIED="1691748704396" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
+    <SUITE FILE_PATH="coverage/system$philosopher_main.coverage" NAME="philosopher main Coverage Results" MODIFIED="1692230805675" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
     <SUITE FILE_PATH="coverage/system$mst_maximax.coverage" NAME="mst_maximax Coverage Results" MODIFIED="1700866398909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
+    <SUITE FILE_PATH="coverage/system$train.coverage" NAME="train Coverage Results" MODIFIED="1700591754683" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
+    <SUITE FILE_PATH="coverage/system$scratch_31.coverage" NAME="scratch_31 Coverage Results" MODIFIED="1702420838012" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/wdl$logic_generator.coverage" NAME="philosopher main Coverage Results" MODIFIED="1691407193115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
+    <SUITE FILE_PATH="coverage/system$m_siamese.coverage" NAME="m_siamese Coverage Results" MODIFIED="1700592143090" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
+    <SUITE FILE_PATH="coverage/system$model.coverage" NAME="model Coverage Results" MODIFIED="1700529933994" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
+    <SUITE FILE_PATH="coverage/wdl$analyser.coverage" NAME="analyser Coverage Results" MODIFIED="1690108599658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
     <SUITE FILE_PATH="coverage/wdl$rest.coverage" NAME="rest Coverage Results" MODIFIED="1690875061170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
+    <SUITE FILE_PATH="coverage/system$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1701793100705" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/service" />
+    <SUITE FILE_PATH="coverage/system$main.coverage" NAME="main Coverage Results" MODIFIED="1701908981876" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
+    <SUITE FILE_PATH="coverage/system$combination_state.coverage" NAME="combination_state Coverage Results" MODIFIED="1700854933474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
+    <SUITE FILE_PATH="coverage/system$train_hierarchy.coverage" NAME="train_hierarchy Coverage Results" MODIFIED="1700679093768" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier/" />
     <SUITE FILE_PATH="coverage/system$train_score_hierarchy.coverage" NAME="train_score_hierarchy Coverage Results" MODIFIED="1700684917202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
     <SUITE FILE_PATH="coverage/system$reader_dialogue.coverage" NAME="reader_dialogue Coverage Results" MODIFIED="1701913001879" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator/" />
-    <SUITE FILE_PATH="coverage/system$train.coverage" NAME="train Coverage Results" MODIFIED="1700591754683" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
-    <SUITE FILE_PATH="coverage/system$train_hierarchy.coverage" NAME="train_hierarchy Coverage Results" MODIFIED="1700679093768" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier/" />
+    <SUITE FILE_PATH="coverage/system$neighbor_joining.coverage" NAME="neighbor_joining Coverage Results" MODIFIED="1700853306690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
+    <SUITE FILE_PATH="coverage/system$train_thesis_antithesis_synthesis.coverage" NAME="train_thesis_antithesis_synthesis Coverage Results" MODIFIED="1700703633058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier/" />
+    <SUITE FILE_PATH="coverage/system$test_models.coverage" NAME="test_models Coverage Results" MODIFIED="1701735293631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
+    <SUITE FILE_PATH="coverage/system$test_mst.coverage" NAME="test_mst Coverage Results" MODIFIED="1700856083189" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
+    <SUITE FILE_PATH="coverage/system$cluster_hierarchy.coverage" NAME="cluster_hierarchy Coverage Results" MODIFIED="1701884560649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
+    <SUITE FILE_PATH="coverage/system$reader_text.coverage" NAME="reader_text Coverage Results" MODIFIED="1701913291918" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator/reader" />
     <SUITE FILE_PATH="coverage/system$train_opposites.coverage" NAME="train_opposites Coverage Results" MODIFIED="1700694621872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier/" />
-    <SUITE FILE_PATH="coverage/system$philosopher_main.coverage" NAME="philosopher main Coverage Results" MODIFIED="1692230805675" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/philosopher" />
   </component>
 </project>

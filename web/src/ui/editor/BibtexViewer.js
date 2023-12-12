@@ -22,7 +22,7 @@ const BibTeXViewer = ({ entry, setIsGood, isGood, short = false }) => {
     setIsGood(true)
   }
   return (
-    <div className="bibtex-entry">
+    <div className="bibtex-entry" style={{ display: 'inline' }}>
       <strong>{data.title}</strong>{' '}
       {!short && (
         <>

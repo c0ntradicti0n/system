@@ -220,29 +220,45 @@ def save_params(params, hash_id):
     socketio.emit("set_params", new_params, room=hash_id)
 
 
-@socketio.on("save_text")
-def get_text(text):
-    print(f"save_text '{text[:10]}...'")
+@socketio.on("save_text_meta")
+def get_text_meta(text, meta):
+    print(f"save_text_meta '{text[:10]}...' '{str(meta)}'")
 
-    if not text.strip():
+    if not text.strip() or not meta.strip():
         return
 
     # Convert the received text into a pickled object
     pickled_obj = pickle.dumps(text)
     hash_id = sha256(pickled_obj).hexdigest()
     states[hash_id + "-text"] = text
+    states[hash_id + "-meta"] = meta
+
+    mods = states.get_all()
+    socketio.emit("set_mods", mods)
+
     return hash_id
 
 
 @socketio.on("get_text")
 def get_text(hash_id):
-    print(f"get_text {hash_id}")
     if not hash_id:
         return
     print(f"get_text {hash_id}")
 
     text = states[hash_id + "-text"]
     return text[:1000]
+
+
+@socketio.on("get_full_text")
+def get_full_text(hash_id):
+    print(f"get_full_text {hash_id}")
+
+    if not hash_id:
+        return
+    print(f"get_full_text {hash_id}")
+
+    text = states[hash_id + "-text"]
+    return text
 
 
 @socketio.on("get_meta", "set_meta")
@@ -255,17 +271,6 @@ def get_meta(hash_id):
     meta = states[hash_id + "-meta"]
     print(f"get_meta {meta=}")
     return meta
-
-
-@socketio.on("save_meta")
-def save_meta(hash_id, meta):
-    print(f"save_meta {hash_id=} '{meta[:10]}...'")
-
-    if not meta.strip():
-        return
-
-    states[hash_id + "-meta"] = meta
-    return hash_id
 
 
 socketio.start_background_task(background_thread)

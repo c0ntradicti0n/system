@@ -86,7 +86,7 @@ export const RIGHT_BIG_TRIANGLE = {
       { x: window.innerWidth / 7, y: 0 }, // Middle top
     ],
   },
-  triangle: {
+  /*triangle: {
     type: 'triangle',
 
     vertices: [
@@ -94,5 +94,5 @@ export const RIGHT_BIG_TRIANGLE = {
       { x: window.innerWidth * 0.8, y: window.innerHeight },
       { x: window.innerWidth * 0.8, y: 0 },
     ],
-  },
+  },*/
 }

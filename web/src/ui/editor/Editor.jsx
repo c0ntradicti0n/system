@@ -1,17 +1,62 @@
 import React, { useState, useMemo, useEffect } from 'react'
 
-import { Progress, Steps, Tabs } from 'antd'
-import { JsonView } from './JsonView'
-import { TreeView } from './TreeView'
-import { TriangleView } from './TriangleView'
-import { ExperimentsView } from './ExperimentsView'
+import { LibraryView } from './LibraryView'
 import { PuzzleView } from './PuzzleView'
 import './controls.css'
 import { useSocket } from '../../query/useSocket'
 import { parseHash } from '../../lib/read_link_params'
-import BibTeXViewer from './BibtexViewer'
+import LibraryMenu from './LibraryMenu'
+import { RIGHT_BIG_TRIANGLE } from '../../config/areas'
+import { ControlContainer } from '../ControlContainer'
 
 const conicColors = { '0%': '#87d068', '50%': '#ffe58f', '100%': '#ffccc7' }
+
+const renderActiveTabContent = ({
+  action,
+  setAction,
+  mods,
+  deleteMod,
+  resetMod,
+  setHashId,
+  setActiveTab,
+  socket,
+  hash,
+  text,
+  state,
+  params,
+  isPaused,
+  setIsPaused,
+  activeTab,
+}) => {
+  switch (activeTab) {
+    case 'lib':
+      return (
+        <LibraryView
+          {...{ mods, deleteMod, resetMod, setHashId, setActiveTab }}
+        />
+      )
+    case 'puzzle':
+      return (
+        <PuzzleView
+          {...{
+            action,
+            setAction,
+            socket,
+            hash,
+            text,
+            state,
+            params,
+            isPaused,
+            setIsPaused,
+            activeTab,
+          }}
+        />
+      )
+    // Add other cases for each tab
+    default:
+      return null
+  }
+}
 
 export const Editor = () => {
   const [hashId, setHashId] = useState(null)
@@ -33,6 +78,12 @@ export const Editor = () => {
     params,
     socket,
   } = useSocket(hashId)
+  const [action, _setAction] = useState(null)
+  const setAction = (action) => {
+    console.log('Setting action to', action)
+    _setAction(() => action)
+  }
+
   //console.log({ progress, state, params, meta, status, i })
   const sumPercent = useMemo(
     () => Object.values(progress ?? {}).reduce((a, b) => a + b, 0) / 3,
@@ -54,115 +105,42 @@ export const Editor = () => {
 
   return (
     <div className="App" style={{ overflow: 'hidden' }}>
-      <Tabs
-        activeKey={activeTab}
-        onChange={(key) => {
-          setActiveTab(key)
-        }}
-        tabPosition={'right'}
-        width={'100%'}
-        items={[
-          {
-            key: 'lib',
-            label: 'Library',
-            children: (
-              <ExperimentsView
-                {...{ mods, deleteMod, resetMod, setHashId, setActiveTab }}
-              />
-            ),
-          },
-
-          {
-            key: 'puzzle',
-            label: 'Puzzle',
-            children: (
-              <PuzzleView
-                {...{
-                  socket,
-                  hash,
-                  text,
-                  state,
-                  params,
-                  isPaused,
-                  setIsPaused,
-                  activeTab,
-                }}
-              />
-            ),
-          },
-          {
-            key: '3',
-            label: 'Triangle',
-            children: state && <TriangleView {...{ hash, text, state }} />,
-          },
-          {
-            key: 'tree',
-            label: 'Tree',
-            children: <TreeView {...{ hash, text, state }} />,
-          },
-          {
-            key: 'json',
-            label: 'JSON',
-            children: <JsonView {...{ hash, text, state }} />,
-          },
-          {
-            key: 'bib',
-            label: (
-              <BibTeXViewer entry={meta} short setIsGood={() => null} isGood />
-            ),
-            children: null,
-          },
-        ]}
-      />
-
-      {hash && (
-        <div
-          style={{
-            fontFamily: 'monospace',
-            position: 'fixed',
-            right: '0',
-            top: '50vh',
-            width: 'min-content',
-          }}
-        >
-          <Progress
-            size={[200, 20]}
-            percent={sumPercent * 100 ?? 100}
-            strokeColor={conicColors}
-            showInfo={false}
-          />
-          <Steps
-            navArrowColor={'rgba(0.2,.2,.4,0)'}
-            direction="vertical"
-            style={{
-              display: 'inline-flex',
-            }}
-            current={
-              status === 'end'
-                ? 3
-                : status === 'syn'
-                ? 2
-                : status === 'ant'
-                ? 1
-                : 0
-            }
-            items={[
-              {
-                title: 'hyperonym',
-              },
-              {
-                title: 'antonyms',
-              },
-              {
-                title: '(anti-/syn)-thesis',
-              },
-              {
-                title: '🏁',
-              },
-            ]}
-          />
-        </div>
-      )}
+      {renderActiveTabContent({
+        mods,
+        deleteMod,
+        resetMod,
+        setHashId,
+        setActiveTab,
+        socket,
+        hash,
+        text,
+        state,
+        params,
+        isPaused,
+        setIsPaused,
+        activeTab,
+        action,
+        setAction,
+      })}
+      <ControlContainer areas={RIGHT_BIG_TRIANGLE} cssPrefix="puzzle">
+        <LibraryMenu
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          meta={meta}
+          sumPercent={sumPercent}
+          progress={progress}
+          status={status}
+          i={i}
+          hash={hash}
+          socket={socket}
+          setAction={setAction}
+          action={action}
+          params={params}
+          isPaused={isPaused}
+          setIsPaused={setIsPaused}
+          activeTab={activeTab}
+        />
+      </ControlContainer>
     </div>
   )
 }
