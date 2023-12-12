@@ -11,8 +11,20 @@ import calculateFontSize from '../../lib/FontSize'
 import { DEBUG } from '../../config/const'
 import EventBroadcaster from './EventBroadcaster'
 const handleInteractionStart = (event) => {
-  const mouseX = event.clientX
-  const mouseY = event.clientY
+
+    let mouseX, mouseY;
+    if (event.touches?.length) {
+      const touch = event.touches[0];
+
+      // Get the touch coordinates
+      mouseX = touch.clientX;
+      mouseY = touch.clientY;
+    } else {
+      mouseX = event.clientX
+      mouseY = event.clientY
+    }
+console.log("handleInteractionStart", mouseX, mouseY)
+    if (mouseX === undefined || mouseY === undefined) return;
 
   const elements = document
     .elementsFromPoint(mouseX, mouseY)
