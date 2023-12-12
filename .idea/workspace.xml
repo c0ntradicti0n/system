@@ -4,26 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="make a new menu and optimize socket communication">
-      <change afterPath="$PROJECT_DIR$/integrator/reader/reader_sentences.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/ui/editor/EventBroadcaster.js" afterDir="false" />
+    <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="repair pointer events and add zoom and drag and drop in editor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chroma_viz/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/chroma_viz/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/cluster_hierarchy.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/cluster_hierarchy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/combination_state.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/combination_state.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/reader/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/reader/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/tree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/lib/position.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/lib/position.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/lib/useMuuriGrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/lib/useMuuriGrid.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/puzzle.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/puzzle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/BibtexViewer.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/BibtexViewer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/Editor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/Editor.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/Puzzle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/Puzzle.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/PuzzleView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/PuzzleView.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/worker/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -524,7 +506,7 @@
       <workItem from="1702284804148" duration="1251000" />
       <workItem from="1702290928962" duration="6346000" />
       <workItem from="1702317033864" duration="9313000" />
-      <workItem from="1702334085400" duration="3611000" />
+      <workItem from="1702334085400" duration="4385000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -855,14 +837,6 @@
       <option name="project" value="LOCAL" />
       <updated>1691896932213</updated>
     </task>
-    <task id="LOCAL-00079" summary="make a new menu and optimize socket communication">
-      <option name="closed" value="true" />
-      <created>1701910410578</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1701910410579</updated>
-    </task>
     <task id="LOCAL-00080" summary="make a new menu and optimize socket communication">
       <option name="closed" value="true" />
       <created>1701912630706</created>
@@ -871,7 +845,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701912630706</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="repair pointer events and add zoom and drag and drop in editor">
+      <option name="closed" value="true" />
+      <created>1702338412581</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1702338412582</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -922,7 +904,8 @@
     <MESSAGE value="fix it" />
     <MESSAGE value="find a working integration with socket and background task for polling" />
     <MESSAGE value="make a new menu and optimize socket communication" />
-    <option name="LAST_COMMIT_MESSAGE" value="make a new menu and optimize socket communication" />
+    <MESSAGE value="repair pointer events and add zoom and drag and drop in editor" />
+    <option name="LAST_COMMIT_MESSAGE" value="repair pointer events and add zoom and drag and drop in editor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

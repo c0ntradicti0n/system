@@ -85,6 +85,12 @@
   bottom: 0;
 }
 
+
+.react-transform-wrapper .react-transform-component {
+  overflow: visible !important;
+}
+
+
 .ant-steps-item-wait .ant-steps-item-icon {
   background-color: yellowgreen !important;
   opacity: 0.5;
