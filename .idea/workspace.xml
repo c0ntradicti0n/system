@@ -4,21 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="repair pointer events and add zoom and drag and drop in editor">
-      <change afterPath="$PROJECT_DIR$/lib/flatten.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/ui/editor/LibraryMenu.jsx" afterDir="false" />
+    <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="new examples">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/config/areas.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/config/areas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/puzzle.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/puzzle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/BibtexViewer.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/BibtexViewer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/Editor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/Editor.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/ExperimentsView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/LibraryView.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/PuzzleControls.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/PuzzleControls.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/PuzzleView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/PuzzleView.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/TextMetaModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/TextMetaModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/puzzle-controls.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/puzzle-controls.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/LibraryView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/LibraryView.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -492,7 +480,7 @@
       <workItem from="1702334085400" duration="4385000" />
       <workItem from="1702339638425" duration="2127000" />
       <workItem from="1702409655039" duration="7192000" />
-      <workItem from="1702421257531" duration="827000" />
+      <workItem from="1702421257531" duration="1415000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -823,23 +811,23 @@
       <option name="project" value="LOCAL" />
       <updated>1691896932213</updated>
     </task>
-    <task id="LOCAL-00082" summary="repair pointer events and add zoom and drag and drop in editor">
+    <task id="LOCAL-00084" summary="repair pointer events and add zoom and drag and drop in editor">
       <option name="closed" value="true" />
-      <created>1702339730768</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
+      <created>1702422281108</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
       <option name="project" value="LOCAL" />
-      <updated>1702339730769</updated>
+      <updated>1702422281109</updated>
     </task>
-    <task id="LOCAL-00083" summary="repair pointer events and add zoom and drag and drop in editor">
+    <task id="LOCAL-00085" summary="new examples">
       <option name="closed" value="true" />
-      <created>1702341145416</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
+      <created>1702422491934</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
       <option name="project" value="LOCAL" />
-      <updated>1702341145416</updated>
+      <updated>1702422491934</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -891,7 +879,8 @@
     <MESSAGE value="find a working integration with socket and background task for polling" />
     <MESSAGE value="make a new menu and optimize socket communication" />
     <MESSAGE value="repair pointer events and add zoom and drag and drop in editor" />
-    <option name="LAST_COMMIT_MESSAGE" value="repair pointer events and add zoom and drag and drop in editor" />
+    <MESSAGE value="new examples" />
+    <option name="LAST_COMMIT_MESSAGE" value="new examples" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

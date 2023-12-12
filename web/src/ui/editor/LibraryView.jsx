@@ -21,7 +21,9 @@ export function LibraryView(props) {
         overflow: 'scroll',
         height: '100vh',
         marginLeft: '6vw',
-        marginTop: '6vh',
+        marginRight: '6vw',
+        marginTop: '8vh',
+        marginBottom: '8vh',
       }}
     >
       <ul>
