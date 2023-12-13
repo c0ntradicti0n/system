@@ -165,7 +165,7 @@ def delete_mod(hash_id):
     return states.get_all()
 
 
-@socketio.on("reset_mod")
+@socketio.on("reset")
 def reset_mod(hash_id):
     if not hash_id:
         print(f"handle_reset_mod hash id null!!! {hash_id=}")

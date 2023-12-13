@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="new examples">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/LibraryMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/LibraryMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrator/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrator/states.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/states.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/query/useSocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/query/useSocket.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,32 +80,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Node.js.TextMetaModal.jsx.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.scratch_31.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/stefan/programming/system/integrator&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/stefan/.local/share/JetBrains/Toolbox/apps/pycharm-professional/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.TextMetaModal.jsx.executor": "Debug",
+    "Python.scratch_31.executor": "Run",
+    "Python.states.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/stefan/programming/system/integrator",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable",
+    "ts.external.directory.path": "/home/stefan/.local/share/JetBrains/Toolbox/apps/pycharm-professional/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;Python&quot;,
-      &quot;Exasol&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Python",
+      "Exasol"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/integrator/reader" />
@@ -120,7 +123,7 @@
       <recent name="$PROJECT_DIR$/classifier/result" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.scratch_31">
+  <component name="RunManager" selected="Python.states">
     <configuration name="TextMetaModal.jsx" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/web/src/ui/editor/TextMetaModal.jsx" working-dir="$PROJECT_DIR$/web/src/ui/editor">
       <method v="2" />
     </configuration>
@@ -152,41 +155,6 @@
         </ENTRIES>
       </EXTENSION>
       <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="wdl" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1 " />
-        <env name="REDIS_HOST" value="$REDIS_HOST$" />
-        <env name="SYSTEM" value="../$SYTEM$" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/integrator" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <EXTENSION ID="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </EXTENSION>
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/integrator/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -302,6 +270,42 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="states" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="wdl" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1 " />
+        <env name="REDIS_HOST" value="$REDIS_HOST$" />
+        <env name="SYSTEM" value="../$SYTEM$" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.11 (system) (2)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/integrator" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </EXTENSION>
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/integrator/states.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="train_opposites" type="PythonConfigurationType" factoryName="Python">
       <module name="wdl" />
       <option name="ENV_FILES" value="" />
@@ -340,18 +344,18 @@
     <list>
       <item itemvalue="Node.js.TextMetaModal.jsx" />
       <item itemvalue="Python.train_opposites" />
+      <item itemvalue="Python.states" />
       <item itemvalue="Python.scratch_31" />
       <item itemvalue="Python.reader_dialogue" />
-      <item itemvalue="Python.main" />
       <item itemvalue="Python.reader_sentences" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.states" />
         <item itemvalue="Python.scratch_31" />
         <item itemvalue="Node.js.TextMetaModal.jsx" />
         <item itemvalue="Python.reader_sentences" />
         <item itemvalue="Python.reader_dialogue" />
-        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -480,7 +484,7 @@
       <workItem from="1702334085400" duration="4385000" />
       <workItem from="1702339638425" duration="2127000" />
       <workItem from="1702409655039" duration="7192000" />
-      <workItem from="1702421257531" duration="5055000" />
+      <workItem from="1702421257531" duration="6114000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -811,14 +815,6 @@
       <option name="project" value="LOCAL" />
       <updated>1691896932213</updated>
     </task>
-    <task id="LOCAL-00090" summary="new examples">
-      <option name="closed" value="true" />
-      <created>1702425643789</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1702425643789</updated>
-    </task>
     <task id="LOCAL-00091" summary="new examples">
       <option name="closed" value="true" />
       <created>1702425830172</created>
@@ -827,7 +823,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702425830172</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="new examples">
+      <option name="closed" value="true" />
+      <created>1702427199530</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1702427199530</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1212,8 +1216,8 @@
     <SUITE FILE_PATH="coverage/system$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1701793100705" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/service" />
     <SUITE FILE_PATH="coverage/system$main.coverage" NAME="main Coverage Results" MODIFIED="1701908981876" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
     <SUITE FILE_PATH="coverage/system$combination_state.coverage" NAME="combination_state Coverage Results" MODIFIED="1700854933474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
-    <SUITE FILE_PATH="coverage/system$train_hierarchy.coverage" NAME="train_hierarchy Coverage Results" MODIFIED="1700679093768" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier/" />
     <SUITE FILE_PATH="coverage/system$train_score_hierarchy.coverage" NAME="train_score_hierarchy Coverage Results" MODIFIED="1700684917202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
+    <SUITE FILE_PATH="coverage/system$train_hierarchy.coverage" NAME="train_hierarchy Coverage Results" MODIFIED="1700679093768" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier/" />
     <SUITE FILE_PATH="coverage/system$reader_dialogue.coverage" NAME="reader_dialogue Coverage Results" MODIFIED="1701913001879" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator/" />
     <SUITE FILE_PATH="coverage/system$neighbor_joining.coverage" NAME="neighbor_joining Coverage Results" MODIFIED="1700853306690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
     <SUITE FILE_PATH="coverage/system$train_thesis_antithesis_synthesis.coverage" NAME="train_thesis_antithesis_synthesis Coverage Results" MODIFIED="1700703633058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier/" />
@@ -1221,6 +1225,7 @@
     <SUITE FILE_PATH="coverage/system$test_mst.coverage" NAME="test_mst Coverage Results" MODIFIED="1700856083189" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
     <SUITE FILE_PATH="coverage/system$cluster_hierarchy.coverage" NAME="cluster_hierarchy Coverage Results" MODIFIED="1701884560649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
     <SUITE FILE_PATH="coverage/system$reader_text.coverage" NAME="reader_text Coverage Results" MODIFIED="1701913291918" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator/reader" />
+    <SUITE FILE_PATH="coverage/system$states.coverage" NAME="states Coverage Results" MODIFIED="1702427645430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/integrator" />
     <SUITE FILE_PATH="coverage/system$train_opposites.coverage" NAME="train_opposites Coverage Results" MODIFIED="1700694621872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier/" />
   </component>
 </project>

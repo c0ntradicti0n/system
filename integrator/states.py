@@ -126,7 +126,7 @@ class States:
                     pass
 
     def __delitem__(self, key):
-        rmtree(self.path(key), ignore_errors=True)
+        os.system(f"rm -rf states/{key}")
         try:
             os.unlink(self.path(key + "-text"))
         except FileNotFoundError:
@@ -137,7 +137,14 @@ class States:
             pass
 
     def reset(self, hash_id):
-        rmtree(self.path(hash_id), ignore_errors=True)
+
+
+
+        os.system(f"rm -rf states/{hash_id}")
+
+
+
+        #rmtree(self.path(hash_id), ignore_errors=True)
 
 
 states = States()

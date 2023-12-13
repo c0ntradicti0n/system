@@ -35,11 +35,12 @@ export const useSocket = (hash_id) => {
     requestInitialState()
   }, [once, requestInitialState])
 
-  const newModEntry = useCallback((text, meta) => {
-    socket.emit('save_text', text, (new_hash) => {
-      socket.emit('save_meta', new_hash, meta, () => {})
-    })
+  const deleteMod = useCallback((text, meta) => {
+    socket.emit('delete_mod', hash_id)
   })
+
+
+
   useEffect(() => {
     return () => {
       console.log('useSocket unmount')
@@ -104,7 +105,7 @@ export const useSocket = (hash_id) => {
     i,
 
     requestInitialState,
-    newModEntry,
+    deleteMod,
     setIsPaused,
   }
 }
