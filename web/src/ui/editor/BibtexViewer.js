@@ -1,7 +1,7 @@
 import React from 'react'
 import { toJSON } from 'bibtex-parse-js'
 
-const BibTeXViewer = ({ entry, setIsGood, isGood, short = false }) => {
+const BibTeXViewer = ({ style={},  entry, setIsGood, isGood, short = false }) => {
   if (!entry) return null
   let parsedData
   try {
@@ -23,7 +23,7 @@ const BibTeXViewer = ({ entry, setIsGood, isGood, short = false }) => {
   }
   console.log(data)
   return (
-    <div className="bibtex-entry" style={{ display: 'inline' }}>
+    <div className="bibtex-entry" style={{ display: 'inline', ...style }}>
       <i>{parsedData[0].entryType}</i>{' '}
       <strong>{data.title}</strong>{' '}
       {!short && (

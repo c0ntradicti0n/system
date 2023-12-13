@@ -31,6 +31,7 @@ import {
   UserInteractionMenu,
 } from './PuzzleControls'
 
+const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints
 const LibraryMenu = ({
   activeTab,
   setActiveTab,
@@ -55,15 +56,16 @@ const LibraryMenu = ({
       .timeout(3000)
       .emit('save_params', hash, { ...params, actions: updatedActions })
   }
+
   return (
     <div>
       <Button
         type="primary"
         icon={<BookOutlined />}
         onClick={() => setCollapsed(!collapsed)}
-        style={{ width: '45vw', minWidth: '300' }}
+        style={{ width: isMobile ? "100vw" : '45vw', minWidth: '300' }}
       >
-        <BibTeXViewer entry={meta} short setIsGood={() => null} isGood inline />
+        <BibTeXViewer style={{fontSize: "0.8em"}} entry={meta} short setIsGood={() => null} isGood inline />
         <div style={{ maxWidth: '10vw', display: 'inline' }}>
           {hash && (
             <Progress
