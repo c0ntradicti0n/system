@@ -88,7 +88,9 @@ const LibraryMenu = ({
           selectedKeys={[activeTab]}
           mode="vertical"
           theme="dark"
-          dropdownWidth={300}
+          style={{
+            width: "45vw"
+              }}
         >
           <Menu.Item
             key="lib"
