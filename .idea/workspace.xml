@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="new examples">
-      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/BibtexViewer.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/BibtexViewer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/ui/editor/LibraryMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/LibraryMenu.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -480,7 +480,7 @@
       <workItem from="1702334085400" duration="4385000" />
       <workItem from="1702339638425" duration="2127000" />
       <workItem from="1702409655039" duration="7192000" />
-      <workItem from="1702421257531" duration="4008000" />
+      <workItem from="1702421257531" duration="5055000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -811,23 +811,23 @@
       <option name="project" value="LOCAL" />
       <updated>1691896932213</updated>
     </task>
-    <task id="LOCAL-00088" summary="new examples">
+    <task id="LOCAL-00090" summary="new examples">
       <option name="closed" value="true" />
-      <created>1702424338628</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
+      <created>1702425643789</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
       <option name="project" value="LOCAL" />
-      <updated>1702424338628</updated>
+      <updated>1702425643789</updated>
     </task>
-    <task id="LOCAL-00089" summary="new examples">
+    <task id="LOCAL-00091" summary="new examples">
       <option name="closed" value="true" />
-      <created>1702425200601</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
+      <created>1702425830172</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
       <option name="project" value="LOCAL" />
-      <updated>1702425200601</updated>
+      <updated>1702425830172</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
