@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+ls /etc
+ls /etc/letsencrypt
+ls /etc/letsencrypt/live
 # Check if /etc/letsencrypt directory does not exist
 if [ ! -d "/etc/letsencrypt/live/polarity.science" ]; then
   # Create or renew certificate

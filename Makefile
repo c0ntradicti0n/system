@@ -86,8 +86,10 @@ train-%:
 	python3 train/$*.py
 
 
-redis:
+redis_queue:
 	docker compose up --build --force-recreate  -d redis worker queue
+redis:
+	docker compose up --build --force-recreate  -d redis
 
 mod:
 	rm -rf ./.cache-cr

@@ -11,8 +11,11 @@ from torch.optim.lr_scheduler import CyclicLR
 
 from classifier.model.different_models import (get_model_config,
                                                print_model_config)
+from classifier.model.siamese import evaluate_model
 from classifier.read.selector import DataGenerator
 from classifier.result.think import get_model, get_prediction
+
+
 
 """
 Use WordNet for more samples
@@ -104,7 +107,15 @@ def train(config_name):
                 train_labels_reshaped = train_labels.view(-1)
 
                 loss = criterion(outputs_reshaped, train_labels_reshaped)
+            elif config.model in ["som"]:
+                train_predicted_labels, outputs_reshaped = get_prediction(
+                    model, train_data, config
+                )
 
+
+                train_labels_reshaped = train_labels[:,1]
+
+                loss = criterion(outputs_reshaped, train_labels_reshaped)
             else:
                 loss = 0
 
@@ -129,8 +140,15 @@ def train(config_name):
                 train_fscore = f1_score(
                     train_labels_reshaped.numpy(),
                     train_predicted_labels.view(-1).numpy(),
-                    average="macro",
+                    average=config.get("f1", "macro"),
                 )
+            elif config.model in ["som"]:
+                train_fscore = f1_score(
+                    train_labels_reshaped.numpy(),
+                    train_predicted_labels.view(-1).numpy(),
+                    average=config.get("f1", "macro"),
+                )
+
             else:
                 precision, recall, train_fscore = evaluate_model(model, train_data)
 
@@ -172,7 +190,7 @@ def train(config_name):
                 valid_fscore = f1_score(
                     valid_labels_reshaped.numpy(),
                     predicted_labels.view(-1).numpy(),
-                    average="macro",
+                    average=config.get("f1", "macro"),
                 )
 
                 # Convert tensor to numpy for sklearn metrics
@@ -182,15 +200,46 @@ def train(config_name):
                 # Calculate accuracy, precision, and recall
                 accuracy = accuracy_score(true_labels_np, predicted_labels_np)
                 precision = precision_score(
-                    true_labels_np, predicted_labels_np, average="macro"
+                    true_labels_np, predicted_labels_np,  average=config.get("f1", "macro"),
+
                 )
-                recall = recall_score(true_labels_np, predicted_labels_np, average="macro")
+                recall = recall_score(true_labels_np, predicted_labels_np, average=config.get("f1", "macro"),
+)
+
+        if config.model in ["som"]:
+            with torch.no_grad():
+                predicted_labels, outputs_reshaped = get_prediction(
+                    model, valid_data, config
+                )
+
+                valid_labels_reshaped = valid_labels[:,1]
+
+                valid_loss = criterion(outputs_reshaped, valid_labels_reshaped)
+
+                valid_fscore = f1_score(
+                    valid_labels_reshaped.numpy(),
+                    predicted_labels.view(-1).numpy(),
+                    average=config.get("f1", "macro"),
+                )
+
+                # Convert tensor to numpy for sklearn metrics
+                predicted_labels_np = predicted_labels.cpu().numpy().ravel()
+                true_labels_np = valid_labels_reshaped.cpu().numpy().ravel()
+
+                # Calculate accuracy, precision, and recall
+                accuracy = accuracy_score(true_labels_np, predicted_labels_np)
+                precision = precision_score(
+                    true_labels_np, predicted_labels_np, average=config.get("f1", "macro"),
+
+                )
+                recall = recall_score(true_labels_np, predicted_labels_np, average=config.get("f1", "macro"),
+                                      )
         else:
             valid_fscore = train_fscore
 
         if valid_fscore > max_fscore:
             print(
-                f"Epoch {epoch + 1}, loss: {loss.item()[0]:.2f}, f1-valid: {valid_fscore:.2f}, f1-train: {train_fscore:.2f}, lr: {optimizer.param_groups[0]['lr']}"
+                f"Epoch {epoch + 1}, loss: {loss.item():.2f}, f1-valid: {valid_fscore:.2f}, f1-train: {train_fscore:.2f}, lr: {optimizer.param_groups[0]['lr']}"
             )
             max_fscore = valid_fscore
             torch.save(
@@ -226,7 +275,7 @@ def train(config_name):
             counter += 1  # Increment the counter
 
 
-        if config.model in ["ntuple"]:
+        if config.model in ["ntuple"] or config.model in ["som"]:
             print(
                 colorized_comparison(
                     "v: ", predicted_labels.view(-1), valid_labels_reshaped
@@ -251,7 +300,7 @@ def train(config_name):
         writer.add_scalar("Precision", precision, epoch)
         writer.add_scalar("Recall", recall, epoch)
 
-        if config.model in ["ntuple"]:
+        if config.model in ["ntuple"] or config.model in ["som"]:
             # Assuming `predictions` are the model predictions and `labels` are the true labels
             writer.add_pr_curve(
                 "precision_recall_valid",

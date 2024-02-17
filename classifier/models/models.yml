@@ -16,8 +16,49 @@ classifier: &classifier
   model: ntuple
   lr: 0.00003
 
+som: &som
+  <<: *defaults
+  model: som
+  lr: 0.00003
+
 
 models:
+  # coordinator for self organizing map
+  som:
+    <<: *som
+    n_samples: 5
+    n_classes: 9
+    # 0 - stay at higher concept
+    # 1 - stay at 1
+    # 2 - stay at 2
+    # 3 - stay at 3
+    # 4 - get higher left
+    # 5 - get higher right
+    # 6 - deeper at 1
+    # 7 - deeper at 2
+    # 8 - deeper at 3
+
+    batch_size: 1000
+    batches_per_epoch: 17
+    lr: 0.003
+
+    embedding_dim: 4096
+    hidden_dim: 1024
+
+
+    from_module: classifier.data.triangle_pos
+
+    f1: micro
+
+    classes:
+      - from_module
+    probs:
+      - 1
+
+    embedding_model: Salesforce/SFR-Embedding-Mistral
+
+
+
   thesis_antithesis_synthesis:
     <<: *classifier
     n_samples: 3

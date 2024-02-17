@@ -1,19 +1,15 @@
 import React from 'react'
+import { useRoutes } from 'raviger'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import './App.css'
+import './app.css'
 
-import Fractal from './ui/viewer/Fractal'
 import { Puzzle } from './ui/editor/Puzzle'
 import { Editor } from './ui/editor/Editor'
 
-import { useRoutes } from 'raviger'
-import { ControlContainerTest } from './ui/ControlTest'
-import { SocketTest } from './ui/SocketTest'
+import { Viewer } from './ui/viewer/Viewer'
 
 const routes = {
-  '/': () => <Fractal />,
-  '/socket_test': () => <SocketTest />,
-  '/control_test': () => <ControlContainerTest />,
+  '/': () => <Viewer />,
   '/puzzle': () => (
     <Puzzle
       data={{

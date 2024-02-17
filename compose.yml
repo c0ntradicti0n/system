@@ -93,6 +93,42 @@ services:
 
       - "./.caches/.cache-cr:/chroma:rw"
       - "./.caches/.cache-hf:/.cache:rw"
+  philo:
+    image: philo
+
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
+    build:
+      context: philo
+      args:
+        SYSTEM: /system
+    command: python server.py
+
+
+    restart: unless-stopped
+
+    container_name: philo
+    env_file:
+      - .env
+    tty: true
+    user: 1000:1000
+    environment:
+      TOKENS: $TOKENS
+      DEBUG: "true"
+      HOST: $HOST
+      SYSTEM: /system
+      PYTHONIOENCODING: utf-8
+    volumes:
+      - "$SYSTEM:/system"
+      - "./philo:/app"
+      - "./lib:/app/lib"
+
+      - "./.caches/.cache-cr:/chroma:rw"
+      - "./.caches/.cache-openai:/.cache-openai:rw"
+      - "./.caches/.cache-hf:/.cache:rw"
   integrator:
     image: integrator:latest
 

@@ -1,0 +1,45 @@
+.fractal-item {
+  pointer-events: auto; /* Enables pointer events for this child */
+  position: absolute;
+  width: 15vw;
+  overflow: visible;
+  height: 19vh;
+  margin: 5px;
+  border-radius: 5px;
+  display: grid;
+}
+
+.fractal .react-transform-wrapper {
+  width: 100vw;
+  height: 100vw;
+  position: relative;
+  overflow: visible;
+}
+
+.fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  z-index: 1000; /* Ensure it's above other content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.content {
+  /* Styles for your content */
+}

@@ -121,10 +121,10 @@ export const Pin = ({ value, setHiddenId }) => {
     <div
       key={'pin-label-' + cleanPath}
       id={'pin-label-' + cleanPath}
-      className="item"
+      className="search-item"
       onClick={() => setHiddenId(value.path.slice(0, -2))}
     >
-      <div className="item-content">
+      <div className="search-item-content">
         {cleanPath}
         <br />
         {value.answer ?? value.content}

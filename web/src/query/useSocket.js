@@ -39,8 +39,6 @@ export const useSocket = (hash_id) => {
     socket.emit('delete_mod', hash_id)
   })
 
-
-
   useEffect(() => {
     return () => {
       console.log('useSocket unmount')

@@ -70,10 +70,6 @@
   animation: fallToGround 1s forwards; /* 1 second duration, animation only plays once and stops at the final state */
 }
 
-.react-transform-wrapper .react-transform-component {
-  overflow: visible !important;
-}
-
 .triangle {
   white-space: pre-wrap;
   white-space: -moz-pre-wrap;

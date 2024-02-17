@@ -8,6 +8,7 @@ const SearchResults = ({ labels, setHiddenId }) => {
   useEffect(() => {
     if (!gridRef.current) return
     const grid = new Muuri(gridRef.current, {
+      items: '.search-item',
       dragEnabled: true,
       layout: { horizontal: true },
       rounding: true,

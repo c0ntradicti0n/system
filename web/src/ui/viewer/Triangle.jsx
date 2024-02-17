@@ -14,6 +14,7 @@ import { MAX_LEVEL } from '../../config/const'
 import { stringToColour } from '../../lib/color'
 import { trim } from '../../lib/string'
 import calculateFontSize from '../../lib/FontSize'
+import CellModal from './CellModal'
 
 function getRandomElement(arr) {
   const randomIndex = Math.floor(Math.random() * arr.length)
@@ -44,17 +45,20 @@ function Triangle({
   setTooltipData,
   setHoverId,
   animate,
+  editData = null,
 }) {
   const [_hover, _setHover] = useState(false)
   const [animationClass, setAnimationClass] = useState('')
-  useEffect(() => {
+  /*useEffect(() => {
     setAnimationClass(
       getRandomElement(['fold-foreground', 'fold-right-top', 'fold-left-top']),
     )
-  }, [])
+  }, [])*/
   const [animationTime] = useState(Math.random() / 4)
   const ref = React.useRef(null)
   const triangleId = 'triangle-' + fullId.replace(/\//g, '')
+  const [cellModalVisible, setCellModalVisible] = useState(false)
+    const [antCellModalVisible, setAntCellModalVisible] = useState(false)
 
   useEffect(() => {
     if (!ref?.current || !isMobile) return
@@ -138,6 +142,7 @@ function Triangle({
                   index,
                   detailId,
                 }}
+                  editData={editData}
               />
             </div>
           ) : null,
@@ -149,7 +154,7 @@ function Triangle({
           style={{
             fontSize,
 
-            color: 'black',
+            color: fullId ? 'black' : 'white',
 
             width: `${size / 3}px`,
           }}
@@ -159,15 +164,25 @@ function Triangle({
           {title && (
             <div>
               <div>{animate ? animationClass ?? '' : ''}</div>
-              <div id={triangleId} className="triangle-title">
+              <div
+                id={triangleId}
+                className="triangle-title"
+                onClick={(e) => {
+                  e.preventDefault()
+                  setCellModalVisible(true)
+                }}
+              >
                 {trim(fullId.replace(/\//g, '.'), '.')}{' '}
                 {postProcessTitle(shortTitle.slice(0, 100))}
               </div>
-
               {postProcessTitle(anto)
                 ?.split(/[\s-]+/)
                 .map((word, index) => (
                   <div
+                      onClick={(e) => {
+                        e.preventDefault()
+                        setAntCellModalVisible(true)
+                      }  }
                     key={index}
                     style={{
                       whiteSpace: 'pre-wrap',
@@ -182,6 +197,24 @@ function Triangle({
           )}
         </div>
       </div>
+      {editData && cellModalVisible ? (
+        <CellModal
+          visible={cellModalVisible}
+          value={title ?? ''}
+          keys={fullId.split('/')}
+          setValue={editData}
+          onClose={() => setCellModalVisible(false)}
+        />
+      ) : null}
+            {editData && antCellModalVisible ? (
+        <CellModal
+          visible={antCellModalVisible}
+          value={anto ?? ''}
+          keys={[...fullId.split('/'), "_"]}
+          setValue={editData}
+          onClose={() => setAntCellModalVisible(false)}
+        />
+      ) : null}
     </div>
   )
 }

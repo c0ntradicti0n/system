@@ -138,13 +138,9 @@ class States:
 
     def reset(self, hash_id):
 
-
-
         os.system(f"rm -rf states/{hash_id}")
 
-
-
-        #rmtree(self.path(hash_id), ignore_errors=True)
+        # rmtree(self.path(hash_id), ignore_errors=True)
 
 
 states = States()

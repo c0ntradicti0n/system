@@ -16,6 +16,7 @@
   overflow: hidden;
   border-radius: 5px;
   display: grid;
+  z-index: 9999999999999;
 }
 
 @media screen and (max-width: 600px) {
@@ -35,11 +36,12 @@
 .item.muuri-item-dragging {
   z-index: 30;
 }
-.item-content {
+.search-item-content {
   font-family: serif;
   width: 100%;
   height: 100%;
-  background: dodgerblue;
+  background: none;
+  border: 1px white solid;
   color: white;
   cursor: pointer;
   font-size: clamp(12px, 4vw, 24px);

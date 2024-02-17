@@ -1,6 +1,6 @@
 import os
 
-from helper import get_from_nested_dict
+from lib.helper import get_from_nested_dict
 
 
 def add_line_if_not_exists(filename, line_to_add):

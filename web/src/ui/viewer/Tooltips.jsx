@@ -8,13 +8,7 @@ import {
   nestTexts,
 } from '../../lib/convertToAntdTreeData'
 
-export const Tooltips = ({
-  tree: _tree,
-  path,
-  isWindowWide,
-  setTooltipData,
-  refill,
-}) => {
+export const Tooltips = ({ tree: _tree, path, setTooltipData, refill }) => {
   const tree = structuredClone(_tree)
 
   const [expandedKeys, setExpandedKeys] = useState([])

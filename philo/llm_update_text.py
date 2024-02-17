@@ -1,11 +1,11 @@
 import logging
-import os
 
 import regex as re
-from helper import get_from_nested_dict
+from analyser import without_text
 from llm_update_toc import filter_similar_paths
-from philosopher.analyser import without_text
-from philosopher.missing import add_to_missing_in_toc
+from missing import add_to_missing_in_toc
+
+from lib.helper import get_from_nested_dict
 
 
 def llm_update_text(toc, kwargs, t, base_path):

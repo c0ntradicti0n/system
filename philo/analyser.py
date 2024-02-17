@@ -1,8 +1,9 @@
 import logging
-from collections import Counter, defaultdict
+from collections import defaultdict
 
-from helper import get_from_nested_dict
-from philosopher.missing import add_to_missing_in_toc
+from missing import add_to_missing_in_toc
+
+from lib.helper import get_from_nested_dict
 
 
 def analyse_toc(tree, exclude):

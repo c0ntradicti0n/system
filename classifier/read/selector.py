@@ -2,6 +2,7 @@ import contextlib
 import os
 import random
 import timeit
+from enum import Enum
 
 import addict
 import numpy as np
@@ -194,6 +195,14 @@ def tree_walker(yield_mode="valid", n_samples=10, config=None):
             row = next(GENS[config.from_file])
             samples.extend([(r, i+1) for i, r in enumerate(row)])
             yield_mode = "random"
+        elif yield_mode== "from_module":
+            if not GENS[config.from_module]:
+                import importlib
+                f = importlib.import_module(config.from_module)
+                GENS[config.from_module] = f.gen(config)
+            row = next(GENS[config.from_module])
+            samples = row
+            yield_mode = "random"
 
         elif True:
             raise NotImplementedError(f"{yield_mode=} not implemented!")
@@ -226,7 +235,9 @@ class DataGenerator:
 
             embeddings.append(get_embeddings(sample, self.config))
         if not no_labels:
-            labels = torch.tensor(labels, dtype=torch.long)
+            if isinstance(labels[0][0], Enum):
+                labels = [[l.value for l in label] for label in labels ]
+            labels = torch.tensor(labels, dtype=torch.int64)
         else:
             labels =None
         if config.result_add:

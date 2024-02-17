@@ -1,0 +1,74 @@
+/* ChatModal.css */
+
+.chat-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.visualization-container {
+  flex: 1;
+  background-color: #f0f0f0;
+}
+
+.chat-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-container {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.message {
+  display: flex;
+  border-radius: 5px;
+  padding: 2px;
+  margin-top: 2px;
+}
+
+.message-user {
+  font-weight: bold;
+  margin-right: 5px;
+  background-color: #eadc6a;
+}
+
+.message-bot {
+  justify-content: space-between;
+  background-color: #d7d6d6;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.message-error {
+  justify-content: flex-end;
+  background-color: #ff0000;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.ant-collapse {
+  width: -webkit-fill-available;
+}
+
+.ant-card-body {
+  padding: 0 !important;
+}
+.ant-modal-wrap {
+  width: 100vw;
+  height: 100vh;
+}
+.message-reply {
+  background-color: #19ab19;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Add more styling as needed */

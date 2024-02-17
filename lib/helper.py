@@ -148,15 +148,43 @@ def get_from_nested_dict(nested_dict, keys, return_on_fail=None):
     try:
         keys = digitize(keys)
         old_dict = nested_dict
+        done = ""
 
         for key in keys[:-1]:
             if key == "..":
                 nested_dict = old_dict
 
-            old_dict = nested_dict
+            if key not in nested_dict:
+                raise KeyError
+
+            old_dict = nested_dict[key]
             nested_dict = nested_dict.setdefault(key, {})
+            done += str(key)
+
+        if keys[-1] in nested_dict:
+            nested_dict = nested_dict[keys[-1]]
+        if isinstance(nested_dict, str):
+            return nested_dict
+        if "." in nested_dict:
+            return nested_dict["."]
+        if "1" in nested_dict and "." in nested_dict[1]:
+            return nested_dict[1]["."]
+        if "2" in nested_dict and "." in nested_dict[2]:
+            return nested_dict[2]["."]
+        if "3" in nested_dict and "." in nested_dict[3]:
+            return nested_dict[3]["."]
+        if "_" in nested_dict:
+            return nested_dict["_"]
+        if not nested_dict:
+            return None
+        print(f"returning {nested_dict=}")
+        if not keys[-1] in nested_dict:
+            raise KeyError
         return nested_dict[keys[-1]]
     except KeyError:
+        logging.error(f"KeyError: {key} {done} {keys=}")
+        return return_on_fail
+
         if return_on_fail is not None:
             if keys[-1] == "_" and "." in nested_dict:
                 topic_path = "".join(str(k) for k in keys[:-1])
@@ -174,7 +202,12 @@ def get_analogue_from_nested_dict(nested_dict, pivot_keys):
         try:
             r = get_from_nested_dict(nested_dict, keys)
         except:
-            r = get_from_nested_dict(nested_dict, pivot_keys[:i] + ["."])
+            r = get_from_nested_dict(
+                nested_dict, pivot_keys[:i] + ["."], return_on_fail=None
+            )
+
+        if not r:
+            continue
 
         if r:
             with e:

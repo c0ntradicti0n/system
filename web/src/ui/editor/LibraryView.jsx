@@ -18,7 +18,7 @@ export function LibraryView(props) {
   return (
     <div
       style={{
-        overflow: 'scroll',
+        overflow: 'auto',
         height: '100vh',
         marginLeft: '6vw',
         marginRight: '6vw',

@@ -5,6 +5,7 @@ WORKDIR /app
 RUN --mount=type=cache,target=/root/.cache/pip  pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 
 COPY requirements.txt requirements.txt
+RUN pip install git+https://github.com/mtybadger/chromaviz/
 RUN pip install -r requirements.txt
 RUN apt-get update && apt-get install -y sqlite3
 

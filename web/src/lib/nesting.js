@@ -143,3 +143,14 @@ export function _shift(currentPath, direction) {
 export function shift(currentPath, direction) {
   return slashIt(_shift(currentPath, direction))
 }
+
+export function setValueInNestedObject(object, keys, value) {
+  console.log({object, keys, value})
+  if (keys.length === 1) {
+    object[keys[0]] = value
+    return object
+  }
+
+  setValueInNestedObject(object[keys[0]], keys.slice(1), value)
+  return object
+}

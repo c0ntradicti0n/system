@@ -3,13 +3,13 @@ import os
 from pprint import pprint
 
 import coloredlogs
-import config
 import requests
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_restx import Api, Namespace, Resource, reqparse
 from string_beauty import remove_duplicates
 
+from lib import config
 from lib.helper import OutputLevel, get_from_nested_dict, nested_str_dict, tree
 
 logging.basicConfig(level=logging.DEBUG)

@@ -30,6 +30,7 @@ import {
   SelectStartNodeButton,
   UserInteractionMenu,
 } from './PuzzleControls'
+import { ViewerLink } from '../viewer/ViewerMenu'
 
 const LibraryMenu = ({
   activeTab,
@@ -47,7 +48,10 @@ const LibraryMenu = ({
   isPaused,
   setIsPaused,
 }) => {
-  const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints || window.innerWidth < 950
+  const isMobile =
+    'ontouchstart' in window ||
+    navigator.maxTouchPoints ||
+    window.innerWidth < 950
   console.log('isMobile', isMobile)
 
   const [collapsed, setCollapsed] = useState(true)
@@ -65,9 +69,16 @@ const LibraryMenu = ({
         type="primary"
         icon={<BookOutlined />}
         onClick={() => setCollapsed(!collapsed)}
-        style={{ width: isMobile ? "90vw" : '45vw', minWidth: '300' }}
+        style={{ width: isMobile ? '90vw' : '45vw', minWidth: '300' }}
       >
-        <BibTeXViewer style={{fontSize: "0.8em"}} entry={meta} short setIsGood={() => null} isGood inline />
+        <BibTeXViewer
+          style={{ fontSize: '0.8em' }}
+          entry={meta}
+          short
+          setIsGood={() => null}
+          isGood
+          inline
+        />
         <div style={{ maxWidth: '10vw', display: 'inline' }}>
           {hash && (
             <Progress
@@ -91,8 +102,8 @@ const LibraryMenu = ({
           mode="vertical"
           theme="dark"
           style={{
-            width: "45vw"
-              }}
+            width: '45vw',
+          }}
         >
           <Menu.Item
             key="lib"
@@ -268,6 +279,10 @@ const LibraryMenu = ({
               />
             </SubMenu>
           </SubMenu>
+          <Menu.Item type="divider" />
+          <Menu.Item>
+            <ViewerLink />
+          </Menu.Item>
         </Menu>
       )}
     </div>

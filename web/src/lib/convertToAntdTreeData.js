@@ -1,6 +1,25 @@
-import ReactMarkdown from 'react-markdown'
 import React from 'react'
 import { postProcessTitle } from './position'
+import { marked } from 'marked'
+
+function convertMarkdownLinks(input) {
+  const regex = /\[([^\]]*?)\]\(((?:[1-3_]\/)+_?)[^)]+\)/g
+  return input.replace(regex, (match, text, path) => {
+    const hiddenPath = path.replace(/\//g, '') // Remove underscores
+    return `[${text}](#hiddenId=${hiddenPath})`
+  })
+}
+const MarkdownRenderer = ({ markdownText }) => {
+  const getMarkdownText = () => {
+    console.log(markdownText)
+    markdownText = convertMarkdownLinks(markdownText)
+    const rawMarkup = marked.parse(markdownText)
+    console.log(rawMarkup)
+    return { __html: rawMarkup }
+  }
+
+  return <div dangerouslySetInnerHTML={getMarkdownText()} />
+}
 
 export const generateExpandedKeys = (path) => {
   const segments = path.split('-')
@@ -40,8 +59,7 @@ export const convertToAntdTreeData = (node, prefix = '') => {
             background: '#fff2d4',
           }}
         >
-          {' '}
-          <ReactMarkdown>{postProcessTitle(node[key])}</ReactMarkdown>
+          <MarkdownRenderer markdownText={postProcessTitle(node[key])} />
         </div>
       )
     }

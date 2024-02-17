@@ -2,35 +2,44 @@ import os.path
 import pathlib
 
 import regex
+from analyser import analyse_toc
 from compare import weighted_fuzzy_compare
-from helper import (get_analogue_from_nested_dict, get_from_nested_dict,
-                    unique_by_func)
-from philosopher.analyser import analyse_toc
-from philosopher.LLMFeature import create_path, features
+from LLMFeature import create_path, features
+
+from lib.helper import (get_analogue_from_nested_dict, get_from_nested_dict,
+                        unique_by_func)
 
 
-def llm_update_toc(toc, kwargs, t, new_entries=1):
-    if os.path.exists(os.environ.get("MISSING_CHAPTERS", "missing.txt")):
-        paths_to_fill = pathlib.Path(
-            os.environ.get("MISSING_CHAPTERS", "missing.txt")
-        ).read_text()
-        paths_to_fill = [p for p in paths_to_fill.split("\n") if p][:new_entries]
+def llm_update_toc(toc, kwargs, t, new_entries=1, path_to_fill=None):
+    if not path_to_fill:
+        if os.path.exists(os.environ.get("MISSING_CHAPTERS", "missing.txt")):
+            paths_to_fill = pathlib.Path(
+                os.environ.get("MISSING_CHAPTERS", "missing.txt")
+            ).read_text()
+            paths_to_fill = [p for p in paths_to_fill.split("\n") if p][:new_entries]
+        else:
+            paths_to_fill = [
+                create_path(p)
+                for p in analyse_toc(t, exclude=["111", "112"])["min_depth_paths"]
+            ][:new_entries]
     else:
         paths_to_fill = [
-            create_path(p)
-            for p in analyse_toc(t, exclude=["111", "112"])["min_depth_paths"]
-        ][:new_entries]
-    paths_to_fill = unique_by_func(paths_to_fill, func=lambda p: p.replace("_", ""))
+            path_to_fill.replace("/", ""),
+            *[path_to_fill.replace("/", "") + str(i) for i in ["1", "2", "3", "_"]],
+        ]
+    # paths_to_fill = unique_by_func(paths_to_fill, func=lambda p: p.replace("_", ""))
 
     themes = [
         (x, get_from_nested_dict(t, list(x), return_on_fail="<please invent>"))
         for x in paths_to_fill
     ]
+
+    print(themes)
     themes = [
         (
             k,
             (
-                v
+                v.replace(".md", "")
                 if isinstance(v, str)
                 else (", ".join(v.values()).replace(".md", ""))
                 if v is not None

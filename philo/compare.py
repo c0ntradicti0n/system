@@ -42,76 +42,77 @@ def weighted_fuzzy_compare(str1, str2, threshold=0.5):
     return normalized_score > threshold, normalized_score
 
 
-# Test
-str1 = "131321"
-str2 = "132321"
-threshold = 0.5
+if __name__ == "__main__":
+    # Test
+    str1 = "131321"
+    str2 = "132321"
+    threshold = 0.5
 
-similar, score = weighted_fuzzy_compare(str1, str2, threshold)
-print(
-    f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
-)
+    similar, score = weighted_fuzzy_compare(str1, str2, threshold)
+    print(
+        f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
+    )
 
-str1 = "132322"
-str2 = "132321"
+    str1 = "132322"
+    str2 = "132321"
 
-similar, score = weighted_fuzzy_compare(str1, str2, threshold)
-print(
-    f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
-)
+    similar, score = weighted_fuzzy_compare(str1, str2, threshold)
+    print(
+        f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
+    )
 
-str1 = "13232212"
-str2 = "132321"
+    str1 = "13232212"
+    str2 = "132321"
 
-similar, score = weighted_fuzzy_compare(str1, str2, threshold)
-print(
-    f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
-)
+    similar, score = weighted_fuzzy_compare(str1, str2, threshold)
+    print(
+        f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
+    )
 
-str1 = "3221232323"
-str2 = "322"
+    str1 = "3221232323"
+    str2 = "322"
 
-similar, score = weighted_fuzzy_compare(str1, str2, threshold)
-print(
-    f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
-)
+    similar, score = weighted_fuzzy_compare(str1, str2, threshold)
+    print(
+        f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
+    )
 
-str1 = "32212"
-str2 = "322"
+    str1 = "32212"
+    str2 = "322"
 
-similar, score = weighted_fuzzy_compare(str1, str2, threshold)
-print(
-    f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
-)
+    similar, score = weighted_fuzzy_compare(str1, str2, threshold)
+    print(
+        f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
+    )
 
-str1 = "32123"
-str2 = "322"
+    str1 = "32123"
+    str2 = "322"
 
-similar, score = weighted_fuzzy_compare(str1, str2, threshold)
-print(
-    f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
-)
+    similar, score = weighted_fuzzy_compare(str1, str2, threshold)
+    print(
+        f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
+    )
 
-str1 = "3212"
-str2 = "313"
+    str1 = "3212"
+    str2 = "313"
 
-similar, score = weighted_fuzzy_compare(str1, str2, threshold)
-print(
-    f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
-)
+    similar, score = weighted_fuzzy_compare(str1, str2, threshold)
+    print(
+        f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
+    )
 
-str1 = "123321"
-str2 = "312123"
+    str1 = "123321"
+    str2 = "312123"
 
-similar, score = weighted_fuzzy_compare(str1, str2, threshold)
-print(
-    f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
-)
+    similar, score = weighted_fuzzy_compare(str1, str2, threshold)
+    print(
+        f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
+    )
 
-str1 = "3122"
-str2 = "312111"
+    str1 = "3122"
+    str2 = "312111"
 
-similar, score = weighted_fuzzy_compare(str1, str2, threshold)
-print(
-    f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
-)
+    similar, score = weighted_fuzzy_compare(str1, str2, threshold)
+    print(
+        f"The strings are {'similar' if similar else 'not similar'}, with a score of {score:.2f}"
+    )

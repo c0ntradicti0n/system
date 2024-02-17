@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react'
 
 import { LibraryView } from './LibraryView'
 import { PuzzleView } from './PuzzleView'
-import './controls.css'
+import './editor.css'
 import { useSocket } from '../../query/useSocket'
 import { parseHash } from '../../lib/read_link_params'
 import LibraryMenu from './LibraryMenu'

@@ -5,10 +5,91 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="new examples">
+      <change afterPath="$PROJECT_DIR$/classifier/data/triangle_pos.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/classifier/model/som.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/classifier/train/train_som.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/json.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/cache-openai/joblib/process/process_user_input/424fb7965bb6075344d5c8c2078961b0/metadata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/cache-openai/joblib/process/process_user_input/424fb7965bb6075344d5c8c2078961b0/output.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/cache-openai/joblib/process/process_user_input/5f9dffe789cebe6e3811ec90d606d66a/metadata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/cache-openai/joblib/process/process_user_input/5f9dffe789cebe6e3811ec90d606d66a/output.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/cache-openai/joblib/process/process_user_input/72d9d58944927b846ea433f36ea1037b/metadata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/cache-openai/joblib/process/process_user_input/72d9d58944927b846ea433f36ea1037b/output.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/cache-openai/joblib/process/process_user_input/77abe883d47d6d789c46d5742f43ed82/metadata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/cache-openai/joblib/process/process_user_input/77abe883d47d6d789c46d5742f43ed82/output.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/cache-openai/joblib/process/process_user_input/89b7be8e1e472832eaa59642fbf23331/metadata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/cache-openai/joblib/process/process_user_input/89b7be8e1e472832eaa59642fbf23331/output.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/cache-openai/joblib/process/process_user_input/8e0882b605b48c44fe0d4166f3d14806/metadata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/cache-openai/joblib/process/process_user_input/8e0882b605b48c44fe0d4166f3d14806/output.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/cache-openai/joblib/process/process_user_input/cfc25cc116dc78c0c304fae9cd880ed3/metadata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/cache-openai/joblib/process/process_user_input/cfc25cc116dc78c0c304fae9cd880ed3/output.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/cache-openai/joblib/process/process_user_input/f6bc7967d070a062ccbb2829b63dc1bf/metadata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/cache-openai/joblib/process/process_user_input/f6bc7967d070a062ccbb2829b63dc1bf/output.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/cache-openai/joblib/process/process_user_input/func_code.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/dialectic_triangle.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/process.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/philo/server.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.local.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/bun.lockb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/ui/viewer/CellModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/ui/viewer/ChatModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/ui/viewer/FractalMini.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/ui/viewer/TriangleMini.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/ui/viewer/Viewer.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/ui/viewer/ViewerMenu.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/ui/viewer/chat-modal.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/ui/viewer/fractal.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chroma_viz/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/chroma_viz/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chroma_viz/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/chroma_viz/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/models/models.yml" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/models/models.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/read/selector.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/read/selector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/result/think.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/result/think.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/train/ntuple.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/train/ntuple.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integrator/states.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/states.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/entrypoint.sh" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/entrypoint.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/sites-enabled/default" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/sites-enabled/default" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philo/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/philo/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philo/analyser.py" beforeDir="false" afterPath="$PROJECT_DIR$/philo/analyser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philo/compare.py" beforeDir="false" afterPath="$PROJECT_DIR$/philo/compare.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philo/llm_update_text.py" beforeDir="false" afterPath="$PROJECT_DIR$/philo/llm_update_text.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philo/llm_update_toc.py" beforeDir="false" afterPath="$PROJECT_DIR$/philo/llm_update_toc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philo/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/philo/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philo/missing.py" beforeDir="false" afterPath="$PROJECT_DIR$/philo/missing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philo/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/philo/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/rest.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/rest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/web/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/controls.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/controls.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/lib/convertToAntdTreeData.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/lib/convertToAntdTreeData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/lib/nesting.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/lib/nesting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/puzzle.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/puzzle.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/query/useSocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/query/useSocket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/ControlTest.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/ControlTest.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/ShareModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/ShareModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/SocketTest.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/SocketTest.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/BibtexViewer.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/BibtexViewer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/Editor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/Editor.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/EventBroadcaster.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/LibraryMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/LibraryMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/LibraryView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/LibraryView.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/Puzzle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/Puzzle.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/TreeView.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/TriangleView.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/editor/controls.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/editor/editor.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/viewer/Fractal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/viewer/Fractal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/viewer/MobileControls.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/viewer/Pin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/viewer/Pin.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/viewer/SearchResults.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/viewer/SearchResults.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/viewer/Tooltips.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/viewer/Tooltips.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/viewer/Triangle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/viewer/Triangle.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/viewer/controls.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/ui/viewer/search.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/viewer/search.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,14 +171,15 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/stefan/programming/system/integrator",
+    "last_opened_file_path": "/home/tetraeder/old/programming/system/nginx",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "ts.external.directory.path": "/home/stefan/.local/share/JetBrains/Toolbox/apps/pycharm-professional/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "two.files.diff.last.used.folder": "/home/tetraeder/old/programming/system/nginx",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -138,7 +220,6 @@
         <env name="SYSTEM" value="../$SYTEM$" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (system) (2)" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -209,7 +290,6 @@
         <env name="SYSTEM" value="../$SYTEM$" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (system) (2)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/integrator/reader" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -245,7 +325,6 @@
         <env name="SYSTEM" value="../$SYTEM$" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (system) (2)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/integrator" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -281,7 +360,6 @@
         <env name="SYSTEM" value="../$SYTEM$" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (system) (2)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/integrator" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -344,10 +422,10 @@
     <list>
       <item itemvalue="Node.js.TextMetaModal.jsx" />
       <item itemvalue="Python.train_opposites" />
-      <item itemvalue="Python.states" />
-      <item itemvalue="Python.scratch_31" />
       <item itemvalue="Python.reader_dialogue" />
       <item itemvalue="Python.reader_sentences" />
+      <item itemvalue="Python.scratch_31" />
+      <item itemvalue="Python.states" />
     </list>
     <recent_temporary>
       <list>
@@ -362,7 +440,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-67fca87a943a-c986f194a52a-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.11799.259" />
+        <option value="bundled-python-sdk-50da183f06c8-2887949eec09-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.13135.95" />
       </set>
     </attachedChunks>
   </component>
@@ -485,6 +563,11 @@
       <workItem from="1702339638425" duration="2127000" />
       <workItem from="1702409655039" duration="7192000" />
       <workItem from="1702421257531" duration="6114000" />
+      <workItem from="1704541478549" duration="2313000" />
+      <workItem from="1704707689799" duration="38000" />
+      <workItem from="1705413420364" duration="1853000" />
+      <workItem from="1708090737443" duration="183000" />
+      <workItem from="1708090936716" duration="3596000" />
     </task>
     <task id="LOCAL-00001" summary="x">
       <created>1689330419674</created>
@@ -901,7 +984,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philo/analyser.py</url>
-          <line>382</line>
+          <line>383</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -931,17 +1014,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/server/rest.py</url>
-          <line>94</line>
-          <option name="timeStamp" value="56" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/server/rest.py</url>
           <line>92</line>
           <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philo/llm_update_toc.py</url>
-          <line>9</line>
+          <line>10</line>
           <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -960,18 +1038,8 @@
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/philo/llm_update_toc.py</url>
-          <line>15</line>
-          <option name="timeStamp" value="66" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/philo/main.py</url>
-          <line>197</line>
-          <option name="timeStamp" value="74" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/philo/main.py</url>
-          <line>100</line>
+          <line>93</line>
           <option name="timeStamp" value="87" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -982,7 +1050,7 @@
         <line-breakpoint suspend="THREAD" type="python-line">
           <condition expression="&quot;331&quot; in &quot;&quot;.join(str(p) for p in path)" language="Python" />
           <url>file://$PROJECT_DIR$/philo/analyser.py</url>
-          <line>20</line>
+          <line>21</line>
           <option name="timeStamp" value="108" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

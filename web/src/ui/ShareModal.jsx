@@ -27,22 +27,13 @@ const ShareModal = ({ url = '', linkInfo }) => {
       setIsVisible(false)
     }, 2000) // Reset after 2 seconds
   }
-
-  const handleHotkey = (e) => {
-    if (e.target.id === 'search') {
-      return // If it is, exit early and don't process the key event
-    }
-    if (e.key === 's') {
-      setIsVisible(true)
-    }
-  }
-
   return (
     <>
       <Button
         onClick={() => setIsVisible(true)}
         icon={<ShareAltOutlined />}
         aria-label="Share (Hotkey: s)"
+        style={{ width: '90%' }}
       >
         Share
       </Button>

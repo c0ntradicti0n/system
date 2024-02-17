@@ -4,19 +4,21 @@ import os
 import pprint
 import re
 
-import config
-import openai
+from openai import OpenAI
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 import pyperclip
 from dotenv import load_dotenv
-from helper import (OutputLevel, extract, get_prefix,
-                    nested_dict_to_filesystem, post_process_tree,
-                    sanitize_nested_dict, tree, update_nested_dict)
 from philosopher.llm_update_text import custom_parser, llm_update_text
 from philosopher.llm_update_toc import llm_update_toc
 from philosopher.yaml_tools import (object_to_yaml_str, rec_sort,
                                     single_key_completion)
 from regex import regex
 
+from lib import config
+from lib.helper import (OutputLevel, extract, get_prefix,
+                        nested_dict_to_filesystem, post_process_tree,
+                        sanitize_nested_dict, tree, update_nested_dict)
 from server.os_tools import git_auto_commit
 
 load_dotenv()
@@ -25,24 +27,15 @@ os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
 if os.environ.get("OPENAI_API_KEY"):
     # Load your API key from an environment variable or secret management service
-    openai.api_key = os.getenv("OPENAI_API_KEY")
 
     def llm(instruction, text, model=os.environ.get("OPENAI_MODEL")):
-        return openai.ChatCompletion.create(
+        return client.chat.completions.create(
             model=model,
             messages=[
                 {"role": "system", "content": instruction},
                 {"role": "user", "content": text},
             ],
         )
-
-else:
-    print(os.environ.get("MODEL", "openlm-research/open_llama_3b_600bt_preview"))
-    guidance.llm = guidance.llms.Transformers(
-        os.environ.get("MODEL", "openlm-research/open_llama_3b_600bt_preview"),
-        trust_remote_code=True,
-    )
-    # "openlm-research/open_llama_3b_600bt_preview")
 
 
 def dialectic_triangle(

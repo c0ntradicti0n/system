@@ -1,30 +1,28 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Muuri from 'muuri'
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
-
-import '../../puzzle.css'
+import './puzzle.css'
 import { stringToColour } from '../../lib/color'
 import { pointInTriangle, postProcessTitle } from '../../lib/position'
 import useMuuriGrid from '../../lib/useMuuriGrid'
 import calculateFontSize from '../../lib/FontSize'
 
 import { DEBUG } from '../../config/const'
-import EventBroadcaster from './EventBroadcaster'
+
 const handleInteractionStart = (event) => {
+  let mouseX, mouseY
+  if (event.touches?.length) {
+    const touch = event.touches[0]
 
-    let mouseX, mouseY;
-    if (event.touches?.length) {
-      const touch = event.touches[0];
-
-      // Get the touch coordinates
-      mouseX = touch.clientX;
-      mouseY = touch.clientY;
-    } else {
-      mouseX = event.clientX
-      mouseY = event.clientY
-    }
-console.log("handleInteractionStart", mouseX, mouseY)
-    if (mouseX === undefined || mouseY === undefined) return;
+    // Get the touch coordinates
+    mouseX = touch.clientX
+    mouseY = touch.clientY
+  } else {
+    mouseX = event.clientX
+    mouseY = event.clientY
+  }
+  console.log('handleInteractionStart', mouseX, mouseY)
+  if (mouseX === undefined || mouseY === undefined) return
 
   const elements = document
     .elementsFromPoint(mouseX, mouseY)
@@ -47,19 +45,18 @@ console.log("handleInteractionStart", mouseX, mouseY)
   }
 }
 
-
 const handleInterActionElement = (element, event) => {
-    let mouseX, mouseY;
-    if (event.touches?.length) {
-      const touch = event.touches[0];
+  let mouseX, mouseY
+  if (event.touches?.length) {
+    const touch = event.touches[0]
 
-      // Get the touch coordinates
-      mouseX = touch.clientX;
-      mouseY = touch.clientY;
-    } else {
-      mouseX = event.clientX
-      mouseY = event.clientY
-    }
+    // Get the touch coordinates
+    mouseX = touch.clientX
+    mouseY = touch.clientY
+  } else {
+    mouseX = event.clientX
+    mouseY = event.clientY
+  }
 
   const rect = element.getBoundingClientRect()
   const ax = rect.left
@@ -322,10 +319,8 @@ export const Puzzle = ({ data = undefined, action = null, props }) => {
 
   if (!items) return null
 
-  //console.log('Puzzle', { items })
-
   return (
-    <>
+    <div className="puzzle">
       <TransformWrapper
         initialScale={1}
         initialPositionX={0}
@@ -383,6 +378,6 @@ export const Puzzle = ({ data = undefined, action = null, props }) => {
             {id}
           </div>
         ))}
-    </>
+    </div>
   )
 }

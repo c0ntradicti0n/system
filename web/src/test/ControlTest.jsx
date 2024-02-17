@@ -1,5 +1,5 @@
 import { ControlContainer } from './ControlContainer'
-import '../controls.css'
+import './controls.css'
 import { TEST_AREAS } from '../config/areas'
 
 export const ControlContainerTest = () => {
