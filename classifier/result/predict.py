@@ -1,5 +1,4 @@
 import logging
-import math
 import os
 
 import torch
@@ -7,7 +6,6 @@ from addict import Dict
 from gevent.lock import BoundedSemaphore
 from ruamel.yaml import YAML
 
-from classifier.model.siamese import asymmetric_similarity
 from lib.shape import to_tensor, view_shape
 
 yaml = YAML(typ="rt")

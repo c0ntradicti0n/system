@@ -1,8 +1,6 @@
-import torch
-import torch.nn.functional as F
 from scipy.optimize import linear_sum_assignment
 from torch.nn.functional import cosine_similarity
-
+import torch
 
 def compute_cosine_similarity(embeddings, labels, config):
     batch_size, n_samples = labels.shape

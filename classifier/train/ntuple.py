@@ -1,6 +1,5 @@
 import logging
 import os
-from pprint import pprint
 
 import torch
 from sklearn.metrics import (accuracy_score, f1_score, precision_score,
@@ -14,8 +13,6 @@ from classifier.model.different_models import (get_model_config,
 from classifier.model.siamese import evaluate_model
 from classifier.read.selector import DataGenerator
 from classifier.result.think import get_model, get_prediction
-
-
 
 """
 Use WordNet for more samples
@@ -160,6 +157,8 @@ def train(config_name):
             print(
                 f"Epoch {epoch + 1}, {batch=}, {loss=}, {train_fscore=:.2f} {optimizer.param_groups[0]['lr']:.2E}"
             )
+            if train_fscore > max_fscore and train_fscore > 0.5:
+                break
 
         avg_loss = total_loss / config.batches_per_epoch
         avg_train_fscore = total_train_fscore / config.batches_per_epoch

@@ -1,9 +1,3 @@
-import ast
-import csv
-import random
-
-from lib.interleave_generators import interleave_generators
-
 extra = [
     ("plus and minus", "multiplication and division", "exponent and root"),
     ("addition and subtraction", "multiplication and division", "exponential and logarithm"),

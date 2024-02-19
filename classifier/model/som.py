@@ -1,7 +1,3 @@
-import numpy as np
-import torch
-from torch.utils.data import DataLoader, TensorDataset
-from sklearn.metrics import f1_score
 from torch import nn
 
 
@@ -15,15 +11,16 @@ def generate_dummy_sequences(batch_size=64, seq_len=5, embedding_dim=128, num_cl
 
 
 class Som(nn.Module):
-    def __init__(self, embedding_dim, hidden_dim, output_dim, num_layers=1, bidirectional=True, dropout_rate=0.3):
+    def __init__(self, embedding_dim, hidden_dim, output_dim, num_layers=1, bidirectional=True, dropout_rate=0.0):
         super(Som, self).__init__()
-
+        self.conv1d = nn.Conv1d(in_channels=embedding_dim, out_channels=hidden_dim, kernel_size=3, padding=1)
+        self.relu = nn.ReLU()
         self.bidirectional = bidirectional
         # Adjusting the hidden dimension if using a bidirectional GRU, as the outputs will be concatenated
         final_hidden_dim = hidden_dim * 2 if bidirectional else hidden_dim
 
         self.gru = nn.GRU(
-            input_size=embedding_dim,
+            input_size=hidden_dim,
             hidden_size=hidden_dim,
             num_layers=num_layers,
             batch_first=True,
@@ -36,6 +33,10 @@ class Som(nn.Module):
         self.fc = nn.Linear(final_hidden_dim, output_dim)
 
     def forward(self, x):
+        x = x.transpose(1, 2)  # Conv1D expects (batch, channels, seq_len)
+        x = self.conv1d(x)
+        x = self.relu(x)
+        x = x.transpose(1, 2)  # Back to (batch, seq_len, channels) for GRU
         out, _ = self.gru(x)
 
         # If using a bidirectional GRU, out will contain concatenated hidden states from both directions

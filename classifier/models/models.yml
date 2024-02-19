@@ -19,7 +19,7 @@ classifier: &classifier
 som: &som
   <<: *defaults
   model: som
-  lr: 0.00003
+  lr: 0.003
 
 
 models:
@@ -27,7 +27,7 @@ models:
   som:
     <<: *som
     n_samples: 5
-    n_classes: 9
+    n_classes: 12
     # 0 - stay at higher concept
     # 1 - stay at 1
     # 2 - stay at 2
@@ -38,9 +38,8 @@ models:
     # 7 - deeper at 2
     # 8 - deeper at 3
 
-    batch_size: 1000
-    batches_per_epoch: 17
-    lr: 0.003
+    batch_size: 64
+    batches_per_epoch: 170
 
     embedding_dim: 4096
     hidden_dim: 1024

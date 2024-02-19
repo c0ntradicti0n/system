@@ -1,12 +1,10 @@
+import os
 import random
 from concurrent.futures import ThreadPoolExecutor, as_completed
-
-import config
-
-from lib.helper import OutputLevel, tree
-
 from enum import Enum
 
+import config
+from lib.helper import OutputLevel, tree, digitize
 from lib.json import encode, decode
 
 
@@ -15,8 +13,8 @@ class ConceptPosition(Enum):
     THESIS = 1
     ANTITHESIS = 2
     SYNTHESIS = 3
-    MORE_ABSTRACT = 4
-    MORE_CONCRETE_COMPLEX = 5
+    LESS_COMPOUND = 4
+    MORE_COMPOUND = 5
     SUBSUMED_INTO_THESIS = 6
     SUBSUMED_INTO_ANTITHESIS = 7
     SUBSUMED_INTO_SYNTHESIS = 8
@@ -24,8 +22,10 @@ class ConceptPosition(Enum):
     def __int__(self):
         return self.value
 
-int(ConceptPosition.SUMMARIZING_CONCEPT)  # 0
-def random_123_string(max_length, start_string=None, shorter = False, longer = False, return_extension=False):
+GLOBAL_PREFIX = os.environ.get("CLASSIFIER_DATA_GLOBAL_PREFIX", "1")
+data_path = config.models_path + GLOBAL_PREFIX + "_" + "som_data.txt"
+
+def random_123_string(max_length, min_length= 0 ,start_string=None, shorter = False, longer = False, return_extension=False, global_prefix=GLOBAL_PREFIX):
     """
     Generate a random string of "1", "2", and "3" within a given length.
     If start_string is provided, modify it based on a probability.
@@ -38,7 +38,7 @@ def random_123_string(max_length, start_string=None, shorter = False, longer = F
 
     # Function to generate a random string of "1", "2", and "3"
     def generate_random_string(length):
-        return ''.join(random.choice(['1', '2', '3']) for _ in range(length))
+        return ''.join(random.choice(['1', '2', '3']) for _ in range(min_length, length))
 
     if start_string:
         if not (shorter ^ longer):
@@ -59,37 +59,25 @@ def random_123_string(max_length, start_string=None, shorter = False, longer = F
         random_length = random.randint(1, max_length)
         result_string = generate_random_string(random_length)
 
-    if return_extension:
-        return result_string, extension
-    return result_string
+    if not (shorter or longer):
+        if return_extension:
+            return global_prefix + result_string, extension
+        return global_prefix + result_string
+    else:
+        if return_extension:
+            return result_string, extension
+        return result_string
 
 
-def find_matching_entries(nested_dict):
-    # Stack item format: (current_dict, path_to_current_dict)
-    stack = [(nested_dict, [])]
-    while stack:
-        current_dict, path = stack.pop()
-        # Check if current_dict is a valid candidate (having keys 1, 2, 3)
-        if all(key in current_dict for key in [1, 2, 3]):
-            # Retrieve the parent dictionary to check for the "." key
-            if path:
-                parent_path = path[:-1]
-                parent_dict = nested_dict
-                for step in parent_path:
-                    parent_dict = parent_dict[step]
-                if '.' in parent_dict:
-                    # Found a match, return the relevant entries
-                    return {key: current_dict[key] for key in [1, 2, 3, '.']}
-        # Push children onto the stack
-        for key, value in current_dict.items():
-            if isinstance(value, dict):
-                stack.append((value, path + [key]))
-    # No matching entry found
+def find_matching_entries(nested_dict, path):
+    for step in digitize(path):
+        nested_dict = nested_dict[step]
+    return path, (nested_dict[1]["."], nested_dict[2]["."], nested_dict[3]["."], nested_dict["."])
     raise KeyError("No matching entry found.")
 
-
+MAX_LENGTH = 7
 def make_sample(which_kind, which):
-    path = random_123_string(10)
+    path = random_123_string(MAX_LENGTH, global_prefix=GLOBAL_PREFIX)
     try:
         file_dict = get_from_triangle(path)
 
@@ -97,17 +85,14 @@ def make_sample(which_kind, which):
         return None
 
     try:
-        matching_entries = find_matching_entries(file_dict)
-        a = matching_entries[1]["."]
-        b = matching_entries[2]["."]
-        c = matching_entries[3]["."]
-        d = matching_entries["."]
+        path_, matching_entries = find_matching_entries(file_dict, path)
+        a, b, c, d = matching_entries
 
     except KeyError:
-        return None
+          return None
 
     except TypeError:
-        return None
+         return None
 
     try:
         # 1 - use higher
@@ -116,50 +101,68 @@ def make_sample(which_kind, which):
         if which_kind == 1:
             # higher
             path2 = random_123_string(10)
-            if path2 in path:
+            if  path2 in path or path in path2:
                 return None
-            if path in path2:
-                return None
-            file_dict = get_from_triangle(path2)
-            matching_entries = find_matching_entries(file_dict)
+            file_dict2 = get_from_triangle(path2)
 
-            X = matching_entries["."]
+
+            try:
+                digitized_path2 = digitize(path2)
+                nested_dict =  file_dict2
+                for step in digitized_path2:
+                    nested_dict = nested_dict[step]
+            except:
+                raise
+            X = nested_dict["."]
+
 
             if (X in [a, b, c, d]):
                 return None
 
             if path > path2:
-                kind = ConceptPosition.MORE_ABSTRACT
+                kind = ConceptPosition.LESS_COMPOUND
             else:
-                kind = ConceptPosition.MORE_CONCRETE_COMPLEX
-        if which_kind == 2 or which_kind == 4:
-            path2, extension = random_123_string(10, start_string=path, longer=True, return_extension=True)
-            file_dict = get_from_triangle(path2)
-            matching_entries = find_matching_entries(file_dict)
-
+                kind = ConceptPosition.MORE_COMPOUND
+        elif which_kind == 2 or which_kind == 4:
+            path2, extension = random_123_string(3, start_string=path, longer=True, return_extension=True, global_prefix=GLOBAL_PREFIX)
+            file_dict2 = get_from_triangle(path2)
+            sub_path, matching_entries = find_matching_entries(file_dict2, path2)
+            _a, _b, _c, _d = matching_entries
             if which == 1:
                 X = a
-                a = matching_entries["."]
+                a = _a
                 kind = ConceptPosition.THESIS
             if which == 2:
                 X = b
-                b = matching_entries["."]
+                b = _b
                 kind = ConceptPosition.ANTITHESIS
             if which == 3:
                 X = c
-                c = matching_entries["."]
+                c = _c
                 kind = ConceptPosition.SYNTHESIS
             if which == 4:
                 X = d
-                d = matching_entries["."]
+                d = _d
                 kind = ConceptPosition.SUMMARIZING_CONCEPT
-        if which_kind == 3 or which_kind == 5:
-            path2, extension = random_123_string(10, start_string=path, longer=True, return_extension=True)
+        elif which_kind == 3 or which_kind == 5 or which_kind== 6 or which_kind ==7:
+            path2, extension = random_123_string(4, min_length=2 ,start_string=path, longer=True, return_extension=True, global_prefix=GLOBAL_PREFIX)
 
-            file_dict = get_from_triangle(path2)
 
-            matching_entries = find_matching_entries(file_dict)
-            X = matching_entries["."]
+            file_dict2 = get_from_triangle(path2)
+
+            try:
+                digitized_path2 = digitize(path2)
+                nested_dict =  file_dict2
+                for step in digitized_path2:
+                    nested_dict = nested_dict[step]
+            except:
+                raise
+            X = nested_dict["."]
+            if X in [a, b, c, d]:
+                return None
+
+
+
             if extension.startswith("1"):
                 kind = ConceptPosition.SUBSUMED_INTO_THESIS
             if extension.startswith("2"):
@@ -173,10 +176,18 @@ def make_sample(which_kind, which):
 
     assert all(
         isinstance(_, str) for _ in (a, b, c, d, X)), f"{a=}, {b=}, {c=}, {d=}, {X=}, {kind=} {which_kind=} {which=}"
+    # replace ".md"
+    (a,b,c,d,X) = [
+        _.replace(".md", "") for _ in (a, b, c, d, X)
 
+]
+    try :
+        print (a, b, c, d, X, kind)
+    except:
+        return None
     return a, b, c, d, X, kind
 def sync_gen(config):
-    which_kind = random.choice([1, 2, 3, 4, 5])
+    which_kind = random.choice([1, 2, 3, 4, 5, 6,7])
     which = random.choice([1, 2, 3, 4])
 
     while True:
@@ -196,7 +207,7 @@ def parallel_gen(config, max_workers=160):
         # A dictionary to map futures to their corresponding which_kind and which values
         future_to_params = {}
 
-        which_kind_options = [1, 2, 3, 4, 5]
+        which_kind_options = [1, 2, 3, 4, 5, 6,7]
         which_options = [1, 2, 3, 4]
 
         # Initial submission of tasks
@@ -238,7 +249,7 @@ def get_from_triangle(path):
         basepath=config.system_path,
         startpath="/".join(path),
         format="json",
-        keys=path.split("/"),
+        keys=[c for c in path],
         info_radius=0,
         exclude=[".git", ".git.md", ".gitignore", ".DS_Store", ".idea"],
         pre_set_output_level=OutputLevel.FILENAMES,
@@ -264,7 +275,7 @@ def store_and_yield_gen(original_gen, filepath):
         yield item
 
 
-def yield_from_file(config, filepath="___.txt", cycle=True):
+def yield_from_file(config, filepath=data_path, cycle=True):
     """
     A generator that reads tuples from a file (stored in JSON format) and yields them.
     Optionally cycles through the data again if the end of the file is reached.
@@ -289,11 +300,16 @@ def yield_from_file(config, filepath="___.txt", cycle=True):
                 a, b, c, d, X = item  # Unpack the tuple
 
                 yield (
-                    ("thesis: " + a[0], a[1] ),
-                    ("antithesis: " + b[0], b[1] ),
-                    ("synthesis: " + c[0], c[1] ),
-                    ("summary topic: " + d[0], d[1] ),
-                    ("new: " + X[0], X[1] ),
+                    (#"thesis: " +
+                     a[0], a[1] ),
+                    (#"antithesis: " +
+                         b[0], b[1] ),
+                    (#"synthesis: " +
+                     c[0], c[1] ),
+                    (#"summary topic: " +
+                         d[0], d[1] ),
+                    (#"new: " +
+                         X[0], X[1] ),
                 )
         if not cycle:
             break  # Exit the while loop if cycling is not enabled
@@ -340,14 +356,10 @@ if __name__ == "__main__":
         }
     }
 
-    try:
-        matching_entries = find_matching_entries(nested_dict)
-        print("Found matching entries:", matching_entries)
-    except ValueError as e:
-        print(e)
 
 
-    g = parallel_gen(None)
+
+    g = sync_gen(None)
     print (next(g))
     print (next(g))
     print (next(g))
@@ -358,4 +370,4 @@ if __name__ == "__main__":
     print (next(g))
 
     for _ in range(10_000_000):
-        print(next(store_and_yield_gen(g, "../___.txt")))
+        print(next(store_and_yield_gen(g, data_path)))
