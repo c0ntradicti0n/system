@@ -11,16 +11,16 @@ def generate_dummy_sequences(batch_size=64, seq_len=5, embedding_dim=128, num_cl
 
 
 class Som(nn.Module):
-    def __init__(self, embedding_dim, hidden_dim, output_dim, num_layers=1, bidirectional=True, dropout_rate=0.0):
+    def __init__(self, embedding_dim, hidden_dim, output_dim, num_layers=3, bidirectional=True, dropout_rate=0.2):
         super(Som, self).__init__()
-        self.conv1d = nn.Conv1d(in_channels=embedding_dim, out_channels=hidden_dim, kernel_size=3, padding=1)
+        self.conv1d = nn.Conv1d(in_channels=embedding_dim, out_channels=hidden_dim, kernel_size=5, padding=1)
         self.relu = nn.ReLU()
         self.bidirectional = bidirectional
         # Adjusting the hidden dimension if using a bidirectional GRU, as the outputs will be concatenated
         final_hidden_dim = hidden_dim * 2 if bidirectional else hidden_dim
 
-        self.gru = nn.GRU(
-            input_size=hidden_dim,
+        self.gru = nn.LSTM(
+            input_size=embedding_dim,
             hidden_size=hidden_dim,
             num_layers=num_layers,
             batch_first=True,
@@ -33,10 +33,10 @@ class Som(nn.Module):
         self.fc = nn.Linear(final_hidden_dim, output_dim)
 
     def forward(self, x):
-        x = x.transpose(1, 2)  # Conv1D expects (batch, channels, seq_len)
-        x = self.conv1d(x)
-        x = self.relu(x)
-        x = x.transpose(1, 2)  # Back to (batch, seq_len, channels) for GRU
+        #x = x.transpose(1, 2)  # Conv1D expects (batch, channels, seq_len)
+        #x = self.conv1d(x)
+        #x = self.relu(x)
+        #x = x.transpose(1, 2)  # Back to (batch, seq_len, channels) for GRU
         out, _ = self.gru(x)
 
         # If using a bidirectional GRU, out will contain concatenated hidden states from both directions
@@ -96,9 +96,40 @@ if __name__ == "__main__":
     output_size = 10  # Number of classes (based on the sum's decade)
     num_layers = 1  # Number of GRU layers
 
-    model = Som(input_size, hidden_size, output_size, num_layers)
+    # Parameters for the Transformer model
+    input_size = 28 * 28  # Flattened MNIST images
+    d_model = 512  # Size of the embedding
+    output_size = 10  # Number of classes (based on the sum's decade)
+    num_layers = 2  # Number of Transformer encoder layers
+    nhead = 8  # Number of heads in the multiheadattention models
+    dim_feedforward = 2048  # Size of the feedforward model in nn.TransformerEncoder
+    dropout = 0.1  # Dropout rate
 
-    # Model
+    # Check if GPU is available
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    # Instantiate the model and move it to the device
+    model = TransformerModel(input_size, d_model, output_size, nhead, num_layers, dim_feedforward, dropout).to(device)
+
+    # Remaining code for data loading and transformation
+    transform = transforms.Compose([transforms.ToTensor(), transforms.Lambda(lambda x: torch.flatten(x))])
+    mnist_data = datasets.MNIST(root='./data', train=True, download=True, transform=transform)
+    train_data, test_data = train_test_split(mnist_data, test_size=0.2, random_state=42)
+
+    # Generate sequences for training and testing
+    # Ensure that you move your tensors to the device where necessary
+    train_sequences, train_labels = generate_sequences(train_data,
+                                                       5)  # Modify this function to move tensors to the device
+    test_sequences, test_labels = generate_sequences(test_data, 5)  # Modify this function to move tensors to the device
+
+    train_sequences, train_labels = train_sequences.to(device), train_labels.to(device)
+    test_sequences, test_labels = test_sequences.to(device), test_labels.to(device)
+
+    # DataLoader
+    train_dataset = TensorDataset(train_sequences, train_labels)
+    train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
+
+    # Training loop
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=0.001)
 
@@ -107,6 +138,7 @@ if __name__ == "__main__":
         model.train()
         total_loss = 0
         for sequences, labels in train_loader:
+            sequences, labels = sequences.to(device), labels.to(device)
             optimizer.zero_grad()
             outputs = model(sequences)
             loss = criterion(outputs, labels)
@@ -114,3 +146,4 @@ if __name__ == "__main__":
             optimizer.step()
             total_loss += loss.item()
         print(f'Epoch {epoch + 1}/{epochs}, Loss: {total_loss / len(train_loader)}')
+

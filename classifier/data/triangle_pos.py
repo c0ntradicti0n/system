@@ -124,7 +124,7 @@ def make_sample(which_kind, which):
             else:
                 kind = ConceptPosition.MORE_COMPOUND
         elif which_kind == 2 or which_kind == 4:
-            path2, extension = random_123_string(3, start_string=path, longer=True, return_extension=True, global_prefix=GLOBAL_PREFIX)
+            path2 = random_123_string(3, global_prefix=GLOBAL_PREFIX)
             file_dict2 = get_from_triangle(path2)
             sub_path, matching_entries = find_matching_entries(file_dict2, path2)
             _a, _b, _c, _d = matching_entries
@@ -143,7 +143,7 @@ def make_sample(which_kind, which):
             if which == 4:
                 X = d
                 d = _d
-                kind = ConceptPosition.SUMMARIZING_CONCEPT
+                kind = ConceptPosition.LESS_COMPOUND
         elif which_kind == 3 or which_kind == 5 or which_kind== 6 or which_kind ==7:
             path2, extension = random_123_string(4, min_length=2 ,start_string=path, longer=True, return_extension=True, global_prefix=GLOBAL_PREFIX)
 

@@ -1,3 +1,4 @@
+import gc
 import logging
 import os
 
@@ -49,11 +50,22 @@ def colorized_comparison(prefix, predicted_labels, gold_labels):
     )
 
 def train(config_name):
+    #device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # Empty the CUDA cache
+    #torch.cuda.empty_cache()
+
+    # Call the garbage collector to remove the objects from memory
+    gc.collect()
+
+    # Verify the memory status (optional)
+    #print(torch.cuda.memory_summary())  # Provides a summary of CUDA memory usage
 
     config = get_model_config(config_name)
-    model = get_model(config)
-    optimizer = torch.optim.Adagrad(model.parameters(), lr=0.01)
-    criterion = nn.CrossEntropyLoss()
+    model = get_model(config)#.to(device)
+
+    optimizer = torch.optim.Adagrad(model.parameters(), lr=0.003, lr_decay=0.01)
+
+    criterion = nn.CrossEntropyLoss(weight=None if not config.get("loss_weights") else torch.tensor(list(config.loss_weights)))
     data_gen = DataGenerator(config)
 
 
@@ -63,7 +75,7 @@ def train(config_name):
     scheduler = CyclicLR(
         optimizer,
         mode="exp_range",
-        gamma=0.99,
+        gamma=0.999,
         base_lr=0,
         max_lr=0.006,
         step_size_up=config.batches_per_epoch * 0.7,
@@ -129,7 +141,10 @@ def train(config_name):
 
 
             # Backward pass and optimizer step
+
             loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 0.5)  # Gradient clipping
+
             optimizer.step()
 
             # Calculate F-score for training data using reshaped tensors
@@ -157,7 +172,7 @@ def train(config_name):
             print(
                 f"Epoch {epoch + 1}, {batch=}, {loss=}, {train_fscore=:.2f} {optimizer.param_groups[0]['lr']:.2E}"
             )
-            if train_fscore > max_fscore and train_fscore > 0.5:
+            if train_fscore > max_fscore and train_fscore > 0.7:
                 break
 
         avg_loss = total_loss / config.batches_per_epoch

@@ -27,7 +27,9 @@ models:
   som:
     <<: *som
     n_samples: 5
-    n_classes: 12
+    n_classes: 9
+    loss_weights: [ 0, 0.15172247835473368, 0.1476857349332255, 0.14668625042352593, 0.07449548855387905, 0.14560698498534902, 0.1154368336454986, 0.11241477773875054, 0.10595145136503747 ]
+
     # 0 - stay at higher concept
     # 1 - stay at 1
     # 2 - stay at 2
@@ -38,14 +40,17 @@ models:
     # 7 - deeper at 2
     # 8 - deeper at 3
 
-    batch_size: 64
-    batches_per_epoch: 170
+    batch_size: 256
+    batches_per_epoch: 200
 
     embedding_dim: 4096
     hidden_dim: 1024
 
+    weight_decay: 0.000000001
+
 
     from_module: classifier.data.triangle_pos
+
 
     f1: micro
 
