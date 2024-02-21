@@ -1,25 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Modal, Button, Spin, Select, Input, Card, Collapse, Radio } from 'antd'
 import { CloseOutlined } from '@ant-design/icons'
-import './chat-modal.css'
+import '../viewer/chat-modal.css'
 import TextArea from 'antd/es/input/TextArea'
 import Meta from 'antd/es/card/Meta'
-import Fractal from './Fractal'
-import FractalMini from './FractalMini'
+import Fractal from '../viewer/Fractal'
+import FractalMini from '../viewer/FractalMini'
 import { setValueInNestedObject } from '../../lib/nesting'
+import useChatModal from "./state";
 
 const { Option } = Select
 const TOKEN_STORAGE_KEY = 'chatModalToken'
 let loading = false
 
-const ChatModal = ({ title, path, setPath }) => {
+const ChatModal = () => {
+  const state = useChatModal()
   const [messages, setMessages] = useState([])
   const [message, setMessage] = useState('')
   const [token, setToken] = useState(localStorage.getItem(TOKEN_STORAGE_KEY))
   const [task, setTask] = useState(localStorage.getItem('task'))
   const messageContainerRef = useRef(null)
   const [isFullscreen, setIsFullscreen] = useState(false)
-  const [isModalVisible, setIsModalVisible] = useState(true)
   const [visualizationData, setVisualizationData] = useState(null)
   const [bestSolution, setBestSolution] = useState(0)
 
@@ -29,33 +30,38 @@ const ChatModal = ({ title, path, setPath }) => {
 
   const showModal = () => {
     setMessages([])
-    setIsModalVisible(true)
+    state.setVisible(true)
+    console.log("NEW")
   }
 
-  const handleCancel = () => {
+  const handleCancel = (e) => {
+    console.log("CANCEL!!!")
     if (isFullscreen) {
       return
     }
-    setIsModalVisible(false)
+    e.preventDefault()
+    e.stopPropagation()
+    state.setVisible(false)
+    console.log(state)
   }
 
 
 
   useEffect(() => {
-    console.log('useEffect', isModalVisible, path, task, token, loading)
-    if (!isModalVisible || loading) return
+    console.log('useEffect', state, task, token, loading)
+    if (!state.visible || loading) return
     loading = true
-    console.log({task, token, path})
-    if (!(task&& token && path))
+    console.log({task, token})
+    if (!(task&& token && state.path))
       return
 
-    console.log(path)
+    console.log(state.path)
     setMessages([{ loading: true }])
 
     fetch('/api/philo/init', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ task, token, path }),
+      body: JSON.stringify({ task, token, path: state.path }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -65,12 +71,11 @@ const ChatModal = ({ title, path, setPath }) => {
         scrollMessageContainerToBottom()
       })
       .catch((e) => console.error(e))
-  }, [ isModalVisible, path, task, token])
+  }, [ state.visible, state.path, task, token])
 
-  console.log('path', path, setPath)
 
   const handleSendMessage = () => {
-    if (!isModalVisible) return
+    if (! state.visible) return
     loading = true
 
     addMessage({ user: message })
@@ -82,7 +87,7 @@ const ChatModal = ({ title, path, setPath }) => {
     fetch('/api/philo/reply', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message, task, token, path, instruction, prompt }),
+      body: JSON.stringify({ message, task, token, path: state.path, instruction, prompt }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -94,7 +99,7 @@ const ChatModal = ({ title, path, setPath }) => {
   }
 
   const handleSubmitMessage = () => {
-    if (!isModalVisible) return
+    if (! state.visible) return
     const message = messages[bestSolution]
     if (!message) return
     const data = message?.data
@@ -102,13 +107,16 @@ const ChatModal = ({ title, path, setPath }) => {
     fetch('/api/philo/commit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message, task, token, path, prompt, data }),
+      body: JSON.stringify({ message, task, token, path: state.path, prompt, data }),
     })
       .then((response) => response.json())
       .then((data) => {
         addMessage(data)
         loading = false
         scrollMessageContainerToBottom()
+        if (!data.error) {
+          state.setVisible(false)
+        }
       })
       .catch((e) => console.error(e))
   }
@@ -117,16 +125,20 @@ const ChatModal = ({ title, path, setPath }) => {
     if (messages.length > 0 && messages[messages.length - 1].loading) {
       messages.pop()
     }
-    setMessages((prevMessages) => [...prevMessages, data])
+
+    setMessages((prevMessages) => {
+      prevMessages = prevMessages.filter((msg) => !msg.loading)
+      return [...prevMessages, data]
+    })
   }
 
   useEffect(() => {
-    if (!isModalVisible) return
+    if (!state.visible) return
     if (token)
     localStorage.setItem(TOKEN_STORAGE_KEY, token)
     if (task)
     localStorage.setItem('task', task)
-  }, [isModalVisible, token, task])
+  }, [ state.visible, token, task])
 
 
 
@@ -153,23 +165,23 @@ const ChatModal = ({ title, path, setPath }) => {
       >
         Got a token? Edit via chat
       </Button>
-      {isModalVisible && (
+      { state.visible && (
         <Modal
           title={
             <>
               Work on fractal at path{' '}
               <Input
                 style={{ display: 'inline-flex' }}
-                defaultValue={path}
+                defaultValue={state.path}
                 onPressEnter={(e) => {
                   setMessages([])
-                  setPath(e.target.value)
+                  state.setPath(value)
                 }}
-                placeholder={'hallo'}
+                placeholder={'path in triangle'}
               />
             </>
           }
-          visible={isModalVisible}
+          visible={ state.visible}
           width="98%"
           height="90%"
           style={{ height: '90%', top: '0', left: '0', marginTop: '1vh' }}
@@ -228,35 +240,27 @@ const ChatModal = ({ title, path, setPath }) => {
                   onChange={(e) => setBestSolution(e.target.value)}
                 >
                   <div className="message-container" ref={messageContainerRef}>
-                    {loading ? (
-                      <Spin
-                        size="large"
-                        style={{
-                          left: '10%',
-                          top: '10%',
-                          position: 'relative',
-                        }}
-                      />
-                    ) : (
+                    {
                       messages.map((msg, index) => (
                         <>
-                          {msg.error && (
+                          {msg?.error && (
                             <div className=" message message-error">
-                              {msg.error}
+                              {msg?.error}
                             </div>
                           )}
 
-                          {msg.user && (
+                          {msg?.user && (
                             <div className=" message message-user">
-                              {msg.user}
+                              {msg?.user}
                             </div>
                           )}
-                          {msg.data && (
+                          {msg.loading && <Spin size="small" />}
+
+                          {msg?.data && (
                             <div className="message message-bot">
-                              {msg.loading && <Spin size="small" />}
                               <Collapse
                                 items={[
-                                  msg.prompt && {
+                                  msg?.prompt && {
                                     label: 'Prompt',
                                     children: (
                                       <pre style={{ whiteSpace: 'pre-wrap' }}>
@@ -265,7 +269,7 @@ const ChatModal = ({ title, path, setPath }) => {
                                     ),
                                     key: '1',
                                   },
-                                  msg.instruction && {
+                                  msg?.instruction && {
                                     label: 'Instruction',
                                     children: (
                                       <pre style={{ whiteSpace: 'pre-wrap' }}>
@@ -274,7 +278,7 @@ const ChatModal = ({ title, path, setPath }) => {
                                     ),
                                     key: '2',
                                   },
-                                  msg.reply && {
+                                  msg?.reply && {
                                     label: 'Reply',
                                     children: (
                                       <pre style={{ whiteSpace: 'pre-wrap' }}>
@@ -283,9 +287,9 @@ const ChatModal = ({ title, path, setPath }) => {
                                     ),
                                     key: '3',
                                   },
-                                  msg.data && {
+                                  msg?.data && {
                                     label: 'Data',
-                                    children: ( msg.data.length ?
+                                    children: ( msg?.data.length ?
                                     (
                                       <pre style={{ whiteSpace: 'pre-wrap' }}>
                                         {JSON.stringify(msg.data)}
@@ -296,7 +300,7 @@ const ChatModal = ({ title, path, setPath }) => {
                                 ].filter((x) => x)}
                                 size="small"
                               />
-                              {msg.data ? (
+                              {msg?.data ? (
                                 <div
                                   onClick={() => {
                                     setVisualizationData([index, msg.data])
@@ -327,14 +331,14 @@ const ChatModal = ({ title, path, setPath }) => {
                                 </div>
                               ) : (
                                 <div className="message-reply">
-                                  <pre>{msg.reply}</pre>
+                                  <pre>{msg?.reply}</pre>
                                 </div>
                               )}
                             </div>
                           )}
                         </>
                       ))
-                    )}
+                    }
                   </div>
                 </Radio.Group>
               </div>

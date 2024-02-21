@@ -15,6 +15,7 @@ import { stringToColour } from '../../lib/color'
 import { trim } from '../../lib/string'
 import calculateFontSize from '../../lib/FontSize'
 import CellModal from './CellModal'
+import useChatModal from "../ChatModal/state";
 
 function getRandomElement(arr) {
   const randomIndex = Math.floor(Math.random() * arr.length)
@@ -49,17 +50,12 @@ function Triangle({
 }) {
   const [_hover, _setHover] = useState(false)
   const [animationClass, setAnimationClass] = useState('')
-  /*useEffect(() => {
-    setAnimationClass(
-      getRandomElement(['fold-foreground', 'fold-right-top', 'fold-left-top']),
-    )
-  }, [])*/
   const [animationTime] = useState(Math.random() / 4)
   const ref = React.useRef(null)
   const triangleId = 'triangle-' + fullId.replace(/\//g, '')
   const [cellModalVisible, setCellModalVisible] = useState(false)
     const [antCellModalVisible, setAntCellModalVisible] = useState(false)
-
+const chatModal = useChatModal()
   useEffect(() => {
     if (!ref?.current || !isMobile) return
     const isWithinViewport = isElementInViewportAndBigAndNoChildren(
@@ -145,7 +141,7 @@ function Triangle({
                   editData={editData}
               />
             </div>
-          ) : null,
+          ) : (null),
         )}
 
         <div
@@ -170,6 +166,12 @@ function Triangle({
                 onClick={(e) => {
                   e.preventDefault()
                   setCellModalVisible(true)
+                }}
+                onContextMenu={(e) => {
+                  e.preventDefault()
+                    setCellModalVisible(true)
+                  chatModal.setPath(fullId)
+                  chatModal.setVisible(true)
                 }}
               >
                 {trim(fullId.replace(/\//g, '.'), '.')}{' '}

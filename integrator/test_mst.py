@@ -9,7 +9,6 @@ def recompute_tree(path, start_node=None, epochs=10, start_with_sub=False):
     file_dict = tree(
         basepath="../../dialectics/",
         startpath=path,
-        format="json",
         keys=path.split("/"),
         info_radius=1,
         exclude=[".git", ".git.md", ".gitignore", ".DS_Store", ".idea"],

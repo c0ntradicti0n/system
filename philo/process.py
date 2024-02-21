@@ -8,6 +8,7 @@ from openai import OpenAI
 
 from lib import config
 from lib.os_tools import git_auto_commit
+from lib.t import catchtime
 
 client = OpenAI()
 import regex
@@ -67,32 +68,34 @@ def generate_prompt(
             # llm model
             model="gpt-4-1106-preview",
         )
-
-    t = tree(
-        basepath=base_path,
-        startpath="",
-        format="json",
-        sparse=True,
-        info_radius=info_radius,
-        location=location_path,
-        pre_set_output_level=preset_output_level,
-        exclude=[".git", ".git.md", ".idea"],
-        prefix_items=True,
-        depth=100 if task == "text" else 7,
-    )
+    with catchtime("tree"):
+        t = tree(
+            basepath=base_path,
+            startpath="",
+            sparse=True,
+            info_radius=info_radius,
+            location=location_path,
+            pre_set_output_level=preset_output_level,
+            exclude=(".git", ".git.md", ".idea"),
+            prefix_items=True,
+            depth=100 if task == "text" else 7,
+        )
     # pprint.pprint(t)
-    index = post_process_tree(single_key_completion(object_to_yaml_str(rec_sort(t))))
+    with catchtime("post_process_tree"):
+        index = post_process_tree(single_key_completion(object_to_yaml_str(rec_sort(t))))
 
-    if task == "toc":
-        instruction, prompt = llm_update_toc(
-            index, kwargs, t, path_to_fill=location_path
-        )
-    elif task == "text":
-        instruction, prompt = llm_update_text(
-            index, kwargs, t, base_path=os.path.join(config.system_path, location_path)
-        )
-    else:
-        raise NotImplementedError(f"{task} not implemented")
+    with catchtime("taks"):
+
+        if task == "toc":
+            instruction, prompt = llm_update_toc(
+                index, kwargs, t, path_to_fill=location_path
+            )
+        elif task == "text":
+            instruction, prompt = llm_update_text(
+                index, kwargs, t, base_path=os.path.join(config.system_path, location_path)
+            )
+        else:
+            raise NotImplementedError(f"{task} not implemented")
 
     # print(prompt)
     # print(location)
@@ -250,7 +253,6 @@ if __name__ == "__main__":
     t = tree(
         basepath=config.system_path,
         startpath=location_path,
-        format="json",
         sparse=True,
         info_radius=3,
         location="",

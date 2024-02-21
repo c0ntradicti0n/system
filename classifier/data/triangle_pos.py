@@ -248,7 +248,6 @@ def get_from_triangle(path):
     file_dict = tree(
         basepath=config.system_path,
         startpath="/".join(path),
-        format="json",
         keys=[c for c in path],
         info_radius=0,
         exclude=[".git", ".git.md", ".gitignore", ".DS_Store", ".idea"],

@@ -31,8 +31,11 @@
 
 .message-user {
   font-weight: bold;
-  margin-right: 5px;
   background-color: #eadc6a;
+  font-size: 12px;
+  height: fit-content;
+  margin: 5px;
+  padding: 10px;
 }
 
 .message-bot {

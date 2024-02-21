@@ -8,7 +8,7 @@ import { slashIt } from '../../lib/nesting'
 
 export const Viewer = () => {
   const [searchText, setSearchText] = useState(null)
-  const [path, setPath] = useState('111')
+  const [path, setPath] = useState('1313')
   const fractalRef = useRef(null)
 
   const linkInfo = {

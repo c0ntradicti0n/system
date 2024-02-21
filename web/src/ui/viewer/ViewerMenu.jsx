@@ -5,7 +5,8 @@ import { useNavigate } from 'raviger'
 import * as PropTypes from 'prop-types'
 import ShareModal from '../ShareModal'
 import { go } from '../../lib/navigate'
-import ChatModal from './ChatModal'
+import ChatModal from '../ChatModal/ChatModal'
+import useChatModal from "../ChatModal/state";
 const { Search: AntdSearch } = Input
 
 export const Search = ({
@@ -165,6 +166,8 @@ export const ViewerMenu = ({
   console.log('isMobile', isMobile)
 
   const [collapsed, setCollapsed] = useState(true)
+ const chatModal = useChatModal()
+    console.log(chatModal)
 
   return (
     <div>
@@ -217,15 +220,15 @@ export const ViewerMenu = ({
           <Menu.Item key="4" icon={<BookOutlined />}>
             <EditorLink />
           </Menu.Item>
-          <Menu.Item key="6" icon={<BookOutlined />}>
-            <ChatModal
-              path={path}
-              setPath={setPath}
-              title={`Elaborate fractal at "${path}"`}
-            />
+          <Menu.Item key="6" icon={<BookOutlined />} onClick={()=> {console.log("MENUG")+
+          chatModal.setVisible(true)}}>
+
+              elaborate a topic
           </Menu.Item>
         </Menu>
       )}
+        {chatModal.visible ? <ChatModal
+            /> : null}
     </div>
   )
 }

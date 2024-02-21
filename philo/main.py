@@ -51,7 +51,6 @@ def dialectic_triangle(
     t = tree(
         basepath=base_path,
         startpath="",
-        format="json",
         sparse=True,
         info_radius=info_radius,
         location=location_path,

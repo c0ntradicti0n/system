@@ -51,7 +51,6 @@ class LogicFractal(Resource):
             file_dict = tree(
                 basepath=config.system_path,
                 startpath=path,
-                format="json",
                 keys=path.split("/"),
                 info_radius=1,
                 exclude=[".git", ".git.md", ".gitignore", ".DS_Store", ".idea"],
@@ -76,7 +75,6 @@ class LogicFractalText(Resource):
             file_dict = tree(
                 basepath=config.system_path,
                 startpath=path,
-                format="json",
                 keys=path.split("/"),
                 info_radius=1,
                 exclude=[".git", ".git.md", ".gitignore", ".DS_Store", ".idea"],

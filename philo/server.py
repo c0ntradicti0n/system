@@ -4,6 +4,8 @@ import os
 from flask import Flask, request
 from flask_cors import CORS
 from flask_restx import Api, Namespace, Resource, reqparse
+
+from lib.t import catchtime
 from process import (generate_prompt, post_process_model_output,
                      process_user_input, commit)
 
@@ -43,7 +45,6 @@ class Philosopher(Resource):
         t = tree(
             basepath=config.system_path,
             startpath=location_path,
-            format="json",
             sparse=True,
             info_radius=3,
             location="",
@@ -105,7 +106,6 @@ class PhilosopherSubmit(Resource):
             t = tree(
                 basepath=config.system_path,
                 startpath=location_path,
-                format="json",
                 sparse=True,
                 info_radius=3,
                 location="",
@@ -127,4 +127,43 @@ class PhilosopherSubmit(Resource):
 
 
 if __name__ == "__main__":
+
+    # Get user input from the request
+    location = "1313"
+    task = "toc"
+    location_path = "/".join(location)
+
+    print(location, task)
+    with catchtime("tree"):
+        t = tree(
+            basepath=config.system_path,
+            startpath=location_path,
+            sparse=True,
+            info_radius=3,
+            location="",
+            pre_set_output_level=OutputLevel.FILENAMES,
+            exclude=(".git", ".git.md", ".idea"),
+            prefix_items=True,
+            depth=100 if task == "text" else 2,
+        )
+    with catchtime("generate_prompt"):
+        prompt, instruction = generate_prompt(
+            base_path=config.system_path,
+            task=task,
+            location=location,
+            info_radius=3,
+            preset_output_level=OutputLevel.FILENAMES,
+        )
+
+
+    # Now you can use 'location' and 'task' in your logic
+    # Example response using 'location' and 'task' values
+    response = {
+        "message": prompt + "\n\n" + instruction,
+        "prompt": prompt.strip(),
+        "instruction": instruction,
+        "data": t,
+    }
+
+
     app.run(debug=True, host="0.0.0.0", port=5000)

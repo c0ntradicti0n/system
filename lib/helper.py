@@ -4,7 +4,7 @@ import pathlib
 import shlex
 import subprocess
 from enum import Enum
-from functools import total_ordering
+from functools import total_ordering, lru_cache
 
 from jsonpath_ng import parse
 from Levenshtein import distance
@@ -241,14 +241,15 @@ class OutputLevel(Enum):
     def __eq__(self, other):
         return self.value == other.value
 
+    def __hash__(self):
+        return hash(self.value)
 
-# @file_based_cache
+
 def tree(
     startpath,
     basepath,
     indent=0,
     output=None,
-    format="string",
     keys=[],
     sparse=False,
     info_radius=100,
@@ -285,16 +286,10 @@ def tree(
         raise
 
     if output is None:
-        if format == "string":
-            output = []
-        elif format == "json":
-            output = dict()
 
-    if format == "string":
-        if indent > 0:
-            output.append("{}- {}/".format("   " * indent, os.path.basename(path)))
-    elif format == "json":
-        pass
+        output = dict()
+
+
 
     indent += 1
 
@@ -308,38 +303,27 @@ def tree(
     for name in sorted(subdirs, key=sort_key):
         if name in exclude:
             continue
-        if format == "string":
-            result = tree(
-                os.path.join(path, name),
-                indent,
-                format=format,
+
+        if depth == None or depth >= 0:
+            tree(
+                startpath=os.path.join(startpath, name),
+                indent=indent,
+                keys=keys + [name],
+                output=output,
                 sparse=sparse,
+                location=location,
+                info_radius=info_radius,
+                basepath=basepath,
+                pre_set_output_level=pre_set_output_level,
                 exclude=exclude,
+                prefix_items=prefix_items,
+                depth=depth - 1 if depth is not None else None,
             )
-            if output_level <= OutputLevel.DIRECTORY:
-                output.append(result)
-        elif format == "json":
-            if depth == None or depth >= 0:
-                tree(
-                    startpath=os.path.join(startpath, name),
-                    indent=indent,
-                    format="json",
-                    keys=keys + [name],
-                    output=output,
-                    sparse=sparse,
-                    location=location,
-                    info_radius=info_radius,
-                    basepath=basepath,
-                    pre_set_output_level=pre_set_output_level,
-                    exclude=exclude,
-                    prefix_items=prefix_items,
-                    depth=depth - 1 if depth is not None else None,
-                )
-                if not exists_in_nested_dict(output, keys + [name]):
-                    if output_level <= OutputLevel.DIRECTORY:
-                        add_to_nested_dict(output, keys + [name], None)
-                    elif output_level <= OutputLevel.TOPIC and name.startswith("."):
-                        add_to_nested_dict(output, keys + [name], None)
+            if not exists_in_nested_dict(output, keys + [name]):
+                if output_level <= OutputLevel.DIRECTORY:
+                    add_to_nested_dict(output, keys + [name], None)
+                elif output_level <= OutputLevel.TOPIC and name.startswith("."):
+                    add_to_nested_dict(output, keys + [name], None)
 
     for name in sorted(files, key=sort_key):
         if name in exclude:
@@ -351,47 +335,45 @@ def tree(
         except Exception as e:
             raise Exception("error reading file", os.path.join(path, name)) from e
 
-        if format == "json":
-            k = name
+        k = name
 
-            if output_level <= OutputLevel.FILE:
-                add = True
-                v = content
+        if output_level <= OutputLevel.FILE:
+            add = True
+            v = content
 
-            elif output_level <= OutputLevel.FILENAMES:
-                v = None
-                add = True
+        elif output_level <= OutputLevel.FILENAMES:
+            v = None
+            add = True
 
-            elif output_level <= OutputLevel.TOPIC and name.startswith("."):
-                v = None
-                add = True
+        elif output_level <= OutputLevel.TOPIC and name.startswith("."):
+            v = None
+            add = True
 
-            else:
-                add = False
+        else:
+            add = False
 
-            if prefix_items and add and not v:
-                try:
-                    k = regex.match(r"(\d+-|\.|_)", name).group(0)
-                except Exception as e:
-                    logging.error(f"error matching prefix {path=}/{name=}")
-                    should_we_fix = input(
-                        "Should we fix this by adding a `.` to the beginning of the filename? (y/n)"
+        if prefix_items and add and not v:
+            try:
+                k = regex.match(r"(\d+-|\.|_)", name).group(0)
+            except Exception as e:
+                logging.error(f"error matching prefix {path=}/{name=}")
+                should_we_fix = input(
+                    "Should we fix this by adding a `.` to the beginning of the filename? (y/n)"
+                )
+                if should_we_fix == "y":
+                    os.rename(
+                        os.path.join(path, name), os.path.join(path, "." + name)
                     )
-                    if should_we_fix == "y":
-                        os.rename(
-                            os.path.join(path, name), os.path.join(path, "." + name)
-                        )
-                        k = "."
-                    else:
-                        raise Exception("error matching prefix", name) from e
-                v = name[len(k) :]
-                k = k[:1]
+                    k = "."
+                else:
+                    raise Exception("error matching prefix", name) from e
+            v = name[len(k) :]
+            k = k[:1]
 
-            if add:
-                add_to_nested_dict(output, keys + [k], v)
+        if add:
+            add_to_nested_dict(output, keys + [k], v)
 
-    if format == "json":
-        return output
+    return output
 
 
 def remove_last_line_from_string(s):
@@ -583,7 +565,7 @@ def unique_by_func(lst, func):
 
 if __name__ == "__main__":
     t = tree(
-        basepath="../product/", startpath="", format="json", sparse=True, location="1/1"
+        basepath="../product/", startpath="", sparse=True, location="1/1"
     )
     update_with_jsonpath(t, "$.1.1.3.topic", "Multiple Existence")
 

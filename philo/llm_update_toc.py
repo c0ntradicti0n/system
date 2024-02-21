@@ -1,13 +1,16 @@
 import os.path
 import pathlib
+from heapq import nlargest
 
 import regex
 from analyser import analyse_toc
 from compare import weighted_fuzzy_compare
 from LLMFeature import create_path, features
+from lib.flatten import flatten_and_format
 
 from lib.helper import (get_analogue_from_nested_dict, get_from_nested_dict,
                         unique_by_func)
+from lib.t import catchtime
 
 
 def llm_update_toc(toc, kwargs, t, new_entries=1, path_to_fill=None):
@@ -29,22 +32,18 @@ def llm_update_toc(toc, kwargs, t, new_entries=1, path_to_fill=None):
         ]
     # paths_to_fill = unique_by_func(paths_to_fill, func=lambda p: p.replace("_", ""))
 
-    themes = [
-        (x, get_from_nested_dict(t, list(x), return_on_fail="<please invent>"))
-        for x in paths_to_fill
-    ]
+    with catchtime("themes"):
+
+        themes = [
+            (x, get_from_nested_dict(t, list(x), return_on_fail="<please invent>"))
+            for x in paths_to_fill
+        ]
 
     print(themes)
     themes = [
         (
             k,
-            (
-                v.replace(".md", "")
-                if isinstance(v, str)
-                else (", ".join(v.values()).replace(".md", ""))
-                if v is not None
-                else ""
-            ),
+            flatten_and_format(v)
         )
         for k, v in themes
     ]
@@ -158,7 +157,9 @@ And please dump all your knowledge accurately about """
         + " and ".join(topics)
     )
 
-    toc_lines = filter_similar_paths(paths_to_fill, toc)
+    with catchtime("filter_similar_paths"):
+
+        toc_lines = filter_similar_paths(paths_to_fill, toc)
 
     toc = "\n".join(toc_lines)
     if not toc:
