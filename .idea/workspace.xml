@@ -5,30 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="46754857-918a-4304-a3a5-1e2951421385" name="Changes" comment="...">
-      <change afterPath="$PROJECT_DIR$/chess_ai/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chess_ai/network.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chess_ai/train.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/philo/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/ui/ChatModal/state.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/wdl.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/wdl.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/base/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier/data/triangle_pos.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/data/triangle_pos.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier/model/som.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/model/som.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integrator/test_mst.py" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/test_mst.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/flatten.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/flatten.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philo/llm_update_toc.py" beforeDir="false" afterPath="$PROJECT_DIR$/philo/llm_update_toc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philo/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/philo/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philo/process.py" beforeDir="false" afterPath="$PROJECT_DIR$/philo/process.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chroma_viz/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/chroma_viz/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/classifier/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrator/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/integrator/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/doc.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/doc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/embedding.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/embedding.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proximity.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/proximity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/vector_store.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/vector_store.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/linker/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linker/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/linker/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/entrypoint.sh" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/entrypoint.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/sites-enabled/default" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/sites-enabled/default" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philo/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/philo/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/philo/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/philo/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/rest.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/rest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.local.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.local.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/service/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/viewer/ChatModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/ChatModal/ChatModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/viewer/Triangle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/viewer/Triangle.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/viewer/Viewer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/viewer/Viewer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/viewer/ViewerMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/viewer/ViewerMenu.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/ui/viewer/chat-modal.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/ui/viewer/chat-modal.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/requirements.prod" beforeDir="false" afterPath="$PROJECT_DIR$/service/requirements.prod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/service/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/lib/useMuuriGrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/lib/useMuuriGrid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/worker/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worker/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/worker/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +42,17 @@
     <option name="groupingKeys">
       <option value="directory" />
     </option>
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/home/ich/PycharmProjects/system" value="2SYe7RxLjamNx7v5w6jv3AmG81c" />
+    </persistenceIdMap>
+  </component>
+  <component name="CopilotUserSelectedModel">
+    <selectedModels>
+      <entry key="agent-panel" value="Claude Sonnet 4.6" />
+      <entry key="chat-panel" value="Claude Sonnet 4.6" />
+    </selectedModels>
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
@@ -95,7 +109,6 @@
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="2SYe7RxLjamNx7v5w6jv3AmG81c" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -118,13 +131,16 @@
     "Python.weight_pos.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "appmap.toolWindow.appMaps.collapsed": "false",
     "appmap.toolWindow.codeObjects.collapsed": "false",
     "appmap.toolWindow.runtimeAnalysis.collapsed": "false",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/tetraeder/system/philo",
+    "last_opened_file_path": "/home/ich/PycharmProjects/dialectics",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -172,6 +188,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
@@ -183,6 +200,7 @@
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
         </ENTRIES>
       </EXTENSION>
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -205,6 +223,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
@@ -216,6 +235,7 @@
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
         </ENTRIES>
       </EXTENSION>
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lib/flatten.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -238,6 +258,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
@@ -249,6 +270,7 @@
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
         </ENTRIES>
       </EXTENSION>
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/philo/server.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -273,6 +295,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
@@ -284,6 +307,7 @@
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
         </ENTRIES>
       </EXTENSION>
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/classifier/train/train_opposites.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -306,6 +330,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
@@ -317,6 +342,7 @@
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
         </ENTRIES>
       </EXTENSION>
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/classifier/train/train_som.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -335,11 +361,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (system)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
@@ -351,6 +377,7 @@
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
         </ENTRIES>
       </EXTENSION>
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/classifier/data/triangle_pos.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -373,6 +400,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <EXTENSION ID="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
@@ -384,6 +412,7 @@
           <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
         </ENTRIES>
       </EXTENSION>
+      <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/classifier/data/weight_pos.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -414,7 +443,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-50da183f06c8-2887949eec09-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.13135.95" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-PY-261.23567.174" />
+        <option value="bundled-python-sdk-024ed6589d45-c2ffad84badb-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-261.23567.174" />
       </set>
     </attachedChunks>
   </component>
@@ -1154,12 +1184,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/lib/vector_store.py</url>
-          <line>18</line>
+          <line>43</line>
           <option name="timeStamp" value="310" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/lib/vector_store.py</url>
-          <line>26</line>
+          <line>51</line>
           <option name="timeStamp" value="311" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1342,5 +1372,13 @@
     <SUITE FILE_PATH="coverage/system$train_opposites.coverage" NAME="train_opposites Coverage Results" MODIFIED="1700694621872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier/" />
     <SUITE FILE_PATH="coverage/system$model.coverage" NAME="model Coverage Results" MODIFIED="1700529933994" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/classifier" />
     <SUITE FILE_PATH="coverage/system$triangle_pos.coverage" NAME="triangle_pos Coverage Results" MODIFIED="1708351340035" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
   </component>
 </project>

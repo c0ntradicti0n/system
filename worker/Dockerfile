@@ -1,8 +1,6 @@
-FROM python:3.11-bookworm
-
+FROM localhost/system-base:latest
 
 WORKDIR /app
-RUN --mount=type=cache,target=/root/.cache/pip  pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt

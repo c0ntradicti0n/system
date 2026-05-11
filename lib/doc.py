@@ -1,6 +1,4 @@
 import os
-
-from langchain.text_splitter import CharacterTextSplitter
 from regex import regex
 
 
@@ -8,9 +6,21 @@ def get_filename_without_extension(path):
     return os.path.splitext(os.path.basename(path))[0]
 
 
-def get_documents(document_dir):
-    text_splitter = CharacterTextSplitter(chunk_size=3000, chunk_overlap=0)
+def _chunk_text(text, chunk_size=3000):
+    """Split text into non-overlapping chunks of at most chunk_size chars."""
+    chunks = []
+    while len(text) > chunk_size:
+        split_at = text.rfind(' ', 0, chunk_size)
+        if split_at == -1:
+            split_at = chunk_size
+        chunks.append(text[:split_at])
+        text = text[split_at:].lstrip()
+    if text:
+        chunks.append(text)
+    return chunks
 
+
+def get_documents(document_dir):
     all_files = []
     for root, _, files in os.walk(document_dir):
         for file in files:
@@ -30,21 +40,14 @@ def get_documents(document_dir):
             path = regex.match(
                 r"^[\/1-3_]*", file_path.replace(document_dir, "")
             ).group(0)
-        except:
+        except Exception:
             raise ValueError(f"Error parsing path for {file_path}")
         clean_path = path.replace("/", "")
-        docs = text_splitter.create_documents(
-            [content],
-            metadatas=[
-                {
-                    "file_path": file_path.replace(document_dir, ""),
-                    "path": path,
-                    **{
-                        clean_path[:i]: clean_path[:i]
-                        for i in range(clean_path.__len__())
-                    },
-                }
-            ],
-        )
-        documents.extend(docs)
+        metadata = {
+            "file_path": file_path.replace(document_dir, ""),
+            "path": path,
+            **{clean_path[:i]: clean_path[:i] for i in range(len(clean_path))},
+        }
+        for chunk in _chunk_text(content):
+            documents.append({"page_content": chunk, "metadata": metadata})
     return documents

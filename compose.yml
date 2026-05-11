@@ -1,5 +1,10 @@
 version: "3"
 services:
+  # ── shared ML base image built via `make base` ─────────────────────────────
+  # Run `make base` once before `make start`.
+  # Image name: localhost/system-base:latest (localhost/ prefix = never pulled
+  # from Docker Hub, always resolved from the local daemon).
+  # ───────────────────────────────────────────────────────────────────────────
   nginx:
 
     image: nginx:latest
@@ -20,8 +25,8 @@ services:
       - server
       - web
     ports:
-      - 80:80
-      - 443:443
+      - "${HTTP_PORT:-8080}:80"
+      - "${HTTPS_PORT:-8443}:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/sites-enabled/:/etc/nginx/sites-enabled/
@@ -86,6 +91,8 @@ services:
       HAYSTACK_TELEMETRY_ENABLED: "False"
       HF_HUB_DISABLE_TELEMETRY: True
       DISABLE_TELEMETRY: True
+      TORCHINDUCTOR_CACHE_DIR: /.cache/torch
+      TORCH_HOME: /.cache/torch
     volumes:
       - "$SYSTEM:/system"
       - "./service:/app"
@@ -121,6 +128,9 @@ services:
       HOST: $HOST
       SYSTEM: /system
       PYTHONIOENCODING: utf-8
+      OPENAI_API_KEY: $DEEPSEEK_API_KEY
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.deepseek.com}
+      OPENAI_MODEL: ${OPENAI_MODEL:-deepseek-chat}
     volumes:
       - "$SYSTEM:/system"
       - "./philo:/app"
@@ -274,8 +284,7 @@ services:
     image: redis:latest
     container_name: redis
     restart: unless-stopped
-    ports:
-      - 6379:6379
+    # host port binding removed – use existing host Redis or access via Docker network only
     volumes:
       - ./.caches/.redis:/data
     command: redis-server --appendonly yes
@@ -291,6 +300,7 @@ services:
     environment:
       CELERYD_CONCURRENCY: 1
       SENTENCE_TRANSFORMERS_HOME: /.cache
+      MODELS_CONFIG: classifier/models/
 
     volumes:
         - "$SYSTEM:/system"
@@ -314,6 +324,8 @@ services:
       - redis
     env_file:
       - .env
+    environment:
+      MODELS_CONFIG: classifier/models/
     volumes:
       - "$SYSTEM:/system"
       - "./integrator:/app/integrator"

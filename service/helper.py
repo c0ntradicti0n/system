@@ -391,17 +391,14 @@ def unique_by_func(lst, func):
 
 from json import JSONEncoder
 
-from langchain.schema.document import Document
-
 
 class CustomEncoder(JSONEncoder):
     def default(self, obj):
-        # Handle Answer objects
-        if isinstance(obj, Document):
+        # Handle Document-like objects (page_content + metadata)
+        if hasattr(obj, "page_content") and hasattr(obj, "metadata"):
             return {
-                **obj.dict(),
                 "meta": obj.metadata,
-                "path": obj.metadata["path"].strip("/"),
+                "path": obj.metadata.get("path", "").strip("/"),
                 "content": obj.page_content,
             }
         # Let the base class handle any types we don't explicitly handle

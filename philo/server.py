@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
-tokens = dict([t.split(":") for t in os.environ.get("TOKENS", "").split(",")])
+tokens = dict([t.split(":") for t in os.environ.get("TOKENS", "").split(",") if ":" in t])
 print(tokens)
 philosopher = Namespace("philosopher", description="Philosopher API")
 

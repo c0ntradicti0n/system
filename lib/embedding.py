@@ -1,7 +1,7 @@
 import os
 
 import torch
-from langchain.embeddings import SentenceTransformerEmbeddings
+from sentence_transformers import SentenceTransformer
 
 from lib.shape import get_shape, view_shape
 
@@ -16,7 +16,7 @@ class RedisEmbedder:
     def __init__(self, model_name, host=None, port=6379, db=0):
         if not host:
             host = os.environ.get("REDIS_HOST", "redis")
-        self.embedder = SentenceTransformerEmbeddings(model_name=model_name)
+        self.embedder = SentenceTransformer(model_name)
 
         # Connect to Redis
         self.redis_client = redis.StrictRedis(host=host, port=port, db=db)
@@ -35,7 +35,7 @@ class RedisEmbedder:
                 embedding = pickle.loads(serialized_embedding)
             else:
                 # Compute the embedding
-                embedding = self.embedder.embed_documents([text])[0]
+                embedding = self.embedder.encode([text])[0].tolist()
                 # Serialize and store the embedding in Redis
                 self.redis_client.set(key, pickle.dumps(embedding))
 

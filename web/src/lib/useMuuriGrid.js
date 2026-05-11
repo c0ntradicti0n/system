@@ -4,6 +4,7 @@ import { idToSize, idToZIndex, positionToId } from '../ui/editor/Puzzle'
 import { pointInTriangle } from './position'
 
 const useMuuriGrid = (gridRef, options, size, props) => {
+  const { action, socket, params, hash } = props
   useEffect(() => {
     try {
       if (!gridRef.current) return
@@ -49,8 +50,8 @@ const useMuuriGrid = (gridRef, options, size, props) => {
         const targetElement = document.getElementById(newId)
         console.log('TARGET ELEMENT', newId, targetElement)
 
-        if (props.action && newId === oldId) {
-          props.action(newId)
+        if (action && newId === oldId) {
+          action(newId)
           return
         }
 
@@ -78,13 +79,12 @@ const useMuuriGrid = (gridRef, options, size, props) => {
         targetElement.style.zIndex = element.style.zIndex
         element.style.zIndex = oldZIndex
 
-        props.socket.timeout(3000).emit(
+        socket.timeout(3000).emit(
           'save_params',
-
           {
-            ...props.params,
+            ...params,
             actions: [
-              ...(props?.params?.actions ?? []),
+              ...(params?.actions ?? []),
               {
                 timestamp: Date.now(),
                 action: 'swap',
@@ -94,9 +94,9 @@ const useMuuriGrid = (gridRef, options, size, props) => {
               },
             ],
           },
-          props.hash,
+          hash,
         )
-        console.log('SAVE PARAMS', props.params)
+        console.log('SAVE PARAMS', params)
 
         grid.refreshItems().layout()
       })
@@ -116,7 +116,7 @@ const useMuuriGrid = (gridRef, options, size, props) => {
     } catch (e) {
       console.log(e)
     }
-  }, [gridRef, options, size, props.params, props.socket, props.hash])
+  }, [gridRef, options, size, action, socket, params, hash])
 }
 
 export default useMuuriGrid

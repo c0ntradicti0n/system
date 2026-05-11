@@ -25,7 +25,12 @@ format:
 	cd web && npm run format
 
 
-start:
+.PHONY: base start stop run logs build sskeys mod
+
+base:
+	DOCKER_BUILDKIT=1 docker build -t localhost/system-base:latest ./base
+
+start: base
 	docker compose down -v -t 1
 	BUILDKIT_PROGRESS=plain docker compose build
 	docker compose up -d
@@ -55,8 +60,15 @@ stop:
 
 
 sskeys:
-	mkdir -p certs/live/polarity.science/
-	openssl req -x509 -newkey rsa:4096 -keyout ./certs/live/polarity.science/privkey.pem -out ./certs/live/polarity.science/fullchain.pem -days 365 -nodes -subj "/CN=localhost"
+	mkdir -p .certs
+	openssl req -x509 -newkey rsa:4096 \
+	  -keyout .certs/privkey.pem \
+	  -out .certs/fullchain.pem \
+	  -days 365 -nodes \
+	  -subj "/CN=$(HOST)" \
+	  -addext "subjectAltName=DNS:$(HOST),DNS:localhost,IP:127.0.0.1"
+	chmod 644 .certs/fullchain.pem .certs/privkey.pem
+	@echo "Self-signed cert written to .certs/  (run 'make start' next)"
 
 logs:
 	docker compose logs -f

@@ -9,7 +9,6 @@ requests
 cython
 pyyaml
 ruamel.yaml
-langchain
 chromadb
 sentence-transformers
 
