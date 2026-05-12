@@ -1,13 +1,17 @@
 **/.env
+**/__pycache__/
+*.pyc
+*.pyo
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
 /web/node_modules
 /.pnp
 .pnp.js
-/certs
+/.certs
+/.caches
 .idea
-
+/node_modules
 # testing
 /coverage
 
