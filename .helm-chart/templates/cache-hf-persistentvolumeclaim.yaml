@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: cache-hf
+  name: cache-hf-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.persistence.cacheHf.size | default "20Gi" }}
+{{- with .Values.persistence.cacheHf.storageClass }}
+  storageClassName: {{ . }}
+{{- end }}

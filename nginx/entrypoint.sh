@@ -3,22 +3,18 @@
 set -e
 
 if [ -z "$EMAIL" ]; then
-  # Local dev mode
+  # Local dev mode: install the local template as the active config.
+  mkdir -p /etc/nginx/sites-enabled
+  # Substitute env vars (only HTTPS_PORT, leave nginx $vars untouched)
+  envsubst '${HTTPS_PORT}' < /etc/nginx/default-local > /etc/nginx/sites-enabled/default
+
   if [ -f "/etc/nginx/certs/fullchain.pem" ] && [ -f "/etc/nginx/certs/privkey.pem" ]; then
     echo "Local dev: self-signed certs found – enabling HTTPS."
   else
     echo "Local dev: no certs found – stripping SSL block from config."
-    # Patch out the SSL server block so nginx starts on port 80 only
-    sed -i '/listen 443/d; /ssl_certificate/d; /return 301/d' \
+    # Remove SSL-specific directives so nginx starts on port 80 only
+    sed -i '/ssl_certificate/d; /listen.*443/d; /return 301 https/d' \
         /etc/nginx/sites-enabled/default
-    sed -i 's/listen 443 ssl default_server;//g' /etc/nginx/sites-enabled/default || true
-  fi
-  cp /etc/nginx/sites-enabled/default-local /etc/nginx/sites-enabled/default
-  rm /etc/nginx/sites-enabled/default-local
-  if [ ! -f "/etc/nginx/certs/fullchain.pem" ]; then
-    # Remove SSL directives so nginx doesn't fail on missing cert
-    sed -i '/ssl_certificate/d; /listen 443/d' /etc/nginx/sites-enabled/default
-    sed -i '/return 301 https/d' /etc/nginx/sites-enabled/default
   fi
 else
   # Production: obtain / renew Let's Encrypt cert

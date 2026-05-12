@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: worker
+  name: worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      containers:
+        - args:
+            - celery
+            - -A
+            - tasks
+            - worker
+            - --loglevel=info
+            - -c
+            - "1"
+          env:
+            - name: CELERYD_CONCURRENCY
+              value: "1"
+            - name: MODELS_CONFIG
+              value: classifier/models/
+            - name: SENTENCE_TRANSFORMERS_HOME
+              value: /.cache
+          envFrom:
+            - configMapRef:
+                name: env
+          image: {{ .Values.images.registry }}worker
+          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          name: worker
+          volumeMounts:
+            - mountPath: /system
+              name: system
+            - mountPath: /chroma
+              name: chroma
+            - mountPath: /.config
+              name: cache-mpl
+          resources:
+            limits:
+              memory: 4Gi
+      restartPolicy: Always
+      volumes:
+        - name: system
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.system.existingClaim | default "system-pvc" }}
+        - name: chroma
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.chroma.existingClaim | default "chroma-pvc" }}
+        - name: cache-mpl
+          persistentVolumeClaim:
+            claimName: worker-claim7

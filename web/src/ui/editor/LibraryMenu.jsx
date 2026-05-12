@@ -2,10 +2,7 @@ import React, { useState } from 'react'
 import { Button, Menu, Progress, Steps } from 'antd'
 import {
   BookOutlined,
-  PuzzleOutlined,
   AppstoreOutlined,
-  TreeOutlined,
-  FileJsonOutlined,
   ReadOutlined,
   MenuOutlined,
   PicLeftOutlined,

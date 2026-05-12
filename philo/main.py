@@ -6,7 +6,7 @@ import re
 
 from openai import OpenAI
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(api_key=os.getenv("LLM_API_KEY"))
 import pyperclip
 from dotenv import load_dotenv
 from philosopher.llm_update_text import custom_parser, llm_update_text
@@ -25,10 +25,10 @@ load_dotenv()
 
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
-if os.environ.get("OPENAI_API_KEY"):
+if os.environ.get("LLM_API_KEY"):
     # Load your API key from an environment variable or secret management service
 
-    def llm(instruction, text, model=os.environ.get("OPENAI_MODEL")):
+    def llm(instruction, text, model=os.environ.get("LLM_MODEL")):
         return client.chat.completions.create(
             model=model,
             messages=[

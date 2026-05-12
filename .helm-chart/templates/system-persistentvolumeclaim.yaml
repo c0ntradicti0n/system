@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: system
+  name: system-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.persistence.system.size | default "10Gi" }}
+{{- with .Values.persistence.system.storageClass }}
+  storageClassName: {{ . }}
+{{- end }}

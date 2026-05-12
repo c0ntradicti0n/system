@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: classifier
+  name: classifier
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: classifier
+  template:
+    metadata:
+      labels:
+        app: classifier
+    spec:
+      containers:
+        - env:
+            - name: DEBUG
+              value: "true"
+            - name: DISABLE_TELEMETRY
+              value: "true"
+            - name: HAYSTACK_TELEMETRY_ENABLED
+              value: "False"
+            - name: HF_HUB_DISABLE_TELEMETRY
+              value: "true"
+            - name: PYTHONIOENCODING
+              value: utf-8
+          envFrom:
+            - configMapRef:
+                name: env
+          image: {{ .Values.images.registry }}classifier
+          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          name: classifier
+          resources:
+            limits:
+              memory: 10Gi
+          securityContext:
+            runAsGroup: 1000
+            runAsUser: 1000
+          volumeMounts:
+            - mountPath: /system
+              name: system
+            - mountPath: /chroma
+              name: chroma
+            - mountPath: /.cache
+              name: cache-hf
+            - mountPath: /app/models
+              name: models
+      restartPolicy: Always
+      volumes:
+        - name: system
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.system.existingClaim | default "system-pvc" }}
+        - name: chroma
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.chroma.existingClaim | default "chroma-pvc" }}
+        - name: cache-hf
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.cacheHf.existingClaim | default "cache-hf-pvc" }}
+        - name: models
+          persistentVolumeClaim:
+            claimName: classifier-claim5

@@ -1,0 +1,51 @@
+# ── Environment ────────────────────────────────────────────
+env:
+  host: localhost
+  email: ""
+  httpPort: 8080
+  httpsPort: 8443
+  systemPath: /system
+  target: dev
+  openaiBaseUrl: https://api.deepseek.com
+  openaiModel: deepseek-chat
+
+# ── Secrets ───────────────────────────────────────────────
+secrets:
+  apiKey:
+    existingSecret: ""        # secret with key "openai-api-key"
+  certs:
+    existingSecret: ""        # secret with TLS certs
+
+# ── Persistence ────────────────────────────────────────────
+persistence:
+  system:
+    existingClaim: ""          # PVC for /system (knowledge base)
+    storageClass: ""
+    size: 10Gi
+  chroma:
+    existingClaim: ""
+    storageClass: ""
+    size: 10Gi
+  cacheHf:
+    existingClaim: ""
+    storageClass: ""
+    size: 20Gi
+  redisData:
+    existingClaim: ""
+    storageClass: ""
+    size: 5Gi
+
+# ── Ingress ───────────────────────────────────────────────
+ingress:
+  enabled: false
+  host: polarity.science
+  className: ""
+  path: /
+  annotations: {}
+  # tls:
+  #   secretName: certs-secret
+
+# ── Image overrides ───────────────────────────────────────
+images:
+  registry: ""                   # set to "localhost/" for kind dev
+  pullPolicy: IfNotPresent

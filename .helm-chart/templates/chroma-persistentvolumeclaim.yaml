@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: chroma
+  name: chroma-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.persistence.chroma.size | default "10Gi" }}
+{{- with .Values.persistence.chroma.storageClass }}
+  storageClassName: {{ . }}
+{{- end }}

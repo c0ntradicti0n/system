@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: philo
+  name: philo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: philo
+  template:
+    metadata:
+      labels:
+        app: philo
+    spec:
+      containers:
+        - args:
+            - python
+            - server.py
+          env:
+            - name: DEBUG
+              value: "true"
+            - name: PYTHONIOENCODING
+              value: utf-8
+            - name: LLM_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.apiKey.existingSecret | default "philo-secrets" }}
+                  key: openai-api-key
+            - name: LLM_BASE_URL
+              value: {{ .Values.env.openaiBaseUrl | default "https://api.deepseek.com" }}
+            - name: LLM_MODEL
+              value: {{ .Values.env.openaiModel | default "deepseek-chat" }}
+          envFrom:
+            - configMapRef:
+                name: env
+          image: {{ .Values.images.registry }}philo
+          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          name: philo
+          securityContext:
+            runAsGroup: 1000
+            runAsUser: 1000
+          volumeMounts:
+            - mountPath: /system
+              name: system
+            - mountPath: /chroma
+              name: chroma
+            - mountPath: /.cache-openai
+              name: cache-openai
+          resources:
+            limits:
+              memory: 2Gi
+      restartPolicy: Always
+      volumes:
+        - name: system
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.system.existingClaim | default "system-pvc" }}
+        - name: chroma
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.chroma.existingClaim | default "chroma-pvc" }}
+        - name: cache-openai
+          persistentVolumeClaim:
+            claimName: philo-claim4

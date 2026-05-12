@@ -7,6 +7,7 @@ RUN pip install -r requirements.txt
 RUN apt-get update && apt-get install -y sqlite3 git
 
 COPY . .
+COPY --from=lib . /app/lib/
 RUN mkdir /.cache
 RUN chmod 777 /.cache
 RUN mkdir /.cache-openai

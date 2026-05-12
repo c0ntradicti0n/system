@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app: env
+  name: env
+data:
+  HOST: {{ .Values.env.host | quote }}
+  EMAIL: {{ .Values.env.email | quote }}
+  HTTP_PORT: {{ .Values.env.httpPort | default "8080" | quote }}
+  HTTPS_PORT: {{ .Values.env.httpsPort | default "8443" | quote }}
+  SYSTEM: {{ .Values.env.systemPath | quote }}
+  TARGET: {{ .Values.env.target | default "dev" | quote }}
+  CERTS: {{ .Values.env.certs | default "/etc/nginx/certs" | quote }}
+  LLM_BASE_URL: {{ .Values.env.openaiBaseUrl | default "https://api.deepseek.com" | quote }}
+  LLM_MODEL: {{ .Values.env.openaiModel | default "deepseek-chat" | quote }}

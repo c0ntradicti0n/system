@@ -25,7 +25,7 @@ models = {
 }
 
 
-def llm(instruction, text, model=os.environ.get("OPENAI_MODEL")):
+def llm(instruction, text, model=os.environ.get("LLM_MODEL")):
     return client.chat.completions.create(
         model=model,
         messages=[

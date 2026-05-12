@@ -21,5 +21,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 
 COPY . /app/
+COPY --from=lib . /app/lib/
 
 ENTRYPOINT ["python3", "main.py"]

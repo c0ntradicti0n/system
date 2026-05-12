@@ -27,6 +27,7 @@ RUN mkdir -p /.cache/torch
 RUN chmod 777 /.cache/torch
 
 ADD . /app/
+COPY --from=lib . /app/lib/
 
 ENV PYTHONIOENCODING=utf-8
 ENV LC_ALL=C.UTF-8

@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: linker
+  name: linker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: linker
+  template:
+    metadata:
+      labels:
+        app: linker
+    spec:
+      containers:
+        - env:
+            - name: DEBUG
+              value: "true"
+            - name: DISABLE_TELEMETRY
+              value: "true"
+            - name: HAYSTACK_TELEMETRY_ENABLED
+              value: "False"
+            - name: HF_HUB_DISABLE_TELEMETRY
+              value: "true"
+            - name: PYTHONIOENCODING
+              value: utf-8
+          envFrom:
+            - configMapRef:
+                name: env
+          image: {{ .Values.images.registry }}linker:latest
+          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          name: linker
+          resources:
+            limits:
+              memory: 10Gi
+          securityContext:
+            runAsGroup: 1000
+            runAsUser: 1000
+          volumeMounts:
+            - mountPath: /system
+              name: system
+            - mountPath: /chroma
+              name: chroma
+      restartPolicy: Always
+      volumes:
+        - name: system
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.system.existingClaim | default "system-pvc" }}
+        - name: chroma
+          persistentVolumeClaim:
+            claimName: linker-claim3

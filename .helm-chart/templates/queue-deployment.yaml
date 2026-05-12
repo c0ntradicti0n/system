@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: queue
+  name: queue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: queue
+  template:
+    metadata:
+      labels:
+        app: queue
+    spec:
+      containers:
+        - args:
+            - python
+            - app.py
+          env:
+            - name: MODELS_CONFIG
+              value: classifier/models/
+          envFrom:
+            - configMapRef:
+                name: env
+          image: {{ .Values.images.registry }}queue:latest
+          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          name: queue
+          volumeMounts:
+            - mountPath: /system
+              name: system
+            - mountPath: /chroma
+              name: chroma
+            - mountPath: /.config
+              name: cache-mpl
+          resources:
+            limits:
+              memory: 2Gi
+      restartPolicy: Always
+      volumes:
+        - name: system
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.system.existingClaim | default "system-pvc" }}
+        - name: chroma
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.chroma.existingClaim | default "chroma-pvc" }}
+        - name: cache-mpl
+          persistentVolumeClaim:
+            claimName: queue-claim6

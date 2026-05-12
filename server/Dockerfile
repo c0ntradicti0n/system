@@ -27,6 +27,7 @@ RUN apt-get purge -y --auto-remove gcc
 RUN apt install
 # Copy the current directory contents into the container at /app
 ADD . /app/
+COPY --from=lib . /app/lib/
 RUN apt-get update && apt-get install -y sqlite3
 
 

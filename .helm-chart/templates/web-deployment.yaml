@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web
+  name: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - envFrom:
+            - configMapRef:
+                name: env
+          image: {{ .Values.images.registry }}web:latest
+          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          name: web

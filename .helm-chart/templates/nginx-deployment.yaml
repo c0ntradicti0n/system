@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - envFrom:
+            - configMapRef:
+                name: env
+          image: {{ .Values.images.registry }}nginx:latest
+          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          name: nginx
+          ports:
+            - containerPort: 80
+              protocol: TCP
+            - containerPort: 443
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /etc/nginx/nginx.conf
+              name: nginx-config
+              subPath: nginx.conf
+            - mountPath: /etc/nginx/default-local
+              name: nginx-default
+              subPath: default-local
+            - mountPath: /etc/nginx/certs
+              name: certs
+              readOnly: true
+          resources:
+            limits:
+              memory: 256Mi
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            items:
+              - key: nginx.conf
+                path: nginx.conf
+            name: nginx-cm0
+          name: nginx-config
+        - configMap:
+            items:
+              - key: default-local
+                path: default-local
+            name: nginx-cm2
+          name: nginx-default
+        - name: certs
+          secret:
+            secretName: {{ .Values.secrets.certs.existingSecret | default "certs-secret" }}

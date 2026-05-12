@@ -1,42 +1,24 @@
-# Common base stage
-FROM node:18 as base
-
+# Common base
+FROM node:20-slim AS base
 WORKDIR /app
-
 RUN npm install -g bun
-
-COPY package*.json ./
-
+COPY package*.json bun.lockb* ./
 RUN bun install
-
 COPY . .
 
-# Development stage
-FROM base as dev
-
-WORKDIR /app
-
+# Dev stage – vite dev server on port 80
+FROM base AS dev
 ENV PORT=80
-
-CMD  bun start  | awk '{gsub(/\033c/,"") system("")}1'
+EXPOSE 80
+CMD ["bun", "run", "start"]
 
 # Build stage
-FROM base as build
-
+FROM base AS build
 RUN bun run build
 
-# Stage 2: Serve the React application
-FROM node:18 as prod
-
-# Install serve globally using npm
-RUN npm install -g serve
-
-
-# Copy build files from the builder stage
-COPY --from=build /app/build /app
-
-WORKDIR /app
-
-CMD serve -p 80 -s . | awk '{gsub(/\033c/,"") system("")}1'
-
+# Prod stage – serve the built SPA with nginx
+FROM nginx:alpine AS prod
+COPY --from=build /app/build /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

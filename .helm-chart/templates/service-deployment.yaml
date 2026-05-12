@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: service
+  name: service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service
+  template:
+    metadata:
+      labels:
+        app: service
+    spec:
+      containers:
+        - env:
+            - name: DEBUG
+              value: "true"
+            - name: DISABLE_TELEMETRY
+              value: "true"
+            - name: HAYSTACK_TELEMETRY_ENABLED
+              value: "False"
+            - name: HF_HUB_DISABLE_TELEMETRY
+              value: "true"
+            - name: PYTHONIOENCODING
+              value: utf-8
+            - name: TORCHINDUCTOR_CACHE_DIR
+              value: /.cache/torch
+            - name: TORCH_HOME
+              value: /.cache/torch
+          envFrom:
+            - configMapRef:
+                name: env
+          image: {{ .Values.images.registry }}service
+          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          name: service
+          securityContext:
+            runAsGroup: 1000
+            runAsUser: 1000
+          volumeMounts:
+            - mountPath: /system
+              name: system
+            - mountPath: /chroma
+              name: chroma
+            - mountPath: /.cache
+              name: cache-hf
+          resources:
+            limits:
+              memory: 4Gi
+      restartPolicy: Always
+      volumes:
+        - name: system
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.system.existingClaim | default "system-pvc" }}
+        - name: chroma
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.chroma.existingClaim | default "chroma-pvc" }}
+        - name: cache-hf
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.cacheHf.existingClaim | default "cache-hf-pvc" }}

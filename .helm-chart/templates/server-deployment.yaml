@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: server
+  name: server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+        - env:
+            - name: DEBUG
+              value: "true"
+            - name: PYTHONIOENCODING
+              value: utf-8
+          envFrom:
+            - configMapRef:
+                name: env
+          image: {{ .Values.images.registry }}server
+          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          name: server
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+          securityContext:
+            runAsGroup: 1000
+            runAsUser: 1000
+          volumeMounts:
+            - mountPath: /system
+              name: system
+          resources:
+            limits:
+              memory: 2Gi
+      restartPolicy: Always
+      volumes:
+        - name: system
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.system.existingClaim | default "system-pvc" }}

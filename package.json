@@ -1,0 +1,28 @@
+{
+  "scripts": {
+    "css:extract": "node web/scripts/css/extract-css.js refactor",
+    "css:extract:dry": "node web/scripts/css/extract-css.js refactor --dry-run",
+    "css:extract:info": "node web/scripts/css/extract-css.js extract",
+    "css:extract:custom": "node web/scripts/css/extract-css.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-code": "^2.1.139",
+    "@modelcontextprotocol/inspector": "^0.21.2",
+    "@types/node": "^25.6.0",
+    "@typescript-eslint/parser": "^8.59.2",
+    "glob": "13.0.6",
+    "openai": "^6.36.0",
+    "typescript": "^6.0.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "hono": ">=4.12.14"
+    }
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint-plugin-simple-import-sort": "^13.0.0",
+    "eslint-plugin-unused-imports": "^4.4.1",
+    "globals": "^17.6.0"
+  }
+}

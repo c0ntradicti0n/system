@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: redis
+  name: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - args:
+            - redis-server
+            - --appendonly
+            - "yes"
+          image: {{ .Values.images.registry }}redis:latest
+          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          name: redis
+          volumeMounts:
+            - mountPath: /data
+              name: redis-data
+          resources:
+            limits:
+              memory: 1Gi
+      restartPolicy: Always
+      volumes:
+        - name: redis-data
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.redisData.existingClaim | default "redis-data-pvc" }}

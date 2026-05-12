@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import LeaderLine from 'leader-line'
+import LeaderLine from 'leader-line-new'
 import useLinkedElementsStore from '../../lib/PinnedElements'
 
 function findElementById(id) {

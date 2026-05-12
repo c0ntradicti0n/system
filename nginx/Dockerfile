@@ -6,6 +6,7 @@ RUN apt-get update \
 
 COPY entrypoint.sh /entrypoint.sh
 RUN ["chmod", "+x", "/entrypoint.sh"]
-COPY sites-enabled/default-local /etc/nginx/sites-enabled/default-local
+# Store as a template outside sites-enabled so nginx never auto-includes it
+COPY default-local /etc/nginx/default-local
 
 ENTRYPOINT ["/entrypoint.sh"]

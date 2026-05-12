@@ -14,6 +14,8 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends \
 
 RUN pip3 install --upgrade pip
 COPY requirements.txt /app/
+COPY --from=lib . /app/lib/
+COPY . /app/
 RUN --mount=type=cache,target=/root/.cache/pip pip3 install --no-cache-dir -r requirements.txt
 RUN pip install jsonpatch flask_cors uwsgi spacy
 RUN python -m spacy download en_core_web_sm
