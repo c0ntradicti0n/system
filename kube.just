@@ -1,5 +1,6 @@
 # ── K8s deploy targets ───────────────────────────────────
 # Used via `just kube::<target>` from main justfile (mod kube)
+set export := true
 
 CHART := ".helm-chart"
 RELEASE := "system"
@@ -7,6 +8,7 @@ KIND_CLUSTER := "my-kind-cluster"
 NAMESPACE := "system"               # override: just kube::helm-install NAMESPACE=foo
 REMOTE_NAMESPACE := "polarity-science"
 IMAGES := "nginx server service philo integrator linker classifier web redis queue worker"
+KUBECONFIG := "/home/ich/2-5-1/__kyber__/k3s-config.yaml"
 
 # ── Kind ──────────────────────────────────────────────────
 
@@ -25,9 +27,9 @@ kind-build:
     docker compose build nginx web
     DOCKER_BUILDKIT=1 bash -c ' \
         for svc in server service philo integrator linker classifier worker; do \
-            docker build --build-context lib=./lib -f $$svc/Dockerfile -t $$svc:latest $$svc/; \
+            docker build --build-context lib=./lib --build-context integrator=./integrator --build-context classifier=./classifier -f $svc/Dockerfile -t $svc:latest $svc/; \
         done; \
-        docker build --build-context lib=./lib -f worker/Dockerfile -t queue:latest worker/'
+        docker build --build-context lib=./lib --build-context integrator=./integrator --build-context classifier=./classifier -f worker/Dockerfile -t queue:latest worker/'
 
 # pull external images (redis)
 kind-pull:
@@ -73,24 +75,61 @@ helm-list:
 # build + load + deploy to kind
 kind-deploy: kind-load helm-install
 
-# deploy to remote cluster with polarity.science domain
+# uninstall from remote
+remote-delete:
+    helm uninstall {{RELEASE}} --namespace {{REMOTE_NAMESPACE}}
+
+# ── Remote (polarity.science) ────────────────────────────────
+
+DOCKER_REGISTRY := "c0ntradicti0n/pianalytic"
+
+# build all images tagged for remote
+remote-build:
+    DOCKER_BUILDKIT=1 docker build -t localhost/system-base:latest ./base
+    TARGET=prod docker compose build web nginx
+    DOCKER_BUILDKIT=1 bash -c ' \
+        for svc in server service philo integrator linker classifier worker; do \
+            docker build --build-context lib=./lib --build-context integrator=./integrator --build-context classifier=./classifier -f $svc/Dockerfile -t $svc:latest $svc/; \
+        done; \
+        docker build --build-context lib=./lib --build-context integrator=./integrator --build-context classifier=./classifier -f worker/Dockerfile -t queue:latest worker/'
+
+# tag and push images to Docker Hub
+remote-push:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    docker login -u c0ntradicti0n --password "$DOCKER_API_KEY"
+    for svc in nginx server service philo integrator linker classifier web queue worker; do \
+        tag="{{DOCKER_REGISTRY}}:system-$svc"; \
+        docker tag $svc:latest $tag; \
+        docker push $tag; \
+    done
+
+# install/upgrade helm chart on remote k3s
 remote-deploy:
     helm upgrade --install {{RELEASE}} {{CHART}} \
         --namespace {{REMOTE_NAMESPACE}} \
         --create-namespace \
         --set env.host=polarity.science \
         --set env.target=prod \
-        --set env.email=admin@polarity.science \
+        --set images.registry={{DOCKER_REGISTRY}}:system- \
+        --set images.redis=redis:latest \
         --set images.pullPolicy=Always \
         --set ingress.enabled=true \
         --set ingress.host=polarity.science \
-        --set ingress.annotations.'kubernetes\.io/ingress\.class'=nginx
+        --set ingress.className=nginx \
+        --set ingress.annotations.'cert-manager\.io/cluster-issuer'=letsencrypt-prod \
+        --set ingress.tls.secretName=polarity-science-tls
+    kubectl rollout restart deployment -n {{REMOTE_NAMESPACE}} --all 2>/dev/null || true
 
-# uninstall from remote
-remote-delete:
-    helm uninstall {{RELEASE}} --namespace {{REMOTE_NAMESPACE}}
+# push images + deploy in one step
+remote-deploy-full: remote-build remote-push remote-deploy remote-sync-data
+
+# just re-deploy without rebuilding (images already pushed)
+remote-upgrade: remote-deploy remote-sync-data
 
 # ── Data sync (dev loop) ──────────────────────────────────
+
+DIALECTICS_SRC := "../dialectics"
 
 # sync dialectics data into running server pod (instant, no rebuild)
 sync-data:
@@ -100,6 +139,16 @@ sync-data:
     POD=$(kubectl get pod -n $NAMESPACE -l app=server -o name)
     tar -C "$SYSTEM" -cf - . | kubectl exec -n $NAMESPACE $POD -i -- tar -C /system -xf - 2>/dev/null || true
     echo "synced $SYSTEM to server:/system"
+
+# sync dialectics data to remote cluster
+remote-sync-data:
+    #!/usr/bin/env bash
+    set -e
+    SRC="${SYSTEM:-$DIALECTICS_SRC}"
+    kubectl wait --for=condition=ready pod -n {{REMOTE_NAMESPACE}} -l app=server --timeout=60s
+    POD=$(kubectl get pod -n {{REMOTE_NAMESPACE}} -l app=server -o name)
+    tar -C "$SRC" -cf - . | kubectl exec -n {{REMOTE_NAMESPACE}} $POD -i -- tar -C /system -xf - 2>/dev/null || true
+    echo "synced $SRC to server:/system (namespace: {{REMOTE_NAMESPACE}})"
 
 # rebuild + reload all images (code changes)
 reload: kind-load

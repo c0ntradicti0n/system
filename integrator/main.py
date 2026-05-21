@@ -5,9 +5,9 @@ import logging
 from pprint import pprint
 
 from classifier.result.predict import MODELS
-from integrator.serialize import serialize_graph_to_structure
-from integrator.states import states
-from integrator.tree import Tree
+from serialize import serialize_graph_to_structure
+from states import states
+from tree import Tree
 from lib.proximity import set_up_db_from_model
 from lib.t import catchtime, indented
 

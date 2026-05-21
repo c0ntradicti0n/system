@@ -47,7 +47,7 @@ export const Viewer = () => {
   console.log('REF', fractalRef)
   return (
     <>
-      <Fractal ref={fractalRef} />
+      <Fractal ref={fractalRef} showTooltips={true} />
       <ControlContainer areas={CONTROL_AREAS} cssPrefix="fractal">
         <ViewerMenu
           {...{

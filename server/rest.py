@@ -132,11 +132,11 @@ class SearchProxy(Resource):
             data = response.json()
 
             pprint(data)
-            data = [{**d, "content": remove_duplicates(d["content"])} for d in data]
+            data = [{**d, "content": remove_duplicates(d["page_content"]), "path": d["metadata"]["path"]} for d in data]
             data = list(
                 sorted(
                     data,
-                    key=lambda x: x["path"],
+                    key=lambda x: x["metadata"]["path"],
                 )
             )
 

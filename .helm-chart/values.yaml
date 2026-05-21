@@ -49,3 +49,4 @@ ingress:
 images:
   registry: ""                   # set to "localhost/" for kind dev
   pullPolicy: IfNotPresent
+  redis: redis:latest            # public image, not custom-built

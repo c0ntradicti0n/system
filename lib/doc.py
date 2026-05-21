@@ -46,7 +46,7 @@ def get_documents(document_dir):
         metadata = {
             "file_path": file_path.replace(document_dir, ""),
             "path": path,
-            **{clean_path[:i]: clean_path[:i] for i in range(len(clean_path))},
+            **{clean_path[:i]: clean_path[:i] for i in range(1, len(clean_path))},
         }
         for chunk in _chunk_text(content):
             documents.append({"page_content": chunk, "metadata": metadata})

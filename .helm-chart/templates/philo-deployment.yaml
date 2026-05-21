@@ -38,9 +38,6 @@ spec:
           image: {{ .Values.images.registry }}philo
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           name: philo
-          securityContext:
-            runAsGroup: 1000
-            runAsUser: 1000
           volumeMounts:
             - mountPath: /system
               name: system

@@ -36,9 +36,6 @@ spec:
           image: {{ .Values.images.registry }}service
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           name: service
-          securityContext:
-            runAsGroup: 1000
-            runAsUser: 1000
           volumeMounts:
             - mountPath: /system
               name: system

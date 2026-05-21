@@ -1,23 +1,11 @@
 error_log /dev/stdout info;
 rewrite_log on;
 
-# Redirect plain HTTP → HTTPS
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
     server_name _;
     access_log /dev/stdout;
-    return 301 https://$host:${HTTPS_PORT}$request_uri;
-}
-
-server {
-    listen 443 ssl default_server;
-    listen [::]:443 ssl default_server;
-    server_name _;
-    access_log /dev/stdout;
-
-    ssl_certificate     /etc/nginx/certs/fullchain.pem;
-    ssl_certificate_key /etc/nginx/certs/privkey.pem;
 
     # socket.io → integrator
     location /socket.io {

@@ -29,9 +29,6 @@ spec:
           ports:
             - containerPort: 5000
               protocol: TCP
-          securityContext:
-            runAsGroup: 1000
-            runAsUser: 1000
           volumeMounts:
             - mountPath: /system
               name: system

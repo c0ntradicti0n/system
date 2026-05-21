@@ -145,6 +145,8 @@ def exists_in_nested_dict(nested_dict, keys):
 
 
 def get_from_nested_dict(nested_dict, keys, return_on_fail=None):
+    if nested_dict is None:
+        return return_on_fail
     try:
         keys = digitize(keys)
         old_dict = nested_dict
@@ -161,8 +163,12 @@ def get_from_nested_dict(nested_dict, keys, return_on_fail=None):
             nested_dict = nested_dict.setdefault(key, {})
             done += str(key)
 
+        if nested_dict is None:
+            return return_on_fail
         if keys[-1] in nested_dict:
             nested_dict = nested_dict[keys[-1]]
+        if nested_dict is None:
+            return return_on_fail
         if isinstance(nested_dict, str):
             return nested_dict
         if "." in nested_dict:

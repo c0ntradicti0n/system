@@ -18,7 +18,8 @@ spec:
         - envFrom:
             - configMapRef:
                 name: env
-          image: {{ .Values.images.registry }}nginx:latest
+          command: ["nginx", "-g", "daemon off;"]
+          image: {{ .Values.images.registry }}nginx
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           name: nginx
           ports:
@@ -30,9 +31,9 @@ spec:
             - mountPath: /etc/nginx/nginx.conf
               name: nginx-config
               subPath: nginx.conf
-            - mountPath: /etc/nginx/default-local
-              name: nginx-default
-              subPath: default-local
+            - mountPath: /etc/nginx/sites-enabled/default
+              name: nginx-default-site
+              subPath: default
             - mountPath: /etc/nginx/certs
               name: certs
               readOnly: true
@@ -49,10 +50,10 @@ spec:
           name: nginx-config
         - configMap:
             items:
-              - key: default-local
-                path: default-local
-            name: nginx-cm2
-          name: nginx-default
+              - key: default
+                path: default
+            name: nginx-cm1
+          name: nginx-default-site
         - name: certs
           secret:
             secretName: {{ .Values.secrets.certs.existingSecret | default "certs-secret" }}

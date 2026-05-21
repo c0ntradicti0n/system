@@ -17,10 +17,17 @@ if [ -z "$EMAIL" ]; then
         /etc/nginx/sites-enabled/default
   fi
 else
-  # Production: obtain / renew Let's Encrypt cert
-  if [ ! -d "/etc/letsencrypt/live/$HOST" ]; then
+  # Production: use cert-manager certs (on K8s) or obtain via certbot (standalone)
+  if [ -f "/etc/nginx/certs/fullchain.pem" ] && [ -f "/etc/nginx/certs/privkey.pem" ]; then
+    echo "Production: cert-manager certs found – using them."
+  elif [ -z "$KUBERNETES_SERVICE_HOST" ]; then
+    # Not in Kubernetes – use certbot standalone
     certbot certonly --standalone --non-interactive --agree-tos --email "$EMAIL" --domains "$HOST"
     echo "0 12 * * * root certbot renew --quiet --post-hook 'service nginx reload'" >> /etc/crontab
+  else
+    echo "Production: on Kubernetes but no certs yet – starting HTTP only. cert-manager will provision."
+    sed -i '/ssl_certificate/d; /listen.*443/d; /return 301 https/d' \
+        /etc/nginx/sites-enabled/default
   fi
 fi
 

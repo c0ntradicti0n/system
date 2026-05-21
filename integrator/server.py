@@ -13,7 +13,7 @@ from flask_socketio import SocketIO, join_room, leave_room
 from states import states
 from werkzeug.middleware.proxy_fix import ProxyFix
 
-from integrator.serialize import serialize_graph_to_structure
+from serialize import serialize_graph_to_structure
 from lib.t import catchtime
 
 app = Flask(__name__)

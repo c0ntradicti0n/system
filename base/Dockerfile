@@ -15,3 +15,6 @@ RUN pip install --no-cache-dir \
     torch torchvision torchaudio \
     --index-url https://download.pytorch.org/whl/cpu
 
+# Prevent stale .pyc files when lib/ is volume-mounted
+ENV PYTHONDONTWRITEBYTECODE=1
+

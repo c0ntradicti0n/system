@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import Muuri from 'muuri'
 import { Pin } from './Pin'
 import './search.css'
-const SearchResults = ({ labels, setHiddenId }) => {
+const SearchResults = ({ labels, setHiddenId, setTooltipData }) => {
   const gridRef = useRef(null)
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const SearchResults = ({ labels, setHiddenId }) => {
   return (
     <div ref={gridRef} className="grid">
       {labels.map((value) => (
-        <Pin value={value} setHiddenId={setHiddenId} key={value.path} />
+        <Pin value={value} setHiddenId={setHiddenId} setTooltipData={setTooltipData} key={value.path} />
       ))}
     </div>
   )

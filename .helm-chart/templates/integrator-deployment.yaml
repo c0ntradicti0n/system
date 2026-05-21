@@ -33,15 +33,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: env
-          image: {{ .Values.images.registry }}integrator:latest
+          image: {{ .Values.images.registry }}integrator
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           name: integrator
           ports:
             - containerPort: 5000
               protocol: TCP
-          securityContext:
-            runAsGroup: 1000
-            runAsUser: 1000
           volumeMounts:
             - mountPath: /system
               name: system

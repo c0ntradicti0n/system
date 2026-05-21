@@ -18,6 +18,6 @@ spec:
         - envFrom:
             - configMapRef:
                 name: env
-          image: {{ .Values.images.registry }}web:latest
+          image: {{ .Values.images.registry }}web
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           name: web

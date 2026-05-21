@@ -29,15 +29,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: env
-          image: {{ .Values.images.registry }}linker:latest
+          image: {{ .Values.images.registry }}linker
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           name: linker
           resources:
             limits:
               memory: 10Gi
-          securityContext:
-            runAsGroup: 1000
-            runAsUser: 1000
           volumeMounts:
             - mountPath: /system
               name: system

@@ -11,4 +11,4 @@ pyyaml
 ruamel.yaml
 chromadb
 sentence-transformers
-
+redis

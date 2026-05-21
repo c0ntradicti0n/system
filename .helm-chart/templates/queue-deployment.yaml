@@ -24,7 +24,7 @@ spec:
           envFrom:
             - configMapRef:
                 name: env
-          image: {{ .Values.images.registry }}queue:latest
+          image: {{ .Values.images.registry }}queue
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           name: queue
           volumeMounts:

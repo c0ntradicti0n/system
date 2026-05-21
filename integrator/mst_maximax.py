@@ -5,8 +5,8 @@ from pprint import pprint
 
 import networkx as nx
 
-from integrator.mst import edge_priority
-from integrator.serialize import serialize_graph_to_structure
+from mst import edge_priority
+from serialize import serialize_graph_to_structure
 from lib.dict_diff import dict_diff
 from lib.draw_graph import draw_graph
 from lib.t import catchtime, indented
@@ -446,7 +446,7 @@ def test(scenario):
 
 
 if __name__ == "__main__":
-    from integrator.test_mst import from_texts
+    from test_mst import from_texts
 
     g, t = from_texts(
         [

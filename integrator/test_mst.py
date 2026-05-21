@@ -1,6 +1,6 @@
 import os
 
-from integrator.main import make_dialectics
+from main import make_dialectics
 from lib.helper import OutputLevel, tree
 from lib.nested import extract_values
 

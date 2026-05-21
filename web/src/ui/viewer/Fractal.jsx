@@ -81,7 +81,7 @@ const Fractal = React.forwardRef(
     const triggerSearch = async (searchText) => {
       try {
         const response = await fetch(
-          `/api/search?filter_path=${hiddenId.replace(/\//g, '') ?? ''}`,
+          `/api/search/?filter_path=${hiddenId.replace(/\//g, '') ?? ''}`,
           {
             method: 'POST',
             headers: {
@@ -240,11 +240,6 @@ const Fractal = React.forwardRef(
 
     return (
       <div className="fractal">
-        <div style={{ position: 'absolute', width: 0, height: 0, top: 0 }}>
-          {searchResults ? (
-            <SearchResults labels={searchResults} setHiddenId={setHiddenId} />
-          ) : null}
-        </div>
         <TransformWrapper
           ref={transformComponentRef}
           limitToBounds={false}
@@ -300,7 +295,9 @@ const Fractal = React.forwardRef(
           )}
         </TransformWrapper>
         <div className="right-container">
-          {showTooltips && tooltipData && (
+          {searchResults ? (
+            <SearchResults labels={searchResults} setHiddenId={setHiddenId} setTooltipData={setTooltipData} />
+          ) : showTooltips && tooltipData ? (
             <Tooltips
               refill={!PRESET_DATA}
               tree={collectedData}
@@ -308,7 +305,7 @@ const Fractal = React.forwardRef(
               isWindowWide={isWindowWide}
               setTooltipData={setTooltipData}
             />
-          )}
+          ) : null}
         </div>
       </div>
     )

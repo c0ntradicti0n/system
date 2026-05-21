@@ -12,8 +12,8 @@ import networkx as nx
 import numpy as np
 from networkx.drawing.nx_agraph import graphviz_layout
 
-from integrator.combination_state import CustomCombinations
-from integrator.mst_maximax import (computed_i_tri_out_edges,
+from combination_state import CustomCombinations
+from mst_maximax import (computed_i_tri_out_edges,
                                     computed_sub_out_edges, maximax)
 from lib.g_from_numpy_array import from_numpy_array
 from lib.max_islice import maxislice
@@ -21,7 +21,7 @@ from lib.shape import flatten, view_shape
 from lib.t import catchtime
 
 image_folder = "images/"
-pickle_folder = "states/"
+pickle_folder = "/system/states/"
 
 
 class Tree:

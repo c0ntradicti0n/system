@@ -23,4 +23,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app/
 COPY --from=lib . /app/lib/
 
-ENTRYPOINT ["python3", "train.py"]
+ENTRYPOINT ["python3", "-c", "import time; print('classifier: waiting for jobs'); time.sleep(999999)"]

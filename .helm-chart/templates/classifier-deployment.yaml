@@ -35,9 +35,6 @@ spec:
           resources:
             limits:
               memory: 10Gi
-          securityContext:
-            runAsGroup: 1000
-            runAsUser: 1000
           volumeMounts:
             - mountPath: /system
               name: system

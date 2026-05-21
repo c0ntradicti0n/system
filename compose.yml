@@ -47,7 +47,10 @@ services:
 
     restart: unless-stopped
 
-    build: server
+    build:
+      context: server
+      additional_contexts:
+        - lib=./lib
     container_name: server
     env_file:
       - .env
@@ -80,6 +83,8 @@ services:
        context: service
        args:
          SYSTEM: /system
+       additional_contexts:
+         - lib=./lib
 
     restart: unless-stopped
 
@@ -93,18 +98,23 @@ services:
       HOST: $HOST
       SYSTEM: /system
       PYTHONIOENCODING: utf-8
+      LLM_API_KEY: $DEEPSEEK_API_KEY
+      LLM_BASE_URL: ${LLM_BASE_URL:-https://api.deepseek.com}
+      PYTHONDONTWRITEBYTECODE: 1
       HAYSTACK_TELEMETRY_ENABLED: "False"
       HF_HUB_DISABLE_TELEMETRY: True
       DISABLE_TELEMETRY: True
       TORCHINDUCTOR_CACHE_DIR: /.cache/torch
       TORCH_HOME: /.cache/torch
+      NVIDIA_VISIBLE_DEVICES: all
+    # devices:                    # uncomment when nvidia-container-toolkit is installed
+    #   - nvidia.com/gpu=all
     volumes:
       - "$SYSTEM:/system"
       - "./service:/app"
       - "./lib:/app/lib"
-
+      - model-cache:/.cache:rw
       - "./.caches/.cache-cr:/chroma:rw"
-      - "./.caches/.cache-hf:/.cache:rw"
   philo:
     image: philo
 
@@ -117,6 +127,8 @@ services:
       context: philo
       args:
         SYSTEM: /system
+      additional_contexts:
+        - lib=./lib
     command: python server.py
 
 
@@ -160,6 +172,8 @@ services:
       context: integrator
       args:
         SYSTEM: /system
+      additional_contexts:
+        - lib=./lib
 
     #restart: unless-stopped
 
@@ -205,6 +219,8 @@ services:
       context: linker
       args:
          SYSTEM: /system
+      additional_contexts:
+        - lib=./lib
     container_name: linker
     env_file:
       - .env
@@ -243,6 +259,8 @@ services:
       context: classifier
       args:
          SYSTEM: /system
+      additional_contexts:
+        - lib=./lib
     container_name: classifier
     env_file:
       - .env
@@ -297,7 +315,10 @@ services:
 
   worker:
     image: worker:latest
-    build: worker
+    build:
+      context: worker
+      additional_contexts:
+        - lib=./lib
     container_name: worker
     command:  ["celery", "-A", "tasks", "worker", "--loglevel=info", "-c", "1"]
     depends_on:
@@ -321,7 +342,10 @@ services:
 
   queue:
     image: queue:latest
-    build: worker
+    build:
+      context: worker
+      additional_contexts:
+        - lib=./lib
     command: ["python", "app.py"]
     #ports:
     #  - "5000:5000"
@@ -341,3 +365,6 @@ services:
       - "./.caches/.cache-cr:/chroma:rw"
       - "./.caches/.cache-hf:/.cache:rw"
       - "./.caches/.cache-mpl:/.config:rw"
+
+volumes:
+  model-cache:

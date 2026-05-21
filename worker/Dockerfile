@@ -2,11 +2,15 @@ FROM localhost/system-base:latest
 
 WORKDIR /app
 
+ENV PYTHONPATH=/app/integrator
+
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 RUN apt-get update && apt-get install -y sqlite3
 
 COPY . .
+COPY --from=integrator . /app/integrator/
+COPY --from=classifier . /app/classifier/
 COPY --from=lib . /app/lib/
 RUN mkdir /.cache
 RUN chmod 777 /.cache

@@ -1,5 +1,5 @@
 import pytest
-from integrator.som.map import insert_concept_with_history, ConceptPosition  # Adjust import path as needed
+from som.map import insert_concept_with_history, ConceptPosition
 
 
 @pytest.mark.parametrize("insertions,expected_structure", [

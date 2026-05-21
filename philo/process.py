@@ -10,7 +10,10 @@ from lib import config
 from lib.os_tools import git_auto_commit
 from lib.t import catchtime
 
-client = OpenAI()
+client = OpenAI(
+    api_key=os.environ.get("LLM_API_KEY"),
+    base_url=os.environ.get("LLM_BASE_URL", "https://api.deepseek.com"),
+)
 import regex
 from llm_update_text import custom_parser, llm_update_text
 from llm_update_toc import llm_update_toc

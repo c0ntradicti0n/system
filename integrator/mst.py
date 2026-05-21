@@ -2,7 +2,7 @@ from pprint import pprint
 
 import networkx as nx
 
-from integrator.serialize import serialize_graph_to_structure
+from serialize import serialize_graph_to_structure
 
 
 def edge_priority(edge, edge_type):

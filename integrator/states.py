@@ -1,150 +1,116 @@
 import logging
 import os
 import pickle
-from shutil import rmtree
+import shutil
 
 import regex as re
 
-from integrator.reader import parse_text
-from integrator.tree import Tree
+from reader import parse_text
+from tree import Tree
 from lib.ls import list_files_with_regex
 
-# Sample in-memory state
+# State files live on the shared PVC so all pods (integrator, worker) can access them.
+# Built-in default states are baked into the Docker image at /app/states/ and are
+# copied here on first init if the directory is empty.
+STATE_DIR = "/system/states/"
+BUILTIN_DIR = "/app/states/"
 
 
 class States:
     def __init__(self):
-        pass
+        os.makedirs(STATE_DIR, exist_ok=True)
+        self._seed_defaults()
+
+    @classmethod
+    def _seed_defaults(cls):
+        """Copy built-in states from Docker image into shared PVC if empty."""
+        if not os.path.isdir(BUILTIN_DIR):
+            return
+        existing = {f for f in os.listdir(STATE_DIR) if f.endswith(".pkl")}
+        for fname in os.listdir(BUILTIN_DIR):
+            if fname.endswith(".pkl") and fname not in existing:
+                shutil.copy2(os.path.join(BUILTIN_DIR, fname), STATE_DIR)
 
     @classmethod
     def path(cls, hash_id):
-        return os.path.join("states/", f"{hash_id}.pkl")
+        return os.path.join(STATE_DIR, f"{hash_id}.pkl")
 
     @staticmethod
     def get_all():
-        matched_files = list_files_with_regex("states/", "(?P<hash>.*)\-text.pkl")
-
+        matched_files = list_files_with_regex(STATE_DIR, r"(?P<hash>.*)\-text\.pkl")
         results = []
-        for matched_file in matched_files:
-            hash_value = matched_file["hash"]
-            meta_filename = os.path.join("states", f"{hash_value}-meta.pkl")
-
-            if os.path.exists(meta_filename):
-                with open(meta_filename, "rb") as meta_file:
-                    metadata = pickle.load(meta_file)
-            else:
-                metadata = None
-
-            matched_file["meta"] = metadata
-
-            results.append(matched_file)
+        for mf in matched_files:
+            hash_value = mf["hash"]
+            meta_path = os.path.join(STATE_DIR, f"{hash_value}-meta.pkl")
+            metadata = None
+            if os.path.exists(meta_path):
+                with open(meta_path, "rb") as f:
+                    metadata = pickle.load(f)
+            results.append({"hash": hash_value, "meta": metadata, **mf})
         return results
 
     def __getitem__(self, hash_id):
+        p = self.path(hash_id)
         if hash_id.endswith("-params"):
-            if not os.path.exists(self.path(hash_id)):
-                return {}
-            with open(self.path(hash_id), "rb") as f:
-                params = pickle.load(f)
-            # print(f"loaded params {hash_id}")
-            return params
+            return pickle.load(open(p, "rb")) if os.path.exists(p) else {}
         if hash_id.endswith("-text"):
-            with open(self.path(hash_id), "rb") as f:
-                text = pickle.load(f)
-            # print(f"loaded text {hash_id}")
-            return text
-        elif hash_id.endswith("-meta"):
-            if not os.path.exists(self.path(hash_id)):
-                return ""
-            with open(self.path(hash_id), "rb") as f:
-                meta = pickle.load(f)
-            # print(f"loaded meta {hash_id}")
-            return meta
-        else:
-            if os.path.exists(self.path(hash_id + "-text")):
-                try:
-                    tree, i = Tree.load_state(hash_id)
-                except Exception as e:
-                    logging.error(
-                        f"Corrupt file; error loading {hash_id} {e}", exc_info=True
-                    )
-                    i = None
-                if not i:
-                    with open(self.path(hash_id + "-text"), "rb") as f:
-                        text = pickle.load(f)
-                    inputs = parse_text(text)
-                    if not inputs:
-                        print(f"invalid text for {hash_id}")
-                        return None, -1
-                    # print(f"loaded tree from text {hash_id}")
-
-                    tree, i = Tree(list(inputs.items())), 0
+            return pickle.load(open(p, "rb"))
+        if hash_id.endswith("-meta"):
+            return pickle.load(open(p, "rb")) if os.path.exists(p) else ""
+        # Main state: tree + iteration
+        text_path = self.path(hash_id + "-text")
+        if os.path.exists(text_path):
+            try:
+                tree, i = Tree.load_state(hash_id)
+            except Exception:
+                logging.error(f"Corrupt file loading {hash_id}", exc_info=True)
+                i = None
+            if not i:
+                text = pickle.load(open(text_path, "rb"))
+                inputs = parse_text(text)
+                if not inputs:
+                    print(f"invalid text for {hash_id}")
+                    return None, -1
+                if isinstance(inputs, list):
+                    tree, i = Tree(list(enumerate(inputs))), 0
                 else:
-                    # print(f"loaded {i=} {hash_id} {tree=} ")
-                    pass
-                # print(f"loaded tree {hash_id}")
-
-                return tree, i
-
-            # print(f"loaded nothing {hash_id}")
-
-            return None, None
+                    tree, i = Tree(list(inputs.items())), 0
+            return tree, i
+        return None, None
 
     def __setitem__(self, hash_id, state):
-        if hash_id.endswith("-params"):
+        if hash_id.endswith(("-params", "-text", "-meta")):
             with open(self.path(hash_id), "wb") as f:
                 pickle.dump(state, f)
             os.chmod(self.path(hash_id), 0o777)
-
-        elif hash_id.endswith("-text"):
-            with open(self.path(hash_id), "wb") as f:
-                pickle.dump(state, f)
-            os.chmod(self.path(hash_id), 0o777)
-
-        elif hash_id.endswith("-meta"):
-            with open(self.path(hash_id), "wb") as f:
-                pickle.dump(state, f)
-
-            os.chmod(self.path(hash_id), 0o777)
-        else:
-            tree, i = state
-            tree.save_state(i, hash_id)
-            print(f"saved {i=} {hash_id} {tree=} ")
-
-            # Get all state filenames
-            state_indices = list_files_with_regex(
-                "states/" + hash_id, r"(?P<filename>tree_state_(?P<i>\d+)\.pkl)"
-            )
-
-            # Extract and sort the numeric parts of the filenames
-            state_indices.sort(reverse=True, key=lambda x: int(x["i"]))
-
-            for state_index in state_indices[3:]:
-                try:
-                    os.unlink(f"states/{hash_id}/{state_index['filename']}")
-                except FileNotFoundError:
-                    pass
+            return
+        tree, i = state
+        tree.save_state(i, hash_id)
+        print(f"saved {i=} {hash_id} {tree=}")
+        # keep only the 3 most recent checkpoints
+        state_dir = os.path.join(STATE_DIR, hash_id)
+        if os.path.isdir(state_dir):
+            files = []
+            for fname in os.listdir(state_dir):
+                m = re.match(r"tree_state_(?P<i>\d+)\.pkl", fname)
+                if m:
+                    files.append((int(m.group("i")), fname))
+            for _, fname in sorted(files, reverse=True)[3:]:
+                os.unlink(os.path.join(state_dir, fname))
 
     def __delitem__(self, key):
-        os.system(f"rm -rf states/{key}")
-        try:
-            os.unlink(self.path(key + "-text"))
-        except FileNotFoundError:
-            pass
-        try:
-            os.unlink(self.path(key + "-meta"))
-        except FileNotFoundError:
-            pass
+        shutil.rmtree(os.path.join(STATE_DIR, key), ignore_errors=True)
+        for suffix in ("-text", "-meta"):
+            try:
+                os.unlink(self.path(key + suffix))
+            except FileNotFoundError:
+                pass
 
     def reset(self, hash_id):
-
-        os.system(f"rm -rf states/{hash_id}")
-
-        # rmtree(self.path(hash_id), ignore_errors=True)
+        shutil.rmtree(os.path.join(STATE_DIR, hash_id), ignore_errors=True)
 
 
 states = States()
-
 
 if __name__ == "__main__":
     v, i = states["1cb10b667a508d3585b760a6ef9e8567b38af5421469a767678007a8a525d911"]

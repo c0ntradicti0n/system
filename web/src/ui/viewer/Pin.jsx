@@ -58,7 +58,7 @@ function createLine(start, end) {
   })
 }
 
-export const Pin = ({ value, setHiddenId }) => {
+export const Pin = ({ value, setHiddenId, setTooltipData }) => {
   const cleanPath = value.path.replace(/\//g, '').replace('.', '')
   const pinId = 'pin-label-' + cleanPath
   const triangleId = 'triangle-' + cleanPath
@@ -123,6 +123,11 @@ export const Pin = ({ value, setHiddenId }) => {
       id={'pin-label-' + cleanPath}
       className="search-item"
       onClick={() => setHiddenId(value.path.slice(0, -2))}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setTooltipData?.(value.path.slice(0, -2));
+      }}
     >
       <div className="search-item-content">
         {cleanPath}

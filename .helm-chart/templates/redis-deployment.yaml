@@ -19,7 +19,7 @@ spec:
             - redis-server
             - --appendonly
             - "yes"
-          image: {{ .Values.images.registry }}redis:latest
+          image: {{ .Values.images.redis | default (printf "%sredis:latest" .Values.images.registry) }}
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           name: redis
           volumeMounts:
