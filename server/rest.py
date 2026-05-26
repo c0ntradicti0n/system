@@ -53,7 +53,7 @@ class LogicFractal(Resource):
                 startpath=path,
                 keys=path.split("/"),
                 info_radius=1,
-                exclude=[".git", ".git.md", ".gitignore", ".DS_Store", ".idea"],
+                exclude=[".git", ".git.md", ".gitignore", ".DS_Store", ".idea", "states"],
                 pre_set_output_level=OutputLevel.FILENAMES,
                 prefix_items=True,
                 depth=os.environ.get("DEPTH", 4),

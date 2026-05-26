@@ -289,6 +289,7 @@ But all of this, so far, is structural. It describes a possible music. It's like
 
 Dynamics and phrasing = the moment of subjective actualization, the becoming-actual of the structural logic.
 
+
 In Hegelian terms: the structure is the essence (Wesen), the score is the concept (Begriff), but dynamics/phrasing is the actuality (Wirklichkeit) and, crucially, the subjectivity of the music.
 
 2. The Paradox: Random vs. Uniform vs. Phrased

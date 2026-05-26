@@ -1,0 +1,28 @@
+.explanation-page {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.explanation-fractal {
+  flex: 1;
+  height: 100vh;
+}
+
+.explanation-text {
+  flex: 0 0 35%;
+  padding: 3rem 2rem;
+  overflow-y: auto;
+  border-left: 1px solid #333;
+}
+
+.explanation-text h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.explanation-text p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}

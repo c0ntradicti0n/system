@@ -29,7 +29,7 @@ function makeNoHorizon() {
 
 const Fractal = React.forwardRef(
   (
-    { PRESET_DATA = undefined, inParent, showTooltips, editData = null },
+    { PRESET_DATA = undefined, inParent, showTooltips, editData = null, hideIndices = false },
     ref,
   ) => {
     const [detailId, _setDetailId] = useState(null)
@@ -288,6 +288,7 @@ const Fractal = React.forwardRef(
                     }}
                     animate={true}
                     editData={editData}
+                    hideIndices={hideIndices}
                   />
                 </div>
               </TransformComponent>

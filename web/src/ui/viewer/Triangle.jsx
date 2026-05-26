@@ -47,6 +47,7 @@ function Triangle({
   setHoverId,
   animate,
   editData = null,
+  hideIndices = false,
 }) {
   const [_hover, _setHover] = useState(false)
   const [animationClass, setAnimationClass] = useState('')
@@ -139,6 +140,7 @@ const chatModal = useChatModal()
                   detailId,
                 }}
                   editData={editData}
+                  hideIndices={hideIndices}
               />
             </div>
           ) : (null),
@@ -174,7 +176,7 @@ const chatModal = useChatModal()
                   chatModal.setVisible(true)
                 }}
               >
-                {trim(fullId.replace(/\//g, '.'), '.')}{' '}
+                {!hideIndices && trim(fullId.replace(/\//g, '.'), '.')}{' '}
                 {postProcessTitle(shortTitle.slice(0, 100))}
               </div>
               {postProcessTitle(anto)

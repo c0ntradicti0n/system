@@ -338,6 +338,8 @@ def tree(
             content = pathlib.Path(os.path.join(path, name)).read_text("utf-8")
             if sparse:
                 content = content[:100]
+        except UnicodeDecodeError:
+            continue
         except Exception as e:
             raise Exception("error reading file", os.path.join(path, name)) from e
 

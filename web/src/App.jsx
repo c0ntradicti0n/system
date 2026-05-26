@@ -7,9 +7,11 @@ import { Puzzle } from './ui/editor/Puzzle'
 import { Editor } from './ui/editor/Editor'
 
 import { Viewer } from './ui/viewer/Viewer'
+import Explanation from './ui/explanation/Explanation'
 
 const routes = {
   '/': () => <Viewer />,
+  '/explanation': () => <Explanation />,
   '/puzzle': () => (
     <Puzzle
       data={{

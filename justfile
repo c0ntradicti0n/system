@@ -23,3 +23,6 @@ deepseek-claude *args:
     CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 \
     npx claude --debug --verbose --model deepseek-v4-flash {{args}}
 
+start:
+    docker compose down -v
+    docker compose up -d
