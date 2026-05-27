@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createContext, useContext, useState, useEffect } from 'react'
 import { useRoutes } from 'raviger'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import './app.css'
@@ -8,6 +8,12 @@ import { Editor } from './ui/editor/Editor'
 
 import { Viewer } from './ui/viewer/Viewer'
 import Explanation from './ui/explanation/Explanation'
+
+const ThemeContext = createContext()
+
+export function useTheme() {
+  return useContext(ThemeContext)
+}
 
 const routes = {
   '/': () => <Viewer />,
@@ -78,12 +84,25 @@ const routes = {
 
 const queryClient = new QueryClient()
 function App() {
+  const [lightMode, setLightMode] = useState(() => {
+    return localStorage.getItem('lightMode') === 'true'
+  })
+
+  useEffect(() => {
+    localStorage.setItem('lightMode', lightMode)
+    document.documentElement.classList.toggle('light-mode', lightMode)
+  }, [lightMode])
+
+  const toggleLightMode = () => setLightMode(v => !v)
+
   const routeResult = useRoutes(routes)
 
   return (
     <div className="App">
       <QueryClientProvider client={queryClient}>
-        {routeResult || '404'}
+        <ThemeContext.Provider value={{ lightMode, toggleLightMode }}>
+          {routeResult || '404'}
+        </ThemeContext.Provider>
       </QueryClientProvider>
     </div>
   )

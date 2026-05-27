@@ -107,8 +107,8 @@ services:
       TORCHINDUCTOR_CACHE_DIR: /.cache/torch
       TORCH_HOME: /.cache/torch
       NVIDIA_VISIBLE_DEVICES: all
-    # devices:                    # uncomment when nvidia-container-toolkit is installed
-    #   - nvidia.com/gpu=all
+    devices:
+      - nvidia.com/gpu=all
     volumes:
       - "$SYSTEM:/system"
       - "./service:/app"

@@ -86,7 +86,7 @@ DOCKER_REGISTRY := "c0ntradicti0n/pianalytic"
 # build all images tagged for remote
 remote-build:
     DOCKER_BUILDKIT=1 docker build -t localhost/system-base:latest ./base
-    TARGET=prod docker compose build web nginx
+    TARGET=prod docker compose build --no-cache web nginx
     DOCKER_BUILDKIT=1 bash -c ' \
         for svc in server service philo integrator linker classifier worker; do \
             docker build --build-context lib=./lib --build-context integrator=./integrator --build-context classifier=./classifier -f $svc/Dockerfile -t $svc:latest $svc/; \
@@ -114,11 +114,13 @@ remote-deploy:
         --set images.registry={{DOCKER_REGISTRY}}:system- \
         --set images.redis=redis:latest \
         --set images.pullPolicy=Always \
+        --set rollTimestamp=$(date +%s) \
         --set ingress.enabled=true \
         --set ingress.host=polarity.science \
         --set ingress.className=nginx \
         --set ingress.annotations.'cert-manager\.io/cluster-issuer'=letsencrypt-prod \
         --set ingress.tls.secretName=polarity-science-tls
+    kubectl rollout status deployment web -n {{REMOTE_NAMESPACE}} --timeout=120s
     kubectl rollout restart deployment -n {{REMOTE_NAMESPACE}} --all 2>/dev/null || true
 
 # push images + deploy in one step
@@ -145,10 +147,20 @@ remote-sync-data:
     #!/usr/bin/env bash
     set -e
     SRC="${SYSTEM:-$DIALECTICS_SRC}"
+    # wipe + re-extract data to PVC (persists across restarts)
     kubectl wait --for=condition=ready pod -n {{REMOTE_NAMESPACE}} -l app=server --timeout=60s
     POD=$(kubectl get pod -n {{REMOTE_NAMESPACE}} -l app=server -o name)
-    tar -C "$SRC" -cf - . | kubectl exec -n {{REMOTE_NAMESPACE}} $POD -i -- tar -C /system -xf - 2>/dev/null || true
-    echo "synced $SRC to server:/system (namespace: {{REMOTE_NAMESPACE}})"
+    kubectl exec -n {{REMOTE_NAMESPACE}} $POD -i -- find /system -mindepth 1 -delete
+    tar -C "$SRC" -cf - . | kubectl exec -n {{REMOTE_NAMESPACE}} $POD -i -- tar -C /system -xf -
+    echo "synced $SRC to server:/system"
+    # restart so server re-reads data from clean PVC
+    kubectl rollout restart deployment server -n {{REMOTE_NAMESPACE}}
+    kubectl rollout status deployment server -n {{REMOTE_NAMESPACE}} --timeout=60s
+    # live-patch lib/ into new pod (bypasses image rebuild for Python changes)
+    NEW_POD=$(kubectl get pod -n {{REMOTE_NAMESPACE}} -l app=server -o name)
+    kubectl exec -n {{REMOTE_NAMESPACE}} $NEW_POD -i -- find /app/lib -mindepth 1 -delete
+    tar -C lib -cf - . | kubectl exec -n {{REMOTE_NAMESPACE}} $NEW_POD -i -- tar -C /app/lib -xf -
+    echo "patched lib/ into $NEW_POD (namespace: {{REMOTE_NAMESPACE}})"
 
 # rebuild + reload all images (code changes)
 reload: kind-load

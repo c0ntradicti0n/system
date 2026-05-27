@@ -29,7 +29,7 @@ function makeNoHorizon() {
 
 const Fractal = React.forwardRef(
   (
-    { PRESET_DATA = undefined, inParent, showTooltips, editData = null, hideIndices = false },
+    { PRESET_DATA = undefined, inParent, showTooltips, editData = null, hideIndices = false, pastel = false, fontMultiplier = 1 },
     ref,
   ) => {
     const [detailId, _setDetailId] = useState(null)
@@ -61,6 +61,7 @@ const Fractal = React.forwardRef(
         ? window.innerHeight
         : window.innerWidth
     const left = (window.innerWidth - size) * 0
+    const fractalTop = window.innerWidth <= 600 ? Math.max(0, window.innerHeight - size) : 0
     const transformComponentRef = useRef(null)
 
     const [tooltipData, setTooltipData] = useState(null)
@@ -261,7 +262,7 @@ const Fractal = React.forwardRef(
                   style={{
                     position: 'relative',
                     left,
-                    top: 0,
+                    top: fractalTop,
                     width: '100%',
                     height: '100%',
                     perspective: '1000px',
@@ -289,6 +290,8 @@ const Fractal = React.forwardRef(
                     animate={true}
                     editData={editData}
                     hideIndices={hideIndices}
+                    pastel={pastel}
+                    fontMultiplier={fontMultiplier}
                   />
                 </div>
               </TransformComponent>

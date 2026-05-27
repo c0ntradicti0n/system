@@ -46,7 +46,14 @@ class LocalEmbedding:
             SentenceTransformerEmbeddingFunction,
         )
 
-        self.ef = SentenceTransformerEmbeddingFunction(model_name=model_name)
+        device = os.environ.get("EMBEDDING_DEVICE", "")
+        if not device:
+            try:
+                import torch
+                device = "cuda" if torch.cuda.is_available() else "cpu"
+            except ImportError:
+                device = "cpu"
+        self.ef = SentenceTransformerEmbeddingFunction(model_name=model_name, device=device)
 
     @staticmethod
     def name():

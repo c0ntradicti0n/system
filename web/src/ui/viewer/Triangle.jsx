@@ -48,6 +48,8 @@ function Triangle({
   animate,
   editData = null,
   hideIndices = false,
+  pastel = false,
+  fontMultiplier = 1,
 }) {
   const [_hover, _setHover] = useState(false)
   const [animationClass, setAnimationClass] = useState('')
@@ -81,7 +83,7 @@ const chatModal = useChatModal()
 
   const title = data?.['.']
   const anto = data?.['_']
-  const { shortTitle, fontSize } = calculateFontSize(size, title, 0.7)
+  const { shortTitle, fontSize } = calculateFontSize(size, title, 0.7 * fontMultiplier)
 
   return (
     <div
@@ -111,8 +113,8 @@ const chatModal = useChatModal()
         onAnimationEnd={(div) => setAnimationClass(null)}
         style={{
           backgroundColor: fullId
-            ? stringToColour(fullId.replace('/', ''), 1)
-            : 'black',
+            ? stringToColour(fullId.replace('/', ''), 1, pastel, (level - MAX_LEVEL) * 0.15)
+            : 'var(--fractal-bg, black)',
           zIndex: 1000 - level,
           filter: _hover ? 'invert(1)' : 'invert(0)',
           animationDuration: `${animationTime}s`,
@@ -141,6 +143,8 @@ const chatModal = useChatModal()
                 }}
                   editData={editData}
                   hideIndices={hideIndices}
+                  pastel={pastel}
+                  fontMultiplier={fontMultiplier}
               />
             </div>
           ) : (null),
@@ -152,7 +156,7 @@ const chatModal = useChatModal()
           style={{
             fontSize,
 
-            color: fullId ? 'black' : 'white',
+            color: fullId ? 'black' : '#333',
 
             width: `${size / 3}px`,
           }}

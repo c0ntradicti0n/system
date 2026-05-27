@@ -375,7 +375,7 @@ def tree(
                     k = "."
                 else:
                     raise Exception("error matching prefix", name) from e
-            v = name[len(k) :]
+            v = content if k == "_" else name[len(k) :]
             k = k[:1]
 
         if add:

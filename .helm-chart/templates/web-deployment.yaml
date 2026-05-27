@@ -11,6 +11,8 @@ spec:
       app: web
   template:
     metadata:
+      annotations:
+        rollTimestamp: {{ .Values.rollTimestamp | default "0" | quote }}
       labels:
         app: web
     spec:

@@ -1,28 +1,25 @@
-import { useEffect, useState } from 'react'
-import { Button, Input, Menu } from 'antd'
+import { useEffect, useRef } from 'react'
+import { Button, Input } from 'antd'
 import { BookOutlined, SearchOutlined } from '@ant-design/icons'
-import { useNavigate } from 'raviger'
-import * as PropTypes from 'prop-types'
 import ShareModal from '../ShareModal'
-import { go } from '../../lib/navigate'
 import ChatModal from '../ChatModal/ChatModal'
-import useChatModal from "../ChatModal/state";
+import useChatModal from '../ChatModal/state'
 const { Search: AntdSearch } = Input
 
 export const Search = ({
   triggerSearch,
   searchText: _searchText,
-  setCollapsed,
+  onSearch,
 }) => {
   return (
-    <div style={{ display: 'inline-block', width: '90%' }}>
+    <div style={{ width: '100%' }}>
       <AntdSearch
-        placeholder="input search text"
+        placeholder="Search the fractal…"
         enterButton
-        size="large"
-        onSearch={(value, _e, info) => {
+        size="small"
+        onSearch={(value) => {
           triggerSearch(value)
-          setCollapsed(true)
+          onSearch?.()
         }}
       />
     </div>
@@ -32,19 +29,10 @@ export const Search = ({
 export function EditorLink() {
   return (
     <Button
-      className="red"
+      className="menu-item-btn"
       href="/editor#activeTab=lib"
       title="Create a new fractal"
       link
-      style={{
-        color: 'lime',
-        //bold font
-        fontWeight: 'bold',
-        fontSize: '1.5vw',
-        height: '3vw',
-        width: '90%',
-        filter: 'invert(100%)',
-      }}
     >
       Make your own fractal
     </Button>
@@ -54,181 +42,95 @@ export function EditorLink() {
 export function ViewerLink() {
   return (
     <Button
-      className="red"
+      className="menu-item-btn"
       href="/"
-      title="Create a new fractal"
+      title="Back to the fractal"
       link
-      style={{
-        color: 'lime',
-        //bold font
-        fontWeight: 'bold',
-        fontSize: '1.5vw',
-        height: '3vw',
-        width: '90%',
-        filter: 'invert(100%)',
-      }}
     >
       Back to the fractal
     </Button>
   )
 }
 
-EditorLink.propTypes = { onClick: PropTypes.func }
-export const Navigation = ({
-  searchText: _searchText,
-  onLeft,
-  onZoomIn,
-  onRight,
-  onZoomOut,
-  linkInfo,
-}) => {
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      switch (e.key) {
-        case 'ArrowLeft':
-          onLeft()
-          break
-        case 'ArrowRight':
-          onRight()
-          break
-        case 'ArrowUp':
-          onZoomIn()
-          break
-        case 'ArrowDown':
-          onZoomOut()
-          break
-        default:
-          return
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [onLeft, onRight, onZoomIn, onZoomOut])
-
-  return (
-    <div className="mobile-controls">
-      <div className="navigation-controls">
-        <button
-          onClick={onZoomIn}
-          className="button red top-controls"
-          aria-label="Up"
-          title="Hotkey: ArrowUp"
-        >
-          ↑
-        </button>
-        <button
-          onClick={onLeft}
-          className="button red left-controls"
-          aria-label="Left"
-          title="Hotkey: ArrowLeft"
-        >
-          ←
-        </button>
-
-        <button
-          onClick={onRight}
-          className="button red right-controls"
-          aria-label="Right"
-          title="Hotkey: ArrowRight"
-        >
-          →
-        </button>
-        <button
-          onClick={onZoomOut}
-          className="button red bottom-controls"
-          aria-label="Down"
-          title="Hotkey: ArrowDown"
-        >
-          ↓
-        </button>
-      </div>
-    </div>
-  )
-}
-
 export const ViewerMenu = ({
+  visible,
+  onClose,
   searchText,
   linkInfo,
-  path,
-  setPath,
   fractalRef,
 }) => {
-  const isMobile =
-    'ontouchstart' in window ||
-    navigator.maxTouchPoints ||
-    window.innerWidth < 950
-  console.log('isMobile', isMobile)
+  const chatModal = useChatModal()
+  const autoCloseRef = useRef(null)
+  const menuRef = useRef(null)
 
-  const [collapsed, setCollapsed] = useState(true)
- const chatModal = useChatModal()
-    console.log(chatModal)
+  const resetAutoClose = () => {
+    if (autoCloseRef.current) {
+      clearTimeout(autoCloseRef.current)
+      autoCloseRef.current = null
+    }
+  }
+
+  const startAutoClose = () => {
+    resetAutoClose()
+    autoCloseRef.current = setTimeout(() => {
+      onClose?.()
+    }, 5000)
+  }
+
+  useEffect(() => {
+    if (visible) {
+      startAutoClose()
+    } else {
+      resetAutoClose()
+    }
+    return resetAutoClose
+  }, [visible])
+
+  if (!visible) return null
 
   return (
-    <div>
-      <Button
-        type="primary"
-        icon={<BookOutlined />}
-        onClick={() => setCollapsed(!collapsed)}
-        style={{ width: isMobile ? '90vw' : '45vw', minWidth: '300' }}
-      ></Button>
-      {!collapsed && (
-        <Menu
-          mode="vertical"
-          theme="dark"
-          style={{
-            width: '45vw',
+    <div
+      className="menu-popover-overlay"
+      onClick={onClose}
+    >
+      <div
+        ref={menuRef}
+        className="menu-popover"
+        onClick={(e) => e.stopPropagation()}
+        onMouseEnter={resetAutoClose}
+        onMouseLeave={startAutoClose}
+      >
+        <div className="menu-popover-item">
+          <SearchOutlined className="menu-item-icon" />
+          <Search
+            searchText={searchText}
+            triggerSearch={fractalRef?.current?.triggerSearch}
+            onSearch={onClose}
+          />
+        </div>
+
+        <div className="menu-popover-item">
+          <BookOutlined className="menu-item-icon" />
+          <ShareModal linkInfo={linkInfo} />
+        </div>
+
+        <div className="menu-popover-item">
+          <EditorLink />
+        </div>
+
+        <div
+          className="menu-popover-item menu-clickable"
+          onClick={() => {
+            chatModal.setVisible(true)
+            onClose?.()
           }}
         >
-          <Menu.Item key="1" icon={<BookOutlined />}>
-            <Search
-              searchText={searchText}
-              triggerSearch={fractalRef?.current?.triggerSearch}
-              setSearchText={fractalRef?.current?.setSearchText}
-              setCollapsed={setCollapsed}
-            />
-          </Menu.Item>
-          <Menu.Item key="2" icon={<BookOutlined />}>
-            <ShareModal linkInfo={linkInfo} />
-          </Menu.Item>
-          <Menu.Item
-            key="3"
-            icon={<BookOutlined />}
-            style={{ height: '110px' }}
-          >
-            <Navigation
-              onLeft={() =>
-                go({ ...(fractalRef?.current ?? {}), direction: 'left' })
-              }
-              onZoomIn={() =>
-                go({ ...(fractalRef?.current ?? {}), direction: 'lower' })
-              }
-              onRight={() =>
-                go({ ...(fractalRef?.current ?? {}), direction: 'right' })
-              }
-              onZoomOut={() =>
-                go({ ...(fractalRef?.current ?? {}), direction: 'higher' })
-              }
-            />
-          </Menu.Item>
+          <BookOutlined className="menu-item-icon" />
+          <span>Ask the Curator</span>
+        </div>
 
-          <Menu.Item key="4" icon={<BookOutlined />}>
-            <EditorLink />
-          </Menu.Item>
-          <Menu.Item key="6" icon={<BookOutlined />} onClick={()=> {console.log("MENUG")+
-          chatModal.setVisible(true)}}>
-
-              elaborate a topic
-          </Menu.Item>
-        </Menu>
-      )}
-        {chatModal.visible ? <ChatModal
-            /> : null}
+        {chatModal.visible ? <ChatModal /> : null}
+      </div>
     </div>
   )
 }

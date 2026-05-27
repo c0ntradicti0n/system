@@ -20,9 +20,11 @@ const SearchResults = ({ labels, setHiddenId, setTooltipData }) => {
 
   if (!labels) return null
 
+  const unique = [...new Map(labels.map(v => [v.path, v])).values()]
+
   return (
     <div ref={gridRef} className="grid">
-      {labels.map((value) => (
+      {unique.map((value) => (
         <Pin value={value} setHiddenId={setHiddenId} setTooltipData={setTooltipData} key={value.path} />
       ))}
     </div>

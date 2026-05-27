@@ -5,7 +5,7 @@ function filterString(str) {
     .join('')
 }
 
-export const stringToColour = (str, alpha = 1) => {
+export const stringToColour = (str, alpha = 1, pastel = false, lighten = 0) => {
   if (!str) return '#fff'
   str = filterString(str)
   const colors = {
@@ -29,6 +29,16 @@ export const stringToColour = (str, alpha = 1) => {
   r = Math.min(255, r / str.length)
   g = Math.min(255, g / str.length)
   b = Math.min(255, b / str.length)
+
+  if (pastel) {
+    r = r + (255 - r) * 0.65
+    g = g + (255 - g) * 0.65
+    b = b + (255 - b) * 0.65
+  }
+
+  r = r + (255 - r) * lighten
+  g = g + (255 - g) * lighten
+  b = b + (255 - b) * lighten
 
   return `rgba(${r},${g},${b},${alpha})`
 }

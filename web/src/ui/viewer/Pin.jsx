@@ -46,22 +46,47 @@ function useElementById(baseId, shorterIdFinder = false, pollInterval = 200) {
   return element
 }
 
+function lineColor() {
+  const val = getComputedStyle(document.documentElement).getPropertyValue('--pin-line-color').trim()
+  return val || 'lawngreen'
+}
+
 function createLine(start, end) {
   if (!start || !end) return
   console.log(start, end)
+  const mobile = window.innerWidth <= 600
   return new LeaderLine(start, end, {
-    color: 'lawngreen',
+    color: lineColor(),
     size: 2,
     endPlugSize: 1.5,
-    startSocket: 'bottom',
+    startSocket: mobile ? 'right' : 'left',
     endSocket: 'top',
   })
 }
 
 export const Pin = ({ value, setHiddenId, setTooltipData }) => {
   const cleanPath = value.path.replace(/\//g, '').replace('.', '')
+  const displayPath = value.path
+    .split('/')
+    .filter(s => s && s !== '_')
+    .join('.')
   const pinId = 'pin-label-' + cleanPath
   const triangleId = 'triangle-' + cleanPath
+
+  function renderContent() {
+    if (value.answer) return <div className="search-item-text">{value.answer}</div>
+    if (!value.content) return null
+    const clean = value.content
+      .replace(/^["\s]+|["\s]+$/g, '')
+      .split('\n')
+      .map(l => l.replace(/^[._]\s*/, '').replace(/["]+/g, '').trim())
+      .filter((l, i, a) => l && a.indexOf(l) === i)
+      .join(' ')
+      .replace(/^(\S+)\s+\1\b/, '$1')
+    const leaf = cleanPath.split('.').pop()
+    if (!clean || clean === leaf) return null
+    return <div className="search-item-text">{clean}</div>
+  }
   const labelIdRef = useElementById(pinId)
   const triangleIdRef = useElementById(triangleId, true)
   const [line, setLine] = useState(null)
@@ -81,9 +106,13 @@ export const Pin = ({ value, setHiddenId, setTooltipData }) => {
   }, [triangleIdRef, triangleId, addElement, labelIdRef, removeElement])
 
   useEffect(() => {
-    if (!labelIdRef || !triangleIdRef)
-      if (line) tryIt(() => line.remove())
-      else return
+    if (!labelIdRef || !triangleIdRef) {
+      if (line) {
+        tryIt(() => line.remove())
+        setLine(null)
+      }
+      return
+    }
     if (line) return
     const newLine = createLine(labelIdRef, triangleIdRef)
     setLine(newLine)
@@ -130,9 +159,8 @@ export const Pin = ({ value, setHiddenId, setTooltipData }) => {
       }}
     >
       <div className="search-item-content">
-        {cleanPath}
-        <br />
-        {value.answer ?? value.content}
+        <div className="search-item-path">{displayPath}</div>
+        {renderContent()}
       </div>
     </div>
   )

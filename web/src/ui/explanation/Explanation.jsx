@@ -1,19 +1,42 @@
 import React from 'react'
 import Fractal from '../viewer/Fractal'
+import { useTheme } from '../../App'
 import './explanation.css'
 
 const EXPLANATION_DATA = {
-  '1': { '.': 'These' },
-  '2': { '.': 'Antithese' },
-  '3': { '.': 'Synthese' },
+  '1': {
+    '1': { '.': 'These' },
+    '2': { '.': 'Antithese' },
+    '3': { '.': 'Synthese' },
+    '.': 'These',
+  },
+  '2': {
+    '1': { '.': 'These' },
+    '2': { '.': 'Antithese' },
+    '3': { '.': 'Synthese' },
+    '.': 'Antithese',
+  },
+  '3': {
+    '1': { '.': 'These' },
+    '2': { '.': 'Antithese' },
+    '3': { '.': 'Synthese' },
+    '.': 'Synthese',
+  },
   '.': '',
 }
 
 const Explanation = () => {
+  const { lightMode } = useTheme()
+
   return (
     <div className="explanation-page">
       <div className="explanation-fractal">
-        <Fractal PRESET_DATA={EXPLANATION_DATA} hideIndices={true} />
+        <Fractal
+          PRESET_DATA={EXPLANATION_DATA}
+          hideIndices={true}
+          pastel={lightMode}
+          fontMultiplier={lightMode ? 2 : 1}
+        />
       </div>
       <div className="explanation-text">
         <h1>These / Antithese / Synthese</h1>

@@ -1,15 +1,17 @@
-import { ControlContainer } from '../ControlContainer'
-import { CONTROL_AREAS } from '../../config/areas'
 import { ViewerMenu } from './ViewerMenu'
 import React, { useEffect, useRef, useState } from 'react'
 import Fractal from './Fractal'
+import { Toolbar } from './Toolbar'
 import { parseHash } from '../../lib/read_link_params'
 import { slashIt } from '../../lib/nesting'
+import { useTheme } from '../../App'
 
 export const Viewer = () => {
   const [searchText, setSearchText] = useState(null)
   const [path, setPath] = useState('1313')
+  const [menuVisible, setMenuVisible] = useState(false)
   const fractalRef = useRef(null)
+  const { lightMode } = useTheme()
 
   const linkInfo = {
     hiddenId: fractalRef?.current?.hiddenId,
@@ -32,33 +34,22 @@ export const Viewer = () => {
       }
     }
 
-    // Listen for hash changes
     window.addEventListener('hashchange', handleHashChange)
-
-    // Call the handler function in case the component mounts with a hash already in the URL
     handleHashChange()
-
-    // Cleanup
     return () => {
       window.removeEventListener('hashchange', handleHashChange)
     }
-  }, []) // Empty dependency array ensures this runs once on mount and once on unmount
+  }, [])
 
-  console.log('REF', fractalRef)
   return (
     <>
-      <Fractal ref={fractalRef} showTooltips={true} />
-      <ControlContainer areas={CONTROL_AREAS} cssPrefix="fractal">
-        <ViewerMenu
-          {...{
-            searchText,
-            linkInfo,
-            path,
-            fractalRef,
-            setPath,
-          }}
-        />
-      </ControlContainer>
+      <Fractal ref={fractalRef} showTooltips={true} pastel={lightMode} fontMultiplier={1} />
+      <Toolbar {...{ menuVisible, setMenuVisible, fractalRef }} />
+      <ViewerMenu
+        visible={menuVisible}
+        onClose={() => setMenuVisible(false)}
+        {...{ searchText, linkInfo, fractalRef }}
+      />
     </>
   )
 }
