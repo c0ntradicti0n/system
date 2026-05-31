@@ -48,6 +48,7 @@ class LogicFractal(Resource):
     @toc.doc("Load Table of contents")
     def get(self, path):
         try:
+            lang = request.args.get('lang', 'en')
             file_dict = tree(
                 basepath=config.system_path,
                 startpath=path,
@@ -57,6 +58,7 @@ class LogicFractal(Resource):
                 pre_set_output_level=OutputLevel.FILENAMES,
                 prefix_items=True,
                 depth=os.environ.get("DEPTH", 4),
+                lang=lang,
             )
             return jsonify(nested_str_dict(file_dict))
         except FileNotFoundError:
@@ -72,6 +74,7 @@ class LogicFractalText(Resource):
         if all(c in "123" for c in path):
             path = "/".join(path)
         try:
+            lang = request.args.get('lang', 'en')
             file_dict = tree(
                 basepath=config.system_path,
                 startpath=path,
@@ -81,10 +84,9 @@ class LogicFractalText(Resource):
                 pre_set_output_level=OutputLevel.FILE,
                 depth=0,
                 prefix_items=True,
+                lang=lang,
             )
 
-            if path.__len__():
-                file_dict = get_from_nested_dict(file_dict, path.split("/"))
             # print(f"{file_dict=}")
             try:
                 file_dict = {

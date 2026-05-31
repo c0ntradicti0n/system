@@ -264,6 +264,7 @@ def tree(
     exclude=[],
     prefix_items=False,
     depth=None,
+    lang=None,
 ):
     if not pre_set_output_level:
         d = distance(startpath, location, weights=(1000, 1000, 100000))
@@ -306,6 +307,12 @@ def tree(
         name for name in os.listdir(path) if os.path.isfile(os.path.join(path, name))
     ]
 
+    # i18n: lang=de → only .de.md files; else → filter .de.md out
+    if lang == 'de':
+        files = [f for f in files if f.endswith('.de.md')]
+    else:
+        files = [f for f in files if not f.endswith('.de.md')]
+
     for name in sorted(subdirs, key=sort_key):
         if name in exclude:
             continue
@@ -324,6 +331,7 @@ def tree(
                 exclude=exclude,
                 prefix_items=prefix_items,
                 depth=depth - 1 if depth is not None else None,
+                lang=lang,
             )
             if not exists_in_nested_dict(output, keys + [name]):
                 if output_level <= OutputLevel.DIRECTORY:
@@ -375,7 +383,10 @@ def tree(
                     k = "."
                 else:
                     raise Exception("error matching prefix", name) from e
-            v = content if k == "_" else name[len(k) :]
+            if not v:
+                v = name[len(k):]
+            if lang == 'de' and v.endswith('.de.md'):
+                v = v[:-6]
             k = k[:1]
 
         if add:

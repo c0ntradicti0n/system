@@ -10,11 +10,11 @@ const FractalMini = ({ PRESET_DATA, size }) => {
 
   useEffect(() => {
     if (PRESET_DATA) {
-      const mergedData = mergeDeep(collectedData, PRESET_DATA)
+      const mergedData = mergeDeep({}, PRESET_DATA)
       setCollectedData(mergedData)
       setVisualData(lookupDeep('', mergedData))
     }
-  }, [PRESET_DATA, collectedData])
+  }, [PRESET_DATA])
 
   return (
     <div className="fractal-thumbnail" style={{ width: size, height: size }}>

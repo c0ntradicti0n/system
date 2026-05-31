@@ -7,8 +7,10 @@ import {
   generateExpandedKeys,
   nestTexts,
 } from '../../lib/convertToAntdTreeData'
+import { useTheme } from '../../App'
 
 export const Tooltips = ({ tree: _tree, path, setTooltipData, refill }) => {
+  const { lang } = useTheme()
   const tree = structuredClone(_tree)
 
   const [expandedKeys, setExpandedKeys] = useState([])
@@ -22,7 +24,7 @@ export const Tooltips = ({ tree: _tree, path, setTooltipData, refill }) => {
   const fetchTexts = async () => {
     if (!refill) return {}
     const p = openedKeys ?? path ?? ''
-    const res = await fetch(`/api/text/${p}`)
+    const res = await fetch(`/api/text/${p}?lang=${lang}`)
 
     if (!res.ok) {
       throw new Error('Network response was not ok')
@@ -32,7 +34,7 @@ export const Tooltips = ({ tree: _tree, path, setTooltipData, refill }) => {
     return newData
   }
 
-  const { data: texts } = useQuery(['triangle', path, openedKeys], fetchTexts, {
+  const { data: texts } = useQuery(['triangle', path, openedKeys, lang], fetchTexts, {
     onError: console.error,
     keepPreviousData: true,
   })

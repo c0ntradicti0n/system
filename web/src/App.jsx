@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react'
+import React, { createContext, useContext, useState, useEffect, useMemo } from 'react'
 import { useRoutes } from 'raviger'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import './app.css'
@@ -95,12 +95,23 @@ function App() {
 
   const toggleLightMode = () => setLightMode(v => !v)
 
+  const [lang, setLang] = useState(() => {
+    return localStorage.getItem('lang') || 'en'
+  })
+
+  useEffect(() => {
+    localStorage.setItem('lang', lang)
+  }, [lang])
+
+  const toggleLang = () => setLang(v => v === 'en' ? 'de' : 'en')
+  const themeValue = useMemo(() => ({ lightMode, toggleLightMode, lang, toggleLang }), [lightMode, lang])
+
   const routeResult = useRoutes(routes)
 
   return (
     <div className="App">
       <QueryClientProvider client={queryClient}>
-        <ThemeContext.Provider value={{ lightMode, toggleLightMode }}>
+        <ThemeContext.Provider value={themeValue}>
           {routeResult || '404'}
         </ThemeContext.Provider>
       </QueryClientProvider>

@@ -22,6 +22,26 @@ deepseek-claude *args:
     CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 \
     npx claude --debug --verbose --model deepseek-v4-flash {{args}}
 
+# wipe chromadb data + restart service (auto-indexes on empty collection)
+update-chroma:
+    rm -rf .caches/.cache-cr
+    docker compose up -d service
+
+# re-index linker chroma
+update-chroma-linker:
+    rm -rf .caches/.cache-cr-linker
+    docker compose up -d linker
+
+# wipe + re-index both
+update-chroma-all: update-chroma update-chroma-linker
+
+# translate .md files to .de.md via DeepSeek
+translate p="":
+    python3 -m lib.translate {{p}} --lang de
+
+# dry-run to preview translation targets
+translate-dry p="":
+    python3 -m lib.translate {{p}} --lang de --dry-run
+
 start:
-    docker compose down -v
-    docker compose up -d
+    make start

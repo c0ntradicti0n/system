@@ -16,6 +16,7 @@ import { Tooltips } from './Tooltips'
 import { MAX_LEVEL } from '../../config/const'
 import { SearchResults } from './SearchResults'
 import './fractal.css'
+import { useTheme } from '../../App'
 
 const maxZoomThreshold = 2
 const minZoomThreshold = 0.6
@@ -32,6 +33,7 @@ const Fractal = React.forwardRef(
     { PRESET_DATA = undefined, inParent, showTooltips, editData = null, hideIndices = false, pastel = false, fontMultiplier = 1 },
     ref,
   ) => {
+    const { lang } = useTheme()
     const [detailId, _setDetailId] = useState(null)
     const [searchResults, setSearchResults] = useState(null)
     const [transformState, setTransformState] = useState(null)
@@ -56,6 +58,7 @@ const Fractal = React.forwardRef(
     )
 
     const [scale, setScale] = useState(null)
+  const scaleRef = useRef(null)
     const size =
       window.innerHeight < window.innerWidth
         ? window.innerHeight
@@ -146,7 +149,7 @@ const Fractal = React.forwardRef(
       const id = hiddenId ?? ''
 
       if (!PRESET_DATA) {
-        const res = await fetch(`/api/toc/${id}`)
+        const res = await fetch(`/api/toc/${id}?lang=${lang}`)
         if (!res.ok) {
           console.error('Network response was not ok', res)
           return
@@ -169,7 +172,7 @@ const Fractal = React.forwardRef(
       return mergedData
     }
 
-    useQuery(['triangle', hiddenId + '/' + detailId], fetchTree, {
+    useQuery(['triangle', hiddenId + '/' + detailId + '/' + lang], fetchTree, {
       staleTime: 0,
       initialData: null,
     })
@@ -248,8 +251,11 @@ const Fractal = React.forwardRef(
           overFlow="visible"
           minScale={0.01}
           onTransformed={(ref) => {
+            const newScale = ref?.instance?.transformState?.scale
+            if (newScale == null || newScale === scaleRef.current) return
+            scaleRef.current = newScale
             setTransformState(ref?.instance?.transformState)
-            setScale(ref?.instance?.transformState?.scale)
+            setScale(newScale)
           }}
         >
           {() => (

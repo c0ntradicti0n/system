@@ -196,6 +196,7 @@ const chatModal = useChatModal()
                       whiteSpace: 'pre-wrap',
                       overflowWrap: 'break-word',
                       fontStyle: 'italic',
+                      fontSize: '0.5em',
                     }}
                   >
                     {word}

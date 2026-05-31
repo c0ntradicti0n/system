@@ -3,12 +3,13 @@ import { Button } from 'antd'
 import {
   MoreOutlined,
   BulbOutlined,
+  GlobalOutlined,
 } from '@ant-design/icons'
 import { go } from '../../lib/navigate'
 import { useTheme } from '../../App'
 
 export const Toolbar = ({ menuVisible, setMenuVisible, fractalRef }) => {
-  const { lightMode, toggleLightMode } = useTheme()
+  const { lightMode, toggleLightMode, lang, toggleLang } = useTheme()
 
   const nav = (direction) => go({ ...(fractalRef?.current ?? {}), direction })
 
@@ -52,6 +53,15 @@ export const Toolbar = ({ menuVisible, setMenuVisible, fractalRef }) => {
           onClick={toggleLightMode}
           title={lightMode ? 'Dark mode' : 'Light mode'}
         />
+        <Button
+          className="toolbar-btn"
+          type="text"
+          icon={<GlobalOutlined />}
+          onClick={toggleLang}
+          title={lang === 'de' ? 'Switch to English' : 'Switch to German'}
+        >
+          {lang.toUpperCase()}
+        </Button>
       </div>
       <div className="toolbar-right">
         <div className="nav-cross">
