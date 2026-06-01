@@ -307,9 +307,16 @@ def tree(
         name for name in os.listdir(path) if os.path.isfile(os.path.join(path, name))
     ]
 
-    # i18n: lang=de → only .de.md files; else → filter .de.md out
+    # i18n: lang=de → prefer .de.md (German stem), fallback to .md for untranslated
     if lang == 'de':
-        files = [f for f in files if f.endswith('.de.md')]
+        all_md = [f for f in files if f.endswith('.md') and not f.endswith('.de.md')]
+        all_de = {f for f in files if f.endswith('.de.md')}
+        de_prefixes = {f[0] for f in all_de}
+        result = list(all_de)
+        for f in all_md:
+            if f[0] not in de_prefixes:
+                result.append(f)
+        files = result
     else:
         files = [f for f in files if not f.endswith('.de.md')]
 

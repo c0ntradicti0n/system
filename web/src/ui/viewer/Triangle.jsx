@@ -158,7 +158,7 @@ const chatModal = useChatModal()
 
             color: fullId ? 'black' : '#333',
 
-            width: `${size / 3}px`,
+            width: `${size / 2}px`,
           }}
           onMouseEnter={() => _setHover(true)}
           onMouseLeave={() => _setHover(false)}
@@ -169,6 +169,7 @@ const chatModal = useChatModal()
               <div
                 id={triangleId}
                 className="triangle-title"
+                style={{ hyphens: 'none' }}
                 onClick={(e) => {
                   e.preventDefault()
                   setCellModalVisible(true)
@@ -180,8 +181,8 @@ const chatModal = useChatModal()
                   chatModal.setVisible(true)
                 }}
               >
-                {!hideIndices && trim(fullId.replace(/\//g, '.'), '.')}{' '}
-                {postProcessTitle(shortTitle.slice(0, 100))}
+                {!hideIndices && trim(fullId.replace(/\//g, '.'), '.')}<br/>
+                {postProcessTitle(shortTitle.slice(0, 100))?.replace(/-/g, '‑')}
               </div>
               {postProcessTitle(anto)
                 ?.split(/[\s-]+/)
