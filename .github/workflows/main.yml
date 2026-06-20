@@ -1,14 +1,12 @@
-
 name: Deploy
 
 on:
   push:
     branches:
       - main
-
-permissions:
-  contents: read
-
+  pull_request:
+  schedule:
+    - cron: '0 0 * * 0'
 
 concurrency:
   group: ${{ github.ref }}
@@ -68,3 +66,22 @@ jobs:
               make start
           '
 
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Save AppMaps
+        uses: actions/cache/save@v3
+        if: always()
+        with:
+          path: ./tmp/appmap
+          key: appmaps-${{ github.sha }}-${{ github.run_attempt }}
+
+  appmap-analysis:
+    if: always()
+    needs: [ Save AppMaps ]
+    uses: getappmap/analyze-action/.github/workflows/appmap-analysis.yml@v1
+    permissions:
+      actions: read
+      contents: read
+      checks: write
+      pull-requests: write
